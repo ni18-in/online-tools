@@ -1,0 +1,42 @@
+{
+    "name": "Online Tools - Free Web Utilities",
+    "short_name": "OnlineTools",
+    "description": "A collection of handy, free online tools like calculators, text analyzers, and converters, accessible from your browser.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4a6fa5",
+    "orientation": "any",
+    "scope": "/",
+    "icons": [
+      {
+        "src": "/assets/icons/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/assets/icons/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "/assets/icons/apple-touch-icon.png",
+        "sizes": "180x180",
+        "type": "image/png"
+      },
+      {
+         "src": "/assets/icons/favicon.svg",
+         "sizes": "any", 
+         "type": "image/svg+xml",
+         "purpose": "any" 
+       }
+      // You might add more icon sizes if generated (e.g., 144x144, etc.)
+      // Consider adding a "maskable" icon if your SVG/PNG is designed for it:
+      // {
+      //   "src": "/assets/icons/maskable-icon-512x512.png",
+      //   "sizes": "512x512",
+      //   "type": "image/png",
+      //   "purpose": "maskable" 
+      // }
+    ]
+  }

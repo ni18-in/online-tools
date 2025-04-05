@@ -323,3 +323,153 @@ footer a:hover {
           padding: 0; /* Remove padding if main container has it */
       }
   }
+
+
+  /* --- Add or Modify these styles in your style.css --- */
+
+/* Header Enhancements */
+header[role="banner"] {
+    /* Adjust padding if needed */
+    padding: 1rem clamp(1rem, 5vw, 3rem); 
+    /* Remove text-align: center; if you want content aligned by flexbox */
+    /* text-align: center; */ 
+}
+
+/* Wrapper for title and nav */
+.header-content {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem; /* Space between title and nav */
+    max-width: 1200px; /* Optional: Limit width */
+    margin: 0 auto; /* Center the content */
+    margin-bottom: 0.5rem; /* Space before tagline */
+}
+
+header h1 {
+     margin-bottom: 0; /* Remove bottom margin as flex handles spacing */
+     font-size: 1.8rem; /* Adjust size as needed */
+}
+
+/* Make H1 link look like plain text but behave like a link */
+header h1 a {
+    color: var(--light-text);
+    text-decoration: none;
+}
+ header h1 a:hover,
+ header h1 a:focus {
+    text-decoration: underline;
+    color: var(--light-text); /* Keep color same on hover/focus */
+    /* Ensure focus outline is visible (it should inherit from base focus styles) */
+ }
+
+/* Tagline styling (ensure it's centered if header wraps or content is centered) */
+header p { 
+    text-align: center; 
+    max-width: 1200px;
+    margin: 0 auto; /* Center tagline below header content */
+    /* Adjust margin-bottom if needed, was 0 */
+    margin-bottom: 0.5em; 
+}
+
+/* --- Navigation Styles --- */
+nav[aria-label="Main Navigation"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow nav items to wrap */
+    gap: clamp(0.5rem, 2vw, 1.5rem); /* Responsive gap between nav items */
+}
+
+nav[aria-label="Main Navigation"] li {
+    margin: 0; /* Remove default li margin */
+}
+
+nav[aria-label="Main Navigation"] a {
+    color: var(--light-text);
+    text-decoration: none;
+    padding: 0.5em 0.75em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    display: inline-block; /* Allows padding */
+    white-space: nowrap; /* Prevent wrapping within a single nav item */
+}
+
+/* Hover/Focus style for nav links */
+nav[aria-label="Main Navigation"] a:hover,
+nav[aria-label="Main Navigation"] a:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: none; /* Keep underline off for nav items */
+    color: var(--light-text);
+    /* Ensure focus outline is visible */
+}
+
+/* Current Page Styling (using aria-current attribute) */
+nav[aria-label="Main Navigation"] a[aria-current="page"] {
+    font-weight: 700; /* Make current page bold */
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly different background */
+    /* Or you could use a border: */
+    /* border-bottom: 3px solid var(--accent-color, #e8c547); */
+    /* padding-bottom: calc(0.5em - 3px); */ /* Adjust padding if using border */
+}
+/* --- End Navigation Styles --- */
+
+
+/* --- Responsive Adjustments (Ensure these are correctly placed/merged) --- */
+/* Example: Stack header elements on smaller screens */
+@media (max-width: 650px) { /* Adjust breakpoint as needed */
+    .header-content {
+        flex-direction: column; /* Stack title and nav */
+        align-items: center; /* Center items when stacked */
+        gap: 0.75rem; /* Adjust gap */
+    }
+     nav[aria-label="Main Navigation"] ul {
+         justify-content: center; /* Center nav items */
+         gap: 0.5rem 1rem; /* Adjust gap for wrapping */
+     }
+      header p {
+          margin-top: 0.75rem; /* Add some space when stacked */
+      }
+}
+
+/* Other existing media queries should remain, ensure search container adjustment is also present */
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 100%; 
+        padding: 0; /* Remove padding if main container has it */
+    }
+    /* Include other 768px adjustments here */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.15rem; }
+    .tool-grid {
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    }
+    :root {
+      --standard-padding: 1.25rem;
+      --standard-gap: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Include other 480px adjustments here */
+    html {
+        font-size: 95%;
+    }
+    .tool-grid {
+         grid-template-columns: 1fr; 
+    }
+     :root {
+      --standard-padding: 1rem;
+      --standard-gap: 1rem;
+    }
+    header[role="banner"] {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+}
+
+/* --- END of New/Modified CSS --- */

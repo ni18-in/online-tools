@@ -8,6 +8,7 @@
     <title>online-tools | Free Web Utilities, Calculators & Converters</title>
     <meta name="description" content="Your go-to hub for free online tools. Access calculators, text utilities, converters, and more useful web apps directly in your browser. Simple and easy to use.">
     
+    <link rel="icon" href="/favicon.ico" sizes="any"> <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"> <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png"> <link rel="manifest" href="/manifest.json"> <meta name="theme-color" content="#4a6fa5"> 
     <meta property="og:title" content="online-tools | Free Web Utilities & Apps">
     <meta property="og:description" content="A collection of handy, free online tools like calculators, text analyzers, and converters.">
     <meta property="og:type" content="website">
@@ -30,10 +31,6 @@
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          // Note: This schema tells Google about your *site's* search capability.
-          // The actual search implemented below is client-side filtering.
-          // If you had server-side search, this URL would point to it.
-          // For client-side only, you might remove potentialAction or keep it for future use.
           "urlTemplate": "https://online-tools.ni18.in/#search={search_term_string}" 
          },
         "query-input": "required name=search_term_string"
@@ -84,21 +81,34 @@
 
 <body>
     <header role="banner">
-        <h1>Online Tools</h1>
-        <p>Your collection of useful browser-based utilities.</p>
+        <div class="header-content"> 
+            <h1><a href="/" title="Go to Homepage">Online Tools</a></h1> 
+            
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="/blogs/">Blogs</a></li> 
+                    <li><a href="/" aria-current="page">Tools</a></li> <li><a href="/about.html">About</a></li>
+                </ul>
+            </nav>
+             </div>
     </header>
 
     <main id="main-content" role="main">
         
         <section class="search-container" aria-labelledby="search-heading">
-             <h2 id="search-heading" class="visually-hidden">Search Tools</h2> <form action="#" method="get" role="search" id="tool-search-form" onsubmit="return false;"> <label for="tool-search-input" class="visually-hidden">Search for tools</label> <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description..." aria-label="Search tools by name or description">
+             <h2 id="search-heading" class="visually-hidden">Search Tools</h2>
+             <form action="#" method="get" role="search" id="tool-search-form" onsubmit="return false;">
+                 <label for="tool-search-input" class="visually-hidden">Search for tools</label>
+                 <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description..." aria-label="Search tools by name or description">
              </form>
         </section>
+        
         <section aria-labelledby="tool-list-heading">
             <h2 id="tool-list-heading">Available Tools</h2>
             
-             <p id="no-results-message" class="no-results-message" style="display: none;">No tools found matching your search.</p>
-             <div class="tool-grid">
+            <p id="no-results-message" class="no-results-message" style="display: none;">No tools found matching your search.</p>
+             
+            <div class="tool-grid">
                 <article class="tool-card" aria-labelledby="tool-heading-1">
                     <h3 id="tool-heading-1">Simple Calculator</h3>
                     <p>Perform basic addition, subtraction, multiplication, and division with this easy-to-use online calculator.</p>
@@ -115,7 +125,7 @@
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2025 Your Name / online-tools. All rights reserved.</p> 
+        <p>&copy; 2025 ni18 / online-tools. All rights reserved.</p> 
     </footer>
 
     <script src="script.js" defer></script> 
