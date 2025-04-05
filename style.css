@@ -473,3 +473,433 @@ nav[aria-label="Main Navigation"] a[aria-current="page"] {
 }
 
 /* --- END of New/Modified CSS --- */
+
+/* --- Blog Page Specific Styles --- */
+
+/* General Page Title & Description */
+.page-title {
+    text-align: center;
+    margin-bottom: 0.5em; /* Less space before description */
+    font-size: 2.25rem; /* Adjust size if needed */
+    color: var(--primary-color);
+}
+
+.page-description {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--dark-text);
+    opacity: 0.8;
+    margin-bottom: calc(var(--standard-padding) * 1.5); /* More space before posts */
+    max-width: 700px; /* Limit width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Blog Post List Container */
+.blog-post-list {
+    margin-top: var(--standard-gap); /* Space above the list */
+}
+
+/* Individual Blog Post Summary Card */
+.blog-post-summary {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--standard-padding);
+    margin-bottom: var(--standard-gap); /* Space between posts */
+    box-shadow: 0 1px 3px var(--shadow-light);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.blog-post-summary:hover {
+     box-shadow: 0 4px 10px var(--shadow-medium);
+}
+
+.blog-post-summary .post-header {
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+    padding-bottom: 0.75em;
+}
+
+/* Blog post title */
+.blog-post-summary h2 {
+    font-size: 1.6rem; /* Larger title for posts */
+    margin-bottom: 0.25em;
+    color: var(--primary-color);
+    text-align: left; /* Override general h2 center align */
+    margin-top: 0; /* Override general h2 top margin */
+}
+.blog-post-summary h2 a {
+    color: inherit; /* Inherit color from h2 */
+    text-decoration: none;
+}
+.blog-post-summary h2 a:hover {
+     color: var(--secondary-color);
+     text-decoration: underline;
+}
+
+
+/* Post Metadata (Date, Author) */
+.post-meta {
+    font-size: 0.9rem;
+    color: var(--dark-text);
+    opacity: 0.7;
+    margin-bottom: 0; /* Remove default p margin */
+}
+.post-meta time {
+    /* Can style time element specifically if needed */
+}
+.post-meta .author {
+    font-style: italic;
+}
+
+/* Post Excerpt */
+.post-excerpt {
+    margin-bottom: 1.5em; /* Space before read more link */
+    color: var(--dark-text);
+    opacity: 0.9;
+}
+
+/* Read More Link */
+.read-more-link {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.read-more-link:hover,
+.read-more-link:focus {
+    color: color-mix(in srgb, var(--secondary-color), black 20%);
+    text-decoration: underline;
+}
+
+/* Optional Pagination Styles (Uncomment HTML first) */
+/*
+.pagination {
+    text-align: center;
+    margin-top: calc(var(--standard-padding) * 2);
+    padding-top: var(--standard-padding);
+    border-top: 1px solid var(--border-color);
+}
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0 0.25em;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-decoration: none;
+}
+.pagination a:hover, .pagination a:focus {
+    background-color: var(--light-bg);
+    border-color: #bbb;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.pagination .disabled {
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+.pagination .page-numbers {
+    border: none;
+    color: var(--dark-text);
+    opacity: 0.8;
+}
+*/
+
+/* --- End Blog Page Specific Styles --- */
+
+/* --- Optional additions/modifications for About Page --- */
+
+/* Add general class for main text content sections if needed */
+.content-section {
+    max-width: 800px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--standard-padding); /* Add some top padding */
+}
+
+.content-section section {
+    margin-bottom: calc(var(--standard-padding) * 1.5); /* Space between sections */
+}
+
+.content-section h2 {
+    /* Ensure H2s are not centered if inheriting from blog styles */
+    text-align: left; 
+    margin-top: 0; 
+    margin-bottom: 0.75em;
+    border-bottom: 1px solid var(--border-color); /* Optional separator */
+    padding-bottom: 0.25em;
+}
+
+/* Style lists within the about page content */
+.content-section ul {
+    list-style: disc; /* Use standard bullet points */
+    margin-left: 2em; /* Indent list */
+    margin-bottom: 1em;
+}
+
+.content-section ul li {
+    margin-bottom: 0.5em; /* Space between list items */
+}
+
+/* Ensure page title style is present if using from blog */
+.page-title {
+    text-align: center;
+    margin-bottom: 1em; 
+    font-size: 2.25rem;
+    color: var(--primary-color);
+}
+
+/* --- End Optional additions --- */
+
+
+/* --- Revised Single Blog Post Styles --- */
+
+.post-full {
+    /* Keep max-width for readability */
+    max-width: 800px; 
+    margin: calc(var(--standard-padding) * 2) auto; /* Increased top/bottom margin */
+    /* Optional: Remove background/border/shadow for seamless look */
+     background-color: transparent; 
+     border: none;
+     box-shadow: none; 
+    /* OR keep card look if preferred: */
+    /* background-color: var(--card-bg); */
+    /* border: 1px solid var(--border-color); */
+    /* border-radius: var(--border-radius); */
+    /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07); */ /* Softer shadow */
+    padding: 0; /* Remove padding from container, apply to sections inside */
+}
+
+.post-full-header {
+    margin-bottom: var(--standard-gap); /* Consistent gap */
+    text-align: left; /* Align header content left */
+    border-bottom: 2px solid var(--primary-color); /* Stronger separator */
+    padding-bottom: var(--standard-gap);
+}
+
+.post-full-title {
+    font-size: 2.8rem; /* Slightly larger title */
+    color: var(--dark-text); /* Darker title for contrast on light bg */
+    margin-bottom: 0.35em;
+    line-height: 1.2;
+    font-weight: 700; /* Bolder title */
+}
+
+.post-meta { 
+    font-size: 0.95rem; /* Slightly larger meta */
+    color: var(--dark-text);
+    opacity: 0.75; /* Slightly less faded */
+    margin-bottom: 0; 
+    margin-top: 0.5em; /* Space between title and meta */
+    line-height: 1.5; /* Ensure meta lines don't cramp */
+}
+.post-meta time { }
+.post-meta span[itemprop="name"] { font-weight: 500; } /* Slightly bolder author */
+
+/* Featured Image (If used) */
+.featured-image {
+    margin: var(--standard-gap) 0 calc(var(--standard-gap) * 1.5) 0; /* Adjust spacing */
+}
+.featured-image img {
+    max-width: 100%;
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+    border-radius: var(--border-radius);
+    /* Optional subtle effect */
+    /* filter: saturate(1.1); */
+}
+.featured-image figcaption {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--dark-text);
+    opacity: 0.7;
+    margin-top: 0.75em; /* More space for caption */
+}
+
+/* Main Post Content Area */
+.post-full-content {
+    font-size: 1.1rem; /* Increase base content font size */
+    line-height: 1.75; /* Increase line height for readability */
+    color: var(--dark-text); /* Ensure good contrast */
+    /* Consider a serif font for body copy for readability */
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    /* Fallback to system stack if Georgia/Times not available */
+    /* font-family: Georgia, Times, 'Times New Roman', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; */
+    padding: var(--standard-padding) 0; /* Add padding top/bottom */
+}
+
+/* Typography within the post */
+.post-full-content p {
+    margin-bottom: 1.3em; /* Adjust paragraph spacing */
+}
+
+.post-full-content h2,
+.post-full-content h3,
+.post-full-content h4 {
+    /* Use sans-serif for headings to contrast with body */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--primary-color);
+    margin-top: 2.2em; /* Increase space above headings */
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+    font-weight: 600; /* Slightly lighter than title */
+    text-align: left; 
+}
+/* Cleaner headings - remove border */
+.post-full-content h2 { font-size: 1.9rem; padding-bottom: 0; border-bottom: none; } 
+.post-full-content h3 { font-size: 1.6rem; }
+.post-full-content h4 { font-size: 1.3rem; }
+
+.post-full-content ul,
+.post-full-content ol {
+    margin-left: 1.5em; 
+    margin-bottom: 1.3em;
+    padding-left: 1em;
+}
+.post-full-content ul li,
+.post-full-content ol li {
+    margin-bottom: 0.6em; /* Slightly more space between list items */
+}
+.post-full-content ul { list-style: square; } /* Different list style */
+.post-full-content ol { list-style: decimal; }
+
+.post-full-content strong { font-weight: 700; }
+.post-full-content em { font-style: italic; }
+
+.post-full-content a { 
+    color: var(--secondary-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px; /* Thinner underline */
+    text-underline-offset: 3px; /* Space between text and underline */
+}
+.post-full-content a:hover {
+     color: color-mix(in srgb, var(--secondary-color), black 25%);
+     text-decoration-thickness: 2px; 
+}
+
+/* Code Blocks */
+.post-full-content pre {
+    background-color: #2d2d2d; /* Darker background for code */
+    border: none; /* Remove border */
+    border-radius: 6px; /* Slightly different radius */
+    padding: 1.2em 1.5em;
+    margin: 1.8em 0; /* More vertical space */
+    overflow-x: auto; 
+    font-size: 0.95rem; /* Slightly larger code font */
+    line-height: 1.5;
+    color: #f0f0f0; /* Light text on dark background */
+}
+.post-full-content code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    background-color: rgba(0, 0, 0, 0.05); /* Subtle background for inline code */
+    padding: 0.2em 0.4em; 
+    border-radius: 4px;
+    font-size: 0.9em; /* Slightly smaller than surrounding text */
+    color: #b54f46; /* Optional color for inline code */
+}
+.post-full-content pre code {
+     background-color: transparent; 
+     padding: 0;
+     border-radius: 0;
+     font-size: inherit; 
+     color: inherit; /* Inherit color from pre */
+}
+
+/* Images within content */
+.post-full-content figure {
+    margin: 2em 0; /* More vertical space for figures */
+}
+.post-full-content figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Add shadow to inline images */
+}
+.post-full-content figure figcaption {
+     text-align: center;
+     font-size: 0.9rem; /* Slightly larger caption */
+     color: var(--dark-text);
+     opacity: 0.75; /* Slightly less faded */
+     margin-top: 0.75em;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Sans-serif for caption */
+}
+
+/* Blockquotes */
+.post-full-content blockquote {
+    margin: 2em 0; /* More vertical space */
+    padding: 1.2em 1.8em;
+    border-left: 4px solid var(--secondary-color); /* Use secondary color */
+    background-color: color-mix(in srgb, var(--secondary-color), white 92%); /* Very light tint of secondary color */
+    font-style: normal; /* Remove italic default? Optional */
+    color: var(--dark-text);
+    opacity: 1; /* Full opacity */
+    border-radius: 0 6px 6px 0; /* Rounded corners on right */
+}
+.post-full-content blockquote p {
+    margin-bottom: 0.5em;
+    font-size: 1.1em; /* Slightly larger quote text */
+    color: #111; /* Darker text within quote */
+}
+.post-full-content blockquote footer {
+     font-style: normal;
+     font-size: 0.9em;
+     opacity: 0.8;
+     text-align: right; /* Align attribution right */
+}
+.post-full-content blockquote cite {
+     font-style: normal;
+     font-weight: 500; /* Normal weight */
+}
+
+
+/* Back to Blog Link */
+.post-navigation {
+    margin: calc(var(--standard-padding) * 2.5) auto; /* Increased spacing */
+    max-width: 800px; 
+    text-align: left; /* Align left */
+    padding-top: var(--standard-padding);
+    border-top: 1px solid var(--border-color);
+}
+.back-to-blog {
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-flex; /* Align icon if added later */
+    align-items: center;
+}
+.back-to-blog:hover {
+     text-decoration: underline;
+     color: color-mix(in srgb, var(--primary-color), black 20%);
+}
+
+
+/* Responsive Article Content Adjustments */
+@media (max-width: 900px) { 
+    .post-full {
+         margin-top: var(--standard-padding);
+         margin-bottom: var(--standard-padding);
+         padding: 0; /* Rely on body/main padding */
+    }
+     .post-full-header {
+         padding-bottom: var(--standard-gap);
+     }
+}
+@media (max-width: 500px) {
+    .post-full-title { font-size: 1.9rem; } /* Adjust sizes */
+    .post-full-content { font-size: 1rem; line-height: 1.7; }
+    .post-full-content h2 { font-size: 1.4rem; }
+    .post-full-content h3 { font-size: 1.2rem; }
+    .post-full-content blockquote { padding: 1em 1.2em; }
+    .post-full-content pre { padding: 1em 1.2em; font-size: 0.9rem; }
+}
+
+
+/* --- End Revised Single Blog Post Styles --- */

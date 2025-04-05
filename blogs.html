@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog - online-tools</title>
+    <meta name="description" content="Read the latest articles, tutorials, and updates from the online-tools team. Discover tips for using our web utilities effectively.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest"> 
+    <meta name="theme-color" content="#4a6fa5">
+
+    <meta property="og:title" content="Blog - online-tools">
+    <meta property="og:description" content="Latest articles, tutorials, and updates from the online-tools team.">
+    <meta property="og:type" content="website"> <meta property="og:site_name" content="online-tools">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog - online-tools">
+    <meta name="twitter:description" content="Latest articles, tutorials, and updates from the online-tools team.">
+    <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "online-tools",
+      "alternateName": "Online Web Tools and Utilities",
+      "url": "https://online-tools.ni18.in/", // CONFIRM THIS IS YOUR FINAL URL
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://online-tools.ni18.in/#search={search_term_string}" 
+         },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+     {
+       "@context": "https://schema.org",
+       "@type": "Blog", // Indicate this page is a Blog listing
+       "name": "online-tools Blog",
+       "description": "Latest articles, tips, and updates from online-tools.",
+       "url": "https://online-tools.ni18.in/blogs/", // CONFIRM THIS URL
+       "publisher": { // Link to the main site/organization
+         "@type": "Organization", 
+         "name": "online-tools",
+         "url": "https://online-tools.ni18.in/" 
+         // "logo": { "@type": "ImageObject", "url": "https://online-tools.ni18.in/assets/logo.png" } // Optional Logo
+       },
+       "mainEntity": { // List the blog posts shown on THIS page
+         "@type": "ItemList",
+         "itemListElement": [
+           // Add a ListItem for each post summary below
+           {
+             "@type": "ListItem",
+             "position": 1,
+             "item": {
+               "@type": "BlogPosting", // Reference the type of item
+               "headline": "First Blog Post Title", // Match H2 below
+               "url": "https://online-tools.ni18.in/blogs/post-1-slug.html", // Link to the actual post
+               "datePublished": "2025-04-05", // Match date below
+               "description": "This is a short summary or excerpt..." // Match excerpt below
+               // Add author and image if applicable
+             }
+           },
+           {
+             "@type": "ListItem",
+             "position": 2,
+             "item": {
+               "@type": "BlogPosting",
+               "headline": "Another Interesting Article",
+               "url": "https://online-tools.ni18.in/blogs/post-2-slug.html",
+               "datePublished": "2025-04-01",
+               "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+             }
+           }
+           // Add more list items here...
+         ]
+       }
+     }
+     </script>
+
+</head>
+
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <h1><a href="/" title="Go to Homepage">Online Tools</a></h1>
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="/blogs/" aria-current="page">Blogs</a></li> <li><a href="/">Tools</a></li> 
+                    <li><a href="/about.html">About</a></li>
+                </ul>
+            </nav>
+            </div>
+        </header>
+
+    <main id="main-content" role="main">
+        
+        <h1 class="page-title">Blog</h1>
+        <p class="page-description">Discover our latest articles, tips, tutorials, and updates.</p>
+
+        <section class="blog-post-list" aria-labelledby="blog-posts-heading">
+            <h2 id="blog-posts-heading" class="visually-hidden">Blog Posts</h2> <article class="blog-post-summary" aria-labelledby="post-heading-1">
+                <header class="post-header">
+                    <h2 id="post-heading-1"><a href="/blogs/post-1-slug.html">First Blog Post Title</a></h2>
+                    <p class="post-meta">
+                        Published on <time datetime="2025-04-05">April 5, 2025</time>
+                        </p>
+                </header>
+                <div class="post-content">
+                    <p class="post-excerpt">This is a short summary or excerpt of the first blog post. It gives readers an idea of the content and encourages them to click through to read more about the fascinating world of web utilities...</p>
+                    <a href="/blogs/post-1-slug.html" class="read-more-link" aria-label="Read more about First Blog Post Title">Read More &raquo;</a>
+                </div>
+            </article>
+
+            <article class="blog-post-summary" aria-labelledby="post-heading-2">
+                 <header class="post-header">
+                    <h2 id="post-heading-2"><a href="/blogs/post-2-slug.html">Another Interesting Article About Tools</a></h2>
+                     <p class="post-meta">
+                        Published on <time datetime="2025-04-01">April 1, 2025</time>
+                    </p>
+                </header>
+                 <div class="post-content">
+                    <p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</p>
+                    <a href="/blogs/post-2-slug.html" class="read-more-link" aria-label="Read more about Another Interesting Article About Tools">Read More &raquo;</a>
+                 </div>
+            </article>
+
+             </section>
+
+        </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 ni18 / online-tools. All rights reserved.</p> 
+    </footer>
+
+    <script src="script.js" defer></script> 
+</body>
+</html>
