@@ -1,0 +1,233 @@
+/* Basic Reset & Root Variables */
+:root {
+    --primary-color: #4a6fa5; /* Blue */
+    --secondary-color: #63b7af; /* Teal */
+    --accent-color: #e8c547; /* Yellow - for highlights/focus */
+    --light-bg: #f4f7f6;
+    --dark-text: #333;
+    --light-text: #fff;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --focus-outline-color: #e8c547; /* Use accent for focus */
+
+    --standard-padding: 1.5rem;
+    --standard-gap: 1.5rem;
+    --border-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base styles and Typography */
+html {
+    font-size: 100%; /* Usually 16px */
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 1rem; /* Base font size */
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-bottom: 1em; /* Consistent spacing after headings */
+}
+
+h1 { font-size: 2.5rem; color: var(--light-text);}
+h2 { font-size: 1.75rem; color: var(--primary-color); text-align: center; margin-top: var(--standard-padding); }
+h3 { font-size: 1.25rem; color: var(--primary-color); }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: color-mix(in srgb, var(--secondary-color), black 15%);
+}
+
+/* Focus Styles - CRUCIAL for Accessibility & UX */
+a:focus,
+button:focus, /* Add button later if needed */
+input:focus, /* Add input later if needed */
+select:focus, /* Add select later if needed */
+textarea:focus { /* Add textarea later if needed */
+    outline: 3px solid var(--focus-outline-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(232, 197, 71, 0.4); /* Optional softer glow */
+    border-radius: 2px; /* Slight radius for the outline */
+}
+/* Remove default outline when custom focus is applied */
+a:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+/* Style for focus-visible only (modern browsers, keyboard nav) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--focus-outline-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(232, 197, 71, 0.4);
+    border-radius: 2px;
+}
+
+
+/* Header */
+header[role="banner"] {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: var(--standard-padding) clamp(1rem, 5vw, 3rem); /* Responsive padding */
+    text-align: center;
+    box-shadow: 0 2px 4px var(--shadow-medium);
+}
+
+header h1 {
+    margin-bottom: 0.25em; /* Reduced space */
+}
+header p {
+    margin-bottom: 0; /* No extra space */
+    opacity: 0.9;
+}
+
+/* Main Content Area */
+main[role="main"] {
+    flex-grow: 1;
+    max-width: 1100px; /* Slightly wider max-width */
+    margin: var(--standard-padding) auto;
+    padding: 0 clamp(1rem, 4vw, 2rem); /* Responsive padding */
+    width: 100%;
+}
+
+/* Tool Grid Layout */
+.tool-grid {
+    display: grid;
+    /* Responsive grid: min 280px wide columns, max 1fr */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: var(--standard-gap);
+}
+
+/* Individual Tool Card Styling */
+.tool-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--standard-padding);
+    box-shadow: 0 1px 3px var(--shadow-light);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-medium);
+}
+
+.tool-card h3 {
+    margin-bottom: 0.75em;
+}
+
+.tool-card p {
+    flex-grow: 1; /* Allows description to take available space */
+    margin-bottom: 1em;
+    color: var(--dark-text);
+    opacity: 0.9; /* Slightly softer text */
+}
+
+.tool-link {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--light-text) !important; /* Ensure text is light */
+    padding: 0.75em 1.5em; /* Use ems for padding */
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: auto; /* Push link to bottom */
+    border: none; /* Ensure no default border */
+    cursor: pointer;
+}
+
+.tool-link:hover,
+.tool-link:focus { /* Apply hover style on focus too */
+    background-color: color-mix(in srgb, var(--secondary-color), black 15%); /* Darken on hover/focus */
+    text-decoration: none; /* Remove underline on button-like links */
+    transform: scale(1.02); /* Slight scale effect */
+    color: var(--light-text) !important; /* Ensure text remains light */
+}
+.tool-link:active {
+    transform: scale(0.98); /* Press effect */
+}
+
+
+/* Footer */
+footer[role="contentinfo"] {
+    background-color: var(--dark-text);
+    color: #ccc;
+    text-align: center;
+    padding: var(--standard-padding) 1rem;
+    margin-top: calc(var(--standard-padding) * 2); /* More space above footer */
+    font-size: 0.9rem;
+}
+footer a {
+    color: #eee; /* Lighter link color in footer */
+}
+footer a:hover {
+    color: var(--light-text);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.15rem; }
+    .tool-grid {
+        /* Adjust grid for smaller tablets if needed */
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    }
+    :root {
+      --standard-padding: 1.25rem;
+      --standard-gap: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 95%; /* Slightly smaller base font on very small screens */
+    }
+    .tool-grid {
+        /* Stack cards on very small screens */
+         grid-template-columns: 1fr; 
+    }
+     :root {
+      --standard-padding: 1rem;
+      --standard-gap: 1rem;
+    }
+    header[role="banner"] {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+}

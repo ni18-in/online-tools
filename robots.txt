@@ -1,0 +1,11 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of potentially irrelevant directories if any (e.g., dev files)
+# Disallow: /dev/
+# Disallow: /temp/
+
+# Specify the location of your sitemap (Update the URL)
+Sitemap: https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/sitemap.xml 
+# or Sitemap: https://www.your-custom-domain.com/sitemap.xml
