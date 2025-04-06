@@ -157,7 +157,7 @@ main[role="main"] {
 
 .tool-link {
     display: inline-block;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--light-text) !important; /* Ensure text is light */
     padding: 0.75em 1.5em; /* Use ems for padding */
     text-decoration: none;

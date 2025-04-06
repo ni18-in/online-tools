@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Text Analyzer - Word Count, Readability & More</title>
+    <meta name="description"
+        content="Analyze your text instantly: Get word count, character count, sentence count, paragraph count, estimated reading time, and keyword frequency. Free online tool.">
+    <meta name="keywords"
+        content="text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, online tool, free text analysis">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "All-in-One Text Analyzer",
+      "description": "Analyze your text instantly: Get word count, character count, sentence count, paragraph count, estimated reading time, and keyword frequency. Free online tool.",
+      "applicationCategory": ["UtilitiesApplication", "ProductivityApplication"],
+      "operatingSystem": "Any", // Web-based, runs on any OS with a browser
+      "browserRequirements": "Requires JavaScript enabled browser.",
+      "url": "/tools/all-in-one-text-analyzer/",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD" 
+      },
+      "keywords": "text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, online tool, free text analysis",
+       "potentialAction": {
+        "@type": "AnalyzeAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "/tools/all-in-one-text-analyzer/"
+        },
+        "result": {
+          "@type": "QuantitativeValue",
+          "name": "Text Analysis Metrics (Word Count, Readability, etc.)"
+        }
+      }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Simple scrollbar styling */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Add some subtle animation */
+        .result-card {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for keyword list */
+        #keywordList li {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #keywordList li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg">
+
+        <header class="mb-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">All-in-One Text Analyzer</h1>
+            <p class="text-gray-600">Paste your text below to get instant analysis.</p>
+        </header>
+
+        <main>
+            <div class="mb-6">
+                <label for="textInput" class="block text-sm font-medium text-gray-700 mb-1">Your Text:</label>
+                <textarea id="textInput" rows="10"
+                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-y"
+                    placeholder="Start typing or paste your text here..."></textarea>
+                <button id="clearButton"
+                    class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm">
+                    Clear Text
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                <div class="result-card bg-indigo-50 p-4 rounded-lg shadow-sm border border-indigo-100 text-center">
+                    <h3 class="text-sm font-medium text-indigo-700 mb-1">Word Count</h3>
+                    <p id="wordCount" class="text-2xl font-semibold text-indigo-900">0</p>
+                </div>
+                <div class="result-card bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-100 text-center">
+                    <h3 class="text-sm font-medium text-blue-700 mb-1">Character Count</h3>
+                    <p id="charCount" class="text-2xl font-semibold text-blue-900">0</p>
+                </div>
+                <div class="result-card bg-green-50 p-4 rounded-lg shadow-sm border border-green-100 text-center">
+                    <h3 class="text-sm font-medium text-green-700 mb-1">Sentence Count</h3>
+                    <p id="sentenceCount" class="text-2xl font-semibold text-green-900">0</p>
+                </div>
+                <div class="result-card bg-yellow-50 p-4 rounded-lg shadow-sm border border-yellow-100 text-center">
+                    <h3 class="text-sm font-medium text-yellow-700 mb-1">Paragraph Count</h3>
+                    <p id="paragraphCount" class="text-2xl font-semibold text-yellow-900">0</p>
+                </div>
+                <div class="result-card bg-purple-50 p-4 rounded-lg shadow-sm border border-purple-100 text-center">
+                    <h3 class="text-sm font-medium text-purple-700 mb-1">Reading Time</h3>
+                    <p id="readingTime" class="text-lg font-semibold text-purple-900">~0 min</p>
+                </div>
+                <div class="result-card bg-pink-50 p-4 rounded-lg shadow-sm border border-pink-100 text-center">
+                    <h3 class="text-sm font-medium text-pink-700 mb-1">Reading Ease</h3>
+                    <p id="readingEase" class="text-lg font-semibold text-pink-900">N/A</p>
+                    <p class="text-xs text-pink-600">(Higher is easier)</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Keyword Frequency (Top 10)</h3>
+                <ul id="keywordList" class="text-sm text-gray-700">
+                    <li class="italic text-gray-500">Enter text to see keyword frequency...</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer class="mt-8 text-center text-sm text-gray-500">
+            <p>&copy; <span id="currentYear"></span> Text Analyzer. </p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const textInput = document.getElementById('textInput');
+        const clearButton = document.getElementById('clearButton');
+        const wordCountEl = document.getElementById('wordCount');
+        const charCountEl = document.getElementById('charCount');
+        const sentenceCountEl = document.getElementById('sentenceCount');
+        const paragraphCountEl = document.getElementById('paragraphCount');
+        const readingTimeEl = document.getElementById('readingTime');
+        const readingEaseEl = document.getElementById('readingEase');
+        const keywordListEl = document.getElementById('keywordList');
+        const currentYearEl = document.getElementById('currentYear');
+
+        // --- Constants ---
+        const WORDS_PER_MINUTE = 225; // Average reading speed
+        // Basic list of English stop words. Could be expanded.
+        const STOP_WORDS = new Set([
+            'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'aren\'t', 'as', 'at',
+            'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can\'t', 'cannot', 'could',
+            'couldn\'t', 'did', 'didn\'t', 'do', 'does', 'doesn\'t', 'doing', 'don\'t', 'down', 'during', 'each', 'few', 'for',
+            'from', 'further', 'had', 'hadn\'t', 'has', 'hasn\'t', 'have', 'haven\'t', 'having', 'he', 'he\'d', 'he\'ll', 'he\'s',
+            'her', 'here', 'here\'s', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'how\'s', 'i', 'i\'d', 'i\'ll', 'i\'m',
+            'i\'ve', 'if', 'in', 'into', 'is', 'isn\'t', 'it', 'it\'s', 'its', 'itself', 'let\'s', 'me', 'more', 'most', 'mustn\'t',
+            'my', 'myself', 'no', 'nor', 'not', 'of', 'off', 'on', 'once', 'only', 'or', 'other', 'ought', 'our', 'ours',
+            'ourselves', 'out', 'over', 'own', 'same', 'shan\'t', 'she', 'she\'d', 'she\'ll', 'she\'s', 'should', 'shouldn\'t',
+            'so', 'some', 'such', 'than', 'that', 'that\'s', 'the', 'their', 'theirs', 'them', 'themselves', 'then', 'there',
+            'there\'s', 'these', 'they', 'they\'d', 'they\'ll', 'they\'re', 'they\'ve', 'this', 'those', 'through', 'to', 'too',
+            'under', 'until', 'up', 'very', 'was', 'wasn\'t', 'we', 'we\'d', 'we\'ll', 'we\'re', 'we\'ve', 'were', 'weren\'t',
+            'what', 'what\'s', 'when', 'when\'s', 'where', 'where\'s', 'which', 'while', 'who', 'who\'s', 'whom', 'why', 'why\'s',
+            'with', 'won\'t', 'would', 'wouldn\'t', 'you', 'you\'d', 'you\'ll', 'you\'re', 'you\'ve', 'your', 'yours', 'yourself',
+            'yourselves'
+        ]);
+
+        // --- Debounce Function ---
+        // Limits the rate at which a function can fire.
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // --- Analysis Functions ---
+
+        // Counts words (sequences of non-whitespace characters)
+        function countWords(text) {
+            if (!text.trim()) return 0;
+            // Match sequences of non-whitespace characters
+            const words = text.match(/\S+/g);
+            return words ? words.length : 0;
+        }
+
+        // Counts characters
+        function countCharacters(text) {
+            return text.length;
+        }
+
+        // Counts sentences (ends with . ! ? followed by space or end of string)
+        // This is a basic approach and might not be perfect for all cases (e.g., abbreviations).
+        function countSentences(text) {
+            if (!text.trim()) return 0;
+            // Match sentence endings (. ! ?) possibly followed by quotes/spaces and then whitespace or end of line.
+            const sentences = text.match(/[^.!?]+[.!?](\s+|$)/g);
+            // Filter out potential empty matches or whitespace-only matches if the regex isn't perfect
+            const validSentences = sentences ? sentences.filter(s => s.trim().length > 0) : [];
+            // Handle case where text might not end with punctuation
+            if (text.trim() && (!sentences || text.trim().length > sentences.join('').trim().length)) {
+                // Check if the remaining part isn't just whitespace
+                const lastPart = text.substring(sentences ? sentences.join('').length : 0).trim();
+                if (lastPart.length > 0) {
+                    return (validSentences ? validSentences.length : 0) + 1;
+                }
+            }
+
+            return validSentences ? validSentences.length : 0;
+
+        }
+
+        // Counts paragraphs (separated by one or more empty lines)
+        function countParagraphs(text) {
+            if (!text.trim()) return 0;
+            // Split by one or more newline characters, filter out empty strings resulting from multiple newlines
+            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+            return paragraphs.length;
+        }
+
+        // Estimates reading time
+        function calculateReadingTime(wordCount) {
+            if (wordCount === 0) return "~0 min";
+            const minutes = wordCount / WORDS_PER_MINUTE;
+            if (minutes < 1) {
+                const seconds = Math.round(minutes * 60);
+                return `~${seconds} sec`;
+            }
+            return `~${Math.round(minutes)} min`;
+        }
+
+        // Basic syllable counter (approximation) - Counts vowel groups
+        function countSyllables(word) {
+            if (!word) return 0;
+            word = word.toLowerCase().trim();
+            if (word.length <= 3) return 1; // Short words often have 1 syllable
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, ''); // Remove common suffixes
+            word = word.replace(/^y/, ''); // Remove starting 'y'
+            // Count vowel groups (sequences of vowels)
+            const vowelGroups = word.match(/[aeiouy]+/g);
+            let syllableCount = vowelGroups ? vowelGroups.length : 0;
+            // Adjust for silent 'e' at the end (already handled partly by suffix removal)
+            // Add syllable if word starts with 'y' and it wasn't removed
+            // Basic check, can be refined
+            return Math.max(1, syllableCount); // Ensure at least 1 syllable
+        }
+
+        // Calculates Flesch Reading Ease score
+        function calculateFleschReadingEase(text) {
+            const totalWords = countWords(text);
+            const totalSentences = countSentences(text);
+
+            if (totalWords === 0 || totalSentences === 0) {
+                return 'N/A'; // Avoid division by zero
+            }
+
+            let totalSyllables = 0;
+            const words = text.match(/\S+/g) || [];
+            words.forEach(word => {
+                totalSyllables += countSyllables(word);
+            });
+
+            // Flesch Reading Ease formula:
+            // 206.835 - 1.015 * (total words / total sentences) - 84.6 * (total syllables / total words)
+            const score = 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords);
+
+            return score.toFixed(1); // Return score rounded to one decimal place
+        }
+
+
+        // Calculates keyword frequency
+        function getKeywordFrequency(text) {
+            if (!text.trim()) return [];
+            const words = text.toLowerCase().match(/\b[a-z]+\b/g); // Match only words (letters)
+            if (!words) return [];
+
+            const frequency = {};
+            words.forEach(word => {
+                if (!STOP_WORDS.has(word) && word.length > 2) { // Exclude stop words and very short words
+                    frequency[word] = (frequency[word] || 0) + 1;
+                }
+            });
+
+            // Convert to array, sort by frequency, take top 10
+            return Object.entries(frequency)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 10);
+        }
+
+        // --- Update UI Function ---
+        function updateAnalysis() {
+            const text = textInput.value;
+
+            // Perform all analyses
+            const wordCount = countWords(text);
+            const charCount = countCharacters(text);
+            const sentenceCount = countSentences(text);
+            const paragraphCount = countParagraphs(text);
+            const readingTime = calculateReadingTime(wordCount);
+            const readingEase = calculateFleschReadingEase(text);
+            const keywords = getKeywordFrequency(text);
+
+            // Update DOM elements
+            wordCountEl.textContent = wordCount;
+            charCountEl.textContent = charCount;
+            sentenceCountEl.textContent = sentenceCount;
+            paragraphCountEl.textContent = paragraphCount;
+            readingTimeEl.textContent = readingTime;
+            readingEaseEl.textContent = readingEase;
+
+
+            // Update Keyword List
+            keywordListEl.innerHTML = ''; // Clear previous list
+            if (keywords.length > 0) {
+                keywords.forEach(([word, count]) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between py-1 border-b border-gray-200 last:border-b-0';
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = word;
+                    wordSpan.className = 'font-medium text-gray-800';
+                    const countSpan = document.createElement('span');
+                    countSpan.textContent = count;
+                    countSpan.className = 'text-indigo-600 font-semibold';
+                    li.appendChild(wordSpan);
+                    li.appendChild(countSpan);
+                    keywordListEl.appendChild(li);
+                });
+            } else if (text.trim()) {
+                keywordListEl.innerHTML = '<li class="italic text-gray-500">No significant keywords found (check stop words or text length).</li>';
+            }
+            else {
+                keywordListEl.innerHTML = '<li class="italic text-gray-500">Enter text to see keyword frequency...</li>';
+            }
+        }
+
+        // --- Event Listeners ---
+        // Debounce the analysis function to run 300ms after user stops typing
+        const debouncedUpdateAnalysis = debounce(updateAnalysis, 300);
+        textInput.addEventListener('input', debouncedUpdateAnalysis);
+
+        // Clear button functionality
+        clearButton.addEventListener('click', () => {
+            textInput.value = '';
+            updateAnalysis(); // Update counts to zero
+            textInput.focus(); // Set focus back to textarea
+        });
+
+
+        // --- Initial Setup ---
+        currentYearEl.textContent = new Date().getFullYear();
+        // Initial analysis in case there's pre-filled text (e.g., browser restore)
+        updateAnalysis();
+
+    </script>
+
+</body>
+
+</html>
