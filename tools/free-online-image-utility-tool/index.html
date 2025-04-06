@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 
+
     <title>Free Online Image Utility Tool | Resize, Compress & Convert Images</title>
-<meta name="description"
-    content="Use our free online image utility tool to quickly resize, compress, convert, and optimize images. No downloads required. Fast, secure, and browser-based.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <meta name="description"
+        content="Use our free online image utility tool to quickly resize, compress, convert, and optimize images. No downloads required. Fast, secure, and browser-based.">
 
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-<link rel="manifest" href="/assets/icons/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
 
-<meta property="og:title" content="Free Online Image Utility Tool | Resize, Compress & Convert">
-<meta property="og:description"
-    content="A powerful free web app for resizing, compressing, and converting images instantly. Simple, fast, and secure.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://online-tools.ni18.in/tools/free-online-image-utility-tool">
-<meta property="og:site_name" content="Online Tools">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://online-tools.ni18.in/assets/image-tool-preview.jpg">
+    <meta property="og:title" content="Free Online Image Utility Tool | Resize, Compress & Convert">
+    <meta property="og:description"
+        content="A powerful free web app for resizing, compressing, and converting images instantly. Simple, fast, and secure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/free-online-image-utility-tool">
+    <meta property="og:site_name" content="Online Tools">
+    <meta property="og:locale" content="en_US">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Online Image Utility Tool | Resize, Compress & Convert">
-<meta name="twitter:description"
-    content="Quickly resize, compress, and convert your images online for free. No login or installation needed.">
-<meta name="twitter:image" content="https://online-tools.ni18.in/assets/image-tool-preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Image Utility Tool | Resize, Compress & Convert">
+    <meta name="twitter:description"
+        content="Quickly resize, compress, and convert your images online for free. No login or installation needed.">
 
-<link rel="canonical" href="https://online-tools.ni18.in/tools/free-online-image-utility-tool">
+    <link rel="canonical" href="https://online-tools.ni18.in/tools/free-online-image-utility-tool">
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -47,7 +47,6 @@
 }
 </script>
 
- -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,18 +54,43 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .file-input-label { cursor: pointer; display: inline-block; padding: 0.75rem 1.5rem; border: 2px dashed #cbd5e1; border-radius: 0.5rem; transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; text-align: center; }
-        .file-input-label:hover { background-color: #f1f5f9; border-color: #94a3b8; }
-        input[type="file"] { display: none; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .file-input-label {
+            cursor: pointer;
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .file-input-label:hover {
+            background-color: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
         /* Canvas Styling */
-        #canvas-container { /* Added container */
-            position: relative; /* Needed for Cropper overlay */
+        #canvas-container {
+            /* Added container */
+            position: relative;
+            /* Needed for Cropper overlay */
             max-width: 100%;
             margin: 0 auto;
-            line-height: 0; /* Prevent extra space below canvas/img */
+            line-height: 0;
+            /* Prevent extra space below canvas/img */
         }
-        canvas, #cropper-image { /* Apply to both canvas and cropper image */
+
+        canvas,
+        #cropper-image {
+            /* Apply to both canvas and cropper image */
             max-width: 100%;
             height: auto;
             display: block;
@@ -78,48 +102,191 @@
             border-radius: 0.375rem;
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
         }
-        #cropper-image { display: none; } /* Hide img initially */
+
+        #cropper-image {
+            display: none;
+        }
+
+        /* Hide img initially */
 
         /* Cropper.js specific overrides if needed */
-        .cropper-view-box, .cropper-face { border-radius: 0.25rem; }
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 0.25rem;
+        }
 
-        .tool-button.active { background-color: #3b82f6; color: white; }
-        .lucide { vertical-align: middle; display: inline-block; width: 1.1em; height: 1.1em; margin-right: 0.35rem; stroke-width: 2; }
-        button .lucide { width: 1em; height: 1em; }
-        #header-actions button .lucide { margin-right: 0.15rem; width: 1.1em; height: 1.1em; }
-        #message-box { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); padding: 0.75rem 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); z-index: 50; display: none; opacity: 0; transition: opacity 0.5s ease-in-out; max-width: 90%; }
-        #message-box.show { display: block; opacity: 1; }
-        #message-box.success { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
-        #message-box.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-        #message-box.info { background-color: #e0f2fe; color: #075985; border: 1px solid #7dd3fc; }
-        .options-section, #export-panel { display: none; }
-        .options-section.active, #export-panel.active { display: block; }
-        #loading-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.7); display: flex; justify-content: center; align-items: center; z-index: 10; border-radius: 0.375rem; display: none; pointer-events: none; }
-        #loading-overlay.show { display: flex; pointer-events: auto; }
-        .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #09f; animation: spin 1s ease infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
-        input[type="range"] { height: 0.5rem; background-color: #e2e8f0; border-radius: 9999px; appearance: none; cursor: pointer; width: 100%; } /* Ensure width */
-        input[type="range"]::-webkit-slider-thumb { appearance: none; width: 1rem; height: 1rem; background-color: #3b82f6; border-radius: 50%; cursor: pointer; }
-        input[type="range"]::-moz-range-thumb { width: 1rem; height: 1rem; background-color: #3b82f6; border-radius: 50%; cursor: pointer; border: none; }
+        .tool-button.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .lucide {
+            vertical-align: middle;
+            display: inline-block;
+            width: 1.1em;
+            height: 1.1em;
+            margin-right: 0.35rem;
+            stroke-width: 2;
+        }
+
+        button .lucide {
+            width: 1em;
+            height: 1em;
+        }
+
+        #header-actions button .lucide {
+            margin-right: 0.15rem;
+            width: 1.1em;
+            height: 1.1em;
+        }
+
+        #message-box {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            z-index: 50;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            max-width: 90%;
+        }
+
+        #message-box.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #message-box.success {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        #message-box.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        #message-box.info {
+            background-color: #e0f2fe;
+            color: #075985;
+            border: 1px solid #7dd3fc;
+        }
+
+        .options-section,
+        #export-panel {
+            display: none;
+        }
+
+        .options-section.active,
+        #export-panel.active {
+            display: block;
+        }
+
+        #loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            border-radius: 0.375rem;
+            display: none;
+            pointer-events: none;
+        }
+
+        #loading-overlay.show {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        input[type="range"] {
+            height: 0.5rem;
+            background-color: #e2e8f0;
+            border-radius: 9999px;
+            appearance: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Ensure width */
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 1rem;
+            height: 1rem;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
         /* Style for canvas when text tool is active */
-        canvas.text-tool-active { cursor: crosshair; }
+        canvas.text-tool-active {
+            cursor: crosshair;
+        }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800">
 
     <header class="bg-white shadow-sm p-4 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold text-blue-600">Free Online Image Utility Tool</h1>
             <div id="header-actions" class="flex items-center gap-3">
-                 <button id="undo-btn" class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400" title="Undo last action" disabled>
+                <button id="undo-btn"
+                    class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400"
+                    title="Undo last action" disabled>
                     <i class="lucide lucide-undo-2"></i> Undo
                 </button>
-                 <button id="redo-btn" class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400" title="Redo last undone action" disabled>
+                <button id="redo-btn"
+                    class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400"
+                    title="Redo last undone action" disabled>
                     <i class="lucide lucide-redo-2"></i> Redo
                 </button>
-                 <span class="text-slate-300">|</span>
-                 <button id="reset-all-btn" class="text-sm text-slate-600 hover:text-red-600 transition-colors" title="Clear image and reset all settings">
+                <span class="text-slate-300">|</span>
+                <button id="reset-all-btn" class="text-sm text-slate-600 hover:text-red-600 transition-colors"
+                    title="Clear image and reset all settings">
                     <i class="lucide lucide-trash-2"></i> Clear All
                 </button>
             </div>
@@ -147,26 +314,43 @@
             <div class="bg-white p-4 rounded-lg shadow">
                 <h2 class="text-lg font-semibold mb-3 border-b pb-2">2. Tools</h2>
                 <div class="grid grid-cols-2 gap-3">
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="resize"><i class="lucide lucide-move-horizontal"></i> Resize</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="crop"><i class="lucide lucide-crop"></i> Crop</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="rotate"><i class="lucide lucide-rotate-cw"></i> Rotate</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="flip"><i class="lucide lucide-flip-horizontal-2"></i> Flip</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="adjust"><i class="lucide lucide-sliders-horizontal"></i> Adjust</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="border"><i class="lucide lucide-square"></i> Border</button>
-                    <button class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center" data-tool="text"><i class="lucide lucide-type"></i> Text</button>
-                    </div>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="resize"><i class="lucide lucide-move-horizontal"></i> Resize</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="crop"><i class="lucide lucide-crop"></i> Crop</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="rotate"><i class="lucide lucide-rotate-cw"></i> Rotate</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="flip"><i class="lucide lucide-flip-horizontal-2"></i> Flip</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="adjust"><i class="lucide lucide-sliders-horizontal"></i> Adjust</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="border"><i class="lucide lucide-square"></i> Border</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="text"><i class="lucide lucide-type"></i> Text</button>
+                </div>
             </div>
         </aside>
 
         <section class="w-full lg:w-1/2 relative">
-             <div class="bg-white p-4 rounded-lg shadow sticky top-[80px]">
-                 <h2 class="text-lg font-semibold mb-3 border-b pb-2">Preview</h2>
-                <div id="preview-area" class="relative min-h-[200px] flex items-center justify-center bg-slate-100 rounded-md overflow-hidden">
+            <div class="bg-white p-4 rounded-lg shadow sticky top-[80px]">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">Preview</h2>
+                <div id="preview-area"
+                    class="relative min-h-[200px] flex items-center justify-center bg-slate-100 rounded-md overflow-hidden">
                     <div id="canvas-container">
                         <canvas id="canvas"></canvas>
                         <img id="cropper-image" alt="Image for cropping">
                     </div>
-                    <p id="preview-placeholder" class="text-slate-500 p-5 text-center absolute inset-0 flex items-center justify-center">Upload an image to start editing</p>
+                    <p id="preview-placeholder"
+                        class="text-slate-500 p-5 text-center absolute inset-0 flex items-center justify-center">Upload
+                        an image to start editing</p>
                     <div id="loading-overlay">
                         <div class="spinner"></div>
                     </div>
@@ -185,15 +369,20 @@
                 <div id="options-resize" class="options-section space-y-3">
                     <label class="block text-sm font-medium text-slate-700">Dimensions (px)</label>
                     <div class="flex gap-2 items-center">
-                        <input type="number" id="resize-width" placeholder="Width" class="form-input w-full text-sm rounded-md border-slate-300">
+                        <input type="number" id="resize-width" placeholder="Width"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
                         <span class="text-slate-500">x</span>
-                        <input type="number" id="resize-height" placeholder="Height" class="form-input w-full text-sm rounded-md border-slate-300">
+                        <input type="number" id="resize-height" placeholder="Height"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="resize-aspect-ratio" checked class="form-checkbox rounded text-blue-600">
+                        <input type="checkbox" id="resize-aspect-ratio" checked
+                            class="form-checkbox rounded text-blue-600">
                         <label for="resize-aspect-ratio" class="ml-2 text-sm text-slate-600">Lock Aspect Ratio</label>
                     </div>
-                    <button id="apply-resize-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply Resize</button>
+                    <button id="apply-resize-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Resize</button>
                     <p class="text-xs text-slate-500">Live preview active. Uses browser default scaling.</p>
                 </div>
 
@@ -202,185 +391,239 @@
                     <div>
                         <label class="block text-sm font-medium text-slate-700">Aspect Ratio</label>
                         <div class="flex flex-wrap gap-2 mt-1">
-                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100" data-ratio="free">Free</button>
-                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100" data-ratio="1/1">1:1</button>
-                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100" data-ratio="4/3">4:3</button>
-                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100" data-ratio="16/9">16:9</button>
-                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100" data-ratio="orig">Original</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="free">Free</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="1/1">1:1</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="4/3">4:3</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="16/9">16:9</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="orig">Original</button>
                         </div>
                     </div>
-                     <button id="apply-crop-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm mt-2">Apply Crop</button>
-                     <button id="cancel-crop-btn" class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Cancel Crop</button>
+                    <button id="apply-crop-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm mt-2">Apply
+                        Crop</button>
+                    <button id="cancel-crop-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Cancel
+                        Crop</button>
                 </div>
 
                 <div id="options-rotate" class="options-section space-y-3">
                     <div class="grid grid-cols-2 gap-3">
-                         <button id="rotate-left-btn" class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i class="lucide lucide-rotate-ccw"></i> 90° Left</button>
-                         <button id="rotate-right-btn" class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i class="lucide lucide-rotate-cw"></i> 90° Right</button>
+                        <button id="rotate-left-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-ccw"></i> 90° Left</button>
+                        <button id="rotate-right-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-cw"></i> 90° Right</button>
                     </div>
-                 </div>
+                </div>
 
                 <div id="options-flip" class="options-section space-y-3">
                     <div class="grid grid-cols-2 gap-3">
-                        <button id="flip-horizontal-btn" class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i class="lucide lucide-flip-horizontal"></i> Horizontal</button>
-                        <button id="flip-vertical-btn" class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i class="lucide lucide-flip-vertical"></i> Vertical</button>
+                        <button id="flip-horizontal-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-horizontal"></i> Horizontal</button>
+                        <button id="flip-vertical-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-vertical"></i> Vertical</button>
                     </div>
-                 </div>
-
-                <div id="options-adjust" class="options-section space-y-4">
-                     <div>
-                        <label for="brightness-slider" class="block text-sm font-medium text-slate-700 mb-1">Brightness (<span id="brightness-value">100</span>%)</label>
-                        <input type="range" id="brightness-slider" min="0" max="200" value="100" class="w-full form-range">
-                    </div>
-                     <div>
-                        <label for="contrast-slider" class="block text-sm font-medium text-slate-700 mb-1">Contrast (<span id="contrast-value">100</span>%)</label>
-                        <input type="range" id="contrast-slider" min="0" max="200" value="100" class="w-full form-range">
-                    </div>
-                     <div>
-                        <label for="saturation-slider" class="block text-sm font-medium text-slate-700 mb-1">Saturation (<span id="saturation-value">100</span>%)</label>
-                        <input type="range" id="saturation-slider" min="0" max="200" value="100" class="w-full form-range">
-                    </div>
-                     <div>
-                        <label for="grayscale-slider" class="block text-sm font-medium text-slate-700 mb-1">Grayscale (<span id="grayscale-value">0</span>%)</label>
-                        <input type="range" id="grayscale-slider" min="0" max="100" value="0" class="w-full form-range">
-                    </div>
-                     <div>
-                        <label for="sepia-slider" class="block text-sm font-medium text-slate-700 mb-1">Sepia (<span id="sepia-value">0</span>%)</label>
-                        <input type="range" id="sepia-slider" min="0" max="100" value="0" class="w-full form-range">
-                    </div>
-                     <div>
-                        <label for="blur-slider" class="block text-sm font-medium text-slate-700 mb-1">Blur (<span id="blur-value">0</span>px)</label>
-                        <input type="range" id="blur-slider" min="0" max="10" step="0.1" value="0" class="w-full form-range">
-                    </div>
-                    <button id="apply-adjust-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply Adjustments</button>
-                     <button id="reset-adjust-btn" class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Reset Adjustments</button>
                 </div>
 
-                 <div id="options-border" class="options-section space-y-3">
+                <div id="options-adjust" class="options-section space-y-4">
+                    <div>
+                        <label for="brightness-slider" class="block text-sm font-medium text-slate-700 mb-1">Brightness
+                            (<span id="brightness-value">100</span>%)</label>
+                        <input type="range" id="brightness-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="contrast-slider" class="block text-sm font-medium text-slate-700 mb-1">Contrast
+                            (<span id="contrast-value">100</span>%)</label>
+                        <input type="range" id="contrast-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="saturation-slider" class="block text-sm font-medium text-slate-700 mb-1">Saturation
+                            (<span id="saturation-value">100</span>%)</label>
+                        <input type="range" id="saturation-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="grayscale-slider" class="block text-sm font-medium text-slate-700 mb-1">Grayscale
+                            (<span id="grayscale-value">0</span>%)</label>
+                        <input type="range" id="grayscale-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="sepia-slider" class="block text-sm font-medium text-slate-700 mb-1">Sepia (<span
+                                id="sepia-value">0</span>%)</label>
+                        <input type="range" id="sepia-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="blur-slider" class="block text-sm font-medium text-slate-700 mb-1">Blur (<span
+                                id="blur-value">0</span>px)</label>
+                        <input type="range" id="blur-slider" min="0" max="10" step="0.1" value="0"
+                            class="w-full form-range">
+                    </div>
+                    <button id="apply-adjust-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Adjustments</button>
+                    <button id="reset-adjust-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Reset
+                        Adjustments</button>
+                </div>
+
+                <div id="options-border" class="options-section space-y-3">
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label for="border-width" class="block text-sm font-medium text-slate-700">Width (px)</label>
-                            <input type="number" id="border-width" value="5" min="0" class="form-input w-full text-sm rounded-md border-slate-300">
+                            <label for="border-width" class="block text-sm font-medium text-slate-700">Width
+                                (px)</label>
+                            <input type="number" id="border-width" value="5" min="0"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
                         </div>
                         <div>
                             <label for="border-color" class="block text-sm font-medium text-slate-700">Color</label>
-                            <input type="color" id="border-color" value="#000000" class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                            <input type="color" id="border-color" value="#000000"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
                         </div>
                     </div>
-                    <button id="apply-border-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply Border</button>
+                    <button id="apply-border-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Border</button>
                     <p class="text-xs text-slate-500">Live preview active.</p>
                 </div>
 
 
                 <div id="options-text" class="options-section space-y-3">
-                     <p class="text-xs text-slate-500 mb-2">Click on the preview to position text, then adjust options.</p>
+                    <p class="text-xs text-slate-500 mb-2">Click on the preview to position text, then adjust options.
+                    </p>
                     <label for="text-input" class="block text-sm font-medium text-slate-700">Text</label>
-                    <textarea id="text-input" placeholder="Your text here" rows="3" class="form-textarea w-full text-sm rounded-md border-slate-300"></textarea>
+                    <textarea id="text-input" placeholder="Your text here" rows="3"
+                        class="form-textarea w-full text-sm rounded-md border-slate-300"></textarea>
 
                     <div class="grid grid-cols-2 gap-3">
-                         <div>
-                            <label for="text-font-family" class="block text-sm font-medium text-slate-700">Font</label>
-                             <select id="text-font-family" class="form-select w-full text-sm rounded-md border-slate-300">
-                                 <option value="Arial, sans-serif">Arial</option>
-                                 <option value="Verdana, sans-serif">Verdana</option>
-                                 <option value="'Times New Roman', Times, serif">Times New Roman</option>
-                                 <option value="'Courier New', Courier, monospace">Courier New</option>
-                                 <option value="Georgia, serif">Georgia</option>
-                                 <option value="Impact, Charcoal, sans-serif">Impact</option>
-                             </select>
-                        </div>
-                         <div>
-                            <label for="text-size" class="block text-sm font-medium text-slate-700">Size (px)</label>
-                            <input type="number" id="text-size" value="30" min="8" class="form-input w-full text-sm rounded-md border-slate-300">
-                        </div>
-                    </div>
-
-                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                             <label class="block text-sm font-medium text-slate-700">Style</label>
-                             <div class="flex gap-2 mt-1">
-                                 <label class="flex items-center text-sm">
-                                     <input type="checkbox" id="text-bold" class="form-checkbox rounded text-blue-600 mr-1"> Bold
-                                 </label>
-                                 <label class="flex items-center text-sm">
-                                     <input type="checkbox" id="text-italic" class="form-checkbox rounded text-blue-600 mr-1"> Italic
-                                 </label>
-                             </div>
+                            <label for="text-font-family" class="block text-sm font-medium text-slate-700">Font</label>
+                            <select id="text-font-family"
+                                class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="'Courier New', Courier, monospace">Courier New</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Impact, Charcoal, sans-serif">Impact</option>
+                            </select>
                         </div>
-                         <div>
+                        <div>
+                            <label for="text-size" class="block text-sm font-medium text-slate-700">Size (px)</label>
+                            <input type="number" id="text-size" value="30" min="8"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Style</label>
+                            <div class="flex gap-2 mt-1">
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-bold"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Bold
+                                </label>
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-italic"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Italic
+                                </label>
+                            </div>
+                        </div>
+                        <div>
                             <label for="text-color" class="block text-sm font-medium text-slate-700">Color</label>
-                            <input type="color" id="text-color" value="#ffffff" class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                            <input type="color" id="text-color" value="#ffffff"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
                         </div>
                     </div>
 
-                     <div class="grid grid-cols-2 gap-3">
-                         <div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
                             <label for="text-align" class="block text-sm font-medium text-slate-700">Align</label>
-                             <select id="text-align" class="form-select w-full text-sm rounded-md border-slate-300">
-                                 <option value="left">Left</option>
-                                 <option value="center">Center</option>
-                                 <option value="right">Right</option>
-                             </select>
+                            <select id="text-align" class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="left">Left</option>
+                                <option value="center">Center</option>
+                                <option value="right">Right</option>
+                            </select>
                         </div>
-                         <div>
-                            <label for="text-rotation" class="block text-sm font-medium text-slate-700">Rotation (°)</label>
-                            <input type="number" id="text-rotation" value="0" step="1" class="form-input w-full text-sm rounded-md border-slate-300">
+                        <div>
+                            <label for="text-rotation" class="block text-sm font-medium text-slate-700">Rotation
+                                (°)</label>
+                            <input type="number" id="text-rotation" value="0" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
                         </div>
                     </div>
 
-                     <div>
-                        <label for="text-opacity" class="block text-sm font-medium text-slate-700 mb-1">Opacity (<span id="text-opacity-value">0.7</span>)</label>
-                        <input type="range" id="text-opacity" min="0" max="1" step="0.05" value="0.7" class="w-full form-range">
+                    <div>
+                        <label for="text-opacity" class="block text-sm font-medium text-slate-700 mb-1">Opacity (<span
+                                id="text-opacity-value">0.7</span>)</label>
+                        <input type="range" id="text-opacity" min="0" max="1" step="0.05" value="0.7"
+                            class="w-full form-range">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                         <div>
+                        <div>
                             <label for="text-x" class="block text-sm font-medium text-slate-700">X Position</label>
-                            <input type="number" id="text-x" value="50" step="1" class="form-input w-full text-sm rounded-md border-slate-300">
-                         </div>
-                         <div>
+                            <input type="number" id="text-x" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                        <div>
                             <label for="text-y" class="block text-sm font-medium text-slate-700">Y Position</label>
-                            <input type="number" id="text-y" value="50" step="1" class="form-input w-full text-sm rounded-md border-slate-300">
-                         </div>
+                            <input type="number" id="text-y" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
                     </div>
                     <p class="text-xs text-slate-500">X/Y position is relative to the top-left corner.</p>
 
-                    <button id="apply-text-btn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply Text</button>
-                     <p class="text-xs text-slate-500">Live preview active.</p>
-               </div>
+                    <button id="apply-text-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Text</button>
+                    <p class="text-xs text-slate-500">Live preview active.</p>
+                </div>
 
             </div>
 
             <div id="export-panel" class="bg-white p-4 rounded-lg shadow space-y-3">
-                 <h2 class="text-lg font-semibold mb-3 border-b pb-2">4. Export Image</h2>
-                 <div>
-                     <label for="convert-format" class="block text-sm font-medium text-slate-700">Output Format</label>
-                     <select id="convert-format" class="form-select w-full text-sm rounded-md border-slate-300 mt-1">
-                         <option value="image/png">PNG (Lossless)</option>
-                         <option value="image/jpeg">JPG (Lossy)</option>
-                         <option value="image/webp">WEBP (Lossy/Lossless)</option>
-                     </select>
-                 </div>
-                 <div id="quality-option" class="space-y-1 hidden">
-                     <label for="convert-quality" class="block text-sm font-medium text-slate-700 mb-1">Quality (<span id="quality-value">92</span>%)</label>
-                     <input type="range" id="convert-quality" min="1" max="100" value="92" class="w-full form-range">
-                     <p class="text-xs text-slate-500">Lower quality means smaller file size (for JPG/WEBP).</p>
-                 </div>
-                 <div id="webp-options" class="space-y-1 hidden">
-                     <div class="flex items-center">
-                         <input type="checkbox" id="webp-lossless" class="form-checkbox rounded text-blue-600">
-                         <label for="webp-lossless" class="ml-2 text-sm text-slate-600">Use Lossless WEBP</label>
-                     </div>
-                 </div>
-                 <div>
-                     <label for="download-filename" class="block text-sm font-medium text-slate-700">Filename</label>
-                     <input type="text" id="download-filename" value="edited-image" class="form-input w-full text-sm rounded-md border-slate-300 mt-1">
-                 </div>
-                  <div class="text-sm text-slate-600">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">4. Export Image</h2>
+                <div>
+                    <label for="convert-format" class="block text-sm font-medium text-slate-700">Output Format</label>
+                    <select id="convert-format" class="form-select w-full text-sm rounded-md border-slate-300 mt-1">
+                        <option value="image/png">PNG (Lossless)</option>
+                        <option value="image/jpeg">JPG (Lossy)</option>
+                        <option value="image/webp">WEBP (Lossy/Lossless)</option>
+                    </select>
+                </div>
+                <div id="quality-option" class="space-y-1 hidden">
+                    <label for="convert-quality" class="block text-sm font-medium text-slate-700 mb-1">Quality (<span
+                            id="quality-value">92</span>%)</label>
+                    <input type="range" id="convert-quality" min="1" max="100" value="92" class="w-full form-range">
+                    <p class="text-xs text-slate-500">Lower quality means smaller file size (for JPG/WEBP).</p>
+                </div>
+                <div id="webp-options" class="space-y-1 hidden">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="webp-lossless" class="form-checkbox rounded text-blue-600">
+                        <label for="webp-lossless" class="ml-2 text-sm text-slate-600">Use Lossless WEBP</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="download-filename" class="block text-sm font-medium text-slate-700">Filename</label>
+                    <input type="text" id="download-filename" value="edited-image"
+                        class="form-input w-full text-sm rounded-md border-slate-300 mt-1">
+                </div>
+                <div class="text-sm text-slate-600">
                     Estimated Size: <span id="estimated-size" class="font-medium">N/A</span>
-                 </div>
-                 <button id="download-btn" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center justify-center gap-2">
-                     <i class="lucide lucide-download"></i> Download Image
-                 </button>
+                </div>
+                <button id="download-btn"
+                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center justify-center gap-2">
+                    <i class="lucide lucide-download"></i> Download Image
+                </button>
             </div>
 
         </aside>
@@ -542,10 +785,10 @@
                 if (cropperInstance) destroyCropper();
                 drawCurrentImageToCanvas(); // Redraw canvas with the loaded state
                 updateEstimatedSize(); updateHistoryButtons(); showLoading(false); isHistoryNavigation = false;
-                 if (activeTool === 'adjust') resetAdjustmentSliders(false);
-                 if (activeTool === 'resize') { resizeWidthInput.value = currentWidth; resizeHeightInput.value = currentHeight; }
-                 // Add resets for other tools if needed
-                 drawCurrentImageToCanvas(); // Redraw again to clear any lingering previews
+                if (activeTool === 'adjust') resetAdjustmentSliders(false);
+                if (activeTool === 'resize') { resizeWidthInput.value = currentWidth; resizeHeightInput.value = currentHeight; }
+                // Add resets for other tools if needed
+                drawCurrentImageToCanvas(); // Redraw again to clear any lingering previews
             };
             img.onerror = (err) => { console.error("Error loading history state image:", err); showMessage('Error loading history state.', 'error', 5000); showLoading(false); isHistoryNavigation = false; updateHistoryButtons(); };
             img.src = dataUrl;
@@ -581,13 +824,13 @@
         }
 
         function updateImageDetails(width, height) {
-             // Update canvas size only if not cropping
-             if (activeTool !== 'crop') {
-                 if (canvas.width !== width || canvas.height !== height) {
-                     canvas.width = width; canvas.height = height;
-                 }
-             }
-             imgDimensions.textContent = `${width} x ${height} px`;
+            // Update canvas size only if not cropping
+            if (activeTool !== 'crop') {
+                if (canvas.width !== width || canvas.height !== height) {
+                    canvas.width = width; canvas.height = height;
+                }
+            }
+            imgDimensions.textContent = `${width} x ${height} px`;
         }
 
         // --- Cropper.js Functions ---
@@ -600,7 +843,7 @@
             cropperImage.style.display = 'block'; // Show image
 
             // Ensure image is loaded before initializing cropper if src was just set
-             // However, currentImage.src should already be loaded dataURL/blobURL
+            // However, currentImage.src should already be loaded dataURL/blobURL
             cropperInstance = new Cropper(cropperImage, {
                 viewMode: 1, // restrict crop box to canvas
                 dragMode: 'move',
@@ -622,7 +865,7 @@
                 cropperImage.style.display = 'none'; // Hide image
                 canvas.style.display = 'block'; // Show canvas
                 // Redraw current state on canvas after destroying cropper
-                if(currentImage) drawCurrentImageToCanvas();
+                if (currentImage) drawCurrentImageToCanvas();
             }
         }
 
@@ -658,8 +901,8 @@
             ctx.filter = 'none';
 
             if (activeTool === 'border') {
-                 const borderWidth = parseInt(borderWidthInput.value, 10);
-                 if (!isNaN(borderWidth) && borderWidth > 0) { ctx.strokeStyle = borderColorInput.value; ctx.lineWidth = borderWidth; ctx.strokeRect(borderWidth / 2, borderWidth / 2, currentWidth - borderWidth, currentHeight - borderWidth); }
+                const borderWidth = parseInt(borderWidthInput.value, 10);
+                if (!isNaN(borderWidth) && borderWidth > 0) { ctx.strokeStyle = borderColorInput.value; ctx.lineWidth = borderWidth; ctx.strokeRect(borderWidth / 2, borderWidth / 2, currentWidth - borderWidth, currentHeight - borderWidth); }
             }
             if (activeTool === 'text') { const text = textInput.value; if (text) drawText(ctx, text, currentWidth, currentHeight); }
 
@@ -668,7 +911,7 @@
 
         function updateCurrentImageFromDataURL(dataUrl, callback) {
             // Destroy cropper if active before updating main image
-             if (cropperInstance) destroyCropper();
+            if (cropperInstance) destroyCropper();
 
             showLoading(true);
             const img = new Image();
@@ -687,30 +930,30 @@
 
         // --- Event Handlers ---
         function handleFileSelect(file) {
-             if (!file || !file.type.startsWith('image/')) { showMessage('Invalid image file.', 'error'); return; }
-             if (isProcessing) return;
-             resetAppState(); showLoading(true);
-             originalFileData = { name: file.name, size: file.size };
-             const reader = new FileReader();
-             reader.onload = (e) => {
-                 const imageDataUrl = e.target.result;
-                 infoFilename.textContent = originalFileData.name; infoOrigSize.textContent = formatBytes(originalFileData.size);
-                 const img = new Image();
-                 img.onload = () => {
-                     originalImage = img; currentImage = img;
-                     originalWidth = img.naturalWidth; originalHeight = img.naturalHeight;
-                     currentWidth = originalWidth; currentHeight = originalHeight;
-                     currentAspectRatio = (currentHeight > 0) ? currentWidth / currentHeight : 1;
-                     infoOrigDims.textContent = `${originalWidth} x ${originalHeight} px`;
-                     drawCurrentImageToCanvas(); pushHistoryState(); // Save initial state
-                     showMessage('Image loaded.', 'success'); exportPanel.classList.add('active');
-                     updateEstimatedSize(); showLoading(false);
-                 };
-                 img.onerror = (err) => { console.error("Error loading initial image object:", err); showMessage('Could not load image.', 'error', 5000); resetAppState(); showLoading(false); };
-                 img.src = imageDataUrl;
-             };
-             reader.onerror = (err) => { console.error("FileReader error:", err); showMessage('Error reading file.', 'error', 5000); resetAppState(); showLoading(false); };
-             reader.readAsDataURL(file);
+            if (!file || !file.type.startsWith('image/')) { showMessage('Invalid image file.', 'error'); return; }
+            if (isProcessing) return;
+            resetAppState(); showLoading(true);
+            originalFileData = { name: file.name, size: file.size };
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageDataUrl = e.target.result;
+                infoFilename.textContent = originalFileData.name; infoOrigSize.textContent = formatBytes(originalFileData.size);
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img; currentImage = img;
+                    originalWidth = img.naturalWidth; originalHeight = img.naturalHeight;
+                    currentWidth = originalWidth; currentHeight = originalHeight;
+                    currentAspectRatio = (currentHeight > 0) ? currentWidth / currentHeight : 1;
+                    infoOrigDims.textContent = `${originalWidth} x ${originalHeight} px`;
+                    drawCurrentImageToCanvas(); pushHistoryState(); // Save initial state
+                    showMessage('Image loaded.', 'success'); exportPanel.classList.add('active');
+                    updateEstimatedSize(); showLoading(false);
+                };
+                img.onerror = (err) => { console.error("Error loading initial image object:", err); showMessage('Could not load image.', 'error', 5000); resetAppState(); showLoading(false); };
+                img.src = imageDataUrl;
+            };
+            reader.onerror = (err) => { console.error("FileReader error:", err); showMessage('Error reading file.', 'error', 5000); resetAppState(); showLoading(false); };
+            reader.readAsDataURL(file);
         }
         fileInput.addEventListener('change', (e) => { if (e.target.files.length > 0) handleFileSelect(e.target.files[0]); });
         // Drag and Drop
@@ -733,12 +976,12 @@
                 if (!originalImage || isProcessing) return;
                 const tool = button.dataset.tool;
 
-                 // Destroy cropper if switching away from crop tool or deactivating it
+                // Destroy cropper if switching away from crop tool or deactivating it
                 if (activeTool === 'crop' && tool !== 'crop' && cropperInstance) {
                     destroyCropper();
                 }
-                 // Remove text tool cursor if switching away
-                 if (activeTool === 'text') canvas.classList.remove('text-tool-active');
+                // Remove text tool cursor if switching away
+                if (activeTool === 'text') canvas.classList.remove('text-tool-active');
 
 
                 if (tool === activeTool) { // Deactivate current tool
@@ -765,27 +1008,27 @@
                     } else if (tool === 'border') {
                         updateBorderPreview(); // Trigger preview
                     } else if (tool === 'text') {
-                         canvas.classList.add('text-tool-active'); // Add cursor
-                         updateTextPreview(); // Trigger preview
+                        canvas.classList.add('text-tool-active'); // Add cursor
+                        updateTextPreview(); // Trigger preview
                     } else if (tool === 'adjust') {
                         updateAdjustmentPreview(); // Trigger preview
                     } else {
-                         // Ensure canvas is visible if switching to a non-cropper tool
-                         if (canvas.style.display === 'none') {
-                              canvas.style.display = 'block';
-                              cropperImage.style.display = 'none';
-                              if(currentImage) drawCurrentImageToCanvas(); // Redraw if needed
-                         }
+                        // Ensure canvas is visible if switching to a non-cropper tool
+                        if (canvas.style.display === 'none') {
+                            canvas.style.display = 'block';
+                            cropperImage.style.display = 'none';
+                            if (currentImage) drawCurrentImageToCanvas(); // Redraw if needed
+                        }
                     }
                 } else {
                     console.warn(`Options panel for tool "${tool}" not found.`);
-                     optionsPlaceholder.style.display = 'block'; activeTool = null;
-                     // Ensure canvas is visible if options panel fails
-                     if (canvas.style.display === 'none') {
-                         canvas.style.display = 'block';
-                         cropperImage.style.display = 'none';
-                         if(currentImage) drawCurrentImageToCanvas();
-                     }
+                    optionsPlaceholder.style.display = 'block'; activeTool = null;
+                    // Ensure canvas is visible if options panel fails
+                    if (canvas.style.display === 'none') {
+                        canvas.style.display = 'block';
+                        cropperImage.style.display = 'none';
+                        if (currentImage) drawCurrentImageToCanvas();
+                    }
                 }
             });
         });
@@ -794,9 +1037,9 @@
 
         // -- Resize --
         function updateResizePreview() { /* ... (no changes) ... */ if (!currentImage || activeTool !== 'resize' || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { drawCurrentImageToCanvas(); return; } updateImageDetails(newWidth, newHeight); ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.imageSmoothingQuality = 'high'; ctx.imageSmoothingEnabled = true; try { ctx.drawImage(currentImage, 0, 0, newWidth, newHeight); } catch (e) { console.error("Error drawing resize preview:", e); drawCurrentImageToCanvas(); } }
-        resizeWidthInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if(!isNaN(newWidth) && newWidth > 0) resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); else resizeHeightInput.value = ''; } debounce(updateResizePreview, 250); });
-        resizeHeightInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newHeight = parseInt(resizeHeightInput.value, 10); if(!isNaN(newHeight) && newHeight > 0) resizeWidthInput.value = Math.round(newHeight * currentAspectRatio); else resizeWidthInput.value = ''; } debounce(updateResizePreview, 250); });
-        resizeAspectRatioCheckbox.addEventListener('change', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if(!isNaN(newWidth) && newWidth > 0) { resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); debounce(updateResizePreview, 250); } } });
+        resizeWidthInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if (!isNaN(newWidth) && newWidth > 0) resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); else resizeHeightInput.value = ''; } debounce(updateResizePreview, 250); });
+        resizeHeightInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newHeight = parseInt(resizeHeightInput.value, 10); if (!isNaN(newHeight) && newHeight > 0) resizeWidthInput.value = Math.round(newHeight * currentAspectRatio); else resizeWidthInput.value = ''; } debounce(updateResizePreview, 250); });
+        resizeAspectRatioCheckbox.addEventListener('change', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if (!isNaN(newWidth) && newWidth > 0) { resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); debounce(updateResizePreview, 250); } } });
         applyResizeBtn.addEventListener('click', () => { if (!currentImage || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { showMessage('Invalid dimensions.', 'error'); return; } if (newWidth === currentWidth && newHeight === currentHeight) { showMessage('Dimensions unchanged.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.imageSmoothingQuality = 'high'; tempCtx.imageSmoothingEnabled = true; tempCtx.drawImage(currentImage, 0, 0, newWidth, newHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Resize applied.', 'success')); });
 
         // -- Crop (Using Cropper.js) --
@@ -819,7 +1062,7 @@
                 });
 
                 if (!croppedCanvas) {
-                     throw new Error("Failed to get cropped canvas.");
+                    throw new Error("Failed to get cropped canvas.");
                 }
 
                 // Update the main image state
@@ -828,21 +1071,21 @@
                     // No need to destroy cropper here, updateCurrentImageFromDataURL handles it
                 });
             } catch (error) {
-                 console.error("Error applying crop:", error);
-                 showMessage("Failed to apply crop.", "error");
-                 showLoading(false);
-                 // Optionally destroy cropper on error?
-                 // destroyCropper();
+                console.error("Error applying crop:", error);
+                showMessage("Failed to apply crop.", "error");
+                showLoading(false);
+                // Optionally destroy cropper on error?
+                // destroyCropper();
             }
         });
         cancelCropBtn.addEventListener('click', () => {
-             if (cropperInstance) {
-                 destroyCropper();
-                 // Optionally deactivate the tool button
-                 activeTool = null;
-                 deactivateAllToolButtons();
-                 hideAllOptionsPanels();
-             }
+            if (cropperInstance) {
+                destroyCropper();
+                // Optionally deactivate the tool button
+                activeTool = null;
+                deactivateAllToolButtons();
+                hideAllOptionsPanels();
+            }
         });
 
 
@@ -940,10 +1183,10 @@
         textOpacitySlider.addEventListener('input', (e) => { textOpacityValue.textContent = parseFloat(e.target.value).toFixed(2); debounce(updateTextPreview, 100); });
         // Add listeners for all text controls
         [textInput, textFontFamilySelect, textSizeInput, textBoldCheckbox, textItalicCheckbox,
-         textColorInput, textAlignSelect, textRotationInput, textXInput, textYInput /*, textPositionSelect - removed */].forEach(input => {
-             input.addEventListener('input', () => debounce(updateTextPreview, 100));
-             input.addEventListener('change', () => debounce(updateTextPreview, 100)); // For selects/checkboxes/numbers
-        });
+            textColorInput, textAlignSelect, textRotationInput, textXInput, textYInput /*, textPositionSelect - removed */].forEach(input => {
+                input.addEventListener('input', () => debounce(updateTextPreview, 100));
+                input.addEventListener('change', () => debounce(updateTextPreview, 100)); // For selects/checkboxes/numbers
+            });
 
         applyTextBtn.addEventListener('click', () => {
             if (!currentImage || isProcessing) return;
@@ -970,4 +1213,5 @@
 
     </script>
 </body>
+
 </html>
