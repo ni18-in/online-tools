@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Text Analyzer - Word Count, Readability & More</title>
-    <meta name="description"
-        content="Analyze your text instantly: Get word count, character count, sentence count, paragraph count, estimated reading time, and keyword frequency. Free online tool.">
-    <meta name="keywords"
-        content="text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, online tool, free text analysis">
+    <title>All-in-One Text Analyzer - Professional Layout</title>
+    <meta name="description" content="Professional text analyzer tool: Get word count, character count, sentence count, paragraph count, reading time, readability score, and keyword frequency with a clean interface.">
+    <meta name="keywords" content="text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis, professional text tool">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -18,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <script type="application/ld+json">
     {
@@ -26,20 +24,20 @@
       "name": "All-in-One Text Analyzer",
       "description": "Analyze your text instantly: Get word count, character count, sentence count, paragraph count, estimated reading time, and keyword frequency. Free online tool.",
       "applicationCategory": ["UtilitiesApplication", "ProductivityApplication"],
-      "operatingSystem": "Any", // Web-based, runs on any OS with a browser
+      "operatingSystem": "Any",
       "browserRequirements": "Requires JavaScript enabled browser.",
-      "url": "/tools/all-in-one-text-analyzer/",
+      "url": "/tools/all-in-one-text-analyzer/", // Replace with your actual URL
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD" 
+        "priceCurrency": "USD"
       },
-      "keywords": "text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, online tool, free text analysis",
+      "keywords": "text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis",
        "potentialAction": {
         "@type": "AnalyzeAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "/tools/all-in-one-text-analyzer/"
+          "urlTemplate": "/tools/all-in-one-text-analyzer/" // Replace with your actual URL
         },
         "result": {
           "@type": "QuantitativeValue",
@@ -52,115 +50,203 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* bg-slate-50 */
         }
 
-        /* Simple scrollbar styling */
+        /* Simple scrollbar styling for textarea */
         textarea::-webkit-scrollbar {
             width: 8px;
         }
-
         textarea::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #e2e8f0; /* bg-slate-200 */
             border-radius: 10px;
         }
-
         textarea::-webkit-scrollbar-thumb {
-            background: #888;
+            background: #94a3b8; /* bg-slate-400 */
             border-radius: 10px;
         }
-
         textarea::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Add some subtle animation */
-        .result-card {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .result-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: #64748b; /* bg-slate-500 */
         }
 
         /* Style for keyword list */
-        #keywordList li {
+         #keywordList li {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 1px solid #eee;
+            padding: 6px 4px; /* Increased padding */
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+         }
+         #keywordList li:last-child {
+            border-bottom: none;
+         }
+         #keywordList li span:first-child {
+             color: #374151; /* text-gray-700 */
+             font-weight: 500; /* font-medium */
+         }
+         #keywordList li span:last-child {
+             color: #4f46e5; /* text-indigo-600 */
+             font-weight: 600; /* font-semibold */
+             background-color: #e0e7ff; /* bg-indigo-100 */
+             padding: 0px 6px;
+             border-radius: 4px;
+             font-size: 0.8rem;
+         }
+
+        /* Ensure sticky works - parent needs alignment */
+        main.md\:flex {
+            align-items: flex-start; /* Important for sticky */
         }
 
-        #keywordList li:last-child {
-            border-bottom: none;
+        /* Modal styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
         }
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Styling for How to Use list */
+        #howToUseList li {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the icon */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+         #howToUseList li svg {
+            position: absolute;
+            left: 0;
+            top: 4px; /* Adjust vertical alignment */
+            width: 1rem; /* w-4 */
+            height: 1rem; /* h-4 */
+            color: #16a34a; /* text-green-600 */
+         }
+
     </style>
 </head>
+<body class="text-gray-800">
 
-<body class="bg-gray-100 text-gray-800 p-4 md:p-8">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-indigo-600">
+                All-in-One Text Analyzer
+            </h1>
+            <a href="/" class="inline-flex items-center px-3 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out">
+                More Tools
+            </a>
+            <button id="howToUseBtn" class="inline-flex items-center px-3 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out">
+                <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i>
+                How to Use
+            </button>
+        </nav>
+    </header>
 
-    <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg">
+    <div class="container mx-auto px-4 md:px-8 mt-6 mb-8">
+        <main class="md:flex md:gap-8">
 
-        <header class="mb-6 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">All-in-One Text Analyzer</h1>
-            <p class="text-gray-600">Paste your text below to get instant analysis.</p>
-        </header>
-
-        <main>
-            <div class="mb-6">
-                <label for="textInput" class="block text-sm font-medium text-gray-700 mb-1">Your Text:</label>
-                <textarea id="textInput" rows="10"
-                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-y"
-                    placeholder="Start typing or paste your text here..."></textarea>
-                <button id="clearButton"
-                    class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm">
-                    Clear Text
-                </button>
+            <div class="md:w-1/2 lg:w-3/5 mb-6 md:mb-0">
+                 <div class="bg-white p-5 rounded-lg shadow">
+                    <label for="textInput" class="block text-sm font-semibold text-gray-700 mb-2">Enter Your Text Below:</label>
+                    <textarea id="textInput" rows="15" style="min-height: 60vh;"
+                              class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 resize-y text-base"
+                              placeholder="Start typing or paste your text here..."></textarea>
+                    <button id="clearButton" class="mt-3 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">
+                         <i data-lucide="trash-2" class="inline-block w-4 h-4 mr-1 align-text-bottom"></i>
+                        Clear Text
+                    </button>
+                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                <div class="result-card bg-indigo-50 p-4 rounded-lg shadow-sm border border-indigo-100 text-center">
-                    <h3 class="text-sm font-medium text-indigo-700 mb-1">Word Count</h3>
-                    <p id="wordCount" class="text-2xl font-semibold text-indigo-900">0</p>
-                </div>
-                <div class="result-card bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-100 text-center">
-                    <h3 class="text-sm font-medium text-blue-700 mb-1">Character Count</h3>
-                    <p id="charCount" class="text-2xl font-semibold text-blue-900">0</p>
-                </div>
-                <div class="result-card bg-green-50 p-4 rounded-lg shadow-sm border border-green-100 text-center">
-                    <h3 class="text-sm font-medium text-green-700 mb-1">Sentence Count</h3>
-                    <p id="sentenceCount" class="text-2xl font-semibold text-green-900">0</p>
-                </div>
-                <div class="result-card bg-yellow-50 p-4 rounded-lg shadow-sm border border-yellow-100 text-center">
-                    <h3 class="text-sm font-medium text-yellow-700 mb-1">Paragraph Count</h3>
-                    <p id="paragraphCount" class="text-2xl font-semibold text-yellow-900">0</p>
-                </div>
-                <div class="result-card bg-purple-50 p-4 rounded-lg shadow-sm border border-purple-100 text-center">
-                    <h3 class="text-sm font-medium text-purple-700 mb-1">Reading Time</h3>
-                    <p id="readingTime" class="text-lg font-semibold text-purple-900">~0 min</p>
-                </div>
-                <div class="result-card bg-pink-50 p-4 rounded-lg shadow-sm border border-pink-100 text-center">
-                    <h3 class="text-sm font-medium text-pink-700 mb-1">Reading Ease</h3>
-                    <p id="readingEase" class="text-lg font-semibold text-pink-900">N/A</p>
-                    <p class="text-xs text-pink-600">(Higher is easier)</p>
-                </div>
-            </div>
+            <aside class="md:w-1/2 lg:w-2/5 md:sticky md:top-24">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Analysis Results</h2>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="result-card bg-indigo-50 p-4 rounded-lg border border-indigo-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-indigo-700 mb-1">Word Count</h3>
+                            <p id="wordCount" class="text-xl sm:text-2xl font-semibold text-indigo-900">0</p>
+                        </div>
+                        <div class="result-card bg-blue-50 p-4 rounded-lg border border-blue-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-blue-700 mb-1">Character Count</h3>
+                            <p id="charCount" class="text-xl sm:text-2xl font-semibold text-blue-900">0</p>
+                        </div>
+                        <div class="result-card bg-green-50 p-4 rounded-lg border border-green-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-green-700 mb-1">Sentence Count</h3>
+                            <p id="sentenceCount" class="text-xl sm:text-2xl font-semibold text-green-900">0</p>
+                        </div>
+                        <div class="result-card bg-yellow-50 p-4 rounded-lg border border-yellow-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-yellow-700 mb-1">Paragraph Count</h3>
+                            <p id="paragraphCount" class="text-xl sm:text-2xl font-semibold text-yellow-900">0</p>
+                        </div>
+                        <div class="result-card bg-purple-50 p-4 rounded-lg border border-purple-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-purple-700 mb-1">Reading Time</h3>
+                            <p id="readingTime" class="text-base sm:text-lg font-semibold text-purple-900">~0 min</p>
+                        </div>
+                        <div class="result-card bg-pink-50 p-4 rounded-lg border border-pink-100 text-center transition hover:shadow-md">
+                            <h3 class="text-xs sm:text-sm font-medium text-pink-700 mb-1">Reading Ease</h3>
+                            <p id="readingEase" class="text-base sm:text-lg font-semibold text-pink-900">N/A</p>
+                            <p class="text-xs text-pink-600 mt-1">(Higher is easier)</p>
+                        </div>
+                    </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Keyword Frequency (Top 10)</h3>
-                <ul id="keywordList" class="text-sm text-gray-700">
-                    <li class="italic text-gray-500">Enter text to see keyword frequency...</li>
-                </ul>
-            </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="text-base font-semibold text-gray-800 mb-3">Keyword Frequency (Top 10)</h3>
+                        <ul id="keywordList" class="text-sm text-gray-700 max-h-48 overflow-y-auto">
+                            <li class="italic text-gray-500">Enter text to see keyword frequency...</li>
+                            </ul>
+                    </div>
+                </div>
+            </aside>
+
         </main>
-
-        <footer class="mt-8 text-center text-sm text-gray-500">
-            <p>&copy; <span id="currentYear"></span> Text Analyzer. </p>
-        </footer>
-
     </div>
 
+    <footer class="text-center text-sm text-gray-500 py-4 border-t border-gray-200 bg-white">
+         <p>&copy; <span id="currentYear"></span> Text Analyzer. All rights reserved.</p>
+    </footer>
+
+    <div id="howToUseModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="modalOverlay" class="fixed inset-0 bg-black/60 modal-overlay"></div>
+
+        <div class="relative bg-white w-full max-w-lg p-6 rounded-lg shadow-xl modal-content transform scale-95">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                 <h2 id="modal-title" class="text-xl font-semibold text-gray-800">How to Use the Text Analyzer</h2>
+                 <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                     <i data-lucide="x" class="w-6 h-6"></i>
+                 </button>
+            </div>
+            <div class="text-gray-700 text-sm space-y-3">
+                 <p>This tool helps you analyze your text quickly. Here's how:</p>
+                 <ul id="howToUseList" class="list-none space-y-2 mt-3">
+                     <li>
+                        <i data-lucide="clipboard-paste"></i>
+                        <strong>Paste or Type:</strong> Enter your text directly into the text area on the left.
+                     </li>
+                     <li>
+                        <i data-lucide="activity"></i>
+                        <strong>Instant Analysis:</strong> As you type or paste, the analysis results on the right update automatically.
+                     </li>
+                      <li>
+                        <i data-lucide="eye"></i>
+                        <strong>View Metrics:</strong> Check various metrics like word count, character count, sentence count, paragraph count, estimated reading time, and readability score (Flesch Reading Ease).
+                     </li>
+                      <li>
+                        <i data-lucide="list-filter"></i>
+                        <strong>Keyword Frequency:</strong> See the most frequently used words (excluding common stop words) in the "Keyword Frequency" section.
+                     </li>
+                      <li>
+                        <i data-lucide="trash-2"></i>
+                        <strong>Clear Text:</strong> Use the "Clear Text" button below the input area to start fresh.
+                     </li>
+                 </ul>
+                 <p class="mt-4 pt-3 border-t text-xs text-gray-500">
+                    Tip: The results update automatically a short moment after you stop typing to ensure smooth performance.
+                 </p>
+            </div>
+        </div>
+    </div>
+
+
     <script>
+        // --- Initialize Lucide Icons ---
+        lucide.createIcons();
+
         // --- DOM Elements ---
         const textInput = document.getElementById('textInput');
         const clearButton = document.getElementById('clearButton');
@@ -172,10 +258,14 @@
         const readingEaseEl = document.getElementById('readingEase');
         const keywordListEl = document.getElementById('keywordList');
         const currentYearEl = document.getElementById('currentYear');
+        const howToUseBtn = document.getElementById('howToUseBtn');
+        const howToUseModal = document.getElementById('howToUseModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+
 
         // --- Constants ---
         const WORDS_PER_MINUTE = 225; // Average reading speed
-        // Basic list of English stop words. Could be expanded.
         const STOP_WORDS = new Set([
             'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'aren\'t', 'as', 'at',
             'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can\'t', 'cannot', 'could',
@@ -194,7 +284,6 @@
         ]);
 
         // --- Debounce Function ---
-        // Limits the rate at which a function can fire.
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -207,51 +296,64 @@
             };
         }
 
-        // --- Analysis Functions ---
+        // --- Modal Functions ---
+        function openModal() {
+            howToUseModal.classList.remove('hidden');
+            howToUseModal.classList.add('flex');
+             // Optional: Animate entrance
+             setTimeout(() => {
+                modalOverlay.classList.remove('opacity-0');
+                modalOverlay.classList.add('opacity-100');
+                howToUseModal.querySelector('.modal-content').classList.remove('scale-95');
+                howToUseModal.querySelector('.modal-content').classList.add('scale-100');
+             }, 10); // Short delay to allow display change
+        }
 
-        // Counts words (sequences of non-whitespace characters)
+        function closeModal() {
+             // Optional: Animate exit
+            modalOverlay.classList.remove('opacity-100');
+            modalOverlay.classList.add('opacity-0');
+            howToUseModal.querySelector('.modal-content').classList.remove('scale-100');
+            howToUseModal.querySelector('.modal-content').classList.add('scale-95');
+
+            setTimeout(() => {
+                howToUseModal.classList.add('hidden');
+                howToUseModal.classList.remove('flex');
+            }, 300); // Match transition duration
+        }
+
+
+        // --- Analysis Functions (Copied from previous version, no changes needed) ---
+
         function countWords(text) {
             if (!text.trim()) return 0;
-            // Match sequences of non-whitespace characters
             const words = text.match(/\S+/g);
             return words ? words.length : 0;
         }
 
-        // Counts characters
         function countCharacters(text) {
             return text.length;
         }
 
-        // Counts sentences (ends with . ! ? followed by space or end of string)
-        // This is a basic approach and might not be perfect for all cases (e.g., abbreviations).
         function countSentences(text) {
             if (!text.trim()) return 0;
-            // Match sentence endings (. ! ?) possibly followed by quotes/spaces and then whitespace or end of line.
             const sentences = text.match(/[^.!?]+[.!?](\s+|$)/g);
-            // Filter out potential empty matches or whitespace-only matches if the regex isn't perfect
-            const validSentences = sentences ? sentences.filter(s => s.trim().length > 0) : [];
-            // Handle case where text might not end with punctuation
-            if (text.trim() && (!sentences || text.trim().length > sentences.join('').trim().length)) {
-                // Check if the remaining part isn't just whitespace
-                const lastPart = text.substring(sentences ? sentences.join('').length : 0).trim();
-                if (lastPart.length > 0) {
+             const validSentences = sentences ? sentences.filter(s => s.trim().length > 0) : [];
+             if (text.trim() && (!sentences || text.trim().length > sentences.join('').trim().length)) {
+                 const lastPart = text.substring(sentences ? sentences.join('').length : 0).trim();
+                 if(lastPart.length > 0) {
                     return (validSentences ? validSentences.length : 0) + 1;
-                }
-            }
-
+                 }
+             }
             return validSentences ? validSentences.length : 0;
-
         }
 
-        // Counts paragraphs (separated by one or more empty lines)
         function countParagraphs(text) {
             if (!text.trim()) return 0;
-            // Split by one or more newline characters, filter out empty strings resulting from multiple newlines
             const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
             return paragraphs.length;
         }
 
-        // Estimates reading time
         function calculateReadingTime(wordCount) {
             if (wordCount === 0) return "~0 min";
             const minutes = wordCount / WORDS_PER_MINUTE;
@@ -262,62 +364,39 @@
             return `~${Math.round(minutes)} min`;
         }
 
-        // Basic syllable counter (approximation) - Counts vowel groups
         function countSyllables(word) {
             if (!word) return 0;
             word = word.toLowerCase().trim();
-            if (word.length <= 3) return 1; // Short words often have 1 syllable
-            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, ''); // Remove common suffixes
-            word = word.replace(/^y/, ''); // Remove starting 'y'
-            // Count vowel groups (sequences of vowels)
+             if (word.length <= 3) return 1;
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+            word = word.replace(/^y/, '');
             const vowelGroups = word.match(/[aeiouy]+/g);
             let syllableCount = vowelGroups ? vowelGroups.length : 0;
-            // Adjust for silent 'e' at the end (already handled partly by suffix removal)
-            // Add syllable if word starts with 'y' and it wasn't removed
-            // Basic check, can be refined
-            return Math.max(1, syllableCount); // Ensure at least 1 syllable
+            return Math.max(1, syllableCount);
         }
 
-        // Calculates Flesch Reading Ease score
         function calculateFleschReadingEase(text) {
             const totalWords = countWords(text);
             const totalSentences = countSentences(text);
-
-            if (totalWords === 0 || totalSentences === 0) {
-                return 'N/A'; // Avoid division by zero
-            }
-
+            if (totalWords === 0 || totalSentences === 0) return 'N/A';
             let totalSyllables = 0;
             const words = text.match(/\S+/g) || [];
-            words.forEach(word => {
-                totalSyllables += countSyllables(word);
-            });
-
-            // Flesch Reading Ease formula:
-            // 206.835 - 1.015 * (total words / total sentences) - 84.6 * (total syllables / total words)
+            words.forEach(word => { totalSyllables += countSyllables(word); });
             const score = 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords);
-
-            return score.toFixed(1); // Return score rounded to one decimal place
+            return score.toFixed(1);
         }
 
-
-        // Calculates keyword frequency
         function getKeywordFrequency(text) {
             if (!text.trim()) return [];
-            const words = text.toLowerCase().match(/\b[a-z]+\b/g); // Match only words (letters)
+            const words = text.toLowerCase().match(/\b[a-z]+\b/g);
             if (!words) return [];
-
             const frequency = {};
             words.forEach(word => {
-                if (!STOP_WORDS.has(word) && word.length > 2) { // Exclude stop words and very short words
+                if (!STOP_WORDS.has(word) && word.length > 2) {
                     frequency[word] = (frequency[word] || 0) + 1;
                 }
             });
-
-            // Convert to array, sort by frequency, take top 10
-            return Object.entries(frequency)
-                .sort(([, a], [, b]) => b - a)
-                .slice(0, 10);
+            return Object.entries(frequency).sort(([, a], [, b]) => b - a).slice(0, 10);
         }
 
         // --- Update UI Function ---
@@ -341,51 +420,56 @@
             readingTimeEl.textContent = readingTime;
             readingEaseEl.textContent = readingEase;
 
-
             // Update Keyword List
             keywordListEl.innerHTML = ''; // Clear previous list
             if (keywords.length > 0) {
                 keywords.forEach(([word, count]) => {
                     const li = document.createElement('li');
-                    li.className = 'flex justify-between py-1 border-b border-gray-200 last:border-b-0';
                     const wordSpan = document.createElement('span');
                     wordSpan.textContent = word;
-                    wordSpan.className = 'font-medium text-gray-800';
                     const countSpan = document.createElement('span');
                     countSpan.textContent = count;
-                    countSpan.className = 'text-indigo-600 font-semibold';
                     li.appendChild(wordSpan);
                     li.appendChild(countSpan);
                     keywordListEl.appendChild(li);
                 });
             } else if (text.trim()) {
-                keywordListEl.innerHTML = '<li class="italic text-gray-500">No significant keywords found (check stop words or text length).</li>';
-            }
-            else {
-                keywordListEl.innerHTML = '<li class="italic text-gray-500">Enter text to see keyword frequency...</li>';
+                 keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">No significant keywords found.</li>';
+            } else {
+                keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">Enter text to see keyword frequency...</li>';
             }
         }
 
         // --- Event Listeners ---
-        // Debounce the analysis function to run 300ms after user stops typing
         const debouncedUpdateAnalysis = debounce(updateAnalysis, 300);
         textInput.addEventListener('input', debouncedUpdateAnalysis);
 
-        // Clear button functionality
         clearButton.addEventListener('click', () => {
             textInput.value = '';
-            updateAnalysis(); // Update counts to zero
-            textInput.focus(); // Set focus back to textarea
+            updateAnalysis();
+            textInput.focus();
         });
+
+        // Modal listeners
+        howToUseBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal); // Close on overlay click
+         // Close modal on Escape key press
+         document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !howToUseModal.classList.contains('hidden')) {
+                closeModal();
+            }
+         });
 
 
         // --- Initial Setup ---
         currentYearEl.textContent = new Date().getFullYear();
-        // Initial analysis in case there's pre-filled text (e.g., browser restore)
-        updateAnalysis();
+        updateAnalysis(); // Initial analysis if needed
+        // Set initial state for modal animations
+        modalOverlay.classList.add('opacity-0');
+
 
     </script>
 
 </body>
-
 </html>
