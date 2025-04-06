@@ -8,4 +8,3 @@ Allow: /
 
 # Specify the location of your sitemap (Update the URL)
 Sitemap: https://online-tools.ni18.in/sitemap.xml 
-# or Sitemap: https://www.your-custom-domain.com/sitemap.xml
