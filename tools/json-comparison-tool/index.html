@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JSON Comparison Online - Diff Tool & Validator</title>
+    <meta name="description" content="Free online tool to compare, diff, validate, and beautify two JSON objects side-by-side. Visualize differences with color highlighting. No server-side processing.">
+    <meta name="keywords" content="json compare, json diff, json comparison, json validator, json beautifier, online tool, developer tools, diff tool, compare json online">
+
+    <link rel="canonical" href="https://online-tools.ni18.in/tools/json-comparison-tool/"> <meta property="og:title" content="JSON Comparison Online - Diff Tool & Validator">
+    <meta property="og:description" content="Easily compare, diff, validate, and beautify two JSON objects with visual highlighting.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/json-comparison-tool/"> <meta property="og:image" content="https://your-domain.com/og-image.png"> <link rel="icon" href="/favicon.ico" sizes="any">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/formatters-styles/html.css" type="text/css" />
+
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/jsondiffpatch.umd.min.js" defer></script>
+
+    <style>
+        /* --- Base & Theme Variables --- */
+        :root {
+             --bg-color: #f9fafb; /* gray-50 */
+             --text-color: #111827; /* gray-900 */
+             --text-secondary-color: #4b5563; /* gray-600 */
+             --textarea-bg: #ffffff; /* white */
+             --textarea-border: #d1d5db; /* gray-300 */
+             --textarea-focus-border: #4f46e5; /* indigo-600 */
+             --diff-bg-color: #ffffff; /* white */
+             --diff-text-color: #1f2937; /* gray-800 */
+             --diff-border-color: #e5e7eb; /* gray-200 */
+             --diff-ins-bg: #e0f2fe; /* sky-100 */
+             --diff-ins-text: #0c4a6e; /* sky-800 */
+             --diff-del-bg: #fee2e2; /* red-100 */
+             --diff-del-text: #991b1b; /* red-800 */
+             --border-color: #e5e7eb; /* gray-200 */
+             --scrollbar-track-color: #f7fafc;
+             --scrollbar-thumb-color: #cbd5e0;
+             --scrollbar-thumb-hover-color: #a0aec0;
+             --error-bg: #fee2e2; /* red-100 */
+             --error-text: #b91c1c; /* red-700 */
+             --error-border: #fca5a5; /* red-300 */
+             --info-bg: #e0f2fe; /* sky-100 */
+             --info-text: #0369a1; /* sky-700 */
+             --info-border: #bae6fd; /* sky-200 */
+             --ad-bg: #e5e7eb; /* gray-200 */
+             --ad-border: #d1d5db; /* gray-300 */
+             --ad-text: #6b7280; /* gray-500 */
+             --btn-icon-text: #4b5563; /* gray-600 */
+             --btn-icon-hover-text: #111827; /* gray-900 */
+             --btn-icon-hover-bg: #f3f4f6; /* gray-100 */
+             --modal-bg: #ffffff;
+             --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+             --modal-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark {
+             --bg-color: #111827; /* gray-900 */
+             --text-color: #f9fafb; /* gray-50 */
+             --text-secondary-color: #9ca3af; /* gray-400 */
+             --textarea-bg: #1f2937; /* gray-800 */
+             --textarea-border: #4b5563; /* gray-600 */
+             --textarea-focus-border: #818cf8; /* indigo-400 */
+             --diff-bg-color: #1f2937; /* gray-800 */
+             --diff-text-color: #e5e7eb; /* gray-200 */
+             --diff-border-color: #374151; /* gray-700 */
+             --diff-ins-bg: #075985; /* sky-900 */
+             --diff-ins-text: #e0f2fe; /* sky-100 */
+             --diff-del-bg: #7f1d1d; /* red-900 */
+             --diff-del-text: #fee2e2; /* red-100 */
+             --border-color: #374151; /* gray-700 */
+             --scrollbar-track-color: #1f2937; /* gray-800 */
+             --scrollbar-thumb-color: #4b5563; /* gray-600 */
+             --scrollbar-thumb-hover-color: #6b7280; /* gray-500 */
+             --error-bg: #450a0a; /* red-950 */
+             --error-text: #fecaca; /* red-200 */
+             --error-border: #7f1d1d; /* red-800 */
+             --info-bg: #0c4a6e; /* sky-900 */
+             --info-text: #bae6fd; /* sky-200 */
+             --info-border: #075985; /* sky-800 */
+             --ad-bg: #374151; /* gray-700 */
+             --ad-border: #4b5563; /* gray-600 */
+             --ad-text: #9ca3af; /* gray-400 */
+             --btn-icon-text: #d1d5db; /* gray-300 */
+             --btn-icon-hover-text: #f9fafb; /* gray-50 */
+             --btn-icon-hover-bg: #374151; /* gray-700 */
+             --modal-bg: #1f2937; /* gray-800 */
+             --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+             --modal-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply base styles */
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        /* --- Custom Component Styles --- */
+        textarea {
+            background-color: var(--textarea-bg); border: 1px solid var(--textarea-border); color: var(--text-color); border-radius: 0.5rem;
+            transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease; min-height: 20rem; resize: vertical;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+        textarea:focus { outline: none; border-color: var(--textarea-focus-border); box-shadow: 0 0 0 2px var(--textarea-focus-border); }
+        textarea::placeholder { color: #6b7280; } .dark textarea::placeholder { color: #9ca3af; }
+
+        .diff-container {
+             background-color: var(--diff-bg-color); color: var(--diff-text-color); border: 1px solid var(--diff-border-color); border-radius: 0.5rem;
+             padding: 1rem; margin-top: 1rem; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem;
+             line-height: 1.6; white-space: pre; transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        .diff-container ins { background-color: var(--diff-ins-bg); color: var(--diff-ins-text); text-decoration: none; padding: 0.1em 0; }
+        .diff-container del { background-color: var(--diff-del-bg); color: var(--diff-del-text); text-decoration: line-through; padding: 0.1em 0; }
+        .diff-container ul { list-style: none; padding: 0; margin: 0; } .diff-container li { padding: 0; margin: 0; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: var(--scrollbar-track-color); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb-color); border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover-color); }
+
+        /* Placeholder Ad Styling */
+        .ad-placeholder {
+            min-height: 90px; background-color: var(--ad-bg); border: 1px dashed var(--ad-border); display: none; align-items: center; justify-content: center;
+            color: var(--ad-text); font-size: 0.875rem; border-radius: 0.5rem; margin: 1rem 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Message Box Styling */
+        .message-box {
+            border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; font-size: 0.875rem; display: none;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .message-box-error { background-color: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); }
+        .message-box-info { background-color: var(--info-bg); color: var(--info-text); border: 1px solid var(--info-border); }
+
+        /* Button Base Styles (Reference) */
+        .btn { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out; }
+        .btn-primary { @apply text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600; }
+        .btn-secondary { @apply text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700; }
+        .btn-danger { @apply text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 dark:bg-red-700 dark:hover:bg-red-800; }
+        .btn-icon { @apply p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out; }
+        .btn-link { @apply text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 focus:outline-none focus:underline; }
+
+        /* Checkbox styling */
+        input[type="checkbox"] { @apply rounded text-indigo-600 focus:ring-indigo-500 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-indigo-400 dark:checked:border-transparent; }
+
+        /* Tooltip Styling (Basic) */
+        [title]:hover::after {
+            content: attr(title); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; padding: 4px 8px;
+            background-color: #333; color: white; font-size: 0.75rem; border-radius: 4px; white-space: nowrap; z-index: 10; opacity: 0.9;
+        }
+        [title] { position: relative; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; inset: 0; background-color: var(--modal-overlay-bg); z-index: 40; /* Below modal */
+        }
+        .modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--modal-bg);
+            border-radius: 0.5rem; padding: 1.5rem; box-shadow: var(--modal-shadow); z-index: 50;
+            width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .modal-title { font-size: 1.25rem; font-weight: 600; }
+        .modal-close-button { background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-secondary-color); }
+        .modal-content ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .modal-content li { margin-bottom: 0.5rem; }
+        .modal-content code { background-color: var(--textarea-bg); padding: 0.1em 0.3em; border-radius: 3px; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
+
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON Comparison Online",
+      "description": "Free online tool to compare, diff, validate, and beautify two JSON objects side-by-side with visual highlighting.",
+      "url": "https://online-tools.ni18.in/tools/json-comparison-tool/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Works on modern browsers.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [ "Compare JSON objects", "Visualize differences (diff)", "Beautify JSON", "Validate JSON syntax", "File upload support", "Dark mode", "Ignore array order option", "Client-side processing" ],
+      "potentialAction": { "@type": "SearchAction", "target": "https://online-tools.ni18.in/tools/json-comparison-tool/", "query-input": "required name=search_term_string" }
+    }
+    </script>
+
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 lg:p-6 max-w-screen-xl min-h-screen flex flex-col">
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-[var(--border-color)] gap-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400"><a href="/">JSON Comparison Online</a></h1>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button id="how-to-use-button" class="btn-link text-sm">How to Use</button>
+                <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Mode">
+                     <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591" /> </svg>
+                     <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="ad-placeholder d-none">Top Ad Placeholder (e.g., 728x90 or Responsive)</div>
+
+        <main class="flex-grow">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-4">
+                <section aria-labelledby="json1-heading">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 id="json1-heading" class="text-lg font-semibold">JSON Input 1 (Left)</h2>
+                        <div class="flex space-x-1">
+                             <button id="paste-left" class="btn-icon" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                             <button id="copy-left" class="btn-icon" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                             <button id="beautify-left" class="btn-icon" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                             <label for="upload-left" class="btn-icon cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-left" type="file" accept=".json,application/json" class="hidden"> </label>
+                             <button id="clear-left" class="btn-icon" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                        </div>
+                    </div>
+                    <textarea id="json-input-left" class="w-full p-3 text-sm" placeholder="Paste or type JSON here..." spellcheck="false" aria-labelledby="json1-heading"></textarea>
+                </section>
+
+                <section aria-labelledby="json2-heading">
+                     <div class="flex justify-between items-center mb-2">
+                        <h2 id="json2-heading" class="text-lg font-semibold">JSON Input 2 (Right)</h2>
+                         <div class="flex space-x-1">
+                             <button id="paste-right" class="btn-icon" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                             <button id="copy-right" class="btn-icon" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                             <button id="beautify-right" class="btn-icon" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                             <label for="upload-right" class="btn-icon cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-right" type="file" accept=".json,application/json" class="hidden"> </label>
+                             <button id="clear-right" class="btn-icon" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                         </div>
+                    </div>
+                    <textarea id="json-input-right" class="w-full p-3 text-sm" placeholder="Paste or type JSON here..." spellcheck="false" aria-labelledby="json2-heading"></textarea>
+                </section>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                <div class="flex gap-2 flex-wrap justify-center sm:justify-start">
+                    <button id="compare-button" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l-3-3m3 3l3 3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" /> </svg>
+                        Compare
+                        <span class="ml-1 text-xs text-indigo-200">(Ctrl+Enter)</span>
+                    </button>
+                     <button id="download-button" class="btn btn-secondary hidden">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
+                        Download Diff
+                    </button>
+                     <button id="copy-results-button" class="btn btn-secondary hidden">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg>
+                        Copy Results
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4">
+                     <label class="flex items-center space-x-2 cursor-pointer text-sm">
+                         <input type="checkbox" id="ignore-array-order">
+                         <span>Ignore Array Order</span>
+                     </label>
+                 </div>
+            </div>
+
+            <div id="message-area"></div>
+
+            <section id="diff-output-section" class="mt-6 hidden" aria-live="polite">
+                <h2 class="text-lg font-semibold mb-2">Comparison Result</h2>
+                <div id="diff-output-wrapper" class="diff-container"></div>
+            </section>
+
+             <div class="ad-placeholder mt-8">Bottom Ad Placeholder (e.g., Responsive)</div>
+
+        </main>
+
+        <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 py-6 border-t border-[var(--border-color)]">
+            <p>&copy; <span id="current-year"></span> JSON Comparison Online. All processing done client-side.</p>
+        </footer>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+    <div id="how-to-use-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+            <h3 id="modal-title" class="modal-title">How to Use</h3>
+            <button id="close-modal-button" class="modal-close-button" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-content text-sm text-[var(--text-secondary-color)]">
+            <p class="mb-4">This tool helps you compare two JSON objects and visualize their differences.</p>
+            <ul>
+                <li><strong>Input JSON:</strong> Paste your JSON data into the left and right text areas, or use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg> upload buttons to load from files.</li>
+                <li><strong>Beautify:</strong> Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /></svg> button (or <code>Ctrl+B</code>) to format the JSON for readability and validation. Invalid JSON will show an error.</li>
+                <li><strong>Compare:</strong> Click the "Compare" button (or press <code>Ctrl+Enter</code>) to see the differences.</li>
+                <li><strong>Results:</strong> Differences are highlighted below. <span class="inline-block px-1 rounded" style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text);">Green</span> indicates additions, and <span class="inline-block px-1 rounded" style="background-color: var(--diff-del-bg); color: var(--diff-del-text); text-decoration: line-through;">Red</span> indicates deletions.</li>
+                <li><strong>Options:</strong> Use the "Ignore Array Order" checkbox if the order of elements within arrays doesn't matter for your comparison.</li>
+                <li><strong>Copy/Download:</strong> Use the buttons below the inputs to copy the diff results or download the raw diff data as a JSON file.</li>
+                <li><strong>Dev Mode:</strong> Type <code>:dev</code> at the end of either input area to load sample data.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants and DOM Elements ---
+        const DOMElements = {
+            jsonInputLeft: document.getElementById('json-input-left'),
+            jsonInputRight: document.getElementById('json-input-right'),
+            compareButton: document.getElementById('compare-button'),
+            clearLeftButton: document.getElementById('clear-left'),
+            clearRightButton: document.getElementById('clear-right'),
+            beautifyLeftButton: document.getElementById('beautify-left'),
+            beautifyRightButton: document.getElementById('beautify-right'),
+            copyLeftButton: document.getElementById('copy-left'),
+            copyRightButton: document.getElementById('copy-right'),
+            pasteLeftButton: document.getElementById('paste-left'),
+            pasteRightButton: document.getElementById('paste-right'),
+            uploadLeftInput: document.getElementById('upload-left'),
+            uploadRightInput: document.getElementById('upload-right'),
+            diffOutputSection: document.getElementById('diff-output-section'),
+            diffOutputWrapper: document.getElementById('diff-output-wrapper'),
+            messageArea: document.getElementById('message-area'),
+            themeToggleButton: document.getElementById('theme-toggle'),
+            themeIconLight: document.getElementById('theme-icon-light'),
+            themeIconDark: document.getElementById('theme-icon-dark'),
+            ignoreArrayOrderCheckbox: document.getElementById('ignore-array-order'),
+            downloadButton: document.getElementById('download-button'),
+            copyResultsButton: document.getElementById('copy-results-button'),
+            currentYearSpan: document.getElementById('current-year'),
+            htmlElement: document.documentElement,
+            // Modal elements
+            howToUseButton: document.getElementById('how-to-use-button'),
+            modalOverlay: document.getElementById('modal-overlay'),
+            howToUseModal: document.getElementById('how-to-use-modal'),
+            closeModalButton: document.getElementById('close-modal-button'),
+        };
+
+        const LOCAL_STORAGE_KEYS = {
+            theme: 'jsonComparerTheme',
+            leftJson: 'jsonComparerLeftJson',
+            rightJson: 'jsonComparerRightJson',
+        };
+
+        // --- State ---
+        let currentDiffDelta = null;
+        let saveTimeout;
+
+        // --- Initialization ---
+        function initializeApp() {
+            console.log("Initializing JSON Comparison App (Production Ready)...");
+            if (DOMElements.currentYearSpan) {
+                DOMElements.currentYearSpan.textContent = new Date().getFullYear();
+            }
+            if (typeof jsondiffpatch !== 'undefined') {
+                 initializeJsonDiffPatcher();
+            } else {
+                 console.warn("jsondiffpatch not loaded yet (deferred). Will initialize on first compare.");
+            }
+            loadThemePreference();
+            loadSavedJson();
+            addEventListeners();
+            updateThemeIcons();
+            console.log("App Initialized Successfully.");
+        }
+
+        function initializeJsonDiffPatcher() {
+             if (window.jsonDiffPatcherInstance) return true;
+             if (typeof jsondiffpatch !== 'undefined') {
+                 try {
+                     window.jsonDiffPatcherInstance = jsondiffpatch.create({
+                         objectHash: (obj, index) => obj.id || obj._id || '$$index:' + index,
+                         arrays: { detectMove: true, includeValueOnMove: false },
+                         textDiff: { minLength: 60 },
+                         cloneDiffValues: false
+                     });
+                     console.log("jsondiffpatch instance created.");
+                     return true;
+                 } catch (error) {
+                     console.error("Error creating jsondiffpatch instance:", error);
+                     displayMessage("Failed to initialize comparison library.", 'error');
+                     return false;
+                 }
+             } else {
+                  console.error("jsondiffpatch library is not available.");
+                  return false;
+             }
+        }
+
+        // --- Theme Management ---
+        function applyTheme(theme) {
+            DOMElements.htmlElement.classList.toggle('dark', theme === 'dark');
+            localStorage.setItem(LOCAL_STORAGE_KEYS.theme, theme);
+            updateThemeIcons();
+        }
+        function toggleTheme() {
+            const currentTheme = DOMElements.htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+        function loadThemePreference() {
+            const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.theme);
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+        }
+        function updateThemeIcons() {
+            const isDark = DOMElements.htmlElement.classList.contains('dark');
+            DOMElements.themeIconLight.classList.toggle('hidden', !isDark);
+            DOMElements.themeIconDark.classList.toggle('hidden', isDark);
+        }
+
+        // --- LocalStorage ---
+        const debouncedSave = () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveJsonToLocalStorage, 500);
+        };
+        function saveJsonToLocalStorage() {
+            try {
+                localStorage.setItem(LOCAL_STORAGE_KEYS.leftJson, DOMElements.jsonInputLeft.value);
+                localStorage.setItem(LOCAL_STORAGE_KEYS.rightJson, DOMElements.jsonInputRight.value);
+            } catch (error) { console.warn("Could not save JSON to localStorage:", error); }
+        }
+        function loadSavedJson() {
+            try {
+                const leftJson = localStorage.getItem(LOCAL_STORAGE_KEYS.leftJson);
+                const rightJson = localStorage.getItem(LOCAL_STORAGE_KEYS.rightJson);
+                if (leftJson) DOMElements.jsonInputLeft.value = leftJson;
+                if (rightJson) DOMElements.jsonInputRight.value = rightJson;
+            } catch (error) { console.error("Error loading JSON from localStorage:", error); displayMessage("Could not load previously saved JSON.", 'error'); }
+        }
+
+        // --- Message Handling ---
+        function displayMessage(message, type = 'info') {
+            clearMessages();
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.classList.add('message-box');
+            messageDiv.classList.add(type === 'error' ? 'message-box-error' : 'message-box-info');
+            messageDiv.setAttribute('role', 'alert');
+            messageDiv.style.display = 'block';
+            DOMElements.messageArea.appendChild(messageDiv);
+            if (type === 'error') {
+                console.error(`Error Displayed: ${message}`);
+                DOMElements.diffOutputSection.classList.add('hidden');
+                DOMElements.downloadButton.classList.add('hidden');
+                DOMElements.copyResultsButton.classList.add('hidden');
+            }
+        }
+        function clearMessages() { DOMElements.messageArea.innerHTML = ''; }
+
+        // --- Core Functionality ---
+        function parseJsonInput(inputElement) {
+            const jsonString = inputElement.value.trim();
+            if (!jsonString) return null;
+            try { return JSON.parse(jsonString); }
+            catch (e) {
+                const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
+                inputElement.focus();
+                throw new Error(`Invalid JSON in ${inputName} Input: ${e.message}`);
+            }
+        }
+        function compareJson() {
+            console.log("Compare button clicked.");
+            clearMessages();
+            currentDiffDelta = null;
+            DOMElements.downloadButton.classList.add('hidden');
+            DOMElements.copyResultsButton.classList.add('hidden');
+            DOMElements.diffOutputWrapper.innerHTML = '';
+            if (!initializeJsonDiffPatcher()) { displayMessage("Comparison library is not ready.", 'error'); return; }
+            let jsonLeft, jsonRight;
+            try {
+                jsonLeft = parseJsonInput(DOMElements.jsonInputLeft);
+                jsonRight = parseJsonInput(DOMElements.jsonInputRight);
+                if (jsonLeft === null && jsonRight === null) { displayMessage("Both inputs are empty.", 'info'); DOMElements.diffOutputSection.classList.add('hidden'); return; }
+                const ignoreArrayOrder = DOMElements.ignoreArrayOrderCheckbox.checked;
+                const diffOptions = { ...window.jsonDiffPatcherInstance.options, arrays: { ...window.jsonDiffPatcherInstance.options.arrays, detectMove: !ignoreArrayOrder } };
+                const currentPatcher = jsondiffpatch.create(diffOptions);
+                const delta = currentPatcher.diff(jsonLeft, jsonRight);
+                currentDiffDelta = delta;
+                if (delta) {
+                    const htmlDiff = jsondiffpatch.formatters.html.format(delta, jsonLeft);
+                    DOMElements.diffOutputWrapper.innerHTML = htmlDiff;
+                    DOMElements.diffOutputSection.classList.remove('hidden');
+                    DOMElements.downloadButton.classList.remove('hidden');
+                    DOMElements.copyResultsButton.classList.remove('hidden');
+                } else {
+                    DOMElements.diffOutputWrapper.innerHTML = '<p class="p-4 text-green-600 dark:text-green-400 font-semibold">No Differences Found.</p>';
+                    DOMElements.diffOutputSection.classList.remove('hidden');
+                }
+                debouncedSave();
+            } catch (error) { displayMessage(error.message, 'error'); }
+        }
+        function beautifyJson(inputElement) {
+            clearMessages();
+            const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
+            try {
+                const currentJson = inputElement.value.trim();
+                if (!currentJson) return;
+                const parsedJson = JSON.parse(currentJson);
+                inputElement.value = JSON.stringify(parsedJson, null, 2);
+                debouncedSave();
+            } catch (error) {
+                inputElement.focus();
+                displayMessage(`Invalid JSON in ${inputName} Input: Cannot beautify. ${error.message}`, 'error');
+            }
+        }
+        function clearInput(inputElement) {
+             inputElement.value = '';
+             debouncedSave();
+             clearMessages();
+             if (!DOMElements.jsonInputLeft.value && !DOMElements.jsonInputRight.value) {
+                  DOMElements.diffOutputWrapper.innerHTML = '';
+                  DOMElements.diffOutputSection.classList.add('hidden');
+                  DOMElements.downloadButton.classList.add('hidden');
+                  DOMElements.copyResultsButton.classList.add('hidden');
+                  currentDiffDelta = null;
+             }
+        }
+
+        // --- Clipboard Operations ---
+        async function copyToClipboard(inputElement, buttonElement) {
+            const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
+            const textToCopy = inputElement.value;
+            if (!textToCopy) { displayMessage(`Input ${inputName} is empty.`, 'info'); return; }
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                const originalHTML = buttonElement.innerHTML;
+                buttonElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
+                buttonElement.disabled = true;
+                setTimeout(() => { buttonElement.innerHTML = originalHTML; buttonElement.disabled = false; }, 1500);
+            } catch (err) { displayMessage(`Failed to copy ${inputName} text.`, 'error'); console.error('Copy failed:', err); }
+        }
+        async function copyResultsToClipboard(buttonElement) {
+             const diffContent = DOMElements.diffOutputWrapper.innerText;
+             if (!currentDiffDelta || !diffContent?.trim()) { displayMessage('No results to copy.', 'info'); return; }
+             try {
+                 await navigator.clipboard.writeText(diffContent);
+                 const originalHTML = buttonElement.innerHTML;
+                 const svgIcon = buttonElement.querySelector('svg')?.outerHTML || '';
+                 buttonElement.innerHTML = `${svgIcon} <span class="ml-2">Copied!</span>`;
+                 buttonElement.disabled = true;
+                 setTimeout(() => { buttonElement.innerHTML = originalHTML; buttonElement.disabled = false; }, 1500);
+             } catch (err) { displayMessage('Failed to copy results.', 'error'); console.error('Copy results failed:', err); }
+        }
+        async function pasteFromClipboard(inputElement) {
+            clearMessages();
+            if (!navigator.clipboard || !navigator.clipboard.readText) { displayMessage('Clipboard API not supported.', 'error'); return; }
+            try {
+                const text = await navigator.clipboard.readText();
+                inputElement.value = text;
+                beautifyJson(inputElement);
+                debouncedSave();
+            } catch (err) {
+                if (err.name === 'NotAllowedError' || err.name === 'SecurityError') { displayMessage('Clipboard paste permission denied.', 'error'); }
+                else { displayMessage('Failed to read clipboard.', 'error'); }
+                console.error('Paste failed:', err);
+            }
+        }
+
+        // --- File Handling ---
+        function handleFileUpload(event, inputElement) {
+            clearMessages();
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.type !== 'application/json' && !file.name.endsWith('.json')) { displayMessage(`Invalid file type. Please upload a .json file.`, 'error'); event.target.value = ''; return; }
+             const maxSizeMB = 10;
+             if (file.size > maxSizeMB * 1024 * 1024) { displayMessage(`File too large (max ${maxSizeMB} MB).`, 'error'); event.target.value = ''; return; }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try { inputElement.value = e.target.result; beautifyJson(inputElement); debouncedSave(); }
+                catch (readError) { displayMessage(`Error processing file: ${readError.message}`, 'error'); }
+                finally { event.target.value = ''; }
+            };
+            reader.onerror = (e) => { displayMessage(`Error reading file.`, 'error'); console.error("FileReader error:", e); event.target.value = ''; };
+            reader.readAsText(file);
+        }
+
+        // --- Download ---
+        function downloadDiff() {
+            if (!currentDiffDelta) { displayMessage("No results to download.", 'info'); return; }
+            try {
+                const diffString = JSON.stringify(currentDiffDelta, null, 2);
+                const blob = new Blob([diffString], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                a.download = `json_diff_${timestamp}.json`;
+                a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) { displayMessage("Failed to generate download.", 'error'); console.error("Download error:", error); }
+        }
+
+        // --- Dev Mode ---
+        function handleDevMode(event) {
+             const targetInput = event.target;
+             if (targetInput === DOMElements.jsonInputLeft || targetInput === DOMElements.jsonInputRight) {
+                 if (targetInput.value.endsWith(':dev')) {
+                     targetInput.value = targetInput.value.slice(0, -4); clearMessages();
+                     const sampleJson1 = { "name": "JSON Compare Tool", "version": "1.0", "features": ["compare", "beautify", "highlight", "dark mode"], "enabled": true, "settings": { "theme": "auto", "indent": 2 }, "items": [ { "id": 1, "value": "apple" }, { "id": 2, "value": "banana" } ] };
+                     const sampleJson2 = { "name": "JSON Comparison Online", "version": "1.1", "features": ["compare", "beautify", "highlight", "dark mode", "file upload", "download"], "enabled": true, "settings": { "theme": "dark", "indent": 2 }, "items": [ { "id": 2, "value": "banana" }, { "id": 3, "value": "cherry" } ], "new_feature": "localStorage persistence" };
+                     if (targetInput === DOMElements.jsonInputLeft) { DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson1, null, 2); DOMElements.jsonInputRight.value = JSON.stringify(sampleJson2, null, 2); }
+                     else { DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson2, null, 2); DOMElements.jsonInputRight.value = JSON.stringify(sampleJson1, null, 2); }
+                     debouncedSave(); displayMessage('Developer mode: Sample JSON loaded!', 'info'); compareJson();
+                 }
+             }
+        }
+
+        // --- Modal Logic ---
+        function openModal() {
+            DOMElements.modalOverlay.classList.remove('hidden');
+            DOMElements.howToUseModal.classList.remove('hidden');
+        }
+        function closeModal() {
+            DOMElements.modalOverlay.classList.add('hidden');
+            DOMElements.howToUseModal.classList.add('hidden');
+        }
+
+        // --- Event Listeners Setup ---
+        function addEventListeners() {
+            // Main Actions
+            DOMElements.compareButton.addEventListener('click', compareJson);
+            DOMElements.themeToggleButton.addEventListener('click', toggleTheme);
+            DOMElements.downloadButton.addEventListener('click', downloadDiff);
+            DOMElements.copyResultsButton.addEventListener('click', (e) => copyResultsToClipboard(e.currentTarget));
+            DOMElements.howToUseButton.addEventListener('click', openModal); // Open modal
+            DOMElements.closeModalButton.addEventListener('click', closeModal); // Close modal button
+            DOMElements.modalOverlay.addEventListener('click', closeModal); // Close modal on overlay click
+
+            // Input Actions (Left)
+            DOMElements.beautifyLeftButton.addEventListener('click', () => beautifyJson(DOMElements.jsonInputLeft));
+            DOMElements.copyLeftButton.addEventListener('click', (e) => copyToClipboard(DOMElements.jsonInputLeft, e.currentTarget));
+            DOMElements.pasteLeftButton.addEventListener('click', () => pasteFromClipboard(DOMElements.jsonInputLeft));
+            DOMElements.clearLeftButton.addEventListener('click', () => clearInput(DOMElements.jsonInputLeft));
+            DOMElements.uploadLeftInput.addEventListener('change', (e) => handleFileUpload(e, DOMElements.jsonInputLeft));
+            DOMElements.jsonInputLeft.addEventListener('input', handleDevMode);
+            DOMElements.jsonInputLeft.addEventListener('input', debouncedSave);
+
+            // Input Actions (Right)
+            DOMElements.beautifyRightButton.addEventListener('click', () => beautifyJson(DOMElements.jsonInputRight));
+            DOMElements.copyRightButton.addEventListener('click', (e) => copyToClipboard(DOMElements.jsonInputRight, e.currentTarget));
+            DOMElements.pasteRightButton.addEventListener('click', () => pasteFromClipboard(DOMElements.jsonInputRight));
+            DOMElements.clearRightButton.addEventListener('click', () => clearInput(DOMElements.jsonInputRight));
+            DOMElements.uploadRightInput.addEventListener('change', (e) => handleFileUpload(e, DOMElements.jsonInputRight));
+            DOMElements.jsonInputRight.addEventListener('input', handleDevMode);
+            DOMElements.jsonInputRight.addEventListener('input', debouncedSave);
+
+            // Options
+            DOMElements.ignoreArrayOrderCheckbox.addEventListener('change', () => { if (!DOMElements.diffOutputSection.classList.contains('hidden')) { compareJson(); } });
+
+            // Keyboard Shortcuts
+            document.addEventListener('keydown', (event) => {
+                if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { if (document.activeElement !== DOMElements.jsonInputLeft && document.activeElement !== DOMElements.jsonInputRight) { event.preventDefault(); DOMElements.compareButton.click(); DOMElements.compareButton.focus(); setTimeout(() => DOMElements.compareButton.blur(), 150); } }
+                if ((event.ctrlKey || event.metaKey) && (event.key === 'b' || event.key === 'B')) { if (document.activeElement === DOMElements.jsonInputLeft) { event.preventDefault(); DOMElements.beautifyLeftButton.click(); } else if (document.activeElement === DOMElements.jsonInputRight) { event.preventDefault(); DOMElements.beautifyRightButton.click(); } }
+                // Close modal with Escape key
+                if (event.key === 'Escape' && !DOMElements.howToUseModal.classList.contains('hidden')) { closeModal(); }
+            });
+
+             // System Theme Change Listener
+             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+             const handleSystemThemeChange = (e) => { if (!localStorage.getItem(LOCAL_STORAGE_KEYS.theme)) { applyTheme(e.matches ? 'dark' : 'light'); } };
+             if (mediaQuery.addEventListener) { mediaQuery.addEventListener('change', handleSystemThemeChange); } else if (mediaQuery.addListener) { mediaQuery.addListener(handleSystemThemeChange); }
+             console.log("Event listeners added.");
+        }
+
+        // --- Run Application ---
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initializeApp); }
+        else { initializeApp(); }
+
+    </script>
+</body>
+</html>
