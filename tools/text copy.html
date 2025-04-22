@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Client-Side Resume Builder</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&family=Roboto:wght@400;700&family=Source+Serif+Pro:wght@400;700&family=Arial&family=Georgia&display=swap" rel="stylesheet">
+
+    <!-- Libraries (jsPDF, html2canvas, SortableJS) - Using CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <style>
+        /* --- Base & Layout --- */
+        :root {
+            --primary-color: #2c3e50; /* Default Primary */
+            --secondary-color: #3498db; /* Default Secondary */
+            --base-font-family: 'Inter', sans-serif; /* Default Font */
+            --background-color: #f8f9fa;
+            --editor-bg: #ffffff;
+            --preview-bg: #ffffff;
+            --border-color: #dee2e6;
+            --text-color: #333;
+            --light-text-color: #555;
+            --heading-color: var(--primary-color);
+            --link-color: var(--secondary-color);
+            --input-border: #ced4da;
+            --input-focus-border: #86b7fe;
+            --button-bg: var(--secondary-color);
+            --button-text: #ffffff;
+            --button-hover-bg: #2980b9;
+            --danger-bg: #e74c3c;
+            --danger-hover-bg: #c0392b;
+            --handle-color: #bdc3c7;
+
+            /* Equivalent to 12mm padding for A4 size (210mm wide)
+               A4 width = 210mm. Content area = 210 - 2*12 = 186mm.
+               Approximate pixel equivalent based on common screen DPIs.
+               Let's use ~45px for ~12mm */
+            --preview-padding: 45px;
+            /* Adjust font size based on base font */
+            --base-font-size: 11pt;
+            --h1-size: 24pt;
+            --h2-size: 16pt;
+            --h3-size: 12pt;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--base-font-family);
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 14px; /* Base UI font size */
+        }
+
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 15px;
+            gap: 15px;
+        }
+
+        #editor {
+            width: 45%;
+            min-width: 320px;
+            background-color: var(--editor-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: calc(100vh - 30px); /* Adjust based on container padding */
+            position: sticky;
+            top: 15px; /* Match container padding */
+        }
+
+        #preview-container {
+            width: 55%;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #pdf-controls {
+           width: 100%;
+           max-width: 800px; /* Similar to resume width */
+           text-align: right;
+        }
+
+        #resume-preview {
+            width: 100%;
+            max-width: 800px; /* A bit wider than A4 for screen display */
+            min-height: calc(1.414 * 800px); /* Maintain A4 aspect ratio */
+            background-color: var(--preview-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            padding: var(--preview-padding);
+            overflow: hidden; /* Hide potential overflow during rendering */
+            transition: all 0.3s ease; /* Smooth transitions for template/style changes */
+            font-family: var(--base-font-family);
+            color: var(--text-color);
+            font-size: var(--base-font-size);
+            line-height: 1.5;
+            border: 1px solid var(--border-color); /* Subtle border */
+        }
+
+        /* --- Editor Styling --- */
+        .editor-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: #fff;
+            position: relative; /* For drag handle positioning */
+        }
+
+        .editor-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--heading-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drag-handle {
+            cursor: grab;
+            font-size: 1.5em;
+            color: var(--handle-color);
+            margin-right: 10px; /* Space before title */
+            line-height: 1;
+            padding: 5px;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--light-text-color);
+            font-size: 0.9em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="url"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--input-focus-border);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(var(--secondary-color), 0.25);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .repeatable-item {
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .remove-item-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--danger-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .remove-item-btn:hover {
+            background-color: var(--danger-hover-bg);
+        }
+
+        .add-item-btn, .download-pdf-btn {
+            display: inline-block;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+        .add-item-btn:hover, .download-pdf-btn:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .add-item-btn {
+            margin-left: 5px; /* Space after section title */
+        }
+
+        /* --- Preview Styling --- */
+        .resume-container h1, .resume-container h2, .resume-container h3,
+        .resume-container h4, .resume-container h5, .resume-container h6 {
+            margin: 0;
+            padding: 0;
+            font-weight: 700; /* Bold headings */
+        }
+
+        .resume-container h2 { /* Section Titles */
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: var(--h2-size);
+        }
+
+        .resume-container h3 { /* Job Title, Degree, Project Name */
+            font-size: var(--h3-size);
+            color: var(--heading-color);
+            margin-bottom: 2px;
+        }
+
+        .resume-container p {
+            margin-bottom: 10px;
+        }
+        .resume-container p:last-child {
+            margin-bottom: 0;
+        }
+
+        .resume-container ul {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0; /* Reset default list indentation */
+        }
+        .resume-container .description ul {
+            list-style: disc; /* Use bullets for descriptions */
+            padding-left: 20px; /* Indent description bullets */
+            margin-left: 0;
+        }
+        .resume-container .description li {
+             margin-bottom: 5px;
+        }
+
+        .resume-container a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .resume-container a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .resume-header h1 {
+            font-size: var(--h1-size);
+            color: var(--heading-color);
+            margin-bottom: 5px;
+        }
+        .resume-header .job-title {
+            font-size: 1.2em; /* Slightly larger than h3 */
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 20px; /* Row and column gap */
+            font-size: 0.9em;
+            color: var(--light-text-color);
+        }
+        .contact-info span {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .contact-info a {
+           color: var(--light-text-color); /* Subtle links in header */
+        }
+        .contact-info a:hover {
+            color: var(--link-color);
+        }
+
+
+        .resume-section {
+            margin-bottom: 20px;
+        }
+        .resume-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .item {
+            margin-bottom: 15px;
+        }
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow wrapping on narrow views */
+            margin-bottom: 5px;
+            align-items: baseline;
+        }
+        .item-header .left {
+           flex-basis: 70%; /* Give more space to title/company */
+        }
+        .item-header .right {
+            flex-basis: 30%; /* Space for dates/location */
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--light-text-color);
+        }
+        .company, .institution, .project-tech {
+            font-style: italic;
+            color: var(--light-text-color);
+            font-size: 0.95em;
+            margin-bottom: 3px;
+            display: block; /* Ensure it takes its own line if needed */
+        }
+        .project-link {
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .description {
+            font-size: 0.95em;
+            padding-left: 5px; /* Slight indent for description */
+        }
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .skills-list li {
+            background-color: #e9ecef;
+            color: var(--text-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .skills-category {
+            font-weight: bold;
+            color: var(--heading-color);
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 1em; /* Slightly smaller than h3 */
+            flex-basis: 100%; /* Make category take full width */
+        }
+        .certification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        .certification-item .cert-name-authority {
+            flex-grow: 1;
+        }
+        .certification-item .cert-date {
+            margin-left: 15px;
+            font-style: italic;
+            color: var(--light-text-color);
+            font-size: 0.9em;
+        }
+         .cert-link {
+            font-size: 0.85em;
+            margin-left: 5px;
+        }
+
+
+        /* --- Template Specific Styles --- */
+
+        /* Classic (Default is similar, maybe slightly more serif if font allows) */
+        .resume-container.classic {
+            /* Minimal changes needed if default is close */
+             border: 1px solid #ccc; /* Example: Add border */
+        }
+        .resume-container.classic h2 {
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Modern */
+        .resume-container.modern .resume-header {
+            border-bottom: 3px solid var(--secondary-color);
+            text-align: left; /* Align header left */
+        }
+        .resume-container.modern .contact-info {
+            justify-content: flex-start; /* Align contact info left */
+            gap: 5px 15px;
+        }
+        .resume-container.modern h2 {
+            border-bottom: none; /* Remove border */
+            color: var(--secondary-color); /* Use secondary color */
+            font-size: calc(var(--h2-size) * 1.1); /* Slightly larger */
+        }
+        .resume-container.modern .item {
+           border-left: 3px solid var(--secondary-color);
+           padding-left: 15px;
+           margin-left: 5px;
+        }
+
+        /* Technical (Two Column) */
+        .resume-container.technical {
+            display: grid;
+            grid-template-columns: 1fr 250px; /* Main content | Sidebar */
+            gap: 30px; /* Gap between columns */
+            padding: var(--preview-padding); /* Apply padding inside grid */
+        }
+        /* Header spans both columns */
+        .resume-container.technical .resume-header {
+            grid-column: 1 / -1; /* Span full width */
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+         }
+
+         .resume-container.technical .resume-main-content {
+            grid-column: 1 / 2;
+         }
+         .resume-container.technical .resume-sidebar {
+            grid-column: 2 / 3;
+            padding-top: 20px; /* Align top of sidebar content roughly with first section title */
+         }
+         /* By default all sections go to main, move specific ones to sidebar */
+         .resume-container.technical .resume-section[data-section-key="skills"],
+         .resume-container.technical .resume-section[data-section-key="education"],
+         .resume-container.technical .resume-section[data-section-key="certifications"] { /* Example: move edu/skills/certs to sidebar */
+            grid-column: 2 / 3; /* Move to sidebar */
+            margin-top: 0; /* Reset margin for sidebar items */
+         }
+         /* Ensure sections meant for main content stay there */
+         .resume-container.technical .resume-section[data-section-key="summary"],
+         .resume-container.technical .resume-section[data-section-key="workExperience"],
+         .resume-container.technical .resume-section[data-section-key="projects"] {
+            grid-column: 1 / 2; /* Ensure these are in main */
+         }
+
+         .resume-container.technical .resume-sidebar h2 {
+            font-size: calc(var(--h2-size) * 0.9); /* Smaller titles in sidebar */
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-bottom-width: 1px;
+         }
+         .resume-container.technical .resume-sidebar .item {
+             margin-bottom: 10px;
+         }
+
+
+        /* --- Responsiveness --- */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            #editor, #preview-container {
+                width: 100%;
+                height: auto; /* Allow editor to grow */
+                position: static; /* Remove sticky positioning */
+                max-height: none;
+            }
+            #resume-preview {
+                max-width: 100%;
+                 min-height: auto;
+                 /* Optionally scale down the preview slightly on tablets */
+                 /* transform: scale(0.9); transform-origin: top left; */
+            }
+            .resume-container.technical {
+                grid-template-columns: 1fr; /* Stack columns */
+                gap: 15px;
+            }
+            .resume-container.technical .resume-main-content,
+            .resume-container.technical .resume-sidebar,
+            .resume-container.technical .resume-section {
+                grid-column: 1 / -1 !important; /* Ensure all sections stack */
+            }
+             .resume-container.technical .resume-sidebar {
+                 padding-top: 0;
+             }
+             .resume-container.technical .resume-sidebar h2 {
+                font-size: var(--h2-size); /* Reset sidebar title size */
+             }
+        }
+
+        @media (max-width: 768px) {
+            #editor {
+                padding: 15px;
+            }
+            #resume-preview {
+                /* Scale down more aggressively or adjust padding */
+                padding: calc(var(--preview-padding) * 0.6); /* Reduce padding */
+                font-size: calc(var(--base-font-size) * 0.9); /* Smaller base font */
+            }
+             /* Adjust heading sizes proportionally */
+            :root {
+                --h1-size: 20pt;
+                --h2-size: 14pt;
+                --h3-size: 11pt;
+            }
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .item-header .right {
+                text-align: left;
+                margin-top: 3px;
+            }
+            .certification-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+             .certification-item .cert-date {
+                 margin-left: 0;
+                 margin-top: 2px;
+             }
+        }
+
+        /* --- PDF Export Specific (Hide elements not needed in PDF) --- */
+        .pdf-export-mode .drag-handle,
+        .pdf-export-mode .add-item-btn,
+        .pdf-export-mode .remove-item-btn,
+        .pdf-export-mode #pdf-controls,
+        .pdf-export-mode #editor { /* Hide editor during export capture */
+            display: none !important;
+        }
+        .pdf-export-mode #preview-container {
+             width: 100%; /* Take full width for capture */
+             margin: 0;
+             padding: 0;
+        }
+        .pdf-export-mode body {
+            background-color: #fff; /* Ensure clean background for capture */
+        }
+        .pdf-export-mode #resume-preview {
+            width: 210mm; /* A4 Width */
+            height: 297mm; /* A4 Height - Can cause issues if content overflows */
+            /* Alternatively use min-height and let it flow, jsPDF handles pages */
+             min-height: 280mm; /* Slightly less than A4 to ensure padding fits */
+             height: auto; /* Allow height to adjust to content */
+            max-width: none;
+            box-shadow: none;
+            border: none;
+            margin: 0 auto; /* Center the page for capture */
+            /* Padding already set via --preview-padding */
+        }
+
+        /* --- SortableJS Helper Class --- */
+        .sortable-ghost {
+            opacity: 0.4;
+            background-color: #cce5ff;
+        }
+        .sortable-chosen {
+             background-color: #e2e6ea;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="editor">
+            <h2>Resume Editor</h2>
+
+            <!-- Customization Section -->
+            <div class="editor-section customization-controls">
+                 <h3><span class="drag-handle" style="visibility: hidden;"></span>Customization</h3>
+                 <div class="form-group">
+                    <label for="template-select">Template</label>
+                    <select id="template-select" data-path="customization.template">
+                        <option value="modern">Modern</option>
+                        <option value="classic">Classic</option>
+                        <option value="technical">Technical</option>
+                    </select>
+                 </div>
+                 <div class="form-group">
+                     <label for="font-select">Font</label>
+                     <select id="font-select" data-path="customization.font">
+                         <option value="'Inter', sans-serif">Inter</option>
+                         <option value="'Source Serif Pro', serif">Source Serif Pro</option>
+                         <option value="'Roboto', sans-serif">Roboto</option>
+                         <option value="'Lato', sans-serif">Lato</option>
+                         <option value="'Arial', sans-serif">Arial</option>
+                         <option value="'Georgia', serif">Georgia</option>
+                     </select>
+                 </div>
+                  <div class="form-group">
+                      <label for="primary-color">Primary Color</label>
+                      <input type="color" id="primary-color" data-path="customization.primaryColor">
+                  </div>
+                  <div class="form-group">
+                      <label for="secondary-color">Secondary Color</label>
+                      <input type="color" id="secondary-color" data-path="customization.secondaryColor">
+                  </div>
+            </div>
+
+            <!-- Sections Container (for SortableJS) -->
+            <div id="editor-sections-container">
+
+                <div class="editor-section" data-section-key="personalInfo">
+                    <h3><span class="drag-handle">⠿</span>Personal Information</h3>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" data-path="personalInfo.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Job Title / Headline</label>
+                        <input type="text" id="title" data-path="personalInfo.title">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" data-path="personalInfo.phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" data-path="personalInfo.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn URL</label>
+                        <input type="url" id="linkedin" data-path="personalInfo.linkedin">
+                    </div>
+                     <div class="form-group">
+                        <label for="github">GitHub URL</label>
+                        <input type="url" id="github" data-path="personalInfo.github">
+                    </div>
+                     <div class="form-group">
+                        <label for="website">Portfolio/Website URL</label>
+                        <input type="url" id="website" data-path="personalInfo.website">
+                    </div>
+                     <div class="form-group">
+                        <label for="location">Location / Address</label>
+                        <input type="text" id="location" data-path="personalInfo.location">
+                    </div>
+                </div>
+
+                <div class="editor-section" data-section-key="summary">
+                     <h3><span class="drag-handle">⠿</span>Summary / Objective</h3>
+                    <div class="form-group">
+                        <label for="summary">Content</label>
+                        <textarea id="summary" data-path="summary.content"></textarea>
+                    </div>
+                </div>
+
+                <div class="editor-section" data-section-key="workExperience">
+                    <h3><span class="drag-handle">⠿</span>Work Experience <button class="add-item-btn" data-section="workExperience">+</button></h3>
+                    <div class="repeatable-items-container" data-section="workExperience">
+                        <!-- Work Experience items will be added here -->
+                    </div>
+                </div>
+
+                <div class="editor-section" data-section-key="education">
+                    <h3><span class="drag-handle">⠿</span>Education <button class="add-item-btn" data-section="education">+</button></h3>
+                    <div class="repeatable-items-container" data-section="education">
+                        <!-- Education items will be added here -->
+                    </div>
+                </div>
+
+                <div class="editor-section" data-section-key="projects">
+                     <h3><span class="drag-handle">⠿</span>Projects <button class="add-item-btn" data-section="projects">+</button></h3>
+                    <div class="repeatable-items-container" data-section="projects">
+                        <!-- Project items will be added here -->
+                    </div>
+                </div>
+
+                <div class="editor-section" data-section-key="skills">
+                    <h3><span class="drag-handle">⠿</span>Skills</h3>
+                    <div class="form-group">
+                        <label for="skills">Skills (comma or newline separated, use "Category: Skill, Skill..." for grouping)</label>
+                        <textarea id="skills" data-path="skills.content"></textarea>
+                    </div>
+                </div>
+
+                 <div class="editor-section" data-section-key="certifications">
+                    <h3><span class="drag-handle">⠿</span>Certifications <button class="add-item-btn" data-section="certifications">+</button></h3>
+                    <div class="repeatable-items-container" data-section="certifications">
+                        <!-- Certification items will be added here -->
+                    </div>
+                </div>
+
+            </div> <!-- /#editor-sections-container -->
+        </div>
+
+        <div id="preview-container">
+             <div id="pdf-controls">
+                 <button id="download-pdf-btn" class="download-pdf-btn">Download as PDF</button>
+            </div>
+            <div id="resume-preview" class="resume-container modern">
+                <!-- Live preview renders here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates for Repeatable Items -->
+    <template id="workExperience-template">
+        <div class="repeatable-item">
+            <button class="remove-item-btn" aria-label="Remove Item">×</button>
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" data-subpath="jobTitle">
+            </div>
+            <div class="form-group">
+                <label>Company</label>
+                <input type="text" data-subpath="company">
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" data-subpath="location">
+            </div>
+            <div class="form-group">
+                <label>Start Date</label>
+                <input type="text" data-subpath="startDate" placeholder="e.g., Jan 2020">
+            </div>
+            <div class="form-group">
+                <label>End Date</label>
+                <input type="text" data-subpath="endDate" placeholder="e.g., Present or Dec 2022">
+            </div>
+            <div class="form-group">
+                <label>Description (use bullet points starting with '*' or '-')</label>
+                <textarea data-subpath="description"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <template id="education-template">
+        <div class="repeatable-item">
+            <button class="remove-item-btn" aria-label="Remove Item">×</button>
+            <div class="form-group">
+                <label>Degree / Program</label>
+                <input type="text" data-subpath="degree">
+            </div>
+            <div class="form-group">
+                <label>Institution</label>
+                <input type="text" data-subpath="institution">
+            </div>
+             <div class="form-group">
+                <label>Location</label>
+                <input type="text" data-subpath="location">
+            </div>
+            <div class="form-group">
+                <label>Graduation / End Date</label>
+                <input type="text" data-subpath="endDate" placeholder="e.g., May 2024">
+            </div>
+             <div class="form-group">
+                <label>Details (Optional: GPA, Honors, relevant coursework)</label>
+                <textarea data-subpath="details"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <template id="projects-template">
+        <div class="repeatable-item">
+            <button class="remove-item-btn" aria-label="Remove Item">×</button>
+            <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" data-subpath="name">
+            </div>
+            <div class="form-group">
+                <label>Link (Optional: Live Demo or Repo URL)</label>
+                <input type="url" data-subpath="link">
+            </div>
+            <div class="form-group">
+                <label>Technologies Used (comma separated)</label>
+                <input type="text" data-subpath="technologies">
+            </div>
+            <div class="form-group">
+                <label>Description (use bullet points starting with '*' or '-')</label>
+                <textarea data-subpath="description"></textarea>
+            </div>
+        </div>
+    </template>
+
+     <template id="certifications-template">
+        <div class="repeatable-item">
+            <button class="remove-item-btn" aria-label="Remove Item">×</button>
+            <div class="form-group">
+                <label>Certification Name</label>
+                <input type="text" data-subpath="name">
+            </div>
+            <div class="form-group">
+                <label>Issuing Authority</label>
+                <input type="text" data-subpath="authority">
+            </div>
+            <div class="form-group">
+                <label>Date Issued</label>
+                <input type="text" data-subpath="dateIssued" placeholder="e.g., Mar 2023">
+            </div>
+            <div class="form-group">
+                <label>Verification Link (Optional)</label>
+                <input type="url" data-subpath="link">
+            </div>
+        </div>
+    </template>
+
+
+    <script>
+        const { jsPDF } = window.jspdf; // Ensure jsPDF is loaded
+
+        // --- State Management ---
+        let resumeData = {}; // Main data store
+
+        const defaultResumeData = {
+            personalInfo: {
+                name: '', title: '', phone: '', email: '', linkedin: '', github: '', website: '', location: ''
+            },
+            summary: { content: '' },
+            workExperience: [],
+            education: [],
+            projects: [],
+            skills: { content: '' },
+            certifications: [],
+            customization: {
+                template: 'modern',
+                font: "'Inter', sans-serif",
+                primaryColor: '#2c3e50',
+                secondaryColor: '#3498db'
+            },
+            // Default section order
+            sectionOrder: ['summary', 'workExperience', 'education', 'projects', 'skills', 'certifications']
+        };
+
+        // --- DOM References ---
+        const editor = document.getElementById('editor');
+        const editorSectionsContainer = document.getElementById('editor-sections-container');
+        const preview = document.getElementById('resume-preview');
+        const downloadPdfBtn = document.getElementById('download-pdf-btn');
+        const templateSelect = document.getElementById('template-select');
+        const fontSelect = document.getElementById('font-select');
+        const primaryColorPicker = document.getElementById('primary-color');
+        const secondaryColorPicker = document.getElementById('secondary-color');
+
+        // --- Utility Functions ---
+
+        // Deep merge function to combine loaded data with defaults
+        function deepMerge(target, source) {
+            for (const key in source) {
+                if (source.hasOwnProperty(key)) {
+                    const targetValue = target[key];
+                    const sourceValue = source[key];
+
+                    if (sourceValue && typeof sourceValue === 'object' && !Array.isArray(sourceValue)) {
+                        // If it's an object (and not null), recurse
+                        if (!targetValue || typeof targetValue !== 'object' || Array.isArray(targetValue)) {
+                             target[key] = {}; // Initialize target if not an object
+                        }
+                        deepMerge(target[key], sourceValue);
+                    } else if (Array.isArray(sourceValue)) {
+                        // If it's an array, overwrite (or could implement smarter array merge if needed)
+                        target[key] = sourceValue.map(item => (typeof item === 'object' && item !== null) ? deepMerge({}, item) : item);
+                    }
+                    else if (sourceValue !== undefined){
+                         // Otherwise, assign the value if it's defined
+                        target[key] = sourceValue;
+                    }
+                }
+            }
+            return target;
+        }
+
+
+        // Helper to get nested property value using dot notation path
+        function getNestedValue(obj, path) {
+            return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+        }
+
+        // Helper to set nested property value using dot notation path
+        function setNestedValue(obj, path, value) {
+            const keys = path.split('.');
+            const lastKey = keys.pop();
+            const target = keys.reduce((acc, part) => acc[part] = acc[part] || {}, obj);
+            target[lastKey] = value;
+        }
+
+        // Helper to format text with lists (basic implementation)
+        function formatTextWithLists(text) {
+            if (!text) return '';
+            // Simple conversion of lines starting with * or - to <li>
+            const lines = text.split('\n');
+            let html = '';
+            let inList = false;
+            lines.forEach(line => {
+                const trimmedLine = line.trim();
+                if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
+                    if (!inList) {
+                        html += '<ul>';
+                        inList = true;
+                    }
+                    html += `<li>${trimmedLine.substring(2)}</li>`;
+                } else {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    // Wrap non-list lines in <p> only if they have content
+                    if (trimmedLine) {
+                         html += `<p>${line}</p>`; // Keep original spacing if needed
+                    }
+                }
+            });
+            if (inList) {
+                html += '</ul>'; // Close list if text ends with list item
+            }
+            return html;
+        }
+
+         // --- Data Persistence ---
+        function saveData() {
+            try {
+                localStorage.setItem('resumeBuilderData', JSON.stringify(resumeData));
+                console.log("Data saved to Local Storage.");
+            } catch (error) {
+                console.error("Error saving data to Local Storage:", error);
+            }
+        }
+
+        function loadData() {
+            try {
+                const savedData = localStorage.getItem('resumeBuilderData');
+                let loadedData = defaultResumeData; // Start with defaults
+
+                if (savedData) {
+                    console.log("Loading data from Local Storage...");
+                    const parsedData = JSON.parse(savedData);
+                    // Merge loaded data onto defaults to ensure all keys exist
+                    loadedData = deepMerge(JSON.parse(JSON.stringify(defaultResumeData)), parsedData); // Use deep copy of defaults
+                     console.log("Loaded and merged data:", loadedData);
+                } else {
+                    console.log("No saved data found, using defaults.");
+                }
+                 resumeData = loadedData;
+
+            } catch (error) {
+                console.error("Error loading or parsing data from Local Storage:", error);
+                 resumeData = JSON.parse(JSON.stringify(defaultResumeData)); // Fallback to defaults on error
+            }
+
+            // Ensure sectionOrder exists and contains all default sections
+             if (!resumeData.sectionOrder || !Array.isArray(resumeData.sectionOrder)) {
+                  resumeData.sectionOrder = [...defaultResumeData.sectionOrder];
+             } else {
+                 // Add any missing default sections to the loaded order
+                  defaultResumeData.sectionOrder.forEach(key => {
+                      if (!resumeData.sectionOrder.includes(key)) {
+                          resumeData.sectionOrder.push(key);
+                      }
+                  });
+                 // Remove sections from order that are no longer in defaults (optional)
+                 // resumeData.sectionOrder = resumeData.sectionOrder.filter(key => defaultResumeData.sectionOrder.includes(key));
+             }
+
+
+            populateEditor();
+            applyCustomization(); // Apply loaded customizations
+            renderPreview(); // Initial render based on loaded/default data
+        }
+
+        // --- Editor Population & Updates ---
+        function populateEditor() {
+            console.log("Populating editor fields...");
+            const inputs = editor.querySelectorAll('input[data-path], textarea[data-path], select[data-path]');
+            inputs.forEach(input => {
+                const path = input.dataset.path;
+                 const value = getNestedValue(resumeData, path);
+                 if (value !== undefined && value !== null) {
+                    if (input.type === 'color') {
+                         input.value = value || (path.includes('primary') ? defaultResumeData.customization.primaryColor : defaultResumeData.customization.secondaryColor);
+                    } else {
+                         input.value = value;
+                    }
+
+                 } else {
+                      // Handle cases where data might be missing in loaded state
+                      if (input.type !== 'color') input.value = ''; // Clear non-color inputs
+                 }
+            });
+
+            // Populate repeatable sections
+            renderRepeatableEditorSection('workExperience');
+            renderRepeatableEditorSection('education');
+            renderRepeatableEditorSection('projects');
+            renderRepeatableEditorSection('certifications');
+
+            // Set customization controls
+             if (templateSelect) templateSelect.value = resumeData.customization.template;
+             if (fontSelect) fontSelect.value = resumeData.customization.font;
+             if (primaryColorPicker) primaryColorPicker.value = resumeData.customization.primaryColor;
+             if (secondaryColorPicker) secondaryColorPicker.value = resumeData.customization.secondaryColor;
+
+             // Reorder editor sections based on loaded order
+             reorderEditorSections();
+        }
+
+
+        function handleInputChange(event) {
+            const input = event.target;
+            const path = input.dataset.path;
+            const value = (input.type === 'color') ? input.value : input.value.trim(); // Trim whitespace for text inputs
+
+            if (path) {
+                 setNestedValue(resumeData, path, value);
+
+                // Handle customization changes immediately
+                if (path.startsWith('customization.')) {
+                    applyCustomization();
+                 }
+
+                 renderPreview();
+                 saveData();
+            } else {
+                // Handle inputs within repeatable items
+                 const itemElement = input.closest('.repeatable-item');
+                 if (itemElement) {
+                    const sectionKey = itemElement.closest('.repeatable-items-container').dataset.section;
+                    const index = parseInt(itemElement.dataset.index, 10);
+                    const subpath = input.dataset.subpath;
+                    if (sectionKey && !isNaN(index) && subpath && resumeData[sectionKey] && resumeData[sectionKey][index]) {
+                         resumeData[sectionKey][index][subpath] = value;
+                         renderPreview();
+                         saveData();
+                    } else {
+                         console.warn("Could not update repeatable item: Missing data attribute or index.", {sectionKey, index, subpath});
+                    }
+                 }
+            }
+        }
+
+        // --- Repeatable Sections ---
+
+        function renderRepeatableEditorSection(sectionKey) {
+            const container = editor.querySelector(`.repeatable-items-container[data-section="${sectionKey}"]`);
+            const template = document.getElementById(`${sectionKey}-template`);
+
+            if (!container || !template) {
+                 console.error(`Container or template not found for section: ${sectionKey}`);
+                return;
+            }
+
+            container.innerHTML = ''; // Clear existing items
+            const items = resumeData[sectionKey] || [];
+
+             items.forEach((itemData, index) => {
+                const templateContent = template.content.cloneNode(true);
+                const newItemElement = templateContent.querySelector('.repeatable-item');
+                newItemElement.dataset.index = index; // Add index for removal
+
+                // Populate inputs within the cloned template
+                const inputs = newItemElement.querySelectorAll('[data-subpath]');
+                 inputs.forEach(input => {
+                    const subpath = input.dataset.subpath;
+                    input.value = itemData[subpath] || ''; // Populate with data or empty string
+                    // Add listener directly here - ensures listeners are attached to *new* elements
+                     input.addEventListener('input', handleInputChange);
+                     input.addEventListener('change', handleInputChange); // For selects/colors if any
+                });
+
+                container.appendChild(templateContent);
+            });
+        }
+
+
+        function addRepeatableItem(sectionKey) {
+             console.log(`Adding item to ${sectionKey}`);
+             if (!resumeData[sectionKey]) {
+                 resumeData[sectionKey] = []; // Initialize if doesn't exist
+             }
+
+             // Create a default empty item based on the template's inputs
+             const template = document.getElementById(`${sectionKey}-template`);
+             if (!template) return;
+             const defaultItem = {};
+             const inputs = template.content.querySelectorAll('[data-subpath]');
+             inputs.forEach(input => {
+                defaultItem[input.dataset.subpath] = ''; // Initialize all fields as empty
+             });
+
+             resumeData[sectionKey].push(defaultItem);
+             renderRepeatableEditorSection(sectionKey); // Re-render the editor section
+             renderPreview();
+             saveData();
+        }
+
+        function removeRepeatableItem(sectionKey, index) {
+            if (resumeData[sectionKey] && resumeData[sectionKey][index] !== undefined) {
+                resumeData[sectionKey].splice(index, 1);
+                renderRepeatableEditorSection(sectionKey); // Re-render editor section
+                renderPreview();
+                saveData();
+            } else {
+                console.warn(`Attempted to remove non-existent item at index ${index} from ${sectionKey}`);
+            }
+        }
+
+         // --- Event Listeners Setup ---
+        function setupEventListeners() {
+            console.log("Setting up event listeners...");
+
+            // Input binding (delegated to editor)
+             editor.addEventListener('input', handleInputChange);
+             editor.addEventListener('change', handleInputChange); // For select, color
+
+            // Add item buttons (delegated to editor)
+            editor.addEventListener('click', (event) => {
+                if (event.target.classList.contains('add-item-btn')) {
+                    const sectionKey = event.target.dataset.section;
+                    if (sectionKey) {
+                        addRepeatableItem(sectionKey);
+                    }
+                }
+            });
+
+             // Remove item buttons (delegated to editor)
+             editor.addEventListener('click', (event) => {
+                if (event.target.classList.contains('remove-item-btn')) {
+                    const itemElement = event.target.closest('.repeatable-item');
+                    const container = event.target.closest('.repeatable-items-container');
+                     if (itemElement && container) {
+                         const sectionKey = container.dataset.section;
+                         const index = parseInt(itemElement.dataset.index, 10);
+                         if (sectionKey && !isNaN(index)) {
+                            removeRepeatableItem(sectionKey, index);
+                         }
+                     }
+                }
+            });
+
+            // PDF Download button
+            if (downloadPdfBtn) {
+                downloadPdfBtn.addEventListener('click', generatePDF);
+            } else {
+                console.error("Download PDF button not found.");
+            }
+        }
+
+        // --- Customization Application ---
+        function applyCustomization() {
+            const cust = resumeData.customization;
+             // Apply template class
+             preview.className = 'resume-container'; // Reset classes first
+             if (cust.template) {
+                 preview.classList.add(cust.template);
+             } else {
+                  preview.classList.add(defaultResumeData.customization.template); // Fallback
+             }
+
+             // Apply font and colors using CSS variables
+             const root = document.documentElement;
+             root.style.setProperty('--base-font-family', cust.font || defaultResumeData.customization.font);
+             root.style.setProperty('--primary-color', cust.primaryColor || defaultResumeData.customization.primaryColor);
+             root.style.setProperty('--secondary-color', cust.secondaryColor || defaultResumeData.customization.secondaryColor);
+
+             // Force preview re-render only if needed (styles applied via CSS vars)
+             // renderPreview(); // Often not needed just for style changes, unless layout depends on them
+        }
+
+
+        // --- Preview Rendering ---
+        function renderPreview() {
+            // console.log("Rendering preview...");
+            if (!preview) {
+                console.error("Preview element not found!");
+                return;
+            }
+
+            // Apply latest customization styles before rendering HTML
+            applyCustomization();
+
+            const { personalInfo, summary, workExperience, education, projects, skills, certifications, sectionOrder } = resumeData;
+
+            let previewHTML = '';
+
+            // 1. Header
+             previewHTML += `
+                <div class="resume-header">
+                    ${personalInfo.name ? `<h1>${personalInfo.name}</h1>` : ''}
+                    ${personalInfo.title ? `<div class="job-title">${personalInfo.title}</div>` : ''}
+                    <div class="contact-info">
+                        ${personalInfo.phone ? `<span><a href="tel:${personalInfo.phone}">${personalInfo.phone}</a></span>` : ''}
+                        ${personalInfo.email ? `<span><a href="mailto:${personalInfo.email}">${personalInfo.email}</a></span>` : ''}
+                        ${personalInfo.location ? `<span>${personalInfo.location}</span>` : ''}
+                        ${personalInfo.linkedin ? `<span><a href="${personalInfo.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>` : ''}
+                        ${personalInfo.github ? `<span><a href="${personalInfo.github}" target="_blank" rel="noopener noreferrer">GitHub</a></span>` : ''}
+                        ${personalInfo.website ? `<span><a href="${personalInfo.website}" target="_blank" rel="noopener noreferrer">Portfolio</a></span>` : ''}
+                    </div>
+                </div>
+            `;
+
+            // Prepare section content generators
+             const sectionRenderers = {
+                 summary: () => summary?.content ? `
+                     <div class="resume-section summary-section" data-section-key="summary">
+                         <h2>Summary</h2>
+                         ${formatTextWithLists(summary.content)}
+                     </div>` : '',
+
+                 workExperience: () => workExperience?.length > 0 ? `
+                     <div class="resume-section work-experience-section" data-section-key="workExperience">
+                         <h2>Work Experience</h2>
+                         ${workExperience.map(item => `
+                             <div class="item">
+                                 <div class="item-header">
+                                     <div class="left">
+                                         ${item.jobTitle ? `<h3>${item.jobTitle}</h3>` : ''}
+                                         ${item.company ? `<span class="company">${item.company}${item.location ? `, ${item.location}` : ''}</span>` : ''}
+                                     </div>
+                                     <div class="right">
+                                         ${item.startDate || item.endDate ? `${item.startDate || ''} - ${item.endDate || ''}` : ''}
+                                     </div>
+                                 </div>
+                                 ${item.description ? `<div class="description">${formatTextWithLists(item.description)}</div>` : ''}
+                             </div>`).join('')}
+                     </div>` : '',
+
+                 education: () => education?.length > 0 ? `
+                     <div class="resume-section education-section" data-section-key="education">
+                         <h2>Education</h2>
+                         ${education.map(item => `
+                             <div class="item">
+                                 <div class="item-header">
+                                      <div class="left">
+                                        ${item.degree ? `<h3>${item.degree}</h3>` : ''}
+                                        ${item.institution ? `<span class="institution">${item.institution}${item.location ? `, ${item.location}` : ''}</span>` : ''}
+                                     </div>
+                                     <div class="right">
+                                         ${item.endDate ? `<span>${item.endDate}</span>` : ''}
+                                     </div>
+                                 </div>
+                                  ${item.details ? `<div class="description">${formatTextWithLists(item.details)}</div>` : ''}
+                             </div>`).join('')}
+                     </div>` : '',
+
+                 projects: () => projects?.length > 0 ? `
+                     <div class="resume-section projects-section" data-section-key="projects">
+                         <h2>Projects</h2>
+                         ${projects.map(item => `
+                             <div class="item">
+                                 <div class="item-header">
+                                     <div class="left">
+                                         <h3>
+                                             ${item.name || 'Untitled Project'}
+                                             ${item.link ? `<a href="${item.link}" class="project-link" target="_blank" rel="noopener noreferrer">[Link]</a>` : ''}
+                                         </h3>
+                                         ${item.technologies ? `<span class="project-tech">Technologies: ${item.technologies}</span>` : ''}
+                                     </div>
+                                      <div class="right"></div> <!-- Placeholder for potential dates -->
+                                 </div>
+                                  ${item.description ? `<div class="description">${formatTextWithLists(item.description)}</div>` : ''}
+                             </div>`).join('')}
+                     </div>` : '',
+
+                 skills: () => {
+                     if (!skills?.content) return '';
+                     let skillsHTML = '<ul class="skills-list">';
+                     const lines = skills.content.split('\n');
+                     let currentCategory = null;
+
+                     lines.forEach(line => {
+                         const trimmedLine = line.trim();
+                         if (!trimmedLine) return;
+
+                         if (trimmedLine.includes(':')) {
+                             const parts = trimmedLine.split(':');
+                             const category = parts[0].trim();
+                             const categorySkills = parts[1]?.trim();
+
+                             if (category && categorySkills) {
+                                 if (currentCategory !== null) { // Close previous category if needed
+                                     // Potentially add closing tags if needed by structure
+                                 }
+                                 skillsHTML += `<li class="skills-category">${category}</li>`;
+                                 currentCategory = category;
+                                 categorySkills.split(',').forEach(skill => {
+                                     const trimmedSkill = skill.trim();
+                                     if (trimmedSkill) skillsHTML += `<li>${trimmedSkill}</li>`;
+                                 });
+                             } else { // Treat as regular skill if format is wrong
+                                 trimmedLine.split(',').forEach(skill => {
+                                     const trimmedSkill = skill.trim();
+                                     if (trimmedSkill) skillsHTML += `<li>${trimmedSkill}</li>`;
+                                 });
+                             }
+                         } else { // No category detected
+                             // Reset category if we were in one? Or assume continuation? Let's assume separate skills.
+                             // currentCategory = null;
+                             trimmedLine.split(',').forEach(skill => {
+                                 const trimmedSkill = skill.trim();
+                                 if (trimmedSkill) skillsHTML += `<li>${trimmedSkill}</li>`;
+                             });
+                         }
+                     });
+                     skillsHTML += '</ul>';
+
+                     return `<div class="resume-section skills-section" data-section-key="skills"><h2>Skills</h2>${skillsHTML}</div>`;
+                 },
+
+                certifications: () => certifications?.length > 0 ? `
+                     <div class="resume-section certifications-section" data-section-key="certifications">
+                         <h2>Certifications</h2>
+                         ${certifications.map(item => `
+                             <div class="item certification-item">
+                                 <div class="cert-name-authority">
+                                     <strong>${item.name || ''}</strong> - ${item.authority || ''}
+                                      ${item.link ? `<a href="${item.link}" class="cert-link" target="_blank" rel="noopener noreferrer">[Verify]</a>` : ''}
+                                 </div>
+                                 <div class="cert-date">${item.dateIssued || ''}</div>
+                             </div>`).join('')}
+                     </div>` : '',
+            };
+
+             // 2. Main Content Area (for non-technical templates) or specific grid area
+              let mainContentHTML = '';
+              let sidebarHTML = '';
+
+             sectionOrder.forEach(key => {
+                 if (sectionRenderers[key]) {
+                     const sectionHTML = sectionRenderers[key]();
+                      if (resumeData.customization.template === 'technical') {
+                         // Check if section belongs in sidebar based on styling rules (could be more robust)
+                         // We rely on the CSS grid placement here, just need to wrap content
+                         if (key === 'skills' || key === 'education' || key === 'certifications') {
+                              sidebarHTML += sectionHTML;
+                         } else {
+                              mainContentHTML += sectionHTML;
+                         }
+                     } else {
+                         // For non-technical, just append
+                         mainContentHTML += sectionHTML;
+                     }
+                 }
+             });
+
+             if (resumeData.customization.template === 'technical') {
+                 previewHTML += `<div class="resume-main-content">${mainContentHTML}</div>`;
+                 previewHTML += `<div class="resume-sidebar">${sidebarHTML}</div>`;
+             } else {
+                 previewHTML += mainContentHTML; // Append directly after header
+             }
+
+            // Update the preview DOM
+            preview.innerHTML = previewHTML;
+        }
+
+         // --- PDF Generation ---
+        async function generatePDF() {
+            console.log("Generating PDF...");
+            const pdfElement = document.getElementById('resume-preview');
+            if (!pdfElement) {
+                console.error("Resume preview element not found for PDF generation.");
+                alert("Error: Could not find resume content to generate PDF.");
+                return;
+            }
+
+            const downloadButton = document.getElementById('download-pdf-btn');
+             downloadButton.textContent = 'Generating...';
+             downloadButton.disabled = true;
+
+             // Add a class to the body to apply PDF export styles
+             document.body.classList.add('pdf-export-mode');
+
+            // Allow styles to apply and fonts to potentially re-render/load
+             await new Promise(resolve => setTimeout(resolve, 100)); // Short delay
+
+             try {
+                 const canvas = await html2canvas(pdfElement, {
+                     scale: 2, // Increase resolution
+                     useCORS: true, // Important for external resources like fonts if needed
+                     logging: false, // Reduce console noise
+                     width: pdfElement.offsetWidth, // Use actual rendered width
+                     height: pdfElement.offsetHeight, // Use actual rendered height
+                     windowWidth: pdfElement.scrollWidth,
+                     windowHeight: pdfElement.scrollHeight
+                 });
+
+                 const imgData = canvas.toDataURL('image/png');
+                 const pdf = new jsPDF({
+                     orientation: 'p', // Portrait
+                     unit: 'mm', // Millimeters
+                     format: 'a4' // A4 size
+                 });
+
+                 const pdfWidth = pdf.internal.pageSize.getWidth();
+                 const pdfHeight = pdf.internal.pageSize.getHeight();
+                 const imgProps = pdf.getImageProperties(imgData);
+                 const imgRatio = imgProps.height / imgProps.width;
+
+                 // Calculate image dimensions to fit A4 page width
+                 let imgWidth = pdfWidth;
+                 let imgHeight = imgWidth * imgRatio;
+
+                  // If the image height exceeds the page height, scale based on height instead
+                  if (imgHeight > pdfHeight) {
+                     imgHeight = pdfHeight;
+                     imgWidth = imgHeight / imgRatio;
+                  }
+
+                 // Add the image to the PDF
+                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight); // Stretch to fill page (might distort slightly if aspect ratio differs from A4)
+                 // Or to fit while maintaining aspect ratio:
+                 // pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+                 pdf.save('resume.pdf');
+                 console.log("PDF generated successfully.");
+
+             } catch (error) {
+                 console.error("Error generating PDF:", error);
+                 alert("An error occurred while generating the PDF. Please check the console for details.");
+             } finally {
+                 // Remove the export mode class regardless of success/failure
+                 document.body.classList.remove('pdf-export-mode');
+                 downloadButton.textContent = 'Download as PDF';
+                 downloadButton.disabled = false;
+             }
+        }
+
+         // --- Section Reordering (SortableJS) ---
+        function initializeSortable() {
+            if (typeof Sortable === 'undefined' || !editorSectionsContainer) {
+                 console.error("SortableJS library not loaded or editor sections container not found.");
+                 return;
+            }
+
+            new Sortable(editorSectionsContainer, {
+                animation: 150,
+                handle: '.drag-handle', // Specify the drag handle element
+                ghostClass: 'sortable-ghost', // Class for the drop placeholder
+                 chosenClass: 'sortable-chosen', // Class for the chosen item
+                onEnd: function (evt) {
+                    // Get the new order of section keys
+                     const newOrder = [];
+                     editorSectionsContainer.querySelectorAll('.editor-section[data-section-key]').forEach(sectionEl => {
+                         newOrder.push(sectionEl.dataset.sectionKey);
+                     });
+
+                     // Update the sectionOrder in resumeData
+                     resumeData.sectionOrder = newOrder;
+                     console.log("New section order:", newOrder);
+
+                     // Re-render the preview based on the new order
+                     renderPreview();
+                     // Save the new order
+                     saveData();
+                },
+            });
+             console.log("SortableJS initialized.");
+        }
+
+        // Function to reorder editor sections visually based on `resumeData.sectionOrder`
+        function reorderEditorSections() {
+             if (!editorSectionsContainer) return;
+             const sections = Array.from(editorSectionsContainer.children);
+             const orderedSections = resumeData.sectionOrder
+                .map(key => sections.find(el => el.dataset.sectionKey === key))
+                .filter(el => el); // Filter out nulls if a section was removed
+
+            // Append sections in the correct order
+            orderedSections.forEach(section => editorSectionsContainer.appendChild(section));
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed.");
+            loadData(); // Load data, populate editor, apply styles, render preview
+            setupEventListeners();
+            initializeSortable();
+            console.log("Resume Builder Initialized.");
+        });
+
+    </script>
+
+</body>
+</html>

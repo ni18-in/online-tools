@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Lato:wght@400;700&family=Source+Serif+Pro:wght@400;600;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600&family=Georgia&family=Arial&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'roboto': ['Roboto', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                        'source-serif': ['Source Serif Pro', 'serif'],
+                        'georgia': ['Georgia', 'serif'],
+                        'arial': ['Arial', 'sans-serif'],
+                        'merriweather': ['Merriweather', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: 'var(--primary-color, #2563eb)',
+                        secondary: 'var(--secondary-color, #4b5563)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #4b5563;
+            --font-family: 'Inter', sans-serif;
+            --resume-padding: 12mm;
+        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .resume-container {
+            background-color: white; padding: var(--resume-padding);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            font-family: var(--font-family); min-height: 297mm; width: 210mm; max-width: 210mm;
+            margin: 0 auto; position: relative; color: #374151; line-height: 1.6;
+        }
+
+        /* Template Styles */
+        .resume-container.modern { --heading-color: var(--primary-color); --text-color: #374151; --secondary-text: var(--secondary-color); --divider-color: #e5e7eb; --section-title-border: 2px solid var(--divider-color); --section-title-transform: none; --section-title-spacing: normal; }
+        .resume-container.classic { --heading-color: #1f2937; --text-color: #374151; --secondary-text: #6b7280; --divider-color: #d1d5db; --section-title-border: 1px solid var(--divider-color); --section-title-transform: none; --section-title-spacing: normal; font-family: var(--font-family); }
+        .classic .resume-name { font-weight: 600; } .classic .resume-section-title { font-weight: 700; font-size: 1.15rem; }
+        .resume-container.technical { --heading-color: var(--primary-color); --text-color: #374151; --secondary-text: var(--secondary-color); --divider-color: #e5e7eb; --section-title-border: 2px solid var(--divider-color); --section-title-transform: none; --section-title-spacing: normal; display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .technical .resume-main { grid-column: 1; } .technical .resume-sidebar { grid-column: 2; } .technical .resume-header { grid-column: 1 / -1; } .technical .resume-section-title { font-size: 1.1rem; }
+        .resume-container.elegant { --heading-color: #2d3748; --text-color: #4a5568; --secondary-text: #718096; --primary-color: #718096; --divider-color: #e2e8f0; --section-title-border: 1px solid var(--divider-color); --section-title-transform: uppercase; --section-title-spacing: 0.05em; font-family: 'Merriweather', serif; }
+        .elegant .resume-name { color: var(--heading-color); font-weight: 700; } .elegant .resume-title { color: var(--primary-color); font-style: italic; } .elegant .resume-section-title { font-size: 1rem; font-weight: 700; color: var(--primary-color); } .elegant .resume-contact a { color: var(--secondary-text); } .elegant .resume-contact a:hover { color: var(--heading-color); }
+        .resume-container.minimalist { --heading-color: #111827; --text-color: #374151; --secondary-text: #6b7280; --primary-color: #6b7280; --divider-color: #f3f4f6; --section-title-border: none; --section-title-transform: none; --section-title-spacing: normal; font-family: 'Montserrat', sans-serif; line-height: 1.5; }
+        .minimalist .resume-name { font-size: 2rem; font-weight: 600; color: var(--heading-color); margin-bottom: 0.5rem; } .minimalist .resume-title { font-size: 1rem; font-weight: 400; color: var(--secondary-text); margin-bottom: 1rem; } .minimalist .resume-header { margin-bottom: 2rem; } .minimalist .resume-section { margin-bottom: 1.25rem; } .minimalist .resume-section-title { font-size: 1.1rem; font-weight: 600; color: var(--heading-color); margin-bottom: 0.5rem; padding-bottom: 0; border-bottom: var(--section-title-border); } .minimalist .resume-item { margin-bottom: 0.75rem; } .minimalist .resume-item-title { font-weight: 500; } .minimalist .skill-tag { background-color: #e5e7eb; font-size: 0.8rem; padding: 0.2rem 0.6rem; } .minimalist .resume-contact { gap: 0.75rem; } .minimalist .resume-contact span { display: flex; align-items: center; } .minimalist .resume-contact svg { margin-right: 0.3rem; }
+
+        /* Common resume element styles */
+        .resume-header { margin-bottom: 1.5rem; text-align: center; }
+        .resume-name { font-size: 1.75rem; font-weight: 700; color: var(--heading-color); margin-bottom: 0.25rem; }
+        .resume-title { font-size: 1.125rem; font-weight: 500; color: var(--secondary-text); margin-bottom: 0.75rem; }
+        .resume-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; font-size: 0.875rem; color: var(--secondary-text); }
+        .resume-contact span { display: inline-flex; align-items: center; gap: 0.3rem; }
+        .resume-contact a { color: var(--secondary-text); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .resume-contact a:hover { color: var(--primary-color); text-decoration: underline; }
+        .resume-contact svg { width: 0.9em; height: 0.9em; opacity: 0.8; }
+        .resume-section { margin-bottom: 1.5rem; }
+        .resume-section-title { font-size: 1.25rem; font-weight: 600; color: var(--heading-color); border-bottom: var(--section-title-border); padding-bottom: 0.25rem; margin-bottom: 0.75rem; text-transform: var(--section-title-transform); letter-spacing: var(--section-title-spacing); }
+        .resume-item { margin-bottom: 1rem; }
+        .resume-item-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 0.25rem; }
+        .resume-item-title { font-weight: 600; color: var(--heading-color); margin-right: 0.5rem; }
+        .resume-item-subtitle { font-weight: 500; color: var(--secondary-text); font-size: 0.95em; }
+        .resume-item-date { color: var(--secondary-text); font-size: 0.875rem; white-space: nowrap; margin-left: auto; padding-left: 1rem; }
+        .resume-item-description { color: var(--text-color); font-size: 0.875rem; line-height: 1.5; }
+        .resume-item-description ul { list-style-type: disc; margin-left: 1.25rem; margin-top: 0.25rem; }
+        .resume-item-description a { color: var(--primary-color); text-decoration: underline; }
+        .resume-item-description a:hover { color: var(--heading-color); }
+        .resume-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-category { margin-bottom: 0.75rem; width: 100%; }
+        .skill-category-title { font-weight: 600; color: var(--heading-color); margin-bottom: 0.25rem; font-size: 0.9rem; }
+        .skill-tag { background-color: #f3f4f6; color: var(--text-color); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .placeholder-text { color: #9ca3af; font-style: italic; font-size: 0.875rem; } /* gray-400 */
+
+        /* Other Styles */
+        .drag-handle { cursor: move; padding: 0.5rem; margin-right: 0.5rem; display: inline-block; color: #9ca3af; font-size: 1.2rem; }
+        .drag-handle:hover { color: #6b7280; }
+        .sortable-ghost { opacity: 0.4; background-color: #dbeafe; }
+        #pdf-loading-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 9999; color: white; font-size: 1.25rem; display: none; }
+        #pdf-loading-overlay.active { display: flex; }
+        .spinner { border: 4px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; width: 40px; height: 40px; animation: spin 1s ease-in-out infinite; margin-right: 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .form-control:required { border-left: 3px solid #fbbf24; }
+        .form-control:required:focus { border-left: 3px solid #f59e0b; }
+        label.required::after { content: ' *'; color: #ef4444; }
+        #save-indicator { position: fixed; bottom: 1rem; right: 1rem; background-color: rgba(0, 128, 0, 0.8); color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; z-index: 10000; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        #save-indicator.visible { opacity: 1; }
+    </style>
+</head>
+<body class="bg-gray-100 font-inter">
+    <div class="app-container flex flex-col min-h-screen">
+        <header class="bg-white p-4 shadow-md text-center sticky top-0 z-10">
+            <h1 class="text-2xl font-bold text-blue-600">Enhanced Resume Builder</h1>
+        </header>
+
+        <main class="flex flex-1 flex-col md:flex-row p-4 gap-4">
+
+            <div class="editor-panel md:w-1/2 lg:w-2/5 bg-white rounded-lg shadow-md p-5 overflow-y-auto md:sticky md:top-[80px] md:max-h-[calc(100vh-100px)]">
+                <div class="panel-header flex justify-between items-center mb-5 pb-3 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-blue-600">Editor</h2>
+                </div>
+
+                <div class="customization-options grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <div class="option-group">
+                        <label for="template-select" class="block mb-1 font-medium text-sm text-gray-600">Template</label>
+                        <select id="template-select" class="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="modern">Modern</option>
+                            <option value="classic">Classic</option>
+                            <option value="technical">Technical</option>
+                            <option value="elegant">Elegant</option>
+                            <option value="minimalist">Minimalist</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="font-select" class="block mb-1 font-medium text-sm text-gray-600">Font</label>
+                        <select id="font-select" class="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="'Inter', sans-serif">Inter</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Lato', sans-serif">Lato</option>
+                            <option value="'Source Serif Pro', serif">Source Serif Pro</option>
+                            <option value="'Merriweather', serif">Merriweather</option>
+                            <option value="'Montserrat', sans-serif">Montserrat</option>
+                            <option value="'Arial', sans-serif">Arial</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="block mb-1 font-medium text-sm text-gray-600">Primary Color</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" id="primary-color" value="#2563eb" class="w-8 h-8 border border-gray-300 rounded cursor-pointer p-0.5" aria-label="Select primary color">
+                            <span class="text-sm text-gray-500" id="primary-color-value">#2563eb</span>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <label class="block mb-1 font-medium text-sm text-gray-600">Secondary Color</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" id="secondary-color" value="#4b5563" class="w-8 h-8 border border-gray-300 rounded cursor-pointer p-0.5" aria-label="Select secondary color">
+                            <span class="text-sm text-gray-500" id="secondary-color-value">#4b5563</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drag-drop-container mb-6">
+                    <label class="block mb-2 font-medium text-sm text-gray-600">Section Order</label>
+                    <div id="section-order" class="space-y-2">
+                        </div>
+                </div>
+
+                <div id="resume-form-sections" class="space-y-6">
+                    </div>
+
+            </div>
+
+            <div class="preview-panel md:w-1/2 lg:w-3/5 flex flex-col bg-white rounded-lg shadow-md p-5">
+                <div class="panel-header flex flex-col sm:flex-row justify-between items-center mb-5 pb-3 border-b border-gray-200 gap-3">
+                    <h2 class="text-xl font-semibold text-blue-600">Preview</h2>
+                    <div class="actions flex justify-center gap-3">
+                        <button id="download-pdf" class="btn btn-primary inline-flex items-center" aria-label="Download Resume as PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download PDF
+                        </button>
+                        <button id="reset-resume" class="btn btn-secondary inline-flex items-center" aria-label="Reset all resume data">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m-15.357-2a8.001 8.001 0 0115.357-2m0 0H15" />
+                             </svg>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-container flex-1 overflow-auto bg-gray-100 p-4 rounded-md">
+                    <div id="resume-preview" class="resume-container modern">
+                        <div class="empty-state text-center text-gray-500 p-8">Fill in the editor to see your resume preview</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="pdf-loading-overlay">
+        <div class="spinner"></div>
+        <span>Generating PDF...</span>
+    </div>
+
+    <div id="save-indicator">Saved.</div>
+
+    <template id="experience-item-template">
+        <div class="repeatable-item bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 relative space-y-3">
+            <button class="remove-btn absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold transition-colors duration-150" aria-label="Remove this experience item">×</button>
+            <div class="form-group">
+                <label class="form-label">Job Title</label>
+                <input type="text" data-field="jobTitle" class="form-control">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Company</label>
+                    <input type="text" data-field="company" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" data-field="location" class="form-control">
+                </div>
+            </div>
+             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="text" data-field="startDate" class="form-control" placeholder="e.g., Jan 2020">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="text" data-field="endDate" class="form-control" placeholder="e.g., Present or Dec 2022">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description (Use * or - for bullet points)</label>
+                <textarea data-field="description" class="form-control min-h-[80px]"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <template id="education-item-template">
+        <div class="repeatable-item bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 relative space-y-3">
+            <button class="remove-btn absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold transition-colors duration-150" aria-label="Remove this education item">×</button>
+            <div class="form-group">
+                <label class="form-label">Degree/Program</label>
+                <input type="text" data-field="degree" class="form-control">
+            </div>
+             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Institution</label>
+                    <input type="text" data-field="institution" class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" data-field="location" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Graduation/End Date</label>
+                <input type="text" data-field="graduationDate" class="form-control" placeholder="e.g., May 2019">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Details (Optional, use * or - for bullet points)</label>
+                <textarea data-field="details" class="form-control min-h-[60px]"></textarea>
+            </div>
+        </div>
+    </template>
+
+     <template id="project-item-template">
+        <div class="repeatable-item bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 relative space-y-3">
+            <button class="remove-btn absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold transition-colors duration-150" aria-label="Remove this project item">×</button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input type="text" data-field="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Link (URL)</label>
+                    <input type="url" data-field="link" class="form-control" placeholder="https://...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Technologies Used (comma-separated)</label>
+                <input type="text" data-field="technologies" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description (Use * or - for bullet points)</label>
+                <textarea data-field="description" class="form-control min-h-[80px]"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <template id="certification-item-template">
+        <div class="repeatable-item bg-gray-50 border border-gray-200 rounded-md p-4 mb-4 relative space-y-3">
+            <button class="remove-btn absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold transition-colors duration-150" aria-label="Remove this certification item">×</button>
+             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Certification Name</label>
+                    <input type="text" data-field="name" class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label class="form-label">Issuing Authority</label>
+                    <input type="text" data-field="authority" class="form-control">
+                </div>
+            </div>
+             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-group">
+                    <label class="form-label">Date Issued</label>
+                    <input type="text" data-field="date" class="form-control" placeholder="e.g., Jun 2021">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Verification Link (URL)</label>
+                    <input type="url" data-field="link" class="form-control" placeholder="https://...">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const app = new ResumeBuilder();
+            app.init();
+        });
+
+        class ResumeBuilder {
+            constructor() {
+                // Default state structure
+                this.state = {
+                    template: 'modern',
+                    fontFamily: "'Inter', sans-serif",
+                    primaryColor: '#2563eb',
+                    secondaryColor: '#4b5563',
+                    sectionOrder: ['personal', 'summary', 'experience', 'education', 'projects', 'skills', 'certifications'],
+                    personal: { name: '', title: '', phone: '', email: '', linkedin: '', github: '', website: '', location: '' },
+                    summary: '',
+                    experience: [],
+                    education: [],
+                    projects: [],
+                    skills: '',
+                    certifications: []
+                 };
+                // Section definitions
+                this.sectionDefinitions = {
+                    personal: { title: 'Personal Information', repeatable: false },
+                    summary: { title: 'Summary / Objective', repeatable: false },
+                    experience: { title: 'Work Experience', repeatable: true, templateId: 'experience-item-template' },
+                    education: { title: 'Education', repeatable: true, templateId: 'education-item-template' },
+                    projects: { title: 'Projects', repeatable: true, templateId: 'project-item-template' },
+                    skills: { title: 'Skills', repeatable: false },
+                    certifications: { title: 'Certifications', repeatable: true, templateId: 'certification-item-template' }
+                };
+                // SVG Icons Store
+                this.icons = {
+                     email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>`,
+                     phone: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2 3a1 1 0 011-1h1.586a1 1 0 01.948.684l1.7 4.251a1 1 0 01-.448 1.169l-2 1.5a1 1 0 101.218 1.562l2.25-1.688a1 1 0 011.169-.448l4.251 1.7a1 1 0 01.684.949V17a1 1 0 01-1 1H3a1 1 0 01-1-1V3zm14.414 1.414a1 1 0 010 1.414l-1.414 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM16 8a1 1 0 011 1v1a1 1 0 11-2 0V9a1 1 0 011-1z" clip-rule="evenodd" /></svg>`,
+                     location: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>`,
+                     linkedin: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>`,
+                     github: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>`,
+                     website: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 1 1 0 10-2 0v.083a1.5 1.5 0 01-1.5 1.5h-.364a6.012 6.012 0 01-2.64 1.561l-.004.002a6.035 6.035 0 01-2.18 1.01V12a1.5 1.5 0 01-1.5 1.5h-.168a1.5 1.5 0 01-1.5-1.5v-1.5a6.006 6.006 0 01-.002-1.473zM10 12.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd" /></svg>`,
+                     link: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0l-1.5-1.5a2 2 0 112.828-2.828l1.5 1.5a.5.5 0 00.707 0l1.5-1.5zm-5 5a2 2 0 012.828 0l1.5 1.5a.5.5 0 00.707 0l1.5-1.5a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0l-1.5-1.5a2 2 0 010-2.828z" clip-rule="evenodd" /></svg>`,
+                };
+                // DOM element references
+                this.dom = {
+                    editorPanel: document.querySelector('.editor-panel'),
+                    previewPanel: document.querySelector('.preview-panel'),
+                    resumePreview: document.getElementById('resume-preview'),
+                    sectionOrderContainer: document.getElementById('section-order'),
+                    formSectionsContainer: document.getElementById('resume-form-sections'),
+                    templateSelect: document.getElementById('template-select'),
+                    fontSelect: document.getElementById('font-select'),
+                    primaryColorPicker: document.getElementById('primary-color'),
+                    secondaryColorPicker: document.getElementById('secondary-color'),
+                    primaryColorValue: document.getElementById('primary-color-value'),
+                    secondaryColorValue: document.getElementById('secondary-color-value'),
+                    downloadPdfButton: document.getElementById('download-pdf'),
+                    resetButton: document.getElementById('reset-resume'),
+                    pdfLoadingOverlay: document.getElementById('pdf-loading-overlay'),
+                    saveIndicator: document.getElementById('save-indicator')
+                };
+                // Debounce timer
+                this.saveIndicatorTimeout = null;
+            }
+
+            // Initialize the application
+            init() {
+                this.loadFromLocalStorage();
+                this.applyColorsToRoot();
+                this.renderEditorUI(); // Renders controls AND form sections
+                this.initEventListeners(); // Sets up global listeners
+                this.initDragAndDrop(); // Sets up sortable
+                this.updatePreview(); // Initial preview render based on loaded/default state
+                console.log('Resume Builder Initialized.');
+            }
+
+            // Load state from localStorage
+            loadFromLocalStorage() {
+                const savedState = localStorage.getItem('resumeBuilderState_v3'); // Use versioned key
+                if (savedState) {
+                    try {
+                        const parsedState = JSON.parse(savedState);
+                        // Deep merge saved state with default, ensuring all keys and nested objects exist
+                        this.state = {
+                            ...this.state, // Start with default structure
+                            ...parsedState, // Overwrite with parsed data
+                            // Ensure nested objects exist and merge them, keeping defaults if missing in parsedState
+                            personal: { ...this.state.personal, ...(parsedState.personal || {}) },
+                            // Ensure arrays are actually arrays, fallback to empty array
+                            experience: Array.isArray(parsedState.experience) ? parsedState.experience : [],
+                            education: Array.isArray(parsedState.education) ? parsedState.education : [],
+                            projects: Array.isArray(parsedState.projects) ? parsedState.projects : [],
+                            certifications: Array.isArray(parsedState.certifications) ? parsedState.certifications : [],
+                            // Ensure summary and skills are strings, fallback to empty string
+                            summary: typeof parsedState.summary === 'string' ? parsedState.summary : '',
+                            skills: typeof parsedState.skills === 'string' ? parsedState.skills : '',
+                            // Ensure sectionOrder is an array, fallback to default order
+                            sectionOrder: Array.isArray(parsedState.sectionOrder) ? parsedState.sectionOrder : this.state.sectionOrder,
+                        };
+                        console.log('Loaded state from localStorage (v3).');
+                    } catch (e) {
+                        console.error('Error parsing saved state:', e);
+                        localStorage.removeItem('resumeBuilderState_v3'); // Clear potentially corrupted storage
+                        // Keep the default state initialized in the constructor
+                    }
+                }
+            }
+
+            // Save state to localStorage and show indicator
+            saveToLocalStorage() {
+                try {
+                    localStorage.setItem('resumeBuilderState_v3', JSON.stringify(this.state));
+                    this.showSaveIndicator(); // Show feedback
+                } catch (e) {
+                    console.error('Error saving state to localStorage:', e);
+                    alert('Could not save changes. Local storage might be full or disabled.');
+                }
+            }
+
+            // Show the "Saved" indicator briefly
+            showSaveIndicator() {
+                clearTimeout(this.saveIndicatorTimeout);
+                this.dom.saveIndicator.classList.add('visible');
+                this.saveIndicatorTimeout = setTimeout(() => {
+                    this.dom.saveIndicator.classList.remove('visible');
+                }, 1500); // Hide after 1.5 seconds
+            }
+
+            // Apply selected colors and font to CSS variables
+            applyColorsToRoot() {
+                document.documentElement.style.setProperty('--primary-color', this.state.primaryColor);
+                document.documentElement.style.setProperty('--secondary-color', this.state.secondaryColor);
+                document.documentElement.style.setProperty('--font-family', this.state.fontFamily);
+            }
+
+             // Render the entire editor panel UI based on current state
+            renderEditorUI() {
+                // Update control values
+                this.dom.templateSelect.value = this.state.template;
+                this.dom.fontSelect.value = this.state.fontFamily;
+                this.dom.primaryColorPicker.value = this.state.primaryColor;
+                this.dom.secondaryColorPicker.value = this.state.secondaryColor;
+                this.dom.primaryColorValue.textContent = this.state.primaryColor;
+                this.dom.secondaryColorValue.textContent = this.state.secondaryColor;
+
+                // Render section order controls
+                this.renderSectionOrderControls();
+
+                // Render form sections in the correct order
+                this.renderFormSections();
+            }
+
+            // Render the draggable section order controls
+            renderSectionOrderControls() {
+                 this.dom.sectionOrderContainer.innerHTML = ''; // Clear existing
+                this.state.sectionOrder.forEach(sectionKey => {
+                    const sectionDef = this.sectionDefinitions[sectionKey];
+                    if (!sectionDef) return; // Skip if definition not found
+
+                    const item = document.createElement('div');
+                    item.className = 'drag-drop-item bg-gray-50 border border-gray-200 rounded-md p-2 flex items-center cursor-pointer hover:bg-gray-100';
+                    item.setAttribute('data-section', sectionKey);
+                    item.innerHTML = `
+                        <span class="drag-handle text-gray-400 hover:text-gray-600" aria-label="Drag to reorder ${sectionDef.title} section">⠿</span>
+                        <span class="section-title text-sm font-medium text-gray-700 flex-grow">${sectionDef.title}</span>
+                    `;
+                    this.dom.sectionOrderContainer.appendChild(item);
+                });
+            }
+
+            // Render all form sections in the order defined by state.sectionOrder
+            renderFormSections() {
+                this.dom.formSectionsContainer.innerHTML = ''; // Clear existing sections
+                this.state.sectionOrder.forEach(sectionKey => {
+                    const sectionElement = this.createFormSectionElement(sectionKey);
+                    if (sectionElement) {
+                        this.dom.formSectionsContainer.appendChild(sectionElement);
+                    }
+                });
+                 // Note: Event listeners using delegation are attached ONCE in initEventListeners().
+                 // No need to re-attach them here.
+            }
+
+            // Create the HTML element for a specific form section
+            createFormSectionElement(sectionKey) {
+                 const sectionDef = this.sectionDefinitions[sectionKey];
+                if (!sectionDef) return null; // Should not happen if state is clean
+
+                const sectionContainer = document.createElement('div');
+                sectionContainer.id = `${sectionKey}-section`;
+                sectionContainer.className = 'form-section mb-6';
+
+                // Section Header
+                const header = document.createElement('h3');
+                header.className = 'section-header flex items-center justify-between bg-gray-100 p-3 rounded-md mb-4 border-b-2 border-blue-200';
+                header.innerHTML = `<span class="section-title font-semibold text-gray-700">${sectionDef.title}</span>`;
+
+                // Add button for repeatable sections
+                if (sectionDef.repeatable) {
+                    const addButton = document.createElement('button');
+                    addButton.id = `add-${sectionKey}`;
+                    addButton.className = 'add-btn'; // Base class, styled later
+                    addButton.setAttribute('aria-label', `Add ${sectionDef.title} item`);
+                    addButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg> Add`;
+                    this.applyTailwindClasses(addButton, 'bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-2 rounded-md inline-flex items-center transition-colors duration-150');
+                    header.appendChild(addButton);
+                }
+                sectionContainer.appendChild(header);
+
+                // Section Content (Inputs or Items Container)
+                if (sectionDef.repeatable) {
+                    const itemsContainer = document.createElement('div');
+                    itemsContainer.id = `${sectionKey}-items`;
+                    itemsContainer.className = 'space-y-4'; // Space between items
+                    sectionContainer.appendChild(itemsContainer);
+                    // Render existing items into the container
+                    this.renderRepeatableItems(sectionKey, itemsContainer);
+                } else {
+                    // Create and append inputs for non-repeatable sections
+                    sectionContainer.appendChild(this.createSingleSectionInputs(sectionKey));
+                }
+
+                return sectionContainer;
+             }
+
+            // Create input fields for non-repeatable sections
+            createSingleSectionInputs(sectionKey) {
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'space-y-3'; // Space between inputs
+
+                switch (sectionKey) {
+                    case 'personal':
+                        // Loop through fields defined in the default state for personal info
+                        Object.keys(this.state.personal).forEach(field => {
+                            const isRequired = (field === 'name'); // Mark name as required
+                            const type = (field === 'email') ? 'email' : (field.includes('URL') || ['linkedin', 'github', 'website'].includes(field)) ? 'url' : 'text';
+                            const labelText = field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1'); // Format label nicely
+                            const value = this.state.personal[field] || ''; // Get current value or empty string
+                            // Create label and input HTML
+                            contentDiv.innerHTML += `
+                                <div class="form-group">
+                                    <label for="${field}" class="form-label ${isRequired ? 'required' : ''}">${labelText}</label>
+                                    <input type="${type}" id="${field}" data-section="personal" data-field="${field}" class="form-control" value="${this.escapeHtml(value)}" ${isRequired ? 'required' : ''}>
+                                </div>`;
+                        });
+                        break;
+                    case 'summary':
+                        // Create textarea for summary
+                        contentDiv.innerHTML = `
+                            <div class="form-group">
+                                <label for="summary" class="form-label">Summary / Objective (Use * or - for bullet points)</label>
+                                <textarea id="summary" data-section="summary" class="form-control min-h-[100px]">${this.escapeHtml(this.state.summary)}</textarea>
+                            </div>`;
+                        break;
+                    case 'skills':
+                         // Create textarea for skills
+                         contentDiv.innerHTML = `
+                            <div class="form-group">
+                                <label for="skills" class="form-label">Skills (Category: Skill1, Skill2... or just Skill1, Skill2...)</label>
+                                <textarea id="skills" data-section="skills" class="form-control min-h-[100px]" placeholder="e.g., \nLanguages: JavaScript, Python\nFrameworks: React, Node.js\nOr just: \nJavaScript, Python, React, Node.js">${this.escapeHtml(this.state.skills)}</textarea>
+                            </div>`;
+                        break;
+                }
+                 // Apply common Tailwind classes after setting innerHTML
+                contentDiv.querySelectorAll('.form-label').forEach(el => this.applyTailwindClasses(el, 'block mb-1 font-medium text-sm text-gray-600'));
+                contentDiv.querySelectorAll('.form-control').forEach(el => this.applyTailwindClasses(el, 'w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y'));
+
+                return contentDiv;
+            }
+
+             // Render items for a repeatable section
+            renderRepeatableItems(sectionKey, container) {
+                container.innerHTML = ''; // Clear existing items
+                const items = this.state[sectionKey] || [];
+                const template = document.getElementById(this.sectionDefinitions[sectionKey].templateId);
+
+                if (!template) {
+                    console.error(`Template not found for section: ${sectionKey}`);
+                    return; // Exit if template doesn't exist
+                }
+
+                items.forEach((itemData, index) => {
+                    // Clone the template content
+                    const itemElement = template.content.cloneNode(true).firstElementChild;
+                    itemElement.setAttribute('data-index', index); // Set index for removal logic
+
+                    // Populate inputs with data from state
+                    itemElement.querySelectorAll('[data-field]').forEach(input => {
+                        const field = input.getAttribute('data-field');
+                        input.value = itemData[field] || ''; // Set value, default to empty string if undefined/null
+                        input.id = `${sectionKey}-${index}-${field}`; // Unique ID for label association
+                        // Add data attributes needed for event delegation
+                        input.setAttribute('data-section', sectionKey);
+                        input.setAttribute('data-index', index);
+                        // Ensure labels point to correct inputs
+                        const label = itemElement.querySelector(`label[for="${field}"]`); // Attempt to find label using default convention
+                        if (label) { // Check if a label was found using the simple selector
+                             // Correct the 'for' attribute if needed, useful if label structure is consistent
+                             const correspondingLabel = itemElement.querySelector(`label[data-field-target="${field}"]`); // Look for a more specific label if needed
+                             if(correspondingLabel) {
+                                correspondingLabel.setAttribute('for', input.id);
+                             } else {
+                                // Fallback for simple labels assuming they are direct predecessors or siblings
+                                const simpleLabel = input.previousElementSibling;
+                                if (simpleLabel && simpleLabel.tagName === 'LABEL') {
+                                    simpleLabel.setAttribute('for', input.id);
+                                }
+                             }
+                        }
+                    });
+
+                    // Set up remove button data attributes
+                    const removeBtn = itemElement.querySelector('.remove-btn');
+                    if (removeBtn) {
+                        removeBtn.setAttribute('data-section', sectionKey);
+                        removeBtn.setAttribute('data-index', index);
+                    }
+
+                    // Apply Tailwind classes to elements within the cloned template
+                    itemElement.querySelectorAll('.form-label').forEach(el => this.applyTailwindClasses(el, 'block mb-1 font-medium text-sm text-gray-600'));
+                    itemElement.querySelectorAll('.form-control').forEach(el => this.applyTailwindClasses(el, 'w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y'));
+
+                    container.appendChild(itemElement); // Add the populated item to the container
+                });
+            }
+
+            // Initialize all event listeners
+            initEventListeners() {
+                // Style/Template controls
+                this.dom.templateSelect.addEventListener('change', (e) => this.handleControlChange('template', e.target.value));
+                this.dom.fontSelect.addEventListener('change', (e) => this.handleControlChange('fontFamily', e.target.value));
+                this.dom.primaryColorPicker.addEventListener('input', (e) => this.handleColorChange('primaryColor', e.target.value));
+                this.dom.secondaryColorPicker.addEventListener('input', (e) => this.handleColorChange('secondaryColor', e.target.value));
+
+                // Action buttons
+                this.dom.downloadPdfButton.addEventListener('click', () => this.generatePDF());
+                this.dom.resetButton.addEventListener('click', () => this.handleReset());
+
+                // Attach listeners for dynamically created form elements using event delegation
+                this.attachFormEventListeners();
+            }
+
+            // Attach event listeners to dynamically created form elements using delegation
+            attachFormEventListeners() {
+                 // Input handling (using event delegation on the parent container)
+                this.dom.formSectionsContainer.addEventListener('input', (e) => {
+                    // Check if the event target is a form control within our sections
+                    if (e.target.matches('.form-control')) {
+                        const section = e.target.dataset.section;
+                        const field = e.target.dataset.field; // May be undefined
+                        const index = e.target.dataset.index; // May be undefined
+
+                        if (!section) return; // Exit if the element doesn't have a section identifier
+
+                        let stateUpdated = false; // Flag to check if we need to update/save
+
+                        if (index !== undefined && field) {
+                            // --- Handle repeatable item field change ---
+                            const itemIndex = parseInt(index, 10);
+                            // Ensure the state structure is valid and value actually changed
+                            if (this.state[section]?.[itemIndex] !== undefined && this.state[section][itemIndex][field] !== e.target.value) {
+                                this.state[section][itemIndex][field] = e.target.value;
+                                stateUpdated = true;
+                            }
+                        } else if (section === 'personal' && field) {
+                            // --- Handle personal info field change ---
+                            if (this.state.personal[field] !== e.target.value) {
+                               this.state.personal[field] = e.target.value;
+                               stateUpdated = true;
+                            }
+                        } else if (index === undefined && !field && (section === 'summary' || section === 'skills')) {
+                            // --- Handle direct section update (summary/skills) ---
+                            // These sections store the value directly in this.state[section]
+                            // They have `data-section` but no `data-field` or `data-index`.
+                            if (this.state[section] !== e.target.value) {
+                                this.state[section] = e.target.value;
+                                stateUpdated = true;
+                            }
+                        }
+                        // Add other cases here if needed for future section types
+
+                        // Update preview (debounced) and save state ONLY if something actually changed
+                        if (stateUpdated) {
+                            this.updatePreviewDebounced();
+                            this.saveToLocalStorage();
+                        }
+                    }
+                });
+
+                // Button click handling (using event delegation for Add/Remove)
+                this.dom.formSectionsContainer.addEventListener('click', (e) => {
+                    const addButton = e.target.closest('.add-btn');
+                    const removeButton = e.target.closest('.remove-btn');
+
+                    if (addButton) { // Handle Add item click
+                        const sectionKey = addButton.id.replace('add-', '');
+                        this.addItem(sectionKey);
+                    } else if (removeButton) { // Handle Remove item click
+                         const sectionKey = removeButton.dataset.section;
+                         const index = parseInt(removeButton.dataset.index, 10);
+                         this.removeItem(sectionKey, index);
+                    }
+                });
+            }
+
+            // Handle changes in template, font controls
+            handleControlChange(key, value) {
+                this.state[key] = value;
+                 if (key === 'fontFamily') {
+                    this.applyColorsToRoot(); // Re-apply font if changed
+                }
+                this.updatePreview(); // Update preview immediately
+                this.saveToLocalStorage(); // Save the change
+            }
+
+            // Handle color picker changes
+            handleColorChange(key, value) {
+                this.state[key] = value;
+                // Update the displayed hex value
+                if (key === 'primaryColor') this.dom.primaryColorValue.textContent = value;
+                if (key === 'secondaryColor') this.dom.secondaryColorValue.textContent = value;
+                this.applyColorsToRoot(); // Apply new color to CSS variable
+                this.updatePreview(); // Update preview
+                this.saveToLocalStorage(); // Save change
+            }
+
+            // Handle reset button click
+            handleReset() {
+                if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
+                    this.resetResume();
+                }
+            }
+
+            // Initialize SortableJS for section ordering
+            initDragAndDrop() {
+                 if (!this.dom.sectionOrderContainer) return; // Guard against null element
+                new Sortable(this.dom.sectionOrderContainer, {
+                    animation: 150, // Animation speed
+                    handle: '.drag-handle', // Specify drag handle element
+                    ghostClass: 'sortable-ghost', // Class for the visual placeholder
+                    onEnd: (evt) => { // Callback when dragging ends
+                        // Get the new order from the DOM elements' data attributes
+                        const newOrder = Array.from(evt.to.children)
+                                            .map(el => el.getAttribute('data-section'));
+                        // Update state with the new order
+                        this.state.sectionOrder = newOrder;
+                        // Re-render the form sections in the editor to match the new order
+                        this.renderFormSections(); // This will re-render inputs in the new order
+                        // Update the preview to reflect the new section order
+                        this.updatePreview();
+                        // Save the new order to local storage
+                        this.saveToLocalStorage();
+                    }
+                });
+            }
+
+            // Add a new item to a repeatable section
+            addItem(sectionKey) {
+                if (!this.sectionDefinitions[sectionKey]?.repeatable) return; // Only for repeatable sections
+
+                const newItem = {}; // Start with an empty object (template provides structure)
+                if (!this.state[sectionKey]) { this.state[sectionKey] = []; } // Ensure the array exists in state
+                this.state[sectionKey].push(newItem); // Add the new item to the state array
+
+                // Re-render only the items for that specific section for efficiency
+                const itemsContainer = this.dom.formSectionsContainer.querySelector(`#${sectionKey}-items`);
+                if (itemsContainer) {
+                    this.renderRepeatableItems(sectionKey, itemsContainer);
+                } else {
+                     // Fallback if container somehow isn't found (shouldn't happen)
+                     console.error(`Container not found for ${sectionKey}-items`);
+                     this.renderFormSections(); // Re-render all forms as fallback
+                }
+
+                this.updatePreview(); // Update the preview
+                this.saveToLocalStorage(); // Save the change
+            }
+
+            // Remove an item from a repeatable section
+            removeItem(sectionKey, index) {
+                 if (!this.sectionDefinitions[sectionKey]?.repeatable || !this.state[sectionKey]) return; // Guards
+
+                // Check if index is valid
+                if (index >= 0 && index < this.state[sectionKey].length) {
+                    this.state[sectionKey].splice(index, 1); // Remove item from state array
+
+                    // Re-render items for that section
+                    const itemsContainer = this.dom.formSectionsContainer.querySelector(`#${sectionKey}-items`);
+                     if (itemsContainer) {
+                        this.renderRepeatableItems(sectionKey, itemsContainer);
+                    } else {
+                         console.error(`Container not found for ${sectionKey}-items`);
+                         this.renderFormSections(); // Fallback
+                    }
+
+                    this.updatePreview(); // Update preview
+                    this.saveToLocalStorage(); // Save change
+                }
+            }
+
+            // Debounce function to limit frequency of preview updates on input
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func.apply(this, args); // Execute the function
+                    };
+                    clearTimeout(timeout); // Reset timer
+                    timeout = setTimeout(later, wait); // Set new timer
+                };
+            }
+
+            // Debounced version of updatePreview, used for input events
+            updatePreviewDebounced = this.debounce(this.updatePreview, 300); // 300ms delay
+
+
+            // Update the resume preview based on the current state
+            updatePreview() {
+                const preview = this.dom.resumePreview;
+                preview.className = `resume-container ${this.state.template}`; // Apply template class
+
+                let mainContentHTML = '';
+                let sidebarContentHTML = '';
+                // Define which sections go into the sidebar ONLY for the 'technical' template
+                const sidebarSectionsTechnical = ['skills', 'certifications', 'education'];
+
+                this.state.sectionOrder.forEach(sectionKey => {
+                    if (sectionKey === 'personal') return; // Header handles personal info
+
+                    const sectionDef = this.sectionDefinitions[sectionKey];
+                    const sectionData = this.state[sectionKey];
+                    // Get title, fallback to capitalized key if definition missing
+                    const sectionTitle = sectionDef ? sectionDef.title : sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
+                    let sectionContentHTML = ''; // Store the content part of the section
+
+                    // Generate content based on section type
+                    switch (sectionKey) {
+                        case 'summary':
+                            // Use String() to handle potential non-string values gracefully before trim()
+                            if (sectionData && String(sectionData).trim()) {
+                                sectionContentHTML = `<div class="resume-item-description">${this.formatTextWithLists(sectionData)}</div>`;
+                            } else {
+                                sectionContentHTML = `<div class="placeholder-text">[Not Provided]</div>`; // Placeholder if empty
+                            }
+                            break;
+                        case 'experience':
+                        case 'education':
+                        case 'projects':
+                        case 'certifications':
+                             // Check if it's an array AND has items
+                            if (Array.isArray(sectionData) && sectionData.length > 0) {
+                                sectionContentHTML = sectionData.map(item => this.generateItemHTML(sectionKey, item)).join('');
+                            } else if (sectionDef?.repeatable) {
+                                // Only show placeholder for repeatable sections that are empty
+                                sectionContentHTML = `<div class="placeholder-text">[No items added]</div>`;
+                            }
+                            // If not repeatable and no data, sectionContentHTML remains empty
+                            break;
+                        case 'skills':
+                            const skillsFormatted = this.formatSkills(sectionData);
+                             // Show skills content OR placeholder if formatted result is empty
+                            sectionContentHTML = skillsFormatted || `<div class="placeholder-text">[No skills listed]</div>`;
+                            break;
+                        default:
+                            // Handle potential future custom sections (display as escaped string if non-empty)
+                            if (sectionData && String(sectionData).trim()) {
+                                sectionContentHTML = `<div>${this.escapeHtml(String(sectionData))}</div>`;
+                            } else {
+                                sectionContentHTML = `<div class="placeholder-text">[Not Provided]</div>`;
+                            }
+                    }
+
+                    // Construct the full section HTML (Title + Content) ONLY if there's content or it's a section that should always show (like summary/skills)
+                    let sectionHTML = '';
+                    // Condition: Always show non-repeatable sections (summary, skills)
+                    // OR show repeatable sections only if they have content (sectionContentHTML contains more than just the placeholder)
+                    const alwaysShow = sectionKey === 'summary' || sectionKey === 'skills';
+                    const hasContent = sectionContentHTML && !sectionContentHTML.includes('placeholder-text');
+
+                    if (alwaysShow || hasContent) {
+                         sectionHTML = `
+                            <div class="resume-section">
+                                <h3 class="resume-section-title">${sectionTitle}</h3>
+                                ${sectionContentHTML}
+                            </div>`;
+                     }
+
+
+                    // Assign to main or sidebar based on template
+                    if (this.state.template === 'technical' && sidebarSectionsTechnical.includes(sectionKey)) {
+                        sidebarContentHTML += sectionHTML; // Add section HTML (even if empty string)
+                    } else {
+                        mainContentHTML += sectionHTML; // Add section HTML (even if empty string)
+                    }
+                });
+
+                // Construct final HTML including the header
+                const p = this.state.personal;
+                let headerHTML = `
+                    <div class="resume-header">
+                        <h1 class="resume-name">${this.escapeHtml(p.name) || '<span class="placeholder-text">Your Name</span>'}</h1>
+                        <h2 class="resume-title">${this.escapeHtml(p.title) || '<span class="placeholder-text">Your Title</span>'}</h2>
+                        <div class="resume-contact">
+                            ${p.email ? `<span>${this.getIconSVG('email')}${this.escapeHtml(p.email)}</span>` : ''}
+                            ${p.phone ? `<span>${this.getIconSVG('phone')}${this.escapeHtml(p.phone)}</span>` : ''}
+                            ${p.location ? `<span>${this.getIconSVG('location')}${this.escapeHtml(p.location)}</span>` : ''}
+                            ${p.linkedin ? `<a href="${this.escapeHtml(p.linkedin)}" target="_blank" rel="noopener noreferrer">${this.getIconSVG('linkedin')}${this.formatDisplayURL(p.linkedin)}</a>` : ''}
+                            ${p.github ? `<a href="${this.escapeHtml(p.github)}" target="_blank" rel="noopener noreferrer">${this.getIconSVG('github')}${this.formatDisplayURL(p.github)}</a>` : ''}
+                            ${p.website ? `<a href="${this.escapeHtml(p.website)}" target="_blank" rel="noopener noreferrer">${this.getIconSVG('website')}${this.formatDisplayURL(p.website)}</a>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                let bodyHTML = '';
+                // Append main/sidebar content based on template
+                if (this.state.template === 'technical') {
+                    // Only add main/sidebar divs if they contain content
+                    bodyHTML += mainContentHTML ? `<div class="resume-main">${mainContentHTML}</div>` : '';
+                    bodyHTML += sidebarContentHTML ? `<div class="resume-sidebar">${sidebarContentHTML}</div>` : '';
+                } else {
+                    // For non-technical templates, append all generated sections sequentially
+                    bodyHTML += mainContentHTML;
+                    bodyHTML += sidebarContentHTML; // Append any sections that might have been assigned to sidebar (should be none in non-technical)
+                }
+
+                // Check if there's *any* actual content (name, title, or any section body)
+                 const hasAnyContent = !!p.name || !!p.title || !!p.email || !!p.phone || !!p.location || !!p.linkedin || !!p.github || !!p.website ||
+                                      this.state.sectionOrder.some(key => {
+                                          if (key === 'personal') return false; // Already checked above
+                                          const data = this.state[key];
+                                          // Check if data is a non-empty array OR a non-empty, non-whitespace string
+                                          return Array.isArray(data) ? data.length > 0 : (!!data && !!String(data).trim());
+                                      });
+
+
+                // Display either the generated resume or the empty state message
+                if (!hasAnyContent) {
+                    preview.innerHTML = '<div class="empty-state text-center text-gray-500 p-8">Fill in the editor to see your resume preview</div>';
+                } else {
+                    preview.innerHTML = headerHTML + bodyHTML; // Combine header and body
+                }
+            }
+
+
+            // Generate HTML for a single item in a repeatable section
+            generateItemHTML(sectionKey, item) {
+                // Ensure item is an object, default to empty object if not (prevents errors if state gets corrupted)
+                const safeItem = typeof item === 'object' && item !== null ? item : {};
+
+                let title = '', subtitle = '', date = '', location = '', description = '', link = '', technologies = '', authority = '';
+
+                // Helper function to create links with icons, handling empty URLs
+                const createLink = (url, text) => {
+                    if (!url || !String(url).trim()) return ''; // Check if url is empty/whitespace after converting to string
+                    const escapedUrl = this.escapeHtml(url); // Use the SAFE escapeHtml
+                    let validUrl = escapedUrl;
+                     // Attempt to add protocol if missing for valid href
+                    if (!validUrl.startsWith('http://') && !validUrl.startsWith('https://') && validUrl.includes('.')) { // Basic check for protocol absence and potential domain
+                        validUrl = 'https://' + validUrl;
+                    }
+                    const displayUrl = this.formatDisplayURL(escapedUrl); // Display original formatting
+                    const linkText = text || displayUrl; // Ensure link text exists, otherwise default to displayUrl
+                    // Ensure linkText is also escaped
+                    return `<a href="${validUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-blue-600 hover:underline text-sm">${this.getIconSVG('link')}${this.escapeHtml(linkText)}</a>`;
+                };
+
+                // Populate variables based on section type, using safeItem and the SAFE escapeHtml
+                switch (sectionKey) {
+                    case 'experience':
+                        title = this.escapeHtml(safeItem.jobTitle);
+                        subtitle = this.escapeHtml(safeItem.company);
+                        // Date assembly is safe because escapeHtml now returns "" for null/undefined
+                        date = `${this.escapeHtml(safeItem.startDate)} ${safeItem.endDate ? '- ' + this.escapeHtml(safeItem.endDate) : ''}`.trim();
+                        location = this.escapeHtml(safeItem.location);
+                        description = this.formatTextWithLists(safeItem.description); // Formatting handles escaping internally
+                        break;
+                    case 'education':
+                        title = this.escapeHtml(safeItem.degree);
+                        subtitle = this.escapeHtml(safeItem.institution);
+                        date = this.escapeHtml(safeItem.graduationDate); // Safe now
+                        location = this.escapeHtml(safeItem.location);
+                        description = this.formatTextWithLists(safeItem.details);
+                        break;
+                    case 'projects':
+                        title = this.escapeHtml(safeItem.name);
+                        link = createLink(safeItem.link);
+                        technologies = this.escapeHtml(safeItem.technologies); // Safe now
+                        description = this.formatTextWithLists(safeItem.description);
+                        // Append technologies safely (technologies is now guaranteed string)
+                        title += technologies ? ` <span class="text-xs font-normal italic text-gray-500">(${technologies})</span>` : '';
+                        subtitle = link; // Put link as subtitle for projects
+                        break;
+                    case 'certifications':
+                        title = this.escapeHtml(safeItem.name);
+                        authority = this.escapeHtml(safeItem.authority); // Safe now
+                        date = this.escapeHtml(safeItem.date); // Safe now
+                        link = createLink(safeItem.link, 'View Credential');
+                        subtitle = authority; // Safe assignment
+                        description = link;
+                        break;
+                }
+
+                 // Clean up date string (remove dangling hyphens or empty dates)
+                 // date is now guaranteed to be a string due to escapeHtml changes
+                 date = date.replace(/^- | -$/, '').trim();
+                 if (date === '-') date = ''; // If only hyphen remains, clear it
+
+                // Construct item HTML, ensuring placeholders or empty strings for missing data
+                 const titleHTML = title ? `<span class="resume-item-title">${title}</span>` : '';
+                 // Subtitle needs careful handling for projects vs others
+                 let subtitleHTML = '';
+                 if (subtitle && sectionKey === 'projects') {
+                     subtitleHTML = `<span class="resume-item-subtitle">${subtitle}</span>`; // Project link doesn't need comma
+                 } else if (subtitle) {
+                      subtitleHTML = `<span class="resume-item-subtitle">, ${subtitle}</span>`; // Others get comma
+                 }
+
+                 const dateHTML = date ? `<div class="resume-item-date">${date}</div>` : '';
+                 const locationHTML = location ? `<div class="resume-item-subtitle">${location}</div>` : ''; // Location doesn't need comma separation from header usually
+                 // Description logic: use specific classes/structure per section if needed
+                 let descriptionHTML = '';
+                 if (description && sectionKey !== 'certifications') {
+                    descriptionHTML = `<div class="resume-item-description mt-1">${description}</div>`;
+                 } else if (description && sectionKey === 'certifications') {
+                     descriptionHTML = `<div class="mt-1">${description}</div>`; // Cert description is just the link
+                 }
+
+                 // Final assembly
+                return `
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <div>
+                                ${titleHTML}
+                                ${subtitleHTML}
+                            </div>
+                            ${dateHTML}
+                        </div>
+                        ${locationHTML}
+                        ${descriptionHTML}
+                    </div>`;
+            }
+
+
+            // Format skills text into categories or a single list
+            formatSkills(skillsText) {
+                 if (!skillsText || typeof skillsText !== 'string' || !skillsText.trim()) return ''; // Return empty if no valid text
+
+                 const lines = skillsText.split('\n').map(line => line.trim()).filter(line => line); // Split lines, trim, remove empty
+                 // Check if *any* line looks like a category (Category: Skill) - be lenient
+                 const hasPotentialCategories = lines.some(line => line.includes(':'));
+
+                 let outputHTML = '';
+
+                 if (hasPotentialCategories) {
+                     // Process lines, attempting to parse categories
+                     lines.forEach(line => {
+                         const parts = line.split(':');
+                         // Check for valid category format (at least one ':' and some text after it)
+                         if (parts.length >= 2 && parts[0].trim() && parts.slice(1).join(':').trim()) {
+                             const category = this.escapeHtml(parts[0].trim());
+                             const skillsString = parts.slice(1).join(':').trim(); // Join rest in case skill has ':'
+                             const skills = skillsString.split(/[,;]/) // Split by comma or semicolon
+                                              .map(skill => skill.trim())
+                                              .filter(skill => skill); // Get skills, trim, remove empty
+
+                             if (skills.length > 0) {
+                                // Return HTML for the category and its skills
+                                outputHTML += `
+                                     <div class="skill-category">
+                                         <div class="skill-category-title">${category}</div>
+                                         <div class="resume-skills">
+                                             ${skills.map(skill => `<span class="skill-tag">${this.escapeHtml(skill)}</span>`).join('')}
+                                         </div>
+                                     </div>
+                                 `;
+                             }
+                         } else {
+                             // If a line doesn't match category format, treat it as a list of single skills
+                             const singleSkills = line.split(/[,;]/).map(skill => skill.trim()).filter(skill => skill);
+                              if(singleSkills.length > 0) {
+                                // Render as simple skill tags if it contains skills
+                                // Wrap in resume-skills for consistent spacing if there's no category title
+                                outputHTML += `<div class="resume-skills mt-2 first:mt-0">${singleSkills.map(skill => `<span class="skill-tag">${this.escapeHtml(skill)}</span>`).join('')}</div>`;
+                              }
+                         }
+                     });
+                 } else {
+                     // No categories found, treat entire input as a single list
+                     const allSkills = skillsText.split(/[,\n;]/).map(skill => skill.trim()).filter(skill => skill); // Split by comma, newline, or semicolon
+                     if (allSkills.length > 0) {
+                        // Return HTML for the list of skills
+                        outputHTML = `
+                             <div class="resume-skills">
+                                 ${allSkills.map(skill => `<span class="skill-tag">${this.escapeHtml(skill)}</span>`).join('')}
+                             </div>
+                         `;
+                     }
+                 }
+                 return outputHTML; // Return the accumulated HTML
+            }
+
+            // Generate PDF using html2canvas and jsPDF
+            async generatePDF() {
+                 this.dom.pdfLoadingOverlay.classList.add('active'); // Show loading indicator
+                // Short delay to allow the UI to update and show the overlay
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                const resumeElement = this.dom.resumePreview; // Target element for capture
+                const originalPadding = resumeElement.style.padding; // Store original padding
+                const originalWidth = resumeElement.style.width;
+                const originalHeight = resumeElement.style.height;
+                const originalOverflow = document.body.style.overflow; // Store body overflow
+
+                try {
+                    const { jsPDF } = window.jspdf; // Get jsPDF constructor
+
+                    // Temporarily adjust styles for capture
+                    resumeElement.style.padding = '0'; // Remove padding for full capture
+                    resumeElement.style.width = '210mm'; // Ensure fixed A4 width
+                    resumeElement.style.height = 'auto'; // Allow height to adjust to content
+                    document.body.style.overflow = 'hidden'; // Prevent scrollbars affecting capture
+
+                    // --- Capture the resume preview element as a canvas ---
+                    const canvas = await html2canvas(resumeElement, {
+                        scale: 2.5, // Increase scale for better resolution
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true,
+                        // Ensure capture starts from the top-left
+                        scrollX: -window.scrollX, // Account for page scroll
+                        scrollY: -window.scrollY,
+                        windowWidth: document.documentElement.offsetWidth,
+                        windowHeight: document.documentElement.offsetHeight,
+                    });
+
+                    // Restore original styles and body overflow AFTER capture
+                    resumeElement.style.padding = originalPadding;
+                    resumeElement.style.width = originalWidth;
+                    resumeElement.style.height = originalHeight;
+                    document.body.style.overflow = originalOverflow;
+
+
+                    // --- Create PDF Document ---
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+                    const imgProps = pdf.getImageProperties(imgData);
+                    // Calculate image dimensions to fit PDF width, maintain aspect ratio
+                    const imgWidth = pdfWidth; // Fit to page width
+                    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+                    // --- Add Image to PDF (handling multiple pages if necessary) ---
+                    let heightLeft = imgHeight;
+                    let position = 0; // Initial vertical position
+
+                    // Add the first page/part of the image
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight; // Calculate remaining height
+
+                    // Add subsequent pages if the image height exceeds PDF page height
+                    while (heightLeft > 0) {
+                        // Calculate the correct negative offset for the next segment of the image
+                        position = -pdfHeight * (Math.ceil(imgHeight / pdfHeight) - Math.ceil(heightLeft / pdfHeight));
+                        pdf.addPage(); // Add a new page
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); // Add the next part of the image
+                        heightLeft -= pdfHeight; // Update remaining height
+                    }
+
+                    // --- Save the PDF ---
+                    const filename = (this.state.personal.name || 'resume')
+                                        .replace(/[^a-z0-9]/gi, '_') // Replace non-alphanumeric chars with underscore
+                                        .toLowerCase();
+                    pdf.save(`${filename}.pdf`); // Trigger download
+
+                } catch (error) {
+                    // Log error and inform user
+                    console.error('Error generating PDF:', error);
+                    alert(`An error occurred while generating the PDF: ${error.message || error}. Please try again or check the console for details.`);
+                     // Restore styles in case of error during capture/PDF generation
+                     resumeElement.style.padding = originalPadding;
+                     resumeElement.style.width = originalWidth;
+                     resumeElement.style.height = originalHeight;
+                     document.body.style.overflow = originalOverflow;
+                } finally {
+                    // Hide loading indicator after a short delay, ensuring styles are restored
+                    setTimeout(() => {
+                        this.dom.pdfLoadingOverlay.classList.remove('active');
+                    }, 300);
+                }
+            }
+
+            // Reset the resume state and UI to defaults
+            resetResume() {
+                // Reset state object to initial default values
+                 this.state = {
+                    template: 'modern', fontFamily: "'Inter', sans-serif", primaryColor: '#2563eb', secondaryColor: '#4b5563',
+                    sectionOrder: ['personal', 'summary', 'experience', 'education', 'projects', 'skills', 'certifications'],
+                    personal: { name: '', title: '', phone: '', email: '', linkedin: '', github: '', website: '', location: '' },
+                    summary: '', experience: [], education: [], projects: [], skills: '', certifications: []
+                };
+                // Clear saved state from local storage
+                localStorage.removeItem('resumeBuilderState_v3');
+                // Re-apply default styles and re-render UI
+                this.applyColorsToRoot();
+                this.renderEditorUI(); // Re-renders controls and form sections
+                this.updatePreview(); // Update preview to show empty state
+                console.log('Resume Reset');
+            }
+
+            // --- Helper Functions ---
+
+            // Get SVG icon string by name
+            getIconSVG(iconName) { return this.icons[iconName] || ''; }
+
+            // Format URL for display (remove protocol, www, trailing slash)
+            formatDisplayURL(url) {
+                if (!url || typeof url !== 'string') return '';
+                try {
+                    // Remove protocol and www.
+                    let formatted = url.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+                    // Remove trailing slash
+                    if (formatted.endsWith('/')) {
+                        formatted = formatted.slice(0, -1);
+                    }
+                     // Truncate long URLs for display? (Optional)
+                     // if (formatted.length > 30) { formatted = formatted.substring(0, 27) + '...'; }
+                    return this.escapeHtml(formatted); // Use the SAFE escapeHtml
+                } catch (e) {
+                    // Fallback to original escaped URL if regex/string manipulation fails
+                    console.warn("Could not format display URL:", url, e);
+                    return this.escapeHtml(url); // Use the SAFE escapeHtml
+                }
+            }
+
+            // Escape HTML special characters in a string
+            escapeHtml(text) {
+                // Ensure the input is treated as a string, return empty string for null/undefined
+                const str = String(text == null ? '' : text); // Convert null/undefined to '', others to string safely
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;' // Use &#039; for wider compatibility than &apos;
+                };
+                // Now replace runs on the guaranteed string 'str'
+                return str.replace(/[&<>"']/g, function(m) { return map[m]; });
+            }
+
+
+            // Format text: replace newlines with <br> and format basic lists (* or -)
+             formatTextWithLists(text) {
+                 if (!text || typeof text !== 'string') return '';
+
+                 // 1. Escape HTML first to prevent XSS injection from the input
+                 const escapedText = this.escapeHtml(text); // Use the SAFE escapeHtml
+
+                 // 2. Process lines for lists and line breaks
+                 const lines = escapedText.split('\n');
+                 let html = '';
+                 let inList = false; // Track if currently inside a <ul>
+
+                 lines.forEach((line, index) => {
+                     const trimmedLine = line.trim();
+
+                     // Check for list items (starts with * or - followed by a space)
+                     if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
+                         const listItemText = trimmedLine.substring(2); // Get text after marker + space
+                         if (!inList) {
+                             html += '<ul>'; // Start list if not already in one
+                             inList = true;
+                         }
+                         html += `<li>${listItemText}</li>`; // Add list item (already escaped)
+                     } else {
+                         // Line is not a list item
+                         if (inList) {
+                             html += '</ul>'; // Close list if we were in one
+                             inList = false;
+                         }
+                         // Add the line content. Add <br> unless it's the very last line.
+                         // This preserves empty lines between paragraphs correctly.
+                         if (index < lines.length - 1) {
+                             // Add the line itself (which might be empty) and a line break
+                             html += line + '<br>';
+                         } else {
+                              // Add the last line without a trailing <br>
+                             html += line;
+                         }
+                     }
+                 });
+
+                 // Close any open list at the very end
+                 if (inList) {
+                     html += '</ul>';
+                 }
+
+                 // Remove potentially redundant <br> tags specifically at the end
+                 // This regex removes one or more <br> tags (and optional whitespace) ONLY at the very end
+                 html = html.replace(/(<br\s*\/?>\s*)+$/, '');
+
+                 return html; // Return the formatted HTML string
+             }
+
+            // Helper to apply multiple Tailwind classes safely to an element
+            applyTailwindClasses(element, classes) {
+                 if (element && classes && typeof classes === 'string') {
+                     classes.split(' ').forEach(cls => {
+                         if (cls) element.classList.add(cls.trim()); // Add each class, trimming whitespace
+                     });
+                 }
+             }
+        }
+    </script>
+
+    <style>
+        .btn { @apply py-2 px-4 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-150 disabled:opacity-50; }
+        .btn-primary { @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500; }
+        .btn-secondary { @apply bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400; }
+        /* Ensure form styles are applied consistently */
+        .form-label { @apply block mb-1 font-medium text-sm text-gray-600; }
+        .form-control { @apply w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100; }
+        /* Allow textareas to resize vertically by default */
+        textarea.form-control { @apply resize-y; }
+        /* Set min-heights where specified in templates/inputs */
+         .min-h-\[60px\] { min-height: 60px; }
+         .min-h-\[80px\] { min-height: 80px; }
+         .min-h-\[100px\] { min-height: 100px; }
+    </style>
+
+</body>
+</html>
