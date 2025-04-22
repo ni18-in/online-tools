@@ -410,7 +410,7 @@ nav[aria-label="Main Navigation"] a:focus {
 /* Current Page Styling (using aria-current attribute) */
 nav[aria-label="Main Navigation"] a[aria-current="page"] {
     font-weight: 700; /* Make current page bold */
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly different background */
+    /*background-color: rgba(255, 255, 255, 0.2);*/ /* Slightly different background */
     /* Or you could use a border: */
     /* border-bottom: 3px solid var(--accent-color, #e8c547); */
     /* padding-bottom: calc(0.5em - 3px); */ /* Adjust padding if using border */
