@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JSON Comparison Online - Diff Tool & Validator</title>
-    <meta name="description" content="Free online tool to compare, diff, validate, and beautify two JSON objects side-by-side. Visualize differences with color highlighting. No server-side processing.">
-    <meta name="keywords" content="json compare, json diff, json comparison, json validator, json beautifier, online tool, developer tools, diff tool, compare json online">
+    <title>JSON Comparison Online - Diff Tool with Line Numbers</title>
+    <meta name="description" content="Free online tool to compare, diff, and beautify two JSON objects or text blocks side-by-side with line numbers. Visualize differences with clear color highlighting. No server-side processing.">
+    <meta name="keywords" content="json compare, text compare, json diff, text diff, json comparison, text comparison, json validator, json beautifier, online tool, developer tools, diff tool, compare json online, compare text online, line numbers, diff viewer">
 
-    <link rel="canonical" href="https://online-tools.ni18.in/tools/json-comparison-tool/"> <meta property="og:title" content="JSON Comparison Online - Diff Tool & Validator">
-    <meta property="og:description" content="Easily compare, diff, validate, and beautify two JSON objects with visual highlighting.">
+    <link rel="canonical" href="https://online-tools.ni18.in/tools/json-comparison-tool/"> <meta property="og:title" content="JSON Comparison Online - Diff Tool with Line Numbers">
+    <meta property="og:description" content="Easily compare, diff, validate, and beautify two JSON objects or text blocks with visual highlighting and line numbers.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://online-tools.ni18.in/tools/json-comparison-tool/"> <meta property="og:image" content="https://your-domain.com/og-image.png"> <link rel="icon" href="/favicon.ico" sizes="any">
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/json-comparison-tool/"> <link rel="icon" href="/favicon.ico" sizes="any"> <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png"> <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="manifest" href="/assets/icons/site.webmanifest">
-
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="manifest" href="/assets/icons/site.webmanifest"> <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,13 +33,25 @@
              --textarea-bg: #ffffff; /* white */
              --textarea-border: #d1d5db; /* gray-300 */
              --textarea-focus-border: #4f46e5; /* indigo-600 */
+             --line-number-bg: #f3f4f6; /* gray-100 */
+             --line-number-text: #6b7280; /* gray-500 */
              --diff-bg-color: #ffffff; /* white */
              --diff-text-color: #1f2937; /* gray-800 */
              --diff-border-color: #e5e7eb; /* gray-200 */
-             --diff-ins-bg: #e0f2fe; /* sky-100 */
-             --diff-ins-text: #0c4a6e; /* sky-800 */
-             --diff-del-bg: #fee2e2; /* red-100 */
-             --diff-del-text: #991b1b; /* red-800 */
+             /* Diff Colors - Enhanced Contrast */
+             --diff-ins-bg: #ddfada; /* Lighter green */
+             --diff-ins-text: #057a55; /* Darker green */
+             --diff-ins-border: #a7f3d0; /* Green border */
+             --diff-del-bg: #fee2e2; /* Lighter red */
+             --diff-del-text: #c81e1e; /* Darker red */
+             --diff-del-border: #fecaca; /* Red border */
+             --diff-moved-bg: #fef3c7; /* Lighter yellow */
+             --diff-moved-text: #a16207; /* Darker yellow */
+             --diff-moved-border: #fde68a; /* Yellow border */
+             --diff-modified-bg: #e0f2fe; /* Lighter blue */
+             --diff-modified-text: #0284c7; /* Darker blue */
+             --diff-modified-border: #bae6fd; /* Blue border */
+
              --border-color: #e5e7eb; /* gray-200 */
              --scrollbar-track-color: #f7fafc;
              --scrollbar-thumb-color: #cbd5e0;
@@ -55,6 +62,9 @@
              --info-bg: #e0f2fe; /* sky-100 */
              --info-text: #0369a1; /* sky-700 */
              --info-border: #bae6fd; /* sky-200 */
+             --warning-bg: #fef3c7; /* amber-100 */
+             --warning-text: #92400e; /* amber-700 */
+             --warning-border: #fde68a; /* amber-200 */
              --ad-bg: #e5e7eb; /* gray-200 */
              --ad-border: #d1d5db; /* gray-300 */
              --ad-text: #6b7280; /* gray-500 */
@@ -73,13 +83,25 @@
              --textarea-bg: #1f2937; /* gray-800 */
              --textarea-border: #4b5563; /* gray-600 */
              --textarea-focus-border: #818cf8; /* indigo-400 */
+             --line-number-bg: #374151; /* gray-700 */
+             --line-number-text: #9ca3af; /* gray-400 */
              --diff-bg-color: #1f2937; /* gray-800 */
              --diff-text-color: #e5e7eb; /* gray-200 */
              --diff-border-color: #374151; /* gray-700 */
-             --diff-ins-bg: #075985; /* sky-900 */
-             --diff-ins-text: #e0f2fe; /* sky-100 */
-             --diff-del-bg: #7f1d1d; /* red-900 */
-             --diff-del-text: #fee2e2; /* red-100 */
+             /* Diff Colors - Enhanced Contrast (Dark) */
+             --diff-ins-bg: #052e16; /* Darker green */
+             --diff-ins-text: #a7f3d0; /* Lighter green */
+             --diff-ins-border: #10b981; /* Green border */
+             --diff-del-bg: #450a0a; /* Darker red */
+             --diff-del-text: #fecaca; /* Lighter red */
+             --diff-del-border: #ef4444; /* Red border */
+             --diff-moved-bg: #422006; /* Darker yellow */
+             --diff-moved-text: #fcd34d; /* Lighter yellow */
+             --diff-moved-border: #f59e0b; /* Yellow border */
+             --diff-modified-bg: #0c4a6e; /* Darker blue */
+             --diff-modified-text: #bae6fd; /* Lighter blue */
+             --diff-modified-border: #38bdf8; /* Blue border */
+
              --border-color: #374151; /* gray-700 */
              --scrollbar-track-color: #1f2937; /* gray-800 */
              --scrollbar-thumb-color: #4b5563; /* gray-600 */
@@ -90,6 +112,9 @@
              --info-bg: #0c4a6e; /* sky-900 */
              --info-text: #bae6fd; /* sky-200 */
              --info-border: #075985; /* sky-800 */
+             --warning-bg: #451a03; /* amber-950 */
+             --warning-text: #fcd34d; /* amber-300 */
+             --warning-border: #78350f; /* amber-800 */
              --ad-bg: #374151; /* gray-700 */
              --ad-border: #4b5563; /* gray-600 */
              --ad-text: #9ca3af; /* gray-400 */
@@ -104,76 +129,181 @@
         /* Apply base styles */
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            line-height: 1.6;
+             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+             background-color: var(--bg-color);
+             color: var(--text-color);
+             transition: background-color 0.3s ease, color 0.3s ease;
+             line-height: 1.6;
         }
 
-        /* --- Custom Component Styles --- */
-        textarea {
-            background-color: var(--textarea-bg); border: 1px solid var(--textarea-border); color: var(--text-color); border-radius: 0.5rem;
-            transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease; min-height: 20rem; resize: vertical;
-            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        /* --- Editor Input Styles --- */
+        .editor-container {
+            display: flex; border: 1px solid var(--textarea-border); border-radius: 0.5rem; overflow: hidden;
+            position: relative; background-color: var(--textarea-bg); transition: border-color 0.2s ease, background-color 0.3s ease;
         }
-        textarea:focus { outline: none; border-color: var(--textarea-focus-border); box-shadow: 0 0 0 2px var(--textarea-focus-border); }
+        .editor-container:focus-within { border-color: var(--textarea-focus-border); box-shadow: 0 0 0 2px var(--textarea-focus-border); }
+        .line-numbers {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6; padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+            background-color: var(--line-number-bg); color: var(--line-number-text); text-align: right; user-select: none; overflow-y: hidden;
+            flex-shrink: 0; white-space: pre; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        textarea.editor-textarea {
+             border: none; border-radius: 0; box-shadow: none; outline: none; padding: 0.75rem; background-color: transparent; color: var(--text-color);
+             flex-grow: 1; min-height: 20rem; resize: none; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;
+             white-space: pre; overflow-wrap: normal; transition: color 0.3s ease;
+        }
+        textarea.editor-textarea:focus { box-shadow: none; border-color: transparent; }
         textarea::placeholder { color: #6b7280; } .dark textarea::placeholder { color: #9ca3af; }
 
+
+        /* --- Diff Output Styles --- */
         .diff-container {
              background-color: var(--diff-bg-color); color: var(--diff-text-color); border: 1px solid var(--diff-border-color); border-radius: 0.5rem;
-             padding: 1rem; margin-top: 1rem; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem;
-             line-height: 1.6; white-space: pre; transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+             padding: 1.5rem; /* Increased padding */ margin-top: 1rem; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem;
+             line-height: 1.7; /* Slightly increased line-height */ white-space: pre-wrap; word-wrap: break-word;
+             transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
         }
-        .diff-container ins { background-color: var(--diff-ins-bg); color: var(--diff-ins-text); text-decoration: none; padding: 0.1em 0; }
-        .diff-container del { background-color: var(--diff-del-bg); color: var(--diff-del-text); text-decoration: line-through; padding: 0.1em 0; }
-        .diff-container ul { list-style: none; padding: 0; margin: 0; } .diff-container li { padding: 0; margin: 0; }
+        /* Override default library styles for better clarity */
+        .jsondiffpatch-delta { padding-left: 1.5em; /* Indent nested levels */ }
+        .jsondiffpatch-unchanged .jsondiffpatch-property-name,
+        .jsondiffpatch-moved .jsondiffpatch-property-name,
+        .jsondiffpatch-modified .jsondiffpatch-property-name,
+        .jsondiffpatch-added .jsondiffpatch-property-name,
+        .jsondiffpatch-deleted .jsondiffpatch-property-name {
+            font-weight: 600; /* Bolder property names */
+            margin-right: 0.5em;
+            display: inline-block; /* Ensure proper spacing */
+            color: var(--text-secondary-color); /* Dimmer property names */
+        }
+        .dark .jsondiffpatch-unchanged .jsondiffpatch-property-name,
+        .dark .jsondiffpatch-moved .jsondiffpatch-property-name,
+        .dark .jsondiffpatch-modified .jsondiffpatch-property-name,
+        .dark .jsondiffpatch-added .jsondiffpatch-property-name,
+        .dark .jsondiffpatch-deleted .jsondiffpatch-property-name {
+             color: var(--text-secondary-color); /* Use dark mode secondary color */
+        }
+
+        /* Added items */
+        .jsondiffpatch-added .jsondiffpatch-value,
+        .jsondiffpatch-added > ins { /* Target direct ins for block adds */
+            background-color: var(--diff-ins-bg) !important; /* Override library */
+            color: var(--diff-ins-text) !important;
+            text-decoration: none !important;
+            display: block; /* Make added blocks distinct */
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            border: 1px solid var(--diff-ins-border);
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        .jsondiffpatch-added > ins::before { content: "+ "; font-weight: bold; } /* Add '+' symbol */
+        .jsondiffpatch-added .jsondiffpatch-value pre { /* Style pre within added */
+             background-color: transparent !important;
+             color: inherit !important;
+        }
+
+        /* Deleted items */
+        .jsondiffpatch-deleted .jsondiffpatch-value,
+        .jsondiffpatch-deleted > del { /* Target direct del for block deletes */
+            background-color: var(--diff-del-bg) !important; /* Override library */
+            color: var(--diff-del-text) !important;
+            text-decoration: line-through !important;
+            display: block; /* Make deleted blocks distinct */
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            border: 1px solid var(--diff-del-border);
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        .jsondiffpatch-deleted > del::before { content: "- "; font-weight: bold; } /* Add '-' symbol */
+        .jsondiffpatch-deleted .jsondiffpatch-value pre { /* Style pre within deleted */
+             background-color: transparent !important;
+             color: inherit !important;
+             text-decoration: line-through !important;
+        }
+
+        /* Modified items */
+        .jsondiffpatch-modified .jsondiffpatch-value > del {
+            background-color: var(--diff-del-bg) !important;
+            color: var(--diff-del-text) !important;
+            text-decoration: line-through !important;
+            padding: 0.1em 0.3em;
+            border-radius: 0.2rem;
+            border: 1px dashed var(--diff-del-border); /* Dashed border for inline changes */
+        }
+        .jsondiffpatch-modified .jsondiffpatch-value > ins {
+            background-color: var(--diff-ins-bg) !important;
+            color: var(--diff-ins-text) !important;
+            text-decoration: none !important;
+            padding: 0.1em 0.3em;
+            border-radius: 0.2rem;
+            border: 1px dashed var(--diff-ins-border); /* Dashed border for inline changes */
+        }
+        /* Style the container for modified values */
+        .jsondiffpatch-modified > .jsondiffpatch-value {
+             background-color: var(--diff-modified-bg);
+             border: 1px solid var(--diff-modified-border);
+             color: var(--diff-modified-text);
+             padding: 0.2em 0.5em;
+             border-radius: 0.25rem;
+             display: inline-block; /* Keep modifications inline where possible */
+             margin-top: 0.2em;
+             margin-bottom: 0.2em;
+        }
+
+        /* Moved items (less common, basic styling) */
+        .jsondiffpatch-moved .jsondiffpatch-value {
+            background-color: var(--diff-moved-bg);
+            border: 1px solid var(--diff-moved-border);
+            color: var(--diff-moved-text);
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        .jsondiffpatch-moved::before { content: ">> "; font-weight: bold; color: var(--diff-moved-text); } /* Indicate move */
+
+        /* Text diffs */
+        .jsondiffpatch-textdiff ins, .jsondiffpatch-textdiff del {
+            padding: 0.1em;
+            border-radius: 0.2rem;
+        }
+        .jsondiffpatch-textdiff ins { background-color: var(--diff-ins-bg); color: var(--diff-ins-text); border: 1px dashed var(--diff-ins-border); text-decoration: none; }
+        .jsondiffpatch-textdiff del { background-color: var(--diff-del-bg); color: var(--diff-del-text); border: 1px dashed var(--diff-del-border); text-decoration: line-through; }
+
+
+        /* General structure improvements */
+        .jsondiffpatch-delta ul { list-style: none; padding: 0; margin: 0; margin-left: 1em; }
+        .jsondiffpatch-delta li { padding: 0; margin: 0.1em 0; }
+        .jsondiffpatch-object-header { margin-bottom: 0.2em; }
+        .jsondiffpatch-array-header { margin-bottom: 0.2em; }
+
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: var(--scrollbar-track-color); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb-color); border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover-color); }
+        .line-numbers::-webkit-scrollbar { display: none; }
+        .line-numbers { scrollbar-width: none; -ms-overflow-style: none; }
 
         /* Placeholder Ad Styling */
-        .ad-placeholder {
-            min-height: 90px; background-color: var(--ad-bg); border: 1px dashed var(--ad-border); display: none; align-items: center; justify-content: center;
-            color: var(--ad-text); font-size: 0.875rem; border-radius: 0.5rem; margin: 1rem 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
+        .ad-placeholder { min-height: 90px; background-color: var(--ad-bg); border: 1px dashed var(--ad-border); display: none; align-items: center; justify-content: center; color: var(--ad-text); font-size: 0.875rem; border-radius: 0.5rem; margin: 1rem 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
 
         /* Message Box Styling */
-        .message-box {
-            border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; font-size: 0.875rem; display: none;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
+        .message-box { border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; font-size: 0.875rem; display: none; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
         .message-box-error { background-color: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); }
         .message-box-info { background-color: var(--info-bg); color: var(--info-text); border: 1px solid var(--info-border); }
-
-        /* Button Base Styles (Reference) */
-        .btn { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out; }
-        .btn-primary { @apply text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600; }
-        .btn-secondary { @apply text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700; }
-        .btn-danger { @apply text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 dark:bg-red-700 dark:hover:bg-red-800; }
-        .btn-icon { @apply p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out; }
-        .btn-link { @apply text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 focus:outline-none focus:underline; }
+        .message-box-warning { background-color: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
 
         /* Checkbox styling */
         input[type="checkbox"] { @apply rounded text-indigo-600 focus:ring-indigo-500 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-indigo-400 dark:checked:border-transparent; }
 
         /* Tooltip Styling (Basic) */
-        [title]:hover::after {
-            content: attr(title); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; padding: 4px 8px;
-            background-color: #333; color: white; font-size: 0.75rem; border-radius: 4px; white-space: nowrap; z-index: 10; opacity: 0.9;
-        }
+        [title]:hover::after { content: attr(title); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; padding: 4px 8px; background-color: #333; color: white; font-size: 0.75rem; border-radius: 4px; white-space: nowrap; z-index: 10; opacity: 0.9; pointer-events: none; }
         [title] { position: relative; }
 
         /* Modal Styles */
-        .modal-overlay {
-            position: fixed; inset: 0; background-color: var(--modal-overlay-bg); z-index: 40; /* Below modal */
-        }
-        .modal {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--modal-bg);
-            border-radius: 0.5rem; padding: 1.5rem; box-shadow: var(--modal-shadow); z-index: 50;
-            width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;
-        }
+        .modal-overlay { position: fixed; inset: 0; background-color: var(--modal-overlay-bg); z-index: 40; }
+        .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--modal-bg); border-radius: 0.5rem; padding: 1.5rem; box-shadow: var(--modal-shadow); z-index: 50; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .modal-title { font-size: 1.25rem; font-weight: 600; }
         .modal-close-button { background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-secondary-color); }
@@ -187,95 +317,106 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "JSON Comparison Online",
-      "description": "Free online tool to compare, diff, validate, and beautify two JSON objects side-by-side with visual highlighting.",
-      "url": "https://online-tools.ni18.in/tools/json-comparison-tool/",
+      "name": "JSON Comparison Online with Line Numbers",
+      "description": "Free online tool to compare, diff, validate (optional), and beautify two JSON objects or text blocks side-by-side with visual highlighting and line numbers.",
+      "url": "https://online-tools.ni18.in/tools/json-comparison-tool/", // Update if URL changes
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "browserRequirements": "Requires JavaScript. Works on modern browsers.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [ "Compare JSON objects", "Visualize differences (diff)", "Beautify JSON", "Validate JSON syntax", "File upload support", "Dark mode", "Ignore array order option", "Client-side processing" ],
-      "potentialAction": { "@type": "SearchAction", "target": "https://online-tools.ni18.in/tools/json-comparison-tool/", "query-input": "required name=search_term_string" }
+      "featureList": [
+        "Compare JSON objects",
+        "Compare text blocks",
+        "Visualize differences (diff)",
+        "Line numbers for inputs",
+        "Beautify valid JSON",
+        "Validate JSON syntax (optional, on beautify)",
+        "File upload support",
+        "Dark mode",
+        "Ignore array order option (for JSON)",
+        "Client-side processing"
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://online-tools.ni18.in/tools/json-comparison-tool/", // Update if URL changes
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RJER6TKTQ3');
-</script>
-
-</head>
+    </head>
 <body class="antialiased">
     <div class="container mx-auto p-4 lg:p-6 max-w-screen-xl min-h-screen flex flex-col">
         <header class="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-[var(--border-color)] gap-4">
-            <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400"><a href="/">JSON Comparison Online</a></h1>
+            <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400"><a href="/">JSON Comparison</a></h1>
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <button id="how-to-use-button" class="btn-link text-sm">How to Use</button>
-                <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Mode">
-                     <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591" /> </svg>
-                     <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+                <button id="how-to-use-button" class="btn-link text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 focus:underline">How to Use</button>
+                <button id="theme-toggle" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Toggle Light/Dark Mode">
+                    <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591" /> </svg>
+                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
                 </button>
             </div>
         </header>
 
-        <div class="ad-placeholder d-none">Top Ad Placeholder (e.g., 728x90 or Responsive)</div>
+        <div class="ad-placeholder">Top Ad Placeholder (e.g., 728x90 or Responsive)</div>
 
         <main class="flex-grow">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-4">
                 <section aria-labelledby="json1-heading">
                     <div class="flex justify-between items-center mb-2">
-                        <h2 id="json1-heading" class="text-lg font-semibold">JSON Input 1 (Left)</h2>
+                        <h2 id="json1-heading" class="text-lg font-semibold">Input 1 (Left)</h2>
                         <div class="flex space-x-1">
-                             <button id="paste-left" class="btn-icon" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
-                             <button id="copy-left" class="btn-icon" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
-                             <button id="beautify-left" class="btn-icon" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
-                             <label for="upload-left" class="btn-icon cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-left" type="file" accept=".json,application/json" class="hidden"> </label>
-                             <button id="clear-left" class="btn-icon" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                             <button id="paste-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                             <button id="copy-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                             <button id="beautify-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                             <label for="upload-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-left" type="file" accept=".json,application/json,.txt,text/plain" class="hidden"> </label>
+                             <button id="clear-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
                         </div>
                     </div>
-                    <textarea id="json-input-left" class="w-full p-3 text-sm" placeholder="Paste or type JSON here..." spellcheck="false" aria-labelledby="json1-heading"></textarea>
+                    <div class="editor-container">
+                        <div id="line-numbers-left" class="line-numbers" aria-hidden="true">1</div>
+                        <textarea id="json-input-left" class="editor-textarea w-full text-sm" placeholder="Paste or type JSON/Text here..." spellcheck="false" aria-labelledby="json1-heading"></textarea>
+                    </div>
                 </section>
 
                 <section aria-labelledby="json2-heading">
                      <div class="flex justify-between items-center mb-2">
-                        <h2 id="json2-heading" class="text-lg font-semibold">JSON Input 2 (Right)</h2>
+                         <h2 id="json2-heading" class="text-lg font-semibold">Input 2 (Right)</h2>
                          <div class="flex space-x-1">
-                             <button id="paste-right" class="btn-icon" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
-                             <button id="copy-right" class="btn-icon" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
-                             <button id="beautify-right" class="btn-icon" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
-                             <label for="upload-right" class="btn-icon cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-right" type="file" accept=".json,application/json" class="hidden"> </label>
-                             <button id="clear-right" class="btn-icon" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                              <button id="paste-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                              <button id="copy-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                              <button id="beautify-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                              <label for="upload-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-right" type="file" accept=".json,application/json,.txt,text/plain" class="hidden"> </label>
+                              <button id="clear-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
                          </div>
+                     </div>
+                     <div class="editor-container">
+                        <div id="line-numbers-right" class="line-numbers" aria-hidden="true">1</div>
+                        <textarea id="json-input-right" class="editor-textarea w-full text-sm" placeholder="Paste or type JSON/Text here..." spellcheck="false" aria-labelledby="json2-heading"></textarea>
                     </div>
-                    <textarea id="json-input-right" class="w-full p-3 text-sm" placeholder="Paste or type JSON here..." spellcheck="false" aria-labelledby="json2-heading"></textarea>
                 </section>
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
                 <div class="flex gap-2 flex-wrap justify-center sm:justify-start">
-                    <button id="compare-button" class="btn btn-primary">
+                    <button id="compare-button" class="btn btn-primary inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l-3-3m3 3l3 3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" /> </svg>
                         Compare
                         <span class="ml-1 text-xs text-indigo-200">(Ctrl+Enter)</span>
                     </button>
-                     <button id="download-button" class="btn btn-secondary hidden">
+                    <button id="download-button" class="btn btn-secondary hidden inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700">
                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
-                        Download Diff
-                    </button>
-                     <button id="copy-results-button" class="btn btn-secondary hidden">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg>
-                        Copy Results
-                    </button>
+                         Download Diff
+                     </button>
+                     <button id="copy-results-button" class="btn btn-secondary hidden inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg>
+                          Copy Results
+                      </button>
                 </div>
                 <div class="flex items-center space-x-4">
-                     <label class="flex items-center space-x-2 cursor-pointer text-sm">
+                     <label class="flex items-center space-x-2 cursor-pointer text-sm" title="Only applies when both inputs are valid JSON">
                          <input type="checkbox" id="ignore-array-order">
-                         <span>Ignore Array Order</span>
+                         <span>Ignore Array Order (JSON only)</span>
                      </label>
                  </div>
             </div>
@@ -283,7 +424,14 @@
             <div id="message-area"></div>
 
             <section id="diff-output-section" class="mt-6 hidden" aria-live="polite">
-                <h2 class="text-lg font-semibold mb-2">Comparison Result</h2>
+                 <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold">Comparison Result</h2>
+                    <div class="text-xs space-x-2 hidden sm:block">
+                        <span style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-ins-border);">+ Added</span>
+                        <span style="background-color: var(--diff-del-bg); color: var(--diff-del-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-del-border); text-decoration: line-through;">- Deleted</span>
+                        <span style="background-color: var(--diff-modified-bg); color: var(--diff-modified-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-modified-border);">Modified</span>
+                    </div>
+                 </div>
                 <div id="diff-output-wrapper" class="diff-container"></div>
             </section>
 
@@ -293,25 +441,25 @@
 
         <footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 py-6 border-t border-[var(--border-color)]">
             <p>&copy; <span id="current-year"></span> JSON Comparison Online. All processing done client-side.</p>
-        </footer>
+            </footer>
     </div>
 
-    <div id="modal-overlay" class="modal-overlay hidden"></div>
-    <div id="how-to-use-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-overlay" class="modal-overlay hidden" aria-hidden="true"></div>
+    <div id="how-to-use-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-header">
             <h3 id="modal-title" class="modal-title">How to Use</h3>
             <button id="close-modal-button" class="modal-close-button" aria-label="Close modal">&times;</button>
         </div>
         <div class="modal-content text-sm text-[var(--text-secondary-color)]">
-            <p class="mb-4">This tool helps you compare two JSON objects and visualize their differences.</p>
+            <p class="mb-4">This tool helps you compare two JSON objects or text blocks and visualize their differences.</p>
             <ul>
-                <li><strong>Input JSON:</strong> Paste your JSON data into the left and right text areas, or use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg> upload buttons to load from files.</li>
-                <li><strong>Beautify:</strong> Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /></svg> button (or <code>Ctrl+B</code>) to format the JSON for readability and validation. Invalid JSON will show an error.</li>
+                <li><strong>Input Data:</strong> Paste your JSON or text data into the left and right input areas (with line numbers!), or use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg> upload buttons to load from files (.json or .txt).</li>
+                <li><strong>Beautify (JSON only):</strong> Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /></svg> button (or <code>Ctrl+B</code>) to format the input *if it's valid JSON*. It won't work on plain text.</li>
                 <li><strong>Compare:</strong> Click the "Compare" button (or press <code>Ctrl+Enter</code>) to see the differences.</li>
-                <li><strong>Results:</strong> Differences are highlighted below. <span class="inline-block px-1 rounded" style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text);">Green</span> indicates additions, and <span class="inline-block px-1 rounded" style="background-color: var(--diff-del-bg); color: var(--diff-del-text); text-decoration: line-through;">Red</span> indicates deletions.</li>
-                <li><strong>Options:</strong> Use the "Ignore Array Order" checkbox if the order of elements within arrays doesn't matter for your comparison.</li>
-                <li><strong>Copy/Download:</strong> Use the buttons below the inputs to copy the diff results or download the raw diff data as a JSON file.</li>
-                <li><strong>Dev Mode:</strong> Type <code>:dev</code> at the end of either input area to load sample data.</li>
+                <li><strong>Results:</strong> Differences are highlighted below (see legend above results). <span class="inline-block px-1 rounded" style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text); border: 1px solid var(--diff-ins-border);">Green</span> indicates additions, <span class="inline-block px-1 rounded" style="background-color: var(--diff-del-bg); color: var(--diff-del-text); border: 1px solid var(--diff-del-border); text-decoration: line-through;">Red</span> indicates deletions, and <span class="inline-block px-1 rounded" style="background-color: var(--diff-modified-bg); color: var(--diff-modified-text); border: 1px solid var(--diff-modified-border);">Blue</span> indicates modifications.</li>
+                <li><strong>Options (JSON only):</strong> Use the "Ignore Array Order" checkbox if the order of elements within arrays doesn't matter for your comparison. This only applies if *both* inputs are valid JSON.</li>
+                <li><strong>Copy/Download:</strong> Use the buttons below the inputs to copy the diff results or download the raw diff data (as JSON, even if inputs were text).</li>
+                <li><strong>Dev Mode:</strong> Type <code>:dev</code> at the end of either input area to load sample JSON data.</li>
             </ul>
         </div>
     </div>
@@ -319,8 +467,12 @@
     <script>
         // --- Constants and DOM Elements ---
         const DOMElements = {
+            // Input Textareas & Line Numbers
             jsonInputLeft: document.getElementById('json-input-left'),
             jsonInputRight: document.getElementById('json-input-right'),
+            lineNumbersLeft: document.getElementById('line-numbers-left'),
+            lineNumbersRight: document.getElementById('line-numbers-right'),
+            // Buttons
             compareButton: document.getElementById('compare-button'),
             clearLeftButton: document.getElementById('clear-left'),
             clearRightButton: document.getElementById('clear-right'),
@@ -330,24 +482,29 @@
             copyRightButton: document.getElementById('copy-right'),
             pasteLeftButton: document.getElementById('paste-left'),
             pasteRightButton: document.getElementById('paste-right'),
+            downloadButton: document.getElementById('download-button'),
+            copyResultsButton: document.getElementById('copy-results-button'),
+            themeToggleButton: document.getElementById('theme-toggle'),
+            howToUseButton: document.getElementById('how-to-use-button'),
+            closeModalButton: document.getElementById('close-modal-button'),
+            // File Uploads
             uploadLeftInput: document.getElementById('upload-left'),
             uploadRightInput: document.getElementById('upload-right'),
+            // Output & Messages
             diffOutputSection: document.getElementById('diff-output-section'),
             diffOutputWrapper: document.getElementById('diff-output-wrapper'),
             messageArea: document.getElementById('message-area'),
-            themeToggleButton: document.getElementById('theme-toggle'),
+            // Theme Icons & Footer
             themeIconLight: document.getElementById('theme-icon-light'),
             themeIconDark: document.getElementById('theme-icon-dark'),
-            ignoreArrayOrderCheckbox: document.getElementById('ignore-array-order'),
-            downloadButton: document.getElementById('download-button'),
-            copyResultsButton: document.getElementById('copy-results-button'),
             currentYearSpan: document.getElementById('current-year'),
-            htmlElement: document.documentElement,
-            // Modal elements
-            howToUseButton: document.getElementById('how-to-use-button'),
+            // Options
+            ignoreArrayOrderCheckbox: document.getElementById('ignore-array-order'),
+            // Modal
             modalOverlay: document.getElementById('modal-overlay'),
             howToUseModal: document.getElementById('how-to-use-modal'),
-            closeModalButton: document.getElementById('close-modal-button'),
+            // Global
+            htmlElement: document.documentElement,
         };
 
         const LOCAL_STORAGE_KEYS = {
@@ -362,22 +519,24 @@
 
         // --- Initialization ---
         function initializeApp() {
-            console.log("Initializing JSON Comparison App (Production Ready)...");
+            console.log("Initializing JSON Comparison App (with Line Numbers)...");
             if (DOMElements.currentYearSpan) {
                 DOMElements.currentYearSpan.textContent = new Date().getFullYear();
             }
-            if (typeof jsondiffpatch !== 'undefined') {
-                 initializeJsonDiffPatcher();
-            } else {
+            if (typeof jsondiffpatch === 'undefined') {
                  console.warn("jsondiffpatch not loaded yet (deferred). Will initialize on first compare.");
             }
             loadThemePreference();
-            loadSavedJson();
+            loadSavedInputs();
             addEventListeners();
             updateThemeIcons();
+            // Initial line number update for both editors
+            updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft);
+            updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight);
             console.log("App Initialized Successfully.");
         }
 
+        // --- jsondiffpatch Initialization ---
         function initializeJsonDiffPatcher() {
              if (window.jsonDiffPatcherInstance) return true;
              if (typeof jsondiffpatch !== 'undefined') {
@@ -396,10 +555,11 @@
                      return false;
                  }
              } else {
-                  console.error("jsondiffpatch library is not available.");
-                  return false;
+                 console.error("jsondiffpatch library is not available.");
+                 displayMessage("Comparison library (jsondiffpatch) is not loaded.", 'error');
+                 return false;
              }
-        }
+         }
 
         // --- Theme Management ---
         function applyTheme(theme) {
@@ -422,56 +582,93 @@
             DOMElements.themeIconDark.classList.toggle('hidden', isDark);
         }
 
-        // --- LocalStorage ---
+        // --- LocalStorage for Inputs ---
         const debouncedSave = () => {
             clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveJsonToLocalStorage, 500);
+            saveTimeout = setTimeout(saveInputsToLocalStorage, 500);
         };
-        function saveJsonToLocalStorage() {
+        function saveInputsToLocalStorage() {
             try {
                 localStorage.setItem(LOCAL_STORAGE_KEYS.leftJson, DOMElements.jsonInputLeft.value);
                 localStorage.setItem(LOCAL_STORAGE_KEYS.rightJson, DOMElements.jsonInputRight.value);
-            } catch (error) { console.warn("Could not save JSON to localStorage:", error); }
+            } catch (error) {
+                console.warn("Could not save inputs to localStorage:", error);
+            }
         }
-        function loadSavedJson() {
+        function loadSavedInputs() {
             try {
-                const leftJson = localStorage.getItem(LOCAL_STORAGE_KEYS.leftJson);
-                const rightJson = localStorage.getItem(LOCAL_STORAGE_KEYS.rightJson);
-                if (leftJson) DOMElements.jsonInputLeft.value = leftJson;
-                if (rightJson) DOMElements.jsonInputRight.value = rightJson;
-            } catch (error) { console.error("Error loading JSON from localStorage:", error); displayMessage("Could not load previously saved JSON.", 'error'); }
+                const leftInput = localStorage.getItem(LOCAL_STORAGE_KEYS.leftJson);
+                const rightInput = localStorage.getItem(LOCAL_STORAGE_KEYS.rightJson);
+                if (leftInput) DOMElements.jsonInputLeft.value = leftInput;
+                if (rightInput) DOMElements.jsonInputRight.value = rightInput;
+                // Line numbers will be updated during initializeApp
+            } catch (error) {
+                console.error("Error loading inputs from localStorage:", error);
+                displayMessage("Could not load previously saved inputs.", 'error');
+            }
         }
 
         // --- Message Handling ---
-        function displayMessage(message, type = 'info') {
+        function displayMessage(message, type = 'info') { // types: 'info', 'error', 'warning'
             clearMessages();
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
             messageDiv.classList.add('message-box');
-            messageDiv.classList.add(type === 'error' ? 'message-box-error' : 'message-box-info');
-            messageDiv.setAttribute('role', 'alert');
+            messageDiv.classList.add(`message-box-${type}`);
+            messageDiv.setAttribute('role', type === 'error' ? 'alert' : 'status');
             messageDiv.style.display = 'block';
             DOMElements.messageArea.appendChild(messageDiv);
+
             if (type === 'error') {
                 console.error(`Error Displayed: ${message}`);
                 DOMElements.diffOutputSection.classList.add('hidden');
                 DOMElements.downloadButton.classList.add('hidden');
                 DOMElements.copyResultsButton.classList.add('hidden');
+            } else if (type === 'warning') {
+                console.warn(`Warning Displayed: ${message}`);
             }
         }
-        function clearMessages() { DOMElements.messageArea.innerHTML = ''; }
+        function clearMessages() {
+            DOMElements.messageArea.innerHTML = '';
+        }
+
+        // --- Line Number Logic ---
+        function updateLineNumbers(textareaElement, lineNumbersElement) {
+            setTimeout(() => {
+                const lines = textareaElement.value.split('\n');
+                const lineCount = lines.length || 1;
+                let numbers = '';
+                for (let i = 1; i <= lineCount; i++) {
+                    numbers += i + '\n';
+                }
+                lineNumbersElement.textContent = numbers.trimEnd();
+                lineNumbersElement.scrollTop = textareaElement.scrollTop;
+            }, 0);
+        }
+        function syncScroll(textareaElement, lineNumbersElement) {
+            lineNumbersElement.scrollTop = textareaElement.scrollTop;
+        }
+
 
         // --- Core Functionality ---
-        function parseJsonInput(inputElement) {
-            const jsonString = inputElement.value.trim();
-            if (!jsonString) return null;
-            try { return JSON.parse(jsonString); }
-            catch (e) {
-                const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
-                inputElement.focus();
-                throw new Error(`Invalid JSON in ${inputName} Input: ${e.message}`);
+        function parseInput(inputElement, inputName) {
+            const text = inputElement.value.trim();
+            if (!text) return { value: null, type: 'empty' };
+
+            try {
+                const parsed = JSON.parse(text);
+                 if (typeof parsed === 'object' && parsed !== null) {
+                    return { value: parsed, type: 'json' };
+                 } else {
+                     console.warn(`${inputName} input parsed as JSON literal, treating as text.`);
+                     return { value: text, type: 'text' };
+                 }
+            } catch (e) {
+                console.warn(`${inputName} input is not valid JSON. Treating as text.`);
+                return { value: text, type: 'text' };
             }
         }
+
         function compareJson() {
             console.log("Compare button clicked.");
             clearMessages();
@@ -479,93 +676,187 @@
             DOMElements.downloadButton.classList.add('hidden');
             DOMElements.copyResultsButton.classList.add('hidden');
             DOMElements.diffOutputWrapper.innerHTML = '';
-            if (!initializeJsonDiffPatcher()) { displayMessage("Comparison library is not ready.", 'error'); return; }
-            let jsonLeft, jsonRight;
+
+            if (!initializeJsonDiffPatcher()) {
+                 return;
+            }
+
+            let parseResultLeft, parseResultRight;
+            let warnings = [];
+
+            parseResultLeft = parseInput(DOMElements.jsonInputLeft, 'Left');
+            parseResultRight = parseInput(DOMElements.jsonInputRight, 'Right');
+
+            if (parseResultLeft.type === 'text') warnings.push("Left input treated as text (not valid JSON object/array).");
+            if (parseResultRight.type === 'text') warnings.push("Right input treated as text (not valid JSON object/array).");
+
+            if (warnings.length > 0) {
+                displayMessage(warnings.join('\n'), 'warning');
+            }
+
+            const valueLeft = parseResultLeft.value;
+            const valueRight = parseResultRight.value;
+
+            if (valueLeft === null && valueRight === null) {
+                displayMessage("Both inputs are empty.", 'info');
+                DOMElements.diffOutputSection.classList.add('hidden');
+                return;
+            }
+
             try {
-                jsonLeft = parseJsonInput(DOMElements.jsonInputLeft);
-                jsonRight = parseJsonInput(DOMElements.jsonInputRight);
-                if (jsonLeft === null && jsonRight === null) { displayMessage("Both inputs are empty.", 'info'); DOMElements.diffOutputSection.classList.add('hidden'); return; }
-                const ignoreArrayOrder = DOMElements.ignoreArrayOrderCheckbox.checked;
-                const diffOptions = { ...window.jsonDiffPatcherInstance.options, arrays: { ...window.jsonDiffPatcherInstance.options.arrays, detectMove: !ignoreArrayOrder } };
+                const ignoreArrayOrder = DOMElements.ignoreArrayOrderCheckbox.checked &&
+                                         parseResultLeft.type === 'json' &&
+                                         parseResultRight.type === 'json';
+
+                const diffOptions = {
+                     ...window.jsonDiffPatcherInstance.options,
+                     arrays: {
+                         ...window.jsonDiffPatcherInstance.options.arrays,
+                         detectMove: !ignoreArrayOrder
+                     }
+                 };
                 const currentPatcher = jsondiffpatch.create(diffOptions);
-                const delta = currentPatcher.diff(jsonLeft, jsonRight);
+
+                const delta = currentPatcher.diff(valueLeft, valueRight);
                 currentDiffDelta = delta;
+
                 if (delta) {
-                    const htmlDiff = jsondiffpatch.formatters.html.format(delta, jsonLeft);
+                    // Use the HTML formatter from jsondiffpatch
+                    const htmlDiff = jsondiffpatch.formatters.html.format(delta, valueLeft);
                     DOMElements.diffOutputWrapper.innerHTML = htmlDiff;
+                    // Make the section visible
                     DOMElements.diffOutputSection.classList.remove('hidden');
+                    // Show action buttons
                     DOMElements.downloadButton.classList.remove('hidden');
                     DOMElements.copyResultsButton.classList.remove('hidden');
                 } else {
+                    // No differences found
                     DOMElements.diffOutputWrapper.innerHTML = '<p class="p-4 text-green-600 dark:text-green-400 font-semibold">No Differences Found.</p>';
                     DOMElements.diffOutputSection.classList.remove('hidden');
                 }
+
                 debouncedSave();
-            } catch (error) { displayMessage(error.message, 'error'); }
+
+            } catch (error) {
+                console.error("Error during comparison:", error);
+                displayMessage(`An unexpected error occurred during comparison: ${error.message}`, 'error');
+                currentDiffDelta = null;
+            }
         }
+
         function beautifyJson(inputElement) {
             clearMessages();
             const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
+            const lineNumbersElement = inputName === 'Left' ? DOMElements.lineNumbersLeft : DOMElements.lineNumbersRight;
+            const currentText = inputElement.value.trim();
+
+            if (!currentText) {
+                displayMessage(`${inputName} input is empty.`, 'info');
+                return;
+            }
+
             try {
-                const currentJson = inputElement.value.trim();
-                if (!currentJson) return;
-                const parsedJson = JSON.parse(currentJson);
+                const parsedJson = JSON.parse(currentText);
+                 if (typeof parsedJson !== 'object' || parsedJson === null) {
+                     displayMessage(`${inputName} input is a valid JSON literal, but not an object or array. Cannot beautify.`, 'info');
+                     return;
+                 }
+
                 inputElement.value = JSON.stringify(parsedJson, null, 2);
+                updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after beautify
                 debouncedSave();
+                displayMessage(`${inputName} input successfully beautified.`, 'info');
+
             } catch (error) {
                 inputElement.focus();
-                displayMessage(`Invalid JSON in ${inputName} Input: Cannot beautify. ${error.message}`, 'error');
+                displayMessage(`${inputName} input is not valid JSON. Cannot beautify.`, 'info');
+                console.warn(`Beautify failed for ${inputName}: ${error.message}`);
             }
         }
+
         function clearInput(inputElement) {
+             const lineNumbersElement = inputElement.id.includes('left') ? DOMElements.lineNumbersLeft : DOMElements.lineNumbersRight;
              inputElement.value = '';
+             updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after clear
              debouncedSave();
              clearMessages();
+
              if (!DOMElements.jsonInputLeft.value && !DOMElements.jsonInputRight.value) {
-                  DOMElements.diffOutputWrapper.innerHTML = '';
-                  DOMElements.diffOutputSection.classList.add('hidden');
-                  DOMElements.downloadButton.classList.add('hidden');
-                  DOMElements.copyResultsButton.classList.add('hidden');
-                  currentDiffDelta = null;
+                 DOMElements.diffOutputWrapper.innerHTML = '';
+                 DOMElements.diffOutputSection.classList.add('hidden');
+                 DOMElements.downloadButton.classList.add('hidden');
+                 DOMElements.copyResultsButton.classList.add('hidden');
+                 currentDiffDelta = null;
              }
-        }
+         }
 
         // --- Clipboard Operations ---
         async function copyToClipboard(inputElement, buttonElement) {
             const inputName = inputElement.id.includes('left') ? 'Left' : 'Right';
             const textToCopy = inputElement.value;
-            if (!textToCopy) { displayMessage(`Input ${inputName} is empty.`, 'info'); return; }
+
+            if (!textToCopy) {
+                displayMessage(`Input ${inputName} is empty. Nothing to copy.`, 'info');
+                return;
+            }
+
             try {
                 await navigator.clipboard.writeText(textToCopy);
                 const originalHTML = buttonElement.innerHTML;
                 buttonElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
                 buttonElement.disabled = true;
-                setTimeout(() => { buttonElement.innerHTML = originalHTML; buttonElement.disabled = false; }, 1500);
-            } catch (err) { displayMessage(`Failed to copy ${inputName} text.`, 'error'); console.error('Copy failed:', err); }
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalHTML;
+                    buttonElement.disabled = false;
+                }, 1500);
+            } catch (err) {
+                displayMessage(`Failed to copy ${inputName} text. Browser may not support or allow clipboard access.`, 'error');
+                console.error('Copy failed:', err);
+            }
         }
+
         async function copyResultsToClipboard(buttonElement) {
              const diffContent = DOMElements.diffOutputWrapper.innerText;
-             if (!currentDiffDelta || !diffContent?.trim()) { displayMessage('No results to copy.', 'info'); return; }
+             if (!currentDiffDelta || !diffContent?.trim()) {
+                 displayMessage('No results to copy.', 'info');
+                 return;
+             }
              try {
                  await navigator.clipboard.writeText(diffContent);
                  const originalHTML = buttonElement.innerHTML;
                  const svgIcon = buttonElement.querySelector('svg')?.outerHTML || '';
                  buttonElement.innerHTML = `${svgIcon} <span class="ml-2">Copied!</span>`;
                  buttonElement.disabled = true;
-                 setTimeout(() => { buttonElement.innerHTML = originalHTML; buttonElement.disabled = false; }, 1500);
-             } catch (err) { displayMessage('Failed to copy results.', 'error'); console.error('Copy results failed:', err); }
-        }
+                 setTimeout(() => {
+                     buttonElement.innerHTML = originalHTML;
+                     buttonElement.disabled = false;
+                 }, 1500);
+             } catch (err) {
+                 displayMessage('Failed to copy results. Browser may not support or allow clipboard access.', 'error');
+                 console.error('Copy results failed:', err);
+             }
+         }
+
         async function pasteFromClipboard(inputElement) {
             clearMessages();
-            if (!navigator.clipboard || !navigator.clipboard.readText) { displayMessage('Clipboard API not supported.', 'error'); return; }
+            const lineNumbersElement = inputElement.id.includes('left') ? DOMElements.lineNumbersLeft : DOMElements.lineNumbersRight;
+
+            if (!navigator.clipboard || !navigator.clipboard.readText) {
+                displayMessage('Clipboard API not supported or permission denied by your browser.', 'error');
+                return;
+            }
+
             try {
                 const text = await navigator.clipboard.readText();
                 inputElement.value = text;
-                beautifyJson(inputElement);
+                updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after paste
                 debouncedSave();
             } catch (err) {
-                if (err.name === 'NotAllowedError' || err.name === 'SecurityError') { displayMessage('Clipboard paste permission denied.', 'error'); }
-                else { displayMessage('Failed to read clipboard.', 'error'); }
+                if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
+                    displayMessage('Clipboard paste permission denied by your browser or operating system.', 'error');
+                } else {
+                    displayMessage('Failed to read from clipboard.', 'error');
+                }
                 console.error('Paste failed:', err);
             }
         }
@@ -574,23 +865,53 @@
         function handleFileUpload(event, inputElement) {
             clearMessages();
             const file = event.target.files[0];
+            const lineNumbersElement = inputElement.id.includes('left') ? DOMElements.lineNumbersLeft : DOMElements.lineNumbersRight;
+
             if (!file) return;
-            if (file.type !== 'application/json' && !file.name.endsWith('.json')) { displayMessage(`Invalid file type. Please upload a .json file.`, 'error'); event.target.value = ''; return; }
+
+            const allowedTypes = ['application/json', 'text/plain'];
+            const allowedExtensions = ['.json', '.txt'];
+            const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+                 displayMessage(`Invalid file type (${file.type || fileExtension}). Please upload a .json or .txt file.`, 'error');
+                 event.target.value = '';
+                 return;
+            }
+
              const maxSizeMB = 10;
-             if (file.size > maxSizeMB * 1024 * 1024) { displayMessage(`File too large (max ${maxSizeMB} MB).`, 'error'); event.target.value = ''; return; }
+             if (file.size > maxSizeMB * 1024 * 1024) {
+                 displayMessage(`File too large (max ${maxSizeMB} MB).`, 'error');
+                 event.target.value = '';
+                 return;
+             }
+
             const reader = new FileReader();
             reader.onload = (e) => {
-                try { inputElement.value = e.target.result; beautifyJson(inputElement); debouncedSave(); }
-                catch (readError) { displayMessage(`Error processing file: ${readError.message}`, 'error'); }
-                finally { event.target.value = ''; }
+                try {
+                    inputElement.value = e.target.result;
+                    updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after file load
+                    debouncedSave();
+                } catch (readError) {
+                    displayMessage(`Error processing file content: ${readError.message}`, 'error');
+                } finally {
+                    event.target.value = '';
+                }
             };
-            reader.onerror = (e) => { displayMessage(`Error reading file.`, 'error'); console.error("FileReader error:", e); event.target.value = ''; };
+            reader.onerror = (e) => {
+                displayMessage(`Error reading file.`, 'error');
+                console.error("FileReader error:", e);
+                event.target.value = '';
+            };
             reader.readAsText(file);
         }
 
         // --- Download ---
         function downloadDiff() {
-            if (!currentDiffDelta) { displayMessage("No results to download.", 'info'); return; }
+            if (!currentDiffDelta) {
+                displayMessage("No comparison results available to download.", 'info');
+                return;
+            }
             try {
                 const diffString = JSON.stringify(currentDiffDelta, null, 2);
                 const blob = new Blob([diffString], { type: 'application/json;charset=utf-8' });
@@ -598,10 +919,16 @@
                 const a = document.createElement('a');
                 a.href = url;
                 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-                a.download = `json_diff_${timestamp}.json`;
-                a.style.display = 'none'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                a.download = `comparison_diff_${timestamp}.json`;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-            } catch (error) { displayMessage("Failed to generate download.", 'error'); console.error("Download error:", error); }
+            } catch (error) {
+                displayMessage("Failed to generate download file.", 'error');
+                console.error("Download error:", error);
+            }
         }
 
         // --- Dev Mode ---
@@ -609,24 +936,45 @@
              const targetInput = event.target;
              if (targetInput === DOMElements.jsonInputLeft || targetInput === DOMElements.jsonInputRight) {
                  if (targetInput.value.endsWith(':dev')) {
-                     targetInput.value = targetInput.value.slice(0, -4); clearMessages();
+                     targetInput.value = targetInput.value.slice(0, -4);
+                     clearMessages();
+
                      const sampleJson1 = { "name": "JSON Compare Tool", "version": "1.0", "features": ["compare", "beautify", "highlight", "dark mode"], "enabled": true, "settings": { "theme": "auto", "indent": 2 }, "items": [ { "id": 1, "value": "apple" }, { "id": 2, "value": "banana" } ] };
                      const sampleJson2 = { "name": "JSON Comparison Online", "version": "1.1", "features": ["compare", "beautify", "highlight", "dark mode", "file upload", "download"], "enabled": true, "settings": { "theme": "dark", "indent": 2 }, "items": [ { "id": 2, "value": "banana" }, { "id": 3, "value": "cherry" } ], "new_feature": "localStorage persistence" };
-                     if (targetInput === DOMElements.jsonInputLeft) { DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson1, null, 2); DOMElements.jsonInputRight.value = JSON.stringify(sampleJson2, null, 2); }
-                     else { DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson2, null, 2); DOMElements.jsonInputRight.value = JSON.stringify(sampleJson1, null, 2); }
-                     debouncedSave(); displayMessage('Developer mode: Sample JSON loaded!', 'info'); compareJson();
+
+                     if (targetInput === DOMElements.jsonInputLeft) {
+                         DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson1, null, 2);
+                         DOMElements.jsonInputRight.value = JSON.stringify(sampleJson2, null, 2);
+                     } else {
+                         DOMElements.jsonInputLeft.value = JSON.stringify(sampleJson2, null, 2);
+                         DOMElements.jsonInputRight.value = JSON.stringify(sampleJson1, null, 2);
+                     }
+
+                     // Update line numbers for both after loading dev data
+                     updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft);
+                     updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight);
+
+                     debouncedSave();
+                     displayMessage('Developer mode: Sample JSON loaded!', 'info');
+                     compareJson();
                  }
              }
-        }
+         }
 
         // --- Modal Logic ---
         function openModal() {
             DOMElements.modalOverlay.classList.remove('hidden');
             DOMElements.howToUseModal.classList.remove('hidden');
+            DOMElements.modalOverlay.setAttribute('aria-hidden', 'false');
+            DOMElements.howToUseModal.setAttribute('aria-hidden', 'false');
+            DOMElements.closeModalButton.focus();
         }
         function closeModal() {
             DOMElements.modalOverlay.classList.add('hidden');
             DOMElements.howToUseModal.classList.add('hidden');
+            DOMElements.modalOverlay.setAttribute('aria-hidden', 'true');
+            DOMElements.howToUseModal.setAttribute('aria-hidden', 'true');
+            DOMElements.howToUseButton.focus();
         }
 
         // --- Event Listeners Setup ---
@@ -636,49 +984,105 @@
             DOMElements.themeToggleButton.addEventListener('click', toggleTheme);
             DOMElements.downloadButton.addEventListener('click', downloadDiff);
             DOMElements.copyResultsButton.addEventListener('click', (e) => copyResultsToClipboard(e.currentTarget));
-            DOMElements.howToUseButton.addEventListener('click', openModal); // Open modal
-            DOMElements.closeModalButton.addEventListener('click', closeModal); // Close modal button
-            DOMElements.modalOverlay.addEventListener('click', closeModal); // Close modal on overlay click
 
-            // Input Actions (Left)
+            // Modal Triggers
+            DOMElements.howToUseButton.addEventListener('click', openModal);
+            DOMElements.closeModalButton.addEventListener('click', closeModal);
+            DOMElements.modalOverlay.addEventListener('click', closeModal);
+
+            // --- Input Actions (Left) ---
             DOMElements.beautifyLeftButton.addEventListener('click', () => beautifyJson(DOMElements.jsonInputLeft));
             DOMElements.copyLeftButton.addEventListener('click', (e) => copyToClipboard(DOMElements.jsonInputLeft, e.currentTarget));
             DOMElements.pasteLeftButton.addEventListener('click', () => pasteFromClipboard(DOMElements.jsonInputLeft));
             DOMElements.clearLeftButton.addEventListener('click', () => clearInput(DOMElements.jsonInputLeft));
             DOMElements.uploadLeftInput.addEventListener('change', (e) => handleFileUpload(e, DOMElements.jsonInputLeft));
+            // Line number updates for Left Textarea
+            DOMElements.jsonInputLeft.addEventListener('input', () => updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft));
+            DOMElements.jsonInputLeft.addEventListener('scroll', () => syncScroll(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft));
+            DOMElements.jsonInputLeft.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') {
+                    updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft);
+                }
+            });
+            DOMElements.jsonInputLeft.addEventListener('paste', () => updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft));
+            // Dev mode & Save
             DOMElements.jsonInputLeft.addEventListener('input', handleDevMode);
             DOMElements.jsonInputLeft.addEventListener('input', debouncedSave);
 
-            // Input Actions (Right)
+
+            // --- Input Actions (Right) ---
             DOMElements.beautifyRightButton.addEventListener('click', () => beautifyJson(DOMElements.jsonInputRight));
             DOMElements.copyRightButton.addEventListener('click', (e) => copyToClipboard(DOMElements.jsonInputRight, e.currentTarget));
             DOMElements.pasteRightButton.addEventListener('click', () => pasteFromClipboard(DOMElements.jsonInputRight));
             DOMElements.clearRightButton.addEventListener('click', () => clearInput(DOMElements.jsonInputRight));
             DOMElements.uploadRightInput.addEventListener('change', (e) => handleFileUpload(e, DOMElements.jsonInputRight));
+            // Line number updates for Right Textarea
+            DOMElements.jsonInputRight.addEventListener('input', () => updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight));
+            DOMElements.jsonInputRight.addEventListener('scroll', () => syncScroll(DOMElements.jsonInputRight, DOMElements.lineNumbersRight));
+            DOMElements.jsonInputRight.addEventListener('keydown', (e) => {
+                 if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') {
+                    updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight);
+                 }
+            });
+            DOMElements.jsonInputRight.addEventListener('paste', () => updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight));
+            // Dev mode & Save
             DOMElements.jsonInputRight.addEventListener('input', handleDevMode);
             DOMElements.jsonInputRight.addEventListener('input', debouncedSave);
 
+
             // Options
-            DOMElements.ignoreArrayOrderCheckbox.addEventListener('change', () => { if (!DOMElements.diffOutputSection.classList.contains('hidden')) { compareJson(); } });
+            DOMElements.ignoreArrayOrderCheckbox.addEventListener('change', () => {
+                if (!DOMElements.diffOutputSection.classList.contains('hidden')) {
+                    compareJson();
+                }
+            });
 
             // Keyboard Shortcuts
             document.addEventListener('keydown', (event) => {
-                if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { if (document.activeElement !== DOMElements.jsonInputLeft && document.activeElement !== DOMElements.jsonInputRight) { event.preventDefault(); DOMElements.compareButton.click(); DOMElements.compareButton.focus(); setTimeout(() => DOMElements.compareButton.blur(), 150); } }
-                if ((event.ctrlKey || event.metaKey) && (event.key === 'b' || event.key === 'B')) { if (document.activeElement === DOMElements.jsonInputLeft) { event.preventDefault(); DOMElements.beautifyLeftButton.click(); } else if (document.activeElement === DOMElements.jsonInputRight) { event.preventDefault(); DOMElements.beautifyRightButton.click(); } }
-                // Close modal with Escape key
-                if (event.key === 'Escape' && !DOMElements.howToUseModal.classList.contains('hidden')) { closeModal(); }
+                if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+                    if (document.activeElement !== DOMElements.jsonInputLeft && document.activeElement !== DOMElements.jsonInputRight) {
+                        event.preventDefault();
+                        DOMElements.compareButton.click();
+                        DOMElements.compareButton.focus();
+                        setTimeout(() => DOMElements.compareButton.blur(), 150);
+                    }
+                }
+                if ((event.ctrlKey || event.metaKey) && (event.key === 'b' || event.key === 'B')) {
+                    if (document.activeElement === DOMElements.jsonInputLeft) {
+                        event.preventDefault();
+                        DOMElements.beautifyLeftButton.click();
+                    } else if (document.activeElement === DOMElements.jsonInputRight) {
+                        event.preventDefault();
+                        DOMElements.beautifyRightButton.click();
+                    }
+                }
+                 if (event.key === 'Escape' && !DOMElements.howToUseModal.classList.contains('hidden')) {
+                     closeModal();
+                 }
             });
 
              // System Theme Change Listener
              const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-             const handleSystemThemeChange = (e) => { if (!localStorage.getItem(LOCAL_STORAGE_KEYS.theme)) { applyTheme(e.matches ? 'dark' : 'light'); } };
-             if (mediaQuery.addEventListener) { mediaQuery.addEventListener('change', handleSystemThemeChange); } else if (mediaQuery.addListener) { mediaQuery.addListener(handleSystemThemeChange); }
-             console.log("Event listeners added.");
+             const handleSystemThemeChange = (e) => {
+                 if (!localStorage.getItem(LOCAL_STORAGE_KEYS.theme)) {
+                     applyTheme(e.matches ? 'dark' : 'light');
+                 }
+             };
+             if (mediaQuery.addEventListener) {
+                 mediaQuery.addEventListener('change', handleSystemThemeChange);
+             } else if (mediaQuery.addListener) {
+                 mediaQuery.addListener(handleSystemThemeChange);
+             }
+
+            console.log("Event listeners added.");
         }
 
         // --- Run Application ---
-        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initializeApp); }
-        else { initializeApp(); }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
 
     </script>
 </body>
