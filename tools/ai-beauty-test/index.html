@@ -18,125 +18,189 @@
     <meta property="og:url" content="https://online-tools.ni18.in/tools/ai-beauty-test/">
     <meta property="og:title" content="AI Beauty Test - Free Online Face Score & Celebrity Look-Alike">
     <meta property="og:description" content="Get a free AI beauty score based on facial features, find your celebrity look-alike, analyze face parts, and compare photos with the AI Beauty Test tool.">
-    <meta property="og:image" content="https://online-tools.ni18.in/tools/ai-beauty-test/preview-image.jpg">
-    <meta property="og:site_name" content="NI18 Online Tools">
+    <meta property="og:image" content="/assets/icons/apple-touch-icon.png"> <meta property="og:site_name" content="NI18 Online Tools">
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://online-tools.ni18.in/tools/ai-beauty-test/">
     <meta property="twitter:title" content="AI Beauty Test - Free Online Face Score & Celebrity Look-Alike">
     <meta property="twitter:description" content="Get a free AI beauty score based on facial features, find your celebrity look-alike, analyze face parts, and compare photos with the AI Beauty Test tool.">
-     <meta property="twitter:image" content="https://online-tools.ni18.in/tools/ai-beauty-test/preview-image.jpg">
+     <meta property="twitter:image" content="/assets/icons/apple-touch-icon.png"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Custom font - Inter */
+        /* Consider minifying this CSS in a build step */
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Add smooth scrolling */
         }
-        /* Add some subtle transitions */
-        .content-section { /* Changed from feature-section for broader use */
+        .content-section {
             transition: opacity 0.5s ease-in-out;
         }
-        /* Style for file input */
+        /* Improved File Input Style */
         input[type="file"]::file-selector-button {
             margin-right: 1rem;
             border: none;
             background: #4f46e5; /* Indigo-600 */
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem; /* Slightly larger padding */
             border-radius: 0.375rem; /* rounded-md */
             color: white;
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
+            font-weight: 500;
         }
         input[type="file"]::file-selector-button:hover {
             background: #4338ca; /* Indigo-700 */
         }
-
-        /* Updated Loader Styles */
+        /* Improved Loader Styles */
         .loader-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 20px auto;
-            min-height: 70px; /* Ensure space for spinner and text */
+            margin: 2rem auto; /* Increased margin */
+            min-height: 90px; /* Increased height */
         }
         .loader-spinner {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #4f46e5; /* Indigo-600 */
+            border: 5px solid #e5e7eb; /* gray-200 */
+            border-top: 5px solid #4f46e5; /* Indigo-600 */
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin-bottom: 10px; /* Space between spinner and text */
+            margin-bottom: 1rem; /* Increased space */
         }
         .loader-text {
-            font-size: 0.9rem;
+            font-size: 1rem; /* Slightly larger text */
             color: #4f46e5; /* Indigo-600 */
-            font-weight: 500;
+            font-weight: 600; /* Bolder */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Ensure images don't overflow their containers */
+        /* Ensure images don't overflow and have consistent styling */
         img {
            max-width: 100%;
            height: auto;
-           display: block; /* Prevents bottom space */
-           border-radius: 0.375rem; /* rounded-md */
+           display: block;
+           border-radius: 0.5rem; /* rounded-lg */
+           background-color: #f3f4f6; /* gray-100 for placeholders */
         }
-
-        /* Style for comparison images */
+        /* Comparison container adjustments */
         .comparison-container {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem; /* Increased gap */
             justify-content: center;
             align-items: flex-start;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
         .comparison-item {
             flex: 1;
-            max-width: 45%;
+            min-width: 200px; /* Adjusted minimum width for better wrapping */
+            max-width: calc(50% - 0.75rem); /* Adjust max-width for gap */
             text-align: center;
         }
          .comparison-item img {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; /* Increased margin */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
          }
-
-         /* Responsive adjustments */
-         @media (max-width: 640px) {
-            .comparison-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .comparison-item {
-                max-width: 90%;
-                margin-bottom: 1rem;
-            }
-            .comparison-item:last-child {
-                margin-bottom: 0;
-            }
-         }
-         /* Style for How to Use / About lists */
+         /* Info section list styling */
          .info-section ul {
-            list-style: disc;
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-            color: #4b5563; /* gray-600 */
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+            margin-top: 1rem;
          }
          .info-section li {
-            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.75rem; /* Space for icon */
+            margin-bottom: 0.75rem;
+            color: #4b5563; /* gray-600 */
+            line-height: 1.6; /* Improve readability */
+         }
+         /* Add checkmark icon */
+         .info-section li::before {
+            content: '\f00c'; /* Font Awesome check icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #10b981; /* emerald-500 */
+            position: absolute;
+            left: 0;
+            top: 5px; /* Adjust vertical alignment slightly */
+            font-size: 0.9em; /* Slightly smaller icon */
          }
          .info-section strong {
             color: #1f2937; /* gray-800 */
+            font-weight: 600;
          }
+         /* Style for result cards */
+        .result-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1rem; /* Base padding */
+            margin-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-sm */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+             .result-card {
+                 padding: 1.5rem; /* Larger padding on larger screens */
+             }
+        }
+        .result-card h3, .result-card h4 {
+            margin-bottom: 1rem;
+        }
+        /* Score display enhancement */
+        .score-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background-color: #f3f4f6; /* gray-100 */
+            border-radius: 0.375rem; /* rounded-md */
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap; /* Allow wrapping inside score display if needed */
+        }
+        .score-display span:first-child { /* Target the label span */
+            margin-right: 0.5rem; /* Add some space between label and value */
+            flex-shrink: 0; /* Prevent label from shrinking */
+        }
+        .score-display i {
+            margin-right: 0.5rem; /* Reduced icon margin */
+            color: #4f46e5; /* Indigo-600 */
+        }
+        .score-value {
+            font-weight: 700;
+            font-size: 1.125rem; /* text-lg */
+            color: #1f2937; /* gray-800 */
+            text-align: right; /* Align score value to the right */
+            flex-grow: 1; /* Allow value to take remaining space */
+        }
+        /* Showdown Winner Highlight */
+        .showdown-winner-card {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            margin-top: 1.5rem;
+            display: inline-block;
+            text-align: center;
+        }
+         @media (min-width: 640px) { /* sm breakpoint */
+            .showdown-winner-card {
+                 font-size: 1.25rem; /* text-xl */
+            }
+         }
+        .winner-img1 { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; } /* green */
+        .winner-img2 { background-color: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; } /* blue */
+        .winner-tie { background-color: #fef9c3; color: #a16207; border: 1px solid #fde047; } /* yellow */
+
+        /* Remove the custom media query as we handle responsiveness via Tailwind classes */
+        /* @media (max-width: 768px) { ... } */
 
     </style>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
     {
@@ -165,8 +229,8 @@
          "applicationCategory": "WebApplication",
          "aggregateRating": {
            "@type": "AggregateRating",
-           "ratingValue": "4.5", 
-           "reviewCount": "150"  
+           "ratingValue": "4.5", // Update with real data if available
+           "reviewCount": "150"  // Update with real data if available
          },
          "offers": {
            "@type": "Offer",
@@ -178,264 +242,302 @@
        }
     }
     </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-RJER6TKTQ3');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3" defer></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RJER6TKTQ3');
+    </script>
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 text-gray-800 min-h-screen flex flex-col">
 
     <header class="bg-white shadow-md sticky top-0 z-10">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-indigo-600">
-                <i class="fas fa-face-smile-beam mr-2"></i>AI Beauty Test
+        <nav class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center">
+            <div class="text-2xl font-bold text-indigo-600 mb-3 sm:mb-0 mr-0 sm:mr-4 flex-shrink-0">
+                <i class="fas fa-face-sparkles mr-2"></i>AI Beauty Test
             </div>
-             <div class="flex flex-wrap justify-end space-x-1 sm:space-x-2 text-xs sm:text-sm">
-                <button data-target="scanner" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">Scan & Score</button>
-                <button data-target="lookalike" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">Look-Alike</button>
-                <button data-target="analysis" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">Face Parts</button>
-                <button data-target="showdown" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">Showdown</button>
-                <button data-target="how-to-use" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">How to Use</button>
-                <button data-target="about" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium transition duration-150 ease-in-out">About</button>
+             <div class="flex flex-wrap justify-center sm:justify-end gap-x-1 gap-y-1 sm:gap-x-2 text-xs">
+                <button data-target="scanner" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-camera-retro mr-1"></i>Scan & Score
+                </button>
+                <button data-target="lookalike" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-user-astronaut mr-1"></i>Look-Alike
+                </button>
+                <button data-target="analysis" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-magnifying-glass-chart mr-1"></i>Face Parts
+                </button>
+                <button data-target="showdown" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-trophy mr-1"></i>Showdown
+                </button>
+                <button data-target="how-to-use" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-circle-question mr-1"></i>How to Use
+                </button>
+                <button data-target="about" class="nav-btn text-gray-600 hover:text-indigo-600 px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm rounded-md font-medium transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                    <i class="fas fa-circle-info mr-1"></i>About
+                </button>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow">
 
         <h1 class="sr-only">AI Beauty Test: Face Score, Look-Alike, and Analysis Tool</h1>
 
-        <section id="scanner" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Face Scanning & Feature Scoring</h2>
-            <p class="text-gray-600 mb-4">Get a detailed score based on your facial features like eyes, lips, nose, and more. Face beauty analysis usually entails applying mathematical or algorithmic models to assess the harmony, symmetry, and proportions of facial characteristics.</p>
-            <div class="mb-4">
-                <label for="scanner-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload your image:</label>
-                <input type="file" id="scanner-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer"/>
+        <section id="scanner" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-camera-retro text-indigo-500 mr-2 sm:mr-3"></i>Face Scanning & Feature Scoring</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Get a detailed score based on your facial features like eyes, lips, nose, and more. Face beauty analysis usually entails applying mathematical or algorithmic models to assess the harmony, symmetry, and proportions of facial characteristics.</p>
+            <div class="mb-6">
+                <label for="scanner-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Upload your image:</label>
+                <input type="file" id="scanner-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"/>
             </div>
-            <div id="scanner-preview" class="mb-4 text-center">
-                <img id="scanner-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for beauty scanning" class="max-w-xs mx-auto rounded-md shadow"/>
+            <div id="scanner-preview" class="mb-6 text-center">
+                <img id="scanner-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for beauty scanning" class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300"/>
             </div>
             <div id="scanner-loader" class="hidden loader-container">
                 <div class="loader-spinner"></div>
                 <div id="scanner-loader-text" class="loader-text">Loading 0%</div>
             </div>
-            <div id="scanner-results" class="hidden mt-6 p-4 bg-indigo-50 rounded-md border border-indigo-200">
-                 <h3 class="text-lg font-semibold text-indigo-800 mb-2">Analysis Results:</h3>
-                <p class="text-gray-700"><strong>Overall Beauty Score:</strong> <span id="scanner-score" class="font-bold">--</span> / 100</p>
-                <ul class="list-disc list-inside mt-2 text-gray-600">
-                    <li>Eyes Score: <span id="scanner-eyes">--</span></li>
-                    <li>Lips Score: <span id="scanner-lips">--</span></li>
-                    <li>Nose Score: <span id="scanner-nose">--</span></li>
-                    <li>Symmetry Score: <span id="scanner-symmetry">--</span></li>
-                </ul>
-                <p class="mt-3 text-xs text-gray-500 italic">*Scores are deterministically generated based on filename for demonstration. Results may not be 100% accurate.</p>
+            <div id="scanner-results" class="hidden result-card border-indigo-200 bg-indigo-50">
+                 <h3 class="text-lg sm:text-xl font-semibold text-indigo-800 mb-4 flex items-center"><i class="fas fa-poll mr-2"></i>Analysis Results:</h3>
+                 <div class="score-display bg-white border border-indigo-100">
+                     <span><i class="fas fa-star text-yellow-500"></i>Overall Score:</span>
+                     <span id="scanner-score" class="score-value text-indigo-700">-- / 100</span>
+                 </div>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="score-display">
+                        <span><i class="fas fa-eye"></i>Eyes Score:</span>
+                        <span id="scanner-eyes" class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-lips"></i>Lips Score:</span>
+                        <span id="scanner-lips" class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-draw-polygon"></i>Nose Score:</span> <span id="scanner-nose" class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-vector-square"></i>Symmetry Score:</span>
+                        <span id="scanner-symmetry" class="score-value">--</span>
+                    </div>
+                 </div>
+                <p class="mt-4 text-xs text-gray-500 italic">*Results may not be 100% accurate.</p>
             </div>
         </section>
 
-        <section id="lookalike" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8 hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Celebrity Look-Alike Detection</h2>
-            <p class="text-gray-600 mb-4">See which celebrity you resemble most! Our algorithms look for similarities in facial features such as dimensions and bone structure.</p>
-            <div class="mb-4">
-                <label for="lookalike-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload your image:</label>
-                <input type="file" id="lookalike-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer"/>
+        <section id="lookalike" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-user-astronaut text-purple-500 mr-2 sm:mr-3"></i>Celebrity Look-Alike</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">See which celebrity you resemble most! Our algorithms look for similarities in facial features such as dimensions and bone structure.</p>
+            <div class="mb-6">
+                <label for="lookalike-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Upload your image:</label>
+                <input type="file" id="lookalike-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"/>
             </div>
-             <div id="lookalike-preview" class="mb-4 text-center">
-                 <img id="lookalike-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for celebrity look-alike detection" class="max-w-xs mx-auto rounded-md shadow"/>
+             <div id="lookalike-preview" class="mb-6 text-center">
+                 <img id="lookalike-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for celebrity look-alike detection" class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300"/>
             </div>
              <div id="lookalike-loader" class="hidden loader-container">
                 <div class="loader-spinner"></div>
                 <div id="lookalike-loader-text" class="loader-text">Loading 0%</div>
             </div>
-            <div id="lookalike-results" class="hidden mt-6 p-4 bg-green-50 rounded-md border border-green-200 text-center">
-                <h3 class="text-lg font-semibold text-green-800 mb-2">Your Celebrity Look-Alike:</h3>
-                <img id="celebrity-img" src="https://placehold.co/200x200/e2e8f0/cbd5e1?text=Celebrity" alt="Celebrity Match" class="w-32 h-32 rounded-full mx-auto mb-3 shadow-md object-cover"/>
-                <p class="text-xl font-medium text-gray-700"><span id="celebrity-name">--</span></p>
-                <p class="text-gray-600">Match Confidence: <span id="celebrity-confidence">--</span>%</p>
-                 <p class="mt-3 text-xs text-gray-500 italic">*Celebrity match is deterministically generated based on filename for demonstration. Results may not be 100% accurate.</p>
+            <div id="lookalike-results" class="hidden result-card border-green-200 bg-green-50 text-center">
+                <h3 class="text-lg sm:text-xl font-semibold text-green-800 mb-4 flex items-center justify-center"><i class="fas fa-award mr-2"></i>Your Celebrity Look-Alike:</h3>
+                <img id="celebrity-img" src="https://placehold.co/160x160/e2e8f0/cbd5e1?text=Celebrity" alt="Celebrity Match Placeholder" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-4 shadow-lg object-cover border-4 border-white" loading="lazy" width="160" height="160"/>
+                <p class="text-xl sm:text-2xl font-semibold text-gray-800"><span id="celebrity-name">--</span></p>
+                <p class="text-gray-600 text-base sm:text-lg mt-1">Match Confidence: <span id="celebrity-confidence" class="font-bold text-green-700">--</span>%</p>
+                 <p class="mt-4 text-xs text-gray-500 italic">*Results may not be 100% accurate.</p>
             </div>
         </section>
 
-        <section id="analysis" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8 hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Face Parts Analysis</h2>
-            <p class="text-gray-600 mb-4">Receive insights about specific face parts, such as eyes, lips, eyebrows, and nose. Face reading, rooted in various traditions, interprets outward characteristics as a reflection of inner traits.</p>
-             <div class="mb-4">
-                <label for="analysis-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload your image:</label>
-                <input type="file" id="analysis-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer"/>
+        <section id="analysis" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-magnifying-glass-chart text-blue-500 mr-2 sm:mr-3"></i>Face Parts Analysis</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Receive insights about specific face parts, such as eyes, lips, eyebrows, and nose. Face reading, rooted in various traditions, interprets outward characteristics as a reflection of inner traits.</p>
+             <div class="mb-6">
+                <label for="analysis-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Upload your image:</label>
+                <input type="file" id="analysis-upload" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"/>
             </div>
-             <div id="analysis-preview" class="mb-4 text-center">
-                 <img id="analysis-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for face parts analysis" class="max-w-xs mx-auto rounded-md shadow"/>
+             <div id="analysis-preview" class="mb-6 text-center">
+                 <img id="analysis-img-preview" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Upload+Image" alt="Preview area for uploaded image for face parts analysis" class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300"/>
             </div>
              <div id="analysis-loader" class="hidden loader-container">
                 <div class="loader-spinner"></div>
                 <div id="analysis-loader-text" class="loader-text">Loading 0%</div>
             </div>
-            <div id="analysis-results" class="hidden mt-6 space-y-4">
-                 <div class="p-4 bg-blue-50 rounded-md border border-blue-200">
-                    <h4 class="font-semibold text-blue-800">Eyes Analysis:</h4>
+            <div id="analysis-results" class="hidden mt-6 space-y-4 sm:space-y-5">
+                 <div class="result-card border-blue-200 bg-blue-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-blue-800 flex items-center"><i class="fas fa-eye mr-2"></i>Eyes Analysis:</h4>
                     <p id="analysis-eyes-text" class="text-gray-700 text-sm">Upload an image to see the analysis.</p>
                 </div>
-                 <div class="p-4 bg-pink-50 rounded-md border border-pink-200">
-                    <h4 class="font-semibold text-pink-800">Lips Analysis:</h4>
+                 <div class="result-card border-pink-200 bg-pink-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-pink-800 flex items-center"><i class="fas fa-lips mr-2"></i>Lips Analysis:</h4>
                     <p id="analysis-lips-text" class="text-gray-700 text-sm">Upload an image to see the analysis.</p>
                 </div>
-                 <div class="p-4 bg-purple-50 rounded-md border border-purple-200">
-                    <h4 class="font-semibold text-purple-800">Nose Analysis:</h4>
+                 <div class="result-card border-purple-200 bg-purple-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-purple-800 flex items-center">
+                        <i class="fas fa-draw-polygon mr-2"></i>Nose Analysis: </h4>
                     <p id="analysis-nose-text" class="text-gray-700 text-sm">Upload an image to see the analysis.</p>
                 </div>
-                 <p class="mt-3 text-xs text-gray-500 italic">*Analysis text is deterministically generated based on filename for demonstration. Results may not be 100% accurate.</p>
+                 <p class="mt-4 text-xs text-gray-500 italic">*Results may not be 100% accurate.</p>
             </div>
         </section>
 
-        <section id="showdown" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8 hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Beauty Showdown</h2>
-            <p class="text-gray-600 mb-4">Upload two images, compare their AI beauty scores based on facial symmetry and proportions, and find the winner!</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+        <section id="showdown" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-trophy text-yellow-500 mr-2 sm:mr-3"></i>Beauty Showdown</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Upload two images, compare their AI beauty scores based on facial symmetry and proportions, and find the winner!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
                 <div>
-                    <label for="showdown-upload1" class="block text-sm font-medium text-gray-700 mb-2">Upload Image 1:</label>
-                    <input type="file" id="showdown-upload1" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer"/>
+                    <label for="showdown-upload1" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Upload Image 1:</label>
+                    <input type="file" id="showdown-upload1" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"/>
                 </div>
                  <div>
-                    <label for="showdown-upload2" class="block text-sm font-medium text-gray-700 mb-2">Upload Image 2:</label>
-                    <input type="file" id="showdown-upload2" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer"/>
+                    <label for="showdown-upload2" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Upload Image 2:</label>
+                    <input type="file" id="showdown-upload2" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"/>
                 </div>
             </div>
-             <div id="showdown-preview" class="mb-4 comparison-container">
+             <div id="showdown-preview" class="mb-6 comparison-container">
                  <div class="comparison-item">
-                     <img id="showdown-img-preview1" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Upload+Image+1" alt="Preview area for first image in beauty showdown" class="mx-auto rounded-md shadow"/>
-                    <p class="text-sm text-gray-500">Image 1</p>
+                     <img id="showdown-img-preview1" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Upload+Image+1" alt="Preview area for first image in beauty showdown" class="mx-auto rounded-lg shadow-md" loading="lazy" width="300" height="225"/>
+                    <p class="text-xs sm:text-sm text-gray-600 font-medium mt-2">Image 1</p>
                  </div>
                  <div class="comparison-item">
-                     <img id="showdown-img-preview2" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Upload+Image+2" alt="Preview area for second image in beauty showdown" class="mx-auto rounded-md shadow"/>
-                    <p class="text-sm text-gray-500">Image 2</p>
+                     <img id="showdown-img-preview2" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Upload+Image+2" alt="Preview area for second image in beauty showdown" class="mx-auto rounded-lg shadow-md" loading="lazy" width="300" height="225"/>
+                    <p class="text-xs sm:text-sm text-gray-600 font-medium mt-2">Image 2</p>
                  </div>
             </div>
              <div id="showdown-loader" class="hidden loader-container">
                 <div class="loader-spinner"></div>
                 <div id="showdown-loader-text" class="loader-text">Loading 0%</div>
             </div>
-            <div id="showdown-results" class="hidden mt-6 p-4 bg-yellow-50 rounded-md border border-yellow-200 text-center">
-                 <h3 class="text-lg font-semibold text-yellow-800 mb-3">Showdown Results:</h3>
-                 <div class="flex justify-around items-center mb-4">
-                     <div class="text-center">
-                         <p class="text-gray-700 font-medium">Image 1 Score</p>
-                         <p id="showdown-score1" class="text-2xl font-bold text-indigo-600">--</p>
+            <div id="showdown-results" class="hidden result-card border-yellow-200 bg-yellow-50 text-center">
+                 <h3 class="text-lg sm:text-xl font-semibold text-yellow-800 mb-5 flex items-center justify-center"><i class="fas fa-balance-scale mr-2"></i>Showdown Results:</h3>
+                 <div class="flex flex-col sm:flex-row justify-around items-center mb-5 gap-4">
+                     <div class="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200 w-full sm:w-auto">
+                         <p class="text-gray-700 font-medium text-sm sm:text-base mb-1">Image 1 Score</p>
+                         <p id="showdown-score1" class="text-2xl sm:text-3xl font-bold text-indigo-600">--</p>
                      </div>
-                     <div class="text-gray-400 text-xl font-light">vs</div>
-                     <div class="text-center">
-                         <p class="text-gray-700 font-medium">Image 2 Score</p>
-                         <p id="showdown-score2" class="text-2xl font-bold text-indigo-600">--</p>
+                     <div class="text-gray-400 text-xl sm:text-2xl font-light hidden sm:block">vs</div>
+                     <div class="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200 w-full sm:w-auto">
+                         <p class="text-gray-700 font-medium text-sm sm:text-base mb-1">Image 2 Score</p>
+                         <p id="showdown-score2" class="text-2xl sm:text-3xl font-bold text-indigo-600">--</p>
                      </div>
                  </div>
-                 <p id="showdown-winner" class="text-xl font-semibold text-green-700 bg-green-100 py-2 px-4 rounded-md inline-block"></p>
-                 <p class="mt-3 text-xs text-gray-500 italic">*Scores are deterministically generated based on filenames for demonstration. Results may not be 100% accurate.</p>
+                 <div id="showdown-winner" class="showdown-winner-card">
+                    </div>
+                 <p class="mt-4 text-xs text-gray-500 italic">*Results may not be 100% accurate.</p>
             </div>
         </section>
 
-        <section id="how-to-use" class="content-section info-section bg-white p-6 rounded-lg shadow-lg mb-8 hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">How to Use AI Beauty Test</h2>
-            <p class="text-gray-600 mb-4">Using the AI Beauty Test is simple and fun! Follow these steps:</p>
+        <section id="how-to-use" class="content-section info-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-circle-question text-teal-500 mr-2 sm:mr-3"></i>How to Use AI Beauty Test</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Using the AI Beauty Test is simple and fun! Follow these steps:</p>
             <ul>
-                <li><strong>Select a Feature:</strong> Click on one of the buttons in the header navigation ("Scan & Score", "Look-Alike", "Face Parts", "Showdown") to choose the analysis you want to perform.</li>
-                <li><strong>Upload Image(s):</strong> Click the "Upload your image" button within the selected feature section. Choose a clear photo of a face from your device. For "Beauty Showdown", you'll need to upload two images.</li>
-                <li><strong>Wait for Analysis:</strong> The tool will simulate an AI analysis. You'll see a loading indicator with a percentage showing the progress. Please be patient, as the analysis time increases with each use for dramatic effect!</li>
-                <li><strong>View Results:</strong> Once the analysis is complete, your results (scores, celebrity match, text analysis, or comparison) will be displayed automatically in the results area below the image preview.</li>
-                <li><strong>Try Another!:</strong> Feel free to try different features or upload new images to see different simulated results. Remember, results for the same filename will be consistent within a session.</li>
+                <li><strong>Select a Feature:</strong> Click on one of the buttons in the header navigation (<i class="fas fa-camera-retro text-xs"></i> Scan & Score, <i class="fas fa-user-astronaut text-xs"></i> Look-Alike, etc.) to choose the analysis you want to perform.</li>
+                <li><strong>Upload Image(s):</strong> Click the "Upload your image" button. Choose a clear photo of a face. For "<i class="fas fa-trophy text-xs"></i> Beauty Showdown", upload two images.</li>
+                <li><strong>Wait for Analysis:</strong> The tool simulates analysis. You'll see a loader (<span class="loader-spinner inline-block w-4 h-4 border-2 border-t-indigo-500 align-middle"></span>).</li>
+                <li><strong>View Results:</strong> Once complete, your results (scores, match, analysis, comparison) appear below.</li>
+                <li><strong>Try Another!:</strong> Feel free to try different features or images.</li>
             </ul>
-             <p class="mt-4 text-sm text-gray-500"><strong>Note:</strong> This tool is for entertainment purposes only. The "AI" analysis is simulated and based on the filename for consistent demonstration.</p>
+             <p class="mt-6 text-xs sm:text-sm text-gray-500 bg-gray-100 p-3 rounded-md border border-gray-200"><i class="fas fa-info-circle mr-2 text-gray-500"></i><strong>Note:</strong> This tool is for entertainment only. The "AI" analysis is simulated based on filename.</p>
         </section>
 
-        <section id="about" class="content-section info-section bg-white p-6 rounded-lg shadow-lg mb-8 hidden">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">About AI Beauty Test</h2>
-            <p class="text-gray-600 mb-4">Welcome to AI Beauty Test, your fun destination for exploring facial features through simulated AI analysis!</p>
-            <p class="text-gray-600 mb-2"><strong>What it does:</strong></p>
+        <section id="about" class="content-section info-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i class="fas fa-circle-info text-cyan-500 mr-2 sm:mr-3"></i>About AI Beauty Test</h2>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base">Welcome to AI Beauty Test, your fun destination for exploring facial features through simulated AI analysis!</p>
+            <p class="text-gray-600 mb-2 text-sm sm:text-base"><strong>What it does (Simulated):</strong></p>
             <ul>
-                <li>Provides simulated "beauty scores" based on general facial characteristics.</li>
-                <li>Matches your photo to a celebrity look-alike (simulated).</li>
-                <li>Offers interpretations of facial parts based on traditional face reading concepts (simulated).</li>
-                <li>Compares the "beauty scores" of two different images (simulated).</li>
+                <li>Provides "beauty scores" based on general facial characteristics.</li>
+                <li>Matches your photo to a celebrity look-alike.</li>
+                <li>Offers interpretations of facial parts based on traditional face reading concepts.</li>
+                <li>Compares the "beauty scores" of two different images.</li>
             </ul>
-             <p class="text-gray-600 mt-4 mb-2"><strong>Important Disclaimer:</strong></p>
-             <ul>
-                <li><strong>Entertainment Only:</strong> This tool is designed purely for entertainment and fun. The results generated are simulated and do not reflect scientific analysis or objective measures of beauty.</li>
-                <li><strong>Simulated AI:</strong> The "AI analysis" is based on the uploaded image's filename to provide consistent results for demonstration purposes. No actual image processing or complex AI modeling occurs in this front-end simulation.</li>
-                <li><strong>No Data Storage:</strong> Your uploaded images are processed locally in your browser for preview and filename retrieval only. They are not sent to any server or stored anywhere.</li>
-                <li><strong>Subjectivity of Beauty:</strong> Beauty is subjective and diverse. This tool does not intend to define or judge beauty standards.</li>
+             <p class="text-gray-600 mt-6 mb-2 text-sm sm:text-base"><strong><i class="fas fa-triangle-exclamation text-red-500 mr-1"></i> Important Disclaimer:</strong></p>
+             <ul class="[&>li]:before:content-['\f071'] [&>li]:before:text-red-500 text-sm sm:text-base"> <li><strong>Entertainment Only:</strong> This tool is designed purely for entertainment. Results are simulated and do not reflect scientific analysis or objective measures of beauty.</li>
+                <li><strong>Simulated AI:</strong> The "AI analysis" uses the uploaded image's filename for demonstration. No actual image processing or complex AI modeling occurs.</li>
+                <li><strong>No Data Storage:</strong> Images are processed locally in your browser for preview and filename retrieval only. They are NOT sent to any server or stored.</li>
+                <li><strong>Subjectivity of Beauty:</strong> Beauty is subjective and diverse. This tool does not define or judge beauty standards.</li>
              </ul>
-             <p class="text-gray-600 mt-4">We hope you enjoy exploring the features of AI Beauty Test!</p>
+             <p class="text-gray-600 mt-6 text-sm sm:text-base">We hope you enjoy exploring the features of AI Beauty Test!</p>
         </section>
 
-        <section id="why-choose" aria-labelledby="why-choose-heading" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8 mt-12 hidden">
-            <h2 id="why-choose-heading" class="text-2xl font-semibold text-gray-700 mb-4 text-center">Why Choose AI Beauty Test?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-                <div class="p-4 rounded-md bg-indigo-50">
-                    <i class="fas fa-brain text-3xl text-indigo-500 mb-2" aria-hidden="true"></i>
-                    <h3 class="font-semibold text-lg text-indigo-800 mb-1">AI-Powered Insights*</h3>
-                    <p class="text-sm text-gray-600">Engaging results powered by *simulated* AI algorithms for fun.</p>
+        <section id="why-choose" aria-labelledby="why-choose-heading" class="content-section bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 mt-12">
+            <h2 id="why-choose-heading" class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-6 text-center">Why Choose AI Beauty Test?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-center">
+                <div class="p-4 sm:p-6 rounded-lg bg-white shadow-sm border border-gray-200">
+                    <i class="fas fa-brain text-4xl sm:text-5xl text-indigo-500 mb-3" aria-hidden="true"></i>
+                    <h3 class="font-semibold text-lg sm:text-xl text-indigo-800 mb-2">AI-Powered Insights*</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Engaging results powered by *simulated* AI algorithms for fun.</p>
                 </div>
-                 <div class="p-4 rounded-md bg-pink-50">
-                     <i class="fas fa-puzzle-piece text-3xl text-pink-500 mb-2" aria-hidden="true"></i>
-                    <h3 class="font-semibold text-lg text-pink-800 mb-1">Fun and Interactive</h3>
-                    <p class="text-sm text-gray-600">Perfect for entertainment, self-discovery, and sharing with friends.</p>
+                 <div class="p-4 sm:p-6 rounded-lg bg-white shadow-sm border border-gray-200">
+                     <i class="fas fa-puzzle-piece text-4xl sm:text-5xl text-pink-500 mb-3" aria-hidden="true"></i>
+                    <h3 class="font-semibold text-lg sm:text-xl text-pink-800 mb-2">Fun and Interactive</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Perfect for entertainment, self-discovery, and sharing with friends.</p>
                 </div>
             </div>
-             <p class="text-center mt-6 text-gray-600">Explore a new perspective with the AI Beauty Test!</p>
+             <p class="text-center mt-6 sm:mt-8 text-base sm:text-lg text-gray-700 font-medium">Explore a new perspective with the AI Beauty Test!</p>
         </section>
 
     </main>
 
-    <footer class="bg-white mt-12 py-4 shadow-inner">
-        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-            &copy; <span id="current-year"></span> AI Beauty Test. All rights reserved. AI features are simulated for entertainment purposes.
+    <footer class="bg-gray-800 text-gray-300 mt-12 py-6 shadow-inner">
+        <div class="container mx-auto px-4 text-center text-xs sm:text-sm">
+            &copy; <span id="current-year"></span> AI Beauty Test. All rights reserved.
+            <br class="sm:hidden"> <span class="hidden sm:inline mx-1">|</span>
+            <span>AI Beauty Test is for entertainment purposes only.</span>
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 
     <script>
-        $(document).ready(function() {
+        // Wrap the entire script in a DOMContentLoaded listener for robustness
+        document.addEventListener('DOMContentLoaded', function() {
 
             // --- Feature State Management ---
             const featureState = {
-                // Base delays (ms) - can be adjusted
-                scanner:   { delay: 10000, intervalId: null, timeoutId: null, loaderTextId: 'scanner-loader-text',   loaderId: 'scanner-loader',   resultsId: 'scanner-results' },
-                lookalike: { delay: 12000, intervalId: null, timeoutId: null, loaderTextId: 'lookalike-loader-text', loaderId: 'lookalike-loader', resultsId: 'lookalike-results' },
-                analysis:  { delay: 8000,  intervalId: null, timeoutId: null, loaderTextId: 'analysis-loader-text',  loaderId: 'analysis-loader',  resultsId: 'analysis-results' },
-                showdown:  { delay: 15000, intervalId: null, timeoutId: null, loaderTextId: 'showdown-loader-text',  loaderId: 'showdown-loader',  resultsId: 'showdown-results' },
-                // Added states for non-loading sections (no delay needed)
+                // Reduced initial delays for quicker testing/demo
+                scanner:   { delay: 2500, intervalId: null, timeoutId: null, loaderTextId: 'scanner-loader-text',   loaderId: 'scanner-loader',   resultsId: 'scanner-results' },
+                lookalike: { delay: 3000, intervalId: null, timeoutId: null, loaderTextId: 'lookalike-loader-text', loaderId: 'lookalike-loader', resultsId: 'lookalike-results' },
+                analysis:  { delay: 2000,  intervalId: null, timeoutId: null, loaderTextId: 'analysis-loader-text',  loaderId: 'analysis-loader',  resultsId: 'analysis-results' },
+                showdown:  { delay: 3500, intervalId: null, timeoutId: null, loaderTextId: 'showdown-loader-text',  loaderId: 'showdown-loader',  resultsId: 'showdown-results' },
                 'how-to-use': { resultsId: 'how-to-use' },
                 about:      { resultsId: 'about' },
                 'why-choose': { resultsId: 'why-choose' }
             };
-            const DELAY_INCREMENT = 30000; // 30 seconds increment for each feature
+            const DELAY_INCREMENT = 500; // Smaller increment
 
             // --- Navigation ---
-            $('.nav-btn').on('click', function() {
+            // Use event delegation for potentially dynamic elements (though not strictly needed here)
+            $(document).on('click', '.nav-btn', function() {
                 const targetId = $(this).data('target');
+                const $targetElement = $('#' + targetId);
 
-                // Hide all content sections
-                $('.content-section').addClass('hidden');
+                if (!$targetElement.length) return; // Exit if target doesn't exist
+
+                // Hide all content sections (except 'why-choose' initially)
+                $('.content-section').not('#why-choose').addClass('hidden');
                 // Remove active styles from all buttons
-                $('.nav-btn').removeClass('text-indigo-600 bg-indigo-100').addClass('text-gray-600');
+                $('.nav-btn').removeClass('text-indigo-600 bg-indigo-100 font-semibold').addClass('text-gray-600 font-medium');
 
                 // Show the target section
-                $('#' + targetId).removeClass('hidden');
+                $targetElement.removeClass('hidden');
                 // Add active styles to the clicked button
-                $(this).addClass('text-indigo-600 bg-indigo-100').removeClass('text-gray-600');
+                $(this).addClass('text-indigo-600 bg-indigo-100 font-semibold').removeClass('text-gray-600 font-medium');
 
-                 // Show 'Why Choose' only if it's the target, otherwise hide it
-                 if (targetId !== 'why-choose') {
-                    $('#why-choose').addClass('hidden');
+                 // Show 'Why Choose' only if a feature section is active
+                 if (targetId === 'scanner' || targetId === 'lookalike' || targetId === 'analysis' || targetId === 'showdown') {
+                    $('#why-choose').removeClass('hidden');
                  } else {
-                     $('#why-choose').removeClass('hidden'); // Explicitly show if targeted
+                     $('#why-choose').addClass('hidden'); // Hide for 'How to Use' and 'About'
                  }
+
+                 // Smooth scroll to the section
+                 const headerHeight = $('header').outerHeight() || 60; // Get header height or default
+                 $('html, body').animate({
+                    scrollTop: $targetElement.offset().top - headerHeight - 15 // Adjust offset for sticky header + margin
+                 }, 300);
             });
 
-            // --- Utility Functions (showLoader, hideLoader, showResults, hideResults remain the same) ---
+            // --- Utility Functions ---
              function showLoader(loaderId, textElementId = null, initialText = "Loading 0%") {
                 $('#' + loaderId).removeClass('hidden');
                 if (textElementId) {
@@ -445,14 +547,16 @@
             function hideLoader(loaderId) {
                  $('#' + loaderId).addClass('hidden');
             }
-            function showResults(resultsId) { $('#' + resultsId).removeClass('hidden'); }
+            function showResults(resultsId) {
+                $('#' + resultsId).removeClass('hidden');
+             }
             function hideResults(resultsId) { $('#' + resultsId).addClass('hidden'); }
 
-
-            // Function to clear timers for a specific feature (only affects features with timers)
+            // Function to clear timers for a specific feature
             function clearFeatureTimers(featureKey) {
                 const state = featureState[featureKey];
-                if (!state || !state.intervalId && !state.timeoutId) return; // Only proceed if state exists and has timers
+                // Add checks for state existence
+                if (!state || (!state.intervalId && !state.timeoutId)) return;
 
                 if (state.intervalId) {
                     clearInterval(state.intervalId);
@@ -462,57 +566,86 @@
                     clearTimeout(state.timeoutId);
                     state.timeoutId = null;
                 }
-                if (state.loaderTextId) {
+                // Check if loaderTextId exists before trying to access it
+                if (state.loaderTextId && $('#' + state.loaderTextId).length) {
                     $('#' + state.loaderTextId).text('Loading 0%');
                 }
             }
 
-            // Function to start the progressive loading process for a feature
+            // Function to start the progressive loading process
             function startProgressiveLoad(featureKey, loadingTextPrefix, onComplete) {
                 const state = featureState[featureKey];
-                if (!state || !state.delay) return; // Only proceed if state exists and has a delay property
+                // Add checks for state and delay property
+                if (!state || typeof state.delay === 'undefined') return;
+
+                // Ensure previous timers for this feature are cleared
+                clearFeatureTimers(featureKey);
+                // Check if resultsId exists before hiding
+                if(state.resultsId) hideResults(state.resultsId);
 
                 const startTime = Date.now();
                 const totalDelay = state.delay;
 
-                showLoader(state.loaderId, state.loaderTextId, `${loadingTextPrefix} 0%`);
+                // Check if loader elements exist before showing
+                if(state.loaderId && state.loaderTextId) {
+                    showLoader(state.loaderId, state.loaderTextId, `${loadingTextPrefix} 0%`);
+                }
+
+                // Clear previous interval if any (safety check)
+                if (state.intervalId) clearInterval(state.intervalId);
 
                 state.intervalId = setInterval(() => {
                     const elapsedTime = Date.now() - startTime;
                     let percentage = Math.min(100, Math.floor((elapsedTime / totalDelay) * 100));
-                     if (state.loaderTextId) {
+                    // Check if loaderTextId exists before updating
+                     if (state.loaderTextId && $('#' + state.loaderTextId).length) {
                          $('#' + state.loaderTextId).text(`${loadingTextPrefix} ${percentage}%`);
                      }
+                    // Clear interval inside itself when 100% is reached
                     if (percentage >= 100) {
                         clearInterval(state.intervalId);
                         state.intervalId = null;
                     }
                 }, 100);
 
+                // Clear previous timeout if any (safety check)
+                if (state.timeoutId) clearTimeout(state.timeoutId);
+
                 state.timeoutId = setTimeout(() => {
+                    // Ensure interval is cleared if timeout finishes first
                     if (state.intervalId) {
                         clearInterval(state.intervalId);
                         state.intervalId = null;
                     }
-                    if (state.loaderTextId) {
+                    // Check if loaderTextId exists before updating
+                    if (state.loaderTextId && $('#' + state.loaderTextId).length) {
                         $('#' + state.loaderTextId).text(`${loadingTextPrefix} 100%`);
                     }
-                    onComplete(); // Execute result calculation
-                    hideLoader(state.loaderId);
-                    showResults(state.resultsId);
-                    state.delay += DELAY_INCREMENT; // Increment delay for next time
-                    state.timeoutId = null;
+
+                    // Execute the completion callback
+                    if (typeof onComplete === 'function') {
+                        onComplete();
+                    }
+
+                    // Check if loaderId and resultsId exist before hiding/showing
+                    if(state.loaderId) hideLoader(state.loaderId);
+                    if(state.resultsId) showResults(state.resultsId);
+
+                    // Increment delay for the *next* time this feature is used
+                    state.delay += DELAY_INCREMENT;
+                    state.timeoutId = null; // Clear timeout ID
+
                 }, totalDelay);
             }
 
-            // Simple hash function
+            // Simple hash function (remains the same)
             function simpleHash(str) {
                 let hash = 0;
                 if (!str || str.length === 0) return hash;
                 for (let i = 0; i < str.length; i++) {
                     const char = str.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
-                    hash |= 0;
+                    hash |= 0; // Convert to 32bit integer
                 }
                 return Math.abs(hash);
             }
@@ -520,47 +653,78 @@
             // Generic function to handle image preview
             function previewImage(inputId, previewImgId) {
                 const input = document.getElementById(inputId);
-                const file = input.files ? input.files[0] : null;
+                // Add safety check for input element
+                if (!input) return null;
 
-                if (file) {
+                const file = input.files ? input.files[0] : null;
+                const $previewElement = $('#' + previewImgId);
+                 // Add safety check for preview element
+                if (!$previewElement.length) return null;
+
+
+                if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        $('#' + previewImgId).attr('src', e.target.result);
+                        $previewElement.attr('src', e.target.result);
+                        // Update alt text safely
+                        let baseAlt = $previewElement.attr('alt')?.split(' - ')[0] || "Preview area";
+                        $previewElement.attr('alt', `${baseAlt} - Preview of ${file.name}`);
+                    }
+                    reader.onerror = function() { // Handle potential read errors
+                        console.error("Error reading file:", file.name);
+                        resetPreview(previewImgId); // Reset on error
                     }
                     reader.readAsDataURL(file);
                     return file;
+                } else {
+                    resetPreview(previewImgId); // Reset if no file or invalid type
+                    if (file && !file.type.startsWith('image/')) {
+                        // Use a more robust notification method if available, otherwise alert
+                        alert("Please upload a valid image file (e.g., JPG, PNG, GIF).");
+                    }
+                    return null;
                 }
-                const placeholder = `https://placehold.co/${$('#' + previewImgId).attr('width') || 400}x${$('#' + previewImgId).attr('height') || 300}/e2e8f0/cbd5e1?text=Upload+Image`;
-                 $('#' + previewImgId).attr('src', placeholder);
-                let originalAlt = "Preview area for uploaded image";
-                if (previewImgId === 'scanner-img-preview') originalAlt = "Preview area for uploaded image for beauty scanning";
-                else if (previewImgId === 'lookalike-img-preview') originalAlt = "Preview area for uploaded image for celebrity look-alike detection";
-                else if (previewImgId === 'analysis-img-preview') originalAlt = "Preview area for uploaded image for face parts analysis";
-                else if (previewImgId === 'showdown-img-preview1') originalAlt = "Preview area for first image in beauty showdown";
-                else if (previewImgId === 'showdown-img-preview2') originalAlt = "Preview area for second image in beauty showdown";
-                $('#' + previewImgId).attr('alt', originalAlt);
-                return null;
             }
+
+            // Helper function to reset image preview and alt text
+            function resetPreview(previewImgId) {
+                 const $previewElement = $('#' + previewImgId);
+                 if (!$previewElement.length) return;
+
+                 const placeholder = `https://placehold.co/${$previewElement.attr('width') || 400}x${$previewElement.attr('height') || 300}/e2e8f0/cbd5e1?text=Upload+Image`;
+                 $previewElement.attr('src', placeholder);
+
+                 let originalAlt = "Preview area for uploaded image";
+                 // Determine original alt text based on ID
+                 if (previewImgId === 'scanner-img-preview') originalAlt = "Preview area for uploaded image for beauty scanning";
+                 else if (previewImgId === 'lookalike-img-preview') originalAlt = "Preview area for uploaded image for celebrity look-alike detection";
+                 else if (previewImgId === 'analysis-img-preview') originalAlt = "Preview area for uploaded image for face parts analysis";
+                 else if (previewImgId === 'showdown-img-preview1') originalAlt = "Preview area for first image in beauty showdown";
+                 else if (previewImgId === 'showdown-img-preview2') originalAlt = "Preview area for second image in beauty showdown";
+                 else if (previewImgId === 'celebrity-img') originalAlt = "Celebrity Match Placeholder";
+
+                 $previewElement.attr('alt', originalAlt);
+            }
+
 
             // --- Feature Logic (Event Handlers) ---
 
             // 1. Face Scanner
             $('#scanner-upload').on('change', function() {
                 const featureKey = 'scanner';
-                hideResults(featureState[featureKey].resultsId);
-                clearFeatureTimers(featureKey);
                 const file = previewImage('scanner-upload', 'scanner-img-preview');
+
                 if (file) {
                     const filename = file.name;
-                    $('#scanner-img-preview').attr('alt', `Preview of uploaded image ${filename} for beauty scanning`);
-                    const onCompleteScanner = () => { /* ... score calculation logic ... */
+                    const onCompleteScanner = () => {
                         const hash = simpleHash(filename);
-                        const overallScore = (hash % 36) + 65;
-                        const eyesScore    = ((hash + 10) % 31) + 68;
-                        const lipsScore    = ((hash + 20) % 26) + 65;
-                        const noseScore    = ((hash + 30) % 31) + 66;
+                        const overallScore = (hash % 41) + 60;
+                        const eyesScore    = ((hash + 10) % 36) + 65;
+                        const lipsScore    = ((hash + 20) % 31) + 60;
+                        const noseScore    = ((hash + 30) % 36) + 62;
                         const symmetryScore= ((hash + 40) % 26) + 70;
-                        $('#scanner-score').text(overallScore);
+
+                        $('#scanner-score').text(`${overallScore} / 100`);
                         $('#scanner-eyes').text(eyesScore);
                         $('#scanner-lips').text(lipsScore);
                         $('#scanner-nose').text(noseScore);
@@ -569,65 +733,90 @@
                     startProgressiveLoad(featureKey, "Scanning", onCompleteScanner);
                 } else {
                      clearFeatureTimers(featureKey);
-                     hideLoader(featureState[featureKey].loaderId);
-                     hideResults(featureState[featureKey].resultsId);
-                     $('#scanner-score, #scanner-eyes, #scanner-lips, #scanner-nose, #scanner-symmetry').text('--');
+                     if(featureState[featureKey]?.loaderId) hideLoader(featureState[featureKey].loaderId);
+                     if(featureState[featureKey]?.resultsId) hideResults(featureState[featureKey].resultsId);
+                     // Reset scores
+                     $('#scanner-score').text('-- / 100');
+                     $('#scanner-eyes, #scanner-lips, #scanner-nose, #scanner-symmetry').text('--');
                 }
             });
 
             // 2. Celebrity Look-Alike
-             const celebrities = [ /* ... celebrity list ... */
-                { name: "Angelina Jolie", img: "https://placehold.co/200x200/FFC0CB/000000?text=AJ" },
-                { name: "Brad Pitt", img: "https://placehold.co/200x200/ADD8E6/000000?text=BP" },
-                { name: "Zendaya", img: "https://placehold.co/200x200/90EE90/000000?text=Z" },
-                { name: "Tom Holland", img: "https://placehold.co/200x200/FFFFE0/000000?text=TH" },
-                { name: "Beyoncé", img: "https://placehold.co/200x200/E6E6FA/000000?text=B" },
-                { name: "Chris Hemsworth", img: "https://placehold.co/200x200/D3D3D3/000000?text=CH" },
-                { name: "Scarlett Johansson", img: "https://placehold.co/200x200/FFA07A/000000?text=SJ" }
+             const celebrities = [ // Using slightly more descriptive placeholders
+                { name: "Elegance Exemplar", img: "https://placehold.co/160x160/FFC0CB/4a4a4a?text=EE" },
+                { name: "Dashing Dynamo", img: "https://placehold.co/160x160/ADD8E6/4a4a4a?text=DD" },
+                { name: "Radiant Star", img: "https://placehold.co/160x160/90EE90/4a4a4a?text=RS" },
+                { name: "Charming Champ", img: "https://placehold.co/160x160/FFFFE0/4a4a4a?text=CC" },
+                { name: "Glamour Icon", img: "https://placehold.co/160x160/E6E6FA/4a4a4a?text=GI" },
+                { name: "Heroic Figure", img: "https://placehold.co/160x160/D3D3D3/4a4a4a?text=HF" },
+                { name: "Stunning Siren", img: "https://placehold.co/160x160/FFA07A/4a4a4a?text=SS" }
              ];
             $('#lookalike-upload').on('change', function() {
                  const featureKey = 'lookalike';
-                 hideResults(featureState[featureKey].resultsId);
-                 clearFeatureTimers(featureKey);
                  const file = previewImage('lookalike-upload', 'lookalike-img-preview');
+
                  if (file) {
                     const filename = file.name;
-                    $('#lookalike-img-preview').attr('alt', `Preview of uploaded image ${filename} for celebrity look-alike detection`);
-                    const onCompleteLookalike = () => { /* ... lookalike calculation logic ... */
+                    const onCompleteLookalike = () => {
                         const hash = simpleHash(filename);
                         const randomIndex = hash % celebrities.length;
                         const match = celebrities[randomIndex];
-                        const confidence = ((hash + 5) % 41) + 60;
+                        const confidence = ((hash + 5) % 36) + 65;
+
                         $('#celebrity-name').text(match.name);
+                        // Update src and alt text for the result image
                         $('#celebrity-img').attr('src', match.img).attr('alt', `Simulated celebrity match: ${match.name}`);
                         $('#celebrity-confidence').text(confidence);
                     };
                     startProgressiveLoad(featureKey, "Finding Match", onCompleteLookalike);
                  } else {
                      clearFeatureTimers(featureKey);
-                     hideLoader(featureState[featureKey].loaderId);
-                     hideResults(featureState[featureKey].resultsId);
-                     $('#celebrity-name, #celebrity-confidence').text('--');
-                     $('#celebrity-img').attr('src', 'https://placehold.co/200x200/e2e8f0/cbd5e1?text=Celebrity').attr('alt', 'Celebrity Match');
+                     if(featureState[featureKey]?.loaderId) hideLoader(featureState[featureKey].loaderId);
+                     if(featureState[featureKey]?.resultsId) hideResults(featureState[featureKey].resultsId);
+                     // Reset lookalike info
+                     $('#celebrity-name').text('--');
+                     $('#celebrity-confidence').text('--');
+                     resetPreview('celebrity-img'); // Reset the image placeholder
                  }
             });
 
             // 3. Face Parts Analysis
-             const analysisTexts = { /* ... analysis text options ... */
-                eyes: ["Expressive eyes, often indicating a keen observer.","Deep-set eyes, suggesting a thoughtful and introspective nature.","Wide-set eyes, hinting at an open and broad perspective.","Bright eyes, reflecting energy and curiosity.","Almond-shaped eyes, often seen as balanced and aesthetically pleasing."],
-                lips: ["Full lips, often associated with generosity and warmth.","Thin lips, suggesting a more reserved or precise personality.","A defined cupid's bow, indicating creativity and strong communication skills.","Balanced lips, reflecting emotional equilibrium.","A naturally upturned smile, conveying approachability."],
-                nose: ["A straight nose, often linked to logic and organization.","A prominent nose, suggesting leadership qualities and ambition.","A smaller nose, hinting at sensitivity and attention to detail.","A rounded nose tip, associated with a friendly and approachable demeanor.","A slightly upturned nose, sometimes linked to optimism."]
+             const analysisTexts = { // Descriptions remain the same
+                eyes: [
+                    "Expressive eyes, often indicating a keen observer with a vibrant inner world.",
+                    "Deep-set eyes, suggesting a thoughtful, introspective, and perhaps mysterious nature.",
+                    "Wide-set eyes, hinting at an open, broad perspective and tolerance for new ideas.",
+                    "Bright, clear eyes, reflecting abundant energy, curiosity, and enthusiasm for life.",
+                    "Almond-shaped eyes, often seen as balanced, aesthetically pleasing, and potentially indicating artistic sensibility."
+                ],
+                lips: [
+                    "Full lips, often associated with generosity, warmth, and strong nurturing instincts.",
+                    "Thin lips, suggesting a more reserved, precise, and perhaps detail-oriented personality.",
+                    "A defined cupid's bow, indicating creativity, strong communication skills, and eloquence.",
+                    "Balanced, symmetrical lips, reflecting emotional equilibrium, stability, and fairness.",
+                    "A naturally upturned smile, conveying approachability, optimism, and a friendly disposition."
+                ],
+                nose: [
+                    "A straight nose bridge, often linked to logic, organization, and a methodical approach.",
+                    "A prominent or strong nose, suggesting leadership qualities, ambition, and decisiveness.",
+                    "A smaller, refined nose, hinting at sensitivity, attention to detail, and refined tastes.",
+                    "A rounded nose tip, associated with a friendly, approachable, and sociable demeanor.",
+                    "A slightly upturned nose ('celestial'), sometimes linked to optimism, curiosity, and playfulness."
+                ]
             };
             $('#analysis-upload').on('change', function() {
                  const featureKey = 'analysis';
-                 hideResults(featureState[featureKey].resultsId);
-                 clearFeatureTimers(featureKey);
-                 $('#analysis-eyes-text, #analysis-lips-text, #analysis-nose-text').text('Upload an image to see the analysis.');
                  const file = previewImage('analysis-upload', 'analysis-img-preview');
+
+                 const resetAnalysisText = () => {
+                    $('#analysis-eyes-text, #analysis-lips-text, #analysis-nose-text').text('Upload an image to see the analysis.');
+                 }
+
+                 resetAnalysisText(); // Reset text initially
+
                  if (file) {
                     const filename = file.name;
-                    $('#analysis-img-preview').attr('alt', `Preview of uploaded image ${filename} for face parts analysis`);
-                    const onCompleteAnalysis = () => { /* ... analysis text selection logic ... */
+                    const onCompleteAnalysis = () => {
                          const hash = simpleHash(filename);
                         $('#analysis-eyes-text').text(analysisTexts.eyes[(hash + 1) % analysisTexts.eyes.length]);
                         $('#analysis-lips-text').text(analysisTexts.lips[(hash + 2) % analysisTexts.lips.length]);
@@ -636,8 +825,9 @@
                     startProgressiveLoad(featureKey, "Analyzing Features", onCompleteAnalysis);
                  } else {
                      clearFeatureTimers(featureKey);
-                     hideLoader(featureState[featureKey].loaderId);
-                     hideResults(featureState[featureKey].resultsId);
+                     if(featureState[featureKey]?.loaderId) hideLoader(featureState[featureKey].loaderId);
+                     if(featureState[featureKey]?.resultsId) hideResults(featureState[featureKey].resultsId);
+                     resetAnalysisText(); // Ensure text remains reset
                  }
             });
 
@@ -647,36 +837,45 @@
 
             function checkShowdownReady() {
                  const featureKey = 'showdown';
+                 const resetShowdownUi = () => {
+                    $('#showdown-score1, #showdown-score2').text('--');
+                    $('#showdown-winner').html('').removeClass('winner-img1 winner-img2 winner-tie'); // Clear HTML and classes
+                 }
+
                 if (showdownFilesReady.file1 && showdownFilesReady.file2) {
-                    hideResults(featureState[featureKey].resultsId);
-                    clearFeatureTimers(featureKey);
-                    const onCompleteShowdown = () => { /* ... showdown score calculation logic ... */
-                        const hash1 = simpleHash(showdownFileNames.file1);
-                        const hash2 = simpleHash(showdownFileNames.file2);
-                        const score1 = ((hash1 + 50) % 41) + 55;
-                        const score2 = ((hash2 + 60) % 41) + 55;
+                    const onCompleteShowdown = () => {
+                        const hash1 = simpleHash(showdownFileNames.file1 || ""); // Add fallback for null
+                        const hash2 = simpleHash(showdownFileNames.file2 || ""); // Add fallback for null
+                        const score1 = ((hash1 + 50) % 46) + 55;
+                        const score2 = ((hash2 + 60) % 46) + 55;
+
                         $('#showdown-score1').text(score1);
                         $('#showdown-score2').text(score2);
+
                         let winnerText = '';
+                        let winnerClass = '';
                         if (score1 > score2) {
-                            winnerText = '🏆 Image 1 Wins!';
-                             $('#showdown-winner').removeClass('text-yellow-700 bg-yellow-100 text-blue-700 bg-blue-100').addClass('text-green-700 bg-green-100');
+                            winnerText = '<i class="fas fa-crown mr-1 sm:mr-2"></i> Image 1 Wins!';
+                            winnerClass = 'winner-img1';
                         } else if (score2 > score1) {
-                            winnerText = '🏆 Image 2 Wins!';
-                             $('#showdown-winner').removeClass('text-yellow-700 bg-yellow-100 text-green-700 bg-green-100').addClass('text-blue-700 bg-blue-100');
+                            winnerText = '<i class="fas fa-crown mr-1 sm:mr-2"></i> Image 2 Wins!';
+                            winnerClass = 'winner-img2';
                         } else {
-                            winnerText = '✨ It\'s a Tie!';
-                             $('#showdown-winner').removeClass('text-green-700 bg-green-100 text-blue-700 bg-blue-100').addClass('text-yellow-700 bg-yellow-100');
+                            winnerText = '<i class="fas fa-handshake mr-1 sm:mr-2"></i> It\'s a Tie!';
+                            winnerClass = 'winner-tie';
                         }
-                        $('#showdown-winner').text(winnerText);
+                        $('#showdown-winner')
+                            .html(winnerText)
+                            .removeClass('winner-img1 winner-img2 winner-tie')
+                            .addClass(winnerClass);
                     };
                     startProgressiveLoad(featureKey, "Comparing Scores", onCompleteShowdown);
                 } else {
+                    // If one or both files are missing/invalid, clear UI
                     clearFeatureTimers(featureKey);
-                    hideLoader(featureState[featureKey].loaderId);
-                    hideResults(featureState[featureKey].resultsId);
-                    $('#showdown-score1, #showdown-score2').text('--');
-                    $('#showdown-winner').text('');
+                    if(featureState[featureKey]?.loaderId) hideLoader(featureState[featureKey].loaderId);
+                    if(featureState[featureKey]?.resultsId) hideResults(featureState[featureKey].resultsId);
+                    resetShowdownUi();
                 }
             }
 
@@ -684,7 +883,6 @@
                 const file = previewImage('showdown-upload1', 'showdown-img-preview1');
                 showdownFilesReady.file1 = !!file;
                 showdownFileNames.file1 = file ? file.name : null;
-                if(file) $('#showdown-img-preview1').attr('alt', `Preview of first image ${file.name} for beauty showdown`);
                 checkShowdownReady();
             });
 
@@ -692,23 +890,23 @@
                 const file = previewImage('showdown-upload2', 'showdown-img-preview2');
                 showdownFilesReady.file2 = !!file;
                 showdownFileNames.file2 = file ? file.name : null;
-                 if(file) $('#showdown-img-preview2').attr('alt', `Preview of second image ${file.name} for beauty showdown`);
                 checkShowdownReady();
             });
 
             // --- Initialization ---
             $('#current-year').text(new Date().getFullYear());
+
             // Set initial active button and section
-            $('.nav-btn[data-target="scanner"]').addClass('text-indigo-600 bg-indigo-100').removeClass('text-gray-600');
-            // Hide all content sections initially
+            $('.nav-btn[data-target="scanner"]')
+                .addClass('text-indigo-600 bg-indigo-100 font-semibold')
+                .removeClass('text-gray-600 font-medium');
+
+            // Hide all content sections initially, except the default and 'why-choose'
             $('.content-section').addClass('hidden');
-            // Show the default section ('scanner')
             $('#scanner').removeClass('hidden');
-            // Show 'Why Choose' section initially along with the default feature
-             $('#why-choose').removeClass('hidden');
+            $('#why-choose').removeClass('hidden');
 
-
-        });
+        }); // End DOMContentLoaded
     </script>
 
 </body>
