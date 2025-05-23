@@ -109,7 +109,7 @@
             margin-bottom: 1rem;
             color: var(--primary-color-light);
         }
-        .dark-mode h1 { /* Ensure dark mode H1 has a visible gradient if needed, or solid color */
+        .dark-mode h1 { 
              background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -138,7 +138,7 @@
         .settings-group select,
         .settings-group input[type="number"] {
             width: 100%;
-            padding: 0.85rem 1rem; /* Increased padding */
+            padding: 0.85rem 1rem; 
             border-radius: var(--border-radius);
             border: 1px solid var(--input-border-color, var(--light-input-border));
             background-color: var(--input-bg-color, var(--light-input-bg));
@@ -151,21 +151,21 @@
         .settings-group input[type="number"]:focus {
             outline: none;
             border-color: var(--primary-color-dark);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb, 37, 117, 252), 0.25); /* Fallback for RGB if not defined */
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb, 37, 117, 252), 0.25); 
         }
-        /* Define RGB versions for box-shadow if not already available */
+        
         :root {
-            --primary-color-dark-rgb: 37, 117, 252; /* RGB for #2575FC */
+            --primary-color-dark-rgb: 37, 117, 252; 
         }
-         .dark-mode :root { /* This won't work, define directly or use JS to set */
-            --primary-color-dark-rgb: 74, 143, 252; /* RGB for #4A8FFC */
+         .dark-mode { 
+            --primary-color-dark-rgb: 74, 143, 252; 
         }
 
 
         .settings-group input[type="checkbox"] {
             width: auto;
             margin-right: 0.5rem;
-            accent-color: var(--primary-color-dark); /* Modern checkbox color */
+            accent-color: var(--primary-color-dark); 
         }
         .radio-group label {
             margin-right: 1rem;
@@ -179,6 +179,25 @@
         }
 
         /* Game Screen */
+        #streamingModeTitle { /* New title for streaming mode */
+            font-size: 2.2rem; 
+            font-weight: 700;
+            margin-bottom: 1rem; 
+            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-align: center; 
+        }
+        .dark-mode #streamingModeTitle {
+            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
         .game-info {
             display: flex;
             justify-content: space-between;
@@ -208,12 +227,12 @@
         .options-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem; /* Increased gap */
+            gap: 1rem; 
             margin-bottom: 1.5rem;
         }
         .btn {
-            padding: 1rem 1.25rem; /* Larger buttons */
-            font-size: 1.1rem; /* Larger font in buttons */
+            padding: 1rem 1.25rem; 
+            font-size: 1.1rem; 
             font-weight: 600;
             border-radius: var(--border-radius);
             border: none;
@@ -239,7 +258,7 @@
             background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
         }
         
-        .btn-secondary { /* Added for share button */
+        .btn-secondary { 
             background: linear-gradient(45deg, var(--secondary-color-light), var(--secondary-color-dark));
             color: var(--button-text-color);
         }
@@ -248,7 +267,7 @@
         }
 
         .btn-option {
-            background: linear-gradient(135deg, #6c757d, #495057); /* Default secondary gradient */
+            background: linear-gradient(135deg, #6c757d, #495057); 
             color: var(--button-text-color);
         }
         .dark-mode .btn-option {
@@ -268,11 +287,11 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .btn-option.correct {
-            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important; /* Darker green success */
+            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important; 
             animation: pulseCorrect 0.6s ease-out;
         }
         .btn-option.incorrect {
-            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important; /* Darker red danger */
+            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important; 
             animation: shakeIncorrect 0.5s ease-in-out;
         }
 
@@ -293,7 +312,7 @@
             padding: 1rem;
             border-radius: var(--border-radius);
             font-weight: 600;
-            font-size: 1.1rem; /* Larger feedback text */
+            font-size: 1.1rem; 
             min-height: 60px; 
             display: flex;
             align-items: center;
@@ -310,7 +329,7 @@
         }
         .feedback-message.info {
             background: var(--warning-color);
-            color: #333; /* Darker text for yellow bg */
+            color: #333; 
         }
          .dark-mode .feedback-message.info {
             color: #333; 
@@ -318,8 +337,8 @@
 
 
         #timer-display {
-            font-size: 1.4rem; /* Larger timer */
-            font-weight: 700; /* Bolder timer */
+            font-size: 1.4rem; 
+            font-weight: 700; 
             color: var(--primary-color-dark);
             min-height: 25px; 
         }
@@ -368,7 +387,7 @@
             background-color: var(--secondary-color-light);
             color: white;
             border: none;
-            border-radius: 50px; /* Circular toggle */
+            border-radius: 50px; 
             cursor: pointer;
             z-index: 1000;
             font-size: 1.2rem;
@@ -402,7 +421,7 @@
             font-weight: 600;
             animation: fadeInDown 0.5s ease-out;
         }
-        .dark-mode .message-box { /* Example: use primary for messages in dark mode */
+        .dark-mode .message-box { 
             background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
             color: white;
         }
@@ -417,22 +436,27 @@
             max-width: 90vw; 
         }
         .party-mode .logo-container img, .streaming-mode .logo-container img {
-            max-height: 45vh; /* Even larger logo for big screens */
+            max-height: 45vh; 
         }
         .party-mode .options-container {
             grid-template-columns: 1fr 1fr; 
         }
         .party-mode .btn, .streaming-mode .btn { 
-            padding: 1.25rem 1.75rem; /* Larger buttons */
+            padding: 1.25rem 1.75rem; 
             font-size: 1.75rem; 
         }
         .party-mode .game-info, .party-mode #timer-display,
         .streaming-mode .game-info, .streaming-mode #timer-display { 
             font-size: 2rem; 
         }
-        .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
-            font-size: 3rem; /* Larger titles */
+        .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 { /* Apply to streaming h1/h2 if they exist */
+            font-size: 3rem; 
         }
+         /* Specific for the new streaming mode title if it's not covered by general .streaming-mode h1 */
+        .streaming-mode #streamingModeTitle {
+             font-size: 2.5rem; /* Example size, adjust as needed */
+        }
+
         .streaming-mode .options-container {
             display: none; 
         }
@@ -443,15 +467,17 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem; /* Adjust padding for smaller screens */
+                padding: 1.5rem; 
             }
             h1 { font-size: 2rem; }
             h2 { font-size: 1.6rem; }
+            #streamingModeTitle { font-size: 1.8rem; } /* Responsive streaming title */
+
             .options-container {
                 grid-template-columns: 1fr; 
             }
             .btn {
-                font-size: 1rem; /* Slightly smaller buttons on mobile */
+                font-size: 1rem; 
                 padding: 0.85rem 1rem;
             }
              .party-mode .btn, .streaming-mode .btn {
@@ -465,6 +491,9 @@
              .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
                 font-size: 2.2rem;
             }
+             .streaming-mode #streamingModeTitle {
+                 font-size: 2rem; 
+            }
             .dark-mode-toggle {
                 top: 1rem;
                 right: 1rem;
@@ -475,11 +504,17 @@
          @media (max-width: 480px) {
             .container { padding: 1rem; }
             h1 { font-size: 1.8rem; }
+            #streamingModeTitle { font-size: 1.6rem; } /* Responsive streaming title */
             .btn { font-size: 0.9rem; }
              .party-mode .btn, .streaming-mode .btn { font-size: 1.1rem; }
              .party-mode .game-info, .party-mode #timer-display,
              .streaming-mode .game-info, .streaming-mode #timer-display { font-size: 1.2rem; }
-             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 { font-size: 1.8rem; }
+             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
+                font-size: 1.8rem;
+            }
+            .streaming-mode #streamingModeTitle {
+                 font-size: 1.8rem; 
+            }
         }
 
     </style>
@@ -509,9 +544,7 @@
                 </div>
             </div>
             <div class="settings-group" id="roundsGroup">
-                <label for="numRounds">Number of Rounds (1-20):</label>
-                <input type="number" id="numRounds" value="10" min="1" max="20">
-            </div>
+                <label for="numRounds">Number of Rounds (1-200):</label> <input type="number" id="numRounds" value="10" min="1" max="200"> </div>
             <div class="settings-group" id="durationGroup" style="display: none;">
                 <label for="sessionDuration">Session Duration (minutes):</label>
                 <select id="sessionDuration">
@@ -529,7 +562,7 @@
         </div>
 
         <div id="gameScreen" class="screen">
-            <div class="game-info">
+            <h1 id="streamingModeTitle" style="display:none;">Guess The Logo</h1> <div class="game-info">
                 <span id="scoreDisplay">Score: 0</span>
                 <span id="roundDisplay">Round: 1/10</span>
             </div>
@@ -582,6 +615,7 @@
         const numRoundsInput = document.getElementById('numRounds');
         const sessionDurationSelect = document.getElementById('sessionDuration');
         const soundEffectsCheckbox = document.getElementById('soundEffects');
+        const streamingModeTitle = document.getElementById('streamingModeTitle'); // Get the new title element
 
 
         // Game State
@@ -601,8 +635,8 @@
         let audioCtx; 
 
         // Constants for streaming mode
-        const STREAMING_REVEAL_TIME = 7; // seconds to show logo before revealing answer
-        const STREAMING_NEXT_DELAY = 3; // seconds to show answer before next logo
+        const STREAMING_REVEAL_TIME = 7; 
+        const STREAMING_NEXT_DELAY = 3; 
 
         // --- LOGO DATA (EXPANDED) ---
         const LOGO_DATA = [
@@ -678,18 +712,15 @@
             messageBox.className = 'message-box'; 
             messageBox.classList.add(type); 
             messageBox.style.display = 'block';
-            // Trigger reflow for animation
             void messageBox.offsetWidth; 
             messageBox.classList.add('visible');
 
-
             setTimeout(() => {
                 messageBox.classList.remove('visible');
-                // Allow fade out animation to complete before hiding
                 setTimeout(() => {
                      messageBox.style.display = 'none';
-                }, 500); // Match animation duration
-            }, duration - 500 < 0 ? duration : duration - 500); // Adjust timeout for animation
+                }, 500); 
+            }, duration - 500 < 0 ? duration : duration - 500); 
         }
         
         function playSound(type) {
@@ -700,9 +731,9 @@
             gainNode.connect(audioCtx.destination);
             gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
             
-            oscillator.start(audioCtx.currentTime); // Start oscillator BEFORE scheduling stop
+            oscillator.start(audioCtx.currentTime); 
 
-            if (type === 'correct') { // Also used for streaming reveal
+            if (type === 'correct') { 
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
@@ -730,6 +761,7 @@
             document.body.style.setProperty('--text-color', isDarkModeActive ? 'var(--dark-text)' : 'var(--light-text)');
             document.body.style.setProperty('--card-bg-color', isDarkModeActive ? 'var(--dark-card-bg)' : 'var(--light-card-bg)');
 
+            streamingModeTitle.style.display = 'none'; // Hide by default
 
             if (gameMode === 'challenge') {
                 roundsGroup.style.display = 'none';
@@ -738,6 +770,7 @@
                 timerDisplay.style.display = 'block'; 
             } else if (gameMode === 'streaming') {
                 document.body.classList.add('streaming-mode');
+                streamingModeTitle.style.display = 'block'; // Show title for streaming
                 roundsGroup.style.display = 'none';
                 durationGroup.style.display = 'none';
                 scoreDisplay.style.display = 'none';
@@ -784,7 +817,7 @@
                 return;
             }
             
-            currentQuestions = shuffleArray([...questionsByDifficulty]);
+            currentQuestions = shuffleArray([...questionsByDifficulty]); // Initial shuffle for the session
 
             if (gameMode === 'challenge') {
                 totalRounds = currentQuestions.length; 
@@ -792,22 +825,22 @@
                 timeLeft = durationMinutes * 60;
                 startSessionTimer();
             } else if (gameMode === 'streaming') {
-                totalRounds = currentQuestions.length;
+                totalRounds = currentQuestions.length; // This is just for reference, won't stop the game
             } else { // Single or Party
                 totalRounds = parseInt(numRoundsInput.value);
-                if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) { // Increased max rounds check
-                    showMessage(`Please enter a valid number of rounds (1-200).`, 'warning');
-                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length)); // Default to a valid number
+                 if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) { 
+                    showMessage(`Please enter a valid number of rounds (1-${Math.min(200, currentQuestions.length)}).`, 'warning');
+                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length)); 
                     return;
                 }
                 if (totalRounds > currentQuestions.length) {
                     totalRounds = currentQuestions.length;
                     showMessage(`Only ${totalRounds} questions available for this difficulty. Game will have ${totalRounds} rounds.`, 'info', 4000);
                 }
-                currentQuestions = currentQuestions.slice(0, totalRounds);
+                currentQuestions = currentQuestions.slice(0, totalRounds); // Take only needed number for non-streaming/non-challenge
             }
             
-            preloadImages(currentQuestions);
+            preloadImages(currentQuestions); // Preload the selected set
 
             score = 0;
             currentQuestionIndex = 0;
@@ -822,15 +855,25 @@
         function loadQuestion() {
             clearAllTimers(); 
 
-            if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && gameMode !== 'streaming' && currentQuestionIndex >= totalRounds)) {
+            if (gameMode === 'streaming') {
+                if (currentQuestions.length === 0) { // Should not happen due to check in startGameBtn
+                    endGame(); // Or show a message "No questions for streaming"
+                    return;
+                }
+                if (currentQuestionIndex >= currentQuestions.length) {
+                    currentQuestionIndex = 0; // Loop back to the beginning for infinite streaming
+                    // No reshuffle here to maintain a smoother continuous stream of the current set
+                }
+            } else if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && currentQuestionIndex >= totalRounds)) {
                 endGame();
                 return;
             }
 
+
             const question = currentQuestions[currentQuestionIndex];
             logoImg.src = question.logoUrl;
             feedbackMessage.style.display = 'none';
-            feedbackMessage.className = 'feedback-message'; // Reset feedback class
+            feedbackMessage.className = 'feedback-message'; 
             nextQuestionBtn.style.display = 'none';
             
             if (gameMode === 'streaming') {
@@ -880,7 +923,7 @@
                 if (timeLeft <= 0) {
                     clearInterval(streamingNextInterval);
                     currentQuestionIndex++;
-                    loadQuestion();
+                    loadQuestion(); // This will loop if currentQuestionIndex reaches end
                 }
             }, 1000);
         }
@@ -976,7 +1019,7 @@
                 btn.disabled = true;
                 if (btn.dataset.option === correctAnswer) {
                     btn.classList.add('correct');
-                } else if (btn.dataset.option === selectedOptionText && selectedOptionText !== correctAnswer) { // Ensure only incorrect selection gets 'incorrect' class
+                } else if (btn.dataset.option === selectedOptionText && selectedOptionText !== correctAnswer) { 
                     btn.classList.add('incorrect');
                 }
             });
@@ -1016,7 +1059,7 @@
             showScreen('gameOverScreen');
             
             if (gameMode === 'streaming') {
-                finalScoreDisplay.textContent = "Streaming finished!";
+                finalScoreDisplay.textContent = "Streaming finished!"; // This is now effectively an 'interrupted' state if a stop button were added
                 highscoreSection.style.display = 'none';
                 shareScoreBtn.style.display = 'none';
             } else {
@@ -1071,6 +1114,7 @@
             optionsContainer.style.display = 'grid';
             highscoreSection.style.display = 'block';
             shareScoreBtn.style.display = 'inline-block'; 
+            streamingModeTitle.style.display = 'none'; // Hide streaming title
             
             showScreen('settingsScreen');
             document.getElementById('modeSingle').checked = true; 
