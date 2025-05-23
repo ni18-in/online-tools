@@ -861,59 +861,60 @@
         const STREAMING_NEXT_DELAY = 3; 
 
         // --- LOGO DATA (EXPANDED) ---
-        const LOGO_DATA = [
-            // Easy
-            { brandName: 'Apple', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/100px-Apple_logo_black.svg.png', options: ['Apple', 'Microsoft', 'Google', 'Amazon'], difficulty: 'easy' },
-            { brandName: 'Nike', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/100px-Logo_NIKE.svg.png', options: ['Adidas', 'Nike', 'Puma', 'Reebok'], difficulty: 'easy' },
-            { brandName: 'Coca-Cola', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/150px-Coca-Cola_logo.svg.png', options: ['Pepsi', 'Coca-Cola', 'Sprite', 'Fanta'], difficulty: 'easy' },
-            { brandName: 'McDonalds', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/100px-Mcdonalds-90s-logo.svg.png', options: ['Burger King', 'KFC', 'McDonalds', 'Subway'], difficulty: 'easy' },
-            { brandName: 'Starbucks', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/100px-Starbucks_Corporation_Logo_2011.svg.png', options: ['Dunkin', 'Starbucks', 'Costa Coffee', 'Tim Hortons'], difficulty: 'easy' },
-            { brandName: 'Pepsi', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pepsi_logo_2014.svg/100px-Pepsi_logo_2014.svg.png', options: ['Coca-Cola', 'Dr Pepper', 'Pepsi', '7 Up'], difficulty: 'easy' },
-            { brandName: 'YouTube', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/100px-YouTube_full-color_icon_%282017%29.svg.png', options: ['Vimeo', 'Dailymotion', 'Twitch', 'YouTube'], difficulty: 'easy' },
-            { brandName: 'Visa', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/150px-Visa_Inc._logo.svg.png', options: ['Mastercard', 'Visa', 'American Express', 'Discover'], difficulty: 'easy' },
-            { brandName: 'Target', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Target_Corporation_logo_%28vector%29.svg/100px-Target_Corporation_logo_%28vector%29.svg.png', options: ['Walmart', 'Kmart', 'Target', 'Costco'], difficulty: 'easy' },
-            { brandName: 'Shell', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/100px-Shell_logo.svg.png', options: ['BP', 'ExxonMobil', 'Chevron', 'Shell'], difficulty: 'easy' },
-            { brandName: 'Ford', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/150px-Ford_Motor_Company_Logo.svg.png', options: ['Chevrolet', 'Ford', 'Dodge', 'Toyota'], difficulty: 'easy'},
-            { brandName: 'Disney', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Disney_wordmark.svg/150px-Disney_wordmark.svg.png', options: ['Pixar', 'DreamWorks', 'Disney', 'Warner Bros.'], difficulty: 'easy'},
-            { brandName: 'KFC', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/100px-KFC_logo.svg.png', options: ['McDonalds', 'Burger King', 'Popeyes', 'KFC'], difficulty: 'easy'},
-            { brandName: 'Lego', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/150px-LEGO_logo.svg.png', options: ['Playmobil', 'Lego', 'Mattel', 'Hasbro'], difficulty: 'easy'},
-            { brandName: 'Subway', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Subway_logo.svg/150px-Subway_logo.svg.png', options: ['Quiznos', 'Jimmy Johns', 'Subway', 'Potbelly'], difficulty: 'easy'},
+      const LOGO_DATA = [
+    // Easy
+    { brandName: 'Apple', logoUrl: './logo/apple.png', options: ['Apple', 'Microsoft', 'Google', 'Amazon'], difficulty: 'easy' },
+    { brandName: 'Nike', logoUrl: './logo/nike.png', options: ['Adidas', 'Nike', 'Puma', 'Reebok'], difficulty: 'easy' },
+    { brandName: 'Coca-Cola', logoUrl: './logo/coca-cola.png', options: ['Pepsi', 'Coca-Cola', 'Sprite', 'Fanta'], difficulty: 'easy' },
+    { brandName: 'McDonalds', logoUrl: './logo/mcdonalds.png', options: ['Burger King', 'KFC', 'McDonalds', 'Subway'], difficulty: 'easy' },
+    { brandName: 'Starbucks', logoUrl: './logo/starbucks.png', options: ['Dunkin', 'Starbucks', 'Costa Coffee', 'Tim Hortons'], difficulty: 'easy' },
+    { brandName: 'Pepsi', logoUrl: './logo/pepsi.png', options: ['Coca-Cola', 'Dr Pepper', 'Pepsi', '7 Up'], difficulty: 'easy' },
+    { brandName: 'YouTube', logoUrl: './logo/youtube.png', options: ['Vimeo', 'Dailymotion', 'Twitch', 'YouTube'], difficulty: 'easy' },
+    { brandName: 'Visa', logoUrl: './logo/visa.png', options: ['Mastercard', 'Visa', 'American Express', 'Discover'], difficulty: 'easy' },
+    { brandName: 'Target', logoUrl: './logo/target.png', options: ['Walmart', 'Kmart', 'Target', 'Costco'], difficulty: 'easy' },
+    { brandName: 'Shell', logoUrl: './logo/shell.png', options: ['BP', 'ExxonMobil', 'Chevron', 'Shell'], difficulty: 'easy' },
+    { brandName: 'Ford', logoUrl: './logo/ford.png', options: ['Chevrolet', 'Ford', 'Dodge', 'Toyota'], difficulty: 'easy'},
+    { brandName: 'Disney', logoUrl: './logo/disney.png', options: ['Pixar', 'DreamWorks', 'Disney', 'Warner Bros.'], difficulty: 'easy'},
+    { brandName: 'KFC', logoUrl: './logo/kfc.png', options: ['McDonalds', 'Burger King', 'Popeyes', 'KFC'], difficulty: 'easy'},
+    { brandName: 'Lego', logoUrl: './logo/lego.png', options: ['Playmobil', 'Lego', 'Mattel', 'Hasbro'], difficulty: 'easy'},
+    { brandName: 'Subway', logoUrl: './logo/subway.png', options: ['Quiznos', 'Jimmy Johns', 'Subway', 'Potbelly'], difficulty: 'easy'},
 
-            // Medium
-            { brandName: 'Amazon', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/150px-Amazon_logo.svg.png', options: ['eBay', 'Alibaba', 'Amazon', 'Walmart'], difficulty: 'medium' },
-            { brandName: 'Google', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/150px-Google_2015_logo.svg.png', options: ['Yahoo', 'Bing', 'DuckDuckGo', 'Google'], difficulty: 'medium' },
-            { brandName: 'Microsoft', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/150px-Microsoft_logo.svg.png', options: ['Apple', 'Microsoft', 'IBM', 'Oracle'], difficulty: 'medium' },
-            { brandName: 'BMW', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/100px-BMW.svg.png', options: ['Mercedes', 'Audi', 'BMW', 'Volkswagen'], difficulty: 'medium' },
-            { brandName: 'Adidas', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/100px-Adidas_Logo.svg.png', options: ['Nike', 'Puma', 'Under Armour', 'Adidas'], difficulty: 'medium' },
-            { brandName: 'X (Twitter)', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/100px-X_logo_2023.svg.png', options: ['Facebook', 'Instagram', 'X (Twitter)', 'Snapchat'], difficulty: 'medium' },
-            { brandName: 'Instagram', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/100px-Instagram_logo_2016.svg.png', options: ['Snapchat', 'TikTok', 'Instagram', 'Pinterest'], difficulty: 'medium' },
-            { brandName: 'Mastercard', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/100px-Mastercard_2019_logo.svg.png', options: ['Visa', 'American Express', 'Mastercard', 'PayPal'], difficulty: 'medium' },
-            { brandName: 'Honda', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Honda_Logo.svg/100px-Honda_Logo.svg.png', options: ['Toyota', 'Nissan', 'Honda', 'Mazda'], difficulty: 'medium' },
-            { brandName: 'Audi', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Audi-Logo_2016.svg/150px-Audi-Logo_2016.svg.png', options: ['BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen'], difficulty: 'medium' },
-            { brandName: 'HP (Hewlett-Packard)', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/100px-HP_logo_2012.svg.png', options: ['Dell', 'Lenovo', 'HP (Hewlett-Packard)', 'Acer'], difficulty: 'medium'},
-            { brandName: 'PlayStation', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/150px-PlayStation_logo.svg.png', options: ['Xbox', 'Nintendo', 'PlayStation', 'Sega'], difficulty: 'medium'},
-            { brandName: 'Burger King', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Burger_King_2020.svg/150px-Burger_King_2020.svg.png', options: ['McDonalds', 'Wendys', 'Burger King', 'KFC'], difficulty: 'medium'},
-            { brandName: 'Puma', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Puma_logo.svg/100px-Puma_logo.svg.png', options: ['Nike', 'Adidas', 'Reebok', 'Puma'], difficulty: 'medium'},
-            { brandName: 'Red Bull', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/RedBull_EnergyDrink_logo.svg/150px-RedBull_EnergyDrink_logo.svg.png', options: ['Monster', 'Rockstar', 'Red Bull', 'Bang'], difficulty: 'medium'},
+    // Medium
+    { brandName: 'Amazon', logoUrl: './logo/amazon.png', options: ['eBay', 'Alibaba', 'Amazon', 'Walmart'], difficulty: 'medium' },
+    { brandName: 'Google', logoUrl: './logo/google.png', options: ['Yahoo', 'Bing', 'DuckDuckGo', 'Google'], difficulty: 'medium' },
+    { brandName: 'Microsoft', logoUrl: './logo/microsoft.png', options: ['Apple', 'Microsoft', 'IBM', 'Oracle'], difficulty: 'medium' },
+    { brandName: 'BMW', logoUrl: './logo/bmw.png', options: ['Mercedes', 'Audi', 'BMW', 'Volkswagen'], difficulty: 'medium' },
+    { brandName: 'Adidas', logoUrl: './logo/adidas.png', options: ['Nike', 'Puma', 'Under Armour', 'Adidas'], difficulty: 'medium' },
+    { brandName: 'X (Twitter)', logoUrl: './logo/x.png', options: ['Facebook', 'Instagram', 'X (Twitter)', 'Snapchat'], difficulty: 'medium' },
+    { brandName: 'Instagram', logoUrl: './logo/instagram.png', options: ['Snapchat', 'TikTok', 'Instagram', 'Pinterest'], difficulty: 'medium' },
+    { brandName: 'Mastercard', logoUrl: './logo/mastercard.png', options: ['Visa', 'American Express', 'Mastercard', 'PayPal'], difficulty: 'medium' },
+    { brandName: 'Honda', logoUrl: './logo/honda.png', options: ['Toyota', 'Nissan', 'Honda', 'Mazda'], difficulty: 'medium' },
+    { brandName: 'Audi', logoUrl: './logo/audi.png', options: ['BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen'], difficulty: 'medium' },
+    { brandName: 'HP (Hewlett-Packard)', logoUrl: './logo/hp.png', options: ['Dell', 'Lenovo', 'HP (Hewlett-Packard)', 'Acer'], difficulty: 'medium'},
+    { brandName: 'PlayStation', logoUrl: './logo/playstation.png', options: ['Xbox', 'Nintendo', 'PlayStation', 'Sega'], difficulty: 'medium'},
+    { brandName: 'Burger King', logoUrl: './logo/burger-king.png', options: ['McDonalds', 'Wendys', 'Burger King', 'KFC'], difficulty: 'medium'},
+    { brandName: 'Puma', logoUrl: './logo/puma.png', options: ['Nike', 'Adidas', 'Reebok', 'Puma'], difficulty: 'medium'},
+    { brandName: 'Red Bull', logoUrl: './logo/red-bull.png', options: ['Monster', 'Rockstar', 'Red Bull', 'Bang'], difficulty: 'medium'},
 
-            // Hard
-            { brandName: 'Facebook', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png', options: ['Twitter', 'Instagram', 'LinkedIn', 'Facebook'], difficulty: 'hard' },
-            { brandName: 'Toyota', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Toyota_EU.svg/100px-Toyota_EU.svg.png', options: ['Honda', 'Ford', 'Toyota', 'BMW'], difficulty: 'hard' },
-            { brandName: 'Samsung', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/150px-Samsung_Logo.svg.png', options: ['LG', 'Sony', 'Samsung', 'Panasonic'], difficulty: 'hard' },
-            { brandName: 'Netflix', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/150px-Netflix_2015_logo.svg.png', options: ['Hulu', 'Netflix', 'Amazon Prime Video', 'Disney+'], difficulty: 'hard' },
-            { brandName: 'Intel', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282020%2C_dark_blue%29.svg/100px-Intel_logo_%282020%2C_dark_blue%29.svg.png', options: ['AMD', 'Nvidia', 'Qualcomm', 'Intel'], difficulty: 'hard' },
-            { brandName: 'Mercedes-Benz', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Benz_Logo_2010.svg/100px-Mercedes-Benz_Logo_2010.svg.png', options: ['BMW', 'Audi', 'Mercedes-Benz', 'Lexus'], difficulty: 'hard' },
-            { brandName: 'Oracle', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/150px-Oracle_logo.svg.png', options: ['SAP', 'Microsoft', 'Oracle', 'IBM'], difficulty: 'hard' },
-            { brandName: 'Adobe', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Adobe_Corporate_logo.svg/100px-Adobe_Corporate_logo.svg.png', options: ['Corel', 'Affinity', 'Adobe', 'Autodesk'], difficulty: 'hard' },
-            { brandName: 'IBM', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/100px-IBM_logo.svg.png', options: ['HP', 'Dell', 'IBM', 'Accenture'], difficulty: 'hard' },
-            { brandName: 'SAP', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/100px-SAP_2011_logo.svg.png', options: ['Oracle', 'Salesforce', 'SAP', 'Workday'], difficulty: 'hard' },
-            { brandName: 'General Electric', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/General_Electric_logo.svg/100px-General_Electric_logo.svg.png', options: ['Siemens', 'Honeywell', 'General Electric', '3M'], difficulty: 'hard'},
-            { brandName: 'Cisco', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/100px-Cisco_logo.svg.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard'},
-            { brandName: 'Volkswagen', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/100px-Volkswagen_logo_2019.svg.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard'},
-            { brandName: 'Chanel', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Chanel_logo_interlocking_cs.svg/100px-Chanel_logo_interlocking_cs.svg.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard'},
-            { brandName: 'Rolex', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Rolex_logo.svg/150px-Rolex_logo.svg.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard'}
-        ];
-        allQuestions = LOGO_DATA; 
+    // Hard
+    { brandName: 'Facebook', logoUrl: './logo/facebook.png', options: ['Twitter', 'Instagram', 'LinkedIn', 'Facebook'], difficulty: 'hard' },
+    { brandName: 'Toyota', logoUrl: './logo/toyota.png', options: ['Honda', 'Ford', 'Toyota', 'BMW'], difficulty: 'hard' },
+    { brandName: 'Samsung', logoUrl: './logo/samsung.png', options: ['LG', 'Sony', 'Samsung', 'Panasonic'], difficulty: 'hard' },
+    { brandName: 'Netflix', logoUrl: './logo/netflix.png', options: ['Hulu', 'Netflix', 'Amazon Prime Video', 'Disney+'], difficulty: 'hard' },
+    { brandName: 'Intel', logoUrl: './logo/intel.png', options: ['AMD', 'Nvidia', 'Qualcomm', 'Intel'], difficulty: 'hard' },
+    { brandName: 'Mercedes-Benz', logoUrl: './logo/mercedes-benz.png', options: ['BMW', 'Audi', 'Mercedes-Benz', 'Lexus'], difficulty: 'hard' },
+    { brandName: 'Oracle', logoUrl: './logo/oracle.png', options: ['SAP', 'Microsoft', 'Oracle', 'IBM'], difficulty: 'hard' },
+    { brandName: 'Adobe', logoUrl: './logo/adobe.png', options: ['Corel', 'Affinity', 'Adobe', 'Autodesk'], difficulty: 'hard' },
+    { brandName: 'IBM', logoUrl: './logo/ibm.png', options: ['HP', 'Dell', 'IBM', 'Accenture'], difficulty: 'hard' },
+    { brandName: 'SAP', logoUrl: './logo/sap.png', options: ['Oracle', 'Salesforce', 'SAP', 'Workday'], difficulty: 'hard' },
+    { brandName: 'General Electric', logoUrl: './logo/general-electric.png', options: ['Siemens', 'Honeywell', 'General Electric', '3M'], difficulty: 'hard'},
+    { brandName: 'Cisco', logoUrl: './logo/cisco.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard'},
+    { brandName: 'Volkswagen', logoUrl: './logo/volkswagen.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard'},
+    { brandName: 'Chanel', logoUrl: './logo/chanel.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard'},
+    { brandName: 'Rolex', logoUrl: './logo/rolex.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard'}
+];
+
+allQuestions = LOGO_DATA;
 
         // --- UTILITY FUNCTIONS ---
         function showScreen(screenId) {
