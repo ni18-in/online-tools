@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Logo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color-light: #6A11CB; /* Vibrant Purple */
+            --primary-color-dark: #2575FC;  /* Bright Blue */
+            --primary-hover-light: #8A42EB;
+            --primary-hover-dark: #4A8FFC;
+            
+            --secondary-color-light: #FF6F91; /* Coral Pink */
+            --secondary-color-dark: #FF9671;  /* Peachy Orange */
+            --secondary-hover-light: #FF8FB1;
+            --secondary-hover-dark: #FFB08F;
+
+            --success-color: #28A745; /* Green */
+            --success-hover-color: #218838;
+            --danger-color: #DC3545; /* Red */
+            --danger-hover-color: #C82333;
+            --warning-color: #FFC107; /* Yellow */
+            
+            --light-bg: #F0F2F5; /* Light Grayish Blue */
+            --dark-bg: #1A1A2E;  /* Deep Indigo */
+
+            --light-card-bg: #FFFFFF;
+            --dark-card-bg: #162447; /* Dark Navy */
+            
+            --light-text: #333333;
+            --dark-text: #E0E0E0; /* Light Gray for dark mode text */
+
+            --light-input-bg: #FFFFFF;
+            --dark-input-bg: #1F4068; /* Darker blue for inputs */
+            --light-input-border: #CED4DA;
+            --dark-input-border: #3B5998; /* Slightly lighter blue for borders */
+            
+            --button-text-color: #FFFFFF;
+
+            --font-family: 'Inter', sans-serif;
+            --border-radius: 0.75rem; /* Slightly more rounded */
+            --box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            --box-shadow-hover: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .dark-mode {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --card-bg-color: var(--dark-card-bg);
+            --card-border-color: #2A3B67; 
+            --input-bg-color: var(--dark-input-bg);
+            --input-border-color: var(--dark-input-border);
+            --primary-color-light: #8A42EB; /* Lighter purple for dark mode */
+            --primary-color-dark: #4A8FFC;  /* Lighter blue for dark mode */
+            --secondary-color-light: #FF8FB1;
+            --secondary-color-dark: #FFB08F;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color, var(--light-bg));
+            color: var(--text-color, var(--light-text));
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        .container {
+            background: linear-gradient(145deg, var(--card-bg-color, var(--light-card-bg)), var(--card-bg-color, var(--light-card-bg)));
+            padding: 2rem; /* Increased padding */
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 650px; /* Slightly wider */
+            text-align: center;
+            transition: background-color 0.4s, border-color 0.4s, box-shadow 0.3s;
+            border: 1px solid var(--card-border-color, #E0E0E0);
+        }
+        .dark-mode .container {
+            border-color: var(--dark-input-border);
+        }
+
+
+        h1 {
+            font-size: 2.5rem; /* Larger H1 */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color-light);
+        }
+        .dark-mode h1 { /* Ensure dark mode H1 has a visible gradient if needed, or solid color */
+             background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .dark-mode h2 {
+            color: var(--primary-hover-light);
+        }
+
+
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* Settings Screen */
+        .settings-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+        .settings-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .settings-group select,
+        .settings-group input[type="number"] {
+            width: 100%;
+            padding: 0.85rem 1rem; /* Increased padding */
+            border-radius: var(--border-radius);
+            border: 1px solid var(--input-border-color, var(--light-input-border));
+            background-color: var(--input-bg-color, var(--light-input-bg));
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .settings-group select:focus,
+        .settings-group input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color-dark);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb, 37, 117, 252), 0.25); /* Fallback for RGB if not defined */
+        }
+        /* Define RGB versions for box-shadow if not already available */
+        :root {
+            --primary-color-dark-rgb: 37, 117, 252; /* RGB for #2575FC */
+        }
+         .dark-mode :root { /* This won't work, define directly or use JS to set */
+            --primary-color-dark-rgb: 74, 143, 252; /* RGB for #4A8FFC */
+        }
+
+
+        .settings-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+            accent-color: var(--primary-color-dark); /* Modern checkbox color */
+        }
+        .radio-group label {
+            margin-right: 1rem;
+            font-weight: normal;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 0.4rem;
+            accent-color: var(--primary-color-dark);
+        }
+
+        /* Game Screen */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .logo-container {
+            margin-bottom: 2rem;
+            background-color: #FFFFFF; 
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            min-height: 180px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        .logo-container img {
+            max-width: 100%;
+            max-height: 220px; 
+            height: auto;
+            border-radius: calc(var(--border-radius) - 0.25rem);
+            object-fit: contain;
+        }
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem; /* Increased gap */
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            padding: 1rem 1.25rem; /* Larger buttons */
+            font-size: 1.1rem; /* Larger font in buttons */
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        .btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
+            color: var(--button-text-color);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
+        }
+        
+        .btn-secondary { /* Added for share button */
+            background: linear-gradient(45deg, var(--secondary-color-light), var(--secondary-color-dark));
+            color: var(--button-text-color);
+        }
+        .btn-secondary:hover {
+             background: linear-gradient(45deg, var(--secondary-hover-light), var(--secondary-hover-dark));
+        }
+
+        .btn-option {
+            background: linear-gradient(135deg, #6c757d, #495057); /* Default secondary gradient */
+            color: var(--button-text-color);
+        }
+        .dark-mode .btn-option {
+            background: linear-gradient(135deg, #495057, #343a40);
+        }
+        .btn-option:hover:not(:disabled) {
+            background: linear-gradient(135deg, #5a6268, #343a40);
+        }
+        .dark-mode .btn-option:hover:not(:disabled) {
+             background: linear-gradient(135deg, #5a6268, #212529);
+        }
+
+        .btn-option:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-option.correct {
+            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important; /* Darker green success */
+            animation: pulseCorrect 0.6s ease-out;
+        }
+        .btn-option.incorrect {
+            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important; /* Darker red danger */
+            animation: shakeIncorrect 0.5s ease-in-out;
+        }
+
+        @keyframes pulseCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes shakeIncorrect {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+
+        .feedback-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1.1rem; /* Larger feedback text */
+            min-height: 60px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .feedback-message.correct {
+            background: var(--success-color);
+            color: white;
+        }
+        .feedback-message.incorrect {
+            background: var(--danger-color);
+            color: white;
+        }
+        .feedback-message.info {
+            background: var(--warning-color);
+            color: #333; /* Darker text for yellow bg */
+        }
+         .dark-mode .feedback-message.info {
+            color: #333; 
+        }
+
+
+        #timer-display {
+            font-size: 1.4rem; /* Larger timer */
+            font-weight: 700; /* Bolder timer */
+            color: var(--primary-color-dark);
+            min-height: 25px; 
+        }
+        .dark-mode #timer-display {
+            color: var(--warning-color);
+        }
+
+
+        /* Game Over Screen */
+        #highscore-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid var(--card-border-color, var(--light-input-border));
+            border-radius: var(--border-radius);
+            padding: 0.75rem;
+            background-color: rgba(0,0,0,0.02);
+        }
+        .dark-mode #highscore-list {
+            background-color: rgba(255,255,255,0.05);
+        }
+        #highscore-list li {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid var(--input-border-color, var(--light-input-border));
+            color: var(--text-color);
+        }
+        #highscore-list li:last-child {
+            border-bottom: none;
+        }
+        #highscore-list li:nth-child(odd) {
+            background-color: rgba(0,0,0,0.02);
+        }
+        .dark-mode #highscore-list li:nth-child(odd) {
+            background-color: rgba(255,255,255,0.03);
+        }
+
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.6rem 0.8rem;
+            background-color: var(--secondary-color-light);
+            color: white;
+            border: none;
+            border-radius: 50px; /* Circular toggle */
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .dark-mode-toggle:hover {
+            background-color: var(--secondary-color-dark);
+            transform: scale(1.1);
+        }
+        .dark-mode .dark-mode-toggle {
+            background-color: var(--primary-color-light);
+        }
+         .dark-mode .dark-mode-toggle:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        /* Message Box (for alerts) */
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--warning-color);
+            color: #333;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: none; 
+            font-weight: 600;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        .dark-mode .message-box { /* Example: use primary for messages in dark mode */
+            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
+            color: white;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+
+        /* Party Mode & Streaming Mode Specific Styles */
+        .party-mode .container, .streaming-mode .container { 
+            max-width: 90vw; 
+        }
+        .party-mode .logo-container img, .streaming-mode .logo-container img {
+            max-height: 45vh; /* Even larger logo for big screens */
+        }
+        .party-mode .options-container {
+            grid-template-columns: 1fr 1fr; 
+        }
+        .party-mode .btn, .streaming-mode .btn { 
+            padding: 1.25rem 1.75rem; /* Larger buttons */
+            font-size: 1.75rem; 
+        }
+        .party-mode .game-info, .party-mode #timer-display,
+        .streaming-mode .game-info, .streaming-mode #timer-display { 
+            font-size: 2rem; 
+        }
+        .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
+            font-size: 3rem; /* Larger titles */
+        }
+        .streaming-mode .options-container {
+            display: none; 
+        }
+        .streaming-mode #scoreDisplay, .streaming-mode #roundDisplay {
+            display: none; 
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem; /* Adjust padding for smaller screens */
+            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .options-container {
+                grid-template-columns: 1fr; 
+            }
+            .btn {
+                font-size: 1rem; /* Slightly smaller buttons on mobile */
+                padding: 0.85rem 1rem;
+            }
+             .party-mode .btn, .streaming-mode .btn {
+                font-size: 1.3rem;
+                padding: 1rem 1.25rem;
+            }
+            .party-mode .game-info, .party-mode #timer-display,
+            .streaming-mode .game-info, .streaming-mode #timer-display {
+                font-size: 1.4rem;
+            }
+             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
+                font-size: 2.2rem;
+            }
+            .dark-mode-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 0.7rem;
+                font-size: 1rem;
+            }
+        }
+         @media (max-width: 480px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .btn { font-size: 0.9rem; }
+             .party-mode .btn, .streaming-mode .btn { font-size: 1.1rem; }
+             .party-mode .game-info, .party-mode #timer-display,
+             .streaming-mode .game-info, .streaming-mode #timer-display { font-size: 1.2rem; }
+             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 { font-size: 1.8rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+    <div id="messageBox" class="message-box"></div>
+
+    <div class="container">
+        <div id="settingsScreen" class="screen active">
+            <h1>Guess the Logo</h1>
+            <div class="settings-group">
+                <label for="gameMode">Game Mode:</label>
+                <div class="radio-group" id="gameMode">
+                    <input type="radio" id="modeSingle" name="gameMode" value="single" checked><label for="modeSingle">Single Player</label>
+                    <input type="radio" id="modeParty" name="gameMode" value="party"><label for="modeParty">Party Mode</label>
+                    <input type="radio" id="modeChallenge" name="gameMode" value="challenge"><label for="modeChallenge">Challenge Mode</label>
+                    <input type="radio" id="modeStreaming" name="gameMode" value="streaming"><label for="modeStreaming">Streaming Mode</label>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label for="difficulty">Difficulty:</label>
+                <div class="radio-group" id="difficulty">
+                    <input type="radio" id="diffEasy" name="difficulty" value="easy" checked><label for="diffEasy">Easy</label>
+                    <input type="radio" id="diffMedium" name="difficulty" value="medium"><label for="diffMedium">Medium</label>
+                    <input type="radio" id="diffHard" name="difficulty" value="hard"><label for="diffHard">Hard</label>
+                </div>
+            </div>
+            <div class="settings-group" id="roundsGroup">
+                <label for="numRounds">Number of Rounds (1-20):</label>
+                <input type="number" id="numRounds" value="10" min="1" max="20">
+            </div>
+            <div class="settings-group" id="durationGroup" style="display: none;">
+                <label for="sessionDuration">Session Duration (minutes):</label>
+                <select id="sessionDuration">
+                    <option value="1">1 Minute</option>
+                    <option value="2">2 Minutes</option>
+                    <option value="3">3 Minutes</option>
+                    <option value="5">5 Minutes</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <input type="checkbox" id="soundEffects" checked>
+                <label for="soundEffects">Sound Effects</label>
+            </div>
+            <button id="startGameBtn" class="btn btn-primary" style="width:100%; padding: 1rem; font-size: 1.2rem;">Start Game</button>
+        </div>
+
+        <div id="gameScreen" class="screen">
+            <div class="game-info">
+                <span id="scoreDisplay">Score: 0</span>
+                <span id="roundDisplay">Round: 1/10</span>
+            </div>
+            <div id="timerDisplay" style="margin-bottom: 1rem;"></div>
+            <div class="logo-container">
+                <img id="logoImg" src="" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x150/EFEFEF/AAAAAA&text=Logo+Error';">
+            </div>
+            <div id="optionsContainer" class="options-container">
+                </div>
+            <div id="feedbackMessage" class="feedback-message" style="display:none;"></div>
+            <button id="nextQuestionBtn" class="btn btn-primary" style="display:none; margin-top: 1rem;">Next Question</button>
+        </div>
+
+        <div id="gameOverScreen" class="screen">
+            <h2>Game Over!</h2>
+            <p id="finalScoreDisplay" style="font-size: 1.5rem; margin-bottom: 1rem;"></p>
+            <div class="settings-group" id="highscoreSection">
+                <h3>High Scores</h3>
+                <ul id="highscoreList">
+                    </ul>
+            </div>
+            <button id="playAgainBtn" class="btn btn-primary" style="margin-right: 0.5rem;">Play Again</button>
+            <button id="shareScoreBtn" class="btn btn-secondary">Share Score</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const settingsScreen = document.getElementById('settingsScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startGameBtn = document.getElementById('startGameBtn');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const roundDisplay = document.getElementById('roundDisplay');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const logoImg = document.getElementById('logoImg');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const finalScoreDisplay = document.getElementById('finalScoreDisplay');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const shareScoreBtn = document.getElementById('shareScoreBtn');
+        const highscoreList = document.getElementById('highscoreList');
+        const highscoreSection = document.getElementById('highscoreSection');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const messageBox = document.getElementById('messageBox');
+        const gameModeRadios = document.querySelectorAll('input[name="gameMode"]');
+        const roundsGroup = document.getElementById('roundsGroup');
+        const durationGroup = document.getElementById('durationGroup');
+        const numRoundsInput = document.getElementById('numRounds');
+        const sessionDurationSelect = document.getElementById('sessionDuration');
+        const soundEffectsCheckbox = document.getElementById('soundEffects');
+
+
+        // Game State
+        let allQuestions = []; 
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalRounds = 10; 
+        let gameMode = 'single'; 
+        let difficulty = 'easy'; 
+        let soundEffectsEnabled = true;
+        let questionTimerInterval;
+        let sessionTimerInterval;
+        let streamingRevealInterval;
+        let streamingNextInterval;
+        let timeLeft = 0;
+        let audioCtx; 
+
+        // Constants for streaming mode
+        const STREAMING_REVEAL_TIME = 7; // seconds to show logo before revealing answer
+        const STREAMING_NEXT_DELAY = 3; // seconds to show answer before next logo
+
+        // --- LOGO DATA (EXPANDED) ---
+        const LOGO_DATA = [
+            // Easy
+            { brandName: 'Apple', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/100px-Apple_logo_black.svg.png', options: ['Apple', 'Microsoft', 'Google', 'Amazon'], difficulty: 'easy' },
+            { brandName: 'Nike', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/100px-Logo_NIKE.svg.png', options: ['Adidas', 'Nike', 'Puma', 'Reebok'], difficulty: 'easy' },
+            { brandName: 'Coca-Cola', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/150px-Coca-Cola_logo.svg.png', options: ['Pepsi', 'Coca-Cola', 'Sprite', 'Fanta'], difficulty: 'easy' },
+            { brandName: 'McDonalds', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/100px-Mcdonalds-90s-logo.svg.png', options: ['Burger King', 'KFC', 'McDonalds', 'Subway'], difficulty: 'easy' },
+            { brandName: 'Starbucks', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/100px-Starbucks_Corporation_Logo_2011.svg.png', options: ['Dunkin', 'Starbucks', 'Costa Coffee', 'Tim Hortons'], difficulty: 'easy' },
+            { brandName: 'Pepsi', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pepsi_logo_2014.svg/100px-Pepsi_logo_2014.svg.png', options: ['Coca-Cola', 'Dr Pepper', 'Pepsi', '7 Up'], difficulty: 'easy' },
+            { brandName: 'YouTube', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/100px-YouTube_full-color_icon_%282017%29.svg.png', options: ['Vimeo', 'Dailymotion', 'Twitch', 'YouTube'], difficulty: 'easy' },
+            { brandName: 'Visa', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/150px-Visa_Inc._logo.svg.png', options: ['Mastercard', 'Visa', 'American Express', 'Discover'], difficulty: 'easy' },
+            { brandName: 'Target', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Target_Corporation_logo_%28vector%29.svg/100px-Target_Corporation_logo_%28vector%29.svg.png', options: ['Walmart', 'Kmart', 'Target', 'Costco'], difficulty: 'easy' },
+            { brandName: 'Shell', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/100px-Shell_logo.svg.png', options: ['BP', 'ExxonMobil', 'Chevron', 'Shell'], difficulty: 'easy' },
+            { brandName: 'Ford', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/150px-Ford_Motor_Company_Logo.svg.png', options: ['Chevrolet', 'Ford', 'Dodge', 'Toyota'], difficulty: 'easy'},
+            { brandName: 'Disney', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Disney_wordmark.svg/150px-Disney_wordmark.svg.png', options: ['Pixar', 'DreamWorks', 'Disney', 'Warner Bros.'], difficulty: 'easy'},
+            { brandName: 'KFC', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/100px-KFC_logo.svg.png', options: ['McDonalds', 'Burger King', 'Popeyes', 'KFC'], difficulty: 'easy'},
+            { brandName: 'Lego', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/150px-LEGO_logo.svg.png', options: ['Playmobil', 'Lego', 'Mattel', 'Hasbro'], difficulty: 'easy'},
+            { brandName: 'Subway', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Subway_logo.svg/150px-Subway_logo.svg.png', options: ['Quiznos', 'Jimmy Johns', 'Subway', 'Potbelly'], difficulty: 'easy'},
+
+            // Medium
+            { brandName: 'Amazon', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/150px-Amazon_logo.svg.png', options: ['eBay', 'Alibaba', 'Amazon', 'Walmart'], difficulty: 'medium' },
+            { brandName: 'Google', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/150px-Google_2015_logo.svg.png', options: ['Yahoo', 'Bing', 'DuckDuckGo', 'Google'], difficulty: 'medium' },
+            { brandName: 'Microsoft', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/150px-Microsoft_logo.svg.png', options: ['Apple', 'Microsoft', 'IBM', 'Oracle'], difficulty: 'medium' },
+            { brandName: 'BMW', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/100px-BMW.svg.png', options: ['Mercedes', 'Audi', 'BMW', 'Volkswagen'], difficulty: 'medium' },
+            { brandName: 'Adidas', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/100px-Adidas_Logo.svg.png', options: ['Nike', 'Puma', 'Under Armour', 'Adidas'], difficulty: 'medium' },
+            { brandName: 'X (Twitter)', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/100px-X_logo_2023.svg.png', options: ['Facebook', 'Instagram', 'X (Twitter)', 'Snapchat'], difficulty: 'medium' },
+            { brandName: 'Instagram', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/100px-Instagram_logo_2016.svg.png', options: ['Snapchat', 'TikTok', 'Instagram', 'Pinterest'], difficulty: 'medium' },
+            { brandName: 'Mastercard', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/100px-Mastercard_2019_logo.svg.png', options: ['Visa', 'American Express', 'Mastercard', 'PayPal'], difficulty: 'medium' },
+            { brandName: 'Honda', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Honda_Logo.svg/100px-Honda_Logo.svg.png', options: ['Toyota', 'Nissan', 'Honda', 'Mazda'], difficulty: 'medium' },
+            { brandName: 'Audi', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Audi-Logo_2016.svg/150px-Audi-Logo_2016.svg.png', options: ['BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen'], difficulty: 'medium' },
+            { brandName: 'HP (Hewlett-Packard)', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/100px-HP_logo_2012.svg.png', options: ['Dell', 'Lenovo', 'HP (Hewlett-Packard)', 'Acer'], difficulty: 'medium'},
+            { brandName: 'PlayStation', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/150px-PlayStation_logo.svg.png', options: ['Xbox', 'Nintendo', 'PlayStation', 'Sega'], difficulty: 'medium'},
+            { brandName: 'Burger King', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Burger_King_2020.svg/150px-Burger_King_2020.svg.png', options: ['McDonalds', 'Wendys', 'Burger King', 'KFC'], difficulty: 'medium'},
+            { brandName: 'Puma', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Puma_logo.svg/100px-Puma_logo.svg.png', options: ['Nike', 'Adidas', 'Reebok', 'Puma'], difficulty: 'medium'},
+            { brandName: 'Red Bull', logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/RedBull_EnergyDrink_logo.svg/150px-RedBull_EnergyDrink_logo.svg.png', options: ['Monster', 'Rockstar', 'Red Bull', 'Bang'], difficulty: 'medium'},
+
+            // Hard
+            { brandName: 'Facebook', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png', options: ['Twitter', 'Instagram', 'LinkedIn', 'Facebook'], difficulty: 'hard' },
+            { brandName: 'Toyota', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Toyota_EU.svg/100px-Toyota_EU.svg.png', options: ['Honda', 'Ford', 'Toyota', 'BMW'], difficulty: 'hard' },
+            { brandName: 'Samsung', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/150px-Samsung_Logo.svg.png', options: ['LG', 'Sony', 'Samsung', 'Panasonic'], difficulty: 'hard' },
+            { brandName: 'Netflix', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/150px-Netflix_2015_logo.svg.png', options: ['Hulu', 'Netflix', 'Amazon Prime Video', 'Disney+'], difficulty: 'hard' },
+            { brandName: 'Intel', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282020%2C_dark_blue%29.svg/100px-Intel_logo_%282020%2C_dark_blue%29.svg.png', options: ['AMD', 'Nvidia', 'Qualcomm', 'Intel'], difficulty: 'hard' },
+            { brandName: 'Mercedes-Benz', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Benz_Logo_2010.svg/100px-Mercedes-Benz_Logo_2010.svg.png', options: ['BMW', 'Audi', 'Mercedes-Benz', 'Lexus'], difficulty: 'hard' },
+            { brandName: 'Oracle', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/150px-Oracle_logo.svg.png', options: ['SAP', 'Microsoft', 'Oracle', 'IBM'], difficulty: 'hard' },
+            { brandName: 'Adobe', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Adobe_Corporate_logo.svg/100px-Adobe_Corporate_logo.svg.png', options: ['Corel', 'Affinity', 'Adobe', 'Autodesk'], difficulty: 'hard' },
+            { brandName: 'IBM', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/100px-IBM_logo.svg.png', options: ['HP', 'Dell', 'IBM', 'Accenture'], difficulty: 'hard' },
+            { brandName: 'SAP', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/100px-SAP_2011_logo.svg.png', options: ['Oracle', 'Salesforce', 'SAP', 'Workday'], difficulty: 'hard' },
+            { brandName: 'General Electric', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/General_Electric_logo.svg/100px-General_Electric_logo.svg.png', options: ['Siemens', 'Honeywell', 'General Electric', '3M'], difficulty: 'hard'},
+            { brandName: 'Cisco', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/100px-Cisco_logo.svg.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard'},
+            { brandName: 'Volkswagen', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/100px-Volkswagen_logo_2019.svg.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard'},
+            { brandName: 'Chanel', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Chanel_logo_interlocking_cs.svg/100px-Chanel_logo_interlocking_cs.svg.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard'},
+            { brandName: 'Rolex', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Rolex_logo.svg/150px-Rolex_logo.svg.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard'}
+        ];
+        allQuestions = LOGO_DATA; 
+
+        // --- UTILITY FUNCTIONS ---
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showMessage(text, type = 'info', duration = 3000) {
+            messageBox.textContent = text;
+            messageBox.className = 'message-box'; 
+            messageBox.classList.add(type); 
+            messageBox.style.display = 'block';
+            // Trigger reflow for animation
+            void messageBox.offsetWidth; 
+            messageBox.classList.add('visible');
+
+
+            setTimeout(() => {
+                messageBox.classList.remove('visible');
+                // Allow fade out animation to complete before hiding
+                setTimeout(() => {
+                     messageBox.style.display = 'none';
+                }, 500); // Match animation duration
+            }, duration - 500 < 0 ? duration : duration - 500); // Adjust timeout for animation
+        }
+        
+        function playSound(type) {
+            if (!soundEffectsEnabled || !audioCtx) return;
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            
+            oscillator.start(audioCtx.currentTime); // Start oscillator BEFORE scheduling stop
+
+            if (type === 'correct') { // Also used for streaming reveal
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+                oscillator.stop(audioCtx.currentTime + 0.3);
+            } else if (type === 'incorrect') {
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.4);
+                oscillator.stop(audioCtx.currentTime + 0.4);
+            } else if (type === 'click') {
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1);
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            }
+        }
+
+        // --- SETTINGS & INITIALIZATION ---
+        function updateSettingsUI() {
+            gameMode = document.querySelector('input[name="gameMode"]:checked').value;
+            
+            document.body.classList.remove('party-mode', 'streaming-mode');
+            const isDarkModeActive = document.body.classList.contains('dark-mode');
+            document.body.style.setProperty('--bg-color', isDarkModeActive ? 'var(--dark-bg)' : 'var(--light-bg)');
+            document.body.style.setProperty('--text-color', isDarkModeActive ? 'var(--dark-text)' : 'var(--light-text)');
+            document.body.style.setProperty('--card-bg-color', isDarkModeActive ? 'var(--dark-card-bg)' : 'var(--light-card-bg)');
+
+
+            if (gameMode === 'challenge') {
+                roundsGroup.style.display = 'none';
+                durationGroup.style.display = 'block';
+                roundDisplay.style.display = 'none'; 
+                timerDisplay.style.display = 'block'; 
+            } else if (gameMode === 'streaming') {
+                document.body.classList.add('streaming-mode');
+                roundsGroup.style.display = 'none';
+                durationGroup.style.display = 'none';
+                scoreDisplay.style.display = 'none';
+                roundDisplay.style.display = 'none';
+                optionsContainer.style.display = 'none';
+                timerDisplay.style.display = 'block';
+            } else { // Single or Party
+                roundsGroup.style.display = 'block';
+                durationGroup.style.display = 'none';
+                scoreDisplay.style.display = 'flex'; 
+                roundDisplay.style.display = 'inline';
+                optionsContainer.style.display = 'grid'; 
+                 if (gameMode === 'single') {
+                    timerDisplay.style.display = 'none'; 
+                } else { // Party mode
+                     document.body.classList.add('party-mode');
+                     timerDisplay.style.display = 'block';
+                }
+            }
+        }
+
+        gameModeRadios.forEach(radio => radio.addEventListener('change', updateSettingsUI));
+
+        function preloadImages(questionsToPreload) {
+            questionsToPreload.forEach(q => {
+                const img = new Image();
+                img.src = q.logoUrl;
+            });
+        }
+        
+        startGameBtn.addEventListener('click', () => {
+            if (!audioCtx) { 
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            playSound('click');
+
+            gameMode = document.querySelector('input[name="gameMode"]:checked').value;
+            difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+            soundEffectsEnabled = soundEffectsCheckbox.checked;
+
+            let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
+            if (questionsByDifficulty.length === 0) {
+                showMessage(`No questions available for ${difficulty} difficulty. Try another.`, 'warning');
+                return;
+            }
+            
+            currentQuestions = shuffleArray([...questionsByDifficulty]);
+
+            if (gameMode === 'challenge') {
+                totalRounds = currentQuestions.length; 
+                const durationMinutes = parseInt(sessionDurationSelect.value);
+                timeLeft = durationMinutes * 60;
+                startSessionTimer();
+            } else if (gameMode === 'streaming') {
+                totalRounds = currentQuestions.length;
+            } else { // Single or Party
+                totalRounds = parseInt(numRoundsInput.value);
+                if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) { // Increased max rounds check
+                    showMessage(`Please enter a valid number of rounds (1-200).`, 'warning');
+                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length)); // Default to a valid number
+                    return;
+                }
+                if (totalRounds > currentQuestions.length) {
+                    totalRounds = currentQuestions.length;
+                    showMessage(`Only ${totalRounds} questions available for this difficulty. Game will have ${totalRounds} rounds.`, 'info', 4000);
+                }
+                currentQuestions = currentQuestions.slice(0, totalRounds);
+            }
+            
+            preloadImages(currentQuestions);
+
+            score = 0;
+            currentQuestionIndex = 0;
+            updateScoreDisplay(); 
+            
+            showScreen('gameScreen');
+            updateSettingsUI(); 
+            loadQuestion();
+        });
+
+        // --- GAME LOGIC ---
+        function loadQuestion() {
+            clearAllTimers(); 
+
+            if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && gameMode !== 'streaming' && currentQuestionIndex >= totalRounds)) {
+                endGame();
+                return;
+            }
+
+            const question = currentQuestions[currentQuestionIndex];
+            logoImg.src = question.logoUrl;
+            feedbackMessage.style.display = 'none';
+            feedbackMessage.className = 'feedback-message'; // Reset feedback class
+            nextQuestionBtn.style.display = 'none';
+            
+            if (gameMode === 'streaming') {
+                optionsContainer.style.display = 'none'; 
+                timerDisplay.textContent = `Revealing in: ${STREAMING_REVEAL_TIME}s`;
+                timeLeft = STREAMING_REVEAL_TIME;
+                streamingRevealInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = `Revealing in: ${timeLeft}s`;
+                    if (timeLeft <= 0) {
+                        clearInterval(streamingRevealInterval);
+                        revealAnswerAndLoadNextStreaming();
+                    }
+                }, 1000);
+            } else { 
+                optionsContainer.style.display = 'grid'; 
+                optionsContainer.innerHTML = ''; 
+                const displayOptions = shuffleArray([...question.options]);
+                displayOptions.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.classList.add('btn', 'btn-option');
+                    button.textContent = option;
+                    button.dataset.option = option; 
+                    button.addEventListener('click', handleGuess);
+                    button.dataset.key = String.fromCharCode(65 + index); 
+                    optionsContainer.appendChild(button);
+                });
+                updateRoundDisplay();
+                 if (gameMode === 'party' || gameMode === 'challenge') {
+                    startQuestionTimer(15); 
+                }
+            }
+        }
+        
+        function revealAnswerAndLoadNextStreaming() {
+            const question = currentQuestions[currentQuestionIndex];
+            feedbackMessage.textContent = `The answer is: ${question.brandName}`;
+            feedbackMessage.className = 'feedback-message info'; 
+            feedbackMessage.style.display = 'block';
+            playSound('correct'); 
+
+            timerDisplay.textContent = `Next in: ${STREAMING_NEXT_DELAY}s`;
+            timeLeft = STREAMING_NEXT_DELAY;
+            streamingNextInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Next in: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(streamingNextInterval);
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+            }, 1000);
+        }
+
+
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+
+        function updateRoundDisplay() {
+            if (gameMode !== 'challenge' && gameMode !== 'streaming') {
+                 roundDisplay.textContent = `Round: ${currentQuestionIndex + 1}/${totalRounds}`;
+            } else if (gameMode === 'challenge') { 
+                roundDisplay.textContent = `Question: ${currentQuestionIndex + 1}`;
+            }
+        }
+        
+        function clearAllTimers() {
+            clearInterval(questionTimerInterval);
+            clearInterval(sessionTimerInterval);
+            clearInterval(streamingRevealInterval);
+            clearInterval(streamingNextInterval);
+        }
+
+        function startQuestionTimer(duration) { 
+            clearAllTimers();
+            timeLeft = duration;
+            timerDisplay.textContent = `Time: ${timeLeft}s`;
+            questionTimerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Time: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(questionTimerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+        
+        function startSessionTimer() { 
+            clearAllTimers();
+            timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
+            sessionTimerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
+                if (timeLeft <= 0) {
+                    clearInterval(sessionTimerInterval);
+                    if (gameScreen.classList.contains('active')) { 
+                        showMessage("Session time's up!", 'info');
+                        endGame();
+                    }
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+
+        function handleTimeout() { 
+            feedbackMessage.textContent = "Time's up! The correct answer was: " + currentQuestions[currentQuestionIndex].brandName;
+            feedbackMessage.className = 'feedback-message info';
+            feedbackMessage.style.display = 'block';
+            playSound('incorrect');
+            revealAnswer(null); 
+        }
+
+        function handleGuess(event) { 
+            clearInterval(questionTimerInterval);
+            const selectedOption = event.target.dataset.option;
+            const correctAnswer = currentQuestions[currentQuestionIndex].brandName;
+
+            if (selectedOption === correctAnswer) {
+                score++;
+                feedbackMessage.textContent = 'Correct!';
+                feedbackMessage.className = 'feedback-message correct';
+                playSound('correct');
+            } else {
+                feedbackMessage.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+                feedbackMessage.className = 'feedback-message incorrect';
+                playSound('incorrect');
+            }
+            feedbackMessage.style.display = 'block';
+            updateScoreDisplay();
+            revealAnswer(selectedOption);
+        }
+
+        function revealAnswer(selectedOptionText) { 
+            const correctAnswer = currentQuestions[currentQuestionIndex].brandName;
+            document.querySelectorAll('.btn-option').forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.option === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.option === selectedOptionText && selectedOptionText !== correctAnswer) { // Ensure only incorrect selection gets 'incorrect' class
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (gameMode === 'party' || (gameMode === 'challenge' && timeLeft > 0)) { 
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }, 2000); 
+            } else if (gameMode === 'single') {
+                if (currentQuestionIndex < totalRounds -1) {
+                    nextQuestionBtn.textContent = 'Next Question';
+                    nextQuestionBtn.style.display = 'block';
+                } else {
+                    nextQuestionBtn.textContent = 'Show Results';
+                     nextQuestionBtn.style.display = 'block';
+                }
+            } else if (gameMode === 'challenge' && timeLeft <= 0) {
+                 setTimeout(endGame, 2000);
+            } else { 
+                 setTimeout(endGame, 2000);
+            }
+        }
+        
+        nextQuestionBtn.addEventListener('click', () => { 
+            playSound('click');
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= totalRounds && gameMode !== 'challenge') {
+                endGame();
+            } else {
+                loadQuestion();
+            }
+        });
+
+        function endGame() {
+            clearAllTimers();
+            showScreen('gameOverScreen');
+            
+            if (gameMode === 'streaming') {
+                finalScoreDisplay.textContent = "Streaming finished!";
+                highscoreSection.style.display = 'none';
+                shareScoreBtn.style.display = 'none';
+            } else {
+                highscoreSection.style.display = 'block';
+                shareScoreBtn.style.display = 'inline-block';
+                let resultText = `You scored ${score} out of ${currentQuestionIndex} questions attempted.`;
+                if (gameMode !== 'challenge') {
+                     resultText = `You scored ${score} out of ${totalRounds} rounds.`;
+                }
+                finalScoreDisplay.textContent = resultText;
+                saveHighScore(score, gameMode, difficulty, gameMode === 'challenge' ? currentQuestionIndex : totalRounds);
+                displayHighScores();
+            }
+        }
+
+        // --- HIGH SCORES (localStorage) ---
+        function saveHighScore(currentScore, mode, diff, questionsOrRounds) {
+            if (mode === 'streaming') return; 
+            const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
+            const scoreEntry = {
+                score: currentScore,
+                mode: mode,
+                difficulty: diff,
+                rounds: questionsOrRounds,
+                date: new Date().toLocaleDateString()
+            };
+            highScores.push(scoreEntry);
+            highScores.sort((a, b) => b.score - a.score || b.rounds - a.rounds); 
+            highScores.splice(10); 
+            localStorage.setItem('guessLogoHighScores', JSON.stringify(highScores));
+        }
+
+        function displayHighScores() {
+            if (gameMode === 'streaming' && gameOverScreen.classList.contains('active')) return; 
+            const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
+            highscoreList.innerHTML = '';
+            if (highScores.length === 0) {
+                highscoreList.innerHTML = '<li>No high scores yet!</li>';
+                return;
+            }
+            highScores.forEach(entry => {
+                const li = document.createElement('li');
+                li.textContent = `${entry.score}/${entry.rounds} (${entry.difficulty}, ${entry.mode}) - ${entry.date}`;
+                highscoreList.appendChild(li);
+            });
+        }
+
+        playAgainBtn.addEventListener('click', () => {
+            playSound('click');
+            scoreDisplay.style.display = 'flex'; 
+            roundDisplay.style.display = 'inline';
+            optionsContainer.style.display = 'grid';
+            highscoreSection.style.display = 'block';
+            shareScoreBtn.style.display = 'inline-block'; 
+            
+            showScreen('settingsScreen');
+            document.getElementById('modeSingle').checked = true; 
+            updateSettingsUI(); 
+        });
+
+        shareScoreBtn.addEventListener('click', () => {
+            playSound('click');
+            const textToCopy = `I scored ${score} in Guess The Logo! (Mode: ${gameMode}, Difficulty: ${difficulty}, Rounds/Questions: ${gameMode === 'challenge' ? currentQuestionIndex : totalRounds}). Try it out!`;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            textArea.style.position = 'fixed'; 
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showMessage('Score copied to clipboard!', 'success', 2000);
+            } catch (err) {
+                showMessage('Failed to copy score.', 'error', 2000);
+            }
+            document.body.removeChild(textArea);
+        });
+
+        // --- DARK MODE ---
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('guessLogoDarkMode', isDarkMode);
+            darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+            
+            document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
+            document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+            document.body.style.setProperty('--card-bg-color', isDarkMode ? 'var(--dark-card-bg)' : 'var(--light-card-bg)');
+            playSound('click');
+        });
+
+        function loadDarkModePreference() {
+            const isDarkMode = localStorage.getItem('guessLogoDarkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode'); 
+                darkModeToggle.textContent = '🌙';
+            }
+             document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
+             document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+             document.body.style.setProperty('--card-bg-color', isDarkMode ? 'var(--dark-card-bg)' : 'var(--light-card-bg)');
+        }
+        
+        // --- KEYBOARD INPUT ---
+        document.addEventListener('keydown', (event) => {
+            const isInteractiveScreen = gameScreen.classList.contains('active') || 
+                                        settingsScreen.classList.contains('active') || 
+                                        gameOverScreen.classList.contains('active');
+
+            if (gameMode === 'streaming' && gameScreen.classList.contains('active')) return; 
+            if (!isInteractiveScreen) return;
+            
+            const key = event.key.toUpperCase();
+            let buttonToClick = null;
+
+            if (gameScreen.classList.contains('active') && optionsContainer.children.length > 0) {
+                if (key >= '1' && key <= '4') {
+                    buttonToClick = optionsContainer.children[parseInt(key) - 1];
+                } else if (key >= 'A' && key <= 'D') {
+                    for(let i=0; i < optionsContainer.children.length; i++){
+                        if(optionsContainer.children[i].dataset.key === key){
+                            buttonToClick = optionsContainer.children[i];
+                            break;
+                        }
+                    }
+                } else if ((key === 'ENTER' || key === ' ') && nextQuestionBtn.style.display !== 'none' && !nextQuestionBtn.disabled) {
+                    buttonToClick = nextQuestionBtn;
+                }
+            }
+            
+            if ((key === 'ENTER' || key === ' ') && !buttonToClick) { 
+                 if (settingsScreen.classList.contains('active') && startGameBtn.offsetParent !== null) { 
+                    buttonToClick = startGameBtn;
+                 } else if (gameOverScreen.classList.contains('active') && playAgainBtn.offsetParent !== null) {
+                    buttonToClick = playAgainBtn;
+                 }
+            }
+
+
+            if (buttonToClick && !buttonToClick.disabled) {
+                event.preventDefault(); 
+                buttonToClick.click();
+            }
+        });
+
+
+        // --- INITIAL LOAD ---
+        window.addEventListener('load', () => {
+            loadDarkModePreference();
+            updateSettingsUI(); 
+            showScreen('settingsScreen'); 
+        });
+
+    </script>
+</body>
+</html>
