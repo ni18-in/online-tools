@@ -1,138 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Introducing JSON Visualizer Pro: Tame Your JSON Data!</title>
-    <meta name="description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.">
+  <title>Introducing JSON Visualizer Pro: Tame Your JSON Data! - online-tools</title>
+  <meta name="description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="manifest" href="/assets/icons/site.webmanifest">
-    <meta name="theme-color" content="#4a6fa5"> <meta property="og:title" content="Introducing JSON Visualizer Pro: Tame Your JSON Data!">
-    <meta property="og:description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.">
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2025-04-12T13:14:00+05:30">
-    <meta property="og:site_name" content="online-tools"> <meta property="og:locale" content="en_US">
-    <meta name="twitter:title" content="Introducing JSON Visualizer Pro: Tame Your JSON Data!">
-    <meta name="twitter:description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="../style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <meta name="theme-color" content="#4A5568"> <meta property="og:title" content="Introducing JSON Visualizer Pro: Tame Your JSON Data!">
+  <meta property="og:description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://online-tools.ni18.in/blogs/json-visualizer-pro-tame-your-json-data.html"> <meta property="og:image" content="https://online-tools.ni18.in/assets/blog/json-visualizer-pro-banner.png"> <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2025-04-12T13:14:00+05:30">
+  <meta property="article:modified_time" content="2025-04-12T13:14:00+05:30"> <meta property="article:author" content="https://online-tools.ni18.in/about"> <meta property="article:section" content="Product Updates"> <meta property="article:tag" content="JSON">
+  <meta property="article:tag" content="Developer Tools">
+  <meta property="article:tag" content="JSON Visualizer">
+  <meta property="og:site_name" content="online-tools">
+  <meta property="og:locale" content="en_US">
 
- 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YourTwitterHandle"> <meta name="twitter:creator" content="@AuthorTwitterHandle"> <meta name="twitter:title" content="Introducing JSON Visualizer Pro: Tame Your JSON Data!">
+  <meta name="twitter:description" content="Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data.">
+  <meta name="twitter:image" content="https://online-tools.ni18.in/assets/blog/json-visualizer-pro-banner.png"> <link rel="canonical" href="https://online-tools.ni18.in/blogs/json-visualizer-pro-tame-your-json-data.html">
 
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            indigo: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81',
+            }
+          },
+          typography: (theme) => ({
+            DEFAULT: {
+              css: {
+                color: theme('colors.gray.700'),
+                a: {
+                  color: theme('colors.indigo.600'),
+                  '&:hover': {
+                    color: theme('colors.indigo.800'),
+                  },
+                },
+                h1: { color: theme('colors.gray.900'), },
+                h2: { color: theme('colors.gray.900'), },
+                h3: { color: theme('colors.gray.800'), },
+                strong: { color: theme('colors.gray.900'), },
+                blockquote: {
+                  borderLeftColor: theme('colors.indigo.500'),
+                  color: theme('colors.gray.600'),
+                },
+                hr: {
+                    borderColor: theme('colors.gray.300'),
+                    marginTop: '3em',
+                    marginBottom: '3em',
+                },
+                ul: {
+                    listStyleType: 'disc', // Ensure default bullet points for ul
+                },
+                ol: {
+                    listStyleType: 'decimal', // Ensure default numbers for ol
+                }
+              },
+            },
+          }),
+        }
+      },
+      plugins: [
+        require('@tailwindcss/typography'),
+      ],
+    }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://online-tools.ni18.in/blogs/json-visualizer-pro-tame-your-json-data.html"
+    },
+    "headline": "Introducing JSON Visualizer Pro: Tame Your JSON Data!",
+    "description": "Discover JSON Visualizer Pro, a free online tool to easily view, format, minify, copy, and validate JSON data with features like tree view and undo/redo.",
+    "image": "https://online-tools.ni18.in/assets/blog/json-visualizer-pro-banner.png",
+    "author": {
+      "@type": "Person",
+      "name": "ni18",
+      "url": "https://online-tools.ni18.in/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "online-tools",
+      "url": "https://online-tools.ni18.in/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://online-tools.ni18.in/assets/icons/favicon-32x32.png"
+      }
+    },
+    "datePublished": "2025-04-12T13:14:00+05:30",
+    "dateModified": "2025-04-12T13:14:00+05:30"
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RJER6TKTQ3');
+  </script>
 </head>
 
-<body>
-    <header role="banner">
-        <div class="header-content">
-            <h1><a href="/" title="Go to Homepage">Online Tools</a></h1>
-            <nav aria-label="Main Navigation">
-                <ul>
-                    <li><a href="/blogs" aria-current="page">Blogs</a></li>
-                    <li><a href="/">Tools</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </nav>
+<body class="bg-gray-100 text-gray-800 font-sans antialiased">
+
+  <header role="banner" class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <div class="flex-shrink-0">
+          <a href="/" title="Go to Homepage" class="text-3xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-150 ease-in-out">
+            Online Tools
+          </a>
         </div>
-    </header>
-
-    <main id="main-content" role="main">
-
-        <article class="post-full" itemscope itemtype="http://schema.org/BlogPosting">
-
-            <header class="post-full-header">
-                <h1 class="post-full-title" itemprop="headline">Introducing JSON Visualizer Pro: Tame Your JSON Data!</h1>
-                <p class="post-meta">
-                    Published on <time datetime="2025-04-12" itemprop="datePublished">April 12, 2025</time>
-                    by <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                        <span itemprop="name">ni18</span> </span>
-                </p>
-            </header>
-
-            <section class="post-full-content" itemprop="articleBody">
-
-                <p>Working with JSON (JavaScript Object Notation) is a daily reality for many developers, data analysts, and testers. It's the lingua franca of APIs and configuration files. But let's be honest – staring at raw, unformatted JSON strings can quickly become a headache. Nested structures get lost, missing commas cause frustrating errors, and understanding complex data becomes a chore.</p>
-                <p>What if there was a simple, web-based tool to bring clarity and efficiency to your JSON workflow?</p>
-                <p>Enter <strong>JSON Visualizer Pro</strong> – your new go-to online utility for making sense of JSON data!</p>
-
-                <hr class="wp-block-separator has-alpha-channel-opacity">
-
-                <h2 class="wp-block-heading">What is JSON Visualizer Pro?</h2>
-                <p>JSON Visualizer Pro is a user-friendly, browser-based application designed to help you view, format, and manage JSON data effortlessly. No installation required – just open it and paste your data. It provides a clean interface to instantly transform confusing JSON text into a structured, easy-to-understand format.</p>
-
-                <hr class="wp-block-separator has-alpha-channel-opacity">
-
-                <h2 class="wp-block-heading">Key Features That Simplify Your Workflow</h2>
-                <p>We built JSON Visualizer Pro with essential features to tackle common JSON pain points:</p>
-                <ul class="wp-block-list">
-                    <li><strong>✨ Intuitive Visualization:</strong> Paste your raw JSON into the input panel, click "Visualize / Update," and instantly see a beautifully structured, color-coded tree view on the right. Keys, strings, numbers, booleans, and null values are distinctly styled for maximum readability, making complex nested data easy to navigate.</li>
-                    <li><strong>✅ Built-in Error Detection:</strong> No more hunting for that missing comma! The tool automatically attempts to parse your JSON as you visualize it. If there's a syntax error, a clear message appears right below the input area, helping you pinpoint the problem quickly.</li>
-                    <li><strong>💅 Effortless Formatting &amp; Minifying:</strong>
-                        <ul>
-                            <li><strong>Format:</strong> Need to make that compact JSON readable? The "Format" button instantly pretty-prints your JSON in the input area with standard 2-space indentation.</li>
-                            <li><strong>Minify:</strong> Preparing JSON for transmission? The "Minify" button strips all unnecessary whitespace, creating the most compact version possible.</li>
-                        </ul>
-                    </li>
-                    <li><strong>📋 Essential Utilities:</strong>
-                        <ul>
-                            <li><strong>Copy:</strong> Quickly copy the entire JSON content from the input area to your clipboard with a single click.</li>
-                            <li><strong>Clear:</strong> Start fresh anytime by clearing both the input and visualization panels using the "Clear" button.</li>
-                        </ul>
-                    </li>
-                    <li><strong>↩️ Robust History (Undo/Redo):</strong> Made a mistake formatting or clearing? No problem! JSON Visualizer Pro includes Undo (<code>Ctrl+Z</code>) and Redo (<code>Ctrl+Y</code>) functionality for actions like formatting, minifying, clearing, and visualizing. Your previous states are saved, giving you peace of mind.</li>
-                    <li><strong>❓ User-Friendly Interface:</strong> A clean, two-panel layout keeps things organized. The clear navigation bar provides the tool's identity, and a handy "How to Use" button opens a modal with quick instructions whenever you need a refresher. The responsive design ensures it works smoothly on different screen sizes.</li>
-                </ul>
-
-                 <hr class="wp-block-separator has-alpha-channel-opacity">
-
-                 <h2 class="wp-block-heading">Who is JSON Visualizer Pro For?</h2>
-                 <p>This tool is perfect for:</p>
-                 <ul class="wp-block-list">
-                     <li><strong>Web Developers:</strong> Debugging API responses or working with JSON payloads.</li>
-                     <li><strong>Backend Developers:</strong> Inspecting data structures or configuration files.</li>
-                     <li><strong>QA Engineers &amp; Testers:</strong> Validating API outputs.</li>
-                     <li><strong>Data Analysts:</strong> Exploring JSON data sources.</li>
-                     <li><strong>Students:</strong> Learning about JSON structure and syntax.</li>
-                     <li>Anyone who regularly interacts with JSON data!</li>
-                 </ul>
-
-                 <hr class="wp-block-separator has-alpha-channel-opacity">
-
-                 <h2 class="wp-block-heading">Getting Started</h2>
-                 <p>It couldn't be simpler:</p>
-                 <ol class="wp-block-list">
-                     <li>Open JSON Visualizer Pro in your web browser.</li>
-                     <li>Paste or type your JSON data into the left input panel.</li>
-                     <li>Click the "Visualize / Update" button.</li>
-                     <li>Explore the structured view on the right and use the utility buttons (Format, Minify, Copy, Clear, Undo, Redo) as needed!</li>
-                     <li>Click "How to Use" in the navbar for a quick guide anytime.</li>
-                 </ol>
-
-                 <hr class="wp-block-separator has-alpha-channel-opacity">
-
-                 <h2 class="wp-block-heading">Try JSON Visualizer Pro Today!</h2>
-                 <p>Stop squinting at messy JSON! Bring clarity and efficiency to your workflow with JSON Visualizer Pro. It's simple, fast, and designed to make working with JSON a breeze.</p>
-                 <p><a href="/tools/json-visualizer-pro/" target="_blank" rel="noopener noreferrer"><strong>Try JSON Visualizer Pro Now!</strong></a></p>
-                 <p>Let us know what you think!</p>
-
-            </section>
-
-        </article>
-
-        <nav class="post-navigation" aria-label="Post navigation">
-            <a href="/blogs" class="back-to-blog">&laquo; Back to Blog</a>
+        <nav aria-label="Main Navigation" class="hidden md:block">
+          <ul class="flex items-center space-x-8">
+            <li><a href="/blogs" aria-current="page" class="text-indigo-600 bg-indigo-100 px-3 py-2 rounded-md text-sm font-medium">Blogs</a></li>
+            <li><a href="/" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Tools</a></li>
+            <li><a href="/about" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">About</a></li>
+          </ul>
         </nav>
+        <div class="md:hidden">
+          <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 rounded-md p-2" aria-expanded="false" aria-controls="mobile-menu-json-post">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="md:hidden hidden bg-white shadow-lg" id="mobile-menu-json-post">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/blogs" aria-current="page" class="text-indigo-600 bg-indigo-100 block px-3 py-2 rounded-md text-base font-medium">Blogs</a>
+            <a href="/" class="text-gray-700 hover:bg-gray-100 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Tools</a>
+            <a href="/about" class="text-gray-700 hover:bg-gray-100 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+        </div>
+    </div>
+  </header>
 
-    </main>
+  <main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <footer role="contentinfo">
-        <p>&copy; 2025 ni18 / online-tools. All rights reserved.</p> </footer>
+      <header class="post-full-header mb-8 text-center">
+        <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+          Introducing JSON Visualizer Pro: Tame Your JSON Data!
+        </h1>
+        <p class="post-meta text-sm text-gray-500">
+          Published on <time datetime="2025-04-12" itemprop="datePublished">April 12, 2025</time>
+          by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/about" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+           &bull; <span class="text-indigo-500 font-semibold">Product Updates</span>
+        </p>
+        <img src="https://placehold.co/1200x630/818CF8/3730A3?text=JSON+Visualizer+Pro" alt="Featured image for blog post on JSON Visualizer Pro" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image">
+      </header>
 
-    <script src="../script.js" defer></script>
+      <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+        <p>Working with JSON (JavaScript Object Notation) is a daily reality for many developers, data analysts, and testers. It's the lingua franca of APIs and configuration files. But let's be honest – staring at raw, unformatted JSON strings can quickly become a headache. Nested structures get lost, missing commas cause frustrating errors, and understanding complex data becomes a chore.</p>
+        <p>What if there was a simple, web-based tool to bring clarity and efficiency to your JSON workflow?</p>
+        <p>Enter <strong>JSON Visualizer Pro</strong> – your new go-to online utility for making sense of JSON data! You can find it on our <a href="/tools/json-visualizer-pro/">tools page</a>.</p>
+
+        <hr>
+
+        <h2>What is JSON Visualizer Pro?</h2>
+        <p>JSON Visualizer Pro is a user-friendly, browser-based application designed to help you view, format, and manage JSON data effortlessly. No installation required – just open it and paste your data. It provides a clean interface to instantly transform confusing JSON text into a structured, easy-to-understand format.</p>
+
+        <hr>
+
+        <h2>Key Features That Simplify Your Workflow</h2>
+        <p>We built JSON Visualizer Pro with essential features to tackle common JSON pain points:</p>
+        <ul>
+          <li><strong>✨ Intuitive Visualization:</strong> Paste your raw JSON into the input panel, click "Visualize / Update," and instantly see a beautifully structured, color-coded tree view on the right. Keys, strings, numbers, booleans, and null values are distinctly styled for maximum readability, making complex nested data easy to navigate.</li>
+          <li><strong>✅ Built-in Error Detection:</strong> No more hunting for that missing comma! The tool automatically attempts to parse your JSON as you visualize it. If there's a syntax error, a clear message appears right below the input area, helping you pinpoint the problem quickly.</li>
+          <li><strong>💅 Effortless Formatting &amp; Minifying:</strong>
+            <ul>
+              <li><strong>Format:</strong> Need to make that compact JSON readable? The "Format" button instantly pretty-prints your JSON in the input area with standard 2-space indentation.</li>
+              <li><strong>Minify:</strong> Preparing JSON for transmission? The "Minify" button strips all unnecessary whitespace, creating the most compact version possible.</li>
+            </ul>
+          </li>
+          <li><strong>📋 Essential Utilities:</strong>
+            <ul>
+              <li><strong>Copy:</strong> Quickly copy the entire JSON content from the input area to your clipboard with a single click.</li>
+              <li><strong>Clear:</strong> Start fresh anytime by clearing both the input and visualization panels using the "Clear" button.</li>
+            </ul>
+          </li>
+          <li><strong>↩️ Robust History (Undo/Redo):</strong> Made a mistake formatting or clearing? No problem! JSON Visualizer Pro includes Undo (<code>Ctrl+Z</code>) and Redo (<code>Ctrl+Y</code>) functionality for actions like formatting, minifying, clearing, and visualizing. Your previous states are saved, giving you peace of mind.</li>
+          <li><strong>❓ User-Friendly Interface:</strong> A clean, two-panel layout keeps things organized. The clear navigation bar provides the tool's identity, and a handy "How to Use" button opens a modal with quick instructions whenever you need a refresher. The responsive design ensures it works smoothly on different screen sizes.</li>
+        </ul>
+
+        <hr>
+
+        <h2>Who is JSON Visualizer Pro For?</h2>
+        <p>This tool is perfect for:</p>
+        <ul>
+          <li><strong>Web Developers:</strong> Debugging API responses or working with JSON payloads.</li>
+          <li><strong>Backend Developers:</strong> Inspecting data structures or configuration files.</li>
+          <li><strong>QA Engineers &amp; Testers:</strong> Validating API outputs.</li>
+          <li><strong>Data Analysts:</strong> Exploring JSON data sources.</li>
+          <li><strong>Students:</strong> Learning about JSON structure and syntax.</li>
+          <li>Anyone who regularly interacts with JSON data!</li>
+        </ul>
+
+        <hr>
+
+        <h2>Getting Started</h2>
+        <p>It couldn't be simpler:</p>
+        <ol>
+          <li>Open <a href="/tools/json-visualizer-pro/">JSON Visualizer Pro</a> in your web browser.</li>
+          <li>Paste or type your JSON data into the left input panel.</li>
+          <li>Click the "Visualize / Update" button.</li>
+          <li>Explore the structured view on the right and use the utility buttons (Format, Minify, Copy, Clear, Undo, Redo) as needed!</li>
+          <li>Click "How to Use" in the navbar for a quick guide anytime.</li>
+        </ol>
+
+        <hr>
+
+        <h2>Try JSON Visualizer Pro Today!</h2>
+        <p>Stop squinting at messy JSON! Bring clarity and efficiency to your workflow with JSON Visualizer Pro. It's simple, fast, and designed to make working with JSON a breeze.</p>
+        <p><a href="/tools/json-visualizer-pro/" target="_blank" rel="noopener noreferrer" class="font-bold text-lg hover:underline"><strong>Try JSON Visualizer Pro Now!</strong></a></p>
+        <p>We'd love to hear your feedback!</p>
+      </section>
+
+      <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+        <nav class="post-navigation flex justify-between items-center" aria-label="Post navigation">
+            <a href="/blogs" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+                <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                Back to Blog
+            </a>
+        </nav>
+      </footer>
+    </article>
+  </main>
+
+  <footer role="contentinfo" class="bg-gray-800 text-gray-300 mt-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
+      <p class="text-base">&copy; <span id="currentYearJsonPost"></span> ni18 / online-tools. All rights reserved.</p>
+      <p class="text-sm text-gray-500 mt-2">
+        Designed with <a href="https://tailwindcss.com" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Tailwind CSS</a>
+        &bull; Hosted with <a href="#" class="hover:text-indigo-400 underline">Your Hosting</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuButtonJsonPost = document.querySelector('[aria-controls="mobile-menu-json-post"]');
+    const mobileMenuJsonPost = document.getElementById('mobile-menu-json-post');
+    const mobileMenuIconJsonPost = menuButtonJsonPost ? menuButtonJsonPost.querySelector('svg') : null;
+    const menuIconPathJsonPost = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />';
+    const closeIconPathJsonPost = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+
+    if (menuButtonJsonPost && mobileMenuJsonPost && mobileMenuIconJsonPost) {
+      menuButtonJsonPost.addEventListener('click', () => {
+        const isExpanded = menuButtonJsonPost.getAttribute('aria-expanded') === 'true';
+        menuButtonJsonPost.setAttribute('aria-expanded', !isExpanded);
+        mobileMenuJsonPost.classList.toggle('hidden');
+        mobileMenuIconJsonPost.innerHTML = isExpanded ? menuIconPathJsonPost : closeIconPathJsonPost;
+      });
+    }
+
+    // Set Current Year in Footer
+    const yearSpanJsonPost = document.getElementById('currentYearJsonPost');
+    if (yearSpanJsonPost) {
+        yearSpanJsonPost.textContent = new Date().getFullYear();
+    }
+  </script>
+  <script src="/script.js" defer></script>
 </body>
-
 </html>
