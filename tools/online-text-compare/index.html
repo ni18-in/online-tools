@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online Text Compare tool to find differences between two texts. Supports multiple languages, dark mode, and highlights added, removed, and common lines.">
+    <title>Online Text Compare - Diff Checker</title>
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* General Reset and Base Styles */
+        :root {
+            --primary-color: #6200EE;
+            --primary-variant-color: #3700B3;
+            --secondary-color: #03DAC6;
+            --background-color: #FFFFFF;
+            --surface-color: #FFFFFF;
+            --error-color: #B00020;
+            --on-primary-color: #FFFFFF;
+            --on-secondary-color: #000000;
+            --on-background-color: #000000;
+            --on-surface-color: #000000;
+
+            --text-font: 'Roboto', sans-serif;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --box-shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
+            --input-border-color: #ced4da;
+            --input-focus-border-color: #80bdff;
+            --diff-added-bg: #e6ffed;
+            --diff-added-text: #28a745;
+            --diff-removed-bg: #ffeef0;
+            --diff-removed-text: #dc3545;
+            --diff-common-text: var(--on-surface-color);
+        }
+
+        .dark-mode {
+            --primary-color: #BB86FC;
+            --primary-variant-color: #3700B3;
+            --secondary-color: #03DAC6; 
+            --background-color: #121212;
+            --surface-color: #1E1E1E; 
+            --error-color: #CF6679;
+            --on-primary-color: #000000;
+            --on-secondary-color: #000000;
+            --on-background-color: #E0E0E0;
+            --on-surface-color: #E0E0E0; 
+            --input-border-color: #555;
+            --input-focus-border-color: #03DAC6;
+            --diff-added-bg: #1c3c22;
+            --diff-added-text: #77dd77;
+            --diff-removed-bg: #3c1c22;
+            --diff-removed-text: #dd7777;
+            --diff-common-text: var(--on-surface-color);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--text-font);
+            background-color: var(--background-color);
+            color: var(--on-background-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            /* Removed padding: 1rem from body to allow container to manage its own padding */
+        }
+
+        .container {
+            /* max-width: 1200px; Removed for full width */
+            width: 100%; /* Ensure it takes full available width */
+            margin: 0 auto;
+            padding: 1rem; /* Padding moved here from body for better control */
+            background-color: var(--surface-color);
+            /* border-radius: var(--border-radius); Removed for edge-to-edge feel, can be added back if preferred */
+            /* box-shadow: var(--box-shadow); Removed for edge-to-edge feel */
+            min-height: 100vh; /* Ensure container takes at least full viewport height */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--input-border-color);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-right: 1rem; 
+        }
+
+        .header-controls {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        .header-controls select, .header-controls button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--surface-color);
+            color: var(--on-surface-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .header-controls button {
+             display: flex;
+             align-items: center;
+             gap: 0.3rem;
+        }
+        .header-controls button.compare-main-btn { 
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+            border-color: var(--primary-color);
+        }
+        .header-controls button.compare-main-btn:hover {
+            background-color: var(--primary-variant-color);
+        }
+
+
+        .header-controls select:hover, .header-controls button:not(.compare-main-btn):hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .dark-mode .header-controls select:hover, .dark-mode .header-controls button:not(.compare-main-btn):hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .header-controls button:active {
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+
+        .comparison-area {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .text-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background-color: var(--background-color); /* Or var(--surface-color) if preferred */
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow); /* Kept shadow on panels for distinction */
+        }
+        
+        .text-panel label {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--on-surface-color);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 30vh; /* Adjusted min-height to be viewport relative */
+            max-height: 60vh; /* Added max-height to prevent excessive growth */
+            padding: 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            font-family: monospace; 
+            font-size: 0.95rem;
+            resize: vertical;
+            background-color: var(--surface-color);
+            color: var(--on-surface-color);
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 98, 0, 238), 0.25); 
+        }
+        .dark-mode textarea:focus {
+             box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 187, 134, 252), 0.25);
+        }
+
+
+        .panel-controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .panel-controls button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .panel-controls button:hover {
+            background-color: var(--primary-variant-color);
+            box-shadow: var(--box-shadow-hover);
+        }
+         .panel-controls button:active {
+            filter: brightness(0.9);
+        }
+
+
+        .diff-output {
+            width: 100%;
+            min-height: 30vh; /* Adjusted min-height */
+            max-height: 60vh; /* Added max-height */
+            padding: 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            font-family: monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+            background-color: var(--surface-color);
+            overflow-y: auto;
+        }
+
+        .diff-output span {
+            display: inline-block; 
+            width: 100%; 
+        }
+        .diff-output .added {
+            background-color: var(--diff-added-bg);
+            color: var(--diff-added-text);
+        }
+        .diff-output .removed {
+            background-color: var(--diff-removed-bg);
+            color: var(--diff-removed-text);
+            text-decoration: line-through;
+        }
+        .diff-output .common {
+            color: var(--diff-common-text);
+        }
+        .diff-output .placeholder { 
+            opacity: 0.5;
+            user-select: none;
+        }
+        
+        .material-icons {
+            font-size: 1.2em; 
+            vertical-align: middle;
+        }
+
+        @media (max-width: 992px) { 
+            .header-controls {
+                justify-content: flex-start; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comparison-area {
+                flex-direction: column;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .header-controls {
+                width: 100%;
+            }
+             .header-controls select {
+                flex-grow: 1; 
+            }
+            textarea, .diff-output { /* Adjust height for smaller screens */
+                min-height: 25vh;
+                max-height: 50vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .panel-controls {
+                flex-direction: column; 
+            }
+            .panel-controls button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                font-size: 10pt; 
+            }
+            header, .panel-controls, textarea {
+                display: none !important; 
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                padding: 0;
+            }
+            .comparison-area {
+                flex-direction: row; 
+                gap: 10px; 
+            }
+            .text-panel {
+                box-shadow: none;
+                border: 1px solid #ccc; 
+                padding: 5px;
+                flex: 1;
+            }
+            .diff-output {
+                min-height: auto; 
+                border: none;
+                font-size: 9pt;
+                background-color: #fff !important; 
+            }
+            .diff-output .added {
+                background-color: #d4edda !important;
+                color: #155724 !important;
+                border: 1px solid #c3e6cb !important;
+            }
+            .diff-output .removed {
+                background-color: #f8d7da !important;
+                color: #721c24 !important;
+                border: 1px solid #f5c6cb !important;
+                text-decoration: line-through;
+            }
+            .diff-output .common {
+                color: #000 !important;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Text Compare",
+      "description": "A free online tool to compare two pieces of text and highlight the differences. Supports multiple languages, dark mode, and provides clear visual diffs for added, removed, and common lines.",
+      "applicationCategory": "Utilities",
+      "operatingSystem": "Any (Web Browser)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "keywords": "text compare, diff checker, compare text, text difference, online diff tool, file compare, compare strings",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+      "featureList": [
+        "Side-by-side text comparison",
+        "Line-based difference highlighting (added, removed, common)",
+        "Multi-language interface (English, Spanish, Chinese, Hindi, Arabic, Portuguese, French, Russian, Japanese, German)",
+        "Copy, Paste, Clear text controls",
+        "Swap text inputs",
+        "Copy diff result to clipboard",
+        "Download diff result as .txt file",
+        "Print diff result",
+        "Dark mode toggle",
+        "Responsive design for all devices",
+        "Works offline after initial load (via Service Worker)"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 data-lang="pageTitle">Online Text Compare</h1>
+            <div class="header-controls">
+                <button id="compareButton" class="compare-main-btn" aria-label="Compare texts" title="Compare Texts">
+                    <i class="material-icons">compare_arrows</i> <span data-lang="compareButton">Compare</span>
+                </button>
+                <select id="languageSelector" aria-label="Select language">
+                    </select>
+                <button id="swapButton" aria-label="Swap texts" title="Swap Texts">
+                    <i class="material-icons">swap_horiz</i> <span data-lang="swapButton">Swap</span>
+                </button>
+                <button id="copyResultButton" aria-label="Copy result" title="Copy Result">
+                    <i class="material-icons">content_copy</i> <span data-lang="copyResultButton">Copy Result</span>
+                </button>
+                <button id="downloadButton" aria-label="Download diff" title="Download Diff">
+                    <i class="material-icons">download</i> <span data-lang="downloadButton">Download</span>
+                </button>
+                <button id="printButton" aria-label="Print diff" title="Print Diff">
+                    <i class="material-icons">print</i> <span data-lang="printButton">Print</span>
+                </button>
+                <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">
+                    <i class="material-icons">brightness_6</i>
+                </button>
+            </div>
+        </header>
+
+        <main class="comparison-area">
+            <div class="text-panel" id="panel1">
+                <label for="text1" data-lang="text1Label">Text 1</label>
+                <textarea id="text1" aria-label="Text input 1" placeholder="Paste or type text here..."></textarea>
+                <div class="panel-controls">
+                    <button class="copy-button" data-text-target="text1" aria-label="Copy text 1" title="Copy Text 1">
+                        <i class="material-icons">content_copy</i> <span data-lang="copyButton">Copy</span>
+                    </button>
+                    <button class="paste-button" data-text-target="text1" aria-label="Paste into text 1" title="Paste into Text 1">
+                        <i class="material-icons">content_paste</i> <span data-lang="pasteButton">Paste</span>
+                    </button>
+                    <button class="clear-button" data-text-target="text1" aria-label="Clear text 1" title="Clear Text 1">
+                        <i class="material-icons">clear</i> <span data-lang="clearButton">Clear</span>
+                    </button>
+                </div>
+                <div id="diffOutput1" class="diff-output" aria-live="polite" aria-atomic="true" data-lang-placeholder="diffOutputPlaceholder">Differences from Text 2 will appear here.</div>
+            </div>
+
+            <div class="text-panel" id="panel2">
+                <label for="text2" data-lang="text2Label">Text 2</label>
+                <textarea id="text2" aria-label="Text input 2" placeholder="Paste or type text here..."></textarea>
+                <div class="panel-controls">
+                    <button class="copy-button" data-text-target="text2" aria-label="Copy text 2" title="Copy Text 2">
+                        <i class="material-icons">content_copy</i> <span data-lang="copyButton">Copy</span>
+                    </button>
+                    <button class="paste-button" data-text-target="text2" aria-label="Paste into text 2" title="Paste into Text 2">
+                        <i class="material-icons">content_paste</i> <span data-lang="pasteButton">Paste</span>
+                    </button>
+                    <button class="clear-button" data-text-target="text2" aria-label="Clear text 2" title="Clear Text 2">
+                        <i class="material-icons">clear</i> <span data-lang="clearButton">Clear</span>
+                    </button>
+                </div>
+                <div id="diffOutput2" class="diff-output" aria-live="polite" aria-atomic="true" data-lang-placeholder="diffOutputPlaceholder">Differences from Text 1 will appear here.</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js" defer></script>
+    <script>
+        // --- Translations Object ---
+        const translations = {
+            en: {
+                pageTitle: "Online Text Compare",
+                text1Label: "Text 1",
+                text2Label: "Text 2",
+                copyButton: "Copy",
+                pasteButton: "Paste",
+                clearButton: "Clear",
+                swapButton: "Swap",
+                compareButton: "Compare",
+                copyResultButton: "Copy Result",
+                downloadButton: "Download",
+                printButton: "Print",
+                darkMode: "Dark Mode",
+                language: "Language",
+                diffOutputPlaceholder: "Differences will appear here after comparison.",
+                pasteInstruction: "Press Ctrl+V or Cmd+V to paste.",
+                emptyTexts: "Both text fields are empty. Nothing to compare or download.",
+                downloadFileName: "text-comparison.txt",
+                copiedToClipboard: "Copied!",
+                resultCopied: "Diff result copied!",
+                nothingToCopy: "Nothing to copy.",
+            },
+            es: {
+                pageTitle: "Comparador de Texto Online",
+                text1Label: "Texto 1",
+                text2Label: "Texto 2",
+                copyButton: "Copiar",
+                pasteButton: "Pegar",
+                clearButton: "Limpiar",
+                swapButton: "Intercambiar",
+                compareButton: "Comparar",
+                copyResultButton: "Copiar Resultado",
+                downloadButton: "Descargar",
+                printButton: "Imprimir",
+                darkMode: "Modo Oscuro",
+                language: "Idioma",
+                diffOutputPlaceholder: "Las diferencias aparecerán aquí después de la comparación.",
+                pasteInstruction: "Presiona Ctrl+V o Cmd+V para pegar.",
+                emptyTexts: "Ambos campos de texto están vacíos. Nada que comparar o descargar.",
+                downloadFileName: "comparacion-texto.txt",
+                copiedToClipboard: "¡Copiado!",
+                resultCopied: "¡Resultado de la diferencia copiado!",
+                nothingToCopy: "Nada que copiar.",
+            },
+            zh: { // Chinese (Mandarin)
+                pageTitle: "在线文本比较",
+                text1Label: "文本1",
+                text2Label: "文本2",
+                copyButton: "复制",
+                pasteButton: "粘贴",
+                clearButton: "清除",
+                swapButton: "交换",
+                compareButton: "比较",
+                copyResultButton: "复制结果",
+                downloadButton: "下载",
+                printButton: "打印",
+                darkMode: "深色模式",
+                language: "语言",
+                diffOutputPlaceholder: "比较后差异将显示在此处。",
+                pasteInstruction: "请按 Ctrl+V 或 Cmd+V 粘贴。",
+                emptyTexts: "两个文本框都为空。没有可比较或下载的内容。",
+                downloadFileName: "文本比较.txt",
+                copiedToClipboard: "已复制！",
+                resultCopied: "比较结果已复制！",
+                nothingToCopy: "没有可复制的内容。",
+            },
+            hi: { // Hindi
+                pageTitle: "ऑनलाइन टेक्स्ट तुलना",
+                text1Label: "टेक्स्ट 1",
+                text2Label: "टेक्स्ट 2",
+                copyButton: "कॉपी",
+                pasteButton: "पेस्ट",
+                clearButton: "साफ़ करें",
+                swapButton: "स्वैप",
+                compareButton: "तुलना करें",
+                copyResultButton: "परिणाम कॉपी करें",
+                downloadButton: "डाउनलोड",
+                printButton: "प्रिंट",
+                darkMode: "डार्क मोड",
+                language: "भाषा",
+                diffOutputPlaceholder: "तुलना के बाद अंतर यहां दिखाई देंगे।",
+                pasteInstruction: "पेस्ट करने के लिए Ctrl+V या Cmd+V दबाएँ।",
+                emptyTexts: "दोनों टेक्स्ट फ़ील्ड खाली हैं। तुलना करने या डाउनलोड करने के लिए कुछ भी नहीं है।",
+                downloadFileName: "टेक्स्ट-तुलना.txt",
+                copiedToClipboard: "कॉपी किया गया!",
+                resultCopied: "विभिन्न परिणाम कॉपी किया गया!",
+                nothingToCopy: "कॉपी करने के लिए कुछ नहीं।",
+            },
+            ar: { // Arabic
+                pageTitle: "مقارنة النصوص عبر الإنترنت",
+                text1Label: "النص 1",
+                text2Label: "النص 2",
+                copyButton: "نسخ",
+                pasteButton: "لصق",
+                clearButton: "مسح",
+                swapButton: "تبديل",
+                compareButton: "مقارنة",
+                copyResultButton: "نسخ النتيجة",
+                downloadButton: "تحميل",
+                printButton: "طباعة",
+                darkMode: "الوضع الداكن",
+                language: "اللغة",
+                diffOutputPlaceholder: "ستظهر الفروقات هنا بعد المقارنة.",
+                pasteInstruction: "اضغط على Ctrl+V أو Cmd+V للصق.",
+                emptyTexts: "كلا حقل النص فارغ. لا يوجد شيء للمقارنة أو التنزيل.",
+                downloadFileName: "مقارنة-النصوص.txt",
+                copiedToClipboard: "تم النسخ!",
+                resultCopied: "تم نسخ نتيجة الفرق!",
+                nothingToCopy: "لا يوجد شيء لنسخه.",
+            },
+            pt: { // Portuguese
+                pageTitle: "Comparador de Texto Online",
+                text1Label: "Texto 1",
+                text2Label: "Texto 2",
+                copyButton: "Copiar",
+                pasteButton: "Colar",
+                clearButton: "Limpar",
+                swapButton: "Trocar",
+                compareButton: "Comparar",
+                copyResultButton: "Copiar Resultado",
+                downloadButton: "Baixar",
+                printButton: "Imprimir",
+                darkMode: "Modo Escuro",
+                language: "Idioma",
+                diffOutputPlaceholder: "As diferenças aparecerão aqui após a comparação.",
+                pasteInstruction: "Pressione Ctrl+V ou Cmd+V para colar.",
+                emptyTexts: "Ambos os campos de texto estão vazios. Nada para comparar ou baixar.",
+                downloadFileName: "comparacao-texto.txt",
+                copiedToClipboard: "Copiado!",
+                resultCopied: "Resultado da comparação copiado!",
+                nothingToCopy: "Nada para copiar.",
+            },
+            fr: { // French
+                pageTitle: "Comparateur de Texte en Ligne",
+                text1Label: "Texte 1",
+                text2Label: "Texte 2",
+                copyButton: "Copier",
+                pasteButton: "Coller",
+                clearButton: "Effacer",
+                swapButton: "Échanger",
+                compareButton: "Comparer",
+                copyResultButton: "Copier Résultat",
+                downloadButton: "Télécharger",
+                printButton: "Imprimer",
+                darkMode: "Mode Sombre",
+                language: "Langue",
+                diffOutputPlaceholder: "Les différences apparaîtront ici après la comparaison.",
+                pasteInstruction: "Appuyez sur Ctrl+V ou Cmd+V pour coller.",
+                emptyTexts: "Les deux champs de texte sont vides. Rien à comparer ou à télécharger.",
+                downloadFileName: "comparaison-texte.txt",
+                copiedToClipboard: "Copié !",
+                resultCopied: "Résultat de la différence copié !",
+                nothingToCopy: "Rien à copier.",
+            },
+            ru: { // Russian
+                pageTitle: "Онлайн Сравнение Текста",
+                text1Label: "Текст 1",
+                text2Label: "Текст 2",
+                copyButton: "Копировать",
+                pasteButton: "Вставить",
+                clearButton: "Очистить",
+                swapButton: "Поменять",
+                compareButton: "Сравнить",
+                copyResultButton: "Копировать Результат",
+                downloadButton: "Скачать",
+                printButton: "Печать",
+                darkMode: "Темный режим",
+                language: "Язык",
+                diffOutputPlaceholder: "Различия появятся здесь после сравнения.",
+                pasteInstruction: "Нажмите Ctrl+V или Cmd+V для вставки.",
+                emptyTexts: "Оба текстовых поля пусты. Нечего сравнивать или скачивать.",
+                downloadFileName: "сравнение-текста.txt",
+                copiedToClipboard: "Скопировано!",
+                resultCopied: "Результат сравнения скопирован!",
+                nothingToCopy: "Нечего копировать.",
+            },
+            ja: { // Japanese
+                pageTitle: "オンラインテキスト比較",
+                text1Label: "テキスト1",
+                text2Label: "テキスト2",
+                copyButton: "コピー",
+                pasteButton: "貼り付け",
+                clearButton: "クリア",
+                swapButton: "交換",
+                compareButton: "比較",
+                copyResultButton: "結果をコピー",
+                downloadButton: "ダウンロード",
+                printButton: "印刷",
+                darkMode: "ダークモード",
+                language: "言語",
+                diffOutputPlaceholder: "比較後、ここに差異が表示されます。",
+                pasteInstruction: "Ctrl+VまたはCmd+Vを押して貼り付けてください。",
+                emptyTexts: "両方のテキストフィールドが空です。比較またはダウンロードするものがありません。",
+                downloadFileName: "テキスト比較.txt",
+                copiedToClipboard: "コピーしました！",
+                resultCopied: "差分結果をコピーしました！",
+                nothingToCopy: "コピーするものがありません。",
+            },
+            de: { // German
+                pageTitle: "Online-Textvergleich",
+                text1Label: "Text 1",
+                text2Label: "Text 2",
+                copyButton: "Kopieren",
+                pasteButton: "Einfügen",
+                clearButton: "Löschen",
+                swapButton: "Tauschen",
+                compareButton: "Vergleichen",
+                copyResultButton: "Ergebnis Kopieren",
+                downloadButton: "Herunterladen",
+                printButton: "Drucken",
+                darkMode: "Dunkelmodus",
+                language: "Sprache",
+                diffOutputPlaceholder: "Unterschiede werden hier nach dem Vergleich angezeigt.",
+                pasteInstruction: "Drücken Sie Strg+V oder Cmd+V zum Einfügen.",
+                emptyTexts: "Beide Textfelder sind leer. Nichts zum Vergleichen oder Herunterladen.",
+                downloadFileName: "textvergleich.txt",
+                copiedToClipboard: "Kopiert!",
+                resultCopied: "Diff-Ergebnis kopiert!",
+                nothingToCopy: "Nichts zu kopieren.",
+            }
+        };
+        const availableLanguages = [
+            { code: 'en', name: 'English' },
+            { code: 'zh', name: '中文 (简体)' },
+            { code: 'es', name: 'Español' },
+            { code: 'hi', name: 'हिन्दी' },
+            { code: 'ar', name: 'العربية' },
+            { code: 'pt', name: 'Português' },
+            { code: 'fr', name: 'Français' },
+            { code: 'ru', name: 'Русский' },
+            { code: 'ja', name: '日本語' },
+            { code: 'de', name: 'Deutsch' },
+        ];
+
+        // --- DOM Elements ---
+        const text1Input = document.getElementById('text1');
+        const text2Input = document.getElementById('text2');
+        const diffOutput1 = document.getElementById('diffOutput1');
+        const diffOutput2 = document.getElementById('diffOutput2');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const languageSelector = document.getElementById('languageSelector');
+        const compareButton = document.getElementById('compareButton');
+        const swapButton = document.getElementById('swapButton');
+        const copyResultButton = document.getElementById('copyResultButton');
+        const downloadButton = document.getElementById('downloadButton');
+        const printButton = document.getElementById('printButton');
+
+        let currentLanguage = 'en';
+
+        // --- Core Functions ---
+        function performComparison() {
+            const text1Value = text1Input.value;
+            const text2Value = text2Input.value;
+
+            localStorage.setItem('textCompare_text1', text1Value);
+            localStorage.setItem('textCompare_text2', text2Value);
+            
+            // Ensure Diff is loaded
+            if (typeof Diff === 'undefined' || typeof Diff.diffLines !== 'function') {
+                console.error("Diff library not loaded yet.");
+                // Optionally, provide user feedback or retry logic
+                diffOutput1.textContent = "Error: Comparison library not loaded. Please try again shortly.";
+                diffOutput2.textContent = "Error: Comparison library not loaded. Please try again shortly.";
+                return;
+            }
+            
+            const diff = Diff.diffLines(text1Value, text2Value, { newlineIsToken: true, ignoreWhitespace: false });
+            
+            diffOutput1.innerHTML = '';
+            diffOutput2.innerHTML = '';
+
+            if (text1Value === "" && text2Value === "") {
+                 applyLocalization(); 
+                 return;
+            }
+
+            diff.forEach(part => {
+                const span = document.createElement('span');
+                const textNode = document.createTextNode(part.value);
+                span.appendChild(textNode);
+
+                if (part.added) {
+                    span.className = 'added';
+                    diffOutput2.appendChild(span);
+                    const placeholderSpan1 = document.createElement('span');
+                    placeholderSpan1.className = 'placeholder';
+                    const lineBreaks = (part.value.match(/\n/g) || []).length;
+                    if (part.value.endsWith('\n') && lineBreaks > 0) {
+                         placeholderSpan1.innerHTML = Array(lineBreaks).join('<br>');
+                    } else if (!part.value.endsWith('\n') && lineBreaks === 0 && part.value.length > 0) {
+                         placeholderSpan1.innerHTML = '&nbsp;'; 
+                    } else if (part.value.length > 0) {
+                         placeholderSpan1.innerHTML = Array(lineBreaks + 1).join('<br>');
+                    }
+                    if (placeholderSpan1.innerHTML === "") placeholderSpan1.innerHTML = "&nbsp;";
+                    diffOutput1.appendChild(placeholderSpan1);
+
+                } else if (part.removed) {
+                    span.className = 'removed';
+                    diffOutput1.appendChild(span);
+                    const placeholderSpan2 = document.createElement('span');
+                    placeholderSpan2.className = 'placeholder';
+                    const lineBreaks = (part.value.match(/\n/g) || []).length;
+                    if (part.value.endsWith('\n') && lineBreaks > 0) {
+                         placeholderSpan2.innerHTML = Array(lineBreaks).join('<br>');
+                    } else if (!part.value.endsWith('\n') && lineBreaks === 0 && part.value.length > 0) {
+                         placeholderSpan2.innerHTML = '&nbsp;';
+                    } else if (part.value.length > 0) {
+                         placeholderSpan2.innerHTML = Array(lineBreaks + 1).join('<br>');
+                    }
+                    if (placeholderSpan2.innerHTML === "") placeholderSpan2.innerHTML = "&nbsp;";
+                    diffOutput2.appendChild(placeholderSpan2);
+
+                } else { // common
+                    span.className = 'common';
+                    const span1 = span.cloneNode(true);
+                    const span2 = span.cloneNode(true);
+                    diffOutput1.appendChild(span1);
+                    diffOutput2.appendChild(span2);
+                }
+            });
+             if (diffOutput1.innerHTML === "") diffOutput1.setAttribute('data-lang-placeholder', 'diffOutputPlaceholder');
+             if (diffOutput2.innerHTML === "") diffOutput2.setAttribute('data-lang-placeholder', 'diffOutputPlaceholder');
+             applyLocalization(); 
+        }
+
+        function applyLocalization() {
+            const lang = translations[currentLanguage] || translations.en;
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (lang[key]) {
+                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '');
+                    if (textNode) {
+                        textNode.textContent = ` ${lang[key]} `; 
+                    } else if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
+                         el.textContent = lang[key]; 
+                    } else {
+                        const spanChild = el.querySelector('span[data-lang]'); // More specific selector
+                        if(spanChild && spanChild.getAttribute('data-lang') === key) {
+                            spanChild.textContent = lang[key];
+                        } else if (!el.querySelector('i.material-icons')) { 
+                             el.textContent = lang[key]; 
+                        }
+                    }
+                }
+            });
+             document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-lang-placeholder');
+                if (lang[key] && (el.innerHTML.trim() === "" || el.classList.contains('placeholder-active') || el.textContent === translations.en[key] /* If previous lang was EN and it's still EN placeholder */)) { 
+                    el.textContent = lang[key];
+                    el.classList.add('placeholder-active');
+                } else if (el.innerHTML.trim() !== "" && el.textContent !== lang[key]) { // Only remove if content is not the placeholder itself
+                    el.classList.remove('placeholder-active');
+                }
+            });
+
+            document.querySelectorAll('button[title]').forEach(button => {
+                const baseKey = button.id || button.getAttribute('data-lang'); // Prefer data-lang for title key
+                if (baseKey && lang[baseKey]) { 
+                    button.title = lang[baseKey];
+                } else if (button.querySelector('span[data-lang]')) { 
+                    const spanKey = button.querySelector('span[data-lang]').getAttribute('data-lang');
+                    if(lang[spanKey]) button.title = lang[spanKey];
+                }
+            });
+            document.querySelectorAll('.copy-button').forEach(btn => btn.title = lang.copyButton);
+            document.querySelectorAll('.paste-button').forEach(btn => btn.title = lang.pasteButton);
+            document.querySelectorAll('.clear-button').forEach(btn => btn.title = lang.clearButton);
+            // Update main button titles
+            if(compareButton) compareButton.title = lang.compareButton;
+            if(swapButton) swapButton.title = lang.swapButton;
+            if(copyResultButton) copyResultButton.title = lang.copyResultButton;
+            if(downloadButton) downloadButton.title = lang.downloadButton;
+            if(printButton) printButton.title = lang.printButton;
+            if(darkModeToggle) darkModeToggle.title = lang.darkMode;
+
+
+            document.title = lang.pageTitle || "Online Text Compare";
+        }
+
+        function setLanguage(langCode) {
+            currentLanguage = langCode;
+            localStorage.setItem('textCompare_language', langCode);
+            document.documentElement.lang = langCode; 
+            applyLocalization();
+            if (text1Input.value === "" && text2Input.value === "") {
+                performComparison();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('textCompare_darkMode', isDarkMode);
+            darkModeToggle.querySelector('.material-icons').textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+        }
+
+        function showTemporaryMessage(buttonElement, messageKey, iconName = 'check') {
+            const lang = translations[currentLanguage] || translations.en;
+            const originalHTML = buttonElement.innerHTML; // Store full HTML
+            const messageText = lang[messageKey] || messageKey;
+            buttonElement.innerHTML = `<i class="material-icons">${iconName}</i> ${messageText}`;
+            setTimeout(() => { 
+                buttonElement.innerHTML = originalHTML; 
+                // No need to re-apply full localization here, originalHTML restores it.
+            }, 2000);
+        }
+
+        // --- Event Listeners ---
+        text1Input.addEventListener('input', () => localStorage.setItem('textCompare_text1', text1Input.value));
+        text2Input.addEventListener('input', () => localStorage.setItem('textCompare_text2', text2Input.value));
+
+        compareButton.addEventListener('click', performComparison);
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+        
+        languageSelector.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        swapButton.addEventListener('click', () => {
+            const temp = text1Input.value;
+            text1Input.value = text2Input.value;
+            text2Input.value = temp;
+            performComparison(); 
+        });
+
+        copyResultButton.addEventListener('click', () => {
+            let resultText = `Differences (Text 1 vs Text 2):\n\n`;
+            resultText += `--- Text 1 View ---\n`;
+            diffOutput1.querySelectorAll('span:not(.placeholder)').forEach(span => { // Exclude placeholders from copy
+                if (span.classList.contains('removed')) resultText += `- ${span.textContent}`;
+                else if (span.classList.contains('common')) resultText += `  ${span.textContent}`;
+            });
+            resultText += `\n\n--- Text 2 View ---\n`;
+            diffOutput2.querySelectorAll('span:not(.placeholder)').forEach(span => { // Exclude placeholders
+                if (span.classList.contains('added')) resultText += `+ ${span.textContent}`;
+                else if (span.classList.contains('common')) resultText += `  ${span.textContent}`;
+            });
+            resultText = resultText.replace(/\n<br>/g, '\n').replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ');
+
+            if ( (diffOutput1.innerText.trim() === "" && diffOutput2.innerText.trim() === "") || (text1Input.value === "" && text2Input.value === "")) {
+                 showTemporaryMessage(copyResultButton, 'nothingToCopy', 'warning');
+                return;
+            }
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = resultText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+            try {
+                document.execCommand('copy');
+                showTemporaryMessage(copyResultButton, 'resultCopied');
+            } catch (err) {
+                console.error('Failed to copy result: ', err);
+                 showTemporaryMessage(copyResultButton, 'Error copying', 'error');
+            }
+            document.body.removeChild(tempTextArea);
+        });
+
+
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.dataset.textTarget;
+                const textToCopy = document.getElementById(targetId).value;
+                if (textToCopy) {
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = textToCopy;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+                    try {
+                        document.execCommand('copy');
+                        showTemporaryMessage(e.currentTarget, 'copiedToClipboard');
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                        showTemporaryMessage(e.currentTarget, 'Error copying', 'error');
+                    }
+                    document.body.removeChild(tempTextArea);
+                } else {
+                    showTemporaryMessage(e.currentTarget, 'nothingToCopy', 'warning');
+                }
+            });
+        });
+
+        document.querySelectorAll('.paste-button').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const targetId = e.currentTarget.dataset.textTarget;
+                const targetTextarea = document.getElementById(targetId);
+                try {
+                    targetTextarea.focus();
+                    showTemporaryMessage(e.currentTarget, 'pasteInstruction', 'arrow_downward');
+                } catch (err) { // Should not fail unless buttonElement is not found
+                    console.error('Paste action failed: ', err);
+                    targetTextarea.focus(); 
+                }
+            });
+        });
+
+        document.querySelectorAll('.clear-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.dataset.textTarget;
+                document.getElementById(targetId).value = '';
+                performComparison(); 
+                localStorage.setItem(targetId === 'text1' ? 'textCompare_text1' : 'textCompare_text2', '');
+            });
+        });
+
+        downloadButton.addEventListener('click', () => {
+            const text1Val = text1Input.value;
+            const text2Val = text2Input.value;
+
+            if (!text1Val && !text2Val) {
+                showTemporaryMessage(downloadButton, 'emptyTexts', 'warning');
+                return;
+            }
+            
+            let diffContent = `--- Text 1 ---\n${text1Val}\n\n`;
+            diffContent += `--- Text 2 ---\n${text2Val}\n\n`;
+            diffContent += "--- Differences (Text 1 perspective) ---\n";
+            diffOutput1.querySelectorAll('span:not(.placeholder)').forEach(span => {
+                if (span.classList.contains('removed')) diffContent += `- ${span.textContent}`;
+                else if (span.classList.contains('common')) diffContent += `  ${span.textContent}`;
+            });
+            diffContent += "\n\n--- Differences (Text 2 perspective) ---\n";
+            diffOutput2.querySelectorAll('span:not(.placeholder)').forEach(span => {
+                if (span.classList.contains('added')) diffContent += `+ ${span.textContent}`;
+                else if (span.classList.contains('common')) diffContent += `  ${span.textContent}`;
+            });
+
+            const blob = new Blob([diffContent.replace(/\n<br>/g, '\n').replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ')], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (translations[currentLanguage] || translations.en).downloadFileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        printButton.addEventListener('click', () => {
+            window.print();
+        });
+
+
+        // --- Initialization ---
+        function init() {
+            availableLanguages.sort((a, b) => a.name.localeCompare(b.name)); 
+            availableLanguages.forEach(lang => {
+                const option = document.createElement('option');
+                option.value = lang.code;
+                option.textContent = lang.name;
+                languageSelector.appendChild(option);
+            });
+
+            const savedLanguage = localStorage.getItem('textCompare_language');
+            if (savedLanguage && translations[savedLanguage]) {
+                currentLanguage = savedLanguage;
+                languageSelector.value = savedLanguage;
+            }
+
+            const savedDarkMode = localStorage.getItem('textCompare_darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+                if(darkModeToggle) darkModeToggle.querySelector('.material-icons').textContent = 'light_mode';
+            }
+            
+            const rootStyle = getComputedStyle(document.documentElement);
+            const primaryColorVal = rootStyle.getPropertyValue('--primary-color').trim();
+            if (primaryColorVal.startsWith('#')) {
+                const r = parseInt(primaryColorVal.slice(1, 3), 16);
+                const g = parseInt(primaryColorVal.slice(3, 5), 16);
+                const b = parseInt(primaryColorVal.slice(5, 7), 16);
+                document.documentElement.style.setProperty('--primary-color-rgb', `${r},${g},${b}`);
+            }
+
+            const savedText1 = localStorage.getItem('textCompare_text1');
+            const savedText2 = localStorage.getItem('textCompare_text2');
+            if (savedText1) text1Input.value = savedText1;
+            if (savedText2) text2Input.value = savedText2;
+            
+            setLanguage(currentLanguage); 
+            // Defer initial comparison until Diff library is likely loaded
+            if (typeof Diff !== 'undefined' && typeof Diff.diffLines === 'function') {
+                 performComparison();
+            } else {
+                // If Diff is not ready, try after a short delay, or rely on user clicking Compare
+                setTimeout(() => {
+                    if (typeof Diff !== 'undefined' && typeof Diff.diffLines === 'function') {
+                        performComparison();
+                    } else {
+                        console.warn("Diff library still not loaded after delay. User may need to click 'Compare'.");
+                    }
+                }, 500); // 500ms delay, adjust as needed
+            }
+        }
+        
+        //DOMContentLoaded might be better for init if scripts were in head without defer
+        //But since script is at end of body, or deferred, direct call is usually fine.
+        //For robustness with deferred jsdiff, ensure init() or parts of it run after jsdiff is ready.
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init(); // DOMContentLoaded has already fired
+        }
+
+
+        // --- Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js') 
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+
+    <!-- 
+    // sw.js
+    const CACHE_NAME = 'text-compare-v3'; // Increment version for updates
+    const urlsToCache = [
+        '/', 
+        'index.html', // Or your specific HTML file name if different
+        // CSS and JS are inlined, so not needed here unless they become separate files
+        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
+        'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js'
+    ];
+
+    self.addEventListener('install', event => {
+        event.waitUntil(
+            caches.open(CACHE_NAME)
+                .then(cache => {
+                    console.log('Opened cache');
+                    const requests = urlsToCache.map(url => {
+                        // For CDN resources, it's often good to fetch them fresh during install
+                        // as they might update, but be careful with opaque responses if not using CORS.
+                        // Google Fonts and Material Icons usually handle CORS well.
+                        if (url.startsWith('http')) {
+                            return new Request(url, { mode: 'cors', cache: 'no-cache' });
+                        }
+                        return new Request(url, { cache: 'no-cache' });
+                    });
+                    return cache.addAll(requests);
+                })
+                .catch(err => {
+                    console.error('Cache addAll failed:', err);
+                })
+        );
+    });
+
+    self.addEventListener('fetch', event => {
+        event.respondWith(
+            caches.match(event.request)
+                .then(response => {
+                    if (response) {
+                        return response; 
+                    }
+                    const fetchRequest = event.request.clone();
+
+                    return fetch(fetchRequest).then(
+                        response => {
+                            if (!response || response.status !== 200 ) { // Allow non-basic types for CDNs
+                                if (response && response.type === 'opaque') {
+                                     // Opaque responses can't be inspected but can be cached.
+                                     // Be cautious as you can't tell if it's an error.
+                                } else if (response) {
+                                    console.warn(`Fetch error for ${event.request.url}: Status ${response.status}`);
+                                }
+                                return response;
+                            }
+
+                            const responseToCache = response.clone();
+                            caches.open(CACHE_NAME)
+                                .then(cache => {
+                                    cache.put(event.request, responseToCache);
+                                });
+                            return response;
+                        }
+                    ).catch(err => {
+                        console.error('Service worker fetch failed for:', event.request.url, err);
+                        // Optionally return a fallback page or resource
+                        // return caches.match('/offline.html'); 
+                    });
+                }
+            )
+        );
+    });
+
+    self.addEventListener('activate', event => {
+        const cacheWhitelist = [CACHE_NAME];
+        event.waitUntil(
+            caches.keys().then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        if (cacheWhitelist.indexOf(cacheName) === -1) {
+                            return caches.delete(cacheName);
+                        }
+                    })
+                );
+            }).then(() => self.clients.claim()) // Ensure new SW takes control immediately
+        );
+    });
+    -->
+</body>
+</html>
