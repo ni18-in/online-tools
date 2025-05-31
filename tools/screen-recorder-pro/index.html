@@ -12,8 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-
+    <script src="https://cdn.tailwindcss.com"></script> 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -31,8 +30,8 @@
       "keywords": "screen recorder, screen recording, online screen recorder, free screen recorder, video capture",
       "browserRequirements": "Requires a modern web browser with support for MediaDevices API and MediaRecorder API (e.g., Chrome, Firefox, Edge).",
       "mainEntityOfPage": {
-         "@type": "WebPage",
-         "@id": "https://online-tools.ni18.in/tools/screen-recorder-pro/" // Replace with your actual URL
+        "@type": "WebPage",
+        "@id": "https://online-tools.ni18.in/tools/screen-recorder-pro/"
       },
       "author": {
         "@type": "Organization",
@@ -46,7 +45,7 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             background-color: var(--background-light);
-            color: var(--text-color-dark);
+            color: var(--text-color-dark); /* Default text color for light mode */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -80,17 +79,28 @@
             --success-container-color: #D1E7DD;
             --on-success-container-color: #145214;
 
+            /* Custom Info & Warning states */
+            --warning-color: #FFAB00; 
+            --on-warning-color: #000000; 
+            --warning-container-color: #FFF3E0; 
+            --on-warning-container-color: #5C3B12; 
 
-            --text-color-dark: #1D1B20; /* On Surface/Background */
-            --text-color-light-variant: #49454F; /* Medium emphasis text */
+            --info-color: #2979FF; 
+            --on-info-color: #FFFFFF;
+            --info-container-color: #E3F2FD; 
+            --on-info-container-color: #0D47A1;
+
+
+            --text-color-dark: #1D1B20; /* On Surface/Background for light theme */
+            --text-color-light-variant: #49454F; /* Medium emphasis text for light theme */
             
             --background-light: #FFFBFE; /* M3 Background - Almost White */
-            --on-background-color: #1C1B1F;
+            --on-background-color: #1C1B1F; /* Text on --background-light */
 
             --surface-light: #FFFBFE; /* M3 Surface */
-            --on-surface-color: #1C1B1F;
+            --on-surface-color: #1C1B1F; /* Text on --surface-light */
             --surface-variant-light: #E7E0EC;
-            --on-surface-variant-color: #49454F;
+            --on-surface-variant-color: #49454F; /* Text on --surface-variant-light */
             
             --outline-color: #79747E;
             --outline-variant-color: #CAC4D0;
@@ -130,24 +140,35 @@
             --success-container-color: #2F6B33;
             --on-success-container-color: #D1E7DD;
 
-            --text-color-dark: #E6E1E5; /* On Surface/Background */
-            --text-color-light-variant: #CAC4D0; /* Medium emphasis text */
+            /* Custom Info & Warning states for dark mode */
+            --warning-color: #FFCA28; /* Lighter Amber */
+            --on-warning-color: #000000;
+            --warning-container-color: #533E00; /* Darker, less saturated yellow/brown */
+            --on-warning-container-color: #FFDEA8; 
+
+            --info-color: #82B1FF; 
+            --on-info-color: #000000;
+            --info-container-color: #003A61; /* Darker Blue */
+            --on-info-container-color: #D1E4FF;
+
+            --text-color-dark: #E6E1E5; /* This is effectively --on-background-color for dark theme */
+            --text-color-light-variant: #CAC4D0; /* Medium emphasis text for dark theme */
 
             --background-dark: #1C1B1F; /* M3 Background Dark */
-            --on-background-color: #E6E1E5;
+            --on-background-color: #E6E1E5; /* Text on --background-dark */
 
             --surface-dark: #1C1B1F; /* M3 Surface Dark */
-            --on-surface-color: #E6E1E5;
+            --on-surface-color: #E6E1E5; /* Text on --surface-dark */
             --surface-variant-dark: #49454F;
-            /* --on-surface-variant-color: #CAC4D0; *//* Using the one from :root for consistency */
+            --on-surface-variant-color: #CAC4D0; /* Text on --surface-variant-dark. Explicitly set for dark. */
             
             --outline-color: #938F99;
-            /* --outline-variant-color: #49454F; *//* Using the one from :root for consistency */
+            --outline-variant-color: #49454F; /* Explicitly set for dark. */
         }
 
         body.dark-mode {
             background-color: var(--background-dark);
-            color: var(--on-background-color);
+            color: var(--on-background-color); /* Default text color for dark mode */
         }
 
         header {
@@ -165,7 +186,7 @@
         }
         body.dark-mode header {
             background-color: var(--surface-dark);
-            color: var(--on-surface-color);
+            color: var(--on-surface-color); /* Ensures header text adapts */
             border-bottom: 1px solid var(--outline-variant-color);
         }
 
@@ -177,9 +198,7 @@
             color: var(--primary-color);
             margin: 0; /* Reset margin for h1 */
         }
-        body.dark-mode .site-title {
-            color: var(--primary-color);
-        }
+        /* body.dark-mode .site-title color will be handled by --primary-color changing */
         .site-title .material-icons {
             margin-right: 8px;
             font-size: 1.75rem; 
@@ -193,7 +212,7 @@
         }
 
         nav ul li a {
-            color: var(--on-surface-variant-color);
+            color: var(--on-surface-variant-color); /* Default link color */
             text-decoration: none;
             padding: 0.625rem 1rem; 
             display: block;
@@ -202,24 +221,18 @@
             font-weight: 500;
             font-size: 0.875rem; 
         }
+        /* body.dark-mode nav ul li a color will be handled by --on-surface-variant-color changing */
 
         nav ul li a:hover {
             background-color: var(--secondary-container-color);
             color: var(--on-secondary-container-color);
         }
-        nav ul li a.active, nav ul li a[aria-current="page"] { /* Added aria-current selector */
+        nav ul li a.active, nav ul li a[aria-current="page"] {
             background-color: var(--primary-container-color);
             color: var(--on-primary-container-color);
             font-weight: 600;
         }
-        body.dark-mode nav ul li a:hover {
-            background-color: var(--secondary-container-color);
-            color: var(--on-secondary-container-color);
-        }
-        body.dark-mode nav ul li a.active, body.dark-mode nav ul li a[aria-current="page"] {
-            background-color: var(--primary-container-color);
-            color: var(--on-primary-container-color);
-        }
+        /* Dark mode for hover/active on nav links is handled by variables changing */
         
         .theme-toggle-btn {
             background: none;
@@ -235,7 +248,10 @@
         }
         .theme-toggle-btn:hover {
             background-color: var(--surface-variant-light);
-            color: var(--on-surface-variant-color);
+            /* color already var(--on-surface-variant-color) which is correct on surface-variant-light */
+        }
+        body.dark-mode .theme-toggle-btn {
+             color: var(--on-surface-variant-color); /* Ensures correct icon color in dark mode */
         }
         body.dark-mode .theme-toggle-btn:hover {
             background-color: var(--surface-variant-dark);
@@ -258,6 +274,7 @@
             display: none; 
             padding: 1.5rem; 
             background-color: var(--surface-light);
+            color: var(--on-surface-color); /* Default text color for section content */
             border-radius: var(--border-radius-large); 
             box-shadow: 0 1px 2px rgba(var(--shadow-color), 0.08), 0 2px 4px rgba(var(--shadow-color), 0.08); 
             animation: fadeIn 0.5s ease-in-out;
@@ -266,6 +283,7 @@
         }
         body.dark-mode section {
             background-color: var(--surface-dark);
+            color: var(--on-surface-color); /* Ensures section text adapts */
             box-shadow: 0 1px 2px rgba(var(--shadow-color), 0.15), 0 2px 4px rgba(var(--shadow-color), 0.15);
             border: 1px solid var(--outline-variant-color);
         }
@@ -285,14 +303,44 @@
             padding-bottom: 0.75rem; 
             margin-top: 0;
             margin-bottom: 1.5rem; 
-            font-weight: 600;
-            font-size: 1.75rem; 
+            font-weight: 600; /* Tailwind uses 600 for semibold */
+            font-size: 1.75rem; /* Tailwind text-2xl is 1.5rem, text-3xl is 1.875rem. This is between. */
             border-bottom: 1px solid var(--outline-variant-color);
         }
-        body.dark-mode h2 {
-            color: var(--primary-color); 
-            border-bottom: 1px solid var(--outline-variant-color);
+        /* body.dark-mode h2 color handled by --primary-color var changing */
+        
+        /* Specific styling for H3 in about section, removing Tailwind text color classes */
+        #about h3 {
+            color: var(--primary-color);
+            font-size: 1.25rem; /* Tailwind text-xl */
+            font-weight: 600; /* Tailwind font-semibold */
+            margin-top: 1.5rem; /* Tailwind mt-6 */
+            margin-bottom: 0.75rem; /* Tailwind mb-3 */
         }
+        /* General styling for paragraphs and lists within sections to use theme colors */
+        section p, section ol, section ul {
+            color: inherit; /* Inherit from section's color: var(--on-surface-color) */
+            /* Tailwind text-base is 1rem, line-height 1.5. Inter default is fine. */
+        }
+        section ol, section ul {
+            padding-left: 1.5rem; /* Consistent padding for lists */
+        }
+        section ul li {
+            list-style: disc;
+        }
+        section ol li {
+            list-style: decimal;
+        }
+        section ul ul li, section ol ul li {
+             list-style: disc; /* Ensure nested unordered lists use disc */
+        }
+        section ul, section ol {
+            margin-bottom: 1rem;
+        }
+         section ul li, section ol li {
+            margin-bottom: 0.5rem;
+        }
+
 
         .button-group {
             display: flex;
@@ -334,15 +382,13 @@
             color: var(--on-secondary-container-color);
         }
         .btn.secondary:hover {
-            background-color: color-mix(in srgb, var(--secondary-container-color) 90%, black);
+            background-color: color-mix(in srgb, var(--secondary-container-color) 90%, var(--on-secondary-container-color) 10%);
         }
-        body.dark-mode .btn.secondary {
-             background-color: var(--secondary-container-color);
-             color: var(--on-secondary-container-color);
-        }
+        /* body.dark-mode .btn.secondary will use updated var values */
         body.dark-mode .btn.secondary:hover {
-            background-color: color-mix(in srgb, var(--secondary-container-color) 90%, white 5%);
+             background-color: color-mix(in srgb, var(--secondary-container-color) 90%, var(--on-secondary-container-color) 20%);
         }
+
 
         .btn.error {
             background-color: var(--error-color);
@@ -352,15 +398,15 @@
             background-color: color-mix(in srgb, var(--error-color) 90%, black);
         }
         body.dark-mode .btn.error {
-            background-color: var(--error-container-color);
+            background-color: var(--error-container-color); /* Use error-container for dark */
             color: var(--on-error-container-color);
         }
-         body.dark-mode .btn.error:hover {
+        body.dark-mode .btn.error:hover {
             background-color: color-mix(in srgb, var(--error-container-color) 90%, white 5%);
         }
 
 
-        .btn:disabled, .btn[aria-disabled="true"] { /* Added aria-disabled styling */
+        .btn:disabled, .btn[aria-disabled="true"] {
             background-color: color-mix(in srgb, var(--on-surface-color) 12%, var(--surface-light));
             color: color-mix(in srgb, var(--on-surface-color) 38%, var(--surface-light));
             cursor: not-allowed;
@@ -384,10 +430,7 @@
             color: var(--on-primary-container-color);
             border-radius: var(--border-radius-medium);
         }
-        body.dark-mode .recording-status {
-            background-color: var(--primary-container-color);
-            color: var(--on-primary-container-color);
-        }
+        /* body.dark-mode .recording-status handled by vars */
 
 
         .recording-indicator {
@@ -397,9 +440,7 @@
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
-        body.dark-mode .recording-indicator {
-            background-color: var(--error-color); 
-        }
+        /* body.dark-mode .recording-indicator error-color var will update */
 
 
         @keyframes pulse {
@@ -422,15 +463,16 @@
         }
         body.dark-mode .settings-group {
             background-color: var(--surface-variant-dark);
-            border-color: var(--outline-variant-color);
+            border-color: var(--outline-variant-color); /* Ensure border color uses the dark mode var */
         }
 
-        .settings-group legend { /* Added for fieldset */
+        .settings-group legend {
             font-weight: 500;
             padding: 0 0.5rem;
             margin-bottom: 0.5rem;
             color: var(--on-surface-variant-color);
         }
+        /* body.dark-mode .settings-group legend color uses updated var */
 
         .settings-group label {
             display: flex;
@@ -441,9 +483,7 @@
             color: var(--on-surface-variant-color);
             font-size: 0.9375rem; 
         }
-        body.dark-mode .settings-group label {
-            color: var(--on-surface-variant-color);
-        }
+        /* body.dark-mode .settings-group label color uses updated var */
         
         .settings-group input[type="checkbox"] {
             appearance: none;
@@ -479,11 +519,19 @@
             background-color: var(--outline-variant-color);
             border-color: var(--outline-variant-color);
             cursor: not-allowed;
+            opacity: 0.6; /* Added for better visual cue */
         }
-         .settings-group input[type="checkbox"]:disabled:checked::before {
-            color: var(--text-color-light-variant);
+        .settings-group input[type="checkbox"]:disabled + span { /* Style label text when checkbox is disabled */
+             opacity: 0.6;
         }
-        .settings-group input[type="checkbox"]:focus-visible { /* Focus indicator */
+        .settings-group input[type="checkbox"]:disabled:checked::before {
+            color: var(--text-color-light-variant); /* Ensure checkmark color is appropriate on disabled bg */
+        }
+        body.dark-mode .settings-group input[type="checkbox"]:disabled:checked::before {
+             color: var(--on-surface-variant-color); /* Dark mode disabled checkmark */
+        }
+
+        .settings-group input[type="checkbox"]:focus-visible { 
             outline: 2px solid var(--primary-color);
             outline-offset: 2px;
         }
@@ -508,8 +556,8 @@
         }
         body.dark-mode #downloadsList li {
             background-color: var(--surface-variant-dark);
-            border-color: var(--outline-variant-color);
-            color: var(--on-surface-variant-color);
+            border-color: var(--outline-variant-color); /* Ensure correct border */
+            color: var(--on-surface-variant-color); /* Ensure correct text color */
         }
 
 
@@ -517,7 +565,7 @@
             font-weight: 500;
             flex-grow: 1;
             margin-right: 1rem;
-            overflow-wrap: anywhere; /* Prevent long filenames from breaking layout */
+            overflow-wrap: anywhere; 
         }
         #downloadsList li a.btn-download { 
             background-color: var(--tertiary-container-color);
@@ -528,17 +576,14 @@
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.2s;
-            flex-shrink: 0; /* Prevent button from shrinking too much */
+            flex-shrink: 0; 
         }
         #downloadsList li a.btn-download:hover {
-            background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, black);
+            background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, var(--on-tertiary-container-color) 10%);
         }
-        body.dark-mode #downloadsList li a.btn-download {
-            background-color: var(--tertiary-container-color);
-            color: var(--on-tertiary-container-color);
-        }
+        /* body.dark-mode download button colors handled by vars */
         body.dark-mode #downloadsList li a.btn-download:hover {
-            background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, white 5%);
+            background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, var(--on-tertiary-container-color) 20%);
         }
 
 
@@ -560,6 +605,7 @@
 
         .modal-content {
             background-color: var(--surface-light);
+            color: var(--on-surface-color); /* Default text for modal content */
             margin: auto;
             padding: 2rem; 
             border-radius: var(--border-radius-extra-large); 
@@ -572,6 +618,7 @@
         }
         body.dark-mode .modal-content {
             background-color: var(--surface-dark); 
+            color: var(--on-surface-color); /* Ensure modal text adapts */
             border-color: var(--outline-variant-color);
         }
 
@@ -584,16 +631,19 @@
         .modal-content h3 { /* This will be modalTitleEl */
             margin-top: 0;
             margin-bottom: 1rem; 
-            color: var(--on-surface-color);
+            color: inherit; /* Inherit from .modal-content */
             font-size: 1.5rem; 
             font-weight: 600;
         }
         .modal-content p { /* This will be modalMessageEl */
             margin-bottom: 1.5rem; 
-            color: var(--on-surface-variant-color);
+            color: var(--on-surface-variant-color); /* Use variant for less emphasis */
             font-size: 1rem; 
             line-height: 1.6;
         }
+         body.dark-mode .modal-content p {
+             color: var(--on-surface-variant-color); /* Ensures this adapts */
+         }
 
         .modal-actions {
             margin-top: 1.5rem; 
@@ -621,7 +671,7 @@
         }
         body.dark-mode #snackbar {
             background-color: var(--on-surface-color); 
-            color: var(--surface-dark);
+            color: var(--surface-dark); /* Snackbar text on dark surface */
         }
 
 
@@ -637,14 +687,7 @@
             background-color: var(--success-container-color);
             color: var(--on-success-container-color);
         }
-        body.dark-mode #snackbar.error {
-            background-color: var(--error-container-color);
-            color: var(--on-error-container-color);
-        }
-        body.dark-mode #snackbar.success {
-            background-color: var(--success-container-color);
-            color: var(--on-success-container-color);
-        }
+        /* body.dark-mode snackbar error/success handled by vars */
 
 
         @keyframes snackbarFadeIn {
@@ -656,6 +699,26 @@
             from {bottom: 30px; opacity: 1; transform: translateX(-50%) scale(1);}
             to {bottom: 0; opacity: 0; transform: translateX(-50%) scale(0.9);}
         }
+        
+        /* Custom Info/Warning Boxes */
+        .message-box {
+            padding: 0.75rem 1rem; /* p-3ish */
+            border-left-width: 4px;
+            border-radius: var(--border-radius-medium); /* rounded-md */
+            font-size: 0.9375rem; /* text-sm equivalent */
+            margin: 1rem 0;
+        }
+        .warning-box {
+            background-color: var(--warning-container-color);
+            color: var(--on-warning-container-color);
+            border-left-color: var(--warning-color);
+        }
+        .info-box {
+            background-color: var(--info-container-color);
+            color: var(--on-info-container-color);
+            border-left-color: var(--info-color);
+        }
+
 
         /* Hamburger menu for mobile */
         .menu-toggle {
@@ -670,6 +733,9 @@
         .menu-toggle:hover {
             background-color: var(--surface-variant-light);
         }
+        body.dark-mode .menu-toggle {
+            color: var(--on-surface-variant-color); /* ensure icon color adapts */
+        }
         body.dark-mode .menu-toggle:hover {
             background-color: var(--surface-variant-dark);
         }
@@ -680,7 +746,7 @@
         /* Skip Link */
         .skip-link {
             position: absolute;
-            top: -40px; /* Initially hidden off-screen */
+            top: -40px; 
             left: 0;
             background: var(--primary-color);
             color: var(--on-primary-color);
@@ -689,7 +755,7 @@
             transition: top 0.3s;
         }
         .skip-link:focus {
-            top: 0; /* Becomes visible on focus */
+            top: 0; 
         }
 
 
@@ -720,19 +786,15 @@
                 padding: 1rem; 
                 border-bottom: 1px solid var(--outline-variant-color);
                 border-radius: 0; 
-                color: var(--on-surface-color);
+                color: var(--on-surface-color); /* Mobile nav links color */
             }
+            /* body.dark-mode nav ul li a color handled by var */
             nav ul li a.active, nav ul li a[aria-current="page"] {
                 background-color: var(--primary-container-color);
                 color: var(--on-primary-container-color);
             }
-            body.dark-mode nav ul li a {
-                color: var(--on-surface-color);
-            }
-             body.dark-mode nav ul li a.active, body.dark-mode nav ul li a[aria-current="page"] {
-                background-color: var(--primary-container-color);
-                color: var(--on-primary-container-color);
-            }
+            /* body.dark-mode nav ul li a.active handled by vars */
+
             .menu-toggle {
                 display: block; 
             }
@@ -742,7 +804,7 @@
             header {
                 padding: 0.5rem 1rem; 
             }
-             main {
+            main {
                 padding: 1rem;
                 margin-top: 1rem;
             }
@@ -797,15 +859,14 @@
                 <legend>Recording Options</legend>
                 <label for="recordAudio">
                     <input type="checkbox" id="recordAudio" checked>
-                    Record Audio (Microphone & System)
+                    <span>Record Audio (Master Switch)</span>
                 </label>
-                 <label for="recordSystemAudio" class="mt-2">
-                    <input type="checkbox" id="recordSystemAudio" checked>
-                    Record System Audio (Tab/Window audio)
+                 <label for="recordSystemAudio" class="mt-2"> <input type="checkbox" id="recordSystemAudio" checked>
+                    <span>Record System Audio (Tab/Window audio)</span>
                 </label>
                  <label for="recordMicrophone" class="mt-2">
                     <input type="checkbox" id="recordMicrophone" checked>
-                    Record Microphone
+                    <span>Record Microphone</span>
                 </label>
             </fieldset>
 
@@ -834,19 +895,19 @@
 
         <section id="how-to-use" aria-labelledby="howToUseHeading">
             <h2 id="howToUseHeading">How to Use</h2>
-            <p class="text-base text-gray-700 dark:text-gray-300 mb-4">Follow these simple steps to record your screen:</p>
-            <ol class="list-decimal list-inside space-y-3 pl-4 text-gray-600 dark:text-gray-400">
+            <p>Follow these simple steps to record your screen:</p>
+            <ol>
                 <li><strong>Navigate to Home:</strong> Ensure you are on the "Home" tab.</li>
                 <li><strong>Configure Settings (Optional):</strong>
-                    <ul class="list-disc list-inside pl-6 space-y-1.5 mt-1">
-                        <li>Check "Record Audio" if you want to include audio from your microphone and/or system.</li>
+                    <ul>
+                        <li>Check "Record Audio" if you want to include audio.</li>
                         <li>If "Record Audio" is checked, you can further specify if you want to record "System Audio" (audio playing from the selected tab/window) and/or "Microphone".</li>
                     </ul>
                 </li>
                 <li><strong>Start Recording:</strong> Click the "Start Recording" button.</li>
                 <li><strong>Choose Screen:</strong> Your browser will prompt you to select what you want to share: your entire screen, a specific application window, or a browser tab. Choose your preference and click "Share".</li>
                 <li><strong>Recording Controls:</strong>
-                    <ul class="list-disc list-inside pl-6 space-y-1.5 mt-1">
+                    <ul>
                         <li>Once recording starts, you'll see a timer and a visual indicator.</li>
                         <li>Use "Pause" to temporarily halt the recording.</li>
                         <li>Use "Resume" to continue a paused recording.</li>
@@ -856,21 +917,21 @@
                 <li><strong>Download:</strong> After stopping, your video will appear in the "Downloads" section. Click the "Download" button next to the filename to save the <code>.webm</code> or <code>.mp4</code> video file.</li>
                 <li><strong>Permissions:</strong> The first time you use the app, your browser will ask for permission to access your screen and microphone. Please grant these permissions for the app to function correctly.</li>
             </ol>
-            <p class="mt-6 p-3 bg-yellow-100 dark:bg-yellow-700 dark:bg-opacity-30 text-yellow-700 dark:text-yellow-300 border-l-4 border-yellow-500 dark:border-yellow-400 rounded-md text-sm"><strong>Note:</strong> All recordings are processed and stored locally in your browser. No data is uploaded to any server.</p>
+            <p class="message-box warning-box"><strong>Note:</strong> All recordings are processed and stored locally in your browser. No data is uploaded to any server.</p>
         </section>
 
         <section id="downloads" aria-labelledby="downloadsHeading">
             <h2 id="downloadsHeading">Your Recordings</h2>
-            <p id="noDownloadsMsg" class="text-gray-600 dark:text-gray-400">No recordings yet. Start a new recording on the Home page!</p>
+            <p id="noDownloadsMsg">No recordings yet. Start a new recording on the Home page!</p>
             <ul id="downloadsList" aria-live="polite">
                 </ul>
         </section>
 
         <section id="about" aria-labelledby="aboutHeading">
             <h2 id="aboutHeading">About This App</h2>
-            <p class="text-base text-gray-700 dark:text-gray-300 mb-4">This Screen Recorder is a lightweight, client-side web application that allows you to easily record your screen, specific application windows, or browser tabs directly from your web browser.</p>
-            <h3 class="text-xl font-semibold mt-6 mb-3 text-primary-600 dark:text-primary-400">Key Features:</h3>
-            <ul class="list-disc list-inside space-y-2 pl-4 text-gray-600 dark:text-gray-400">
+            <p>This Screen Recorder is a lightweight, client-side web application that allows you to easily record your screen, specific application windows, or browser tabs directly from your web browser.</p>
+            <h3>Key Features:</h3>
+            <ul>
                 <li><strong>Client-Side Recording:</strong> All processing happens in your browser. No data is sent to any server, ensuring your privacy.</li>
                 <li><strong>Multiple Recording Options:</strong> Choose to record your entire screen, a single window, or a browser tab.</li>
                 <li><strong>Audio Recording:</strong> Optionally include audio from your microphone and/or system audio (from the shared tab/window).</li>
@@ -879,15 +940,15 @@
                 <li><strong>Material Design:</strong> A clean, modern, and responsive interface inspired by Google's Material Design 3.</li>
                 <li><strong>Dark Mode:</strong> Toggle between light and dark themes for comfortable viewing.</li>
             </ul>
-            <h3 class="text-xl font-semibold mt-6 mb-3 text-primary-600 dark:text-primary-400">Use Cases:</h3>
-            <ul class="list-disc list-inside space-y-2 pl-4 text-gray-600 dark:text-gray-400">
+            <h3>Use Cases:</h3>
+            <ul>
                 <li>Creating software tutorials or demonstrations.</li>
                 <li>Recording gameplay.</li>
                 <li>Capturing presentations or online meetings (ensure you have consent).</li>
                 <li>Bug reporting by visually showing an issue.</li>
                 <li>Saving online videos or streams (respect copyright and terms of service).</li>
             </ul>
-            <p class="mt-6 p-3 bg-blue-100 dark:bg-blue-700 dark:bg-opacity-30 text-blue-700 dark:text-blue-300 border-l-4 border-blue-500 dark:border-blue-400 rounded-md text-sm">This application utilizes the browser's built-in MediaStream Recording API, making it efficient and secure.</p>
+            <p class="message-box info-box">This application utilizes the browser's built-in MediaStream Recording API, making it efficient and secure.</p>
         </section>
     </main>
 
@@ -928,8 +989,8 @@
         const noDownloadsMsg = document.getElementById('noDownloadsMsg');
 
         const customModal = document.getElementById('customModal');
-        const modalTitleEl = document.getElementById('modalTitleEl'); // Updated ID
-        const modalMessageEl = document.getElementById('modalMessageEl'); // Updated ID
+        const modalTitleEl = document.getElementById('modalTitleEl');
+        const modalMessageEl = document.getElementById('modalMessageEl');
         const modalConfirmBtn = document.getElementById('modalConfirmBtn');
         const modalCancelBtn = document.getElementById('modalCancelBtn');
         const snackbar = document.getElementById('snackbar');
@@ -941,51 +1002,44 @@
         let mediaRecorder;
         let recordedChunks = [];
         let mediaStream;
-        let audioStream;
-        let screenStream;
+        let audioStream; // For microphone
+        let screenStream; // For screen capture (video and potentially system audio)
         let timerInterval;
         let secondsElapsed = 0;
         let currentModalConfirmCallback = null;
-        let lastFocusedElement = null; // For modal accessibility
+        let lastFocusedElement = null;
 
         // --- Navigation ---
         function showSection(targetId) {
             sections.forEach(section => {
-                section.classList.remove('active');
-                // For accessibility, hide sections not active
-                section.setAttribute('aria-hidden', 'true'); 
-                section.style.display = 'none'; // Ensure display none for non-active
+                const isActive = section.id === targetId;
+                section.classList.toggle('active', isActive);
+                section.setAttribute('aria-hidden', !isActive);
+                section.style.display = isActive ? 'block' : 'none';
+                if (isActive) {
+                    const heading = section.querySelector('h2');
+                    if (heading) {
+                        heading.setAttribute('tabindex', '-1'); 
+                        heading.focus({ preventScroll: true }); // preventScroll optional
+                    }
+                }
             });
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                link.removeAttribute('aria-current');
+                const isActive = link.getAttribute('href') === `#${targetId}`;
+                link.classList.toggle('active', isActive);
+                if (isActive) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
             });
 
-            const activeSection = document.getElementById(targetId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-                activeSection.removeAttribute('aria-hidden');
-                activeSection.style.display = 'block'; // Ensure display block for active
-                
-                // Set focus to the section heading for better navigation for screen reader users
-                const heading = activeSection.querySelector('h2');
-                if(heading) heading.setAttribute('tabindex', '-1'); // Make it focusable
-                if(heading) heading.focus();
-
-
-                const activeLink = document.querySelector(`nav ul li a[href="#${targetId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                    activeLink.setAttribute('aria-current', 'page');
-                }
-            }
-            
             if (navUl.classList.contains('open')) {
                 navUl.classList.remove('open');
                 menuToggleBtn.querySelector('.material-icons').textContent = 'menu';
                 menuToggleBtn.setAttribute('aria-expanded', 'false');
             }
-            // window.scrollTo(0, 0); // Already present, good.
+             // window.scrollTo(0, 0); // Optional: if you want to scroll to top on section change
         }
 
         navLinks.forEach(link => {
@@ -993,14 +1047,14 @@
                 e.preventDefault();
                 const targetId = e.target.getAttribute('href').substring(1);
                 showSection(targetId);
+                window.location.hash = targetId; // Update URL hash for history/linking
             });
         });
         
         menuToggleBtn.addEventListener('click', () => {
             const isExpanded = navUl.classList.toggle('open');
             menuToggleBtn.setAttribute('aria-expanded', isExpanded.toString());
-            const icon = menuToggleBtn.querySelector('.material-icons');
-            icon.textContent = isExpanded ? 'close' : 'menu';
+            menuToggleBtn.querySelector('.material-icons').textContent = isExpanded ? 'close' : 'menu';
         });
 
         // --- Theme Toggle ---
@@ -1021,14 +1075,41 @@
             applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
         
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const savedTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
         applyTheme(savedTheme);
+        prefersDarkScheme.addEventListener('change', e => { // Listen for OS theme changes
+            if (!localStorage.getItem('theme')) { // Only if user hasn't explicitly set a theme
+                 applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+
+        // --- Audio Checkbox Logic ---
+        function updateAudioSubCheckboxes() {
+            const isRecordAudioEnabled = recordAudioCheckbox.checked;
+            recordSystemAudioCheckbox.disabled = !isRecordAudioEnabled;
+            recordMicrophoneCheckbox.disabled = !isRecordAudioEnabled;
+
+            // If master is unchecked, also uncheck subs
+            if (!isRecordAudioEnabled) {
+                recordSystemAudioCheckbox.checked = false;
+                recordMicrophoneCheckbox.checked = false;
+            }
+        }
+        recordAudioCheckbox.addEventListener('change', updateAudioSubCheckboxes);
 
 
         // --- Recording Logic ---
         async function startRecording() {
             recordedChunks = [];
+            previewVideo.style.display = 'none'; 
+            previewVideo.src = '';
+
             try {
+                const shouldRecordSystemAudio = recordAudioCheckbox.checked && recordSystemAudioCheckbox.checked;
+                const shouldRecordMicrophone = recordAudioCheckbox.checked && recordMicrophoneCheckbox.checked;
+
                 const displayMediaOptions = {
                     video: { 
                         mediaSource: "screen", 
@@ -1036,17 +1117,21 @@
                         height: { ideal: 1080, max: 2160 },
                         frameRate: { ideal: 30, max: 60 } 
                     },
-                    preferCurrentTab: recordAudioCheckbox.checked && recordSystemAudioCheckbox.checked, 
-                    systemAudio: (recordAudioCheckbox.checked && recordSystemAudioCheckbox.checked) ? 'include' : 'exclude',
+                    // preferCurrentTab can cause issues if you want system audio from *other* tabs/apps
+                    // preferCurrentTab: shouldRecordSystemAudio, 
+                    systemAudio: shouldRecordSystemAudio ? 'include' : 'exclude',
                 };
-                if (!( 'systemAudio' in navigator.mediaDevices.getSupportedConstraints() )) {
-                    displayMediaOptions.audio = recordAudioCheckbox.checked && recordSystemAudioCheckbox.checked;
+                
+                // Fallback for browsers that don't support the 'systemAudio' constraint directly
+                if (!('systemAudio' in navigator.mediaDevices.getSupportedConstraints()) && shouldRecordSystemAudio) {
+                    displayMediaOptions.audio = true; 
                 }
+
 
                 screenStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 
                 audioStream = null; 
-                if (recordAudioCheckbox.checked && recordMicrophoneCheckbox.checked) {
+                if (shouldRecordMicrophone) {
                     try {
                         audioStream = await navigator.mediaDevices.getUserMedia({ 
                             audio: {
@@ -1058,23 +1143,23 @@
                         });
                     } catch (micError) {
                         console.warn("Microphone access denied or no microphone found:", micError);
-                        showSnackbar("Microphone access denied or not found. Recording without microphone.", "error");
+                        showSnackbar("Mic access denied/not found. Recording without mic.", "warning");
                     }
                 }
                 
                 const tracks = [...screenStream.getVideoTracks()];
-                let screenAudioTracks = screenStream.getAudioTracks();
+                const screenAudioTracks = screenStream.getAudioTracks(); // System audio tracks
 
                 if (audioStream) { 
                     tracks.push(...audioStream.getAudioTracks());
                 }
-                if (screenAudioTracks.length > 0) {
-                     tracks.push(...screenAudioTracks);
+                if (screenAudioTracks.length > 0 && shouldRecordSystemAudio) { // Only add if system audio was requested and captured
+                    tracks.push(...screenAudioTracks);
                 }
                 
                 const hasAudioTracks = tracks.some(track => track.kind === 'audio');
-                if (recordAudioCheckbox.checked && !hasAudioTracks) {
-                    showSnackbar("No audio source captured. Recording video only.", "warning"); // Changed to warning
+                if (recordAudioCheckbox.checked && !hasAudioTracks && (shouldRecordMicrophone || shouldRecordSystemAudio)) {
+                     showSnackbar("No audio source captured despite selection. Recording video only.", "warning");
                 }
 
                 mediaStream = new MediaStream(tracks);
@@ -1082,8 +1167,8 @@
                 screenStream.getVideoTracks()[0].onended = () => {
                     if (mediaRecorder && mediaRecorder.state !== "inactive") {
                         if (!stopRecordingBtn.disabled) { 
-                             showSnackbar("Screen sharing stopped externally.", "info"); // Changed to info
-                             stopActualRecording(); 
+                            showSnackbar("Screen sharing stopped externally.", "info");
+                            stopActualRecording(); 
                         }
                     }
                 };
@@ -1092,8 +1177,9 @@
                     'video/webm; codecs="vp9, opus"',
                     'video/webm; codecs="vp8, opus"',
                     'video/webm; codecs="h264,opus"',
-                    'video/mp4; codecs="avc1.42E01E, mp4a.40.2"', // More specific MP4
-                    'video/webm',
+                    'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
+                    'video/webm', // Fallback generic webm
+                    'video/mp4'   // Fallback generic mp4
                 ];
                 let selectedMimeType = '';
                 for (const mimeType of MimeTypesToTry) {
@@ -1113,7 +1199,7 @@
                     mimeType: selectedMimeType,
                     videoBitsPerSecond : 2500000, 
                     audioBitsPerSecond : 128000, 
-                 });
+                });
 
                 mediaRecorder.ondataavailable = (event) => {
                     if (event.data.size > 0) {
@@ -1122,27 +1208,27 @@
                 };
 
                 mediaRecorder.onstop = () => {
-                    const blobPropertyBag = selectedMimeType.startsWith('video/mp4') ? { type: 'video/mp4' } : { type: 'video/webm' };
+                    const fileExtension = selectedMimeType.includes('mp4') ? 'mp4' : 'webm';
+                    const blobPropertyBag = { type: selectedMimeType.split(';')[0] }; // e.g. 'video/webm' or 'video/mp4'
+                    
                     const blob = new Blob(recordedChunks, blobPropertyBag);
                     const url = URL.createObjectURL(blob);
                     
                     previewVideo.src = url;
                     previewVideo.style.display = 'block';
                     
-                    const fileExtension = selectedMimeType.startsWith('video/mp4') ? 'mp4' : 'webm';
                     addRecordingToDownloads(url, `recording-${new Date().toISOString().replace(/[:.]/g, '-')}.${fileExtension}`);
                     
                     mediaStream.getTracks().forEach(track => track.stop());
-                    if (screenStream) screenStream.getTracks().forEach(track => track.stop());
-                    if (audioStream) audioStream.getTracks().forEach(track => track.stop());
-
+                    // screenStream and audioStream tracks are part of mediaStream, so they are stopped too.
+                    
                     resetRecordingState();
                     showSnackbar("Recording stopped and saved!", "success");
                 };
                 
                 mediaRecorder.onerror = (event) => {
                     console.error("MediaRecorder error:", event.error);
-                    showSnackbar(`Recording error: ${event.error.name}`, "error"); // Simplified message
+                    showSnackbar(`Recording error: ${event.error.name}`, "error");
                     stopActualRecording(); 
                 };
 
@@ -1152,13 +1238,15 @@
 
             } catch (err) {
                 console.error("Error starting recording:", err);
-                if (err.name === "NotAllowedError" || (err.message && err.message.includes("Permission denied"))) {
-                     showSnackbar("Permission denied. Please allow screen and audio access.", "error");
+                if (err.name === "NotAllowedError" || err.message?.includes("Permission denied")) {
+                    showSnackbar("Permission denied. Please allow screen/audio access.", "error");
                 } else if (err.name === "NotFoundError") {
                     showSnackbar("No screen or audio source found. Check connections.", "error");
+                } else if (err.name === "NotReadableError" || err.name === "AbortError") {
+                     showSnackbar("Could not start recording. Source might be busy or unavailable.", "error");
                 }
                 else {
-                    showSnackbar(`Error starting recording: ${err.name}`, "error"); // Simplified message
+                    showSnackbar(`Error starting: ${err.name || 'Unknown error'}`, "error");
                 }
                 resetRecordingState();
             }
@@ -1208,15 +1296,15 @@
                 mediaRecorder.stop(); 
                 stopTimer();
             } else { 
-                resetRecordingState();
+                resetRecordingState(); // If somehow called when not recording
             }
         }
 
         function confirmStopRecording() {
             if (mediaRecorder && (mediaRecorder.state === "recording" || mediaRecorder.state === "paused")) {
-                 showModal("Stop Recording", "Are you sure you want to stop the recording? The current recording will be saved.", () => {
+                showModal("Stop Recording", "Are you sure you want to stop? The recording will be saved.", () => {
                     stopActualRecording();
-                 });
+                });
             }
         }
         
@@ -1227,8 +1315,8 @@
             updateButtonDisabledState(stopRecordingBtn, true);
 
             recordAudioCheckbox.disabled = false;
-            recordSystemAudioCheckbox.disabled = false;
-            recordMicrophoneCheckbox.disabled = false;
+            updateAudioSubCheckboxes(); // Re-evaluate sub-checkbox disabled state
+
             recordingStatusDiv.style.display = 'none';
             secondsElapsed = 0;
             timerDisplay.textContent = formatTime(0);
@@ -1276,7 +1364,7 @@
             downloadLink.download = filename;
             downloadLink.textContent = "Download";
             downloadLink.classList.add('btn-download'); 
-            downloadLink.setAttribute('role', 'button'); // For semantics
+            downloadLink.setAttribute('role', 'button');
 
             listItem.appendChild(fileInfoSpan);
             listItem.appendChild(downloadLink);
@@ -1286,39 +1374,39 @@
 
         // --- Modal ---
         function showModal(title, message, onConfirm) {
-            lastFocusedElement = document.activeElement; // Store last focused element
+            lastFocusedElement = document.activeElement; 
 
             modalTitleEl.textContent = title;
             modalMessageEl.textContent = message;
             currentModalConfirmCallback = onConfirm;
             customModal.style.display = 'flex';
-            modalConfirmBtn.focus(); // Set focus to confirm button in modal
+            modalConfirmBtn.focus(); 
         }
 
         function hideModal() {
             customModal.style.display = 'none';
             currentModalConfirmCallback = null;
             if (lastFocusedElement) {
-                lastFocusedElement.focus(); // Return focus to the element that opened the modal
+                lastFocusedElement.focus(); 
             }
         }
         
-        // Keyboard navigation within modal
         customModal.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 hideModal();
             }
             if (event.key === 'Tab') {
-                const focusableElements = Array.from(customModal.querySelectorAll('button'));
+                const focusableElements = Array.from(customModal.querySelectorAll('button:not([disabled])'));
+                if (focusableElements.length === 0) return;
                 const firstElement = focusableElements[0];
                 const lastElement = focusableElements[focusableElements.length - 1];
 
-                if (event.shiftKey) { // Shift + Tab
+                if (event.shiftKey) { 
                     if (document.activeElement === firstElement) {
                         lastElement.focus();
                         event.preventDefault();
                     }
-                } else { // Tab
+                } else { 
                     if (document.activeElement === lastElement) {
                         firstElement.focus();
                         event.preventDefault();
@@ -1326,7 +1414,6 @@
                 }
             }
         });
-
 
         modalConfirmBtn.addEventListener('click', () => {
             if (currentModalConfirmCallback) {
@@ -1336,7 +1423,7 @@
         });
 
         modalCancelBtn.addEventListener('click', hideModal);
-        customModal.addEventListener('click', (event) => {
+        customModal.addEventListener('click', (event) => { // Close on backdrop click
             if (event.target === customModal) {
                 hideModal();
             }
@@ -1348,22 +1435,26 @@
             snackbar.textContent = message;
             snackbar.className = 'show'; 
             
+            snackbar.classList.remove('success', 'error', 'warning'); // Clear previous types
+            let ariaLiveValue = 'polite';
+
             if (type === 'success') {
                 snackbar.classList.add('success');
-                snackbar.setAttribute('aria-live', 'polite'); // Success messages are polite
             } else if (type === 'error') {
                 snackbar.classList.add('error');
-                snackbar.setAttribute('aria-live', 'assertive'); // Errors are assertive
-            } else { // info or warning
-                snackbar.setAttribute('aria-live', 'polite');
-                 if (type === 'warning') snackbar.style.backgroundColor = 'var(--tertiary-container-color)'; // Example for warning
+                ariaLiveValue = 'assertive';
+            } else if (type === 'warning') { // You might want specific styling for warning too
+                snackbar.classList.add('warning'); // Add a .warning class if you want to style it via CSS
+                // Example inline style for warning if no CSS class defined for it
+                // snackbar.style.backgroundColor = 'var(--warning-container-color)';
+                // snackbar.style.color = 'var(--on-warning-container-color)';
             }
-
+            snackbar.setAttribute('aria-live', ariaLiveValue);
 
             setTimeout(() => { 
                 snackbar.className = snackbar.className.replace("show", "");
-                snackbar.classList.remove('success', 'error');
-                snackbar.style.backgroundColor = ''; // Reset custom style
+                // snackbar.style.backgroundColor = ''; // Reset if inline style was used
+                // snackbar.style.color = '';
             }, 3000);
         }
         
@@ -1376,39 +1467,34 @@
 
         // Initial Setup
         function init() {
-            // Set initial aria-hidden attributes for sections
-            sections.forEach(section => {
-                if (!section.classList.contains('active')) {
-                    section.setAttribute('aria-hidden', 'true');
-                    section.style.display = 'none';
-                } else {
-                    section.removeAttribute('aria-hidden');
-                     const heading = section.querySelector('h2');
-                     if(heading) heading.setAttribute('tabindex', '-1'); 
-                }
-            });
+            updateAudioSubCheckboxes(); // Set initial state of audio sub-checkboxes
 
-            showSection('home'); 
+            // Set initial aria-hidden attributes for sections
+            const currentHash = window.location.hash.substring(1);
+            const sectionToShow = sectionsNodeList.includes(document.getElementById(currentHash)) ? currentHash : 'home';
+            
+            showSection(sectionToShow); 
             resetRecordingState(); 
+
             if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-                showSnackbar("Screen Recording API is not supported in your browser.", "error");
+                showSnackbar("Screen Recording API not supported.", "error");
                 updateButtonDisabledState(startRecordingBtn, true);
                 document.querySelectorAll('.settings-group input, .button-group button:not(#startRecordingBtn)').forEach(el => updateButtonDisabledState(el, true));
-                modalMessageEl.textContent = "Your browser does not support the Screen Recording API. Please try a modern browser like Chrome, Firefox, or Edge.";
+                modalMessageEl.textContent = "Your browser does not support Screen Recording. Try Chrome, Firefox, or Edge.";
                 modalTitleEl.textContent = "Unsupported Browser";
                 modalConfirmBtn.style.display = 'none';
                 modalCancelBtn.textContent = "Close";
-                customModal.style.display = 'flex';
+                showModal(modalTitleEl.textContent, modalMessageEl.textContent, () => {}); // Empty confirm
                 return; 
             }
             if (!window.MediaRecorder) {
-                 showSnackbar("MediaRecorder API is not supported. Cannot record.", "error");
-                 updateButtonDisabledState(startRecordingBtn, true);
-                 document.querySelectorAll('.settings-group input, .button-group button:not(#startRecordingBtn)').forEach(el => updateButtonDisabledState(el, true));
-                 return;
+                showSnackbar("MediaRecorder API not supported. Cannot record.", "error");
+                updateButtonDisabledState(startRecordingBtn, true);
+                document.querySelectorAll('.settings-group input, .button-group button:not(#startRecordingBtn)').forEach(el => updateButtonDisabledState(el, true));
+                return;
             }
         }
-
+        const sectionsNodeList = Array.from(sections);
         document.addEventListener('DOMContentLoaded', init);
 
     </script>
