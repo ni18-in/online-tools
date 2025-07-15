@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>AI Love Calculator - Find Your Love Score!</title>
+    <meta name="description" content="Find out your love compatibility with our fun AI Love Calculator! Enter your names and ages to calculate your love score and get a fun future prediction. For entertainment purposes only.">
+    <meta name="keywords" content="love calculator, ai love calculator, compatibility test, love score, relationship calculator, fun app">
+    <meta name="author" content="ni18 tools">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="AI Love Calculator - What's Your Score?">
+    <meta property="og:description" content="A fun, AI-powered calculator to measure the love between two people. Enter your names and see what the future holds! ❤️">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/ai-love-calculator/">
+    <meta property="og:image" content="https://placehold.co/1200x630/ec4899/ffffff?text=AI+Love+Calculator&font=pacifico">
+    <meta property="og:image:alt" content="A vibrant pink background with the text AI Love Calculator">
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AI Love Calculator",
+      "description": "A fun, client-side web application that calculates a 'love score' based on two people's names and ages for entertainment purposes.",
+      "applicationCategory": "EntertainmentApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "ni18 tools"
+      },
+      "mainEntityOfPage": {
+        "@type": "CreativeWork",
+        "name": "AI Love Calculator",
+        "author": {
+          "@type": "Person",
+          "name": "ni18 tools"
+        },
+        "description": "A fun tool for entertainment purposes only. Don't take results seriously! Love is more than numbers."
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles and font definitions */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        /* Custom animation for result display */
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .animate-fade-in-scale-up {
+            animation: fadeInScaleUp 0.7s ease-in-out forwards;
+        }
+        /* Custom progress bar animation */
+        @keyframes progress-bar {
+            from { width: 0%; }
+            to { width: var(--progress-width); }
+        }
+        .progress-bar-animated {
+            animation: progress-bar 1.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-100 to-teal-100 min-h-screen flex items-center justify-center p-4">
+
+    <main class="w-full max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl shadow-pink-200/50 overflow-hidden">
+        <div class="p-6 md:p-10">
+            <header class="text-center mb-8">
+                <h1 class="font-pacifico text-4xl md:text-6xl text-pink-500">AI Love Calculator</h1>
+                <p class="text-gray-600 mt-2">Discover your love potential with our "advanced" AI! 💘</p>
+            </header>
+
+            <!-- Input Form -->
+            <div id="calculator-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                <!-- Partner 1 -->
+                <div class="bg-rose-50 p-6 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-semibold text-rose-600 mb-4 text-center">Partner 1 👩‍❤️‍👨</h2>
+                    <div>
+                        <label for="name1" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input type="text" id="name1" placeholder="e.g., Romeo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-rose-500 focus:border-rose-500 transition">
+                    </div>
+                    <div class="mt-4">
+                        <label for="age1" class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                        <input type="number" id="age1" placeholder="e.g., 21" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-rose-500 focus:border-rose-500 transition">
+                    </div>
+                </div>
+
+                <!-- Partner 2 -->
+                <div class="bg-teal-50 p-6 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-semibold text-teal-600 mb-4 text-center">Partner 2 💖</h2>
+                    <div>
+                        <label for="name2" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input type="text" id="name2" placeholder="e.g., Juliet" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    <div class="mt-4">
+                        <label for="age2" class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                        <input type="number" id="age2" placeholder="e.g., 19" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calculate Button -->
+            <div class="text-center mt-8">
+                <button id="calculate-btn" class="bg-gradient-to-r from-pink-500 to-orange-400 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Calculate Love ✨
+                </button>
+                <p id="error-message" class="text-red-500 mt-2 h-5"></p>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-section" class="text-center mt-10 hidden">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-inner animate-fade-in-scale-up">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Your Love Score:</h3>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-pink-400 to-red-500 h-8 rounded-full flex items-center justify-center text-white font-bold text-lg progress-bar-animated">
+                            <span id="score-text"></span>
+                        </div>
+                    </div>
+                    
+                    <p id="compatibility-status" class="text-3xl font-bold my-3"></p>
+                    <p id="future-prediction" class="text-lg text-gray-600"></p>
+
+                    <div class="mt-6">
+                        <button id="share-btn" class="bg-gray-200 text-gray-700 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition">
+                            Share Your Score 💌
+                        </button>
+                        <p id="share-feedback" class="text-green-600 text-sm mt-2 h-4"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fake Formula Display -->
+            <div class="text-center mt-8 text-gray-500 text-sm">
+                <p>Our formula: <code class="bg-gray-200 p-1 rounded">(Σ(names) + Σ(ages)) % 💕 + ✨</code></p>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <footer class="bg-gray-100 p-6 text-sm text-gray-600">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">About This App</h4>
+                    <p>This app is just for fun and entertainment! Our "AI" love formula 💘 is designed to bring a smile to your face. Enjoy!</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">How to Use</h4>
+                    <ol class="list-decimal list-inside">
+                        <li>Enter both names and ages.</li>
+                        <li>Click "Calculate Love".</li>
+                        <li>See your score and fun prediction!</li>
+                    </ol>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">⚠️ Disclaimer</h4>
+                    <p>This is a fun tool for entertainment purposes only. Please don't take the results seriously! True love is complex and can't be measured by an algorithm. ❤️</p>
+                    <p><a href="https://online-tools.ni18.in/" class="text-blue-500 hover:underline">More Tools By Ni18</a></p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // DOM Element References
+        const name1Input = document.getElementById('name1');
+        const age1Input = document.getElementById('age1');
+        const name2Input = document.getElementById('name2');
+        const age2Input = document.getElementById('age2');
+        const calculateBtn = document.getElementById('calculate-btn');
+        const errorMessage = document.getElementById('error-message');
+        const resultSection = document.getElementById('result-section');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreText = document.getElementById('score-text');
+        const compatibilityStatus = document.getElementById('compatibility-status');
+        const futurePrediction = document.getElementById('future-prediction');
+        const shareBtn = document.getElementById('share-btn');
+        const shareFeedback = document.getElementById('share-feedback');
+
+        /**
+         * Calculates a deterministic, happy love score based on names and ages.
+         * @param {string} name1 - The first person's name.
+         * @param {number} age1 - The first person's age.
+         * @param {string} name2 - The second person's name.
+         * @param {number} age2 - The second person's age.
+         * @returns {number} The final love score, always between 70 and 100.
+         */
+        function calculateLoveScore(name1, age1, name2, age2) {
+            // Guard against empty inputs
+            if (!name1 || !name2 || !age1 || !age2) return 0;
+
+            const name1Processed = name1.toLowerCase().replace(/\s/g, '');
+            const name2Processed = name2.toLowerCase().replace(/\s/g, '');
+
+            // Combine names for a base value
+            const combinedNames = name1Processed + name2Processed;
+            const nameValue = [...combinedNames].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+            // Use ages to create a seed
+            const ageSeed = parseInt(age1) + parseInt(age2);
+
+            // A "happier" deterministic formula that always produces high scores.
+            // The result will always be between 70 and 100, ensuring a "happy" result.
+            const score = 70 + ((nameValue + ageSeed) % 31); // (0-30) + 70 = 70-100
+
+            return score;
+        }
+
+
+        /**
+         * Gets the compatibility status and prediction based on the score.
+         * @param {number} score - The love score.
+         * @returns {object} An object with status and prediction strings.
+         */
+        function getCompatibilityDetails(score) {
+            if (score >= 90) {
+                return {
+                    status: "Perfect Match 💑",
+                    prediction: "Your future is full of roses and endless pizza dates!"
+                };
+            } else if (score >= 70) {
+                return {
+                    status: "Strong Connection 💕",
+                    prediction: "You two complete each other’s memes. A match made in digital heaven."
+                };
+            } else if (score >= 50) {
+                return {
+                    status: "Average Match 🙂",
+                    prediction: "There's potential here! A mix of some drama and some dhamaal."
+                };
+            } else if (score >= 30) {
+                return {
+                    status: "Tough Match 💔",
+                    prediction: "This might require a lot of Netflix, patience, and maybe separate blankets."
+                };
+            } else {
+                return {
+                    status: "Oops! 🚫",
+                    prediction: "The stars aren't aligned. Have you considered getting a dog instead?"
+                };
+            }
+        }
+
+        /**
+         * Animates the score from 0 to the final score.
+         * @param {number} finalScore - The target score to animate to.
+         */
+        function animateScore(finalScore) {
+            let currentScore = 0;
+            const interval = setInterval(() => {
+                if (currentScore >= finalScore) {
+                    clearInterval(interval);
+                    // Ensure final score is exact
+                    scoreText.textContent = `${finalScore}%`;
+                } else {
+                    currentScore++;
+                    scoreText.textContent = `${currentScore}%`;
+                }
+            }, 20); // Adjust timing for faster/slower animation
+        }
+        
+        // Event Listener for the Calculate Button
+        calculateBtn.addEventListener('click', () => {
+            // 1. Get and validate inputs
+            const name1 = name1Input.value.trim();
+            const age1 = parseInt(age1Input.value, 10);
+            const name2 = name2Input.value.trim();
+            const age2 = parseInt(age2Input.value, 10);
+
+            if (!name1 || !name2 || !age1 || !age2) {
+                errorMessage.textContent = 'Please fill in all fields! 🙏';
+                return;
+            }
+            if (age1 <= 0 || age2 <= 0) {
+                errorMessage.textContent = 'Age must be a positive number.';
+                return;
+            }
+            errorMessage.textContent = '';
+            shareFeedback.textContent = '';
+
+            // 2. Calculate score and get details
+            const score = calculateLoveScore(name1, age1, name2, age2);
+            const details = getCompatibilityDetails(score);
+
+            // 3. Update the UI
+            // Reset animation for re-calculation
+            resultSection.classList.add('hidden');
+            progressBar.classList.remove('progress-bar-animated');
+            // We need a small delay to allow the browser to apply the style changes
+            setTimeout(() => {
+                // Set the custom property for the progress bar width
+                progressBar.style.setProperty('--progress-width', `${score}%`);
+                progressBar.classList.add('progress-bar-animated');
+                
+                animateScore(score);
+                compatibilityStatus.textContent = details.status;
+                futurePrediction.textContent = details.prediction;
+
+                resultSection.classList.remove('hidden');
+                
+                // Scroll to the result
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        });
+
+        // Event Listener for the Share Button
+        shareBtn.addEventListener('click', () => {
+            const score = scoreText.textContent;
+            const status = compatibilityStatus.textContent;
+            const textToCopy = `My love score is ${score}! The AI says it's a "${status}". Find out yours!`;
+            
+            // Create a temporary textarea to copy text
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                // Use execCommand as a fallback for iframe environments
+                document.execCommand('copy');
+                shareFeedback.textContent = 'Results copied to clipboard!';
+            } catch (err) {
+                shareFeedback.textContent = 'Could not copy results.';
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+
+            // Hide the feedback message after a few seconds
+            setTimeout(() => {
+                shareFeedback.textContent = '';
+            }, 3000);
+        });
+
+    </script>
+</body>
+</html>

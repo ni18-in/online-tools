@@ -94,3 +94,4 @@ System: I'm sorry, but I cannot respond with the current input provided. The inp
 ## [Online Text Compare](https://online-tools.ni18.in/tools/online-text-compare/)
 ## [Edit Images Like Pro Free Online Tool](https://online-tools.ni18.in/blogs/edit-images-like-pro-free-online-tool.html)
 ## [Json Visualizer Pro Tame Your Json Data](https://online-tools.ni18.in/blogs/json-visualizer-pro-tame-your-json-data.html)
+## [AI Love Calculator](https://online-tools.ni18.in/tools/ai-love-calculator/)
