@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Gen GST Calculator</title>
+    <meta name="description" content="Understand and calculate the Goods and Services Tax (GST) based on the new next-gen GST reforms. Easily determine tax rates and total costs for various goods and services.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+    <!-- Use Tailwind CSS for modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- SEO Schema.org JSON-LD -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["WebSite", "WebApplication"],
+      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website",
+      "name": "Next Gen GST Calculator",
+      "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
+      "description": "Understand and calculate the Goods and Services Tax (GST) based on the new next-gen GST reforms. Easily determine tax rates and total costs for various goods and services.",
+      "applicationCategory": "Calculator",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and HTML5 support.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://online-tools.ni18.in/tools/next-gen-gst-reforms?search_term={search_term}",
+        "query-input": "required name=search_term"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#webpage",
+      "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
+      "name": "Next Gen GST Calculator - Understand the New Reforms",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website"
+      },
+      "mainEntity": {
+        "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#tool"
+      },
+      "lastReviewed": "2025-09-04",
+      "dateModified": "2025-09-04",
+      "reviewedBy": {
+        "@type": "Organization",
+        "name": "NI18 Online Tools"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#howto",
+      "name": "How to Use the Next Gen GST Calculator",
+      "description": "A step-by-step guide to calculating GST with the new reforms.",
+      "totalTime": "PT5M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Enter the base price",
+          "text": "Input the base price of the good or service without GST.",
+          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Select the GST rate",
+          "text": "Choose the applicable GST slab rate (e.g., 5%, 12%, 18%, 28%) from the dropdown menu.",
+          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step2"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "View the results",
+          "text": "The calculator will automatically display the GST amount, CGST, SGST, and the total price.",
+          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step3"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "name": "FAQs about the Next Gen GST Calculator",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is GST and why is it important?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GST (Goods and Services Tax) is an indirect tax used in India on the supply of goods and services. It is a single, comprehensive tax that has replaced multiple taxes like VAT, Service Tax, and Excise Duty. It simplifies the tax structure and aims to boost the economy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the Next Gen GST Calculator work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our calculator uses the latest GST reform rates to accurately calculate the tax amount. Simply input the base price and select the correct GST slab to get the total."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8; /* A soft, light gray for the background */
+            color: #1a202c; /* A dark gray for text */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            background-color: #3b82f6; /* A nice blue for the title */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Pill shape */
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        .input-group select, .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-group select:focus, .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        .calculate-btn {
+            background-color: #2563eb;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+        }
+        .calculate-btn:hover {
+            background-color: #1e40af;
+        }
+        .calculate-btn:active {
+            transform: scale(0.98);
+        }
+        .result-box {
+            background-color: #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .result-box p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        .result-box .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .image-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        /* New styles for the top navigation and info sections */
+        .info-header {
+            background-color: #e2e8f0;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+        .info-link {
+            font-weight: 600;
+            color: #4a5568;
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        .info-link:hover {
+            color: #3b82f6;
+        }
+        .info-section {
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            max-width: 400px;
+        }
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="container mx-auto">
+        <header class="text-center my-8">
+            <a href="http://online-tools.ni18.in/"><h1 class="text-4xl md:text-5xl font-extrabold text-blue-800">Next Gen GST Calculator</h1></a>
+            <p class="mt-2 text-xl text-gray-600">Estimate your GST liability with the new reforms</p>
+        </header>
+
+        <!-- New Info Header -->
+        <nav class="info-header" role="navigation" aria-label="Main navigation">
+            <a href="#about" class="info-link">About This App</a>
+            <a href="#how-to-use" class="info-link">How to Use</a>
+            <a href="#advantages" class="info-link">Advantages</a>
+            <a href="https://www.cbic.gov.in/" target="_blank" rel="noopener noreferrer" class="info-link">Official CBIC Website</a>
+            <a href="https://cbic-gst.gov.in/gst-goods-services-rates.html" target="_blank" rel="noopener noreferrer" class="info-link">GST Rates Information</a>
+        </nav>
+
+        <!-- New sections with detailed information -->
+        <div id="about" class="info-section">
+            <h2 class="text-xl md:text-2xl font-bold">About This App</h2>
+            <p class="text-gray-700 mt-2 leading-relaxed">
+                The "Next Gen GST Calculator" is a user-friendly tool designed to help citizens and businesses navigate the new Goods and Services Tax (GST) reforms. Based on the proposed two-slab structure, this application provides a simple way to calculate the total price of an item including the new tax rates. It is a zero-service-cost tool, providing essential financial information transparently and easily.
+            </p>
+        </div>
+
+        <div id="how-to-use" class="info-section">
+            <h2 class="text-xl md:text-2xl font-bold">How to Use</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-2">
+                <li>Choose a product category from the cards above, such as "Daily Essentials" or "Automobiles."</li>
+                <li>Select the specific item you want to calculate from the dropdown menu. This will automatically update the GST rate in the calculator section.</li>
+                <li>Alternatively, if you already know the rate, you can manually select it from the "Select GST Rate" dropdown.</li>
+                <li>Enter the base price of the item in the "Enter Base Price" field.</li>
+                <li>Click the "Calculate GST" button to see the total price, including the GST amount.</li>
+            </ol>
+        </div>
+
+        <div id="advantages" class="info-section">
+            <h2 class="text-xl md:text-2xl font-bold">Advantages of the App</h2>
+            <ul class="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
+                <li><strong class="font-semibold">Simplicity and Accuracy:</strong> The app automates complex GST calculations, reducing the risk of human error and saving you valuable time.</li>
+                <li><strong class="font-semibold">Instant Results:</strong> Get the total price and GST amount instantly without manual effort.</li>
+                <li><strong class="font-semibold">Clarity and Transparency:</strong> By showing the base price, GST rate, and final price, the tool provides a clear and transparent view of your tax obligations.</li>
+                <li><strong class="font-semibold">No Cost:</strong> This is a free-to-use web application with no hidden charges or service costs.</li>
+            </ul>
+        </div>
+        
+        <!-- Calculator and main content -->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Daily Essentials Card -->
+            <div class="card">
+                <h2 class="section-title">Daily Essentials</h2>
+                <div class="input-group">
+                    <label for="daily-essential">Select Item:</label>
+                    <select id="daily-essential" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="18">Hair Oil, Shampoo, Toothpaste, Toilet Soap (18% from 12%)</option>
+                        <option value="12">Bath, Brush, Shaving Cream (12% from 5%)</option>
+                        <option value="12">Butter, Ghee, Cheese (12% from 5%)</option>
+                        <option value="12">Pre-packaged Namkeen, Bhujia (12% from 5%)</option>
+                        <option value="12">Utensils (12% from 5%)</option>
+                        <option value="12">Feeding Bottle, Napkins (12% from 5%)</option>
+                        <option value="12">Sewing Machines & Parts (12% from 5%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Farmers & Agriculture Card -->
+            <div class="card">
+                <h2 class="section-title">Farmers & Agriculture</h2>
+                <div class="input-group">
+                    <label for="agriculture">Select Item:</label>
+                    <select id="agriculture" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="18">Tractor, Tyres & Parts (18% from 12%)</option>
+                        <option value="12">Tractors (12% from 5%)</option>
+                        <option value="12">Specified Bio-Pesticides, Micro-nutrients (12% from 5%)</option>
+                        <option value="12">Drip Irrigation System & Sprinklers (12% from 5%)</option>
+                        <option value="12">Agricultural, Horticultural or Forestry Machines (12% from 5%)</option>
+                        <option value="12">Cultivation, Harvesting & Threshing (12% from 5%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Healthcare Card -->
+            <div class="card">
+                <h2 class="section-title">Relief in Healthcare</h2>
+                <div class="input-group">
+                    <label for="healthcare">Select Item:</label>
+                    <select id="healthcare" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="18">Individual Health & Life Insurance (18% from Nil)</option>
+                        <option value="18">Thermometer (18% from 5%)</option>
+                        <option value="18">Medical Grade Oxygen (18% from 5%)</option>
+                        <option value="12">All Diagnostic Kits & Reagents (12% from 5%)</option>
+                        <option value="12">Glucometer & Test Strips (12% from 5%)</option>
+                        <option value="12">Corrective Spectacles (12% from 5%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Automobiles Card -->
+            <div class="card">
+                <h2 class="section-title">Automobiles</h2>
+                <div class="input-group">
+                    <label for="automobile">Select Item:</label>
+                    <select id="automobile" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="28">Petrol & Hybrid Vehicle (28% from 26%)</option>
+                        <option value="28">Motor Vehicles (1500cc & 4000mm) (28% from 18%)</option>
+                        <option value="28">2-Wheeled Vehicles (28% from 18%)</option>
+                        <option value="28">Motor Cycles (350cc & below) (28% from 18%)</option>
+                        <option value="28">Motor Vehicles for transport of goods (28% from 18%)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Education Card -->
+            <div class="card">
+                <h2 class="section-title">Affordable Education</h2>
+                <div class="input-group">
+                    <label for="education">Select Item:</label>
+                    <select id="education" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="12">Maps, Charts & Globes (12% from Nil)</option>
+                        <option value="12">Pencils, Sharpeners, Crayons & Pastels (12% from Nil)</option>
+                        <option value="12">Exercise Books & Notebooks (12% from 5%)</option>
+                        <option value="12">Eraser (12% from Nil)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Electronic Appliances Card -->
+            <div class="card">
+                <h2 class="section-title">Electronic Appliances</h2>
+                <div class="input-group">
+                    <label for="electronics">Select Item:</label>
+                    <select id="electronics" class="mt-1 block">
+                        <option value="">-- Select an Item --</option>
+                        <option value="28">Air Conditioners (28% from 18%)</option>
+                        <option value="28">Television (above 32") (28% from 18%)</option>
+                        <option value="28">Monitors & Projectors (28% from 18%)</option>
+                        <option value="28">Dish Washing Machines (28% from 18%)</option>
+                    </select>
+                </div>
+            </div>
+        </main>
+        
+        <div class="card mt-8">
+            <h2 class="section-title">Calculate GST</h2>
+            <div class="input-group">
+                <label for="base-price">Enter Base Price (₹):</label>
+                <input type="number" id="base-price" placeholder="e.g., 1000" class="mt-1 block">
+            </div>
+            <div class="input-group">
+                <label for="gst-rate">Select GST Rate (%):</label>
+                <select id="gst-rate" class="mt-1 block">
+                    <option value="">-- Select a GST Rate --</option>
+                    <option value="5">5%</option>
+                    <option value="12">12%</option>
+                    <option value="18">18%</option>
+                    <option value="28">28%</option>
+                </select>
+            </div>
+            <div class="mt-6">
+                <button class="calculate-btn" onclick="calculateGST()">Calculate GST</button>
+            </div>
+            <div id="result" class="result-box mt-6 hidden">
+                <p>Total Price (Base Price + GST):</p>
+                <div class="result-value" id="total-price">₹ 0.00</div>
+                <p class="text-sm mt-2 text-gray-500">Includes GST amount of: <span id="gst-amount">₹ 0.00</span></p>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Next Gen GST Calculator. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Custom Message Box UI -->
+    <div id="message-box" class="message-box hidden">
+        <p id="message-text" class="text-lg font-semibold text-red-600 mb-4"></p>
+        <button onclick="hideMessageBox()" class="bg-blue-600 text-white px-6 py-2 rounded-md font-bold hover:bg-blue-700">OK</button>
+    </div>
+    <div id="message-box-overlay" class="message-box-overlay hidden" onclick="hideMessageBox()"></div>
+
+    <script>
+        // Use a single, comprehensive data structure to store all GST rates
+        const gstRates = {
+            "daily-essential": {
+                "18": "Hair Oil, Shampoo, Toothpaste, Toilet Soap",
+                "12": "Bath, Brush, Shaving Cream",
+                "12": "Butter, Ghee, Cheese",
+                "12": "Pre-packaged Namkeen, Bhujia",
+                "12": "Utensils",
+                "12": "Feeding Bottle, Napkins",
+                "12": "Sewing Machines & Parts"
+            },
+            "agriculture": {
+                "18": "Tractor, Tyres & Parts",
+                "12": "Tractors",
+                "12": "Specified Bio-Pesticides, Micro-nutrients",
+                "12": "Drip Irrigation System & Sprinklers",
+                "12": "Agricultural, Horticultural or Forestry Machines",
+                "12": "Cultivation, Harvesting & Threshing"
+            },
+            "healthcare": {
+                "18": "Individual Health & Life Insurance",
+                "18": "Thermometer",
+                "18": "Medical Grade Oxygen",
+                "12": "All Diagnostic Kits & Reagents",
+                "12": "Glucometer & Test Strips",
+                "12": "Corrective Spectacles"
+            },
+            "automobile": {
+                "28": "Petrol & Hybrid Vehicle",
+                "28": "Motor Vehicles (1500cc & 4000mm)",
+                "28": "2-Wheeled Vehicles",
+                "28": "Motor Cycles (350cc & below)",
+                "28": "Motor Vehicles for transport of goods"
+            },
+            "education": {
+                "12": "Maps, Charts & Globes",
+                "12": "Pencils, Sharpeners, Crayons & Pastels",
+                "12": "Exercise Books & Notebooks",
+                "12": "Eraser"
+            },
+            "electronics": {
+                "28": "Air Conditioners",
+                "28": "Television (above 32\")",
+                "28": "Monitors & Projectors",
+                "28": "Dish Washing Machines"
+            }
+        };
+
+        function showMessageBox(message) {
+            document.getElementById('message-text').textContent = message;
+            document.getElementById('message-box').classList.remove('hidden');
+            document.getElementById('message-box-overlay').classList.remove('hidden');
+        }
+
+        function hideMessageBox() {
+            document.getElementById('message-box').classList.add('hidden');
+            document.getElementById('message-box-overlay').classList.add('hidden');
+        }
+
+        function calculateGST() {
+            // Get user inputs
+            const basePriceInput = document.getElementById('base-price');
+            const gstRateSelect = document.getElementById('gst-rate');
+            const resultBox = document.getElementById('result');
+            
+            const basePrice = parseFloat(basePriceInput.value);
+            const gstRate = parseFloat(gstRateSelect.value);
+
+            // Simple validation
+            if (isNaN(basePrice) || isNaN(gstRate) || basePrice <= 0) {
+                showMessageBox('Please enter a valid base price and select a GST rate.');
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            // Calculate GST
+            const gstAmount = basePrice * (gstRate / 100);
+            const totalPrice = basePrice + gstAmount;
+
+            // Display results
+            document.getElementById('total-price').textContent = `₹ ${totalPrice.toFixed(2)}`;
+            document.getElementById('gst-amount').textContent = `₹ ${gstAmount.toFixed(2)}`;
+            resultBox.classList.remove('hidden');
+        }
+
+        // Function to update the GST rate dropdown based on the selected item
+        function updateGstRateDropdown(event) {
+            const selectElement = event.target;
+            const selectedValue = selectElement.value;
+            const gstRateSelect = document.getElementById('gst-rate');
+            
+            // If an item with a specific rate is selected, update the main GST rate dropdown
+            if (selectedValue) {
+                gstRateSelect.value = selectedValue;
+            }
+        }
+
+        // Attach event listeners to all select elements to update the GST rate dropdown
+        document.getElementById('daily-essential').addEventListener('change', updateGstRateDropdown);
+        document.getElementById('agriculture').addEventListener('change', updateGstRateDropdown);
+        document.getElementById('healthcare').addEventListener('change', updateGstRateDropdown);
+        document.getElementById('automobile').addEventListener('change', updateGstRateDropdown);
+        document.getElementById('education').addEventListener('change', updateGstRateDropdown);
+        document.getElementById('electronics').addEventListener('change', updateGstRateDropdown);
+
+        // SEO and Accessibility features
+        // Add ARIA attributes and focus management for better accessibility
+        document.addEventListener('DOMContentLoaded', () => {
+            const calculateBtn = document.querySelector('.calculate-btn');
+            calculateBtn.setAttribute('aria-label', 'Calculate GST');
+        });
+        
+    </script>
+</body>
+</html>
