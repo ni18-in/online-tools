@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Authentication Header Generator</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A free, secure, client-side tool to generate Basic Authentication headers for HTTP requests. No username or password data is ever stored or sent to a server.">
+    <meta name="keywords" content="basic authentication, auth header, base64 encode, http authorization, developer tool, security, client-side">
+    <link rel="canonical" href="https://your-domain.com/" /> <!-- TODO: Replace with your actual domain -->
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/"> <!-- TODO: Replace with your actual domain -->
+    <meta property="og:title" content="Basic Authentication Header Generator">
+    <meta property="og:description" content="Securely generate Basic Auth headers directly in your browser. Fast, free, and client-side.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/"> <!-- TODO: Replace with your actual domain -->
+    <meta property="twitter:title" content="Basic Authentication Header Generator">
+    <meta property="twitter:description" content="Securely generate Basic Auth headers directly in your browser. Fast, free, and client-side.">
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom focus styles for better accessibility */
+        .form-input:focus, .btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+        /* Style for the generated code block */
+        .code-block {
+            word-break: break-all;
+        }
+    </style>
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Basic Authentication Header Generator",
+      "description": "A free and secure client-side tool to generate Basic Authentication headers for HTTP requests by Base64 encoding a username and password.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://your-domain.com/" 
+    }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-200 flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <div class="w-full max-w-2xl mx-auto">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Basic Authentication Header Generator</h1>
+            <p class="mt-2 text-lg text-gray-400">Securely generate `Authorization` headers on the client-side.</p>
+        </header>
+
+        <!-- Main Application Section -->
+        <main class="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-700">
+            <div class="space-y-6">
+                <!-- Username Input -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="form-input w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-white placeholder-gray-500 focus:border-blue-500 transition duration-200" placeholder="Enter your username">
+                </div>
+                
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="form-input w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-white placeholder-gray-500 focus:border-blue-500 transition duration-200" placeholder="Enter your password">
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generate-btn" class="btn w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:scale-105">
+                    Generate Header
+                </button>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-container" class="mt-8 pt-6 border-t border-gray-700 hidden">
+                <h2 class="text-lg font-semibold text-white mb-3">Generated Header</h2>
+                <div class="relative bg-gray-900 rounded-lg p-4 flex items-center justify-between">
+                    <pre class="code-block text-green-400 text-sm sm:text-base whitespace-pre-wrap"><code id="result-output"></code></pre>
+                    <button id="copy-btn" title="Copy to clipboard" class="btn absolute top-2 right-2 p-2 bg-gray-700 text-gray-300 rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
+                            <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h6a2 2 0 00-2-2H5z" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Copy feedback message -->
+                <p id="copy-feedback" class="text-sm text-center text-green-500 mt-2 h-5" aria-live="polite"></p>
+            </div>
+        </main>
+
+        <!-- About Section -->
+        <section id="about" class="mt-12 text-center text-gray-500">
+            <h2 class="text-xl font-semibold text-gray-300 mb-4">About This Tool</h2>
+            <div class="max-w-xl mx-auto space-y-3 text-base">
+                <p>This tool generates a Basic Authentication header string by encoding your credentials in Base64 format.</p>
+                <p><strong class="text-yellow-400">Your security is paramount.</strong> The entire encoding process runs locally in your web browser using JavaScript. Your username and password are never sent over the network, seen, or stored by this website.</p>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-10 text-gray-600 text-sm">
+            <p>&copy; 2024 Secure Client-Side Tools. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM element references
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const generateBtn = document.getElementById('generate-btn');
+        const resultContainer = document.getElementById('result-container');
+        const resultOutput = document.getElementById('result-output');
+        const copyBtn = document.getElementById('copy-btn');
+        const copyFeedback = document.getElementById('copy-feedback');
+
+        let copyTimeout;
+
+        /**
+         * Generates the Basic Authentication header.
+         */
+        function generateHeader() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Do not generate if inputs are empty
+            if (!username && !password) {
+                // You could add a subtle shake animation or a message here if desired
+                return;
+            }
+
+            // Combine username and password with a colon
+            const credentials = `${username}:${password}`;
+            
+            try {
+                // Encode the combined string in Base64
+                const encodedCredentials = btoa(credentials);
+
+                // Format the final Authorization header
+                const header = `Authorization: Basic ${encodedCredentials}`;
+
+                // Display the result
+                resultOutput.textContent = header;
+                resultContainer.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error encoding credentials:", error);
+                resultOutput.textContent = "Error: Could not encode credentials. Please check for non-ASCII characters if your browser does not support them in btoa().";
+                resultContainer.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Copies the generated header to the clipboard.
+         * Uses a temporary textarea to ensure compatibility, especially in iFrames.
+         */
+        function copyToClipboard() {
+            const textToCopy = resultOutput.textContent;
+            if (!textToCopy) return;
+
+            // Create a temporary textarea element
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            tempTextArea.style.position = 'absolute';
+            tempTextArea.style.left = '-9999px'; // Move it off-screen
+            document.body.appendChild(tempTextArea);
+            
+            // Select and copy
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                displayCopyFeedback('Copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                displayCopyFeedback('Failed to copy!');
+            } finally {
+                // Clean up the temporary element
+                document.body.removeChild(tempTextArea);
+            }
+        }
+
+        /**
+         * Displays a feedback message for the copy action.
+         * @param {string} message - The message to display.
+         */
+        function displayCopyFeedback(message) {
+            copyFeedback.textContent = message;
+            
+            // Clear any existing timeout to avoid overlaps
+            clearTimeout(copyTimeout);
+
+            // Set a new timeout to clear the message
+            copyTimeout = setTimeout(() => {
+                copyFeedback.textContent = '';
+            }, 2500);
+        }
+
+        // --- Event Listeners ---
+
+        // Generate button click
+        generateBtn.addEventListener('click', generateHeader);
+        
+        // Allow pressing Enter in input fields to generate
+        usernameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generateHeader();
+            }
+        });
+        passwordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generateHeader();
+            }
+        });
+
+        // Copy button click
+        copyBtn.addEventListener('click', copyToClipboard);
+
+    </script>
+
+</body>
+</html>
+
