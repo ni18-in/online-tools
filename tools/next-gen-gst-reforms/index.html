@@ -4,670 +4,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Gen GST Calculator</title>
-    <meta name="description"
-        content="An advanced and mobile-friendly tool to calculate GST based on the new two-slab reforms.">
-    <!-- SEO Schema.org JSON-LD -->
+    <title>Next Gen GST Calculator | Real-Time GST Calculation Tool</title>
+    <meta name="description" content="A real-time, mobile-friendly tool to instantly calculate GST based on India's new reforms. Add, remove, or find GST rates with ease.">
+    <link rel="canonical" href="https://online-tools.ni18.in/tools/next-gen-gst-reforms">
+    
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": ["WebSite", "WebApplication"],
-      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website",
-      "name": "Next Gen GST Calculator",
-      "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
-      "description": "Understand and calculate the Goods and Services Tax (GST) based on the new next-gen GST reforms. Easily determine tax rates and total costs for various goods and services.",
-      "applicationCategory": "Calculator",
-      "operatingSystem": "Any",
-      "browserRequirements": "Requires JavaScript and HTML5 support.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://online-tools.ni18.in/tools/next-gen-gst-reforms?search_term={search_term}",
-        "query-input": "required name=search_term"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#webpage",
-      "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
-      "name": "Next Gen GST Calculator - Understand the New Reforms",
-      "inLanguage": "en-US",
-      "isPartOf": {
-        "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website"
-      },
-      "mainEntity": {
-        "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#tool"
-      },
-      "lastReviewed": "2025-09-04",
-      "dateModified": "2025-09-04",
-      "reviewedBy": {
-        "@type": "Organization",
-        "name": "NI18 Online Tools"
-      }
-    },
-    {
-      "@type": "HowTo",
-      "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#howto",
-      "name": "How to Use the Next Gen GST Calculator",
-      "description": "A step-by-step guide to calculating GST with the new reforms.",
-      "totalTime": "PT5M",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Enter the base price",
-          "text": "Input the base price of the good or service without GST.",
-          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step1"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Select the GST rate",
-          "text": "Choose the applicable GST slab rate (e.g., 5%, 12%, 18%, 28%) from the dropdown menu.",
-          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step2"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "View the results",
-          "text": "The calculator will automatically display the GST amount, CGST, SGST, and the total price.",
-          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#step3"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "name": "FAQs about the Next Gen GST Calculator",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is GST and why is it important?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GST (Goods and Services Tax) is an indirect tax used in India on the supply of goods and services. It is a single, comprehensive tax that has replaced multiple taxes like VAT, Service Tax, and Excise Duty. It simplifies the tax structure and aims to boost the economy."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the Next Gen GST Calculator work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our calculator uses the latest GST reform rates to accurately calculate the tax amount. Simply input the base price and select the correct GST slab to get the total."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
-    <!-- Tailwind CSS for modern design -->
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["WebSite", "WebApplication"],
+          "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website",
+          "name": "Next Gen GST Calculator",
+          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
+          "description": "Understand and calculate the Goods and Services Tax (GST) based on the new next-gen GST reforms. Easily determine tax rates and total costs for various goods and services.",
+          "applicationCategory": "Calculator",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript and HTML5 support."
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#webpage",
+          "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms",
+          "name": "Next Gen GST Calculator - Understand the New Reforms",
+          "inLanguage": "en-US",
+          "isPartOf": {
+            "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#website"
+          }
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://online-tools.ni18.in/tools/next-gen-gst-reforms#howto",
+          "name": "How to Use the Next Gen GST Calculator",
+          "description": "A step-by-step guide to calculating GST with the new reforms.",
+          "totalTime": "PT1M",
+          "step": [
+            { "@type": "HowToStep", "name": "Select Calculation Mode", "text": "Choose 'Add GST' to find the total price, 'Remove GST' to find the base price, or 'Find GST Rate' to calculate the rate from two prices." },
+            { "@type": "HowToStep", "name": "Enter the Price(s)", "text": "Input the price in the designated field. The calculation will update in real-time as you type." },
+            { "@type": "HowToStep", "name": "Select the GST Rate", "text": "Choose the applicable GST slab rate from the dropdown. You can also select a specific item from the tables below to auto-select its rate." },
+            { "@type": "HowToStep", "name": "View Instant Results", "text": "The calculator instantly displays the GST amount, CGST, SGST, and the total/base price in the result box." }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is GST and why is it important?",
+              "acceptedAnswer": { "@type": "Answer", "text": "GST (Goods and Services Tax) is an indirect tax used in India on the supply of goods and services. It is a single, comprehensive tax that has replaced multiple taxes like VAT, Service Tax, and Excise Duty. It simplifies the tax structure and aims to boost the economy." }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the Next Gen GST Calculator work?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Our calculator uses the latest GST reform rates to accurately calculate the tax amount. Simply input the base price and select the correct GST slab to get an instant result." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #e2e8f0;
-            /* Soft gray-blue background */
-            color: #1a202c;
-            line-height: 1.6;
-        }
-
-        .main-container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .title {
-            color: #2563eb;
-            font-size: 2.25rem;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            color: #4b5563;
-        }
-
-        .input-group {
-            margin-bottom: 1rem;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #4a5568;
-        }
-
-        .input-group input,
-        .input-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.75rem;
-            background-color: #f9fafb;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .input-group select:focus,
-        .input-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-
-        .calculate-btn {
-            background-image: linear-gradient(to right, #3b82f6, #2563eb);
-            color: white;
-            font-weight: 700;
-            padding: 1rem 2rem;
-            border-radius: 0.75rem;
-            transition: transform 0.1s ease, box-shadow 0.3s ease;
-            width: 100%;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(59, 130, 246, 0.35);
-        }
-
-        .calculate-btn:active {
-            transform: scale(0.98);
-        }
-
-        .result-box {
-            background-color: #f3f4f6;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .result-box .result-label {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .result-box .result-value {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #2563eb;
-            letter-spacing: -1px;
-        }
-
-        .result-breakdown {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-
-        .radio-group {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .radio-group label {
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            font-weight: 600;
-            color: #4b5563;
-            background-color: #e5e7eb;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
-            white-space: nowrap;
-        }
-
-        .radio-group input[type="radio"]:checked+label {
-            background-color: #2563eb;
-            color: white;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .info-tab-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .info-tab-button {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            font-weight: 600;
-            color: #6b7280;
-            transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-            border-bottom: 2px solid transparent;
-        }
-
-        .info-tab-button.active {
-            color: #2563eb;
-            border-color: #2563eb;
-        }
-
-        .info-content {
-            display: none;
-            padding-top: 1rem;
-        }
-
-        .info-content.active {
-            display: block;
-        }
-
-        .message-box {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 1000;
-            max-width: 400px;
-        }
-
-        .message-box-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        /* Style for invalid input fields */
+        [aria-invalid="true"] { border-color: #ef4444; }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-slate-200 text-slate-800 antialiased">
 
-    <div class="main-container">
-        <!-- Header -->
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-8">
+        
         <header class="text-center">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-800 leading-tight title">Next Gen GST
-                Calculator</h1>
-            <p class="mt-2 text-lg sm:text-xl text-gray-600 subtitle">Estimate your GST liability with the new
-                simplified reforms.</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-blue-700">Next Gen GST Calculator</h1>
+            <p class="mt-2 text-lg text-slate-600">Estimate your GST liability with the new simplified reforms.</p>
         </header>
 
-        <!-- Main Calculator Section -->
-        <main class="card">
-            <h2 class="text-center font-bold text-xl sm:text-2xl text-blue-600 mb-6">GST Calculation Tool</h2>
+        <main>
+            <section id="calculator" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-xl">
+                <h2 class="text-center font-bold text-2xl text-blue-600 mb-6">GST Calculation Tool</h2>
 
-            <!-- Calculation Mode Selector -->
-            <div class="radio-group">
-                <input type="radio" id="add-gst" name="calc-mode" value="add" class="hidden" checked>
-                <label for="add-gst">Add GST</label>
+                <fieldset class="mb-8">
+                    <legend class="sr-only">Select Calculation Mode</legend>
+                    <div role="radiogroup" class="flex justify-center flex-wrap gap-4">
+                        <div>
+                            <input type="radio" id="add-gst" name="calc-mode" value="add" class="sr-only" checked>
+                            <label for="add-gst" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Add GST</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="remove-gst" name="calc-mode" value="remove" class="sr-only">
+                            <label for="remove-gst" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Remove GST</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="find-gst-rate" name="calc-mode" value="find" class="sr-only">
+                            <label for="find-gst-rate" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Find GST Rate</label>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <input type="radio" id="remove-gst" name="calc-mode" value="remove" class="hidden">
-                <label for="remove-gst">Remove GST</label>
-
-                <input type="radio" id="find-gst-rate" name="calc-mode" value="find" class="hidden">
-                <label for="find-gst-rate">Find GST Rate</label>
-            </div>
-
-            <div id="add-remove-inputs">
-                <div class="input-group">
-                    <label for="price-input" id="price-label">Enter Base Price (₹):</label>
-                    <input type="number" id="price-input" placeholder="e.g., 1000" class="mt-1 block">
+                <div id="add-remove-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="price-input" id="price-label" class="block mb-1.5 font-semibold text-slate-700">Enter Base Price (₹):</label>
+                        <input type="number" id="price-input" placeholder="e.g., 1000" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false">
+                    </div>
+                    <div>
+                        <label for="gst-rate" class="block mb-1.5 font-semibold text-slate-700">Select GST Rate (%):</label>
+                        <select id="gst-rate" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <option value="">-- Select Rate --</option>
+                            <option value="0">0%</option>
+                            <option value="5">5%</option>
+                            <option value="18">18%</option>
+                            <option value="40">40%</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="gst-rate">Select GST Rate (%):</label>
-                    <select id="gst-rate" class="mt-1 block">
-                        <option value="">-- Select a GST Rate --</option>
-                        <option value="0">0%</option>
-                        <option value="5">5%</option>
-                        <option value="18">18%</option>
-                        <option value="40">40%</option>
-                    </select>
-                </div>
-            </div>
 
-            <div id="find-rate-inputs" class="hidden">
-                <div class="input-group">
-                    <label for="base-price-input-find">Enter Base Price (₹):</label>
-                    <input type="number" id="base-price-input-find" placeholder="e.g., 1000" class="mt-1 block">
+                <div id="find-rate-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+                    <div>
+                        <label for="base-price-input-find" class="block mb-1.5 font-semibold text-slate-700">Enter Base Price (₹):</label>
+                        <input type="number" id="base-price-input-find" placeholder="e.g., 1000" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false">
+                    </div>
+                    <div>
+                        <label for="total-price-input-find" class="block mb-1.5 font-semibold text-slate-700">Enter Total Price (₹):</label>
+                        <input type="number" id="total-price-input-find" placeholder="e.g., 1180" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="total-price-input-find">Enter Total Price (₹):</label>
-                    <input type="number" id="total-price-input-find" placeholder="e.g., 1180" class="mt-1 block">
-                </div>
-            </div>
-
-            <div class="mt-6">
-                <button class="calculate-btn" onclick="calculateGST()">Calculate GST</button>
-            </div>
-
-            <div id="result" class="result-box mt-6 hidden">
-                <div id="result-text" class="text-center">
-                    <p class="result-label" id="result-label-text">Total Price:</p>
-                    <div class="result-value" id="result-value">₹ 0.00</div>
+                
+                <div id="result" class="bg-slate-100 rounded-xl p-6 mt-8 text-center hidden" aria-live="polite">
+                    <p class="text-lg font-semibold text-slate-800" id="result-label-text">Total Price:</p>
+                    <div class="text-5xl font-bold text-blue-600 tracking-tight my-2" id="result-value">₹ 0.00</div>
                     <div id="gst-breakdown-details" class="hidden">
-                        <p class="text-sm mt-2 text-gray-500">Includes GST amount of: <span id="gst-amount">₹
-                                0.00</span></p>
-                        <div id="gst-breakdown" class="result-breakdown">
-                            <span>CGST: <span id="cgst-amount">₹ 0.00</span></span>
-                            <span>SGST: <span id="sgst-amount">₹ 0.00</span></span>
+                        <p class="text-sm mt-2 text-slate-500">Includes GST amount of: <span id="gst-amount" class="font-semibold">₹ 0.00</span></p>
+                        <div class="flex justify-center gap-6 mt-2 text-slate-500">
+                            <span>CGST: <span id="cgst-amount" class="font-semibold">₹ 0.00</span></span>
+                            <span>SGST: <span id="sgst-amount" class="font-semibold">₹ 0.00</span></span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
-
-        <!-- Information and Item Rates Section -->
-        <div class="card">
-            <div class="info-tab-container">
-                <div id="tab-rates" class="info-tab-button active" onclick="showTab('rates')">New GST Rates</div>
-                <div id="tab-about" class="info-tab-button" onclick="showTab('about')">About the Reforms</div>
-                <div id="tab-how-to" class="info-tab-button" onclick="showTab('how-to')">How to Use</div>
+        
+        <section id="information" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-xl">
+            <div role="tablist" aria-label="Information about GST" class="flex flex-wrap border-b border-slate-200 mb-6">
+                <button role="tab" aria-selected="true" aria-controls="content-rates" id="tab-rates" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">New GST Rates</button>
+                <button role="tab" aria-selected="false" aria-controls="content-about" id="tab-about" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">About the Reforms</button>
+                <button role="tab" aria-selected="false" aria-controls="content-how-to" id="tab-how-to" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">How to Use</button>
             </div>
 
-            <!-- Tab Content -->
-            <div id="content-rates" class="info-content active grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Daily Essentials Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Daily Essentials (5%)</h3>
-                    <div class="input-group">
-                        <label for="daily-essential" class="text-sm">Select Item:</label>
-                        <select id="daily-essential" class="mt-1 block">
+            <div role="tabpanel" id="content-rates" class="info-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+                        <h3 class="font-bold text-lg mb-2 text-blue-700">Daily Essentials (5%)</h3>
+                        <label for="daily-essential" class="sr-only">Select Daily Essential Item:</label>
+                        <select id="daily-essential" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
                             <option value="">-- Select an Item --</option>
-                            <option value="5">Hair Oil, Shampoo, Toothpaste, Toilet Soap (18% &rarr; 5%)</option>
+                            <option value="5">Hair Oil, Shampoo, etc (18% &rarr; 5%)</option>
                             <option value="5">Butter, Ghee, Cheese (12% &rarr; 5%)</option>
-                            <option value="5">Pre-packaged Namkeen, Bhujia (12% &rarr; 5%)</option>
-                            <option value="5">Utensils (12% &rarr; 5%)</option>
-                            <option value="5">Feeding Bottle, Napkins (12% &rarr; 5%)</option>
-                            <option value="5">Sewing Machines & Parts (12% &rarr; 5%)</option>
-                        </select>
+                            </select>
                     </div>
-                </div>
-
-                <!-- Farmers & Agriculture Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Farmers & Agriculture (5%)</h3>
-                    <div class="input-group">
-                        <label for="agriculture" class="text-sm">Select Item:</label>
-                        <select id="agriculture" class="mt-1 block">
+                    <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+                        <h3 class="font-bold text-lg mb-2 text-blue-700">Farmers & Agriculture (5%)</h3>
+                        <label for="agriculture" class="sr-only">Select Agriculture Item:</label>
+                        <select id="agriculture" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
                             <option value="">-- Select an Item --</option>
                             <option value="5">Tractor Tyres & Parts (18% &rarr; 5%)</option>
-                            <option value="5">Tractors (12% &rarr; 5%)</option>
-                            <option value="5">Specified Bio-Pesticides, Micro-nutrients (12% &rarr; 5%)</option>
-                            <option value="5">Drip Irrigation System & Sprinklers (12% &rarr; 5%)</option>
-                            <option value="5">Agricultural, Horticultural or Forestry Machines (12% &rarr; 5%)</option>
-                        </select>
+                            </select>
                     </div>
-                </div>
-
-                <!-- Healthcare Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Healthcare (0% & 5%)</h3>
-                    <div class="input-group">
-                        <label for="healthcare" class="text-sm">Select Item:</label>
-                        <select id="healthcare" class="mt-1 block">
+                     <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+                        <h3 class="font-bold text-lg mb-2 text-blue-700">Healthcare (0% & 5%)</h3>
+                        <label for="healthcare" class="sr-only">Select Healthcare Item:</label>
+                        <select id="healthcare" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
                             <option value="">-- Select an Item --</option>
-                            <option value="0">Individual Health & Life Insurance (18% &rarr; 0%)</option>
-                            <option value="5">Thermometer (18% &rarr; 5%)</option>
-                            <option value="5">Medical Grade Oxygen (12% &rarr; 5%)</option>
-                            <option value="5">All Diagnostic Kits & Reagents (12% &rarr; 5%)</option>
-                            <option value="5">Glucometer & Test Strips (12% &rarr; 5%)</option>
-                            <option value="5">Corrective Spectacles (12% &rarr; 5%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Automobiles Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Automobiles (18%)</h3>
-                    <div class="input-group">
-                        <label for="automobile" class="text-sm">Select Item:</label>
-                        <select id="automobile" class="mt-1 block">
-                            <option value="">-- Select an Item --</option>
-                            <option value="18">Petrol & Hybrid Vehicle (28% &rarr; 18%)</option>
-                            <option value="18">Motor Vehicles (1500cc & 4000mm) (28% &rarr; 18%)</option>
-                            <option value="18">2-Wheeled Vehicles (28% &rarr; 18%)</option>
-                            <option value="18">Motor Cycles (350cc & below) (28% &rarr; 18%)</option>
-                            <option value="18">Motor Vehicles for transport of goods (28% &rarr; 18%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Education Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Education (0%)</h3>
-                    <div class="input-group">
-                        <label for="education" class="text-sm">Select Item:</label>
-                        <select id="education" class="mt-1 block">
-                            <option value="">-- Select an Item --</option>
-                            <option value="0">Maps, Charts & Globes (12% &rarr; 0%)</option>
-                            <option value="0">Pencils, Sharpeners, Crayons & Pastels (12% &rarr; 0%)</option>
-                            <option value="0">Exercise Books & Notebooks (12% &rarr; 0%)</option>
-                            <option value="0">Eraser (5% &rarr; 0%)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Electronics Card -->
-                <div class="bg-gray-50 p-4 rounded-xl shadow-inner">
-                    <h3 class="font-bold text-md sm:text-lg mb-2 text-blue-700">Electronics (18%)</h3>
-                    <div class="input-group">
-                        <label for="electronics" class="text-sm">Select Item:</label>
-                        <select id="electronics" class="mt-1 block">
-                            <option value="">-- Select an Item --</option>
-                            <option value="18">Air Conditioners (28% &rarr; 18%)</option>
-                            <option value="18">Television (above 32") (28% &rarr; 18%)</option>
-                            <option value="18">Monitors & Projectors (28% &rarr; 18%)</option>
-                            <option value="18">Dish Washing Machines (28% &rarr; 18%)</option>
-                        </select>
+                            <option value="0">Individual Health Insurance (18% &rarr; 0%)</option>
+                            </select>
                     </div>
                 </div>
             </div>
 
-            <!-- About Content -->
-            <div id="content-about" class="info-content">
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    The "Next Gen GST" reforms represent a major simplification of India's tax structure. The previous
-                    four-tier system (5%, 12%, 18%, and 28%) has been rationalized into a streamlined two-tier system
-                    with primary rates of 5% (for essential goods) and 18% (for standard goods). A new, higher 40% slab
-                    has been introduced for luxury and "sin" goods.
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    This reform aims to reduce the tax burden on the common man, correct the "inverted duty structure"
-                    that was affecting businesses, and simplify tax compliance. Many daily essentials, household
-                    appliances, and vehicles have seen a significant reduction in their tax rates, bringing relief to
-                    households across the country.
-                </p>
+            <div role="tabpanel" id="content-about" class="info-content hidden prose max-w-none">
+                <p>The "Next Gen GST" reforms represent a major simplification of India's tax structure. The previous four-tier system has been rationalized into a streamlined two-tier system with primary rates of 5% (for essential goods) and 18% (for standard goods). A new, higher 40% slab has been introduced for luxury and "sin" goods.</p>
+                <p>This reform aims to reduce the tax burden on the common man, correct the "inverted duty structure," and simplify tax compliance. Many daily essentials, household appliances, and vehicles have seen a significant reduction in their tax rates.</p>
             </div>
 
-            <!-- How-To Content -->
-            <div id="content-how-to" class="info-content">
-                <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-2">
-                    <li>Choose your calculation mode: "Add GST" to find the final cost, "Remove GST" to find the base
-                        value, or "Find GST Rate" to calculate the rate from two prices.</li>
-                    <li>Enter the required price(s) in the input field(s).</li>
-                    <li>For "Add" or "Remove" modes, you can either select a GST rate from the dropdown or pick an item
-                        from the "New GST Rates" tab to automatically set the rate.</li>
-                    <li>Click the "Calculate GST" button to see the results.</li>
+            <div role="tabpanel" id="content-how-to" class="info-content hidden prose max-w-none">
+                <ol>
+                    <li><strong>Choose your calculation mode:</strong> "Add GST," "Remove GST," or "Find GST Rate."</li>
+                    <li><strong>Enter the prices:</strong> Input the required price(s). The result updates automatically!</li>
+                    <li><strong>Select a rate:</strong> Pick a GST rate from the dropdown, or choose an item from the "New GST Rates" tab to set the rate for you.</li>
+                    <li><strong>View the results:</strong> The calculator instantly shows a full breakdown.</li>
                 </ol>
             </div>
-        </div>
+        </section>
 
-        <footer class="mt-8 text-center text-gray-500 text-sm">
+        <footer class="mt-4 text-center text-slate-500 text-sm">
             <p>&copy; 2025 Next Gen GST Calculator. All Rights Reserved.</p>
         </footer>
     </div>
-
-    <!-- Custom Message Box UI -->
-    <div id="message-box" class="message-box hidden">
-        <p id="message-text" class="text-lg font-semibold text-red-600 mb-4"></p>
-        <button onclick="hideMessageBox()"
-            class="bg-blue-600 text-white px-6 py-2 rounded-md font-bold hover:bg-blue-700">OK</button>
-    </div>
-    <div id="message-box-overlay" class="message-box-overlay hidden" onclick="hideMessageBox()"></div>
-
+    
     <script>
-        function showMessageBox(message) {
-            document.getElementById('message-text').textContent = message;
-            document.getElementById('message-box').classList.remove('hidden');
-            document.getElementById('message-box-overlay').classList.remove('hidden');
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Element Caching ---
+            const elements = {
+                calcModeRadios: document.querySelectorAll('input[name="calc-mode"]'),
+                addRemoveInputs: document.getElementById('add-remove-inputs'),
+                findRateInputs: document.getElementById('find-rate-inputs'),
+                priceInput: document.getElementById('price-input'),
+                priceLabel: document.getElementById('price-label'),
+                gstRateSelect: document.getElementById('gst-rate'),
+                basePriceFindInput: document.getElementById('base-price-input-find'),
+                totalPriceFindInput: document.getElementById('total-price-input-find'),
+                resultBox: document.getElementById('result'),
+                resultLabel: document.getElementById('result-label-text'),
+                resultValue: document.getElementById('result-value'),
+                gstBreakdownDetails: document.getElementById('gst-breakdown-details'),
+                gstAmountEl: document.getElementById('gst-amount'),
+                cgstAmountEl: document.getElementById('cgst-amount'),
+                sgstAmountEl: document.getElementById('sgst-amount'),
+                infoTabs: document.querySelectorAll('.info-tab-button'),
+                infoContents: document.querySelectorAll('.info-content'),
+                rateSelectors: document.querySelectorAll('[data-rate-selector]')
+            };
 
-        function hideMessageBox() {
-            document.getElementById('message-box').classList.add('hidden');
-            document.getElementById('message-box-overlay').classList.add('hidden');
-        }
+            // --- Main Calculation Logic ---
+            const calculateGST = () => {
+                const calcMode = document.querySelector('input[name="calc-mode"]:checked').value;
+                let basePrice, totalPrice, gstRate, gstAmount;
+                let isValid = true;
 
-        function calculateGST() {
-            const resultBox = document.getElementById('result');
-            const resultLabel = document.getElementById('result-label-text');
-            const resultValue = document.getElementById('result-value');
-            const gstBreakdownDetails = document.getElementById('gst-breakdown-details');
-            const gstAmountEl = document.getElementById('gst-amount');
-            const cgstAmountEl = document.getElementById('cgst-amount');
-            const sgstAmountEl = document.getElementById('sgst-amount');
+                // Reset validation
+                [elements.priceInput, elements.basePriceFindInput, elements.totalPriceFindInput].forEach(el => el.setAttribute('aria-invalid', 'false'));
 
-            const calcMode = document.querySelector('input[name="calc-mode"]:checked').value;
+                if (calcMode === 'add' || calcMode === 'remove') {
+                    const price = parseFloat(elements.priceInput.value);
+                    gstRate = parseFloat(elements.gstRateSelect.value);
 
-            let basePrice, totalPrice, gstRate;
+                    if (isNaN(price) || price <= 0 || isNaN(gstRate)) {
+                        isValid = false;
+                    } else {
+                        if (calcMode === 'add') {
+                            basePrice = price;
+                            gstAmount = basePrice * (gstRate / 100);
+                            totalPrice = basePrice + gstAmount;
+                            updateResultUI('Total Price:', totalPrice, gstAmount);
+                        } else { // remove
+                            totalPrice = price;
+                            basePrice = totalPrice / (1 + gstRate / 100);
+                            gstAmount = totalPrice - basePrice;
+                            updateResultUI('Base Price:', basePrice, gstAmount);
+                        }
+                    }
+                } else { // find
+                    basePrice = parseFloat(elements.basePriceFindInput.value);
+                    totalPrice = parseFloat(elements.totalPriceFindInput.value);
 
-            if (calcMode === 'add' || calcMode === 'remove') {
-                const priceInput = document.getElementById('price-input');
-                const gstRateSelect = document.getElementById('gst-rate');
-
-                const price = parseFloat(priceInput.value);
-                gstRate = parseFloat(gstRateSelect.value);
-
-                if (isNaN(price) || price <= 0) {
-                    showMessageBox('Please enter a valid price.');
-                    resultBox.classList.add('hidden');
-                    return;
-                }
-                if (isNaN(gstRate)) {
-                    showMessageBox('Please select a GST rate.');
-                    resultBox.classList.add('hidden');
-                    return;
-                }
-
-                if (calcMode === 'add') {
-                    basePrice = price;
-                    const gstAmount = basePrice * (gstRate / 100);
-                    totalPrice = basePrice + gstAmount;
-
-                    resultLabel.textContent = 'Total Price:';
-                    resultValue.textContent = `₹ ${totalPrice.toFixed(2)}`;
-                    gstAmountEl.textContent = `₹ ${gstAmount.toFixed(2)}`;
-
-                } else { // calcMode === 'remove'
-                    totalPrice = price;
-                    basePrice = totalPrice / (1 + gstRate / 100);
-                    const gstAmount = totalPrice - basePrice;
-
-                    resultLabel.textContent = 'Base Price:';
-                    resultValue.textContent = `₹ ${basePrice.toFixed(2)}`;
-                    gstAmountEl.textContent = `₹ ${gstAmount.toFixed(2)}`;
-                }
-
-                const cgstAmount = (parseFloat(gstAmountEl.textContent.replace('₹ ', '')) / 2).toFixed(2);
-                const sgstAmount = (parseFloat(gstAmountEl.textContent.replace('₹ ', '')) / 2).toFixed(2);
-                cgstAmountEl.textContent = `₹ ${cgstAmount}`;
-                sgstAmountEl.textContent = `₹ ${sgstAmount}`;
-                gstBreakdownDetails.classList.remove('hidden');
-
-            } else { // calcMode === 'find'
-                const basePriceInputFind = document.getElementById('base-price-input-find');
-                const totalPriceInputFind = document.getElementById('total-price-input-find');
-
-                basePrice = parseFloat(basePriceInputFind.value);
-                totalPrice = parseFloat(totalPriceInputFind.value);
-
-                if (isNaN(basePrice) || isNaN(totalPrice) || basePrice <= 0 || totalPrice <= 0) {
-                    showMessageBox('Please enter valid base and total prices.');
-                    resultBox.classList.add('hidden');
-                    return;
-                }
-                if (totalPrice < basePrice) {
-                    showMessageBox('Total price cannot be less than the base price.');
-                    resultBox.classList.add('hidden');
-                    return;
+                    if (isNaN(basePrice) || basePrice <= 0 || isNaN(totalPrice) || totalPrice <= 0 || totalPrice < basePrice) {
+                        isValid = false;
+                        if(totalPrice < basePrice) elements.totalPriceFindInput.setAttribute('aria-invalid', 'true');
+                    } else {
+                        gstRate = ((totalPrice - basePrice) / basePrice) * 100;
+                        updateResultUI('Calculated GST Rate:', `${gstRate.toFixed(2)}%`, null);
+                    }
                 }
 
-                gstRate = ((totalPrice - basePrice) / basePrice) * 100;
-
-                resultLabel.textContent = 'Calculated GST Rate:';
-                resultValue.textContent = `${gstRate.toFixed(2)}%`;
-                gstBreakdownDetails.classList.add('hidden');
-            }
-
-            resultBox.classList.remove('hidden');
-        }
-
-        // Function to handle tab switching
-        function showTab(tabId) {
-            document.querySelectorAll('.info-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.info-tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            document.getElementById('content-' + tabId).classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('active');
-        }
-
-        // Event listener for calculation mode radio buttons
-        document.querySelectorAll('input[name="calc-mode"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                const mode = e.target.value;
-                const addRemoveInputs = document.getElementById('add-remove-inputs');
-                const findRateInputs = document.getElementById('find-rate-inputs');
-
-                if (mode === 'find') {
-                    addRemoveInputs.classList.add('hidden');
-                    findRateInputs.classList.remove('hidden');
+                elements.resultBox.classList.toggle('hidden', !isValid);
+            };
+            
+            // --- UI Update Functions ---
+            const updateResultUI = (label, value, gstAmount) => {
+                elements.resultLabel.textContent = label;
+                
+                if (typeof value === 'number') {
+                    elements.resultValue.textContent = `₹ ${value.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 } else {
-                    addRemoveInputs.classList.remove('hidden');
-                    findRateInputs.classList.add('hidden');
-                    document.getElementById('price-label').textContent = mode === 'add' ? 'Enter Base Price (₹):' : 'Enter Total Price (₹):';
+                    elements.resultValue.textContent = value;
                 }
-                // Hide results when switching modes
-                document.getElementById('result').classList.add('hidden');
-            });
-        });
 
-        // Attach event listeners to all select elements to update the main GST rate dropdown
-        document.querySelectorAll('.card select').forEach(select => {
-            select.addEventListener('change', (e) => {
-                const selectedValue = e.target.value;
-                // Only update if the user is in 'add' or 'remove' mode
-                const currentMode = document.querySelector('input[name="calc-mode"]:checked').value;
-                if (selectedValue && (currentMode === 'add' || currentMode === 'remove')) {
-                    document.getElementById('gst-rate').value = selectedValue;
+                if (gstAmount !== null) {
+                    const cgst = (gstAmount / 2).toFixed(2);
+                    elements.gstAmountEl.textContent = `₹ ${gstAmount.toFixed(2)}`;
+                    elements.cgstAmountEl.textContent = `₹ ${cgst}`;
+                    elements.sgstAmountEl.textContent = `₹ ${cgst}`;
+                    elements.gstBreakdownDetails.classList.remove('hidden');
+                } else {
+                    elements.gstBreakdownDetails.classList.add('hidden');
                 }
+            };
+            
+            const switchCalcMode = (mode) => {
+                const isFindMode = mode === 'find';
+                elements.addRemoveInputs.classList.toggle('hidden', isFindMode);
+                elements.findRateInputs.classList.toggle('hidden', !isFindMode);
+                
+                if (!isFindMode) {
+                    elements.priceLabel.textContent = mode === 'add' ? 'Enter Base Price (₹):' : 'Enter Total Price (₹):';
+                }
+                
+                calculateGST(); // Recalculate on mode switch
+            };
+
+            const switchTab = (targetTab) => {
+                elements.infoTabs.forEach(tab => {
+                    const isSelected = tab === targetTab;
+                    tab.setAttribute('aria-selected', isSelected);
+                    tab.dataset.selected = isSelected;
+                });
+                elements.infoContents.forEach(content => {
+                    content.classList.toggle('hidden', content.id !== targetTab.getAttribute('aria-controls'));
+                });
+            };
+
+            // --- Event Listeners ---
+            elements.calcModeRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => switchCalcMode(e.target.value));
             });
+            
+            elements.infoTabs.forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab));
+            });
+
+            elements.rateSelectors.forEach(select => {
+                select.addEventListener('change', (e) => {
+                    const selectedValue = e.target.value;
+                    if (selectedValue) {
+                        elements.gstRateSelect.value = selectedValue;
+                        calculateGST(); // Recalculate when an item is selected
+                    }
+                });
+            });
+            
+            // Real-time calculation listeners
+            const inputsToTrack = [elements.priceInput, elements.basePriceFindInput, elements.totalPriceFindInput, elements.gstRateSelect];
+            inputsToTrack.forEach(input => {
+                input.addEventListener('input', calculateGST);
+                input.addEventListener('change', calculateGST); // For select dropdown
+            });
+
+            // --- Initial Setup ---
+            switchCalcMode(document.querySelector('input[name="calc-mode"]:checked').value);
+
         });
     </script>
 </body>
