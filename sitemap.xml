@@ -53,10 +53,36 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://online-tools.ni18.in/tools/ai-beauty-test/</loc>
-  <lastmod>2025-05-05T08:05:19+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+    <loc>https://online-tools.ni18.in/tools/ai-beauty-test/</loc>
+    <lastmod>2025-05-05T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link 
+      rel="alternate"
+      hreflang="es"
+      href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"
+    />
+    <xhtml:link 
+      rel="alternate"
+      hreflang="en"
+      href="https://online-tools.ni18.in/tools/ai-beauty-test/"
+    />
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/tools/ai-beauty-test/</loc>
+    <lastmod>2025-11-16T09:50:00+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link 
+      rel="alternate"
+      hreflang="en"
+      href="https://online-tools.ni18.in/tools/ai-beauty-test/"
+    />
+    <xhtml:link 
+      rel="alternate"
+      hreflang="es"
+      href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"
+    />
+  </url>
 <url>
   <loc>https://online-tools.ni18.in/tools/guess-the-logo/</loc>
   <lastmod>2025-05-23T08:05:19+00:00</lastmod>
