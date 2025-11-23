@@ -197,6 +197,201 @@
 
   <!-- BLOG POSTS -->
   <url>
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- HOME -->
+  <url>
+    <loc>https://online-tools.ni18.in/</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/"/>
+  </url>
+
+  <!-- TOOLS PAGE -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools</loc>
+    <lastmod>2025-10-12T08:05:19+00:00</lastmod>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/tools</loc>
+    <lastmod>2025-10-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools"/>
+  </url>
+
+  <!-- BLOGS -->
+  <url>
+    <loc>https://online-tools.ni18.in/blogs</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/blogs</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+  </url>
+
+  <!-- ABOUT -->
+  <url>
+    <loc>https://online-tools.ni18.in/about</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/about</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+  </url>
+
+  <!-- TOOL PAGES (no Spanish versions, so no hreflang) -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/next-gen-gst-reforms/</loc>
+    <lastmod>2025-08-04T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/free-online-image-utility-tool/</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/all-in-one-text-analyzer/</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/json-comparison-tool/</loc>
+    <lastmod>2025-04-23T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/json-visualizer-pro/</loc>
+    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- AI BEAUTY TEST -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/ai-beauty-test/</loc>
+    <lastmod>2025-05-05T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/tools/ai-beauty-test/</loc>
+    <lastmod>2025-11-16T09:50:00+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
+  </url>
+
+  <!-- OTHER TOOLS -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/guess-the-logo/</loc>
+    <lastmod>2025-05-23T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/online-text-compare/</loc>
+    <lastmod>2025-05-24T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- PX TO REM -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/px-to-rem-converter/</loc>
+    <lastmod>2025-07-11T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/px-to-rem-converter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/px-a-rem-convertidor/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/px-to-rem-converter/"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/tools/px-a-rem-convertidor/</loc>
+    <lastmod>2025-07-11T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/px-to-rem-converter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/px-a-rem-convertidor/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/px-to-rem-converter/"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/ai-love-calculator/</loc>
+    <lastmod>2025-07-13T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/basic-authentication-header-generator/</loc>
+    <lastmod>2025-09-24T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- REM TO PX -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/rem-to-px-converter/</loc>
+    <lastmod>2025-09-30T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/rem-to-px-converter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/rem-to-px-converter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/rem-to-px-converter/"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/es/tools/rem-to-px-converter/</loc>
+    <lastmod>2025-11-16T09:54:00+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/rem-to-px-converter/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/rem-to-px-converter/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/rem-to-px-converter/"/>
+  </url>
+
+  <!-- BLOG POSTS -->
+  <url>
     <loc>https://online-tools.ni18.in/blogs/edit-images-like-pro-free-online-tool.html</loc>
     <lastmod>2025-04-12T08:05:19+00:00</lastmod>
     <priority>0.64</priority>
@@ -205,6 +400,12 @@
   <url>
     <loc>https://online-tools.ni18.in/blogs/json-visualizer-pro-tame-your-json-data.html</loc>
     <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/blogs/px-to-rem-converter.html</loc>
+    <lastmod>2025-11-23T15:17:00+00:00</lastmod>
     <priority>0.64</priority>
   </url>
 
