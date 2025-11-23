@@ -214,4 +214,11 @@
     <priority>0.64</priority>
   </url>
 
+  <!-- MH METER PRICE CALCULATOR -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/mh-meter-price-calculator/</loc>
+    <lastmod>2025-11-23T16:27:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>

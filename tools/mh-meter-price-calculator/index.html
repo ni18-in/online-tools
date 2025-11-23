@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description"
+        content="Calculate Auto Rickshaw, Black & Yellow Taxi, and Cool Cab fares in Mumbai & Maharashtra. Official 2025 Tariff rates (MMRTA). Offline capable.">
+    <meta name="keywords"
+        content="Mumbai Taxi Fare Calculator, Auto Rickshaw Meter Card 2025, MH Meter Price, Cool Cab Tariff, Mumbai Auto Fare">
+    <meta name="author" content="MH Meter Price Calculator">
+    <meta name="theme-color" content="#ffc107">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="MH Meter Price Calculator">
+    <meta property="og:description"
+        content="Check the correct fair price for Auto and Taxis in Maharashtra based on the latest MMRTA rules.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+
+    <title>MH Meter Price Calculator | Pune/Mumbai Auto & Taxi Fare 2025</title>
+
+    <!-- Schema.org JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "MH Meter Price Calculator",
+      "operatingSystem": "Any",
+      "applicationCategory": "TravelApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "A web application to calculate taxi and auto-rickshaw fares in Mumbai Metropolitan Region based on official 2025 tariff cards.",
+      "featureList": "Auto Rickshaw Fare, Taxi Fare, Cool Cab Fare, Midnight Charges, AC Charges, Luggage Calculation"
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #ffc107;
+            /* Taxi Yellow */
+            --primary-dark: #e0a800;
+            --secondary: #212529;
+            /* Asphalt */
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --accent: #0d6efd;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Accessibility: Focus visible */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            /* Prevents zoom on iOS */
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+            color: var(--text-main);
+        }
+
+        select:focus,
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .checkbox-item input {
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            accent-color: var(--secondary);
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        .tag-night {
+            background: #e2e6ea;
+            color: #d63384;
+        }
+
+        .tag-ac {
+            background: #e7f1ff;
+            color: #0d6efd;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Instructions Accordion */
+        details.instructions-card {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border-left: 5px solid var(--primary);
+        }
+
+        summary {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            list-style: none;
+            /* Hide default arrow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            transition: background-color 0.2s;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:hover {
+            background-color: #f9f9f9;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        details[open] summary::after {
+            content: '−';
+            /* Minus sign */
+        }
+
+        .instructions-content {
+            padding: 0 20px 20px 20px;
+            color: #555;
+            font-size: 0.95rem;
+            border-top: 1px solid #eee;
+        }
+
+        .instructions-content ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .instructions-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Result Section */
+        #result-section {
+            margin-top: 25px;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .result-header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .result-body {
+            padding: 20px;
+        }
+
+        .fare-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .total-row {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-amount {
+            color: var(--accent);
+        }
+
+        .helper-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Footer & Modal */
+        .btn-about {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            text-decoration: underline;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f1f3f5;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .official-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 400px) {
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <header role="banner">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🚕</div>
+            <h1>MH Meter Price Calculator</h1>
+            <span class="subtitle">Official MMR Tariff (w.e.f. 01/02/2025)</span>
+        </header>
+
+        <article class="card">
+            <form id="fareForm" aria-label="Taxi Fare Calculator">
+
+                <div class="form-group">
+                    <label for="vehicleType">Select Vehicle Type</label>
+                    <select id="vehicleType" required onchange="updateFormUI()">
+                        <option value="auto">🛺 Auto Rickshaw</option>
+                        <option value="taxi_by">🚕 Taxi (Black & Yellow)</option>
+                        <option value="taxi_cool">🚙 Cool Cab (Blue/Silver)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="distance">Distance (in KM)</label>
+                    <input type="number" id="distance" inputmode="decimal" placeholder="e.g. 2.5" step="0.01" min="0"
+                        required aria-required="true">
+                    <div class="helper-text">Enter distance from meter or maps.</div>
+                </div>
+
+                <div class="checkbox-group" role="group" aria-label="Trip Modifiers">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="midnight">
+                        <span>Midnight <br><small class="tag tag-night">+25% (12AM-5AM)</small></span>
+                    </label>
+
+                    <label class="checkbox-item" id="acOptionContainer" style="display:none;">
+                        <input type="checkbox" id="ac">
+                        <span>AC Ride <br><small class="tag tag-ac">+10%</small></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="waiting">Waiting Time (Minutes)</label>
+                    <input type="number" id="waiting" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Traffic jams or signal stops.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="luggage">Big Luggage (Quantity)</label>
+                    <input type="number" id="luggage" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Items larger than 60x40cm (₹6/pc).</div>
+                </div>
+
+                <button type="submit" class="btn-primary">Calculate Fare</button>
+            </form>
+        </article>
+
+        <!-- NEW: How To Use Section -->
+        <details class="instructions-card">
+            <summary>❓ How to use this calculator?</summary>
+            <div class="instructions-content">
+                <ol>
+                    <li><strong>Choose Vehicle:</strong> Select Auto, Black & Yellow Taxi, or Cool Cab.</li>
+                    <li><strong>Enter Distance:</strong> Input the Kilometers (KM) shown on the meter or your GPS map
+                        app.</li>
+                    <li><strong>Midnight Option:</strong> Check this if your journey is between 12:00 AM and 5:00 AM.
+                    </li>
+                    <li><strong>AC Option:</strong> (For Black & Yellow Taxis only) Check if you used the AC.</li>
+                    <li><strong>Waiting & Luggage:</strong> Enter waiting time in minutes or number of large bags if
+                        applicable.</li>
+                    <li><strong>Calculate:</strong> Click the button to see the estimated official government fare.</li>
+                </ol>
+                <p style="margin-top:10px; font-size: 0.85rem; color: #777;">
+                    <em>Note: The final amount is rounded to the nearest Rupee as per RTO rules.</em>
+                </p>
+            </div>
+        </details>
+
+        <!-- Results Section -->
+        <section id="result-section" aria-live="polite">
+            <div class="result-card">
+                <div class="result-header">Estimated Fare Details</div>
+                <div class="result-body">
+                    <div class="fare-row">
+                        <span>Base Fare (Distance)</span>
+                        <span id="res-base">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-ac">
+                        <span>AC Surcharge</span>
+                        <span id="res-ac">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-midnight">
+                        <span>Midnight Charge</span>
+                        <span id="res-midnight">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Waiting Charges</span>
+                        <span id="res-waiting">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Luggage Charges</span>
+                        <span id="res-luggage">₹0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Pay</span>
+                        <span class="total-amount" id="res-total">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button id="aboutBtn" class="btn-about" aria-haspopup="dialog">About & Disclaimer</button>
+            <div style="text-align: center; margin-top: 10px; font-size: 0.7rem; color: #999;">
+                &copy; 2025 MH Meter Price Calculator
+            </div>
+        </footer>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Close Modal">&times;</button>
+            <h2 id="modalTitle" style="margin-bottom: 15px; color: var(--secondary);">⚠️ Important Disclaimer</h2>
+
+            <p style="margin-bottom: 15px;">
+                <strong>This is NOT an official government website.</strong>
+            </p>
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">
+                This tool is designed to help commuters estimate fares based on the tariff card effective 01/02/2025.
+                While we strive for accuracy, actual meter readings may vary slightly due to calibration.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 0.95rem;">
+                For official queries, complaints, or to download the signed PDF, please visit the Maharashtra Motor
+                Vehicle Department website:
+            </p>
+
+            <a href="https://transport.maharashtra.gov.in/Site/Common/ViewPdfList.aspx?Doctype=1d1f28f9-a4e5-4b09-ab8b-1d4576adca18"
+                target="_blank" rel="noopener noreferrer" class="official-link">
+                Visit Official Transport Website ↗
+            </a>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * MH Meter Price Calculator Logic
+         * Based on MMRTA Tariff Card w.e.f 01/02/2025
+         */
+
+        const TARIFFS = {
+            auto: {
+                minFare: 26.00,
+                minDist: 1.5,
+                perKm: 17.14,
+                waitingFactor: 0.10 // 10% of perKm rate per min
+            },
+            taxi_by: {
+                minFare: 31.00,
+                minDist: 1.5,
+                perKm: 20.66,
+                waitingFactor: 0.10
+            },
+            taxi_cool: {
+                minFare: 48.00,
+                minDist: 1.5,
+                perKm: 32.05,
+                waitingFactor: 0.10
+            }
+        };
+
+        const LUGGAGE_RATE = 6.00;
+
+        // UI Elements
+        const form = document.getElementById('fareForm');
+        const vehicleSelect = document.getElementById('vehicleType');
+        const acContainer = document.getElementById('acOptionContainer');
+        const acCheckbox = document.getElementById('ac');
+        const resultSection = document.getElementById('result-section');
+
+        // Modal Elements
+        const modal = document.getElementById('aboutModal');
+        const aboutBtn = document.getElementById('aboutBtn');
+        const closeBtn = document.getElementById('closeModal');
+
+        // Update Form UI based on selection
+        function updateFormUI() {
+            const type = vehicleSelect.value;
+            if (type === 'taxi_by') {
+                acContainer.style.display = 'flex';
+            } else {
+                acContainer.style.display = 'none';
+                acCheckbox.checked = false;
+            }
+        }
+
+        // Main Calculation
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const type = vehicleSelect.value;
+            const config = TARIFFS[type];
+
+            // Inputs
+            const distance = parseFloat(document.getElementById('distance').value);
+            const isMidnight = document.getElementById('midnight').checked;
+            const isAC = document.getElementById('ac').checked;
+            const waitingMins = parseFloat(document.getElementById('waiting').value) || 0;
+            const luggageQty = parseInt(document.getElementById('luggage').value) || 0;
+
+            if (isNaN(distance) || distance < 0) return;
+
+            // 1. Base Fare Calculation
+            let baseFare = 0;
+            if (distance <= config.minDist) {
+                baseFare = config.minFare;
+            } else {
+                const extraKm = distance - config.minDist;
+                baseFare = config.minFare + (extraKm * config.perKm);
+            }
+
+            // 2. AC Surcharge
+            let acCharge = 0;
+            if (type === 'taxi_by' && isAC) {
+                acCharge = baseFare * 0.10;
+            }
+
+            let runningTotal = baseFare + acCharge;
+
+            // 3. Midnight Charge
+            let midnightCharge = 0;
+            if (isMidnight) {
+                midnightCharge = runningTotal * 0.25;
+            }
+
+            // 4. Waiting Charges
+            const waitingRate = config.perKm * config.waitingFactor;
+            const waitingCharge = waitingMins * waitingRate;
+
+            // 5. Luggage
+            const luggageCharge = luggageQty * LUGGAGE_RATE;
+
+            // 6. Final Total (Rounded)
+            const finalRaw = runningTotal + midnightCharge + waitingCharge + luggageCharge;
+            const finalRounded = Math.round(finalRaw);
+
+            // Render Results
+            document.getElementById('res-base').innerText = formatCurrency(baseFare);
+
+            toggleRow('row-ac', isAC, acCharge);
+            toggleRow('row-midnight', isMidnight, midnightCharge);
+
+            document.getElementById('res-waiting').innerText = formatCurrency(waitingCharge);
+            document.getElementById('res-luggage').innerText = formatCurrency(luggageCharge);
+            document.getElementById('res-total').innerText = `₹${finalRounded}`;
+
+            // Show Results
+            resultSection.style.display = 'block';
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        function formatCurrency(num) {
+            return `₹${num.toFixed(2)}`;
+        }
+
+        function toggleRow(rowId, condition, amount) {
+            const el = document.getElementById(rowId);
+            const span = el.querySelector('span:last-child');
+            if (condition) {
+                el.classList.remove('hidden');
+                span.innerText = formatCurrency(amount);
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // Modal Logic
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            closeBtn.focus();
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            aboutBtn.focus();
+        }
+
+        aboutBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Initial run
+        updateFormUI();
+
+    </script>
+
+</body>
+
+</html>
