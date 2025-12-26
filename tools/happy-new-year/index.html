@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Wish Generator</title>
+    <meta name="description"
+        content="Create and share your personalized Happy New Year wishes! Dynamic, responsive, and serverless.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <!-- Meta tags for social sharing (will be updated dynamically by JS if possible, but static ones here) -->
+    <meta property="og:title" content="Happy New Year Wish">
+    <meta property="og:description" content="Click to see your special New Year wish!">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1467810563316-b5476525c0f9?q=80&w=2069&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+
+    <canvas id="fireworksCanvas"></canvas>
+
+    <div class="container">
+        <!-- View Wish Section -->
+        <div id="wish-display" class="glass-card hidden">
+            <h1 class="animate-pop">Happy New Year <span class="current-year">202X</span>! 🎉</h1>
+            <p class="wish-text">To you from <span id="sender-name-display" class="highlight-name"></span></p>
+            <div class="message-box">
+                <p id="custom-message-display"></p>
+            </div>
+            <button id="create-own-btn" class="btn primary-btn">Create Your Own Wish</button>
+        </div>
+
+        <!-- Create Wish Section -->
+        <div id="create-wish" class="glass-card">
+            <h1>Create Your New Year Wish 🎆</h1>
+            <p class="subtitle">Send a personalized wish to your friends & family for <span
+                    class="current-year">202X</span>!</p>
+
+            <form id="wish-form">
+                <div class="input-group" style="text-align: center;">
+                    <label style="display:inline-block; margin-bottom: 10px;">Choose a Theme</label>
+                    <div class="theme-selector">
+                        <div class="theme-option opt-default selected" data-theme="default" title="Midnight Party">
+                        </div>
+                        <div class="theme-option opt-golden" data-theme="theme-golden" title="Golden Glitz"></div>
+                        <div class="theme-option opt-neon" data-theme="theme-neon" title="Cyberpunk Neon"></div>
+                        <div class="theme-option opt-snow" data-theme="theme-snow" title="Winter Snow"></div>
+                    </div>
+                    <input type="hidden" id="selected-theme" value="default">
+                </div>
+
+                <div class="input-group">
+                    <label for="sender-name">Your Name</label>
+                    <input type="text" id="sender-name" placeholder="Ex. Nitin" required maxlength="30">
+                </div>
+
+                <div class="input-group">
+                    <label for="custom-message">Your Message</label>
+                    <textarea id="custom-message" placeholder="Wishing you joy, prosperity, and happiness..." required
+                        maxlength="200"></textarea>
+                </div>
+
+                <button type="submit" class="btn shine-btn">Generate Wish Link 🚀</button>
+            </form>
+        </div>
+
+        <!-- Share Section -->
+        <div id="share-section" class="glass-card hidden">
+            <h2>Your Wish is Ready! 🌟</h2>
+            <p>Share this link with your loved ones:</p>
+
+            <div class="link-box">
+                <input type="text" id="share-link" readonly>
+                <button id="copy-link-btn" class="icon-btn" aria-label="Copy Link">📋</button>
+            </div>
+
+            <div class="social-buttons">
+                <a href="#" id="share-whatsapp" target="_blank" class="social-btn whatsapp">WhatsApp</a>
+                <a href="#" id="share-facebook" target="_blank" class="social-btn facebook">Facebook</a>
+                <a href="#" id="share-twitter" target="_blank" class="social-btn twitter">X (Twitter)</a>
+            </div>
+
+            <button id="make-another-btn" class="btn secondary-btn">Make Another</button>
+        </div>
+    </div>
+
+    <!-- Background Music Control -->
+    <div class="music-control">
+        <button id="music-toggle" aria-label="Toggle Music">🎵</button>
+    </div>
+    <audio id="bg-music" loop>
+        <!-- Using a royalty free placeholder or simply not autoplaying -->
+        <!-- User requested optional bg music. Sticking to simple or none if no asset. -->
+        <!-- I won't link a file to avoid 404s, I'll simulate it or leave empty unless I generate one.
+             User said "Fast loading", "No heavy assets". I'll skip actual audio file load for now 
+             or use a very short base64 beep/tune if requested, but better to just have the UI ready. -->
+    </audio>
+
+    <!-- Google Ads Container -->
+    <div class="ad-container">
+        <script async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9080750085757406"
+            crossorigin="anonymous"></script>
+        <!-- Happy New Year Wish Generator -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9080750085757406"
+            data-ad-slot="2773802330" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <footer>
+        <p>&copy; <span class="current-year"></span> Friendly Tools</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
