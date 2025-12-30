@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTF Converter - Online Image to VTF Tool</title>
+    <meta name="description"
+        content="Convert images (PNG, JPG) to VTF (Valve Texture Format) online for free. Client-side, secure, and fast. Perfect for Source engine modding (CS:GO, TF2, L4D2).">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "VTF Converter",
+      "abstract": "A free, client-side web tool to convert images to Valve Texture Format (VTF).",
+      "description": "Instantly convert PNG, JPG, and other image formats to VTF files directly in your browser. No server uploads required.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "keywords": "vtf converter, image to vtf, source engine texture, vtf edit online, valve texture format",
+      "browserRequirements": "Requires a modern web browser.",
+      "author": {
+        "@type": "Organization",
+        "name": "ni18 tools"
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts and Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen font-sans transition-colors duration-200">
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Navigation -->
+        <nav
+            class="flex justify-between items-center py-4 mb-10 bg-white dark:bg-gray-800 rounded-2xl shadow-sm px-6 border border-gray-100 dark:border-gray-700">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                    V</div>
+                <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">VTF Converter</h1>
+            </div>
+            <div class="hidden sm:flex space-x-6 text-sm font-medium">
+                <a href="#how-to-use" class="hover:text-brand-600 dark:hover:text-brand-500 transition-colors">How to
+                    Use</a>
+                <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-500 transition-colors">About</a>
+                <a href="#faq" class="hover:text-brand-600 dark:hover:text-brand-500 transition-colors">FAQ</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
+                Convert Images to <span class="text-brand-600 dark:text-brand-500">VTF</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                The fastest way to create Valve Texture Format files for Source games.
+                <br> Runs 100% in your browser — your files never leave your device.
+            </p>
+        </header>
+
+        <!-- Main Tool Area -->
+        <main
+            class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+
+                <!-- Left: Upload & Settings -->
+                <div class="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-gray-100 dark:border-gray-700">
+
+                    <!-- Dropzone -->
+                    <div id="dropzone"
+                        class="group relative w-full h-64 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900/50 hover:bg-brand-50 dark:hover:bg-gray-800 hover:border-brand-500 transition-all cursor-pointer">
+                        <input type="file" id="file-input"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            accept="image/png, image/jpeg, image/jpg, image/webp" aria-label="Upload image">
+
+                        <div
+                            class="pointer-events-none text-center p-4 transition-transform group-hover:scale-105 duration-200">
+                            <svg class="w-12 h-12 mx-auto text-gray-400 group-hover:text-brand-500 mb-3" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                            </svg>
+                            <p class="text-lg font-medium text-gray-700 dark:text-gray-200">Drop image here</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">or click to browse</p>
+                        </div>
+                    </div>
+
+                    <!-- Settings (Simplified for V1) -->
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <label for="resize-option"
+                                class="text-sm font-medium text-gray-700 dark:text-gray-300">Resizing Mode</label>
+                            <select id="resize-option"
+                                class="bg-gray-100 dark:bg-gray-900 border-none text-sm rounded-lg p-2.5 focus:ring-2 focus:ring-brand-500">
+                                <option value="nearest">Nearest Power of 2 (Recommended)</option>
+                                <option value="none">Original (If Power of 2)</option>
+                                <option value="stretch">Stretch to 512x512</option>
+                            </select>
+                        </div>
+
+                        <div
+                            class="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border border-yellow-100 dark:border-yellow-900/30">
+                            <div class="flex gap-3">
+                                <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-500 shrink-0" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <p class="text-xs text-yellow-800 dark:text-yellow-200 leading-relaxed">
+                                    Note: VTF files require "Power of 2" dimensions (e.g., 256x256, 512x1024). This tool
+                                    automates this for you.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Preview & Action -->
+                <div class="p-8 lg:p-10 bg-gray-50 dark:bg-gray-900/30 flex flex-col">
+                    <h2 class="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-4">
+                        Preview</h2>
+
+                    <div class="flex-1 flex items-center justify-center min-h-[200px] border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 overflow-hidden relative"
+                        id="preview-container">
+                        <p class="text-gray-400 text-sm">No image selected</p>
+                        <img id="image-preview" class="hidden max-w-full max-h-full object-contain" alt="Preview">
+                        <div id="loading-spinner"
+                            class="hidden absolute inset-0 bg-white/80 dark:bg-gray-800/80 flex items-center justify-center">
+                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600"></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div id="file-info"
+                            class="hidden mb-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <span id="file-name">filename.png</span>
+                            <span id="file-dims">-- x --</span>
+                        </div>
+
+                        <button id="convert-btn" disabled
+                            class="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-[0.98] transition-all shadow-lg shadow-brand-500/30">
+                            Convert to VTF
+                        </button>
+
+                        <a id="download-link" class="hidden"></a>
+
+                        <p id="status-msg" class="mt-3 text-center text-sm text-gray-500 min-h-[1.25rem]"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Google Ads -->
+        <div class="mt-12 text-center">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9080750085757406"
+                data-ad-slot="2773802330" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Informational Sections -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <section id="how-to-use" class="md:col-span-2 space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    How to Use
+                </h2>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <ol
+                        class="space-y-4 text-gray-600 dark:text-gray-300 list-decimal list-inside marker:text-brand-500 marker:font-bold">
+                        <li><strong>Drag & Drop</strong> your image (PNG, JPG) into the upload box.</li>
+                        <li><strong>Check Settings</strong>. We automatically resize images to the nearest "Power of 2"
+                            (e.g., 512x512) required by game engines.</li>
+                        <li><strong>Click Convert</strong>. The tool generates the .vtf file locally in your browser.
+                        </li>
+                        <li><strong>Download</strong> and save your new texture file.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="about" class="space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    About
+                </h2>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                    <p class="mb-3">
+                        This <strong>VTF Converter</strong> is a secure, client-side utility built for Source engine
+                        modders.
+                    </p>
+                    <p class="mb-3">
+                        <strong>Supported Formats:</strong><br>
+                        Input: PNG, JPEG, WEBP<br>
+                        Output: VTF (7.2, RGBA8888)
+                    </p>
+                    <p class="text-xs text-gray-500 mt-4 pt-4 border-t dark:border-gray-700">
+                        Privacy Note: Your images are processed entirely within your browser. No files are ever uploaded
+                        to a server.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <section id="faq" class="mt-12 mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Frequently Asked Questions
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Why is my image resized?</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">The Source Engine (VTF format) strictly requires
+                        image dimensions to be a "Power of Two" (e.g., 64, 128, 256, 512, 1024, 2048, 4096). We handle
+                        this resizing automatically to ensure your texture works in-game.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Is there a transparent background?</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Yes! If your input PNG has transparency, it is
+                        preserved in the final VTF file using the Alpha channel.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm pb-8">
+            <p>&copy; 2024 VTF Converter Tool. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RJER6TKTQ3');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9080750085757406"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

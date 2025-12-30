@@ -1,0 +1,21 @@
+/* Custom styles for VTF Converter */
+
+/* Drag and drop active state */
+.drag-active {
+    @apply border-brand-500 bg-brand-50 dark:bg-brand-900/20 ring-4 ring-brand-500/20 scale-[1.02];
+}
+
+/* Smooth transitions */
+#dropzone {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Ensure canvas or images don't overflow */
+img, canvas {
+    image-rendering: pixelated; /* Useful for checking pixel perfection */
+}
