@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JSON Visualizer Pro - View, Format & Edit JSON Online</title>
-    <meta name="description" content="An easy-to-use online tool to visualize, format, minify, copy, and validate JSON data. Features include a tree view, undo/redo, and error checking.">
-    <meta name="keywords" content="json visualizer, json viewer, json formatter, json editor, online json tool, json tree view, format json, minify json, validate json, json schema">
-    <meta name="robots" content="index, follow"> <meta name="author" content="JSON Visualizer Pro"> <link rel="canonical" href="https://online-tools.ni18.in/tools/json-visualizer-pro/">
+    <meta name="description"
+        content="An easy-to-use online tool to visualize, format, minify, copy, and validate JSON data. Features include a tree view, undo/redo, and error checking.">
+    <meta name="keywords"
+        content="json visualizer, json viewer, json formatter, json editor, online json tool, json tree view, format json, minify json, validate json, json schema">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="JSON Visualizer Pro">
+    <link rel="canonical" href="https://online-tools.ni18.in/tools/json-visualizer-pro/">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
@@ -56,10 +61,10 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
 
     <style>
         /* Consistent font */
@@ -71,108 +76,292 @@
             height: 100vh;
             margin: 0;
         }
+
         /* Monospace font for code areas */
-        #jsonInput, #jsonVisualizer {
-             font-family: 'Fira Code', 'Courier New', Courier, monospace;
-             font-size: 0.875rem;
+        #jsonInput,
+        #jsonVisualizer {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
         }
 
         /* --- Navbar Styles --- */
         .navbar {
             flex-shrink: 0;
-             background-color: #1f2937;
+            background-color: #1f2937;
             color: #e2e8f0;
             padding: 0.75rem 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
+
         .navbar-brand {
-            font-weight: 700; font-size: 1.25rem; display: flex; align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
         }
-         .navbar-brand i { margin-right: 0.5rem; color: #63b3ed; }
+
+        .navbar-brand i {
+            margin-right: 0.5rem;
+            color: #63b3ed;
+        }
 
         /* --- Main Content Area --- */
         .main-content-area {
-            flex-grow: 1; display: flex; flex-direction: column; overflow: hidden;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
-         @media (min-width: 768px) { /* md breakpoint */
-            .main-content-area { flex-direction: row; }
+
+        @media (min-width: 768px) {
+
+            /* md breakpoint */
+            .main-content-area {
+                flex-direction: row;
+            }
         }
 
         /* --- Panel Styles --- */
-         .panel {
-            display: flex; flex-direction: column; overflow: hidden; height: 100%;
-         }
-         /* Styles for the content area within a panel (textarea or visualizer div) */
-         .panel-content {
-             flex-grow: 1; /* Allow this area to grow and fill space */
-             overflow-y: auto; /* Enable scrolling within this area if content overflows */
-             border: 1px solid #d1d5db; /* Keep the border */
-             min-height: 150px; /* Ensure a minimum height */
-             /* Removed fixed height calculation */
-         }
-         /* Ensure textarea fills its container */
-         textarea.panel-content {
-             height: 100%; /* Make textarea fill the height allocated by flex-grow */
-             resize: none; /* Keep resize disabled */
-         }
+        .panel {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+        }
 
-         .panel-controls {
-             flex-shrink: 0; margin-top: auto; padding-top: 1rem;
-         }
+        /* Styles for the content area within a panel (textarea or visualizer div) */
+        .panel-content {
+            flex-grow: 1;
+            /* Allow this area to grow and fill space */
+            overflow-y: auto;
+            /* Enable scrolling within this area if content overflows */
+            border: 1px solid #d1d5db;
+            /* Keep the border */
+            min-height: 150px;
+            /* Ensure a minimum height */
+            /* Removed fixed height calculation */
+        }
+
+        /* Ensure textarea fills its container */
+        textarea.panel-content {
+            height: 100%;
+            /* Make textarea fill the height allocated by flex-grow */
+            resize: none;
+            /* Keep resize disabled */
+        }
+
+        .panel-controls {
+            flex-shrink: 0;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
 
         /* --- Visualizer Styles --- */
-        .json-visualizer ul { list-style: none; padding-left: 1.75em; margin-left: 0.5em; border-left: 1px dashed #cbd5e0; }
-        .json-visualizer li { position: relative; padding: 2px 0; }
-        .json-key { color: #c53030; font-weight: 600; margin-right: 0.5em; }
-        .json-string { color: #2b6cb0; }
-        .json-number { color: #2f855a; }
-        .json-boolean { color: #c05621; }
-        .json-null { color: #718096; font-style: italic; }
-        .json-brace, .json-bracket { color: #4a5568; }
-        .json-array > .empty-text, .json-object > .empty-text { display: none; }
-        .json-array:empty > .empty-text, .json-object:empty > .empty-text { display: inline; }
+        .json-visualizer ul {
+            list-style: none;
+            padding-left: 1.75em;
+            margin-left: 0.5em;
+            border-left: 1px dashed #cbd5e0;
+        }
+
+        .json-visualizer li {
+            position: relative;
+            padding: 2px 0;
+        }
+
+        .json-key {
+            color: #c53030;
+            font-weight: 600;
+            margin-right: 0.5em;
+        }
+
+        .json-string {
+            color: #2b6cb0;
+        }
+
+        .json-number {
+            color: #2f855a;
+        }
+
+        .json-boolean {
+            color: #c05621;
+        }
+
+        .json-null {
+            color: #718096;
+            font-style: italic;
+        }
+
+        .json-brace,
+        .json-bracket {
+            color: #4a5568;
+        }
+
+        .json-array>.empty-text,
+        .json-object>.empty-text {
+            display: none;
+        }
+
+        .json-array:empty>.empty-text,
+        .json-object:empty>.empty-text {
+            display: inline;
+        }
 
         /* --- Modal Styles --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 50; opacity: 0; transition: opacity 0.3s ease-in-out; pointer-events: none; }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-content { background-color: white; color: #1f2937; padding: 2rem; border-radius: 8px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transform: scale(0.95); transition: transform 0.3s ease-in-out; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .modal-content h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
-        .modal-content p, .modal-content ul { margin-bottom: 1rem; line-height: 1.6; }
-        .modal-content ul { list-style: disc; padding-left: 1.5rem; }
-        .modal-content code { background-color: #e5e7eb; padding: 0.1em 0.4em; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.9em; }
-        .modal-close-btn { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #9ca3af; transition: color 0.2s; }
-        .modal-close-btn:hover { color: #1f2937; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            color: #1f2937;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-content p,
+        .modal-content ul {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+
+        .modal-content code {
+            background-color: #e5e7eb;
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #9ca3af;
+            transition: color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            color: #1f2937;
+        }
 
         /* --- Message Box --- */
-        .message-box { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(45, 55, 72, 0.9); color: white; padding: 12px 24px; border-radius: 6px; z-index: 1000; opacity: 0; transition: opacity 0.5s ease-in-out, transform 0.3s ease-out; font-size: 0.9rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
-        .message-box.show { opacity: 1; transform: translateX(-50%) translateY(-10px); }
+        .message-box {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(45, 55, 72, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-out;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+        }
+
+        .message-box.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
 
         /* --- Button Styles --- */
-        .button-container { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; background-color: #9ca3af; }
-        button:disabled:hover { background-color: #9ca3af; }
-        .nav-button { background-color: #4b5563; color: #e2e8f0; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; transition: background-color 0.2s ease; }
-        .nav-button:hover { background-color: #6b7280; }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
 
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #9ca3af;
+        }
+
+        button:disabled:hover {
+            background-color: #9ca3af;
+        }
+
+        .nav-button {
+            background-color: #4b5563;
+            color: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #6b7280;
+        }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-RJER6TKTQ3');
-</script>
+        gtag('config', 'G-RJER6TKTQ3');
+    </script>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
     <nav class="navbar flex justify-between items-center">
-        <div class="navbar-brand">
+        <h1 class="navbar-brand">
             <i class="fas fa-code"></i> <span><a href="/">JSON Visualizer Pro</a></span>
-        </div>
+        </h1>
         <div>
             <button id="howToUseBtn" class="nav-button">
                 <i class="fas fa-question-circle mr-1"></i> How to Use
@@ -185,9 +374,8 @@
         <div class="w-full md:w-1/2 p-4 flex flex-col border-r border-gray-300 bg-white shadow-lg panel">
             <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Input</h2>
             <textarea id="jsonInput"
-                      class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 panel-content h-full"
-                      placeholder="Paste or type your JSON here..."
-            >{
+                class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 panel-content h-full"
+                placeholder="Paste or type your JSON here...">{
     "name": "Example JSON",
     "version": 1.0,
     "enabled": true,
@@ -205,41 +393,61 @@
 }</textarea>
             <div id="errorDisplay" class="text-red-600 text-xs mb-3 h-10 overflow-y-auto font-mono flex-shrink-0"></div>
             <div class="button-container panel-controls">
-                 <button id="undoBtn" title="Undo last change (Ctrl+Z)" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center" disabled><i class="fas fa-undo mr-2"></i>Undo</button>
-                 <button id="redoBtn" title="Redo last undone change (Ctrl+Y)" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center" disabled><i class="fas fa-redo mr-2"></i>Redo</button>
-                 <button id="visualizeBtn" title="Parse input and update visualization" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i class="fas fa-sync-alt mr-2"></i>Visualize / Update</button>
-                 <button id="formatBtn" title="Format JSON input with indentation" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i class="fas fa-align-left mr-2"></i>Format</button>
-                 <button id="minifyBtn" title="Remove whitespace from JSON input" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i class="fas fa-compress-arrows-alt mr-2"></i>Minify</button>
-                 <button id="copyBtn" title="Copy JSON input to clipboard" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i class="fas fa-copy mr-2"></i>Copy</button>
-                 <button id="clearBtn" title="Clear JSON input and visualization" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i class="fas fa-trash mr-2"></i>Clear</button>
+                <button id="undoBtn" title="Undo last change (Ctrl+Z)"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
+                    disabled><i class="fas fa-undo mr-2"></i>Undo</button>
+                <button id="redoBtn" title="Redo last undone change (Ctrl+Y)"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
+                    disabled><i class="fas fa-redo mr-2"></i>Redo</button>
+                <button id="visualizeBtn" title="Parse input and update visualization"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-sync-alt mr-2"></i>Visualize / Update</button>
+                <button id="formatBtn" title="Format JSON input with indentation"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-align-left mr-2"></i>Format</button>
+                <button id="minifyBtn" title="Remove whitespace from JSON input"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-compress-arrows-alt mr-2"></i>Minify</button>
+                <button id="copyBtn" title="Copy JSON input to clipboard"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-copy mr-2"></i>Copy</button>
+                <button id="clearBtn" title="Clear JSON input and visualization"
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-trash mr-2"></i>Clear</button>
             </div>
         </div>
 
         <div class="w-full md:w-1/2 p-4 flex flex-col bg-gray-50 panel">
-             <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Visualization</h2>
-             <div id="jsonVisualizer" class="rounded p-3 bg-white shadow-inner json-visualizer panel-content">
+            <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Visualization</h2>
+            <div id="jsonVisualizer" class="rounded p-3 bg-white shadow-inner json-visualizer panel-content">
                 <p class="text-gray-500 italic">Click 'Visualize / Update' to see the JSON structure here...</p>
             </div>
-            </div>
+        </div>
     </div>
 
     <div id="howToUseModal" class="modal-overlay">
         <div class="modal-content relative">
-             <button id="closeModalBtn" class="modal-close-btn" title="Close"><i class="fas fa-times"></i></button>
-             <h3>How to Use JSON Visualizer Pro</h3>
-             <p>This tool helps you view, format, and manage your JSON data easily.</p>
-             <ul>
-                 <li><strong>JSON Input:</strong> Paste or type your JSON data into the left panel. Any syntax errors will be shown below the input area.</li>
-                 <li><strong>Visualize / Update:</strong> Click this button to parse the input and display the structured tree view in the right panel.</li>
-                 <li><strong>Format:</strong> Cleans up the JSON in the input area with standard indentation (2 spaces).</li>
-                 <li><strong>Minify:</strong> Removes all unnecessary whitespace from the JSON in the input area, making it compact.</li>
-                 <li><strong>Copy:</strong> Copies the current content of the JSON input area to your clipboard.</li>
-                 <li><strong>Clear:</strong> Empties the input area and the visualization panel.</li>
-                 <li><strong>Undo (Ctrl+Z):</strong> Reverts the last action (Visualize/Update, Format, Minify, Clear).</li>
-                 <li><strong>Redo (Ctrl+Y):</strong> Re-applies the last undone action.</li>
-                 <li><strong>Visualization Panel:</strong> Shows a color-coded, indented tree view of your valid JSON data.</li>
-             </ul>
-             <p>Use the buttons and keyboard shortcuts to manage your JSON effectively!</p>
+            <button id="closeModalBtn" class="modal-close-btn" title="Close"><i class="fas fa-times"></i></button>
+            <h3>How to Use JSON Visualizer Pro</h3>
+            <p>This tool helps you view, format, and manage your JSON data easily.</p>
+            <ul>
+                <li><strong>JSON Input:</strong> Paste or type your JSON data into the left panel. Any syntax errors
+                    will be shown below the input area.</li>
+                <li><strong>Visualize / Update:</strong> Click this button to parse the input and display the structured
+                    tree view in the right panel.</li>
+                <li><strong>Format:</strong> Cleans up the JSON in the input area with standard indentation (2 spaces).
+                </li>
+                <li><strong>Minify:</strong> Removes all unnecessary whitespace from the JSON in the input area, making
+                    it compact.</li>
+                <li><strong>Copy:</strong> Copies the current content of the JSON input area to your clipboard.</li>
+                <li><strong>Clear:</strong> Empties the input area and the visualization panel.</li>
+                <li><strong>Undo (Ctrl+Z):</strong> Reverts the last action (Visualize/Update, Format, Minify, Clear).
+                </li>
+                <li><strong>Redo (Ctrl+Y):</strong> Re-applies the last undone action.</li>
+                <li><strong>Visualization Panel:</strong> Shows a color-coded, indented tree view of your valid JSON
+                    data.</li>
+            </ul>
+            <p>Use the buttons and keyboard shortcuts to manage your JSON effectively!</p>
         </div>
     </div>
 
@@ -282,7 +490,7 @@
         function createJsonNode(data) { const type = typeof data; const element = document.createElement('span'); if (data === null) { element.textContent = 'null'; element.className = 'json-null'; } else if (type === 'string') { element.textContent = `"${data}"`; element.className = 'json-string'; } else if (type === 'number') { element.textContent = data; element.className = 'json-number'; } else if (type === 'boolean') { element.textContent = data; element.className = 'json-boolean'; } else if (Array.isArray(data)) { return createJsonArrayNode(data); } else if (type === 'object') { return createJsonObjectNode(data); } else { element.textContent = String(data); } return element; }
         function createJsonArrayNode(arr) { const ul = document.createElement('ul'); ul.className = 'json-array'; const openBracket = document.createElement('span'); openBracket.textContent = '['; openBracket.className = 'json-bracket'; ul.appendChild(openBracket); if (arr.length === 0) { const emptyText = document.createElement('span'); emptyText.textContent = ' ]'; emptyText.className = 'json-bracket empty-text'; ul.appendChild(emptyText); } else { arr.forEach((item, index) => { const li = document.createElement('li'); const valueNode = createJsonNode(item); li.appendChild(valueNode); if (index < arr.length - 1) { const comma = document.createElement('span'); comma.textContent = ','; li.appendChild(comma); } ul.appendChild(li); }); const closeBracketLi = document.createElement('li'); const closeBracket = document.createElement('span'); closeBracket.textContent = ']'; closeBracket.className = 'json-bracket'; closeBracketLi.appendChild(closeBracket); ul.appendChild(closeBracketLi); } return ul; }
         function createJsonObjectNode(obj) { const ul = document.createElement('ul'); ul.className = 'json-object'; const openBrace = document.createElement('span'); openBrace.textContent = '{'; openBrace.className = 'json-brace'; ul.appendChild(openBrace); const keys = Object.keys(obj); if (keys.length === 0) { const emptyText = document.createElement('span'); emptyText.textContent = ' }'; emptyText.className = 'json-brace empty-text'; ul.appendChild(emptyText); } else { keys.forEach((key, index) => { const li = document.createElement('li'); const keySpan = document.createElement('span'); keySpan.textContent = `"${key}": `; keySpan.className = 'json-key'; li.appendChild(keySpan); const valueNode = createJsonNode(obj[key]); li.appendChild(valueNode); if (index < keys.length - 1) { const comma = document.createElement('span'); comma.textContent = ','; li.appendChild(comma); } ul.appendChild(li); }); const closeBraceLi = document.createElement('li'); const closeBrace = document.createElement('span'); closeBrace.textContent = '}'; closeBrace.className = 'json-brace'; closeBraceLi.appendChild(closeBrace); ul.appendChild(closeBraceLi); } return ul; }
-        function renderVisualization() { jsonVisualizer.innerHTML = ''; if (currentJsonObject !== null) { try { const rootNode = createJsonNode(currentJsonObject); jsonVisualizer.appendChild(rootNode); } catch(e) { console.error("Error rendering visualization:", e); jsonVisualizer.innerHTML = '<p class="text-red-500 italic font-semibold">Error occurred during rendering.</p>'; errorDisplay.textContent = `Rendering Error: ${e.message}`; } } else if (!jsonInput.value.trim()) { jsonVisualizer.innerHTML = '<p class="text-gray-500 italic">Input is empty.</p>'; } }
+        function renderVisualization() { jsonVisualizer.innerHTML = ''; if (currentJsonObject !== null) { try { const rootNode = createJsonNode(currentJsonObject); jsonVisualizer.appendChild(rootNode); } catch (e) { console.error("Error rendering visualization:", e); jsonVisualizer.innerHTML = '<p class="text-red-500 italic font-semibold">Error occurred during rendering.</p>'; errorDisplay.textContent = `Rendering Error: ${e.message}`; } } else if (!jsonInput.value.trim()) { jsonVisualizer.innerHTML = '<p class="text-gray-500 italic">Input is empty.</p>'; } }
 
         // --- Modal Logic ---
         function openModal() { howToUseModal.classList.add('active'); }
@@ -296,7 +504,7 @@
         visualizeBtn.addEventListener('click', () => { if (parseAndUpdateState(true)) { renderVisualization(); showMessage("Visualization Updated", 1500); } });
         formatBtn.addEventListener('click', () => { if (currentJsonObject !== null) { saveState(); updateJsonInput(true); renderVisualization(); showMessage("JSON Formatted", 1500); } else { showMessage("Cannot format: Invalid JSON.", 2000); } });
         minifyBtn.addEventListener('click', () => { if (currentJsonObject !== null) { saveState(); updateJsonInput(false); renderVisualization(); showMessage("JSON Minified", 1500); } else { showMessage("Cannot minify: Invalid JSON.", 2000); } });
-        copyBtn.addEventListener('click', () => { if (!jsonInput.value) { showMessage('Nothing to copy!', 1500); return; } navigator.clipboard.writeText(jsonInput.value) .then(() => { showMessage('JSON copied!', 1500); }) .catch(err => { showMessage('Failed to copy.', 2500); console.error('Clipboard copy failed: ', err); }); });
+        copyBtn.addEventListener('click', () => { if (!jsonInput.value) { showMessage('Nothing to copy!', 1500); return; } navigator.clipboard.writeText(jsonInput.value).then(() => { showMessage('JSON copied!', 1500); }).catch(err => { showMessage('Failed to copy.', 2500); console.error('Clipboard copy failed: ', err); }); });
         clearBtn.addEventListener('click', () => { saveState(); jsonInput.value = ''; currentJsonObject = null; jsonVisualizer.innerHTML = '<p class="text-gray-500 italic">Input cleared.</p>'; errorDisplay.textContent = ''; saveState(); showMessage('Input cleared.', 1500); });
         undoBtn.addEventListener('click', undo);
         redoBtn.addEventListener('click', redo);
@@ -308,4 +516,5 @@
     </script>
 
 </body>
+
 </html>

@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Logo - Fun Brand Quiz Game</title>
-    <meta name="description" content="Test your brand knowledge with Guess the Logo! A fun and addictive quiz game with multiple modes, difficulty levels, and endless logo challenges. Play now in your browser!">
-    <meta name="keywords" content="guess the logo, logo quiz, brand game, trivia game, online game, browser game, party game, challenge game, html game, javascript game">
-    
+    <meta name="description"
+        content="Test your brand knowledge with Guess the Logo! A fun and addictive quiz game with multiple modes, difficulty levels, and endless logo challenges. Play now in your browser!">
+    <meta name="keywords"
+        content="guess the logo, logo quiz, brand game, trivia game, online game, browser game, party game, challenge game, html game, javascript game">
+
     <meta property="og:title" content="Guess the Logo - Fun Brand Quiz Game">
-    <meta property="og:description" content="Test your brand knowledge with Guess the Logo! Multiple modes, difficulty levels, and endless challenges.">
+    <meta property="og:description"
+        content="Test your brand knowledge with Guess the Logo! Multiple modes, difficulty levels, and endless challenges.">
     <meta property="og:type" content="website">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color-light: #6A11CB; 
-            --primary-color-dark: #2575FC;  
+            --primary-color-light: #6A11CB;
+            --primary-color-dark: #2575FC;
             --primary-hover-light: #8A42EB;
             --primary-hover-dark: #4A8FFC;
-            
-            --secondary-color-light: #FF6F91; 
-            --secondary-color-dark: #FF9671;  
+
+            --secondary-color-light: #FF6F91;
+            --secondary-color-dark: #FF9671;
             --secondary-hover-light: #FF8FB1;
             --secondary-hover-dark: #FFB08F;
 
-            --success-color: #28A745; 
+            --success-color: #28A745;
             --success-hover-color: #218838;
-            --danger-color: #DC3545; 
+            --danger-color: #DC3545;
             --danger-hover-color: #C82333;
-            --warning-color: #FFC107; 
-            
-            --light-bg: #F0F2F5; 
-            --dark-bg: #1A1A2E;  
+            --warning-color: #FFC107;
+
+            --light-bg: #F0F2F5;
+            --dark-bg: #1A1A2E;
 
             --light-card-bg: #FFFFFF;
-            --dark-card-bg: #162447; 
-            
+            --dark-card-bg: #162447;
+
             --light-text: #333333;
-            --dark-text: #E0E0E0; 
+            --dark-text: #E0E0E0;
 
             --light-input-bg: #FFFFFF;
-            --dark-input-bg: #1F4068; 
+            --dark-input-bg: #1F4068;
             --light-input-border: #CED4DA;
-            --dark-input-border: #3B5998; 
-            
+            --dark-input-border: #3B5998;
+
             --button-text-color: #FFFFFF;
 
             --font-family: 'Inter', sans-serif;
-            --border-radius: 0.75rem; 
-            --box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            --box-shadow-hover: 0 8px 16px rgba(0,0,0,0.15);
+            --border-radius: 0.75rem;
+            --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
 
             /* RGB versions for box-shadow alpha */
-            --primary-color-dark-rgb: 37, 117, 252; 
+            --primary-color-dark-rgb: 37, 117, 252;
             --primary-hover-dark-rgb: 74, 143, 252;
         }
 
@@ -59,14 +63,15 @@
             --bg-color: var(--dark-bg);
             --text-color: var(--dark-text);
             --card-bg-color: var(--dark-card-bg);
-            --card-border-color: #2A3B67; 
+            --card-border-color: #2A3B67;
             --input-bg-color: var(--dark-input-bg);
             --input-border-color: var(--dark-input-border);
-            --primary-color-light: #8A42EB; 
-            --primary-color-dark: #4A8FFC;  
+            --primary-color-light: #8A42EB;
+            --primary-color-dark: #4A8FFC;
             --secondary-color-light: #FF8FB1;
             --secondary-color-dark: #FFB08F;
-            --primary-color-dark-rgb: 74, 143, 252; /* RGB for #4A8FFC in dark mode */
+            --primary-color-dark-rgb: 74, 143, 252;
+            /* RGB for #4A8FFC in dark mode */
         }
 
         * {
@@ -90,22 +95,24 @@
         }
 
         .container {
-            background: var(--card-bg-color, var(--light-card-bg)); /* Simpler background for container */
-            padding: 2rem; 
+            background: var(--card-bg-color, var(--light-card-bg));
+            /* Simpler background for container */
+            padding: 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             width: 100%;
-            max-width: 650px; 
+            max-width: 650px;
             text-align: center;
             transition: background-color 0.4s, border-color 0.4s, box-shadow 0.3s;
             border: 1px solid var(--card-border-color, #E0E0E0);
         }
+
         .dark-mode .container {
             border-color: var(--dark-input-border);
         }
 
         h1 {
-            font-size: 2.5rem; 
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
@@ -114,75 +121,95 @@
             background-clip: text;
             text-fill-color: transparent;
         }
+
         h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--primary-color-light);
         }
-         .dark-mode h1 { 
-             background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
+
+        .dark-mode h1 {
+            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
         }
+
         .dark-mode h2 {
             color: var(--primary-hover-light);
         }
 
 
-        .screen { display: none; }
-        .screen.active { display: block; }
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
 
         /* Settings Screen Enhancements */
         .settings-header {
             margin-bottom: 2rem;
         }
+
         .settings-header .subtitle {
             font-size: 1.1rem;
             color: var(--secondary-color-dark);
             margin-top: -1rem;
             margin-bottom: 1.5rem;
         }
+
         .dark-mode .settings-header .subtitle {
             color: var(--secondary-color-light);
         }
 
         .settings-group {
-            margin-bottom: 1.5rem; /* Increased spacing */
+            margin-bottom: 1.5rem;
+            /* Increased spacing */
             padding: 1rem;
             border-radius: calc(var(--border-radius) - 0.25rem);
-            background-color: rgba(0,0,0,0.02); /* Subtle background for groups */
-            border: 1px solid transparent; /* Placeholder for potential border */
+            background-color: rgba(0, 0, 0, 0.02);
+            /* Subtle background for groups */
+            border: 1px solid transparent;
+            /* Placeholder for potential border */
             text-align: left;
         }
+
         .dark-mode .settings-group {
-            background-color: rgba(255,255,255,0.03);
-            border-color: rgba(255,255,255,0.07);
+            background-color: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.07);
         }
-        .settings-group legend, /* Use legend for fieldset-like appearance */
-        .settings-group label.group-title { /* Alternative if not using fieldset */
+
+        .settings-group legend,
+        /* Use legend for fieldset-like appearance */
+        .settings-group label.group-title {
+            /* Alternative if not using fieldset */
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-color-dark);
             margin-bottom: 0.75rem;
             display: block;
         }
+
         .dark-mode .settings-group legend,
         .dark-mode .settings-group label.group-title {
             color: var(--primary-hover-dark);
         }
 
-        .settings-group label:not(.group-title) { /* Regular labels */
+        .settings-group label:not(.group-title) {
+            /* Regular labels */
             display: block;
             margin-bottom: 0.6rem;
             font-weight: 600;
             color: var(--text-color);
         }
+
         .settings-group select,
         .settings-group input[type="number"] {
             width: 100%;
-            padding: 0.85rem 1rem; 
+            padding: 0.85rem 1rem;
             border-radius: var(--border-radius);
             border: 1px solid var(--input-border-color, var(--light-input-border));
             background-color: var(--input-bg-color, var(--light-input-bg));
@@ -191,35 +218,44 @@
             font-size: 1rem;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
+
         .settings-group select:focus,
         .settings-group input[type="number"]:focus {
             outline: none;
             border-color: var(--primary-color-dark);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb), 0.25); 
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb), 0.25);
         }
-        
+
         .settings-group input[type="checkbox"] {
-            width: 1.1em; /* Slightly larger checkbox */
+            width: 1.1em;
+            /* Slightly larger checkbox */
             height: 1.1em;
             margin-right: 0.6rem;
-            accent-color: var(--primary-color-dark); 
+            accent-color: var(--primary-color-dark);
             vertical-align: middle;
         }
+
         .radio-group label {
-            margin-right: 1.5rem; /* More spacing for radio options */
+            margin-right: 1.5rem;
+            /* More spacing for radio options */
             font-weight: normal;
             color: var(--text-color);
             cursor: pointer;
-            display: inline-flex; /* Align radio and text nicely */
+            display: inline-flex;
+            /* Align radio and text nicely */
             align-items: center;
         }
+
         .radio-group input[type="radio"] {
-            margin-right: 0.5rem; /* Space between radio and its label text */
+            margin-right: 0.5rem;
+            /* Space between radio and its label text */
             accent-color: var(--primary-color-dark);
             width: 1.1em;
             height: 1.1em;
         }
-        .settings-actions { /* Container for About/How to Play buttons */
+
+        .settings-actions {
+            /* Container for About/How to Play buttons */
             display: flex;
             justify-content: center;
             gap: 1rem;
@@ -227,17 +263,18 @@
         }
 
         /* Game Screen */
-        #streamingModeTitle { 
-            font-size: 2.2rem; 
+        #streamingModeTitle {
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 1rem; 
+            margin-bottom: 1rem;
             background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
-            text-align: center; 
+            text-align: center;
         }
+
         .dark-mode #streamingModeTitle {
             background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
             -webkit-background-clip: text;
@@ -254,112 +291,148 @@
             font-size: 1.2rem;
             font-weight: 600;
         }
+
         .logo-container {
             margin-bottom: 2rem;
-            background-color: #FFFFFF; 
+            background-color: #FFFFFF;
             padding: 1.5rem;
             border-radius: var(--border-radius);
-            min-height: 180px; 
+            min-height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
         }
+
         .logo-container img {
             max-width: 100%;
-            max-height: 220px; 
+            max-height: 220px;
             height: auto;
             border-radius: calc(var(--border-radius) - 0.25rem);
             object-fit: contain;
         }
+
         .options-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem; 
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
+
         .btn {
-            padding: 1rem 1.25rem; 
-            font-size: 1.1rem; 
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
             border-radius: var(--border-radius);
             border: none;
             cursor: pointer;
             transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--box-shadow-hover);
         }
+
         .btn:active {
             transform: translateY(0px);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
             background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
             color: var(--button-text-color);
         }
+
         .btn-primary:hover {
             background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
         }
-        
-        .btn-secondary { 
+
+        .btn-secondary {
             background: linear-gradient(45deg, var(--secondary-color-light), var(--secondary-color-dark));
             color: var(--button-text-color);
         }
+
         .btn-secondary:hover {
-             background: linear-gradient(45deg, var(--secondary-hover-light), var(--secondary-hover-dark));
+            background: linear-gradient(45deg, var(--secondary-hover-light), var(--secondary-hover-dark));
         }
-        .btn-info { /* For About/How to Play buttons */
-            background: linear-gradient(45deg, #5bc0de, #31b0d5); /* Info blue gradient */
+
+        .btn-info {
+            /* For About/How to Play buttons */
+            background: linear-gradient(45deg, #5bc0de, #31b0d5);
+            /* Info blue gradient */
             color: white;
         }
+
         .btn-info:hover {
             background: linear-gradient(45deg, #46b8da, #269abc);
         }
 
 
         .btn-option {
-            background: linear-gradient(135deg, #6c757d, #495057); 
+            background: linear-gradient(135deg, #6c757d, #495057);
             color: var(--button-text-color);
         }
+
         .dark-mode .btn-option {
             background: linear-gradient(135deg, #495057, #343a40);
         }
+
         .btn-option:hover:not(:disabled) {
             background: linear-gradient(135deg, #5a6268, #343a40);
         }
+
         .dark-mode .btn-option:hover:not(:disabled) {
-             background: linear-gradient(135deg, #5a6268, #212529);
+            background: linear-gradient(135deg, #5a6268, #212529);
         }
 
         .btn-option:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .btn-option.correct {
-            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important; 
+            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important;
             animation: pulseCorrect 0.6s ease-out;
         }
+
         .btn-option.incorrect {
-            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important; 
+            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important;
             animation: shakeIncorrect 0.5s ease-in-out;
         }
 
         @keyframes pulseCorrect {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
+
         @keyframes shakeIncorrect {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
 
@@ -368,36 +441,41 @@
             padding: 1rem;
             border-radius: var(--border-radius);
             font-weight: 600;
-            font-size: 1.1rem; 
-            min-height: 60px; 
+            font-size: 1.1rem;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         .feedback-message.correct {
             background: var(--success-color);
             color: white;
         }
+
         .feedback-message.incorrect {
             background: var(--danger-color);
             color: white;
         }
+
         .feedback-message.info {
             background: var(--warning-color);
-            color: #333; 
+            color: #333;
         }
-         .dark-mode .feedback-message.info {
-            color: #333; 
+
+        .dark-mode .feedback-message.info {
+            color: #333;
         }
 
 
         #timer-display {
-            font-size: 1.4rem; 
-            font-weight: 700; 
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--primary-color-dark);
-            min-height: 25px; 
+            min-height: 25px;
         }
+
         .dark-mode #timer-display {
             color: var(--warning-color);
         }
@@ -413,75 +491,94 @@
             border: 1px solid var(--card-border-color, var(--light-input-border));
             border-radius: var(--border-radius);
             padding: 0.75rem;
-            background-color: rgba(0,0,0,0.02);
+            background-color: rgba(0, 0, 0, 0.02);
         }
+
         .dark-mode #highscore-list {
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255, 255, 255, 0.05);
         }
+
         #highscore-list li {
             padding: 0.6rem 0.75rem;
             border-bottom: 1px solid var(--input-border-color, var(--light-input-border));
             color: var(--text-color);
         }
+
         #highscore-list li:last-child {
             border-bottom: none;
         }
+
         #highscore-list li:nth-child(odd) {
-            background-color: rgba(0,0,0,0.02);
+            background-color: rgba(0, 0, 0, 0.02);
         }
+
         .dark-mode #highscore-list li:nth-child(odd) {
-            background-color: rgba(255,255,255,0.03);
+            background-color: rgba(255, 255, 255, 0.03);
         }
 
         /* Modal Styles (for About & How to Play) */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; 
-            z-index: 1001; /* Above dark mode toggle, below message box */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1001;
+            /* Above dark mode toggle, below message box */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.5); /* Dim background */
-            padding-top: 60px; /* Location of the box */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Dim background */
+            padding-top: 60px;
+            /* Location of the box */
         }
+
         .modal-content {
             background-color: var(--card-bg-color, var(--light-card-bg));
-            margin: 5% auto; 
+            margin: 5% auto;
             padding: 25px;
             border: 1px solid var(--card-border-color, #888);
             width: 80%;
             max-width: 700px;
             border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             text-align: left;
             position: relative;
         }
+
         .dark-mode .modal-content {
             border-color: var(--dark-input-border);
         }
+
         .modal-content h3 {
             font-size: 1.8rem;
             color: var(--primary-color-dark);
             margin-bottom: 1rem;
         }
+
         .dark-mode .modal-content h3 {
             color: var(--primary-hover-dark);
         }
-        .modal-content p, .modal-content ul {
+
+        .modal-content p,
+        .modal-content ul {
             margin-bottom: 1rem;
             line-height: 1.7;
         }
+
         .modal-content ul {
             padding-left: 20px;
         }
+
         .modal-content strong {
             color: var(--primary-color-dark);
         }
+
         .dark-mode .modal-content strong {
             color: var(--primary-hover-dark);
         }
+
         .close-btn {
             color: var(--secondary-color-dark);
             float: right;
@@ -489,6 +586,7 @@
             font-weight: bold;
             line-height: 1;
         }
+
         .close-btn:hover,
         .close-btn:focus {
             color: var(--danger-color);
@@ -506,21 +604,24 @@
             background-color: var(--secondary-color-light);
             color: white;
             border: none;
-            border-radius: 50px; 
+            border-radius: 50px;
             cursor: pointer;
             z-index: 1000;
             font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.2s;
         }
+
         .dark-mode-toggle:hover {
             background-color: var(--secondary-color-dark);
             transform: scale(1.1);
         }
+
         .dark-mode .dark-mode-toggle {
             background-color: var(--primary-color-light);
         }
-         .dark-mode .dark-mode-toggle:hover {
+
+        .dark-mode .dark-mode-toggle:hover {
             background-color: var(--primary-color-dark);
         }
 
@@ -534,115 +635,192 @@
             color: #333;
             padding: 1rem 1.5rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 2000;
-            display: none; 
+            display: none;
             font-weight: 600;
             animation: fadeInDown 0.5s ease-out;
         }
-        .dark-mode .message-box { 
+
+        .dark-mode .message-box {
             background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
             color: white;
         }
+
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translate(-50%, -20px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
         }
 
 
         /* Party Mode & Streaming Mode Specific Styles */
-        .party-mode .container, .streaming-mode .container { 
-            max-width: 90vw; 
+        .party-mode .container,
+        .streaming-mode .container {
+            max-width: 90vw;
         }
-        .party-mode .logo-container img, .streaming-mode .logo-container img {
-            max-height: 45vh; 
+
+        .party-mode .logo-container img,
+        .streaming-mode .logo-container img {
+            max-height: 45vh;
         }
+
         .party-mode .options-container {
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: 1fr 1fr;
         }
-        .party-mode .btn, .streaming-mode .btn { 
-            padding: 1.25rem 1.75rem; 
-            font-size: 1.75rem; 
+
+        .party-mode .btn,
+        .streaming-mode .btn {
+            padding: 1.25rem 1.75rem;
+            font-size: 1.75rem;
         }
-        .party-mode .game-info, .party-mode #timer-display,
-        .streaming-mode .game-info, .streaming-mode #timer-display { 
-            font-size: 2rem; 
+
+        .party-mode .game-info,
+        .party-mode #timer-display,
+        .streaming-mode .game-info,
+        .streaming-mode #timer-display {
+            font-size: 2rem;
         }
-        .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 { 
-            font-size: 3rem; 
+
+        .party-mode h1,
+        .party-mode h2,
+        .streaming-mode h1,
+        .streaming-mode h2 {
+            font-size: 3rem;
         }
+
         .streaming-mode #streamingModeTitle {
-             font-size: 2.5rem; 
+            font-size: 2.5rem;
         }
 
         .streaming-mode .options-container {
-            display: none; 
+            display: none;
         }
-        .streaming-mode #scoreDisplay, .streaming-mode #roundDisplay {
-            display: none; 
+
+        .streaming-mode #scoreDisplay,
+        .streaming-mode #roundDisplay {
+            display: none;
         }
-        
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem; 
+                padding: 1.5rem;
             }
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.6rem; }
-            #streamingModeTitle { font-size: 1.8rem; } 
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            #streamingModeTitle {
+                font-size: 1.8rem;
+            }
 
             .options-container {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
             }
+
             .btn {
-                font-size: 1rem; 
+                font-size: 1rem;
                 padding: 0.85rem 1rem;
             }
-             .party-mode .btn, .streaming-mode .btn {
+
+            .party-mode .btn,
+            .streaming-mode .btn {
                 font-size: 1.3rem;
                 padding: 1rem 1.25rem;
             }
-            .party-mode .game-info, .party-mode #timer-display,
-            .streaming-mode .game-info, .streaming-mode #timer-display {
+
+            .party-mode .game-info,
+            .party-mode #timer-display,
+            .streaming-mode .game-info,
+            .streaming-mode #timer-display {
                 font-size: 1.4rem;
             }
-             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
+
+            .party-mode h1,
+            .party-mode h2,
+            .streaming-mode h1,
+            .streaming-mode h2 {
                 font-size: 2.2rem;
             }
-             .streaming-mode #streamingModeTitle {
-                 font-size: 2rem; 
+
+            .streaming-mode #streamingModeTitle {
+                font-size: 2rem;
             }
+
             .dark-mode-toggle {
                 top: 1rem;
                 right: 1rem;
                 padding: 0.5rem 0.7rem;
                 font-size: 1rem;
             }
+
             .modal-content {
                 width: 90%;
                 padding: 20px;
             }
-            .modal-content h3 { font-size: 1.5rem; }
-        }
-         @media (max-width: 480px) {
-            .container { padding: 1rem; }
-            h1 { font-size: 1.8rem; }
-            #streamingModeTitle { font-size: 1.6rem; } 
-            .btn { font-size: 0.9rem; }
-             .party-mode .btn, .streaming-mode .btn { font-size: 1.1rem; }
-             .party-mode .game-info, .party-mode #timer-display,
-             .streaming-mode .game-info, .streaming-mode #timer-display { font-size: 1.2rem; }
-             .party-mode h1, .party-mode h2, .streaming-mode h1, .streaming-mode h2 {
-                font-size: 1.8rem;
-            }
-            .streaming-mode #streamingModeTitle {
-                 font-size: 1.8rem; 
-            }
-            .settings-actions {
-                flex-direction: column; /* Stack About/How to Play buttons on small screens */
+
+            .modal-content h3 {
+                font-size: 1.5rem;
             }
         }
 
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            #streamingModeTitle {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+            }
+
+            .party-mode .btn,
+            .streaming-mode .btn {
+                font-size: 1.1rem;
+            }
+
+            .party-mode .game-info,
+            .party-mode #timer-display,
+            .streaming-mode .game-info,
+            .streaming-mode #timer-display {
+                font-size: 1.2rem;
+            }
+
+            .party-mode h1,
+            .party-mode h2,
+            .streaming-mode h1,
+            .streaming-mode h2 {
+                font-size: 1.8rem;
+            }
+
+            .streaming-mode #streamingModeTitle {
+                font-size: 1.8rem;
+            }
+
+            .settings-actions {
+                flex-direction: column;
+                /* Stack About/How to Play buttons on small screens */
+            }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -680,12 +858,13 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3" defer></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RJER6TKTQ3');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RJER6TKTQ3');
     </script>
 </head>
+
 <body>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
     <div id="messageBox" class="message-box"></div>
@@ -705,17 +884,23 @@
             <div class="settings-group">
                 <label class="group-title" for="gameMode">Game Mode</label>
                 <div class="radio-group" id="gameMode">
-                    <input type="radio" id="modeSingle" name="gameMode" value="single" checked><label for="modeSingle">Single Player</label><br>
-                    <input type="radio" id="modeParty" name="gameMode" value="party"><label for="modeParty">Party Mode</label><br>
-                    <input type="radio" id="modeChallenge" name="gameMode" value="challenge"><label for="modeChallenge">Challenge Mode</label><br>
-                    <input type="radio" id="modeStreaming" name="gameMode" value="streaming"><label for="modeStreaming">Streaming Mode</label>
+                    <input type="radio" id="modeSingle" name="gameMode" value="single" checked><label
+                        for="modeSingle">Single Player</label><br>
+                    <input type="radio" id="modeParty" name="gameMode" value="party"><label for="modeParty">Party
+                        Mode</label><br>
+                    <input type="radio" id="modeChallenge" name="gameMode" value="challenge"><label
+                        for="modeChallenge">Challenge Mode</label><br>
+                    <input type="radio" id="modeStreaming" name="gameMode" value="streaming"><label
+                        for="modeStreaming">Streaming Mode</label>
                 </div>
             </div>
             <div class="settings-group">
                 <label class="group-title" for="difficulty">Difficulty</label>
                 <div class="radio-group" id="difficulty">
-                    <input type="radio" id="diffEasy" name="difficulty" value="easy" checked><label for="diffEasy">Easy</label>
-                    <input type="radio" id="diffMedium" name="difficulty" value="medium"><label for="diffMedium">Medium</label>
+                    <input type="radio" id="diffEasy" name="difficulty" value="easy" checked><label
+                        for="diffEasy">Easy</label>
+                    <input type="radio" id="diffMedium" name="difficulty" value="medium"><label
+                        for="diffMedium">Medium</label>
                     <input type="radio" id="diffHard" name="difficulty" value="hard"><label for="diffHard">Hard</label>
                 </div>
             </div>
@@ -725,7 +910,7 @@
                 <input type="number" id="numRounds" value="10" min="1" max="200">
             </div>
             <div class="settings-group" id="durationGroup" style="display: none;">
-                 <label class="group-title" for="sessionDuration">Game Length</label>
+                <label class="group-title" for="sessionDuration">Game Length</label>
                 <label for="sessionDuration">Session Duration (minutes):</label>
                 <select id="sessionDuration">
                     <option value="1">1 Minute</option>
@@ -735,27 +920,30 @@
                 </select>
             </div>
             <div class="settings-group">
-                 <label class="group-title">Options</label>
+                <label class="group-title">Options</label>
                 <input type="checkbox" id="soundEffects" checked>
                 <label for="soundEffects">Sound Effects</label>
             </div>
-            <button id="startGameBtn" class="btn btn-primary" style="width:100%; padding: 1.25rem; font-size: 1.4rem; margin-top:1rem;">Start Game</button>
+            <button id="startGameBtn" class="btn btn-primary"
+                style="width:100%; padding: 1.25rem; font-size: 1.4rem; margin-top:1rem;">Start Game</button>
         </div>
 
         <div id="gameScreen" class="screen">
-            <h1 id="streamingModeTitle" style="display:none;">Guess The Logo</h1> 
+            <h2 id="streamingModeTitle" style="display:none;">Guess The Logo</h2>
             <div class="game-info">
                 <span id="scoreDisplay">Score: 0</span>
                 <span id="roundDisplay">Round: 1/10</span>
             </div>
             <div id="timerDisplay" style="margin-bottom: 1rem;"></div>
             <div class="logo-container">
-                <img id="logoImg" src="" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x150/EFEFEF/AAAAAA&text=Logo+Error';">
+                <img id="logoImg" src="" alt="Logo"
+                    onerror="this.onerror=null; this.src='https://placehold.co/300x150/EFEFEF/AAAAAA&text=Logo+Error';">
             </div>
             <div id="optionsContainer" class="options-container">
-                </div>
+            </div>
             <div id="feedbackMessage" class="feedback-message" style="display:none;"></div>
-            <button id="nextQuestionBtn" class="btn btn-primary" style="display:none; margin-top: 1rem;">Next Question</button>
+            <button id="nextQuestionBtn" class="btn btn-primary" style="display:none; margin-top: 1rem;">Next
+                Question</button>
         </div>
 
         <div id="gameOverScreen" class="screen">
@@ -764,7 +952,7 @@
             <div class="settings-group" id="highscoreSection">
                 <h3>High Scores</h3>
                 <ul id="highscoreList">
-                    </ul>
+                </ul>
             </div>
             <button id="playAgainBtn" class="btn btn-primary" style="margin-right: 0.5rem;">Play Again</button>
             <button id="shareScoreBtn" class="btn btn-secondary">Share Score</button>
@@ -775,9 +963,12 @@
         <div class="modal-content">
             <span class="close-btn" id="closeAboutModal">&times;</span>
             <h3>About Guess the Logo</h3>
-            <p>Guess the Logo is a fun and challenging game designed to test your knowledge of popular brands from around the world!</p>
-            <p>Put your brand recognition skills to the test across various difficulty levels and game modes. Whether you're playing solo or with friends, get ready for an exciting logo guessing adventure.</p>
-            <p>This game is created with HTML, CSS, and Vanilla JavaScript, showcasing a lightweight and responsive web application.</p>
+            <p>Guess the Logo is a fun and challenging game designed to test your knowledge of popular brands from
+                around the world!</p>
+            <p>Put your brand recognition skills to the test across various difficulty levels and game modes. Whether
+                you're playing solo or with friends, get ready for an exciting logo guessing adventure.</p>
+            <p>This game is created with HTML, CSS, and Vanilla JavaScript, showcasing a lightweight and responsive web
+                application.</p>
             <p>Enjoy playing!</p>
         </div>
     </div>
@@ -786,26 +977,35 @@
         <div class="modal-content">
             <span class="close-btn" id="closeHowToPlayModal">&times;</span>
             <h3>How to Play</h3>
-            <p><strong>General Gameplay:</strong> A logo will be displayed on the screen. Your task is to choose the correct brand name from the four multiple-choice options provided.</p>
+            <p><strong>General Gameplay:</strong> A logo will be displayed on the screen. Your task is to choose the
+                correct brand name from the four multiple-choice options provided.</p>
             <ul>
-                <li><strong>Single Player Mode:</strong> Play at your own pace. Score points for each correct answer. Try to achieve the highest score and make it to the leaderboard!</li>
-                <li><strong>Party Mode:</strong> Perfect for playing with friends or on a larger screen! A timer adds to the excitement for each question, and the game automatically advances to the next logo.</li>
-                <li><strong>Challenge Mode:</strong> Race against the clock in this timed session. Answer as many logos correctly as you can before your time runs out.</li>
-                <li><strong>Streaming Mode:</strong> Sit back, relax, and learn! Logos and their correct answers will be displayed automatically one after another. This mode is great for a quick visual quiz or familiarizing yourself with brands.</li>
+                <li><strong>Single Player Mode:</strong> Play at your own pace. Score points for each correct answer.
+                    Try to achieve the highest score and make it to the leaderboard!</li>
+                <li><strong>Party Mode:</strong> Perfect for playing with friends or on a larger screen! A timer adds to
+                    the excitement for each question, and the game automatically advances to the next logo.</li>
+                <li><strong>Challenge Mode:</strong> Race against the clock in this timed session. Answer as many logos
+                    correctly as you can before your time runs out.</li>
+                <li><strong>Streaming Mode:</strong> Sit back, relax, and learn! Logos and their correct answers will be
+                    displayed automatically one after another. This mode is great for a quick visual quiz or
+                    familiarizing yourself with brands.</li>
             </ul>
             <p><strong>Controls:</strong></p>
             <ul>
                 <li>Use your <strong>mouse or tap</strong> to select an option or click buttons.</li>
-                <li><strong>Keyboard:</strong> Use keys <strong>1, 2, 3, 4</strong> or <strong>A, B, C, D</strong> to select the corresponding answer option. Use <strong>Enter</strong> or <strong>Spacebar</strong> for primary action buttons like "Start Game", "Next Question", or "Play Again".</li>
+                <li><strong>Keyboard:</strong> Use keys <strong>1, 2, 3, 4</strong> or <strong>A, B, C, D</strong> to
+                    select the corresponding answer option. Use <strong>Enter</strong> or <strong>Spacebar</strong> for
+                    primary action buttons like "Start Game", "Next Question", or "Play Again".</li>
             </ul>
             <p><strong>Settings:</strong> Before starting, you can customize your game experience:</p>
             <ul>
                 <li>Choose your preferred <strong>Game Mode</strong>.</li>
                 <li>Select the <strong>Difficulty</strong> (Easy, Medium, Hard).</li>
-                <li>Set the <strong>Number of Rounds</strong> (for Single Player/Party Mode) or <strong>Session Duration</strong> (for Challenge Mode).</li>
+                <li>Set the <strong>Number of Rounds</strong> (for Single Player/Party Mode) or <strong>Session
+                        Duration</strong> (for Challenge Mode).</li>
                 <li>Toggle <strong>Sound Effects</strong> on or off.</li>
             </ul>
-             <p>Have fun guessing!</p>
+            <p>Have fun guessing!</p>
         </div>
     </div>
 
@@ -836,8 +1036,8 @@
         const numRoundsInput = document.getElementById('numRounds');
         const sessionDurationSelect = document.getElementById('sessionDuration');
         const soundEffectsCheckbox = document.getElementById('soundEffects');
-        const streamingModeTitle = document.getElementById('streamingModeTitle'); 
-        
+        const streamingModeTitle = document.getElementById('streamingModeTitle');
+
         // Modal elements
         const aboutModal = document.getElementById('aboutModal');
         const howToPlayModal = document.getElementById('howToPlayModal');
@@ -848,80 +1048,80 @@
 
 
         // Game State
-        let allQuestions = []; 
+        let allQuestions = [];
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
-        let totalRounds = 10; 
-        let gameMode = 'single'; 
-        let difficulty = 'easy'; 
+        let totalRounds = 10;
+        let gameMode = 'single';
+        let difficulty = 'easy';
         let soundEffectsEnabled = true;
         let questionTimerInterval;
         let sessionTimerInterval;
         let streamingRevealInterval;
         let streamingNextInterval;
         let timeLeft = 0;
-        let audioCtx; 
+        let audioCtx;
 
         // Constants for streaming mode
-        const STREAMING_REVEAL_TIME = 7; 
-        const STREAMING_NEXT_DELAY = 3; 
+        const STREAMING_REVEAL_TIME = 7;
+        const STREAMING_NEXT_DELAY = 3;
 
         // --- LOGO DATA (EXPANDED) ---
-      const LOGO_DATA = [
-    // Easy
-    { brandName: 'Apple', logoUrl: './logo/apple.png', options: ['Apple', 'Microsoft', 'Google', 'Amazon'], difficulty: 'easy' },
-    { brandName: 'Nike', logoUrl: './logo/nike.png', options: ['Adidas', 'Nike', 'Puma', 'Reebok'], difficulty: 'easy' },
-    { brandName: 'Coca-Cola', logoUrl: './logo/coco-cola.png', options: ['Pepsi', 'Coca-Cola', 'Sprite', 'Fanta'], difficulty: 'easy' },
-    { brandName: 'McDonalds', logoUrl: './logo/mcdonalds.png', options: ['Burger King', 'KFC', 'McDonalds', 'Subway'], difficulty: 'easy' },
-    { brandName: 'Starbucks', logoUrl: './logo/starbucks.png', options: ['Dunkin', 'Starbucks', 'Costa Coffee', 'Tim Hortons'], difficulty: 'easy' },
-    { brandName: 'Pepsi', logoUrl: './logo/pepsi.png', options: ['Coca-Cola', 'Dr Pepper', 'Pepsi', '7 Up'], difficulty: 'easy' },
-    { brandName: 'YouTube', logoUrl: './logo/youtube.png', options: ['Vimeo', 'Dailymotion', 'Twitch', 'YouTube'], difficulty: 'easy' },
-    { brandName: 'Visa', logoUrl: './logo/visa.png', options: ['Mastercard', 'Visa', 'American Express', 'Discover'], difficulty: 'easy' },
-    { brandName: 'Target', logoUrl: './logo/target.png', options: ['Walmart', 'Kmart', 'Target', 'Costco'], difficulty: 'easy' },
-    { brandName: 'Shell', logoUrl: './logo/shell.png', options: ['BP', 'ExxonMobil', 'Chevron', 'Shell'], difficulty: 'easy' },
-    { brandName: 'Ford', logoUrl: './logo/ford.png', options: ['Chevrolet', 'Ford', 'Dodge', 'Toyota'], difficulty: 'easy'},
-    { brandName: 'Disney', logoUrl: './logo/disney.png', options: ['Pixar', 'DreamWorks', 'Disney', 'Warner Bros.'], difficulty: 'easy'},
-    { brandName: 'KFC', logoUrl: './logo/kfc.png', options: ['McDonalds', 'Burger King', 'Popeyes', 'KFC'], difficulty: 'easy'},
-    { brandName: 'Lego', logoUrl: './logo/lego.png', options: ['Playmobil', 'Lego', 'Mattel', 'Hasbro'], difficulty: 'easy'},
-    { brandName: 'Subway', logoUrl: './logo/subway.png', options: ['Quiznos', 'Jimmy Johns', 'Subway', 'Potbelly'], difficulty: 'easy'},
+        const LOGO_DATA = [
+            // Easy
+            { brandName: 'Apple', logoUrl: './logo/apple.png', options: ['Apple', 'Microsoft', 'Google', 'Amazon'], difficulty: 'easy' },
+            { brandName: 'Nike', logoUrl: './logo/nike.png', options: ['Adidas', 'Nike', 'Puma', 'Reebok'], difficulty: 'easy' },
+            { brandName: 'Coca-Cola', logoUrl: './logo/coco-cola.png', options: ['Pepsi', 'Coca-Cola', 'Sprite', 'Fanta'], difficulty: 'easy' },
+            { brandName: 'McDonalds', logoUrl: './logo/mcdonalds.png', options: ['Burger King', 'KFC', 'McDonalds', 'Subway'], difficulty: 'easy' },
+            { brandName: 'Starbucks', logoUrl: './logo/starbucks.png', options: ['Dunkin', 'Starbucks', 'Costa Coffee', 'Tim Hortons'], difficulty: 'easy' },
+            { brandName: 'Pepsi', logoUrl: './logo/pepsi.png', options: ['Coca-Cola', 'Dr Pepper', 'Pepsi', '7 Up'], difficulty: 'easy' },
+            { brandName: 'YouTube', logoUrl: './logo/youtube.png', options: ['Vimeo', 'Dailymotion', 'Twitch', 'YouTube'], difficulty: 'easy' },
+            { brandName: 'Visa', logoUrl: './logo/visa.png', options: ['Mastercard', 'Visa', 'American Express', 'Discover'], difficulty: 'easy' },
+            { brandName: 'Target', logoUrl: './logo/target.png', options: ['Walmart', 'Kmart', 'Target', 'Costco'], difficulty: 'easy' },
+            { brandName: 'Shell', logoUrl: './logo/shell.png', options: ['BP', 'ExxonMobil', 'Chevron', 'Shell'], difficulty: 'easy' },
+            { brandName: 'Ford', logoUrl: './logo/ford.png', options: ['Chevrolet', 'Ford', 'Dodge', 'Toyota'], difficulty: 'easy' },
+            { brandName: 'Disney', logoUrl: './logo/disney.png', options: ['Pixar', 'DreamWorks', 'Disney', 'Warner Bros.'], difficulty: 'easy' },
+            { brandName: 'KFC', logoUrl: './logo/kfc.png', options: ['McDonalds', 'Burger King', 'Popeyes', 'KFC'], difficulty: 'easy' },
+            { brandName: 'Lego', logoUrl: './logo/lego.png', options: ['Playmobil', 'Lego', 'Mattel', 'Hasbro'], difficulty: 'easy' },
+            { brandName: 'Subway', logoUrl: './logo/subway.png', options: ['Quiznos', 'Jimmy Johns', 'Subway', 'Potbelly'], difficulty: 'easy' },
 
-    // Medium
-    { brandName: 'Amazon', logoUrl: './logo/amazon.png', options: ['eBay', 'Alibaba', 'Amazon', 'Walmart'], difficulty: 'medium' },
-    { brandName: 'Google', logoUrl: './logo/google.png', options: ['Yahoo', 'Bing', 'DuckDuckGo', 'Google'], difficulty: 'medium' },
-    { brandName: 'Microsoft', logoUrl: './logo/microsoft.png', options: ['Apple', 'Microsoft', 'IBM', 'Oracle'], difficulty: 'medium' },
-    { brandName: 'BMW', logoUrl: './logo/bmw.png', options: ['Mercedes', 'Audi', 'BMW', 'Volkswagen'], difficulty: 'medium' },
-    { brandName: 'Adidas', logoUrl: './logo/adidas.png', options: ['Nike', 'Puma', 'Under Armour', 'Adidas'], difficulty: 'medium' },
-    { brandName: 'X (Twitter)', logoUrl: './logo/x.png', options: ['Facebook', 'Instagram', 'X (Twitter)', 'Snapchat'], difficulty: 'medium' },
-    { brandName: 'Instagram', logoUrl: './logo/instagram.png', options: ['Snapchat', 'TikTok', 'Instagram', 'Pinterest'], difficulty: 'medium' },
-    { brandName: 'Mastercard', logoUrl: './logo/mastercard.png', options: ['Visa', 'American Express', 'Mastercard', 'PayPal'], difficulty: 'medium' },
-    { brandName: 'Honda', logoUrl: './logo/honda.png', options: ['Toyota', 'Nissan', 'Honda', 'Mazda'], difficulty: 'medium' },
-    { brandName: 'Audi', logoUrl: './logo/audi.png', options: ['BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen'], difficulty: 'medium' },
-    { brandName: 'HP (Hewlett-Packard)', logoUrl: './logo/hp.png', options: ['Dell', 'Lenovo', 'HP (Hewlett-Packard)', 'Acer'], difficulty: 'medium'},
-    { brandName: 'PlayStation', logoUrl: './logo/playstation.png', options: ['Xbox', 'Nintendo', 'PlayStation', 'Sega'], difficulty: 'medium'},
-    { brandName: 'Burger King', logoUrl: './logo/burger-king.png', options: ['McDonalds', 'Wendys', 'Burger King', 'KFC'], difficulty: 'medium'},
-    { brandName: 'Puma', logoUrl: './logo/puma.png', options: ['Nike', 'Adidas', 'Reebok', 'Puma'], difficulty: 'medium'},
-    { brandName: 'Red Bull', logoUrl: './logo/red-bull.png', options: ['Monster', 'Rockstar', 'Red Bull', 'Bang'], difficulty: 'medium'},
+            // Medium
+            { brandName: 'Amazon', logoUrl: './logo/amazon.png', options: ['eBay', 'Alibaba', 'Amazon', 'Walmart'], difficulty: 'medium' },
+            { brandName: 'Google', logoUrl: './logo/google.png', options: ['Yahoo', 'Bing', 'DuckDuckGo', 'Google'], difficulty: 'medium' },
+            { brandName: 'Microsoft', logoUrl: './logo/microsoft.png', options: ['Apple', 'Microsoft', 'IBM', 'Oracle'], difficulty: 'medium' },
+            { brandName: 'BMW', logoUrl: './logo/bmw.png', options: ['Mercedes', 'Audi', 'BMW', 'Volkswagen'], difficulty: 'medium' },
+            { brandName: 'Adidas', logoUrl: './logo/adidas.png', options: ['Nike', 'Puma', 'Under Armour', 'Adidas'], difficulty: 'medium' },
+            { brandName: 'X (Twitter)', logoUrl: './logo/x.png', options: ['Facebook', 'Instagram', 'X (Twitter)', 'Snapchat'], difficulty: 'medium' },
+            { brandName: 'Instagram', logoUrl: './logo/instagram.png', options: ['Snapchat', 'TikTok', 'Instagram', 'Pinterest'], difficulty: 'medium' },
+            { brandName: 'Mastercard', logoUrl: './logo/mastercard.png', options: ['Visa', 'American Express', 'Mastercard', 'PayPal'], difficulty: 'medium' },
+            { brandName: 'Honda', logoUrl: './logo/honda.png', options: ['Toyota', 'Nissan', 'Honda', 'Mazda'], difficulty: 'medium' },
+            { brandName: 'Audi', logoUrl: './logo/audi.png', options: ['BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen'], difficulty: 'medium' },
+            { brandName: 'HP (Hewlett-Packard)', logoUrl: './logo/hp.png', options: ['Dell', 'Lenovo', 'HP (Hewlett-Packard)', 'Acer'], difficulty: 'medium' },
+            { brandName: 'PlayStation', logoUrl: './logo/playstation.png', options: ['Xbox', 'Nintendo', 'PlayStation', 'Sega'], difficulty: 'medium' },
+            { brandName: 'Burger King', logoUrl: './logo/burger-king.png', options: ['McDonalds', 'Wendys', 'Burger King', 'KFC'], difficulty: 'medium' },
+            { brandName: 'Puma', logoUrl: './logo/puma.png', options: ['Nike', 'Adidas', 'Reebok', 'Puma'], difficulty: 'medium' },
+            { brandName: 'Red Bull', logoUrl: './logo/red-bull.png', options: ['Monster', 'Rockstar', 'Red Bull', 'Bang'], difficulty: 'medium' },
 
-    // Hard
-    { brandName: 'Facebook', logoUrl: './logo/facebook.png', options: ['Twitter', 'Instagram', 'LinkedIn', 'Facebook'], difficulty: 'hard' },
-    { brandName: 'Toyota', logoUrl: './logo/toyota.png', options: ['Honda', 'Ford', 'Toyota', 'BMW'], difficulty: 'hard' },
-    { brandName: 'Samsung', logoUrl: './logo/samsung.png', options: ['LG', 'Sony', 'Samsung', 'Panasonic'], difficulty: 'hard' },
-    { brandName: 'Netflix', logoUrl: './logo/netflix.png', options: ['Hulu', 'Netflix', 'Amazon Prime Video', 'Disney+'], difficulty: 'hard' },
-    { brandName: 'Intel', logoUrl: './logo/intel.png', options: ['AMD', 'Nvidia', 'Qualcomm', 'Intel'], difficulty: 'hard' },
-    { brandName: 'Mercedes-Benz', logoUrl: './logo/mercedes-benz.png', options: ['BMW', 'Audi', 'Mercedes-Benz', 'Lexus'], difficulty: 'hard' },
-    { brandName: 'Oracle', logoUrl: './logo/oracle.png', options: ['SAP', 'Microsoft', 'Oracle', 'IBM'], difficulty: 'hard' },
-    { brandName: 'Adobe', logoUrl: './logo/adobe.png', options: ['Corel', 'Affinity', 'Adobe', 'Autodesk'], difficulty: 'hard' },
-    { brandName: 'IBM', logoUrl: './logo/ibm.png', options: ['HP', 'Dell', 'IBM', 'Accenture'], difficulty: 'hard' },
-    { brandName: 'SAP', logoUrl: './logo/sap.png', options: ['Oracle', 'Salesforce', 'SAP', 'Workday'], difficulty: 'hard' },
-    { brandName: 'General Electric', logoUrl: './logo/general-electric.png', options: ['Siemens', 'Honeywell', 'General Electric', '3M'], difficulty: 'hard'},
-    { brandName: 'Cisco', logoUrl: './logo/cisco.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard'},
-    { brandName: 'Volkswagen', logoUrl: './logo/volkswagen.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard'},
-    { brandName: 'Chanel', logoUrl: './logo/chanel.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard'},
-    { brandName: 'Rolex', logoUrl: './logo/rolex.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard'}
-];
+            // Hard
+            { brandName: 'Facebook', logoUrl: './logo/facebook.png', options: ['Twitter', 'Instagram', 'LinkedIn', 'Facebook'], difficulty: 'hard' },
+            { brandName: 'Toyota', logoUrl: './logo/toyota.png', options: ['Honda', 'Ford', 'Toyota', 'BMW'], difficulty: 'hard' },
+            { brandName: 'Samsung', logoUrl: './logo/samsung.png', options: ['LG', 'Sony', 'Samsung', 'Panasonic'], difficulty: 'hard' },
+            { brandName: 'Netflix', logoUrl: './logo/netflix.png', options: ['Hulu', 'Netflix', 'Amazon Prime Video', 'Disney+'], difficulty: 'hard' },
+            { brandName: 'Intel', logoUrl: './logo/intel.png', options: ['AMD', 'Nvidia', 'Qualcomm', 'Intel'], difficulty: 'hard' },
+            { brandName: 'Mercedes-Benz', logoUrl: './logo/mercedes-benz.png', options: ['BMW', 'Audi', 'Mercedes-Benz', 'Lexus'], difficulty: 'hard' },
+            { brandName: 'Oracle', logoUrl: './logo/oracle.png', options: ['SAP', 'Microsoft', 'Oracle', 'IBM'], difficulty: 'hard' },
+            { brandName: 'Adobe', logoUrl: './logo/adobe.png', options: ['Corel', 'Affinity', 'Adobe', 'Autodesk'], difficulty: 'hard' },
+            { brandName: 'IBM', logoUrl: './logo/ibm.png', options: ['HP', 'Dell', 'IBM', 'Accenture'], difficulty: 'hard' },
+            { brandName: 'SAP', logoUrl: './logo/sap.png', options: ['Oracle', 'Salesforce', 'SAP', 'Workday'], difficulty: 'hard' },
+            { brandName: 'General Electric', logoUrl: './logo/general-electric.png', options: ['Siemens', 'Honeywell', 'General Electric', '3M'], difficulty: 'hard' },
+            { brandName: 'Cisco', logoUrl: './logo/cisco.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard' },
+            { brandName: 'Volkswagen', logoUrl: './logo/volkswagen.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard' },
+            { brandName: 'Chanel', logoUrl: './logo/chanel.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard' },
+            { brandName: 'Rolex', logoUrl: './logo/rolex.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard' }
+        ];
 
-allQuestions = LOGO_DATA;
+        allQuestions = LOGO_DATA;
 
         // --- UTILITY FUNCTIONS ---
         function showScreen(screenId) {
@@ -943,32 +1143,32 @@ allQuestions = LOGO_DATA;
 
         function showMessage(text, type = 'info', duration = 3000) {
             messageBox.textContent = text;
-            messageBox.className = 'message-box'; 
-            messageBox.classList.add(type); 
+            messageBox.className = 'message-box';
+            messageBox.classList.add(type);
             messageBox.style.display = 'block';
-            void messageBox.offsetWidth; 
+            void messageBox.offsetWidth;
             messageBox.classList.add('visible');
 
             setTimeout(() => {
                 messageBox.classList.remove('visible');
                 setTimeout(() => {
-                     messageBox.style.display = 'none';
-                }, 500); 
-            }, duration - 500 < 0 ? duration : duration - 500); 
+                    messageBox.style.display = 'none';
+                }, 500);
+            }, duration - 500 < 0 ? duration : duration - 500);
         }
-        
+
         function playSound(type) {
             if (!soundEffectsEnabled || !audioCtx) return;
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
-            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
-            
-            oscillator.start(audioCtx.currentTime); 
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+            oscillator.start(audioCtx.currentTime);
 
             let duration = 0.1;
-            if (type === 'correct') { 
+            if (type === 'correct') {
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
                 duration = 0.3;
@@ -997,7 +1197,7 @@ allQuestions = LOGO_DATA;
         showHowToPlayBtn.addEventListener('click', () => openModal(howToPlayModal));
         closeAboutModal.addEventListener('click', () => closeModal(aboutModal));
         closeHowToPlayModal.addEventListener('click', () => closeModal(howToPlayModal));
-        
+
         // Close modal if user clicks outside of it
         window.addEventListener('click', (event) => {
             if (event.target == aboutModal) closeModal(aboutModal);
@@ -1008,7 +1208,7 @@ allQuestions = LOGO_DATA;
         // --- SETTINGS & INITIALIZATION ---
         function updateSettingsUI() {
             gameMode = document.querySelector('input[name="gameMode"]:checked').value;
-            
+
             document.body.classList.remove('party-mode', 'streaming-mode');
             const isDarkModeActive = document.body.classList.contains('dark-mode');
             // CSS variables on :root and .dark-mode should handle most theme changes
@@ -1017,16 +1217,16 @@ allQuestions = LOGO_DATA;
             document.body.style.setProperty('--text-color', isDarkModeActive ? 'var(--dark-text)' : 'var(--light-text)');
             // Card bg is handled by .container styles
 
-            streamingModeTitle.style.display = 'none'; 
+            streamingModeTitle.style.display = 'none';
 
             if (gameMode === 'challenge') {
                 roundsGroup.style.display = 'none';
                 durationGroup.style.display = 'block';
-                roundDisplay.style.display = 'none'; 
-                timerDisplay.style.display = 'block'; 
+                roundDisplay.style.display = 'none';
+                timerDisplay.style.display = 'block';
             } else if (gameMode === 'streaming') {
                 document.body.classList.add('streaming-mode');
-                streamingModeTitle.style.display = 'block'; 
+                streamingModeTitle.style.display = 'block';
                 roundsGroup.style.display = 'none';
                 durationGroup.style.display = 'none';
                 scoreDisplay.style.display = 'none';
@@ -1036,14 +1236,14 @@ allQuestions = LOGO_DATA;
             } else { // Single or Party
                 roundsGroup.style.display = 'block';
                 durationGroup.style.display = 'none';
-                scoreDisplay.style.display = 'flex'; 
+                scoreDisplay.style.display = 'flex';
                 roundDisplay.style.display = 'inline';
-                optionsContainer.style.display = 'grid'; 
-                 if (gameMode === 'single') {
-                    timerDisplay.style.display = 'none'; 
+                optionsContainer.style.display = 'grid';
+                if (gameMode === 'single') {
+                    timerDisplay.style.display = 'none';
                 } else { // Party mode
-                     document.body.classList.add('party-mode');
-                     timerDisplay.style.display = 'block';
+                    document.body.classList.add('party-mode');
+                    timerDisplay.style.display = 'block';
                 }
             }
         }
@@ -1056,16 +1256,16 @@ allQuestions = LOGO_DATA;
                 img.src = q.logoUrl;
             });
         }
-        
+
         startGameBtn.addEventListener('click', () => {
-            if (!audioCtx && soundEffectsEnabled) { 
+            if (!audioCtx && soundEffectsEnabled) {
                 // Attempt to create AudioContext on user interaction if sound is enabled
                 try {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 } catch (e) {
                     console.warn("Web Audio API is not supported or could not be initialized.", e);
                     soundEffectsEnabled = false; // Disable sound if context fails
-                    soundEffectsCheckbox.checked = false; 
+                    soundEffectsCheckbox.checked = false;
                 }
             }
             playSound('click');
@@ -1079,21 +1279,21 @@ allQuestions = LOGO_DATA;
                 showMessage(`No questions available for ${difficulty} difficulty. Try another.`, 'warning');
                 return;
             }
-            
-            currentQuestions = shuffleArray([...questionsByDifficulty]); 
+
+            currentQuestions = shuffleArray([...questionsByDifficulty]);
 
             if (gameMode === 'challenge') {
-                totalRounds = currentQuestions.length; 
+                totalRounds = currentQuestions.length;
                 const durationMinutes = parseInt(sessionDurationSelect.value);
                 timeLeft = durationMinutes * 60;
                 startSessionTimer();
             } else if (gameMode === 'streaming') {
-                totalRounds = currentQuestions.length; 
+                totalRounds = currentQuestions.length;
             } else { // Single or Party
                 totalRounds = parseInt(numRoundsInput.value);
-                 if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) { 
+                if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) {
                     showMessage(`Please enter a valid number of rounds (1-${Math.min(200, currentQuestions.length)}).`, 'warning');
-                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length)); 
+                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length));
                     return;
                 }
                 if (totalRounds > currentQuestions.length) {
@@ -1101,32 +1301,32 @@ allQuestions = LOGO_DATA;
                     showMessage(`Only ${totalRounds} questions available for this difficulty. Game will have ${totalRounds} rounds.`, 'info', 4000);
                 }
                 // For Single/Party, take only the specified number of rounds after shuffling
-                currentQuestions = currentQuestions.slice(0, totalRounds); 
+                currentQuestions = currentQuestions.slice(0, totalRounds);
             }
-            
+
             // Preload images for the current set of questions (could be all for streaming/challenge, or sliced for single/party)
-            preloadImages(currentQuestions); 
+            preloadImages(currentQuestions);
 
             score = 0;
             currentQuestionIndex = 0;
-            updateScoreDisplay(); 
-            
+            updateScoreDisplay();
+
             showScreen('gameScreen');
-            updateSettingsUI(); 
+            updateSettingsUI();
             loadQuestion();
         });
 
         // --- GAME LOGIC ---
         function loadQuestion() {
-            clearAllTimers(); 
+            clearAllTimers();
 
             if (gameMode === 'streaming') {
-                if (currentQuestions.length === 0) { 
-                    endGame(); 
+                if (currentQuestions.length === 0) {
+                    endGame();
                     return;
                 }
                 if (currentQuestionIndex >= currentQuestions.length) {
-                    currentQuestionIndex = 0; 
+                    currentQuestionIndex = 0;
                     // Optionally re-shuffle for variety in very long streaming sessions, though not strictly necessary for "infinite"
                     // currentQuestions = shuffleArray([...allQuestions.filter(q => q.difficulty === difficulty)]);
                 }
@@ -1144,11 +1344,11 @@ allQuestions = LOGO_DATA;
             }
             logoImg.src = question.logoUrl;
             feedbackMessage.style.display = 'none';
-            feedbackMessage.className = 'feedback-message'; 
+            feedbackMessage.className = 'feedback-message';
             nextQuestionBtn.style.display = 'none';
-            
+
             if (gameMode === 'streaming') {
-                optionsContainer.style.display = 'none'; 
+                optionsContainer.style.display = 'none';
                 timerDisplay.textContent = `Revealing in: ${STREAMING_REVEAL_TIME}s`;
                 timeLeft = STREAMING_REVEAL_TIME;
                 streamingRevealInterval = setInterval(() => {
@@ -1159,26 +1359,26 @@ allQuestions = LOGO_DATA;
                         revealAnswerAndLoadNextStreaming();
                     }
                 }, 1000);
-            } else { 
-                optionsContainer.style.display = 'grid'; 
-                optionsContainer.innerHTML = ''; 
+            } else {
+                optionsContainer.style.display = 'grid';
+                optionsContainer.innerHTML = '';
                 const displayOptions = shuffleArray([...question.options]);
                 displayOptions.forEach((option, index) => {
                     const button = document.createElement('button');
                     button.classList.add('btn', 'btn-option');
                     button.textContent = option;
-                    button.dataset.option = option; 
+                    button.dataset.option = option;
                     button.addEventListener('click', handleGuess);
-                    button.dataset.key = String.fromCharCode(65 + index); 
+                    button.dataset.key = String.fromCharCode(65 + index);
                     optionsContainer.appendChild(button);
                 });
                 updateRoundDisplay();
-                 if (gameMode === 'party' || gameMode === 'challenge') {
-                    startQuestionTimer(15); 
+                if (gameMode === 'party' || gameMode === 'challenge') {
+                    startQuestionTimer(15);
                 }
             }
         }
-        
+
         function revealAnswerAndLoadNextStreaming() {
             const question = currentQuestions[currentQuestionIndex];
             if (!question) { // Safety check
@@ -1186,9 +1386,9 @@ allQuestions = LOGO_DATA;
                 return;
             }
             feedbackMessage.textContent = `The answer is: ${question.brandName}`;
-            feedbackMessage.className = 'feedback-message info'; 
+            feedbackMessage.className = 'feedback-message info';
             feedbackMessage.style.display = 'block';
-            playSound('correct'); 
+            playSound('correct');
 
             timerDisplay.textContent = `Next in: ${STREAMING_NEXT_DELAY}s`;
             timeLeft = STREAMING_NEXT_DELAY;
@@ -1198,7 +1398,7 @@ allQuestions = LOGO_DATA;
                 if (timeLeft <= 0) {
                     clearInterval(streamingNextInterval);
                     currentQuestionIndex++;
-                    loadQuestion(); 
+                    loadQuestion();
                 }
             }, 1000);
         }
@@ -1210,12 +1410,12 @@ allQuestions = LOGO_DATA;
 
         function updateRoundDisplay() {
             if (gameMode !== 'challenge' && gameMode !== 'streaming') {
-                 roundDisplay.textContent = `Round: ${currentQuestionIndex + 1}/${totalRounds}`;
-            } else if (gameMode === 'challenge') { 
+                roundDisplay.textContent = `Round: ${currentQuestionIndex + 1}/${totalRounds}`;
+            } else if (gameMode === 'challenge') {
                 roundDisplay.textContent = `Question: ${currentQuestionIndex + 1}`;
             }
         }
-        
+
         function clearAllTimers() {
             clearInterval(questionTimerInterval);
             clearInterval(sessionTimerInterval);
@@ -1223,7 +1423,7 @@ allQuestions = LOGO_DATA;
             clearInterval(streamingNextInterval);
         }
 
-        function startQuestionTimer(duration) { 
+        function startQuestionTimer(duration) {
             clearAllTimers();
             timeLeft = duration;
             timerDisplay.textContent = `Time: ${timeLeft}s`;
@@ -1236,8 +1436,8 @@ allQuestions = LOGO_DATA;
                 }
             }, 1000);
         }
-        
-        function startSessionTimer() { 
+
+        function startSessionTimer() {
             clearAllTimers();
             timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
             sessionTimerInterval = setInterval(() => {
@@ -1245,7 +1445,7 @@ allQuestions = LOGO_DATA;
                 timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
                 if (timeLeft <= 0) {
                     clearInterval(sessionTimerInterval);
-                    if (gameScreen.classList.contains('active')) { 
+                    if (gameScreen.classList.contains('active')) {
                         showMessage("Session time's up!", 'info');
                         endGame();
                     }
@@ -1260,16 +1460,16 @@ allQuestions = LOGO_DATA;
         }
 
 
-        function handleTimeout() { 
+        function handleTimeout() {
             if (!currentQuestions[currentQuestionIndex]) return; // Safety check
             feedbackMessage.textContent = "Time's up! The correct answer was: " + currentQuestions[currentQuestionIndex].brandName;
             feedbackMessage.className = 'feedback-message info';
             feedbackMessage.style.display = 'block';
             playSound('incorrect');
-            revealAnswer(null); 
+            revealAnswer(null);
         }
 
-        function handleGuess(event) { 
+        function handleGuess(event) {
             clearInterval(questionTimerInterval);
             if (!currentQuestions[currentQuestionIndex]) return; // Safety check
 
@@ -1291,39 +1491,39 @@ allQuestions = LOGO_DATA;
             revealAnswer(selectedOption);
         }
 
-        function revealAnswer(selectedOptionText) { 
+        function revealAnswer(selectedOptionText) {
             if (!currentQuestions[currentQuestionIndex]) return; // Safety check
             const correctAnswer = currentQuestions[currentQuestionIndex].brandName;
             document.querySelectorAll('.btn-option').forEach(btn => {
                 btn.disabled = true;
                 if (btn.dataset.option === correctAnswer) {
                     btn.classList.add('correct');
-                } else if (btn.dataset.option === selectedOptionText && selectedOptionText !== correctAnswer) { 
+                } else if (btn.dataset.option === selectedOptionText && selectedOptionText !== correctAnswer) {
                     btn.classList.add('incorrect');
                 }
             });
 
-            if (gameMode === 'party' || (gameMode === 'challenge' && timeLeft > 0)) { 
+            if (gameMode === 'party' || (gameMode === 'challenge' && timeLeft > 0)) {
                 setTimeout(() => {
                     currentQuestionIndex++;
                     loadQuestion();
-                }, 2000); 
+                }, 2000);
             } else if (gameMode === 'single') {
-                if (currentQuestionIndex < totalRounds -1) {
+                if (currentQuestionIndex < totalRounds - 1) {
                     nextQuestionBtn.textContent = 'Next Question';
                     nextQuestionBtn.style.display = 'block';
                 } else {
                     nextQuestionBtn.textContent = 'Show Results';
-                     nextQuestionBtn.style.display = 'block';
+                    nextQuestionBtn.style.display = 'block';
                 }
             } else if (gameMode === 'challenge' && timeLeft <= 0) {
-                 setTimeout(endGame, 2000);
-            } else { 
-                 setTimeout(endGame, 2000);
+                setTimeout(endGame, 2000);
+            } else {
+                setTimeout(endGame, 2000);
             }
         }
-        
-        nextQuestionBtn.addEventListener('click', () => { 
+
+        nextQuestionBtn.addEventListener('click', () => {
             playSound('click');
             currentQuestionIndex++;
             if (currentQuestionIndex >= totalRounds && gameMode !== 'challenge') {
@@ -1336,9 +1536,9 @@ allQuestions = LOGO_DATA;
         function endGame() {
             clearAllTimers();
             showScreen('gameOverScreen');
-            
+
             if (gameMode === 'streaming') {
-                finalScoreDisplay.textContent = "Streaming session ended. Select 'Play Again' to return to settings."; 
+                finalScoreDisplay.textContent = "Streaming session ended. Select 'Play Again' to return to settings.";
                 highscoreSection.style.display = 'none';
                 shareScoreBtn.style.display = 'none';
             } else {
@@ -1346,7 +1546,7 @@ allQuestions = LOGO_DATA;
                 shareScoreBtn.style.display = 'inline-block';
                 let resultText = `You scored ${score} out of ${currentQuestionIndex > 0 ? currentQuestionIndex : totalRounds} questions attempted.`;
                 if (gameMode !== 'challenge') {
-                     resultText = `You scored ${score} out of ${totalRounds} rounds.`;
+                    resultText = `You scored ${score} out of ${totalRounds} rounds.`;
                 }
                 finalScoreDisplay.textContent = resultText;
                 saveHighScore(score, gameMode, difficulty, gameMode === 'challenge' ? currentQuestionIndex : totalRounds);
@@ -1356,7 +1556,7 @@ allQuestions = LOGO_DATA;
 
         // --- HIGH SCORES (localStorage) ---
         function saveHighScore(currentScore, mode, diff, questionsOrRounds) {
-            if (mode === 'streaming') return; 
+            if (mode === 'streaming') return;
             try {
                 const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
                 const scoreEntry = {
@@ -1367,8 +1567,8 @@ allQuestions = LOGO_DATA;
                     date: new Date().toLocaleDateString()
                 };
                 highScores.push(scoreEntry);
-                highScores.sort((a, b) => b.score - a.score || b.rounds - a.rounds); 
-                highScores.splice(10); 
+                highScores.sort((a, b) => b.score - a.score || b.rounds - a.rounds);
+                highScores.splice(10);
                 localStorage.setItem('guessLogoHighScores', JSON.stringify(highScores));
             } catch (e) {
                 console.error("Could not save high score:", e);
@@ -1376,7 +1576,7 @@ allQuestions = LOGO_DATA;
         }
 
         function displayHighScores() {
-            if (gameMode === 'streaming' && gameOverScreen.classList.contains('active')) return; 
+            if (gameMode === 'streaming' && gameOverScreen.classList.contains('active')) return;
             try {
                 const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
                 highscoreList.innerHTML = '';
@@ -1397,16 +1597,16 @@ allQuestions = LOGO_DATA;
 
         playAgainBtn.addEventListener('click', () => {
             playSound('click');
-            scoreDisplay.style.display = 'flex'; 
+            scoreDisplay.style.display = 'flex';
             roundDisplay.style.display = 'inline';
             optionsContainer.style.display = 'grid';
             highscoreSection.style.display = 'block';
-            shareScoreBtn.style.display = 'inline-block'; 
-            streamingModeTitle.style.display = 'none'; 
-            
+            shareScoreBtn.style.display = 'inline-block';
+            streamingModeTitle.style.display = 'none';
+
             showScreen('settingsScreen');
-            document.getElementById('modeSingle').checked = true; 
-            updateSettingsUI(); 
+            document.getElementById('modeSingle').checked = true;
+            updateSettingsUI();
         });
 
         shareScoreBtn.addEventListener('click', () => {
@@ -1414,7 +1614,7 @@ allQuestions = LOGO_DATA;
             const textToCopy = `I scored ${score} in Guess The Logo! (Mode: ${gameMode}, Difficulty: ${difficulty}, Rounds/Questions: ${gameMode === 'challenge' ? currentQuestionIndex : totalRounds}). Try it out!`;
             const textArea = document.createElement('textarea');
             textArea.value = textToCopy;
-            textArea.style.position = 'fixed'; 
+            textArea.style.position = 'fixed';
             textArea.style.left = '-9999px';
             document.body.appendChild(textArea);
             textArea.select();
@@ -1433,7 +1633,7 @@ allQuestions = LOGO_DATA;
             const isDarkMode = document.body.classList.contains('dark-mode');
             localStorage.setItem('guessLogoDarkMode', isDarkMode);
             darkModeToggle.textContent = isDarkMode ? '☀️' : '�';
-            
+
             // CSS variables should handle the theme changes via :root and .dark-mode
             // Explicitly setting body styles here might be redundant but kept for safety
             document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
@@ -1447,22 +1647,22 @@ allQuestions = LOGO_DATA;
                 document.body.classList.add('dark-mode');
                 darkModeToggle.textContent = '☀️';
             } else {
-                document.body.classList.remove('dark-mode'); 
+                document.body.classList.remove('dark-mode');
                 darkModeToggle.textContent = '🌙';
             }
-             document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
-             document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+            document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
+            document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
         }
-        
+
         // --- KEYBOARD INPUT ---
         document.addEventListener('keydown', (event) => {
-            const isInteractiveScreen = gameScreen.classList.contains('active') || 
-                                        settingsScreen.classList.contains('active') || 
-                                        gameOverScreen.classList.contains('active');
+            const isInteractiveScreen = gameScreen.classList.contains('active') ||
+                settingsScreen.classList.contains('active') ||
+                gameOverScreen.classList.contains('active');
 
-            if (gameMode === 'streaming' && gameScreen.classList.contains('active')) return; 
+            if (gameMode === 'streaming' && gameScreen.classList.contains('active')) return;
             if (!isInteractiveScreen) return;
-            
+
             // Close modals with Escape key
             if (event.key === 'Escape') {
                 if (aboutModal.style.display === 'block') closeModal(aboutModal);
@@ -1477,8 +1677,8 @@ allQuestions = LOGO_DATA;
                 if (key >= '1' && key <= '4') {
                     buttonToClick = optionsContainer.children[parseInt(key) - 1];
                 } else if (key >= 'A' && key <= 'D') {
-                    for(let i=0; i < optionsContainer.children.length; i++){
-                        if(optionsContainer.children[i].dataset.key === key){
+                    for (let i = 0; i < optionsContainer.children.length; i++) {
+                        if (optionsContainer.children[i].dataset.key === key) {
                             buttonToClick = optionsContainer.children[i];
                             break;
                         }
@@ -1487,18 +1687,18 @@ allQuestions = LOGO_DATA;
                     buttonToClick = nextQuestionBtn;
                 }
             }
-            
-            if ((key === 'ENTER' || key === ' ') && !buttonToClick) { 
-                 if (settingsScreen.classList.contains('active') && startGameBtn.offsetParent !== null) { 
+
+            if ((key === 'ENTER' || key === ' ') && !buttonToClick) {
+                if (settingsScreen.classList.contains('active') && startGameBtn.offsetParent !== null) {
                     buttonToClick = startGameBtn;
-                 } else if (gameOverScreen.classList.contains('active') && playAgainBtn.offsetParent !== null) {
+                } else if (gameOverScreen.classList.contains('active') && playAgainBtn.offsetParent !== null) {
                     buttonToClick = playAgainBtn;
-                 }
+                }
             }
 
 
             if (buttonToClick && !buttonToClick.disabled) {
-                event.preventDefault(); 
+                event.preventDefault();
                 buttonToClick.click();
             }
         });
@@ -1507,10 +1707,11 @@ allQuestions = LOGO_DATA;
         // --- INITIAL LOAD ---
         window.addEventListener('load', () => {
             loadDarkModePreference();
-            updateSettingsUI(); 
-            showScreen('settingsScreen'); 
+            updateSettingsUI();
+            showScreen('settingsScreen');
         });
 
     </script>
 </body>
+
 </html>
