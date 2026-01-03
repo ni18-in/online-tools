@@ -158,6 +158,48 @@
 
   <!-- OTHER TOOLS -->
   <url>
+    <loc>https://online-tools.ni18.in/tools/grade-calculator/</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/happy-new-year/</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/tools/screen-recorder-pro/</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- FRENCH BLOGS -->
+  <url>
+    <loc>https://online-tools.ni18.in/fr/blogs/</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/fr/blogs/ai-beauty-test-free-online.html</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/fr/blogs/edit-images-like-pro-free-online-tool.html</loc>
+    <lastmod>2026-01-03T08:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+  </url>
+
+  <!-- EXISTING OTHER TOOLS -->
+  <url>
     <loc>https://online-tools.ni18.in/tools/guess-the-logo/</loc>
     <lastmod>2025-05-23T08:05:19+00:00</lastmod>
     <priority>0.80</priority>
