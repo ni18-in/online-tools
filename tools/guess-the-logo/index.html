@@ -14,470 +14,455 @@
     <meta property="og:description"
         content="Test your brand knowledge with Guess the Logo! Multiple modes, difficulty levels, and endless challenges.">
     <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color-light: #6A11CB;
-            --primary-color-dark: #2575FC;
-            --primary-hover-light: #8A42EB;
-            --primary-hover-dark: #4A8FFC;
+            /* Modern Palette - Light Mode */
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: 1px solid rgba(255, 255, 255, 0.5);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
 
-            --secondary-color-light: #FF6F91;
-            --secondary-color-dark: #FF9671;
-            --secondary-hover-light: #FF8FB1;
-            --secondary-hover-dark: #FFB08F;
+            /* Actions */
+            --brand-primary: #4f46e5;
+            /* Indigo */
+            --brand-secondary: #ec4899;
+            /* Pink */
 
-            --success-color: #28A745;
-            --success-hover-color: #218838;
-            --danger-color: #DC3545;
-            --danger-hover-color: #C82333;
-            --warning-color: #FFC107;
+            /* States */
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
 
-            --light-bg: #F0F2F5;
-            --dark-bg: #1A1A2E;
+            /* Effects */
+            --glass-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            --neon-glow: 0 0 10px rgba(79, 70, 229, 0.3);
 
-            --light-card-bg: #FFFFFF;
-            --dark-card-bg: #162447;
-
-            --light-text: #333333;
-            --dark-text: #E0E0E0;
-
-            --light-input-bg: #FFFFFF;
-            --dark-input-bg: #1F4068;
-            --light-input-border: #CED4DA;
-            --dark-input-border: #3B5998;
-
-            --button-text-color: #FFFFFF;
-
-            --font-family: 'Inter', sans-serif;
-            --border-radius: 0.75rem;
-            --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
-
-            /* RGB versions for box-shadow alpha */
-            --primary-color-dark-rgb: 37, 117, 252;
-            --primary-hover-dark-rgb: 74, 143, 252;
+            /* Typography */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --border-radius-lg: 1.5rem;
+            --border-radius-md: 1rem;
         }
 
         .dark-mode {
-            --bg-color: var(--dark-bg);
-            --text-color: var(--dark-text);
-            --card-bg-color: var(--dark-card-bg);
-            --card-border-color: #2A3B67;
-            --input-bg-color: var(--dark-input-bg);
-            --input-border-color: var(--dark-input-border);
-            --primary-color-light: #8A42EB;
-            --primary-color-dark: #4A8FFC;
-            --secondary-color-light: #FF8FB1;
-            --secondary-color-dark: #FFB08F;
-            --primary-color-dark-rgb: 74, 143, 252;
-            /* RGB for #4A8FFC in dark mode */
+            /* Modern Palette - Dark Mode */
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --card-border: 1px solid rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+
+            --brand-primary: #818cf8;
+            --brand-secondary: #f472b6;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: var(--font-family);
-            background-color: var(--bg-color, var(--light-bg));
-            color: var(--text-color, var(--light-text));
-            line-height: 1.6;
+            font-family: var(--font-body);
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            overflow-x: hidden;
             padding: 1rem;
-            transition: background-color 0.4s, color 0.4s;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            background: var(--card-bg-color, var(--light-card-bg));
-            /* Simpler background for container */
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: var(--card-border);
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
             width: 100%;
-            max-width: 650px;
+            max-width: 600px;
             text-align: center;
-            transition: background-color 0.4s, border-color 0.4s, box-shadow 0.3s;
-            border: 1px solid var(--card-border-color, #E0E0E0);
+            position: relative;
+            overflow: hidden;
         }
 
-        .dark-mode .container {
-            border-color: var(--dark-input-border);
+        /* Decorative "Mesh" top bar */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
+            font-family: var(--font-heading);
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+            line-height: 1.2;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color-light);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 2rem;
         }
 
-        .dark-mode h1 {
-            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
+        /* Custom Scrollbar for Highscores */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .dark-mode h2 {
-            color: var(--primary-hover-light);
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
 
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
 
+        /* Game Screens Transition */
         .screen {
             display: none;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .screen.active {
             display: block;
         }
 
-        /* Settings Screen Enhancements */
-        .settings-header {
-            margin-bottom: 2rem;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .settings-header .subtitle {
-            font-size: 1.1rem;
-            color: var(--secondary-color-dark);
-            margin-top: -1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .dark-mode .settings-header .subtitle {
-            color: var(--secondary-color-light);
-        }
-
+        /* Settings Styles */
         .settings-group {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
-            /* Increased spacing */
-            padding: 1rem;
-            border-radius: calc(var(--border-radius) - 0.25rem);
-            background-color: rgba(0, 0, 0, 0.02);
-            /* Subtle background for groups */
-            border: 1px solid transparent;
-            /* Placeholder for potential border */
             text-align: left;
+            border: 1px solid transparent;
         }
 
         .dark-mode .settings-group {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .settings-group legend,
-        /* Use legend for fieldset-like appearance */
-        .settings-group label.group-title {
-            /* Alternative if not using fieldset */
-            font-size: 1.2rem;
+        .settings-group legend {
+            font-family: var(--font-heading);
             font-weight: 700;
-            color: var(--primary-color-dark);
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        .dark-mode .settings-group legend,
-        .dark-mode .settings-group label.group-title {
-            color: var(--primary-hover-dark);
-        }
-
-        .settings-group label:not(.group-title) {
-            /* Regular labels */
-            display: block;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .settings-group select,
-        .settings-group input[type="number"] {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--input-border-color, var(--light-input-border));
-            background-color: var(--input-bg-color, var(--light-input-bg));
-            color: var(--text-color);
-            font-family: var(--font-family);
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .settings-group select:focus,
-        .settings-group input[type="number"]:focus {
-            outline: none;
-            border-color: var(--primary-color-dark);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-dark-rgb), 0.25);
-        }
-
-        .settings-group input[type="checkbox"] {
-            width: 1.1em;
-            /* Slightly larger checkbox */
-            height: 1.1em;
-            margin-right: 0.6rem;
-            accent-color: var(--primary-color-dark);
-            vertical-align: middle;
-        }
-
-        .radio-group label {
-            margin-right: 1.5rem;
-            /* More spacing for radio options */
-            font-weight: normal;
-            color: var(--text-color);
-            cursor: pointer;
-            display: inline-flex;
-            /* Align radio and text nicely */
-            align-items: center;
-        }
-
-        .radio-group input[type="radio"] {
-            margin-right: 0.5rem;
-            /* Space between radio and its label text */
-            accent-color: var(--primary-color-dark);
-            width: 1.1em;
-            height: 1.1em;
-        }
-
-        .settings-actions {
-            /* Container for About/How to Play buttons */
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Game Screen */
-        #streamingModeTitle {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--brand-primary);
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            text-align: center;
-        }
-
-        .dark-mode #streamingModeTitle {
-            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-        }
-
-        .game-info {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
+            gap: 0.5rem;
         }
 
+        /* Custom Inputs */
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            border: 2px solid transparent;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            background: var(--card-bg);
+        }
+
+        /* Logo Display Area */
         .logo-container {
+            position: relative;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 250, 1) 100%);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
             margin-bottom: 2rem;
-            background-color: #FFFFFF;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            min-height: 180px;
+            min-height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .logo-container {
+            background: radial-gradient(circle, rgba(40, 40, 50, 1) 0%, rgba(20, 20, 30, 1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo-container img {
             max-width: 100%;
-            max-height: 220px;
-            height: auto;
-            border-radius: calc(var(--border-radius) - 0.25rem);
-            object-fit: contain;
+            max-height: 200px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            padding: 1rem 1.25rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: var(--border-radius);
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow-hover);
-        }
-
-        .btn:active {
-            transform: translateY(0px);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
-            color: var(--button-text-color);
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, var(--primary-hover-light), var(--primary-hover-dark));
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--secondary-color-light), var(--secondary-color-dark));
-            color: var(--button-text-color);
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(45deg, var(--secondary-hover-light), var(--secondary-hover-dark));
-        }
-
-        .btn-info {
-            /* For About/How to Play buttons */
-            background: linear-gradient(45deg, #5bc0de, #31b0d5);
-            /* Info blue gradient */
-            color: white;
-        }
-
-        .btn-info:hover {
-            background: linear-gradient(45deg, #46b8da, #269abc);
-        }
-
-
-        .btn-option {
-            background: linear-gradient(135deg, #6c757d, #495057);
-            color: var(--button-text-color);
-        }
-
-        .dark-mode .btn-option {
-            background: linear-gradient(135deg, #495057, #343a40);
-        }
-
-        .btn-option:hover:not(:disabled) {
-            background: linear-gradient(135deg, #5a6268, #343a40);
-        }
-
-        .dark-mode .btn-option:hover:not(:disabled) {
-            background: linear-gradient(135deg, #5a6268, #212529);
-        }
-
-        .btn-option:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-option.correct {
-            background: linear-gradient(45deg, var(--success-color), #1e7e34) !important;
-            animation: pulseCorrect 0.6s ease-out;
-        }
-
-        .btn-option.incorrect {
-            background: linear-gradient(45deg, var(--danger-color), #b21f2d) !important;
-            animation: shakeIncorrect 0.5s ease-in-out;
-        }
-
-        @keyframes pulseCorrect {
+        @keyframes popIn {
             0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
+                transform: scale(0.5);
+                opacity: 0;
             }
 
             100% {
                 transform: scale(1);
+                opacity: 1;
             }
         }
 
-        @keyframes shakeIncorrect {
+        /* Buttons */
+        .btn {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Primary Action Button (Start Game) */
+        .btn-primary {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            /* Pill shape */
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Option Buttons */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            perspective: 1000px;
+        }
+
+        @media (max-width: 500px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-option {
+            background: var(--text-primary);
+            /* Inverted for high contrast */
+            color: var(--card-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .btn-option {
+            background: #334155;
+            color: white;
+        }
+
+        .btn-option:hover:not(:disabled) {
+            transform: translateY(-2px) rotateX(5deg);
+            opacity: 1;
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        /* Feedback States */
+        .btn-option.correct {
+            background: var(--success-color) !important;
+            color: white !important;
+            animation: rubberBand 0.8s;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-option.incorrect {
+            background: var(--error-color) !important;
+            color: white !important;
+            animation: shake 0.5s;
+        }
+
+        @keyframes rubberBand {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @keyframes shake {
 
             0%,
             100% {
                 transform: translateX(0);
             }
 
-            25% {
-                transform: translateX(-5px);
+            20%,
+            60% {
+                transform: translateX(-10px);
             }
 
-            75% {
-                transform: translateX(5px);
+            40%,
+            80% {
+                transform: translateX(10px);
             }
         }
 
+        /* HUD (Heads Up Display) */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
 
+        .dark-mode .game-info {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #timer-display {
+            color: var(--brand-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Feedback Message */
         .feedback-message {
             margin-top: 1.5rem;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 1.1rem;
-            min-height: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            border-radius: var(--border-radius-md);
         }
 
         .feedback-message.correct {
-            background: var(--success-color);
-            color: white;
+            color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
         }
 
         .feedback-message.incorrect {
-            background: var(--danger-color);
-            color: white;
+            color: var(--error-color);
+            background: rgba(239, 68, 68, 0.1);
         }
 
-        .feedback-message.info {
-            background: var(--warning-color);
-            color: #333;
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .dark-mode .feedback-message.info {
-            color: #333;
-        }
-
-
-        #timer-display {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--primary-color-dark);
-            min-height: 25px;
-        }
-
-        .dark-mode #timer-display {
-            color: var(--warning-color);
+        .dark-mode-toggle:hover {
+            color: var(--brand-primary);
+            border-color: var(--brand-primary);
+            transform: rotate(15deg);
         }
 
 
@@ -498,10 +483,21 @@
             background-color: rgba(255, 255, 255, 0.05);
         }
 
+        /* Highscore List */
+        #highscore-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
         #highscore-list li {
-            padding: 0.6rem 0.75rem;
-            border-bottom: 1px solid var(--input-border-color, var(--light-input-border));
-            color: var(--text-color);
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--text-secondary);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            opacity: 0.9;
         }
 
         #highscore-list li:last-child {
@@ -513,141 +509,102 @@
         }
 
         .dark-mode #highscore-list li:nth-child(odd) {
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
-        /* Modal Styles (for About & How to Play) */
+        /* Modals */
         .modal {
             display: none;
-            /* Hidden by default */
             position: fixed;
             z-index: 1001;
-            /* Above dark mode toggle, below message box */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Dim background */
-            padding-top: 60px;
-            /* Location of the box */
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         .modal-content {
-            background-color: var(--card-bg-color, var(--light-card-bg));
-            margin: 5% auto;
-            padding: 25px;
-            border: 1px solid var(--card-border-color, #888);
-            width: 80%;
-            max-width: 700px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: left;
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: var(--card-border);
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
             position: relative;
-        }
-
-        .dark-mode .modal-content {
-            border-color: var(--dark-input-border);
+            color: var(--text-primary);
         }
 
         .modal-content h3 {
+            font-family: var(--font-heading);
             font-size: 1.8rem;
-            color: var(--primary-color-dark);
+            color: var(--brand-primary);
             margin-bottom: 1rem;
-        }
-
-        .dark-mode .modal-content h3 {
-            color: var(--primary-hover-dark);
         }
 
         .modal-content p,
         .modal-content ul {
             margin-bottom: 1rem;
             line-height: 1.7;
+            color: var(--text-secondary);
         }
 
         .modal-content ul {
-            padding-left: 20px;
+            padding-left: 1.5rem;
         }
 
         .modal-content strong {
-            color: var(--primary-color-dark);
-        }
-
-        .dark-mode .modal-content strong {
-            color: var(--primary-hover-dark);
+            color: var(--text-primary);
         }
 
         .close-btn {
-            color: var(--secondary-color-dark);
+            color: var(--text-secondary);
             float: right;
-            font-size: 28px;
+            font-size: 2rem;
             font-weight: bold;
-            line-height: 1;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: var(--danger-color);
-            text-decoration: none;
+            line-height: 0.8;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
-
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            padding: 0.6rem 0.8rem;
-            background-color: var(--secondary-color-light);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            z-index: 1000;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.2s;
+        .close-btn:hover {
+            color: var(--error-color);
         }
 
-        .dark-mode-toggle:hover {
-            background-color: var(--secondary-color-dark);
-            transform: scale(1.1);
-        }
-
-        .dark-mode .dark-mode-toggle {
-            background-color: var(--primary-color-light);
-        }
-
-        .dark-mode .dark-mode-toggle:hover {
-            background-color: var(--primary-color-dark);
-        }
-
-        /* Message Box (for alerts) */
+        /* Message Box */
         .message-box {
             position: fixed;
-            top: 20px;
+            top: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--warning-color);
-            color: #333;
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: var(--card-bg);
+            border: 1px solid var(--warning-color);
+            color: var(--warning-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             z-index: 2000;
             display: none;
-            font-weight: 600;
-            animation: fadeInDown 0.5s ease-out;
+            font-weight: 700;
+            animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .dark-mode .message-box {
-            background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color-dark));
-            color: white;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--brand-primary);
         }
 
-        @keyframes fadeInDown {
+        .message-box.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
             from {
                 opacity: 0;
                 transform: translate(-50%, -20px);
@@ -659,57 +616,36 @@
             }
         }
 
-
-        /* Party Mode & Streaming Mode Specific Styles */
+        /* Party & Streaming Mode overrides */
         .party-mode .container,
         .streaming-mode .container {
-            max-width: 90vw;
+            max-width: 95vw;
         }
 
         .party-mode .logo-container img,
         .streaming-mode .logo-container img {
-            max-height: 45vh;
-        }
-
-        .party-mode .options-container {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .party-mode .btn,
-        .streaming-mode .btn {
-            padding: 1.25rem 1.75rem;
-            font-size: 1.75rem;
+            max-height: 40vh;
         }
 
         .party-mode .game-info,
-        .party-mode #timer-display,
-        .streaming-mode .game-info,
-        .streaming-mode #timer-display {
-            font-size: 2rem;
+        .streaming-mode .game-info {
+            font-size: 1.5rem;
         }
 
-        .party-mode h1,
-        .party-mode h2,
-        .streaming-mode h1,
-        .streaming-mode h2 {
-            font-size: 3rem;
-        }
-
-        .streaming-mode #streamingModeTitle {
-            font-size: 2.5rem;
-        }
-
-        .streaming-mode .options-container {
-            display: none;
-        }
-
+        .streaming-mode .options-container,
         .streaming-mode #scoreDisplay,
         .streaming-mode #roundDisplay {
             display: none;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
+        .streaming-mode #streamingModeTitle {
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
             .container {
                 padding: 1.5rem;
             }
@@ -718,107 +654,27 @@
                 font-size: 2rem;
             }
 
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            #streamingModeTitle {
-                font-size: 1.8rem;
+            .btn-primary {
+                font-size: 1rem;
+                padding: 1rem;
             }
 
             .options-container {
                 grid-template-columns: 1fr;
             }
 
-            .btn {
-                font-size: 1rem;
-                padding: 0.85rem 1rem;
-            }
-
-            .party-mode .btn,
-            .streaming-mode .btn {
-                font-size: 1.3rem;
-                padding: 1rem 1.25rem;
-            }
-
-            .party-mode .game-info,
-            .party-mode #timer-display,
-            .streaming-mode .game-info,
-            .streaming-mode #timer-display {
-                font-size: 1.4rem;
-            }
-
-            .party-mode h1,
-            .party-mode h2,
-            .streaming-mode h1,
-            .streaming-mode h2 {
-                font-size: 2.2rem;
-            }
-
-            .streaming-mode #streamingModeTitle {
-                font-size: 2rem;
-            }
-
-            .dark-mode-toggle {
-                top: 1rem;
-                right: 1rem;
-                padding: 0.5rem 0.7rem;
-                font-size: 1rem;
-            }
-
-            .modal-content {
-                width: 90%;
-                padding: 20px;
-            }
-
-            .modal-content h3 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
+            .logo-container {
+                min-height: 180px;
                 padding: 1rem;
             }
 
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            #streamingModeTitle {
-                font-size: 1.6rem;
-            }
-
-            .btn {
-                font-size: 0.9rem;
-            }
-
-            .party-mode .btn,
-            .streaming-mode .btn {
-                font-size: 1.1rem;
-            }
-
-            .party-mode .game-info,
-            .party-mode #timer-display,
-            .streaming-mode .game-info,
-            .streaming-mode #timer-display {
-                font-size: 1.2rem;
-            }
-
-            .party-mode h1,
-            .party-mode h2,
-            .streaming-mode h1,
-            .streaming-mode h2 {
-                font-size: 1.8rem;
-            }
-
-            .streaming-mode #streamingModeTitle {
-                font-size: 1.8rem;
+            .logo-container img {
+                max-height: 150px;
             }
 
             .settings-actions {
                 flex-direction: column;
-                /* Stack About/How to Play buttons on small screens */
+                gap: 0.5rem;
             }
         }
     </style>
@@ -909,6 +765,16 @@
                 <label for="numRounds">Number of Rounds (1-200):</label>
                 <input type="number" id="numRounds" value="10" min="1" max="200">
             </div>
+            <div class="settings-group" id="partyTimerGroup" style="display: none;">
+                <label class="group-title" for="partyTimer">Time Per Question</label>
+                <label for="partyTimer">Seconds (5-60):</label>
+                <input type="number" id="partyTimer" value="15" min="5" max="60">
+            </div>
+            <div class="settings-group" id="streamingTimerGroup" style="display: none;">
+                <label class="group-title" for="streamingTimer">Reveal Speed</label>
+                <label for="streamingTimer">Seconds to Reveal (3-20):</label>
+                <input type="number" id="streamingTimer" value="7" min="3" max="20">
+            </div>
             <div class="settings-group" id="durationGroup" style="display: none;">
                 <label class="group-title" for="sessionDuration">Game Length</label>
                 <label for="sessionDuration">Session Duration (minutes):</label>
@@ -930,6 +796,11 @@
 
         <div id="gameScreen" class="screen">
             <h2 id="streamingModeTitle" style="display:none;">Guess The Logo</h2>
+            <div class="game-header-info" style="text-align: center; margin-bottom: 1rem;">
+                <span id="currentModeLabel"
+                    style="display:inline-block; padding: 0.5rem 1rem; background: var(--brand-primary); color: white; border-radius: 20px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.5rem;">MODE</span>
+                <p id="modeInstruction" style="color: var(--text-secondary); font-size: 1rem; margin: 0;"></p>
+            </div>
             <div class="game-info">
                 <span id="scoreDisplay">Score: 0</span>
                 <span id="roundDisplay">Round: 1/10</span>
@@ -1037,6 +908,12 @@
         const sessionDurationSelect = document.getElementById('sessionDuration');
         const soundEffectsCheckbox = document.getElementById('soundEffects');
         const streamingModeTitle = document.getElementById('streamingModeTitle');
+        const partyTimerGroup = document.getElementById('partyTimerGroup');
+        const streamingTimerGroup = document.getElementById('streamingTimerGroup');
+        const partyTimerInput = document.getElementById('partyTimer');
+        const streamingTimerInput = document.getElementById('streamingTimer');
+        const currentModeLabel = document.getElementById('currentModeLabel');
+        const modeInstruction = document.getElementById('modeInstruction');
 
         // Modal elements
         const aboutModal = document.getElementById('aboutModal');
@@ -1061,6 +938,8 @@
         let streamingRevealInterval;
         let streamingNextInterval;
         let timeLeft = 0;
+        let partyTimerDuration = 15;
+        let streamingRevealDuration = 7;
         let audioCtx;
 
         // Constants for streaming mode
@@ -1118,7 +997,28 @@
             { brandName: 'Cisco', logoUrl: './logo/cisco.png', options: ['Juniper', 'Huawei', 'Cisco', 'Arista'], difficulty: 'hard' },
             { brandName: 'Volkswagen', logoUrl: './logo/volkswagen.png', options: ['Toyota', 'Ford', 'BMW', 'Volkswagen'], difficulty: 'hard' },
             { brandName: 'Chanel', logoUrl: './logo/chanel.png', options: ['Dior', 'Gucci', 'Chanel', 'Prada'], difficulty: 'hard' },
-            { brandName: 'Rolex', logoUrl: './logo/rolex.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard' }
+            { brandName: 'Rolex', logoUrl: './logo/rolex.png', options: ['Omega', 'Tag Heuer', 'Rolex', 'Cartier'], difficulty: 'hard' },
+
+            // New Additions - Easy
+            { brandName: 'Spotify', logoUrl: './logo/spotify.png', options: ['SoundCloud', 'Apple Music', 'Spotify', 'Deezer'], difficulty: 'easy' },
+            { brandName: 'WhatsApp', logoUrl: './logo/whatsapp.png', options: ['Viber', 'Telegram', 'WhatsApp', 'WeChat'], difficulty: 'easy' },
+            { brandName: 'Tesla', logoUrl: './logo/tesla.png', options: ['Rivian', 'Lucid', 'Tesla', 'Nio'], difficulty: 'easy' },
+            { brandName: 'FedEx', logoUrl: './logo/fedex.png', options: ['UPS', 'DHL', 'FedEx', 'USPS'], difficulty: 'easy' },
+            { brandName: '7-Eleven', logoUrl: './logo/7-eleven.png', options: ['Circle K', 'Wawa', '7-Eleven', 'Sheetz'], difficulty: 'easy' },
+
+            // New Additions - Medium
+            { brandName: 'Ferrari', logoUrl: './logo/ferrari.png', options: ['Lamborghini', 'Maserati', 'Ferrari', 'Bugatti'], difficulty: 'medium' },
+            { brandName: 'Porsche', logoUrl: './logo/porsche.png', options: ['Ferrari', 'Audi', 'Porsche', 'Bentley'], difficulty: 'medium' },
+            { brandName: 'Nikon', logoUrl: './logo/nikon.png', options: ['Canon', 'Sony', 'Nikon', 'Fujifilm'], difficulty: 'medium' },
+            { brandName: 'Canon', logoUrl: './logo/canon.png', options: ['Nikon', 'Olympus', 'Canon', 'Panasonic'], difficulty: 'medium' },
+            { brandName: 'Nintendo', logoUrl: './logo/nintendo.png', options: ['Sega', 'Sony', 'Nintendo', 'Xbox'], difficulty: 'medium' },
+
+            // New Additions - Hard
+            { brandName: 'Unilever', logoUrl: './logo/unilever.png', options: ['P&G', 'Nestle', 'Unilever', 'Kraft Heinz'], difficulty: 'hard' },
+            { brandName: 'Nestlé', logoUrl: './logo/nestle.png', options: ['Danone', 'Mars', 'Nestlé', 'Mondelez'], difficulty: 'hard' },
+            { brandName: 'Goldman Sachs', logoUrl: './logo/goldman-sachs.png', options: ['JP Morgan', 'Morgan Stanley', 'Goldman Sachs', 'Citi'], difficulty: 'hard' },
+            { brandName: 'Hermès', logoUrl: './logo/hermes.png', options: ['Gucci', 'Louis Vuitton', 'Hermès', 'Prada'], difficulty: 'hard' },
+            { brandName: 'Jaguar', logoUrl: './logo/jaguar.png', options: ['Land Rover', 'Aston Martin', 'Jaguar', 'Bentley'], difficulty: 'hard' }
         ];
 
         allQuestions = LOGO_DATA;
@@ -1207,28 +1107,35 @@
 
         // --- SETTINGS & INITIALIZATION ---
         function updateSettingsUI() {
-            gameMode = document.querySelector('input[name="gameMode"]:checked').value;
+            // Read values
+            // Note: gameMode global variable should be updated here or in the listener? 
+            // Better to update globals in the listener or at start of game, but for UI sync we might need it.
+            // Let's rely on reading the DOM state for UI updates.
+            const selectedMode = document.querySelector('input[name="gameMode"]:checked').value;
 
             document.body.classList.remove('party-mode', 'streaming-mode');
             const isDarkModeActive = document.body.classList.contains('dark-mode');
-            // CSS variables on :root and .dark-mode should handle most theme changes
-            // These explicit sets are for ensuring body bg/text if not covered by general rules
             document.body.style.setProperty('--bg-color', isDarkModeActive ? 'var(--dark-bg)' : 'var(--light-bg)');
             document.body.style.setProperty('--text-color', isDarkModeActive ? 'var(--dark-text)' : 'var(--light-text)');
-            // Card bg is handled by .container styles
 
             streamingModeTitle.style.display = 'none';
 
-            if (gameMode === 'challenge') {
+            if (selectedMode === 'challenge') {
                 roundsGroup.style.display = 'none';
                 durationGroup.style.display = 'block';
+                partyTimerGroup.style.display = 'none';
+                streamingTimerGroup.style.display = 'none';
+                scoreDisplay.style.display = 'flex';
                 roundDisplay.style.display = 'none';
+                optionsContainer.style.display = 'grid';
                 timerDisplay.style.display = 'block';
-            } else if (gameMode === 'streaming') {
+            } else if (selectedMode === 'streaming') {
                 document.body.classList.add('streaming-mode');
                 streamingModeTitle.style.display = 'block';
                 roundsGroup.style.display = 'none';
                 durationGroup.style.display = 'none';
+                partyTimerGroup.style.display = 'none';
+                streamingTimerGroup.style.display = 'block';
                 scoreDisplay.style.display = 'none';
                 roundDisplay.style.display = 'none';
                 optionsContainer.style.display = 'none';
@@ -1236,18 +1143,25 @@
             } else { // Single or Party
                 roundsGroup.style.display = 'block';
                 durationGroup.style.display = 'none';
+                partyTimerGroup.style.display = 'none';
+                streamingTimerGroup.style.display = 'none';
                 scoreDisplay.style.display = 'flex';
                 roundDisplay.style.display = 'inline';
                 optionsContainer.style.display = 'grid';
-                if (gameMode === 'single') {
+                if (selectedMode === 'single') {
                     timerDisplay.style.display = 'none';
                 } else { // Party mode
                     document.body.classList.add('party-mode');
+                    partyTimerGroup.style.display = 'block';
                     timerDisplay.style.display = 'block';
                 }
             }
+            // Update global gameMode if needed for immediate feedback, though startGame overrides it
+            gameMode = selectedMode;
+            updateModeInfo();
         }
 
+        // Add listeners once
         gameModeRadios.forEach(radio => radio.addEventListener('change', updateSettingsUI));
 
         function preloadImages(questionsToPreload) {
@@ -1259,12 +1173,11 @@
 
         startGameBtn.addEventListener('click', () => {
             if (!audioCtx && soundEffectsEnabled) {
-                // Attempt to create AudioContext on user interaction if sound is enabled
                 try {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 } catch (e) {
-                    console.warn("Web Audio API is not supported or could not be initialized.", e);
-                    soundEffectsEnabled = false; // Disable sound if context fails
+                    console.warn("Web Audio API is not supported.", e);
+                    soundEffectsEnabled = false;
                     soundEffectsCheckbox.checked = false;
                 }
             }
@@ -1273,6 +1186,10 @@
             gameMode = document.querySelector('input[name="gameMode"]:checked').value;
             difficulty = document.querySelector('input[name="difficulty"]:checked').value;
             soundEffectsEnabled = soundEffectsCheckbox.checked;
+
+            // Update timer configs
+            partyTimerDuration = parseInt(partyTimerInput.value) || 15;
+            streamingRevealDuration = parseInt(streamingTimerInput.value) || 7;
 
             let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
             if (questionsByDifficulty.length === 0) {
@@ -1292,19 +1209,24 @@
             } else { // Single or Party
                 totalRounds = parseInt(numRoundsInput.value);
                 if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) {
-                    showMessage(`Please enter a valid number of rounds (1-${Math.min(200, currentQuestions.length)}).`, 'warning');
-                    numRoundsInput.value = Math.min(200, Math.max(1, currentQuestions.length));
+                    showMessage(`Please enter a valid number of rounds`, 'warning');
+                    numRoundsInput.value = 10;
                     return;
                 }
-                if (totalRounds > currentQuestions.length) {
-                    totalRounds = currentQuestions.length;
-                    showMessage(`Only ${totalRounds} questions available for this difficulty. Game will have ${totalRounds} rounds.`, 'info', 4000);
+
+                // For Party Mode, we want infinite loop, but totalRounds acts as batch size
+                // We don't need to limit if user wants more, but usually we slice for Single
+                if (gameMode === 'single') {
+                    if (totalRounds > currentQuestions.length) totalRounds = currentQuestions.length;
+                    currentQuestions = currentQuestions.slice(0, totalRounds);
+                } else if (gameMode === 'party') {
+                    // Ensure batch size isn't larger than available questions (repeats handled by reshuffle later)
+                    if (totalRounds > currentQuestions.length) totalRounds = currentQuestions.length;
+                    currentQuestions = currentQuestions.slice(0, totalRounds);
                 }
-                // For Single/Party, take only the specified number of rounds after shuffling
-                currentQuestions = currentQuestions.slice(0, totalRounds);
             }
 
-            // Preload images for the current set of questions (could be all for streaming/challenge, or sliced for single/party)
+            // Preload images
             preloadImages(currentQuestions);
 
             score = 0;
@@ -1327,18 +1249,27 @@
                 }
                 if (currentQuestionIndex >= currentQuestions.length) {
                     currentQuestionIndex = 0;
-                    // Optionally re-shuffle for variety in very long streaming sessions, though not strictly necessary for "infinite"
-                    // currentQuestions = shuffleArray([...allQuestions.filter(q => q.difficulty === difficulty)]);
                 }
-            } else if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && currentQuestionIndex >= totalRounds)) {
-                endGame();
-                return;
+            } else if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && gameMode !== 'party' && currentQuestionIndex >= totalRounds)) {
+                // Check if Party Mode ended batch is handled in revealAnswer, but here we can catch boundary
+                if (gameMode === 'party') {
+                    // Should have been handled by revealAnswer or needs restart
+                    // But if we fall through here, safe to End or Restart?
+                    // Let's assume revealAnswer handles the loop.
+                } else {
+                    endGame();
+                    return;
+                }
             }
 
-
             const question = currentQuestions[currentQuestionIndex];
-            if (!question) { // Safety check, should not happen if logic is correct
-                console.error("Error: No question found at index", currentQuestionIndex);
+            if (!question) {
+                // If we are in party mode and question is missing (maybe index OOB), try to restart batch
+                if (gameMode === 'party') {
+                    // Fail-safe: restart batch
+                    restartPartyBatch();
+                    return;
+                }
                 endGame();
                 return;
             }
@@ -1349,8 +1280,8 @@
 
             if (gameMode === 'streaming') {
                 optionsContainer.style.display = 'none';
-                timerDisplay.textContent = `Revealing in: ${STREAMING_REVEAL_TIME}s`;
-                timeLeft = STREAMING_REVEAL_TIME;
+                timerDisplay.textContent = `Revealing in: ${streamingRevealDuration}s`;
+                timeLeft = streamingRevealDuration;
                 streamingRevealInterval = setInterval(() => {
                     timeLeft--;
                     timerDisplay.textContent = `Revealing in: ${timeLeft}s`;
@@ -1374,9 +1305,49 @@
                 });
                 updateRoundDisplay();
                 if (gameMode === 'party' || gameMode === 'challenge') {
-                    startQuestionTimer(15);
+                    startQuestionTimer(gameMode === 'party' ? partyTimerDuration : 15);
                 }
             }
+        }
+
+        function restartPartyBatch() {
+            showMessage("Loading more logos...", "success", 1000);
+            let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
+            currentQuestions = shuffleArray([...questionsByDifficulty]);
+            let batchSize = parseInt(numRoundsInput.value) || 10;
+            if (batchSize > questionsByDifficulty.length) batchSize = questionsByDifficulty.length;
+            totalRounds = batchSize;
+            currentQuestions = currentQuestions.slice(0, totalRounds);
+            currentQuestionIndex = 0;
+            loadQuestion();
+        }
+
+        updateModeInfo();
+
+
+        function updateModeInfo() {
+            let label = '';
+            let instruction = '';
+            switch (gameMode) {
+                case 'single':
+                    label = 'Single Player';
+                    instruction = 'Take your time and guess the logo.';
+                    break;
+                case 'party':
+                    label = 'Party Mode';
+                    instruction = `Guess quickly! You have ${partyTimerDuration} seconds per logo.`;
+                    break;
+                case 'challenge':
+                    label = 'Challenge Mode';
+                    instruction = 'Answer as many as you can before the session ends!';
+                    break;
+                case 'streaming':
+                    label = 'Streaming Mode';
+                    instruction = 'Sit back and watch the answers reveal.';
+                    break;
+            }
+            if (currentModeLabel) currentModeLabel.textContent = label;
+            if (modeInstruction) modeInstruction.textContent = instruction;
         }
 
         function revealAnswerAndLoadNextStreaming() {
@@ -1503,7 +1474,26 @@
                 }
             });
 
-            if (gameMode === 'party' || (gameMode === 'challenge' && timeLeft > 0)) {
+            if (gameMode === 'party') {
+                // Party Mode Interstitial
+                let interstitialTime = 4;
+                timerDisplay.textContent = `Next logo in: ${interstitialTime}s`;
+
+                const partyNextInterval = setInterval(() => {
+                    interstitialTime--;
+                    timerDisplay.textContent = `Next logo in: ${interstitialTime}s`;
+                    if (interstitialTime <= 0) {
+                        clearInterval(partyNextInterval);
+                        currentQuestionIndex++;
+                        if (currentQuestionIndex >= totalRounds) {
+                            // Infinite Party Mode: Restart Batch
+                            restartPartyBatch();
+                        } else {
+                            loadQuestion();
+                        }
+                    }
+                }, 1000);
+            } else if (gameMode === 'challenge' && timeLeft > 0) {
                 setTimeout(() => {
                     currentQuestionIndex++;
                     loadQuestion();
