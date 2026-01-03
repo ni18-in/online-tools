@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>NI18 Herramientas Online - Herramientas Web Gratuitas para Desarrolladores y Diseñadores</title>
-    <meta name="description" content="Colección gratuita de herramientas web útiles y rápidas, incluyendo convertidores de unidades, análisis de texto, utilidades JSON y más. Perfectas para desarrolladores y diseñadores.">
-    <meta name="keywords" content="herramientas online, herramientas web, convertidor rem a px, test de belleza ia, utilidades gratuitas, css, html, json">
+    <meta name="description"
+        content="Colección gratuita de herramientas web útiles y rápidas, incluyendo convertidores de unidades, análisis de texto, utilidades JSON y más. Perfectas para desarrolladores y diseñadores.">
+    <meta name="keywords"
+        content="herramientas online, herramientas web, convertidor rem a px, test de belleza ia, utilidades gratuitas, css, html, json">
     <meta name="author" content="ni18-in">
 
     <link rel="canonical" href="https://online-tools.ni18.in/es/" />
@@ -16,23 +19,27 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
     <link rel="manifest" href="/assets/icons/site.webmanifest">
-    
+
     <meta property="og:title" content="NI18 Herramientas Online - Herramientas Web Gratuitas">
-    <meta property="og:description" content="Colección de herramientas gratuitas esenciales para desarrolladores y diseñadores web.">
+    <meta property="og:description"
+        content="Colección de herramientas gratuitas esenciales para desarrolladores y diseñadores web.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://online-tools.ni18.in/es/">
     <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=NI18+Herramientas+Online">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-slate-800 min-h-screen flex flex-col">
 
     <header class="bg-white shadow-md sticky top-0 z-10">
@@ -41,31 +48,44 @@
                 <i class="fas fa-screwdriver-wrench mr-2 text-indigo-500"></i>
                 NI18 Herramientas Online
             </a>
-            
+
             <div class="flex items-center space-x-4 mt-3 sm:mt-0">
-                <a href="https://online-tools.ni18.in/es/tools" class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Herramientas</a>
-                <a href="https://online-tools.ni18.in/es/blogs" class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Blogs</a>
-                <a href="https://online-tools.ni18.in/es/about" class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Acerca de</a>
-                
-                <a href="https://online-tools.ni18.in/" class="text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded-md text-sm font-semibold transition duration-150 ease-in-out flex items-center">
-                    <i class="fas fa-globe mr-1"></i> English
-                </a>
+                <a href="https://online-tools.ni18.in/es/tools"
+                    class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Herramientas</a>
+                <a href="https://online-tools.ni18.in/es/blogs"
+                    class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Blogs</a>
+                <a href="https://online-tools.ni18.in/es/about"
+                    class="text-slate-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Acerca
+                    de</a>
+
+                <select aria-label="Seleccionar idioma" onchange="if(this.value) window.location.href=this.value"
+                    class="text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded-md text-sm font-semibold transition duration-150 ease-in-out border-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer appearance-none">
+                    <option value="" disabled style="background-color: white; color: black;">Idioma</option>
+                    <option value="https://online-tools.ni18.in/tools/" style="background-color: white; color: black;">
+                        English</option>
+                    <option value="https://online-tools.ni18.in/es/tools/" selected
+                        style="background-color: white; color: black;">Español</option>
+                    <option value="https://online-tools.ni18.in/fr/tools/"
+                        style="background-color: white; color: black;">Français</option>
+                </select>
             </div>
         </nav>
     </header>
 
     <main class="flex-grow">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            
+
             <section class="text-center bg-white p-8 sm:p-12 rounded-xl shadow-xl mb-12">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight">
                     Herramientas Online <span class="text-indigo-600">Gratuitas</span>
                 </h1>
                 <p class="mt-4 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
-                    Tu destino para utilidades web rápidas y eficientes. Desde desarrollo hasta diversión, hacemos tu vida digital más fácil.
+                    Tu destino para utilidades web rápidas y eficientes. Desde desarrollo hasta diversión, hacemos tu
+                    vida digital más fácil.
                 </p>
                 <div class="mt-8">
-                    <a href="https://online-tools.ni18.in/es/tools" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-indigo-600 hover:bg-indigo-700 transition duration-300">
+                    <a href="https://online-tools.ni18.in/es/tools"
+                        class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-indigo-600 hover:bg-indigo-700 transition duration-300">
                         <i class="fas fa-compass mr-2"></i> Explorar Todas las Herramientas
                     </a>
                 </div>
@@ -75,41 +95,49 @@
                 <h2 id="featured-heading" class="text-3xl font-bold text-slate-800 mb-8 text-center sm:text-left">
                     <i class="fas fa-star text-yellow-500 mr-2"></i> Nuestras Herramientas Destacadas
                 </h2>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-indigo-100 hover:shadow-xl transition duration-300">
+
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-lg border border-indigo-100 hover:shadow-xl transition duration-300">
                         <i class="fas fa-ruler-combined text-4xl text-indigo-500 mb-4"></i>
                         <h3 class="text-xl font-semibold text-slate-900 mb-2">
                             Convertidor REM a PX
                         </h3>
                         <p class="text-slate-600 mb-4 text-sm">
-                            Convierte instantáneamente unidades REM a valores de píxeles (px) con un tamaño de fuente base personalizable.
+                            Convierte instantáneamente unidades REM a valores de píxeles (px) con un tamaño de fuente
+                            base personalizable.
                         </p>
-                        <a href="https://online-tools.ni18.in/es/tools/rem-to-px-converter/" class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
+                        <a href="https://online-tools.ni18.in/es/tools/rem-to-px-converter/"
+                            class="text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
                             Usar Herramienta <i class="fas fa-arrow-right ml-1 text-sm"></i>
                         </a>
                     </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg border border-purple-100 hover:shadow-xl transition duration-300">
+
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-lg border border-purple-100 hover:shadow-xl transition duration-300">
                         <i class="fas fa-face-sparkles text-4xl text-purple-500 mb-4"></i>
                         <h3 class="text-xl font-semibold text-slate-900 mb-2">
                             Test de Belleza IA
                         </h3>
                         <p class="text-slate-600 mb-4 text-sm">
-                            Obtén una puntuación de belleza facial simulada, encuentra tu doble celebridad y analiza rasgos faciales.
+                            Obtén una puntuación de belleza facial simulada, encuentra tu doble celebridad y analiza
+                            rasgos faciales.
                         </p>
-                        <a href="https://online-tools.ni18.in/es/tools/ai-beauty-test/" class="text-purple-600 font-medium hover:text-purple-800 flex items-center">
+                        <a href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"
+                            class="text-purple-600 font-medium hover:text-purple-800 flex items-center">
                             Usar Herramienta <i class="fas fa-arrow-right ml-1 text-sm"></i>
                         </a>
                     </div>
-                    
-                    <div class="bg-gray-100 p-6 rounded-xl shadow-inner border border-gray-200 flex flex-col justify-center items-center text-center">
+
+                    <div
+                        class="bg-gray-100 p-6 rounded-xl shadow-inner border border-gray-200 flex flex-col justify-center items-center text-center">
                         <i class="fas fa-ellipsis text-3xl text-slate-400 mb-3"></i>
                         <p class="text-slate-600 font-medium">¡Muchas más herramientas por explorar!</p>
-                        <a href="https://online-tools.ni18.in/es/tools" class="mt-3 text-sm text-indigo-600 hover:underline">Ver catálogo completo</a>
+                        <a href="https://online-tools.ni18.in/es/tools"
+                            class="mt-3 text-sm text-indigo-600 hover:underline">Ver catálogo completo</a>
                     </div>
-                    
+
                 </div>
             </section>
 
@@ -127,4 +155,5 @@
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
+
 </html>

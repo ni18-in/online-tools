@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Improvement: More descriptive title -->
+    <title>Répertoire d'Outils pour Développeurs | Explorez des Ressources Essentielles</title>
+    <!-- SEO Improvement: Added meta description -->
+    <meta name="description"
+        content="Outils ni18 - Votre centre tout-en-un pour des outils en ligne gratuits et faciles à utiliser !
+Trouvez les meilleurs outils pour les tâches quotidiennes, la productivité et les besoins techniques — le tout au même endroit. Simple, rapide et convivial.">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Schema Improvement: JSON-LD Structured Data Schema for CollectionPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "CollectionPage",
+      "name": "Répertoire d'Outils pour Développeurs",
+      "description": "Un répertoire consultable d'outils et de ressources essentiels pour les développeurs.",
+      "url": "https://online-tools.ni18.in/fr/tools",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://online-tools.ni18.in/fr/tools"
+      }
+    }
+    </script>
+
+    <style>
+        /* Custom scrollbar styling for aesthetics */
+        .tools-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .tools-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            /* slate-300 */
+            border-radius: 4px;
+        }
+
+        .tools-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            /* slate-100 */
+        }
+
+        /* A11y Improvement: Screen reader only class for the label */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans antialiased min-h-screen p-4 sm:p-8">
+
+    <!-- SEO & A11y Improvement: Using <main> for the primary content -->
+    <main class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-indigo-800 tracking-tight">
+                Répertoire d'Outils Ni18
+            </h1>
+            <p class="mt-2 text-lg text-gray-600">
+                Trouvez les meilleurs outils pour les tâches quotidiennes, la productivité et les besoins techniques —
+                le tout au même endroit. Simple, rapide et convivial. </p>
+        </header>
+
+        <!-- Search Input -->
+        <div class="mb-8 shadow-xl rounded-xl">
+            <!-- A11y Improvement: Added accessible label -->
+            <label for="toolSearch" class="sr-only">Rechercher des Outils</label>
+            <input type="text" id="toolSearch" placeholder="Rechercher des outils par nom ou description..."
+                aria-label="Rechercher des Outils pour Développeurs"
+                class="w-full p-4 text-gray-700 border border-indigo-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out text-lg"
+                onkeyup="filterTools()">
+        </div>
+
+        <!-- Tools Container (A11y Improvement: role="feed" for dynamic content list) -->
+        <div id="toolsContainer" role="feed" aria-live="polite" aria-busy="false"
+            class="tools-container grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto max-h-[70vh]">
+            <!-- Tool cards will be injected here by JavaScript -->
+        </div>
+
+        <!-- No Results Message (Hidden by default) -->
+        <div id="noResults" class="text-center p-10 bg-white rounded-xl shadow-lg mt-6 hidden">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9.172 16.172A4 4 0 0112 11h.01M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m.463-2.585A6.002 6.002 0 0012 14c.94 0 1.847.197 2.684.555m.53-2.062a8.001 8.001 0 00-2.683-1.545">
+                </path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun résultat trouvé</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                Essayez d'ajuster vos termes de recherche ou vérifiez votre orthographe.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Maintainability Improvement: Tool Data moved to its own easy-to-update JSON block -->
+    <script id="toolDataJson" type="application/json">
+        [
+  {
+    "name": "Réformes GST de Prochaine Génération",
+    "description": "Explorez des idées et des ressources sur les réformes GST à venir et leur impact sur les entreprises en Inde.",
+    "url": "https://online-tools.ni18.in/tools/next-gen-gst-reforms/"
+  },
+  {
+    "name": "Outil Utilitaire d'Image Gratuit en Ligne",
+    "description": "Modifiez, redimensionnez, compressez et convertissez des images facilement — tout cela dans votre navigateur, gratuitement.",
+    "url": "https://online-tools.ni18.in/tools/free-online-image-utility-tool/"
+  },
+  {
+    "name": "Analyseur de Texte Tout-en-Un",
+    "description": "Analysez, comptez et améliorez votre contenu textuel avec cet outil d'analyse de texte intelligent et gratuit.",
+    "url": "https://online-tools.ni18.in/tools/all-in-one-text-analyzer/"
+  },
+  {
+    "name": "Outil de Comparaison JSON",
+    "description": "Comparez deux fichiers JSON côte à côte et trouvez les différences instantanément avec cet outil convivial pour les développeurs.",
+    "url": "https://online-tools.ni18.in/tools/json-comparison-tool/"
+  },
+  {
+    "name": "Visualiseur JSON Pro",
+    "description": "Visualisez des structures de données JSON complexes dans un format arborescent facile à comprendre.",
+    "url": "https://online-tools.ni18.in/tools/json-visualizer-pro/"
+  },
+  {
+    "name": "Test de Beauté IA",
+    "description": "Laissez l'IA analyser votre photo et prédire des scores de beauté pour le plaisir et le divertissement.",
+    "url": "https://online-tools.ni18.in/fr/tools/ai-beauty-test/"
+  },
+  {
+    "name": "Jeu Devinez le Logo",
+    "description": "Testez vos connaissances avec ce jeu amusant de devinettes de logos propulsé par l'IA.",
+    "url": "https://online-tools.ni18.in/tools/guess-the-logo/"
+  },
+  {
+    "name": "Comparaison de Texte en Ligne",
+    "description": "Comparez facilement deux blocs de texte et mettez en évidence les différences en temps réel.",
+    "url": "https://online-tools.ni18.in/tools/online-text-compare/"
+  },
+  {
+    "name": "Convertisseur PX en REM",
+    "description": "Convertissez rapidement des valeurs de pixels en unités rem pour une conception web responsive.",
+    "url": "https://online-tools.ni18.in/tools/px-to-rem-converter/"
+  },
+  {
+    "name": "Calculatrice d'Amour IA",
+    "description": "Découvrez votre score de compatibilité en utilisant une calculatrice d'amour amusante propulsée par l'IA.",
+    "url": "https://online-tools.ni18.in/tools/ai-love-calculator/"
+  },
+  {
+    "name": "Générateur d'En-tête d'Authentification de Base",
+    "description": "Générez instantanément des en-têtes d'authentification de base encodés en Base64 pour des tests d'API sécurisés.",
+    "url": "https://online-tools.ni18.in/tools/basic-authentication-header-generator/"
+  },
+  {
+    "name": "Convertisseur REM en PX",
+    "description": "Convertissez les unités rem en valeurs de pixels pour des ajustements précis de conception front-end.",
+    "url": "https://online-tools.ni18.in/tools/rem-to-px-converter/"
+  },
+  {
+    "name": "Générateur de Vœux de Bonne Année",
+    "description": "Créez et partagez des vœux de Bonne Année personnalisés avec des noms dynamiques et des animations festives.",
+    "url": "https://online-tools.ni18.in/tools/happy-new-year/"
+  }
+]
+
+    </script>
+
+    <script>
+        // 1. Load Data from the JSON script tag for improved maintainability
+        let toolsData = [];
+        try {
+            const dataElement = document.getElementById('toolDataJson');
+            if (dataElement && dataElement.textContent) {
+                toolsData = JSON.parse(dataElement.textContent.trim());
+            }
+        } catch (e) {
+            console.error("Error parsing tool data:", e);
+        }
+
+        const toolsContainer = document.getElementById('toolsContainer');
+        const noResultsMessage = document.getElementById('noResults');
+
+        /**
+         * Renders the given array of tools into the DOM.
+         * @param {Array<Object>} tools - The array of tool objects to render.
+         */
+        function renderTools(tools) {
+            toolsContainer.innerHTML = ''; // Clear existing cards
+
+            if (tools.length === 0) {
+                noResultsMessage.classList.remove('hidden');
+                // A11y Improvement: Announce the change to screen readers
+                toolsContainer.setAttribute('aria-busy', 'false');
+                noResultsMessage.setAttribute('aria-live', 'assertive');
+
+                return;
+            } else {
+                noResultsMessage.classList.add('hidden');
+                noResultsMessage.setAttribute('aria-live', 'off');
+            }
+
+            // A11y Improvement: Set aria-busy while content is being updated
+            toolsContainer.setAttribute('aria-busy', 'true');
+
+            tools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                // A11y Improvement: role="article" for each feed item
+                toolCard.setAttribute('role', 'article');
+                toolCard.className = 'bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-100';
+
+                // Tool Name (Clickable link)
+                const nameLink = document.createElement('a');
+                nameLink.href = tool.url;
+                nameLink.target = '_blank';
+                // A11y Improvement: Add title attribute for clarity on link action
+                nameLink.title = `Allez sur le site web de ${tool.name} (ouvre dans un nouvel onglet)`;
+                nameLink.className = 'text-xl font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer transition duration-150';
+                nameLink.textContent = tool.name;
+
+                // Tool Description
+                const descriptionPara = document.createElement('p');
+                descriptionPara.className = 'mt-2 text-gray-500 text-sm';
+                descriptionPara.textContent = tool.description;
+
+                // Append elements to the card
+                toolCard.appendChild(nameLink);
+                toolCard.appendChild(descriptionPara);
+
+                toolsContainer.appendChild(toolCard);
+            });
+            // A11y Improvement: Reset aria-busy once content is rendered
+            toolsContainer.setAttribute('aria-busy', 'false');
+        }
+
+        /**
+         * Filters the tools data based on the search input value and re-renders the list.
+         */
+        function filterTools() {
+            const searchTerm = document.getElementById('toolSearch').value.toLowerCase().trim();
+
+            const filteredTools = toolsData.filter(tool => {
+                const nameMatch = tool.name.toLowerCase().includes(searchTerm);
+                const descriptionMatch = tool.description.toLowerCase().includes(searchTerm);
+                // Return true if the search term is found in either the name or the description
+                return nameMatch || descriptionMatch;
+            });
+
+            renderTools(filteredTools);
+        }
+
+        // 3. Initial Load: Render all tools when the script loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTools(toolsData);
+        });
+
+    </script>
+</body>
+
+</html>

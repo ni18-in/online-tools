@@ -279,10 +279,13 @@
         </nav>
 
         <div class="hidden md:flex items-center space-x-4">
-          <a href="https://online-tools.ni18.in/" class="text-gray-600 hover:text-indigo-600 text-sm font-medium">EN</a>
-
-          <a href="https://online-tools.ni18.in/es/"
-            class="text-gray-600 hover:text-indigo-600 text-sm font-medium">ES</a>
+          <select aria-label="Language Selector" onchange="if(this.value) window.location.href=this.value"
+            class="bg-transparent text-gray-600 hover:text-indigo-600 text-sm font-medium focus:outline-none cursor-pointer border-none focus:ring-0">
+            <option value="" disabled>Language</option>
+            <option value="https://online-tools.ni18.in/tools/" selected>English</option>
+            <option value="https://online-tools.ni18.in/es/tools/">Español</option>
+            <option value="https://online-tools.ni18.in/fr/tools/">Français</option>
+          </select>
         </div>
         <div class="md:hidden">
           <button type="button"
@@ -305,14 +308,15 @@
           class="text-indigo-600 bg-indigo-100 block px-3 py-2 rounded-md text-base font-medium">Tools</a>
         <a href="/about"
           class="text-gray-600 hover:bg-gray-50 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
-        <a href="https://online-tools.ni18.in/"
-          class="text-gray-600 hover:bg-gray-50 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
-          EN
-        </a>
-        <a href="https://online-tools.ni18.in/es/"
-          class="text-gray-600 hover:bg-gray-50 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
-          ES
-        </a>
+        <div class="px-3 py-2">
+          <label for="mobile-lang-selector" class="sr-only">Select Language</label>
+          <select id="mobile-lang-selector" onchange="if(this.value) window.location.href=this.value"
+            class="block w-full text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <option value="https://online-tools.ni18.in/tools/" selected>English</option>
+            <option value="https://online-tools.ni18.in/es/tools/">Español</option>
+            <option value="https://online-tools.ni18.in/fr/tools/">Français</option>
+          </select>
+        </div>
       </div>
     </div>
   </header>
