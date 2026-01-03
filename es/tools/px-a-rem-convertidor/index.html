@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!--
+        ================================================================
+        Convertidor PX a REM - Material Design
+        Una herramienta simple y gratuita para desarrolladores y diseñadores.
+        ================================================================
+    -->
+
+    <!-- Meta Tags for Character Set and Viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Convertidor PX a REM – Herramienta Online Gratuita</title>
+    <meta name="description"
+        content="Una herramienta sencilla y gratuita para convertir valores de píxeles a unidades REM para desarrolladores y diseñadores. Convierte instantáneamente px a rem con un tamaño de fuente base personalizable.">
+    <meta name="keywords"
+        content="px a rem, pixel a rem, convertidor, css, material design, desarrollo web, diseño responsive, accesibilidad">
+    <meta name="author" content="Gemini">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/online-tools/assets/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Convertidor PX a REM – Herramienta Online Gratuita">
+    <meta property="og:description"
+        content="Una herramienta sencilla y gratuita para convertir valores de píxeles (px) a unidades REM sin esfuerzo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/es/tools/px-a-rem-convertidor">
+    <meta property="og:image" content="https://placehold.co/1200x630/4285F4/ffffff?text=Convertidor+PX+a+REM">
+    <meta property="og:image:alt" content="Imagen promocional para la herramienta Convertidor PX a REM.">
+
+    <!-- Google Fonts (Roboto is standard for Material Design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data (Schema Markup) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Convertidor PX a REM",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "All",
+      "url": "https://online-tools.ni18.in/es/tools/px-a-rem-convertidor",
+      "description": "Una herramienta sencilla y gratuita para convertir valores de píxeles a unidades REM para desarrolladores y diseñadores.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Gemini"
+      }
+    }
+    </script>
+
+    <!-- Internal CSS (Material Design Inspired) -->
+    <style>
+        /* Basic Reset and Global Styles */
+        :root {
+            --md-primary-color: #4285F4;
+            /* Google Blue */
+            --md-primary-dark-color: #3367D6;
+            --md-background-color: #f5f5f5;
+            --md-surface-color: #ffffff;
+            --md-text-primary-color: #202124;
+            --md-text-secondary-color: #5f6368;
+            --md-border-color: #dadce0;
+            --md-focus-ring-color: rgba(66, 133, 244, 0.2);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-background-color);
+            color: var(--md-text-primary-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Layout Container */
+        .container {
+            width: 100%;
+            max-width: 720px;
+            /* Adjusted for better content readability */
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header and Footer */
+        header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: var(--md-text-secondary-color);
+        }
+
+        /* Typography */
+        h1,
+        h2 {
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            color: var(--md-primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--md-text-primary-color);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--md-border-color);
+        }
+
+        /* Card Styling (Material Surface) */
+        .card {
+            background-color: var(--md-surface-color);
+            border: 1px solid var(--md-border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: box-shadow 0.3s cubic-bezier(.25, .8, .25, 1);
+            margin-bottom: 2rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        /* Form Elements (Material Inspired) */
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--md-text-secondary-color);
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 1rem 0.5rem 0.5rem 0.5rem;
+            border: none;
+            border-bottom: 1px solid var(--md-text-secondary-color);
+            background-color: transparent;
+            font-size: 1.1rem;
+            transition: border-bottom-color 0.2s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-bottom: 2px solid var(--md-primary-color);
+        }
+
+        .convert-button {
+            display: block;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background-color: var(--md-primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: background-color 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        .convert-button:hover {
+            background-color: var(--md-primary-dark-color);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        .convert-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px var(--md-focus-ring-color);
+        }
+
+        /* Result Display */
+        #result-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--md-background-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--md-text-secondary-color);
+        }
+
+        #result-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--md-primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* How-to Section */
+        .how-to ol {
+            padding-left: 20px;
+            color: var(--md-text-secondary-color);
+        }
+
+        .how-to li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Conversion Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--md-border-color);
+        }
+
+        thead th {
+            background-color: var(--md-background-color);
+            font-weight: 500;
+            color: var(--md-text-secondary-color);
+        }
+
+        /* Utility for screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Convertidor PX a REM</h1>
+            <p style="color: var(--md-text-secondary-color);">Una herramienta para desarrolladores con Material Design
+            </p>
+        </header>
+
+        <main>
+            <!-- Conversion Tool Section -->
+            <section id="converter" aria-labelledby="converter-heading">
+                <h2 id="converter-heading" class="sr-only">Herramienta de Conversión</h2>
+                <div class="card">
+                    <form id="converter-form" aria-label="Formulario de conversión de Píxeles a REM">
+                        <div class="form-group">
+                            <label for="px-input">Valor de Píxeles (px)</label>
+                            <input type="number" id="px-input" placeholder="p.ej., 24" required aria-required="true"
+                                aria-describedby="px-input-description" value="16">
+                            <p id="px-input-description" class="sr-only">Introduce el valor en píxeles que quieres
+                                convertir.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="base-font-size">Tamaño de Fuente Base (px)</label>
+                            <select id="base-font-size" aria-describedby="base-font-description">
+                                <option value="10">10px</option>
+                                <option value="12">12px</option>
+                                <option value="14">14px</option>
+                                <option value="16" selected>16px (Predeterminado)</option>
+                                <option value="18">18px</option>
+                                <option value="20">20px</option>
+                                <option value="24">24px</option>
+                            </select>
+                            <p id="base-font-description" class="sr-only">Selecciona el tamaño de fuente base para el
+                                cálculo de conversión. El valor predeterminado es 16 píxeles.</p>
+                        </div>
+
+                        <button type="submit" class="convert-button">Convertir</button>
+                    </form>
+
+                    <div id="result-container" aria-live="polite">
+                        Resultado en REM
+                        <span id="result-value">1rem</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How to Use Section -->
+            <section id="how-to" class="how-to" aria-labelledby="how-to-heading">
+                <h2 id="how-to-heading">Cómo usar esta aplicación</h2>
+                <div class="card">
+                    <ol>
+                        <li>Introduce el valor de píxeles (px) deseado en el primer cuadro de entrada.</li>
+                        <li>Ajusta el tamaño de fuente base desde el menú desplegable si tu proyecto usa un valor
+                            predeterminado diferente (el estándar es 16px).</li>
+                        <li>El equivalente en REM se calcula y muestra en tiempo real en el cuadro de resultados.</li>
+                        <li>Para una referencia rápida, consulta la tabla de conversión a continuación, basada en un
+                            tamaño de fuente base de 16px.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Conversion Table Section -->
+            <section id="conversion-table" aria-labelledby="table-heading">
+                <h2 id="table-heading">Tabla de Conversión de PX a REM (Base 16px)</h2>
+                <div class="card table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Píxel (px)</th>
+                                <th>REM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="conversion-table-body">
+                            <!-- Rows will be generated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Convertidor PX a REM. Una herramienta gratuita para la comunidad web.</p>
+            <p><a href="#">Volver arriba</a></p>
+        </footer>
+    </div>
+
+    <!-- Internal JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to DOM elements
+            const converterForm = document.getElementById('converter-form');
+            const pxInput = document.getElementById('px-input');
+            const baseFontSizeSelect = document.getElementById('base-font-size');
+            const resultValue = document.getElementById('result-value');
+            const tableBody = document.getElementById('conversion-table-body');
+
+            /**
+             * Converts a pixel value to a REM value based on a base font size.
+             * Updates the result display on the page.
+             */
+            function convertPxToRem() {
+                const pxValue = parseFloat(pxInput.value);
+                const baseSize = parseFloat(baseFontSizeSelect.value);
+
+                // Validation: Ensure we have valid numbers to work with
+                if (isNaN(pxValue) || isNaN(baseSize) || baseSize === 0) {
+                    resultValue.textContent = 'Inválido';
+                    return;
+                }
+
+                const remValue = pxValue / baseSize;
+
+                // Format the result to a reasonable number of decimal places
+                const formattedRem = parseFloat(remValue.toFixed(4));
+
+                resultValue.textContent = `${formattedRem}rem`;
+            }
+
+            /**
+             * Populates the conversion table with values from 1px to 100px.
+             * The table is based on a fixed base font size of 16px for quick reference.
+             */
+            function populateConversionTable() {
+                const baseForTable = 16;
+                let tableHTML = '';
+
+                for (let px = 1; px <= 100; px++) {
+                    const rem = parseFloat((px / baseForTable).toFixed(4));
+                    tableHTML += `
+                        <tr>
+                            <td>${px}px</td>
+                            <td>${rem}rem</td>
+                        </tr>
+                    `;
+                }
+                tableBody.innerHTML = tableHTML;
+            }
+
+            // --- Event Listeners ---
+
+            // Prevent form submission from reloading the page
+            converterForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                convertPxToRem();
+            });
+
+            // Real-time conversion on input change
+            pxInput.addEventListener('input', convertPxToRem);
+            baseFontSizeSelect.addEventListener('change', convertPxToRem);
+
+            // --- Initial Setup ---
+
+            // Populate the conversion table on page load
+            populateConversionTable();
+
+            // Perform an initial conversion on page load with default values
+            convertPxToRem();
+        });
+    </script>
+</body>
+
+</html>
