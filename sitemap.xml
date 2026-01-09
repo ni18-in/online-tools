@@ -78,19 +78,31 @@
   <!-- ABOUT -->
   <url>
     <loc>https://online-tools.ni18.in/about</loc>
-    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <lastmod>2026-01-09T18:05:19+00:00</lastmod>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
   </url>
 
   <url>
     <loc>https://online-tools.ni18.in/es/about</loc>
-    <lastmod>2025-04-12T08:05:19+00:00</lastmod>
+    <lastmod>2026-01-09T18:05:19+00:00</lastmod>
     <priority>0.64</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+  </url>
+
+  <url>
+    <loc>https://online-tools.ni18.in/fr/about</loc>
+    <lastmod>2026-01-09T18:05:19+00:00</lastmod>
+    <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
   </url>
 
