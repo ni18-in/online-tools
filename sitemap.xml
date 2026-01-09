@@ -263,6 +263,11 @@
 
   <!-- BLOG POSTS -->
   <url>
+    <loc>https://online-tools.ni18.in/blogs/ai-love-calculator.html</loc>
+    <lastmod>2026-01-09T18:00:00+05:30</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://online-tools.ni18.in/blogs/face-beauty-test.html</loc>
     <lastmod>2026-01-06T18:00:00+05:30</lastmod>
     <priority>0.80</priority>
