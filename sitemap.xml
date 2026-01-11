@@ -321,4 +321,11 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- ADVANCE EPOCH CONVERTER -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/advance-epoch-converter/</loc>
+    <lastmod>2026-01-11T15:00:00+05:30</lastmod>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>

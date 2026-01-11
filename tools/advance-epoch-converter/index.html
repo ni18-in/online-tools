@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Epoch & Unix Timestamp Converter</title>
+    <meta name="description"
+        content="Convert Unix timestamps to human-readable dates and vice versa. Supports seconds, milliseconds, microseconds, nanoseconds, and timezones.">
+    <meta name="keywords"
+        content="epoch converter, unix timestamp, timestamp converter, epoch time, unix time, developer tool">
+    <link rel="icon" href="/online-tools/assets/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Light Mode Variables */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #007acc;
+            /* VS Code Blue */
+            --accent-hover: #0062a3;
+            --border-color: #dee2e6;
+            --code-bg: #f1f3f5;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+
+        .dark {
+            /* Dark Mode Variables (Default) */
+            --bg-primary: #1e1e1e;
+            /* VS Code Editor Bg */
+            --bg-secondary: #252526;
+            /* VS Code Sidebar Bg */
+            --text-primary: #d4d4d4;
+            --text-secondary: #858585;
+            --accent-color: #007acc;
+            --accent-hover: #0098ff;
+            --border-color: #3e3e42;
+            --code-bg: #1e1e1e;
+            --success-color: #4ec9b0;
+            --error-color: #f48771;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Dashboard (Real-time clock) */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .clock-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .date-display {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        button.secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        button.secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Main Converter Input */
+        .converter-section {
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .smart-input-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+        }
+
+        .precision-toggles {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        input[type="radio"] {
+            accent-color: var(--accent-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            display: none;
+            /* Hidden by default until valid input */
+        }
+
+        .results-grid.visible {
+            display: grid;
+        }
+
+        .result-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .result-value-container {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+
+        .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+
+        .copy-btn:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 122, 204, 0.1);
+        }
+
+        /* Timezone Dropdown */
+        .timezone-selector {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        select {
+            padding: 0.5rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Developer Zone */
+        .developer-zone {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .developer-zone.visible {
+            display: block;
+        }
+
+        .code-snippet {
+            background-color: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .lang-tag {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Info Sections */
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .steps-list {
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .steps-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .steps-list strong {
+            color: var(--text-primary);
+        }
+
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .apps-list {
+            list-style: none;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+
+        .apps-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .apps-list strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        article h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        article p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        /* Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>
+                <svg class="icon" style="width: 24px; height: 24px;" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                </svg>
+                Epoch Converter
+            </h1>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark Mode">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
+                </svg>
+            </button>
+        </header>
+
+        <section class="dashboard">
+            <div class="card">
+                <h2>Current Epoch Time</h2>
+                <div class="clock-display" id="current-epoch">Loading...</div>
+                <div class="controls">
+                    <button id="pause-btn">Pause</button>
+                    <button class="secondary" id="reset-btn">Resume / Reset</button>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Current Date (UTC)</h2>
+                <div class="date-display" id="current-utc">Loading...</div>
+                <h2 style="margin-top: 1rem;">Current Date (Local)</h2>
+                <div class="date-display" id="current-local">Loading...</div>
+            </div>
+        </section>
+
+        <main class="card converter-section">
+            <div class="input-group">
+                <label for="main-input" style="color: var(--accent-color); font-weight: 600;">Converter Input</label>
+                <div class="smart-input-container">
+                    <input type="text" id="main-input"
+                        placeholder="Type a timestamp (e.g., 1704100000) or date string..." autocomplete="off">
+                    <button id="convert-btn">Convert</button>
+                </div>
+                <div class="precision-toggles">
+                    <label class="radio-label">
+                        <input type="radio" name="precision" value="seconds" checked> Seconds
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="precision" value="milliseconds"> Milliseconds
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="precision" value="microseconds"> Microseconds
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="precision" value="nanoseconds"> Nanoseconds
+                    </label>
+                </div>
+                <div id="error-msg" class="error-message"></div>
+            </div>
+        </main>
+
+        <section id="result-area" class="results-grid">
+            <div class="card">
+                <h2>Timestamps</h2>
+                <div class="result-item">
+                    <span class="result-label">Seconds</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-seconds"></span>
+                        <button class="copy-btn" data-target="res-seconds" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Milliseconds</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-ms"></span>
+                        <button class="copy-btn" data-target="res-ms" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Date Formats</h2>
+                <div class="result-item">
+                    <span class="result-label">GMT / UTC</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-utc"></span>
+                        <button class="copy-btn" data-target="res-utc" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Local Time</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-local"></span>
+                        <button class="copy-btn" data-target="res-local" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">ISO 8601</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-iso"></span>
+                        <button class="copy-btn" data-target="res-iso" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Details & Timezone</h2>
+                <div class="result-item">
+                    <span class="result-label">Relative Time</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-relative"></span>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Details</span>
+                    <div class="result-value-container">
+                        <span class="result-value" id="res-details"></span>
+                    </div>
+                </div>
+
+                <div class="timezone-selector">
+                    <span class="result-label" style="display:block; margin-bottom: 0.5rem;">Convert to Timezone</span>
+                    <select id="tz-select">
+                        <option value="UTC">UTC (Universal Coordinated Time)</option>
+                        <option value="America/New_York">New York (EST/EDT)</option>
+                        <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                        <option value="Europe/London">London (GMT/BST)</option>
+                        <option value="Europe/Paris">Paris (CET/CEST)</option>
+                        <option value="Asia/Tokyo">Tokyo (JST)</option>
+                        <option value="Asia/Kolkata">India (IST)</option>
+                        <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                    </select>
+                    <div class="result-value-container" style="margin-top: 0.5rem;">
+                        <span class="result-value" id="res-tz-converted"></span>
+                        <button class="copy-btn" data-target="res-tz-converted" title="Copy"><svg class="icon"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="grid-column: 1 / -1;">
+                <h2>Developer Zone</h2>
+                <div class="developer-zone visible">
+                    <div class="code-snippet">
+                        <div class="lang-tag">JavaScript / TypeScript</div>
+                        <code id="code-js">const timestamp = Date.now(); // milliseconds</code>
+                    </div>
+                    <div class="code-snippet">
+                        <div class="lang-tag">Python</div>
+                        <code id="code-python">import time; timestamp = int(time.time()) # seconds</code>
+                    </div>
+                    <div class="code-snippet">
+                        <div class="lang-tag">Java</div>
+                        <code id="code-java">long timestamp = System.currentTimeMillis(); // milliseconds</code>
+                    </div>
+                    <div class="code-snippet">
+                        <div class="lang-tag">PHP</div>
+                        <code id="code-php">$timestamp = time(); // seconds</code>
+                    </div>
+                    <div class="code-snippet">
+                        <div class="lang-tag">SQL</div>
+                        <code id="code-sql">SELECT UNIX_TIMESTAMP(); -- seconds</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="info-section">
+            <h2>How to Use</h2>
+            <article class="card">
+                <ol class="steps-list">
+                    <li><strong>Check the Clock:</strong> The dashboard at the top shows the current Unix Epoch time
+                        ticking in real-time. You can pause it if needed.</li>
+                    <li><strong>Smart Conversion:</strong> In the "Converter Input" box, type any <strong>Unix
+                            Timestamp</strong> (e.g., <code>1704067200</code>) or a <strong>Date String</strong> (e.g.,
+                        <code>2024-01-01</code>). The tool auto-detects the format.</li>
+                    <li><strong>Select Precision:</strong> If you are working with high-precision timestamps (like from
+                        a database or system log), select Milliseconds, Microseconds, or Nanoseconds to get accurate
+                        date conversions.</li>
+                    <li><strong>View Results:</strong> Instantly see the converted date in UTC, Local Time, and ISO 8601
+                        formats. Relative time (e.g., "2 years ago") is also displayed.</li>
+                    <li><strong>Timezone:</strong> Use the dropdown to convert the time into major global timezones like
+                        PST, EST, JST, or IST.</li>
+                </ol>
+            </article>
+        </section>
+
+        <!-- About & Applications Section -->
+        <section class="info-section">
+            <h2>About & Applications</h2>
+            <div class="card-grid-2">
+                <article class="card">
+                    <h3>What is Unix Epoch?</h3>
+                    <p>The <strong>Unix epoch</strong> (or Unix time, POSIX time) is the number of seconds that have
+                        elapsed since <strong>January 1, 1970 (00:00:00 UTC)</strong>, minus leap seconds. It provides a
+                        uniform way for computer systems to track time regardless of timezones.</p>
+                </article>
+                <article class="card">
+                    <h3>Common Applications</h3>
+                    <ul class="apps-list">
+                        <li><strong>Databases:</strong> Storing time as a simple integer (timestamp) is efficient and
+                            avoids timezone confusion in databases like MySQL, PostgreSQL, and MongoDB.</li>
+                        <li><strong>APIs:</strong> JSON APIs often return timestamps to ensure the client application
+                            can parse the date into its own local time easily.</li>
+                        <li><strong>Logging & Debugging:</strong> Developers use timestamps to correlate events across
+                            distributed systems where server clocks might be in different timezones.</li>
+                        <li><strong>File Systems:</strong> Operating systems (Linux, macOS, Windows) use timestamps to
+                            track when files are created, modified, or accessed.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Advance Epoch & Unix Timestamp Converter. Run locally + securely in your browser.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- State ---
+        let clockRunning = true;
+        let clockInterval;
+
+        // --- DOM Elements ---
+        const els = {
+            themeBtn: document.getElementById('theme-btn'),
+            currentEpoch: document.getElementById('current-epoch'),
+            currentUtc: document.getElementById('current-utc'),
+            currentLocal: document.getElementById('current-local'),
+            pauseBtn: document.getElementById('pause-btn'),
+            resetBtn: document.getElementById('reset-btn'),
+            mainInput: document.getElementById('main-input'),
+            convertBtn: document.getElementById('convert-btn'),
+            precisionRadios: document.querySelectorAll('input[name="precision"]'),
+            errorMsg: document.getElementById('error-msg'),
+            resultArea: document.getElementById('result-area'),
+            resSeconds: document.getElementById('res-seconds'),
+            resMs: document.getElementById('res-ms'),
+            resUtc: document.getElementById('res-utc'),
+            resLocal: document.getElementById('res-local'),
+            resIso: document.getElementById('res-iso'),
+            resRelative: document.getElementById('res-relative'),
+            resDetails: document.getElementById('res-details'),
+            tzSelect: document.getElementById('tz-select'),
+            resTzConverted: document.getElementById('res-tz-converted'),
+            developerCodes: {
+                js: document.getElementById('code-js'),
+                python: document.getElementById('code-python'),
+                java: document.getElementById('code-java'),
+                php: document.getElementById('code-php'),
+                sql: document.getElementById('code-sql')
+            }
+        };
+
+        let lastConvertedDate = new Date(); // Store for timezone conversions
+
+        // --- Clock Functions ---
+        function updateClock() {
+            if (!clockRunning) return;
+            const now = new Date();
+            els.currentEpoch.textContent = Math.floor(now.getTime() / 1000);
+            els.currentUtc.textContent = now.toUTCString();
+            els.currentLocal.textContent = now.toLocaleString();
+        }
+
+        function toggleClock() {
+            clockRunning = !clockRunning;
+            els.pauseBtn.textContent = clockRunning ? "Pause" : "Resume";
+            if (clockRunning) {
+                updateClock();
+            }
+        }
+
+        // --- Core Converter Logic ---
+        function processInput() {
+            const val = els.mainInput.value.trim();
+            const precision = document.querySelector('input[name="precision"]:checked').value;
+
+            els.errorMsg.style.display = 'none';
+            els.resultArea.classList.remove('visible');
+
+            if (!val) return;
+
+            let dateObj;
+            let isTimestamp = /^\d+(\.\d+)?$/.test(val);
+
+            try {
+                if (isTimestamp) {
+                    let num = parseFloat(val);
+                    /* 
+                       Logic for precision:
+                       JS Date works with milliseconds.
+                       If input is Seconds -> * 1000
+                       If input is Milliseconds -> * 1
+                       If input is Microseconds -> / 1000
+                       If input is Nanoseconds -> / 1000000
+                    */
+                    let msValue = num;
+                    if (precision === 'seconds') msValue = num * 1000;
+                    else if (precision === 'microseconds') msValue = num / 1000;
+                    else if (precision === 'nanoseconds') msValue = num / 1000000;
+
+                    dateObj = new Date(msValue);
+                } else {
+                    // Try parsing date string
+                    const parsed = Date.parse(val);
+                    if (isNaN(parsed)) throw new Error("Invalid date format");
+                    dateObj = new Date(parsed);
+                }
+
+                if (isNaN(dateObj.getTime())) throw new Error("Invalid date");
+
+                displayResults(dateObj);
+            } catch (e) {
+                els.errorMsg.textContent = "Oops! Could not parse that. Try a standard format like '2024-01-01' or a numeric timestamp.";
+                els.errorMsg.style.display = 'block';
+            }
+        }
+
+        function displayResults(date) {
+            lastConvertedDate = date;
+
+            // Format timestamps
+            const ms = date.getTime();
+            const s = Math.floor(ms / 1000);
+
+            els.resSeconds.textContent = s;
+            els.resMs.textContent = ms;
+            els.resUtc.textContent = date.toUTCString();
+            els.resLocal.textContent = date.toString();
+            els.resIso.textContent = date.toISOString();
+
+            // Relative time (Simple implementation)
+            const now = new Date();
+            const diffSeconds = Math.floor((now - date) / 1000);
+            const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+            if (Math.abs(diffSeconds) < 60) els.resRelative.textContent = rtf.format(-diffSeconds, 'second');
+            else if (Math.abs(diffSeconds) < 3600) els.resRelative.textContent = rtf.format(-Math.floor(diffSeconds / 60), 'minute');
+            else if (Math.abs(diffSeconds) < 86400) els.resRelative.textContent = rtf.format(-Math.floor(diffSeconds / 3600), 'hour');
+            else if (Math.abs(diffSeconds) < 31536000) els.resRelative.textContent = rtf.format(-Math.floor(diffSeconds / 86400), 'day');
+            else els.resRelative.textContent = rtf.format(-Math.floor(diffSeconds / 31536000), 'year');
+
+
+            // Details: Leap Year, Day of Year
+            const year = date.getFullYear();
+            const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            const start = new Date(year, 0, 0);
+            const diff = date - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+
+            els.resDetails.textContent = `Leap Year: ${isLeap ? "Yes" : "No"} | Day of Year: ${dayOfYear}`;
+
+            // Update Timezone
+            updateTimezone();
+
+            // Show results
+            els.resultArea.classList.add('visible');
+        }
+
+        function updateTimezone() {
+            if (!lastConvertedDate) return;
+            const tz = els.tzSelect.value;
+            try {
+                els.resTzConverted.textContent = new Intl.DateTimeFormat('en-US', {
+                    dateStyle: 'full',
+                    timeStyle: 'long',
+                    timeZone: tz
+                }).format(lastConvertedDate);
+            } catch (e) {
+                els.resTzConverted.textContent = "Timezone conversion error";
+            }
+        }
+
+        // --- copy to clipboard ---
+        function copyToClipboard(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<svg class="icon" style="color:var(--success-color)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 1500);
+            });
+        }
+
+        // --- Event Listeners ---
+        // Clock
+        setInterval(updateClock, 1000);
+        updateClock(); // Init
+        els.pauseBtn.addEventListener('click', toggleClock);
+        els.resetBtn.addEventListener('click', () => {
+            clockRunning = true;
+            els.pauseBtn.textContent = "Pause";
+            updateClock();
+            els.mainInput.value = "";
+            els.errorMsg.style.display = 'none';
+            els.resultArea.classList.remove('visible');
+        });
+
+        // Theme
+        els.themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Conversion
+        els.convertBtn.addEventListener('click', processInput);
+        els.mainInput.addEventListener('input', () => {
+            // Optional: Debounce this if it gets heavy, currently instantaneous
+            processInput();
+        });
+        els.precisionRadios.forEach(radio => radio.addEventListener('change', processInput));
+
+        // Timezone
+        els.tzSelect.addEventListener('change', updateTimezone);
+
+        // Copy
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                const text = document.getElementById(targetId).textContent;
+                copyToClipboard(text, btn);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
