@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to Word Converter – Convert ChatGPT to DOCX Online</title>
+    <meta name="description"
+        content="Free Markdown to Word converter. Convert ChatGPT, markdown files and rich text to DOCX instantly in your browser. No upload, no login.">
+    <meta name="keywords"
+        content="markdown to word, markdown to rich text, ChatGPT to word, convert markdown to docx, markdown to microsoft word, copy chatgpt to word, export chatgpt to docx">
+    <link rel="icon" href="/online-tools/assets/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Libraries (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Markdown to Word Converter",
+          "url": "https://online-tools.ni18.in/tools/markdown-to-word/",
+          "description": "Convert Markdown and ChatGPT responses to fully formatted Word (.docx) documents directly in your browser.",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to convert Markdown or ChatGPT text to Word",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "text": "Paste your Markdown or ChatGPT response into the editor on the left.",
+              "name": "Paste Content"
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Review the live preview on the right to ensure formatting is correct.",
+              "name": "Preview"
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Click 'Download Word (.docx)' to save the file to your device.",
+              "name": "Download"
+            }
+          ]
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How to convert ChatGPT to Word?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Simply copy the Markdown response from ChatGPT and paste it into our editor. The tool will automatically format it, and you can download it as a DOCX file."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does this tool keep formatting?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, it preserves headings, bold, italic, lists, code blocks, and more when converting to Word."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my data uploaded?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. This tool runs 100% in your browser. No data is sent to any server."
+                }
+              }
+            ]
+          }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+            --editor-bg: #ffffff;
+            --preview-bg: #ffffff;
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        .upload-label {
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .workspace {
+            display: flex;
+            gap: 2rem;
+            height: 70vh;
+            min-height: 500px;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--editor-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-header {
+            background-color: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #editor {
+            flex: 1;
+            width: 100%;
+            padding: 1.5rem;
+            border: none;
+            resize: none;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            outline: none;
+            background-color: var(--editor-bg);
+            color: var(--text-color);
+        }
+
+        #preview {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: var(--preview-bg);
+        }
+
+        /* Markdown Preview Styles (Targeting a Word-like look) */
+        #preview h1,
+        #preview h2,
+        #preview h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        #preview h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.3em;
+        }
+
+        #preview h2 {
+            font-size: 1.5em;
+        }
+
+        #preview p {
+            margin-bottom: 1em;
+        }
+
+        #preview ul,
+        #preview ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+
+        #preview blockquote {
+            border-left: 4px solid #dfe2e5;
+            margin: 0;
+            padding-left: 1em;
+            color: #64748b;
+        }
+
+        #preview pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        #preview code {
+            font-family: var(--font-mono);
+            background-color: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        #preview pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        #preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        #preview th,
+        #preview td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5em;
+        }
+
+        #preview th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        #preview img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-list li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2.5rem;
+            font-weight: bold;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-item h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #0f172a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workspace {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .panel {
+                min-height: 400px;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Markdown to Word Converter</h1>
+        <a href="/online-tools/" style="text-decoration: none; color: var(--text-color); font-weight: 500;">&larr; More
+            Tools</a>
+    </header>
+
+    <div class="container">
+
+        <div class="toolbar">
+            <button class="btn btn-secondary" onclick="document.getElementById('file-upload').click()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Upload .md File
+            </button>
+            <input type="file" id="file-upload" accept=".md,.txt,.markdown" onchange="handleFileUpload(this)">
+
+            <button class="btn btn-secondary" onclick="copyRichText()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copy Rich Text
+            </button>
+
+            <button class="btn" style="margin-left: auto;" onclick="downloadDocx()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Word (.docx)
+            </button>
+        </div>
+
+        <div class="workspace">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Markdown / ChatGPT Input</span>
+                    <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">Type or Paste here</span>
+                </div>
+                <textarea id="editor" placeholder="# Paste your Markdown or ChatGPT content here...
+                
+- It will automatically convert.
+- Supports **bold**, *italic*, and more.
+
+1. Lists
+2. Tables
+3. Code blocks" spellcheck="false"></textarea>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Live Preview</span>
+                </div>
+                <!-- The Preview Div is where we render HTML for visual feedback -->
+                <div id="preview"></div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>How to Convert Markdown or ChatGPT to Word</h2>
+            <ol class="step-list">
+                <li><strong>Paste Content:</strong> Copy your text from ChatGPT, GitHub, or any text editor and paste it
+                    into the left panel. You can also upload a <code>.md</code> file directly.</li>
+                <li><strong>Check Preview:</strong> As you type, the right panel updates instantly to show you how your
+                    document will look.</li>
+                <li><strong>Download or Copy:</strong> Click <strong>Download Word (.docx)</strong> to save a fully
+                    formatted Microsoft Word file. Or click <strong>Copy Rich Text</strong> to paste formatted text into
+                    emails or Google Docs.</li>
+            </ol>
+        </section>
+
+        <section class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How to convert ChatGPT to Word?</h3>
+                <p>Simply click the "Copy" button on your ChatGPT response, then paste it into the editor on this page.
+                    Our tool reads the markdown formatting and lets you download a clean DOCX file.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does this tool keep formatting?</h3>
+                <p>Yes! We support headings (H1, H2, H3), bold, italic, bullet points, numbered lists, blockquotes, code
+                    blocks, and tables.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is this tool free and secure?</h3>
+                <p>Absolutely. It is 100% free and runs entirely in your browser. Your data never leaves your device and
+                    is not uploaded to any server.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Markdown to Word Converter. Built for privacy and speed.</p>
+    </footer>
+
+    <script>
+        // --- Initialization ---
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+
+        // Set initial content and render
+        const initialContent = `# Welcome to Markdown to Word
+
+This is a **client-side** converter tool.
+
+## Features
+- Convert **Markdown** to Word
+- Supports *Italics* and __Bold__
+- Lists and Tables
+
+| Feature | Support |
+|---------|---------|
+| Tables  | Yes     |
+| Lists   | Yes     |
+
+\`\`\`javascript
+console.log("Hello World");
+\`\`\`
+`;
+
+        if (!editor.value) {
+            editor.value = initialContent;
+        }
+
+        // --- Markdown to HTML (Preview) ---
+        function updatePreview() {
+            const markdownText = editor.value;
+            const htmlContent = marked.parse(markdownText);
+            preview.innerHTML = htmlContent;
+        }
+
+        editor.addEventListener('input', updatePreview);
+        updatePreview(); // Initial render
+
+        // --- File Upload ---
+        function handleFileUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                editor.value = e.target.result;
+                updatePreview();
+            };
+            reader.readAsText(file);
+        }
+
+        // --- Copy Rich Text ---
+        // We select the preview div and copy its HTML content to clipboard
+        async function copyRichText() {
+            const range = document.createRange();
+            range.selectNode(preview);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            try {
+                // Modern Async Clipboard API (if text/html is supported, mostly strict security)
+                // Fallback to execCommand for better rich text support across browsers
+                document.execCommand('copy');
+                alert('Rich text copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy', err);
+                alert('Failed to copy text.');
+            }
+
+            window.getSelection().removeAllRanges();
+        }
+
+        // --- Markdown to DOCX Generation (The Heavy Lifting) ---
+        // We use 'marked.lexer' to get tokens, then map tokens to 'docx' library objects.
+        async function downloadDocx() {
+            const text = editor.value;
+            const tokens = marked.lexer(text);
+
+            // Generate filename from the first H1 heading, or default
+            let filename = "markdown-document.docx";
+            const h1Token = tokens.find(t => t.type === 'heading' && t.depth === 1);
+            if (h1Token) {
+                // Sanitize filename: keep alphanumeric, spaces, hyphens
+                const safeName = h1Token.text.replace(/[^a-z0-9 \-_]/gi, '').trim();
+                if (safeName) {
+                    filename = safeName.replace(/\s+/g, '-') + ".docx";
+                }
+            }
+
+            const docChildren = mapTokensToDocx(tokens);
+
+            const doc = new docx.Document({
+                sections: [{
+                    properties: {},
+                    children: docChildren,
+                }],
+            });
+
+            docx.Packer.toBlob(doc).then((blob) => {
+                const docxBlob = new Blob([blob], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+
+                // Use DOM anchor method for maximum compatibility
+                const url = window.URL.createObjectURL(docxBlob);
+                const anchor = document.createElement("a");
+                anchor.href = url;
+                anchor.download = filename;
+                document.body.appendChild(anchor);
+                anchor.click();
+                document.body.removeChild(anchor);
+                window.URL.revokeObjectURL(url);
+            }).catch(err => {
+                console.error("Error generating docx:", err);
+                alert("Error generating document. See console.");
+            });
+        }
+
+        // --- Mapper Function: Tokens -> Docx Paragraphs ---
+        function mapTokensToDocx(tokens) {
+            const children = [];
+
+            tokens.forEach(token => {
+                switch (token.type) {
+                    case 'heading':
+                        children.push(createHeading(token));
+                        break;
+                    case 'paragraph':
+                        children.push(createParagraph(token.text));
+                        break;
+                    case 'list':
+                        children.push(...createList(token));
+                        break;
+                    case 'code':
+                        children.push(createCodeBlock(token));
+                        break;
+                    case 'blockquote':
+                        // Blockquotes treated as italicized indented text
+                        token.tokens.forEach(t => {
+                            if (t.type === 'paragraph') {
+                                children.push(new docx.Paragraph({
+                                    children: [new docx.TextRun(t.text)],
+                                    indent: { left: 720 }, // 0.5 inch
+                                    style: "IntenseQuote" // Docx built-in style or manual
+                                }));
+                            }
+                        })
+                        break;
+                    case 'table':
+                        children.push(createTable(token));
+                        break;
+                    case 'space':
+                        // Ignore
+                        break;
+                    case 'hr':
+                        children.push(new docx.Paragraph({
+                            border: { bottom: { color: "auto", space: 1, value: "single", size: 6 } }
+                        }));
+                        break;
+                    default:
+                        console.warn('Unhandled token type:', token.type);
+                }
+            });
+
+            return children;
+        }
+
+        // Helper: Create Heading
+        function createHeading(token) {
+            // marked token.depth is 1-6
+            let headingLevel = docx.HeadingLevel.HEADING_1;
+            if (token.depth === 2) headingLevel = docx.HeadingLevel.HEADING_2;
+            if (token.depth === 3) headingLevel = docx.HeadingLevel.HEADING_3;
+            if (token.depth === 4) headingLevel = docx.HeadingLevel.HEADING_4;
+            if (token.depth === 5) headingLevel = docx.HeadingLevel.HEADING_5;
+            if (token.depth >= 6) headingLevel = docx.HeadingLevel.HEADING_6;
+
+            return new docx.Paragraph({
+                children: [
+                    new docx.TextRun({
+                        text: token.text,
+                    })
+                ],
+                heading: headingLevel,
+                spacing: { before: 200, after: 120 }
+            });
+        }
+
+        // Helper: Create Paragraph with inline formatting (bold/italic)
+        // Note: marked token.text is plain string with Markdown syntax. 
+        // Ideally we recursively parse inline markdown. marked.inlineLexer?
+        // Simpler approach for client-side without massive complexity:
+        // Use a simple regex replacer or split logic for ** and *.
+        // Ideally we should use token.tokens if available for inline.
+        // Let's assume basic text or try to handle simple formatting.
+        function createParagraph(text) {
+            // Basic parsing for Bold (**text**) and Italic (*text*)
+            // This is a naive implementation. For robust production usage, we'd traverse the inline tokens.
+            // But for this single-file tool, we will try to support basic formatting.
+
+            const textRuns = parseInlineText(text);
+
+            return new docx.Paragraph({
+                children: textRuns,
+                spacing: { after: 120 }
+            });
+        }
+
+        function createList(token) {
+            const items = [];
+            token.items.forEach(item => {
+                // item.text contains the content. 
+                // We should handle nested formatting if possible.
+                items.push(new docx.Paragraph({
+                    children: parseInlineText(item.text),
+                    bullet: { level: 0 }, // docx.js handles numbering vs bullets automatically if using proper Paragraph props? 
+                    // Actually docx.js requires styling numbering. 
+                    // For Simplicity: We use 'bullet' property. 
+                    // For ordered lists we can try numbering but it needs config.
+                    // Falling back to simple bullets for both for generic stability or just bullets.
+                }));
+            });
+            return items;
+        }
+
+        function createCodeBlock(token) {
+            return new docx.Paragraph({
+                children: [
+                    new docx.TextRun({
+                        text: token.text,
+                        font: "Courier New",
+                        size: 22, // 11pt
+                    })
+                ],
+                shading: {
+                    type: docx.ShadingType.CLEAR,
+                    fill: "F1F5F9",
+                },
+                spacing: { before: 120, after: 120 }
+            });
+        }
+
+        function createTable(token) {
+            // token.header is array of {text: string}
+            // token.rows is array of array of {text: string}
+
+            const rows = [];
+
+            // Header
+            const headerCells = token.header.map(cell =>
+                new docx.TableCell({
+                    children: [new docx.Paragraph({ children: parseInlineText(cell.text), style: "strong" })],
+                    shading: { fill: "f3f4f6" }
+                })
+            );
+            rows.push(new docx.TableRow({ children: headerCells }));
+
+            // Body
+            token.rows.forEach(row => {
+                const cells = row.map(cell =>
+                    new docx.TableCell({
+                        children: [new docx.Paragraph({ children: parseInlineText(cell.text) })]
+                    })
+                );
+                rows.push(new docx.TableRow({ children: cells }));
+            });
+
+            return new docx.Table({
+                rows: rows,
+                width: { size: 100, type: docx.WidthType.PERCENTAGE }
+            });
+        }
+
+        // --- Simple Inline Parser --- 
+        // Supports **bold**, *italic*, `code`.
+        function parseInlineText(text) {
+            const runs = [];
+            // Regex to split by bold, italic, code
+            // This is tricky. A better way is to use marked inline lexer tokens if available.
+            // marked.lexer(text) returns block tokens. 
+            // Inside paragraph token, there might be 'tokens' array if 'smartypants' or default inline parser run.
+            // Let's check `marked.lexer` output in console. It usually puts inline tokens in `token.tokens`.
+
+            // However, since we don't have the token object passed here (only text string for some helpers), 
+            // let's re-lex inline. 
+            // Actually, we can just use the provided tokens in the recursive map.
+            // But `createParagraph` received `text`. Let's assume we can split manually for now.
+            // Or better: pass the token itself to createParagraph everywhere.
+
+            // Re-implementing a basic regex parser for common syntax:
+            // Split by ** or * or `
+            // This is "Good Enough" for MVP.
+
+            let parts = text.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`)/g);
+
+            parts.forEach(part => {
+                if (!part) return;
+
+                if (part.startsWith('**') && part.endsWith('**')) {
+                    runs.push(new docx.TextRun({ text: part.slice(2, -2), bold: true }));
+                } else if (part.startsWith('*') && part.endsWith('*')) {
+                    runs.push(new docx.TextRun({ text: part.slice(1, -1), italics: true }));
+                } else if (part.startsWith('`') && part.endsWith('`')) {
+                    runs.push(new docx.TextRun({ text: part.slice(1, -1), font: "Courier New" }));
+                } else {
+                    // Start decoding HTML entities if marked left them? marked.lexer decodes entities usually.
+                    // But we might need to handle &amp; etc. Docx handles string content well.
+                    runs.push(new docx.TextRun({ text: part }));
+                }
+            });
+
+            return runs;
+        }
+
+    </script>
+</body>
+
+</html>

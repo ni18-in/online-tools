@@ -328,4 +328,11 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- MARKDOWN TO WORD CONVERTER -->
+  <url>
+    <loc>https://online-tools.ni18.in/tools/markdown-to-word/</loc>
+    <lastmod>2026-01-11T15:00:00+05:30</lastmod>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>
