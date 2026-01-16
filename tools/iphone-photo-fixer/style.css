@@ -1,0 +1,303 @@
+/* Global Styles */
+:root {
+    --primary-color: #3b82f6;
+    /* Apple Blue-ish */
+    --primary-hover: #2563eb;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --surface-bg: #334155;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #475569;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #60a5fa, #34d399);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+/* Tool Area */
+.tool-card {
+    background-color: var(--card-bg);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Drop Zone */
+.drop-zone {
+    border: 3px dashed var(--border-color);
+    border-radius: 1rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.drop-icon {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.drop-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.drop-subtext {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.file-input {
+    display: none;
+}
+
+/* Controls */
+.controls-area {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.format-select {
+    background-color: var(--surface-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+    background-color: var(--surface-bg);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+/* File List */
+.file-list {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.file-item {
+    background-color: var(--surface-bg);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: opacity 0.3s;
+}
+
+.file-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.file-status {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.status-converting {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--primary-color);
+}
+
+.status-done {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
+}
+
+.status-error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--error-color);
+}
+
+.progress-ring {
+    width: 24px;
+    height: 24px;
+}
+
+/* Privacy & Info Sections */
+.info-section {
+    margin-top: 4rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .info-section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .full-width {
+        grid-column: span 2;
+    }
+}
+
+.info-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.info-card h2,
+.info-card h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-card p,
+.info-card li {
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.faq-list details {
+    background-color: var(--surface-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.faq-list summary {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.faq-list p {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--text-color);
+}

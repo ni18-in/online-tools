@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Photo Fixer | Convert HEIC to JPG on PC Free - Offline</title>
+    <meta name="description"
+        content="Convert HEIC images to JPG or PNG instantly on Windows, Mac, or Android. Free batch converter, runs 100% offline in your browser. No upload required.">
+    <meta name="keywords"
+        content="Convert HEIC to JPG PC free, Batch heic converter no upload, Open iPhone photos on Windows online, Offline HEIC to PNG, iPhone photo converter for Windows">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/iphone-photo-fixer/">
+    <meta property="og:title" content="iPhone Photo Fixer - Free Offline HEIC Converter">
+    <meta property="og:description"
+        content="Convert unlimited HEIC photos to JPG/PNG locally. No server uploads, total privacy. Works on Windows, Mac, Android.">
+    <meta property="og:image" content="https://online-tools.ni18.in/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://online-tools.ni18.in/tools/iphone-photo-fixer/">
+    <meta property="twitter:title" content="iPhone Photo Fixer - Free Offline HEIC Converter">
+    <meta property="twitter:description"
+        content="Convert unlimited HEIC photos to JPG/PNG locally. No server uploads, total privacy. Works on Windows, Mac, Android.">
+    <meta property="twitter:image" content="https://online-tools.ni18.in/assets/og-image.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RJER6TKTQ3');
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="/" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5" />
+                <path d="M12 19l-7-7 7-7" />
+            </svg>
+            Back to Tools
+        </a>
+
+        <header>
+            <h1>iPhone Photo Fixer</h1>
+            <p class="tagline">Convert HEIC to JPG on PC – Free, Offline, No Upload</p>
+        </header>
+
+        <main class="tool-card">
+            <div id="drop-zone" class="drop-zone">
+                <span class="drop-icon">📸</span>
+                <p class="drop-text">Drag & Drop HEIC files here</p>
+                <p class="drop-subtext">or click to select files</p>
+                <input type="file" id="file-input" class="file-input" accept=".heic,.HEIC" multiple>
+            </div>
+
+            <div id="controls-area" class="controls-area hidden">
+                <div class="options">
+                    <label for="format-select">Output Format:</label>
+                    <select id="format-select" class="format-select">
+                        <option value="image/jpeg">JPG</option>
+                        <option value="image/png">PNG</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button id="convert-btn" class="btn btn-primary">Start Conversion</button>
+                    <button id="download-all-btn" class="btn btn-success hidden" disabled>
+                        Download All (ZIP)
+                    </button>
+                </div>
+            </div>
+
+            <div id="file-list" class="file-list"></div>
+        </main>
+
+        <!-- SEO Content -->
+        <section class="info-section">
+            <article class="info-card">
+                <h2>Why Use iPhone Photo Fixer?</h2>
+                <ul>
+                    <li><strong>100% Private:</strong> Your photos never leave your device. Processing is done locally
+                        in your browser.</li>
+                    <li><strong>Offline Capable:</strong> Works without an internet connection once loaded. suitable for
+                        working on airplanes or remote areas.</li>
+                    <li><strong>Batch Conversion:</strong> Convert hundreds of photos at once without limits.</li>
+                    <li><strong>Free Forever:</strong> No premium plans, no watermarks, no hidden fees.</li>
+                </ul>
+            </article>
+
+            <article class="info-card">
+                <h2>What is HEIC?</h2>
+                <p>HEIC (High Efficiency Image Container) is the default image format used by Apple devices (iPhone,
+                    iPad) since iOS 11. It offers better quality than JPG at half the file size.</p>
+                <p>However, Windows PCs and many older Android devices cannot natively open HEIC files, causing
+                    frustration when transferring photos. This tool solves that problem instantly.</p>
+            </article>
+
+            <article class="info-card full-width">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details>
+                        <summary>Is it safe to use this tool?</summary>
+                        <p>Yes, absolutely. Unlike other online converters that require you to upload your files to a
+                            cloud server, "iPhone Photo Fixer" processes everything client-side using JavaScript. Your
+                            personal photos never touch the internet.</p>
+                    </details>
+                    <details>
+                        <summary>Can I convert multiple files at once?</summary>
+                        <p>Yes, you can upload as many files as you want. We recommend batches of 50-100 if you have a
+                            lower-end device to prevent your browser from becoming slow.</p>
+                    </details>
+                    <details>
+                        <summary>Does this work on Windows?</summary>
+                        <p>Yes, this tool works perfectly on Windows 10, Windows 11, macOS, and Linux via Chrome, Edge,
+                            or Firefox.</p>
+                    </details>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
