@@ -340,4 +340,10 @@
     <priority>0.80</priority>
   </url>
 
+  <url>
+    <loc>https://online-tools.ni18.in/tools/subtitle-resync-tool/</loc>
+    <lastmod>2026-01-16T22:30:00+05:30</lastmod>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>

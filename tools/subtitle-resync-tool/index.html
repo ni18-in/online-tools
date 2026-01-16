@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtitle Resync Tool - Fix Out of Sync Subtitles Online</title>
+    <meta name="description"
+        content="Fix out of sync subtitles easily. Upload your SRT and Video, adjust timing with a click, and download the permanently fixed subtitle file.">
+    <meta name="keywords"
+        content="Subtitle shifter online, Fix out of sync subtitles srt, Resync srt file permanent, Delay subtitles online tool, srt time shifter">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://online-tools.ni18.in/tools/subtitle-resync-tool/">
+    <meta property="og:title" content="Subtitle Resync Tool - Fix Audio Sync Issues Instantly">
+    <meta property="og:description"
+        content="Easily fix subtitle sync issues online. Adjust timestamps, preview in real-time with your video, and download the corrected SRT file.">
+    <meta property="og:image" content="https://online-tools.ni18.in/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://online-tools.ni18.in/tools/subtitle-resync-tool/">
+    <meta property="twitter:title" content="Subtitle Resync Tool - Fix Audio Sync Issues Instantly">
+    <meta property="twitter:description"
+        content="Easily fix subtitle sync issues online. Adjust timestamps, preview in real-time with your video, and download the corrected SRT file.">
+    <meta property="twitter:image" content="https://online-tools.ni18.in/assets/og-image.png">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+
+    <!-- Analytics (Optional Integration) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJER6TKTQ3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RJER6TKTQ3');
+    </script>
+</head>
+
+<body>
+
+    <div class="tool-container">
+        <a href="/" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5" />
+                <path d="M12 19l-7-7 7-7" />
+            </svg>
+            Back to Tools
+        </a>
+
+        <header>
+            <h1>Subtitle Resync</h1>
+            <p class="subtitle">Permanently fix out-of-sync .SRT subtitle files</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="file-input-wrapper" id="video-drop-zone">
+                <input type="file" id="video-file" accept="video/*">
+                <div class="file-label">
+                    <span class="icon">🎥</span>
+                    <span>1. Upload Video (for preview)</span>
+                    <span class="file-name" id="video-file-name"></span>
+                </div>
+            </div>
+
+            <div class="file-input-wrapper" id="srt-drop-zone">
+                <input type="file" id="srt-file" accept=".srt">
+                <div class="file-label">
+                    <span class="icon">📝</span>
+                    <span>2. Upload .SRT File</span>
+                    <span class="file-name" id="srt-file-name"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="video-container">
+                <video id="video-preview" controls playsinline>
+                    <track id="subtitle-track" kind="subtitles" label="Preview" default>
+                </video>
+                <div class="video-placeholder" id="video-placeholder">
+                    Upload a video to see the preview
+                </div>
+            </div>
+
+            <aside class="controls-panel">
+                <div class="offset-display">
+                    <span class="offset-label">Current Offset</span>
+                    <div class="offset-value" id="current-offset">0.0s</div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Quick Shift</h3>
+                    <div class="shift-buttons">
+                        <button class="btn-shift" data-amount="-0.1">- 0.1s</button>
+                        <button class="btn-shift" data-amount="0.1">+ 0.1s</button>
+                        <button class="btn-shift" data-amount="-0.5">- 0.5s</button>
+                        <button class="btn-shift" data-amount="0.5">+ 0.5s</button>
+                        <button class="btn-shift" data-amount="-1.0">- 1.0s</button>
+                        <button class="btn-shift" data-amount="1.0">+ 1.0s</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Manual Adjustment</h3>
+                    <div class="manual-adjust">
+                        <input type="number" id="manual-offset" step="0.1" value="0" placeholder="Seconds (e.g. -1.5)">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <button id="download-btn" class="btn-primary" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download Fixed SRT
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <p class="instructions">
+                        <strong>Tip:</strong> You can also use keyboard shortcuts to adjust timing while the video is
+                        focused.<br>
+                        <kbd>Shift</kbd> + <kbd>←</kbd> / <kbd>→</kbd>
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <section class="info-section">
+            <div class="content-card">
+                <h2>How to Resync Subtitles Online?</h2>
+                <ol class="steps-list">
+                    <li><strong>Upload Video & Subtitles:</strong> Select your video file (MP4, WebM, etc.) and the
+                        out-of-sync .SRT file.</li>
+                    <li><strong>Check Sync:</strong> Play the video to see when the expected dialogue happens versus
+                        when the subtitle appears.</li>
+                    <li><strong>Adjust Timing:</strong>
+                        <ul>
+                            <li>If subtitles appear <strong>too early</strong>, click <span class="badge">+ Shift</span>
+                                (Delay).</li>
+                            <li>If subtitles appear <strong>too late</strong>, click <span class="badge">- Shift</span>
+                                (Advance).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Fine Tune:</strong> Use the manual input for precise millisecond adjustments (e.g.,
+                        <code>-1.5s</code>).</li>
+                    <li><strong>Download:</strong> Click "Download Fixed SRT" to save the permanently corrected file.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="content-card">
+                <h2>About Subtitle Resync Tool</h2>
+                <p>
+                    Frustrated with subtitles that don't match the audio? The <strong>Subtitle Resync Tool</strong> is
+                    the easiest way to <strong>fix out of sync subtitles srt</strong> files directly in your browser. No
+                    need to download complex software or manually edit timestamps.
+                </p>
+                <p>
+                    Whether you are a movie enthusiast, anime fan, or language learner, our <strong>subtitle shifter
+                        online</strong> utility helps you perfectly align text with speech. Simply load your media,
+                    apply a time offset, and <strong>resync srt file permanent</strong> changes in seconds.
+                </p>
+                <p>
+                    This tool works entirely on your device (client-side), ensuring your video and subtitle files remain
+                    private and secure. It's the ultimate solution to <strong>delay subtitles online tool</strong>
+                    searches, providing a quick fix for any synced video playback issues.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
