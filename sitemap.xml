@@ -27,83 +27,83 @@
 
   <!-- TOOLS PAGE -->
   <url>
-    <loc>https://online-tools.ni18.in/tools</loc>
+    <loc>https://online-tools.ni18.in/tools/</loc>
     <lastmod>2026-01-03T08:05:19+00:00</lastmod>
     <priority>1.00</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/"/>
   </url>
 
   <url>
-    <loc>https://online-tools.ni18.in/es/tools</loc>
+    <loc>https://online-tools.ni18.in/es/tools/</loc>
     <lastmod>2026-01-03T08:05:19+00:00</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/"/>
   </url>
 
   <url>
-    <loc>https://online-tools.ni18.in/fr/tools</loc>
+    <loc>https://online-tools.ni18.in/fr/tools/</loc>
     <lastmod>2026-01-03T08:05:19+00:00</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/"/>
   </url>
 
   <!-- BLOGS -->
   <url>
-    <loc>https://online-tools.ni18.in/blogs</loc>
+    <loc>https://online-tools.ni18.in/blogs/</loc>
     <lastmod>2025-04-12T08:05:19+00:00</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
   </url>
 
   <url>
-    <loc>https://online-tools.ni18.in/es/blogs</loc>
+    <loc>https://online-tools.ni18.in/es/blogs/</loc>
     <lastmod>2025-04-12T08:05:19+00:00</lastmod>
     <priority>0.64</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
   </url>
 
   <!-- ABOUT -->
   <url>
-    <loc>https://online-tools.ni18.in/about</loc>
+    <loc>https://online-tools.ni18.in/about/</loc>
     <lastmod>2026-01-09T18:05:19+00:00</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about/"/>
   </url>
 
   <url>
-    <loc>https://online-tools.ni18.in/es/about</loc>
+    <loc>https://online-tools.ni18.in/es/about/</loc>
     <lastmod>2026-01-09T18:05:19+00:00</lastmod>
     <priority>0.64</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about/"/>
   </url>
 
   <url>
-    <loc>https://online-tools.ni18.in/fr/about</loc>
+    <loc>https://online-tools.ni18.in/fr/about/</loc>
     <lastmod>2026-01-09T18:05:19+00:00</lastmod>
     <priority>0.64</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/about/"/>
   </url>
 
   <!-- TOOL PAGES (no Spanish versions, so no hreflang) -->
@@ -192,10 +192,10 @@
     <loc>https://online-tools.ni18.in/fr/blogs/</loc>
     <lastmod>2026-01-03T08:05:19+00:00</lastmod>
     <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
   </url>
 
   <url>

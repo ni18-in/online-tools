@@ -2,9 +2,9 @@
 User-agent: *
 Allow: /
 
-# Disallow crawling of potentially irrelevant directories if any (e.g., dev files)
-# Disallow: /dev/
-# Disallow: /temp/
+# Disallow crawling of potentially irrelevant directories
+Disallow: /.gemini/
+Disallow: /.git/
 
-# Specify the location of your sitemap (Update the URL)
+# Specify the location of your sitemap
 Sitemap: https://online-tools.ni18.in/sitemap.xml 
