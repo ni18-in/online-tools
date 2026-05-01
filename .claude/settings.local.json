@@ -4,7 +4,9 @@
       "WebFetch(domain:online-tools.ni18.in)",
       "Bash(curl -sI https://online-tools.ni18.in/)",
       "Bash(curl -sI -A \"Googlebot/2.1 \\(+http://www.google.com/bot.html\\)\" https://online-tools.ni18.in/)",
-      "Bash(curl -sI https://online-tools.ni18.in/sitemap.xml)"
+      "Bash(curl -sI https://online-tools.ni18.in/sitemap.xml)",
+      "Bash(python -c ' *)",
+      "Bash(curl -sI https://online-tools.ni18.in/assets/og-image.png)"
     ]
   }
 }

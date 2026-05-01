@@ -80,27 +80,17 @@
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
   </url>
 
-  <url>
-    <loc>https://online-tools.ni18.in/es/blogs/</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
-  </url>
+  <!-- /es/blogs/ intentionally excluded: page is noindex'd until translated content exists. -->
 
   <url>
     <loc>https://online-tools.ni18.in/fr/blogs/</loc>
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/blogs/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/blogs/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/blogs/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/blogs/"/>
   </url>
@@ -146,20 +136,9 @@
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://online-tools.ni18.in/tools/ai-beauty-test/</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-  </url>
-  <url>
-    <loc>https://online-tools.ni18.in/tools/ai-love-calculator/</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
+  <!-- /tools/ai-beauty-test/ (en/es/fr) intentionally excluded: noindex (entertainment tool, separate from developer-tool focus). -->
+  <!-- /tools/ai-love-calculator/ intentionally excluded: noindex. -->
+
   <url>
     <loc>https://online-tools.ni18.in/tools/all-in-one-text-analyzer/</loc>
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
@@ -260,24 +239,8 @@
   <!-- ============================================================
        TRANSLATED TOOL PAGES
        ============================================================ -->
-  <url>
-    <loc>https://online-tools.ni18.in/es/tools/ai-beauty-test/</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-  </url>
-  <url>
-    <loc>https://online-tools.ni18.in/fr/tools/ai-beauty-test/</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://online-tools.ni18.in/es/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://online-tools.ni18.in/fr/tools/ai-beauty-test/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://online-tools.ni18.in/tools/ai-beauty-test/"/>
-  </url>
+  <!-- /es/tools/ai-beauty-test/ and /fr/tools/ai-beauty-test/ excluded: noindex. -->
+
   <url>
     <loc>https://online-tools.ni18.in/es/tools/px-a-rem-convertidor/</loc>
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
@@ -298,18 +261,9 @@
   <!-- ============================================================
        BLOG POSTS (English)
        ============================================================ -->
-  <url>
-    <loc>https://online-tools.ni18.in/blogs/ai-love-calculator.html</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-  </url>
+  <!-- ai-love-calculator.html and face-beauty-test.html blog posts excluded: noindex. -->
   <url>
     <loc>https://online-tools.ni18.in/blogs/edit-images-like-pro-free-online-tool.html</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-  </url>
-  <url>
-    <loc>https://online-tools.ni18.in/blogs/face-beauty-test.html</loc>
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
     <priority>0.65</priority>
   </url>
@@ -342,11 +296,7 @@
   <!-- ============================================================
        BLOG POSTS (French)
        ============================================================ -->
-  <url>
-    <loc>https://online-tools.ni18.in/fr/blogs/ai-beauty-test-free-online.html</loc>
-    <lastmod>2026-05-02T00:00:00+00:00</lastmod>
-    <priority>0.55</priority>
-  </url>
+  <!-- /fr/blogs/ai-beauty-test-free-online.html excluded: noindex. -->
   <url>
     <loc>https://online-tools.ni18.in/fr/blogs/edit-images-like-pro-free-online-tool.html</loc>
     <lastmod>2026-05-02T00:00:00+00:00</lastmod>
