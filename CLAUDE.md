@@ -51,4 +51,4 @@ Tools are advertised as client-side. Don't introduce server calls or third-party
 
 ## What's NOT here
 
-No `package.json`, no `node_modules`, no test runner, no linter config, no CI beyond GitHub Pages deployment. Don't try to run `npm`/`yarn`/`pnpm` or look for a missing build step — there isn't one.
+No `package.json`, no `node_modules`, no test runner, no linter config, no CI beyond GitHub Pages deployment. Don't try to run `npm`/`yarn`/`pnpm` or look for a missing build step — there isn't one
