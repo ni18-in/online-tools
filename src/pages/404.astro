@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../components/Seo.astro';
+import { SITE_URL } from '../data/site';
+
+// 404.astro emits dist/404.html (GitHub Pages serves it automatically). noindex, no ads.
+const seo: SeoProps = {
+  title: '404 - Page Not Found | Online Tools',
+  description: 'The page you are looking for could not be found.',
+  canonical: `${SITE_URL}/404.html`,
+  robots: 'noindex, follow',
+  og: { type: 'website', url: `${SITE_URL}/404.html`, title: '404 - Page Not Found', description: 'The page you are looking for could not be found.' },
+  twitter: { card: 'summary', url: `${SITE_URL}/404.html`, title: '404 - Page Not Found', description: 'The page you are looking for could not be found.' },
+};
+---
+<BaseLayout seo={seo} lang="en">
+  <main id="main-content" class="notfound">
+    <p class="code">404</p>
+    <h1>Page not found</h1>
+    <p class="msg">Sorry, the page you’re looking for doesn’t exist or has moved.</p>
+    <div class="actions">
+      <a class="btn" href="/">Go home</a>
+      <a class="btn btn-outline" href="/tools/">Browse all tools</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .notfound { max-width: 600px; margin: 0 auto; padding: 80px 16px; text-align: center; }
+  .code { font-size: 5rem; font-weight: 700; margin: 0; color: var(--md-sys-color-primary); line-height: 1; }
+  .notfound h1 { font-size: 1.75rem; margin: 8px 0 12px; color: var(--md-sys-color-on-surface); }
+  .msg { color: var(--md-sys-color-on-surface-variant); margin: 0 0 28px; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; padding: 10px 24px; border-radius: 999px;
+    background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+    text-decoration: none; font-weight: 500;
+  }
+  .btn-outline { background: transparent; color: var(--md-sys-color-primary); border: 1px solid var(--md-sys-color-outline); }
+</style>

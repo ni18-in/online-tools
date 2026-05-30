@@ -73,8 +73,8 @@ body = body.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (full, attrs, cod
 // remove AdSense <ins> units
 body = body.replace(/<ins\b[^>]*class="[^"]*adsbygoogle[^"]*"[\s\S]*?<\/ins>/gi, '');
 
-// blogs reuse the old site chrome (header/footer); keep only the <main>/<article> content.
-if (category === 'blogs') {
+// content pages reuse the old site chrome (header/footer); keep only the <main>/<article>.
+if (category !== 'tools') {
   const m = body.match(/<main[^>]*>[\s\S]*?<\/main>/i) || body.match(/<article[^>]*>[\s\S]*?<\/article>/i);
   if (m) body = m[0];
 }
