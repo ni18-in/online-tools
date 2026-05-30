@@ -1,0 +1,10 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of potentially irrelevant directories
+Disallow: /.gemini/
+Disallow: /.git/
+
+# Specify the location of your sitemap
+Sitemap: https://online-tools.ni18.in/sitemap.xml 

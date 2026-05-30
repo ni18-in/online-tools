@@ -1,0 +1,10 @@
+---
+// PROBE PAGE (P0) — replaced in P6. THE critical test: blog posts must emit as a
+// literal /blogs/<name>.html FILE (not /blogs/<name>/index.html). getStaticPaths returns
+// the bare slug; build.format:'preserve' should append .html for this non-index route.
+export function getStaticPaths() {
+  return [{ params: { slug: 'demo-post' } }];
+}
+const { slug } = Astro.params;
+---
+<html lang="en"><head><meta charset="utf-8" /><title>probe post {slug}</title></head><body><h1>blog post → /blogs/{slug}.html</h1></body></html>
