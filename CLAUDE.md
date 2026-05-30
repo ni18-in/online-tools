@@ -37,7 +37,8 @@ This site lives or dies on search ranking — `ISSUES.md` documents a completed 
 - `<link rel="canonical">` on every page
 - Full `hreflang` set (`en`, `es`, `fr`, `x-default`) on landing/tool pages where translations exist
 - `<meta name="description">` and `<meta name="keywords">` on every page
-- `application/ld+json` structured data — typically `WebApplication` schema for tool pages, `BlogPosting` for blogs, `CollectionPage`/`ItemList` for the homepage
+- `application/ld+json` structured data — typically `WebApplication` for tool pages, `BlogPosting` for blogs, `CollectionPage`/`ItemList` for the homepage, plus a `BreadcrumbList` block on tool and blog pages
+- **JSON-LD blocks must be pure JSON — never put JS-style `//` comments inside `<script type="application/ld+json">`.** They silently break Google's structured-data parser and fail `validate-jsonld.js` (a `//` inside a `https://` URL is fine; a comment line is not)
 - Open Graph (`og:*`) and `twitter:*` meta tags
 - **Trailing slashes on all internal directory URLs** (`/tools/`, not `/tools`) — this was a deliberate normalization
 - `alt` attributes on every `<img>`
@@ -45,10 +46,22 @@ This site lives or dies on search ranking — `ISSUES.md` documents a completed 
 
 Existing tool pages are the reference template — copy the `<head>` structure from a similar tool (e.g. `tools/json-visualizer-pro/index.html`) rather than writing from scratch.
 
+## Validation & maintenance scripts
+
+`scripts/` holds standalone Node/Bash helpers. There is no `package.json`, so run them directly — and no CI runs them, so run them by hand after bulk edits. The two validators are the closest thing this repo has to a lint/test step:
+
+- `node scripts/validate-jsonld.js` — parses every `<script type="application/ld+json">` block site-wide and exits non-zero on any JSON error. **Run after touching any structured data.**
+- `node scripts/validate-canonicals.js` — checks that each page's `rel="canonical"` matches its deployed URL path, trailing slashes included.
+- `node scripts/strip-jsonld-comments.js` — auto-strips stray `//` comments from JSON-LD blocks and rewrites the files (re-verifies each parses before saving).
+- `scripts/add-breadcrumbs.sh` — idempotently injects `BreadcrumbList` JSON-LD into tool/blog pages; holds the canonical slug→display-name map across all locales.
+- `scripts/optimize-images.sh` — adds `loading="lazy"`/`decoding="async"` + explicit `width`/`height` to `placehold.co` `<img>` tags.
+
+The `.sh` scripts need a Bash shell (use the Bash tool on Windows). All of them walk the tree skipping `.git`/`node_modules`/`scripts`, and are written to be idempotent and safe to re-run.
+
 ## Privacy posture
 
 Tools are advertised as client-side. Don't introduce server calls or third-party data exfiltration — any tool that touches user data (JSON input, uploaded images, screen recordings) must process it in-browser only.
 
 ## What's NOT here
 
-No `package.json`, no `node_modules`, no test runner, no linter config, no CI beyond GitHub Pages deployment. Don't try to run `npm`/`yarn`/`pnpm` or look for a missing build step — there isn't one
+No `package.json`, no `node_modules`, no bundler, no linter config, no CI beyond GitHub Pages deployment. Don't run `npm`/`yarn`/`pnpm` or look for a missing build step — there isn't one. The `scripts/` validators above need a system `node`/`bash` but install nothing. There are no functional or unit tests for the tools' JavaScript — verify a tool's behavior by opening its page in a browser.
