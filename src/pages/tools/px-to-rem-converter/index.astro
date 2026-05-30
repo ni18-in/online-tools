@@ -1,0 +1,208 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+
+const tool = getTool('px-to-rem-converter')!;
+const seo = toolSeo(tool, {
+  title: 'PX to REM Converter – Free Online Tool',
+  description:
+    'A simple, free online PX to REM converter tool for developers and designers. Instantly convert pixel values to REM units with a customizable base font size, following Material Design principles.',
+  keywords:
+    'px to rem, pixel to rem, converter, css, material design, web development, responsive design, frontend tool, accessibility',
+  author: 'ni18',
+  ogDescription: 'A simple, free online tool to convert pixel (px) values to REM units effortlessly.',
+  ogImageAlt: 'A promotional image for the PX to REM Converter tool.',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PX to REM Converter',
+    applicationCategory: 'WebApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/tools/px-to-rem-converter/`,
+    description: 'A simple, free online PX to REM converter tool for developers and designers.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@type': 'Person', name: 'ni18', url: `${SITE_URL}/about/` },
+  },
+});
+const altLinks = { es: `${SITE_URL}/es/tools/px-a-rem-convertidor/` };
+---
+<ToolLayout seo={seo} lang="en" altLinks={altLinks} adMinHeight={120}>
+  <div class="tool-island">
+    <header class="tool-header">
+      <h1>PX to REM Converter</h1>
+      <p class="subtitle">A developer tool with Material Design</p>
+    </header>
+
+    <section id="converter" aria-labelledby="converter-heading">
+      <h2 id="converter-heading" class="sr-only">Conversion Tool</h2>
+      <div class="card">
+        <form id="converter-form" aria-label="Pixel to REM conversion form">
+          <div class="form-group">
+            <label for="px-input">Pixel (px) Value</label>
+            <input type="number" id="px-input" placeholder="e.g., 24" required aria-required="true" aria-describedby="px-input-description" value="16" />
+            <p id="px-input-description" class="sr-only">Enter the pixel value you want to convert.</p>
+          </div>
+          <div class="form-group">
+            <label for="base-font-size">Base Font Size (px)</label>
+            <select id="base-font-size" aria-describedby="base-font-description">
+              <option value="10">10px</option>
+              <option value="12">12px</option>
+              <option value="14">14px</option>
+              <option value="16" selected>16px (Default)</option>
+              <option value="18">18px</option>
+              <option value="20">20px</option>
+              <option value="24">24px</option>
+            </select>
+            <p id="base-font-description" class="sr-only">Select the base font size for the conversion calculation. The default is 16 pixels.</p>
+          </div>
+          <button type="submit" class="convert-button">Convert</button>
+        </form>
+        <div id="result-container" aria-live="polite">
+          Result in REM
+          <span id="result-value">1rem</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to" class="how-to" aria-labelledby="how-to-heading">
+      <h2 id="how-to-heading">How to Use This App</h2>
+      <div class="card">
+        <ol>
+          <li>Enter the desired pixel (px) value in the first input box.</li>
+          <li>Adjust the base font size from the dropdown if your project uses a different default (the standard is 16px).</li>
+          <li>The REM equivalent is calculated and displayed in real-time in the result box.</li>
+          <li>For quick reference, consult the conversion table below which is based on a 16px base font size.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="conversion-table" aria-labelledby="table-heading">
+      <h2 id="table-heading">PX to REM Conversion Table (Base 16px)</h2>
+      <div class="card table-container">
+        <table>
+          <thead>
+            <tr><th>Pixel (px)</th><th>REM</th></tr>
+          </thead>
+          <tbody id="conversion-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const converterForm = document.getElementById('converter-form');
+    const pxInput = document.getElementById('px-input');
+    const baseFontSizeSelect = document.getElementById('base-font-size');
+    const resultValue = document.getElementById('result-value');
+    const tableBody = document.getElementById('conversion-table-body');
+
+    function convertPxToRem() {
+      const pxValue = parseFloat(pxInput.value);
+      const baseSize = parseFloat(baseFontSizeSelect.value);
+      if (isNaN(pxValue) || isNaN(baseSize) || baseSize === 0) {
+        resultValue.textContent = 'Invalid';
+        return;
+      }
+      const remValue = pxValue / baseSize;
+      const formattedRem = parseFloat(remValue.toFixed(4));
+      resultValue.textContent = `${formattedRem}rem`;
+    }
+
+    function populateConversionTable() {
+      const baseForTable = 16;
+      let tableHTML = '';
+      for (let px = 1; px <= 100; px++) {
+        const rem = parseFloat((px / baseForTable).toFixed(4));
+        tableHTML += `<tr><td>${px}px</td><td>${rem}rem</td></tr>`;
+      }
+      tableBody.innerHTML = tableHTML;
+    }
+
+    converterForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      convertPxToRem();
+    });
+    pxInput.addEventListener('input', convertPxToRem);
+    baseFontSizeSelect.addEventListener('change', convertPxToRem);
+    populateConversionTable();
+    convertPxToRem();
+  });
+</script>
+
+<style>
+  /* px-to-rem styles, scoped by Astro to this page. Tool's --md-* custom props are remapped
+     to MD3 tokens so the tool is theme-aware (dark mode) and color-consistent with the shell. */
+  .tool-island {
+    --md-primary-color: var(--md-sys-color-primary);
+    --md-primary-dark-color: var(--md-sys-color-primary);
+    --md-background-color: var(--md-sys-color-surface-container);
+    --md-surface-color: var(--md-sys-color-surface-container-lowest);
+    --md-text-primary-color: var(--md-sys-color-on-surface);
+    --md-text-secondary-color: var(--md-sys-color-on-surface-variant);
+    --md-border-color: var(--md-sys-color-outline-variant);
+    --md-focus-ring-color: color-mix(in srgb, var(--md-sys-color-primary) 30%, transparent);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .tool-island *, .tool-island *::before, .tool-island *::after { box-sizing: border-box; }
+
+  .tool-header { text-align: center; padding-bottom: 1.5rem; margin-bottom: 1rem; }
+  .tool-header h1 { font-size: 2.25rem; font-weight: 500; color: var(--md-primary-color); margin: 0 0 0.5rem; }
+  .subtitle { color: var(--md-text-secondary-color); margin: 0; }
+
+  h2 { font-weight: 500; font-size: 1.5rem; color: var(--md-text-primary-color); margin: 3rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--md-border-color); }
+
+  .card {
+    background-color: var(--md-surface-color);
+    border: 1px solid var(--md-border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--md-sys-elevation-1);
+    margin-bottom: 2rem;
+  }
+
+  .form-group { position: relative; margin-bottom: 2rem; }
+  label { font-size: 1rem; color: var(--md-text-secondary-color); }
+  input[type='number'], select {
+    width: 100%; padding: 1rem 0.5rem 0.5rem; border: none;
+    border-bottom: 1px solid var(--md-text-secondary-color);
+    background-color: transparent; color: var(--md-text-primary-color); font-size: 1.1rem;
+    transition: border-bottom-color 0.2s;
+  }
+  input[type='number']:focus, select:focus { outline: none; border-bottom: 2px solid var(--md-primary-color); }
+  select option { color: initial; }
+
+  .convert-button {
+    display: block; width: 100%; padding: 0.85rem 1rem;
+    background-color: var(--md-primary-color); color: var(--md-sys-color-on-primary);
+    border: none; border-radius: 999px; font-size: 1rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;
+    box-shadow: var(--md-sys-elevation-1); transition: box-shadow 0.2s; margin-top: 1rem;
+  }
+  .convert-button:hover { box-shadow: var(--md-sys-elevation-2); }
+  .convert-button:focus { outline: none; box-shadow: 0 0 0 4px var(--md-focus-ring-color); }
+
+  #result-container {
+    margin-top: 2rem; padding: 1.5rem; background-color: var(--md-background-color);
+    border-radius: 12px; text-align: center; font-size: 1.25rem; color: var(--md-text-secondary-color);
+  }
+  #result-value { display: block; font-size: 2.5rem; font-weight: 500; color: var(--md-primary-color); margin-top: 0.5rem; }
+
+  .how-to ol { padding-left: 20px; color: var(--md-text-secondary-color); }
+  .how-to li { margin-bottom: 0.75rem; }
+
+  .table-container { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--md-border-color); }
+  thead th { background-color: var(--md-background-color); font-weight: 500; color: var(--md-text-secondary-color); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+  }
+</style>

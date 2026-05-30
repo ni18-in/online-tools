@@ -1,8 +1,8 @@
 // Single source of truth for the tool catalog. Drives the homepage grid, the /tools/
 // listing, client-side search, per-page SEO + reciprocal hreflang, and the sitemap.
 // Per-tool PAGE specifics (full JSON-LD, legacy body) are attached during P3–P5.
-import { SITE_URL, DEFAULT_ROBOTS } from './site';
-import type { HreflangLink } from '../components/Seo.astro';
+import { SITE_URL, DEFAULT_ROBOTS, DEFAULT_OG_IMAGE } from './site';
+import type { HreflangLink, Props as SeoProps } from '../components/Seo.astro';
 
 export type ToolCategory = 'developer' | 'text' | 'media' | 'calculator' | 'fun';
 export type SchemaType = 'WebApplication' | 'SoftwareApplication' | 'VideoGame';
@@ -318,5 +318,79 @@ export function homepageItemListItem(tool: Tool) {
     ...(tool.rating
       ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: tool.rating.value, ratingCount: tool.rating.count } }
       : {}),
+  };
+}
+
+/** Uniform Home → Tools → <tool> BreadcrumbList (present on every tool page). */
+export function toolBreadcrumb(tool: Tool) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools/` },
+      { '@type': 'ListItem', position: 3, name: tool.name },
+    ],
+  };
+}
+
+export interface ToolSeoOpts {
+  title: string;
+  description: string;
+  keywords?: string;
+  author?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  twitterDomain?: string;
+  /** The tool-specific WebApplication/SoftwareApplication/VideoGame JSON-LD block. */
+  appSchema?: Record<string, unknown>;
+  /** Any extra blocks (FAQPage, HowTo, …). Breadcrumb is added automatically. */
+  extraJsonLd?: Record<string, unknown>[];
+}
+
+/**
+ * Assembles a tool page's full SEO props: canonical, reciprocal hreflang, per-page robots,
+ * OG + Twitter (sensible defaults from the tool), and JSON-LD = [appSchema?, breadcrumb, …extra].
+ */
+export function toolSeo(tool: Tool, opts: ToolSeoOpts): SeoProps {
+  const url = toolUrl(tool.slug);
+  const jsonLd: Record<string, unknown>[] = [];
+  if (opts.appSchema) jsonLd.push(opts.appSchema);
+  jsonLd.push(toolBreadcrumb(tool));
+  if (opts.extraJsonLd) jsonLd.push(...opts.extraJsonLd);
+
+  const ogImage = opts.ogImage ?? DEFAULT_OG_IMAGE;
+  const ogTitle = opts.ogTitle ?? opts.title;
+  const ogDescription = opts.ogDescription ?? opts.description;
+  return {
+    title: opts.title,
+    description: opts.description,
+    keywords: opts.keywords,
+    author: opts.author,
+    canonical: url,
+    robots: toolRobots(tool),
+    hreflang: toolHreflang(tool),
+    og: {
+      type: 'website',
+      url,
+      title: ogTitle,
+      description: ogDescription,
+      image: ogImage,
+      imageAlt: opts.ogImageAlt,
+      siteName: 'Online Tools',
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      url,
+      title: ogTitle,
+      description: ogDescription,
+      image: ogImage,
+      imageAlt: opts.ogImageAlt,
+      domain: opts.twitterDomain,
+    },
+    jsonLd,
   };
 }

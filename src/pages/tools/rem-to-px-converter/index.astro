@@ -1,0 +1,137 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+
+const tool = getTool('rem-to-px-converter')!;
+const seo = toolSeo(tool, {
+  title: 'REM to PX Converter – Free Online Tool',
+  description:
+    'A simple, free online REM to PX converter for developers and designers. Instantly convert REM units to pixel values with a customizable base font size.',
+  keywords: 'rem to px, rem to pixel, converter, css, web development, responsive design, frontend tool, accessibility',
+  author: 'ni18-in',
+  ogDescription: 'A simple, free online tool to convert REM units to pixel (px) values effortlessly.',
+  ogImageAlt: 'A promotional image for the REM to PX Converter tool.',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'REM to PX Converter',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    url: `${SITE_URL}/tools/rem-to-px-converter/`,
+    description: 'A simple, free online REM to PX converter tool for developers and designers.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+});
+const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
+---
+<ToolLayout seo={seo} lang="en" altLinks={altLinks} adMinHeight={120}>
+  <div class="tool-island legacy-tw">
+    <div class="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+      <header class="text-center mb-10">
+        <h1 class="text-4xl sm:text-5xl font-bold text-indigo-600 tracking-tight">REM to PX Converter</h1>
+        <p class="mt-3 text-lg text-slate-600">Instantly convert REM units to pixels.</p>
+      </header>
+
+      <main>
+        <section id="converter" aria-labelledby="converter-heading">
+          <h2 id="converter-heading" class="sr-only">Conversion Tool</h2>
+          <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-10">
+            <form id="converter-form" aria-label="REM to Pixel conversion form" class="space-y-6">
+              <div>
+                <label for="rem-input" class="block text-sm font-medium text-slate-700">REM Value</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input type="number" id="rem-input" placeholder="e.g., 1.5" required aria-required="true" value="1" step="0.05" class="block w-full px-4 py-3 border-slate-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 text-lg" aria-describedby="rem-input-description" />
+                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span class="text-slate-500 sm:text-sm">rem</span>
+                  </div>
+                </div>
+                <p id="rem-input-description" class="sr-only">Enter the REM value you want to convert.</p>
+              </div>
+              <div>
+                <label for="base-font-size" class="block text-sm font-medium text-slate-700">Base Font Size (px)</label>
+                <select id="base-font-size" class="mt-1 block w-full pl-3 pr-10 py-3 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" aria-describedby="base-font-description">
+                  <option value="10">10px</option>
+                  <option value="12">12px</option>
+                  <option value="14">14px</option>
+                  <option value="16" selected>16px (Browser Default)</option>
+                  <option value="18">18px</option>
+                  <option value="20">20px</option>
+                  <option value="24">24px</option>
+                </select>
+                <p id="base-font-description" class="sr-only">Select the base font size for the conversion calculation. The default is 16 pixels.</p>
+              </div>
+            </form>
+            <div id="result-container" aria-live="polite" class="mt-8 text-center bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+              <p class="text-lg font-medium text-indigo-800">Equivalent Pixel Value</p>
+              <p id="result-value" class="text-5xl font-bold text-indigo-600 tracking-tight mt-2">16px</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="conversion-table" aria-labelledby="table-heading" class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+          <h2 id="table-heading" class="text-2xl font-semibold text-slate-800 mb-4">Common REM to PX Conversions</h2>
+          <p class="text-sm text-slate-500 mb-6">Based on a root font size of <strong class="font-medium text-slate-700">16px</strong>.</p>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-slate-200">
+              <thead class="bg-slate-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">REM</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Pixel (px)</th>
+                </tr>
+              </thead>
+              <tbody id="conversion-table-body" class="bg-white divide-y divide-slate-200"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const remInput = document.getElementById('rem-input');
+    const baseFontSizeSelect = document.getElementById('base-font-size');
+    const resultValue = document.getElementById('result-value');
+    const tableBody = document.getElementById('conversion-table-body');
+
+    function convertRemToPx() {
+      const remValue = parseFloat(remInput.value);
+      const baseSize = parseFloat(baseFontSizeSelect.value);
+      if (isNaN(remValue) || isNaN(baseSize) || baseSize <= 0) {
+        resultValue.textContent = '...';
+        return;
+      }
+      const pxValue = remValue * baseSize;
+      const formattedPx = parseFloat(pxValue.toFixed(4));
+      resultValue.textContent = `${formattedPx}px`;
+    }
+
+    function populateConversionTable() {
+      const baseForTable = 16;
+      const commonRemValues = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6];
+      let tableHTML = '';
+      commonRemValues.forEach((rem) => {
+        const px = rem * baseForTable;
+        tableHTML += `<tr class="hover:bg-slate-50"><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">${rem}rem</td><td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">${px}px</td></tr>`;
+      });
+      tableBody.innerHTML = tableHTML;
+    }
+
+    remInput.addEventListener('input', convertRemToPx);
+    baseFontSizeSelect.addEventListener('change', convertRemToPx);
+    populateConversionTable();
+    convertRemToPx();
+  });
+</script>
+
+<style>
+  /* Tailwind tool: utilities are global; give the island a light surface so the tool's
+     light palette reads as an intentional panel regardless of shell theme. */
+  .tool-island.legacy-tw {
+    background: #f8fafc;
+    color: #0f172a;
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+</style>

@@ -2,10 +2,11 @@
 /**
  * AdSlot.astro — one consistent, non-intrusive AdSense unit.
  *
- * Reserves vertical space (min-height) so ad insertion causes ZERO layout shift (CLS),
- * and defers the adsbygoogle.push() until the slot nears the viewport (IntersectionObserver)
- * to protect LCP/INP. The loader script itself is injected once by BaseLayout (adsEnabled).
- * No interstitial / anchor / vignette / auto-ads — manual in-content units only.
+ * Reserves vertical space (min-height) so insertion causes ZERO layout shift (CLS), and
+ * defers the adsbygoogle.push() until the slot nears the viewport (IntersectionObserver) to
+ * protect LCP/INP. In dev it renders a labeled, theme-aware placeholder (AdSense can't serve
+ * on localhost); the real <ins> + loader only ship in production builds. No interstitial /
+ * anchor / vignette / auto-ads — manual in-content units only.
  */
 import { ADSENSE_CLIENT, ADSENSE_SLOT } from '../data/site';
 
@@ -13,7 +14,6 @@ export interface Props {
   client?: string;
   slot?: string;
   format?: string;
-  /** Reserved min-height in px to prevent CLS. Tune per placement. */
   minHeight?: number;
   placement?: 'in-content' | 'below-content';
   class?: string;
@@ -23,43 +23,85 @@ const {
   client = ADSENSE_CLIENT,
   slot = ADSENSE_SLOT,
   format = 'auto',
-  minHeight = 280,
+  minHeight = 250,
   placement = 'in-content',
   class: className = '',
 } = Astro.props;
+
+const isProd = import.meta.env.PROD;
 ---
 <aside
   class:list={['ad-slot', `ad-slot--${placement}`, className]}
   aria-label="Advertisement"
   style={`min-height:${minHeight}px`}
 >
-  <ins
-    class="adsbygoogle"
-    style={`display:block;min-height:${minHeight}px`}
-    data-ad-client={client}
-    data-ad-slot={slot}
-    data-ad-format={format}
-    data-full-width-responsive="true"
-  ></ins>
+  <span class="ad-label">Advertisement</span>
+  {isProd ? (
+    <ins
+      class="adsbygoogle"
+      style={`display:block;min-height:${minHeight}px`}
+      data-ad-client={client}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+  ) : (
+    <div class="ad-placeholder" style={`min-height:${minHeight}px`}>Ad slot ({minHeight}px reserved)</div>
+  )}
 </aside>
 
-<script is:inline>
-  (function () {
-    var ins = document.currentScript.previousElementSibling.querySelector('ins.adsbygoogle');
-    if (!ins) return;
-    var pushed = false;
-    function load() {
-      if (pushed) return;
-      pushed = true;
-      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-    }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        if (entries[0] && entries[0].isIntersecting) { load(); io.disconnect(); }
-      }, { rootMargin: '300px' });
-      io.observe(ins);
-    } else {
-      load();
-    }
-  })();
-</script>
+{isProd && (
+  <script is:inline>
+    (function () {
+      var slot = document.currentScript.previousElementSibling;
+      var ins = slot && slot.querySelector('ins.adsbygoogle');
+      if (!ins) return;
+      var pushed = false;
+      function load() {
+        if (pushed) return;
+        pushed = true;
+        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+      }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0] && entries[0].isIntersecting) { load(); io.disconnect(); }
+        }, { rootMargin: '300px' });
+        io.observe(ins);
+      } else { load(); }
+    })();
+  </script>
+)}
+
+<style>
+  .ad-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    background: var(--md-sys-color-surface-container);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-medium);
+    overflow: hidden;
+  }
+  .ad-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--md-sys-color-on-surface-variant);
+    opacity: 0.7;
+  }
+  .ad-slot .adsbygoogle { width: 100%; }
+  .ad-placeholder {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.875rem;
+    opacity: 0.5;
+  }
+</style>

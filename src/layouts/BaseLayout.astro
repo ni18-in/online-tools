@@ -61,7 +61,7 @@ const {
     <Analytics />
     <Seo {...seo} />
 
-    {adsEnabled && (
+    {adsEnabled && import.meta.env.PROD && (
       <script
         is:inline
         async

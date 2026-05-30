@@ -1,12 +1,12 @@
 ---
 /**
- * ToolLayout.astro — wraps a PRESERVED legacy tool island in the MD3 shell.
+ * ToolLayout.astro — MD3 shell around a preserved tool.
  *
- * The tool's exact markup + inline <style> + inline <script> are injected verbatim via
- * set:html (Astro never parses/bundles set:html, so getElementById / onclick / classList all
- * survive). External tool assets (script.js) are re-attached with is:inline. Tools that
- * originally loaded the Tailwind CDN set usesTailwind → wrapped in .legacy-tw to receive the
- * SCOPED Preflight. CDN libs go in headRaw (verbatim, exact load order).
+ * The tool's markup goes in the page's <slot> wrapped in `.tool-island` (Tailwind tools add
+ * `.legacy-tw` for the scoped Preflight). The page keeps the tool's CSS in an Astro scoped
+ * <style> (auto-isolated → cannot leak into the shell or other tools) and its JS in an
+ * is:inline <script> (verbatim, untouched). CDN libs/fonts a tool needs go in `headRaw`;
+ * external tool scripts (script.js) in `scriptSrcs`.
  */
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
@@ -18,15 +18,8 @@ export interface Props {
   seo: SeoProps;
   lang?: Locale;
   altLinks?: Partial<Record<Locale, string>>;
-  /** Verbatim tool markup + inline <style>/<script>. */
-  bodyHtml: string;
-  /** Tool originally used the Tailwind CDN → apply scoped Preflight. */
-  usesTailwind?: boolean;
-  /** Verbatim CDN <link>/<script> deps for <head> (exact load order). */
   headRaw?: string;
-  /** External tool scripts (e.g. /tools/<slug>/script.js), attached after the island. */
   scriptSrcs?: string[];
-  /** In-content ad above the tool (reserved height → no CLS). */
   ad?: boolean;
   adMinHeight?: number;
 }
@@ -34,34 +27,29 @@ const {
   seo,
   lang = 'en',
   altLinks = {},
-  bodyHtml,
-  usesTailwind = false,
   headRaw,
   scriptSrcs = [],
   ad = true,
   adMinHeight = 280,
 } = Astro.props;
 ---
-<BaseLayout
-  seo={seo}
-  lang={lang}
-  current="tools"
-  altLinks={altLinks}
-  headRaw={headRaw}
-  adsEnabled={ad}
->
+<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
-    {ad && <AdSlot placement="in-content" minHeight={adMinHeight} class="tool-ad" />}
-    <div class:list={['tool-island', { 'legacy-tw': usesTailwind }]} set:html={bodyHtml} />
+    <slot />
     {scriptSrcs.map((src) => <script is:inline src={src}></script>)}
+    {ad && <AdSlot placement="below-content" minHeight={adMinHeight} class="tool-ad" />}
   </main>
 </BaseLayout>
 
 <style>
   .tool-main {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 16px;
   }
-  .tool-ad { margin: 0 auto 24px; }
+  .tool-ad { margin: 32px auto 0; max-width: 728px; }
+  /* Island reset: give the tool a clean, theme-aware canvas without inheriting shell spacing. */
+  :global(.tool-island) {
+    color: var(--md-sys-color-on-surface);
+  }
 </style>

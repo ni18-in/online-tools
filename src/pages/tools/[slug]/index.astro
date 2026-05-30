@@ -1,8 +1,0 @@
----
-// PROBE PAGE (P0) — replaced in P3+. Verifies /tools/<slug>/ trailing-slash dirs.
-export function getStaticPaths() {
-  return [{ params: { slug: 'demo-tool' } }];
-}
-const { slug } = Astro.params;
----
-<html lang="en"><head><meta charset="utf-8" /><title>probe tool {slug}</title></head><body><h1>tool → /tools/{slug}/</h1></body></html>
