@@ -1,0 +1,43 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/all-in-one-text-analyzer/body.html?raw';
+import css from '../../../components/legacy/tools/all-in-one-text-analyzer/styles.css?raw';
+import js from '../../../components/legacy/tools/all-in-one-text-analyzer/script.js?raw';
+
+const tool = getTool('all-in-one-text-analyzer')!;
+const seo = toolSeo(tool, {
+  title: 'All-in-One Text Analyzer - Professional Layout',
+  description:
+    'Professional text analyzer tool: Get word count, character count, sentence count, paragraph count, reading time, readability score, and keyword frequency with a clean interface.',
+  keywords:
+    'text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis, professional text tool',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'All-in-One Text Analyzer',
+    description:
+      'Analyze your text instantly: Get word count, character count, sentence count, paragraph count, estimated reading time, and keyword frequency. Free online tool.',
+    applicationCategory: ['UtilitiesApplication', 'ProductivityApplication'],
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript enabled browser.',
+    url: `${SITE_URL}/tools/all-in-one-text-analyzer/`,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords:
+      'text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis',
+    potentialAction: {
+      '@type': 'AnalyzeAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/tools/all-in-one-text-analyzer/` },
+      result: { '@type': 'QuantitativeValue', name: 'Text Analysis Metrics (Word Count, Readability, etc.)' },
+    },
+  },
+});
+const headRaw = '<script src="https://unpkg.com/lucide@latest"></script>';
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island legacy-tw bg-gray-50 text-gray-800 p-2 sm:p-4" id="tool-all-in-one-text-analyzer" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

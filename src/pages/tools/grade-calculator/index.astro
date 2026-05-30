@@ -1,0 +1,41 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/grade-calculator/body.html?raw';
+import css from '../../../components/legacy/tools/grade-calculator/styles.css?raw';
+import js from '../../../components/legacy/tools/grade-calculator/script.js?raw';
+
+const tool = getTool('grade-calculator')!;
+const seo = toolSeo(tool, {
+  title: 'Universal Grade Calculator - Weighted & Easy',
+  description:
+    'The fastest and easiest universal weighted grade calculator. Define categories, add assignments, and get your real-time course grade. Built for students and teachers.',
+  keywords: 'grade calculator, gpa calculator, student tool, school grades',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Universal Weighted Grade Calculator',
+    abstract: 'A free, client-side web application for calculating weighted course grades.',
+    description:
+      "The Universal Grade Calculator allows users to define weighted categories and input assignment scores to calculate their real-time course grade. Data is saved automatically in the browser's local storage for future use and can be exported as JSON.",
+    applicationCategory: 'EducationalSoftware',
+    operatingSystem: 'Web Browser (Chrome, Firefox, Edge, Safari)',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords: 'grade calculator, weighted grade, course grade, final grade, student tool, education calculator',
+    browserRequirements: 'Requires a modern web browser with local storage support.',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/grade-calculator/` },
+    author: { '@type': 'Organization', name: 'GradeCalc Tool' },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div
+    class="tool-island legacy-tw bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 sm:p-8"
+    id="tool-grade-calculator"
+    set:html={body}
+  />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

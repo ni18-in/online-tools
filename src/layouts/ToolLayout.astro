@@ -48,16 +48,11 @@ const {
     padding: 16px;
   }
   .tool-ad { margin: 32px auto 0; max-width: 728px; }
-  /* Island reset: give the tool a clean, theme-aware canvas without inheriting shell spacing. */
-  :global(.tool-island) {
-    color: var(--md-sys-color-on-surface);
-  }
-  /* Tailwind tools use a fixed light palette; present them as a self-contained light panel
-     so their white cards read correctly regardless of the shell's (possibly dark) theme. */
+  /* The island is a transparent wrapper. Each tool brings its own canvas: custom-CSS tools via
+     their scoped #tool-<slug> rules; Tailwind tools by carrying their original <body> bg/text
+     classes onto the island element (so dark-themed or dark:-adaptive tools render correctly). */
   :global(.tool-island.legacy-tw) {
-    background: #f1f4fb;
-    color: #0f172a;
     border-radius: var(--md-sys-shape-corner-large);
-    padding: 4px;
+    overflow: hidden;
   }
 </style>

@@ -1,0 +1,476 @@
+// Global state for categories
+        let categories = [];
+        const categoriesContainer = document.getElementById('categories-container');
+        const finalGradeEl = document.getElementById('final-grade');
+        const summaryBreakdownEl = document.getElementById('summary-breakdown');
+        const totalWeightEl = document.getElementById('total-weight');
+        const weightErrorEl = document.getElementById('weight-error');
+        const placeholderTextEl = document.getElementById('placeholder-text');
+
+        // --- Data Persistence (Local Storage) ---
+
+        /**
+         * Saves the current categories state to local storage.
+         */
+        function saveData() {
+            try {
+                localStorage.setItem('gradeCalculatorData', JSON.stringify(categories));
+            } catch (error) {
+                console.error("Could not save data to local storage:", error);
+            }
+        }
+
+        /**
+         * Loads saved data from local storage into the categories array.
+         */
+        function loadData() {
+            try {
+                const data = localStorage.getItem('gradeCalculatorData');
+                if (data) {
+                    categories = JSON.parse(data);
+                }
+            } catch (error) {
+                console.error("Could not load data from local storage:", error);
+            }
+        }
+        
+        /**
+         * Clears all saved data and resets the calculator state.
+         */
+        function clearData() {
+            // Confirm with the user via the custom modal instead of alert/confirm
+            showModal('Confirm Clear', 'Are you sure you want to clear ALL saved data? This cannot be undone.', 'error');
+            
+            // Override the modal's default close button action to include the clear logic
+            const modalCloseBtn = document.querySelector('#app-modal button');
+            modalCloseBtn.textContent = 'Cancel';
+            modalCloseBtn.onclick = closeModal;
+            
+            // Create a dedicated confirmation button
+            const confirmBtn = document.createElement('button');
+            confirmBtn.textContent = 'Yes, Clear Data';
+            confirmBtn.className = 'px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150 ml-2';
+            confirmBtn.onclick = function() {
+                localStorage.removeItem('gradeCalculatorData');
+                categories = [];
+                renderCategories();
+                closeModal();
+                showModal('Data Cleared', 'All saved data has been successfully cleared!', 'success');
+                // Restore original close button handler after success
+                document.querySelector('#app-modal button').textContent = 'Close';
+                document.querySelector('#app-modal button').onclick = closeModal;
+            };
+
+            const modalFooter = document.getElementById('modal-content').querySelector('.mt-4');
+            // Clear existing buttons and add the new confirmation buttons
+            modalFooter.innerHTML = '';
+            modalFooter.appendChild(document.querySelector('#app-modal button')); // Cancel button
+            modalFooter.appendChild(confirmBtn); // Confirm button
+        }
+        
+        /**
+         * Exports the current calculator data as a JSON file.
+         */
+        function exportData() {
+            const dataStr = JSON.stringify({ 
+                categories, 
+                overallGrade: finalGradeEl.textContent 
+            }, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+            const exportFileDefaultName = 'grade_calculator_data.json';
+
+            let linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            document.body.appendChild(linkElement); // Required for Firefox
+            linkElement.click();
+            document.body.removeChild(linkElement); // Cleanup
+            
+            showModal('Success', 'Data exported as grade_calculator_data.json!', 'success');
+        }
+
+        // --- Utility Functions (Modal) ---
+
+        /**
+         * Shows a custom modal with a title and message.
+         * @param {string} title - The title of the modal.
+         * @param {string} message - The message body.
+         * @param {string} type - 'error' (default) or 'success'.
+         */
+        function showModal(title, message, type = 'error') {
+            const modal = document.getElementById('app-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+
+            if (type === 'error') {
+                modalTitle.className = 'text-xl font-bold mb-3 text-red-600 dark:text-red-400';
+            } else {
+                modalTitle.className = 'text-xl font-bold mb-3 text-green-600 dark:text-green-400';
+            }
+            
+            // Ensure standard close button is present for simple messages
+            const modalFooter = document.getElementById('modal-content').querySelector('.mt-4');
+            if (modalFooter.children.length > 1 || type === 'success') {
+                 modalFooter.innerHTML = '';
+                 const closeBtn = document.createElement('button');
+                 closeBtn.textContent = 'Close';
+                 closeBtn.className = 'px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150';
+                 closeBtn.onclick = closeModal;
+                 modalFooter.appendChild(closeBtn);
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('app-modal').classList.add('hidden');
+        }
+
+        // --- Core Calculation Logic ---
+
+        /**
+         * Calculates the overall course grade based on all categories and assignments.
+         */
+        function calculateOverallGrade() {
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+            const breakdown = [];
+            let allCategoriesHaveAssignments = true;
+
+            categories.forEach(category => {
+                totalWeight += category.weight;
+
+                let categoryPointsEarned = 0;
+                let categoryPointsPossible = 0;
+
+                category.assignments.forEach(assignment => {
+                    // Only include assignments that have a score and points possible entered
+                    if (assignment.score !== null && assignment.pointsPossible !== null && assignment.pointsPossible > 0) {
+                        categoryPointsEarned += assignment.score;
+                        categoryPointsPossible += assignment.pointsPossible;
+                    }
+                });
+
+                let categoryScore = 0;
+                let weightedCategoryScore = 0;
+                
+                if (categoryPointsPossible > 0) {
+                    // Calculate raw percentage for the category
+                    categoryScore = (categoryPointsEarned / categoryPointsPossible) * 100;
+
+                    // Calculate the weighted score contribution
+                    weightedCategoryScore = (categoryScore * (category.weight / 100));
+                    totalWeightedScore += weightedCategoryScore;
+                } else if (category.weight > 0) {
+                     // If a category has weight but no assignments, flag it
+                     allCategoriesHaveAssignments = false; 
+                }
+                
+                // Store breakdown for display
+                breakdown.push({
+                    name: category.name,
+                    weight: category.weight,
+                    pointsEarned: categoryPointsEarned,
+                    pointsPossible: categoryPointsPossible,
+                    score: categoryPointsPossible > 0 ? categoryScore.toFixed(2) : '--',
+                    contributes: weightedCategoryScore.toFixed(2)
+                });
+            });
+
+            // Update Total Weight Display and Validation
+            const actualTotalWeight = categories.reduce((sum, cat) => sum + cat.weight, 0);
+            totalWeightEl.textContent = `Total Weight: ${actualTotalWeight}%`;
+            
+            if (actualTotalWeight !== 100 && categories.length > 0) {
+                weightErrorEl.classList.remove('hidden');
+            } else {
+                weightErrorEl.classList.add('hidden');
+            }
+
+            // Update Final Grade Display
+            if (actualTotalWeight > 0 && totalWeight > 0) {
+                // Normalize the weighted score if total weight is not 100
+                const normalizedGrade = (totalWeightedScore / actualTotalWeight) * 100;
+                finalGradeEl.textContent = `${normalizedGrade.toFixed(2)}%`;
+            } else {
+                finalGradeEl.textContent = '--';
+            }
+            
+            if (!allCategoriesHaveAssignments && categories.length > 0) {
+                 finalGradeEl.textContent = 'Incomplete Data';
+            }
+
+
+            // Update Summary Breakdown Display
+            renderSummaryBreakdown(breakdown, totalWeightedScore);
+            saveData(); // Save data after every calculation
+        }
+
+        /**
+         * Renders the category breakdown summary.
+         * @param {Array} breakdown - Array of category summary objects.
+         */
+        function renderSummaryBreakdown(breakdown, totalWeightedScore) {
+            summaryBreakdownEl.innerHTML = '';
+
+            if (breakdown.length === 0) {
+                 summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">No categories defined.</p>';
+                 return;
+            }
+
+            breakdown.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'p-3 bg-gray-100 dark:bg-gray-700 rounded-lg';
+                let content = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-medium text-indigo-600 dark:text-indigo-300">${item.name} (${item.weight}%)</span>
+                        <span class="font-bold text-lg">${item.score}%</span>
+                    </div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400">
+                        ${item.pointsEarned.toFixed(2)}/${item.pointsPossible.toFixed(2)} pts completed. Contributes ${item.contributes}%
+                    </div>
+                `;
+                itemEl.innerHTML = content;
+                summaryBreakdownEl.appendChild(itemEl);
+            });
+            
+             // Add final total contribution row
+            const totalEl = document.createElement('div');
+            totalEl.className = 'mt-3 pt-3 border-t border-gray-300 dark:border-gray-600 flex justify-between font-bold text-base';
+            totalEl.innerHTML = `
+                <span>Total Calculated Weighted Score</span>
+                <span>${totalWeightedScore.toFixed(2)} pts</span>
+            `;
+            summaryBreakdownEl.appendChild(totalEl);
+        }
+
+        // --- DOM Manipulation / Rendering ---
+
+        /**
+         * Renders all categories and assignments to the DOM.
+         */
+        function renderCategories() {
+            categoriesContainer.innerHTML = '';
+
+            if (categories.length === 0) {
+                placeholderTextEl.classList.remove('hidden');
+                calculateOverallGrade(); 
+                return;
+            } else {
+                placeholderTextEl.classList.add('hidden');
+            }
+
+            categories.forEach((category, catIndex) => {
+                const categoryEl = document.createElement('div');
+                categoryEl.className = 'category-card bg-indigo-50 dark:bg-gray-900/50 p-5 rounded-xl shadow-md border-t-4 border-indigo-500 space-y-4';
+                categoryEl.id = `category-${catIndex}`;
+                categoryEl.setAttribute('role', 'group'); // Accessibility group for categories
+
+                // Category Header
+                let categoryHTML = `
+                    <div class="flex justify-between items-center pb-2 border-b border-indigo-200 dark:border-gray-700">
+                        <h3 class="text-xl font-bold text-indigo-700 dark:text-indigo-300" id="cat-title-${catIndex}">${category.name} (${category.weight}%)</h3>
+                        <button onclick="removeCategory(${catIndex})" title="Remove Category: ${category.name}" aria-label="Remove category ${category.name}" class="text-red-500 hover:text-red-700 transition duration-150 p-1 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                // Assignments Header (Table style)
+                categoryHTML += `
+                    <div class="assignment-row-grid font-semibold text-sm text-gray-600 dark:text-gray-400 border-b pb-1" aria-hidden="true">
+                        <span class="truncate">Assignment Name</span>
+                        <span class="text-right">Score</span>
+                        <span></span>
+                        <span class="text-right">Total</span>
+                        <span></span>
+                    </div>
+                `;
+
+                // Assignments List
+                categoryHTML += `<div id="assignments-list-${catIndex}" class="space-y-3 mt-3" role="list">`;
+                category.assignments.forEach((assignment, assignIndex) => {
+                    categoryHTML += renderAssignment(assignment, catIndex, assignIndex);
+                });
+                categoryHTML += `</div>`; // End assignments-list
+
+                // Add Assignment Form
+                categoryHTML += `
+                    <div class="flex flex-wrap sm:flex-nowrap gap-2 pt-3 border-t border-indigo-200 dark:border-gray-700" role="form" aria-labelledby="cat-title-${catIndex}">
+                        <input type="text" id="assign-name-${catIndex}" placeholder="New Assignment Name" aria-label="New assignment name for ${category.name}" class="p-2 w-full sm:w-1/3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-score-${catIndex}" placeholder="Score" min="0" aria-label="Score earned for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-points-${catIndex}" placeholder="Total" min="1" aria-label="Total points for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <button onclick="addAssignment(${catIndex})" title="Add assignment to ${category.name}" class="p-2 w-full sm:w-1/6 bg-indigo-500 text-white text-sm rounded-lg hover:bg-indigo-600 transition duration-150 shadow-sm">
+                            Add
+                        </button>
+                    </div>
+                `;
+
+                categoryEl.innerHTML = categoryHTML;
+                categoriesContainer.appendChild(categoryEl);
+            });
+            calculateOverallGrade();
+        }
+
+        /**
+         * Generates the HTML for a single assignment row in a table-like grid.
+         */
+        function renderAssignment(assignment, catIndex, assignIndex) {
+            const assignmentName = assignment.name.replace(/"/g, '&quot;'); // Sanitize for attribute values
+            return `
+                <div class="assignment-row-grid p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-100" role="listitem">
+                    <span class="font-medium text-gray-700 dark:text-gray-300 truncate pr-2">${assignmentName}</span>
+                    
+                    <input type="number" value="${assignment.score !== null ? assignment.score : ''}" 
+                           oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'score', this.value)" 
+                           placeholder="Score" min="0" 
+                           aria-label="Score earned for ${assignmentName}"
+                           class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
+                    
+                    <span class="text-gray-500 dark:text-gray-400 text-center font-bold" aria-hidden="true">/</span>
+
+                    <input type="number" value="${assignment.pointsPossible !== null ? assignment.pointsPossible : ''}" 
+                           oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'pointsPossible', this.value)" 
+                           placeholder="Total" min="1" 
+                           aria-label="Total possible points for ${assignmentName}"
+                           class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
+                    
+                    <button onclick="removeAssignment(${catIndex}, ${assignIndex})" title="Remove Assignment: ${assignmentName}" aria-label="Remove assignment ${assignmentName}" class="text-red-400 hover:text-red-600 transition duration-150 p-1 ml-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            `;
+        }
+
+        // --- Event Handlers (Mutators) ---
+
+        document.getElementById('add-category-btn').addEventListener('click', () => {
+            const nameInput = document.getElementById('category-name');
+            const weightInput = document.getElementById('category-weight');
+            
+            const name = nameInput.value.trim();
+            const weight = parseFloat(weightInput.value);
+
+            if (!name) {
+                showModal('Input Required', 'Please enter a name for the category.');
+                return;
+            }
+
+            if (isNaN(weight) || weight <= 0 || weight > 100) {
+                showModal('Invalid Weight', 'Please enter a valid weight between 1 and 100.');
+                return;
+            }
+
+            const newCategory = {
+                name: name,
+                weight: weight,
+                assignments: []
+            };
+
+            categories.push(newCategory);
+
+            // Clear inputs
+            nameInput.value = '';
+            weightInput.value = '';
+
+            renderCategories();
+        });
+
+        function removeCategory(index) {
+            categories.splice(index, 1);
+            renderCategories();
+        }
+
+        function addAssignment(catIndex) {
+            const nameInput = document.getElementById(`assign-name-${catIndex}`);
+            const scoreInput = document.getElementById(`assign-score-${catIndex}`);
+            const pointsInput = document.getElementById(`assign-points-${catIndex}`);
+            
+            const name = nameInput.value.trim();
+            const score = parseFloat(scoreInput.value);
+            const pointsPossible = parseFloat(pointsInput.value);
+
+            // Basic validation for new assignment
+            if (!name) {
+                showModal('Input Required', 'Please enter a name for the assignment.');
+                return;
+            }
+            if (scoreInput.value.trim() !== '' && (isNaN(score) || score < 0)) {
+                showModal('Invalid Score', 'Score must be a non-negative number.');
+                return;
+            }
+            if (isNaN(pointsPossible) || pointsPossible <= 0) {
+                showModal('Invalid Total Points', 'Total Points must be a positive number.');
+                return;
+            }
+            if (score > pointsPossible) {
+                showModal('Score Error', 'The score cannot be greater than the total possible points.');
+                return;
+            }
+
+            const newAssignment = {
+                name: name,
+                // If input value is empty, treat it as null (ungraded)
+                score: scoreInput.value.trim() === '' ? null : score,
+                pointsPossible: pointsPossible
+            };
+
+            categories[catIndex].assignments.push(newAssignment);
+
+            // Clear inputs
+            nameInput.value = '';
+            scoreInput.value = '';
+            pointsInput.value = '';
+
+            renderCategories();
+        }
+
+        function removeAssignment(catIndex, assignIndex) {
+            categories[catIndex].assignments.splice(assignIndex, 1);
+            renderCategories();
+        }
+
+        /**
+         * Updates the score or total points for an existing assignment.
+         */
+        function updateAssignmentScore(catIndex, assignIndex, field, value) {
+            let numValue = parseFloat(value);
+            
+            // Allow empty string to be saved as null for potentially ungraded assignments
+            if (value === '') {
+                numValue = null;
+            } else if (isNaN(numValue) || numValue < 0 || (field === 'pointsPossible' && numValue === 0)) {
+                // Ignore invalid non-empty input
+                calculateOverallGrade(); 
+                return; 
+            }
+
+            categories[catIndex].assignments[assignIndex][field] = numValue;
+
+            // Simple validation check on update
+            const assignment = categories[catIndex].assignments[assignIndex];
+            if (assignment.score !== null && assignment.pointsPossible !== null && assignment.score > assignment.pointsPossible) {
+                showModal('Score Error', 'Score cannot be greater than Total Points.');
+                
+                // Revert the change to prevent inconsistent display state, requires re-rendering
+                categories[catIndex].assignments[assignIndex][field] = null; 
+            }
+
+            calculateOverallGrade();
+        }
+
+        // --- Initialization ---
+
+        // Initial rendering on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData(); // Load saved data
+            renderCategories(); // Render loaded data
+        });

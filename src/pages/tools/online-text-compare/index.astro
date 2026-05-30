@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/online-text-compare/body.html?raw';
+import css from '../../../components/legacy/tools/online-text-compare/styles.css?raw';
+import js from '../../../components/legacy/tools/online-text-compare/script.js?raw';
+
+const tool = getTool('online-text-compare')!;
+const seo = toolSeo(tool, {
+  title: 'Online Text Compare - Diff Checker',
+  description:
+    'Online Text Compare tool to find differences between two texts. Supports multiple languages, dark mode, and highlights added, removed, and common lines.',
+  keywords: 'text compare, diff tool, online text comparison, compare text files',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Online Text Compare',
+    url: `${SITE_URL}/tools/online-text-compare/`,
+    description:
+      'A free online tool to compare two pieces of text and highlight the differences. Supports multiple languages, dark mode, and provides clear visual diffs for added, removed, and common lines.',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'All',
+    browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', ratingCount: 15 },
+    keywords: 'text compare, diff checker, compare text, text difference, online diff tool, file compare, compare strings',
+  },
+});
+const headRaw =
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js" defer></script>';
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island" id="tool-online-text-compare" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

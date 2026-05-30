@@ -1,0 +1,70 @@
+#tool-all-in-one-text-analyzer {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* bg-slate-50 */
+        }
+
+        /* Simple scrollbar styling for textarea */
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-track {
+            background: #e2e8f0; /* bg-slate-200 */
+            border-radius: 10px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* bg-slate-400 */
+            border-radius: 10px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* bg-slate-500 */
+        }
+
+        /* Style for keyword list */
+         #tool-all-in-one-text-analyzer #keywordList li {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 4px; /* Increased padding */
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+         }
+         #tool-all-in-one-text-analyzer #keywordList li:last-child {
+            border-bottom: none;
+         }
+         #tool-all-in-one-text-analyzer #keywordList li span:first-child {
+             color: #374151; /* text-gray-700 */
+             font-weight: 500; /* font-medium */
+         }
+         #tool-all-in-one-text-analyzer #keywordList li span:last-child {
+             color: #4f46e5; /* text-indigo-600 */
+             font-weight: 600; /* font-semibold */
+             background-color: #e0e7ff; /* bg-indigo-100 */
+             padding: 0px 6px;
+             border-radius: 4px;
+             font-size: 0.8rem;
+         }
+
+        /* Ensure sticky works - parent needs alignment */
+        #tool-all-in-one-text-analyzer main.md\:flex {
+            align-items: flex-start; /* Important for sticky */
+        }
+
+        /* Modal styles */
+        #tool-all-in-one-text-analyzer .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #tool-all-in-one-text-analyzer .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Styling for How to Use list */
+        #tool-all-in-one-text-analyzer #howToUseList li {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the icon */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+         #tool-all-in-one-text-analyzer #howToUseList li svg {
+            position: absolute;
+            left: 0;
+            top: 4px; /* Adjust vertical alignment */
+            width: 1rem; /* w-4 */
+            height: 1rem; /* h-4 */
+            color: #16a34a; /* text-green-600 */
+         }

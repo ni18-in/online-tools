@@ -1,0 +1,335 @@
+/* General Reset and Base Styles */
+        #tool-online-text-compare {
+            --primary-color: #6200EE;
+            --primary-variant-color: #3700B3;
+            --secondary-color: #03DAC6;
+            --background-color: #FFFFFF;
+            --surface-color: #FFFFFF;
+            --error-color: #B00020;
+            --on-primary-color: #FFFFFF;
+            --on-secondary-color: #000000;
+            --on-background-color: #000000;
+            --on-surface-color: #000000;
+
+            --text-font: 'Roboto', sans-serif;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --box-shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
+            --input-border-color: #ced4da;
+            --input-focus-border-color: #80bdff;
+            --diff-added-bg: #e6ffed;
+            --diff-added-text: #28a745;
+            --diff-removed-bg: #ffeef0;
+            --diff-removed-text: #dc3545;
+            --diff-common-text: var(--on-surface-color);
+        }
+
+        #tool-online-text-compare .dark-mode {
+            --primary-color: #BB86FC;
+            --primary-variant-color: #3700B3;
+            --secondary-color: #03DAC6; 
+            --background-color: #121212;
+            --surface-color: #1E1E1E; 
+            --error-color: #CF6679;
+            --on-primary-color: #000000;
+            --on-secondary-color: #000000;
+            --on-background-color: #E0E0E0;
+            --on-surface-color: #E0E0E0; 
+            --input-border-color: #555;
+            --input-focus-border-color: #03DAC6;
+            --diff-added-bg: #1c3c22;
+            --diff-added-text: #77dd77;
+            --diff-removed-bg: #3c1c22;
+            --diff-removed-text: #dd7777;
+            --diff-common-text: var(--on-surface-color);
+        }
+
+        #tool-online-text-compare * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #tool-online-text-compare {
+            font-family: var(--text-font);
+            background-color: var(--background-color);
+            color: var(--on-background-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            /* Removed padding: 1rem from body to allow container to manage its own padding */
+        }
+
+        #tool-online-text-compare .container {
+            /* max-width: 1200px; Removed for full width */
+            width: 100%; /* Ensure it takes full available width */
+            margin: 0 auto;
+            padding: 1rem; /* Padding moved here from body for better control */
+            background-color: var(--surface-color);
+            /* border-radius: var(--border-radius); Removed for edge-to-edge feel, can be added back if preferred */
+            /* box-shadow: var(--box-shadow); Removed for edge-to-edge feel */
+            min-height: 100vh; /* Ensure container takes at least full viewport height */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #tool-online-text-compare header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--input-border-color);
+        }
+
+        #tool-online-text-compare header h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-right: 1rem; 
+        }
+
+        #tool-online-text-compare .header-controls {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        #tool-online-text-compare .header-controls select, #tool-online-text-compare .header-controls button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--surface-color);
+            color: var(--on-surface-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        #tool-online-text-compare .header-controls button {
+             display: flex;
+             align-items: center;
+             gap: 0.3rem;
+        }
+        #tool-online-text-compare .header-controls button.compare-main-btn { 
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+            border-color: var(--primary-color);
+        }
+        #tool-online-text-compare .header-controls button.compare-main-btn:hover {
+            background-color: var(--primary-variant-color);
+        }
+
+
+        #tool-online-text-compare .header-controls select:hover, #tool-online-text-compare .header-controls button:not(.compare-main-btn):hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        #tool-online-text-compare .dark-mode .header-controls select:hover, #tool-online-text-compare .dark-mode .header-controls button:not(.compare-main-btn):hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        #tool-online-text-compare .header-controls button:active {
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+
+        #tool-online-text-compare .comparison-area {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        #tool-online-text-compare .text-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background-color: var(--background-color); /* Or var(--surface-color) if preferred */
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow); /* Kept shadow on panels for distinction */
+        }
+        
+        #tool-online-text-compare .text-panel label {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--on-surface-color);
+        }
+
+        #tool-online-text-compare textarea {
+            width: 100%;
+            min-height: 30vh; /* Adjusted min-height to be viewport relative */
+            max-height: 60vh; /* Added max-height to prevent excessive growth */
+            padding: 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            font-family: monospace; 
+            font-size: 0.95rem;
+            resize: vertical;
+            background-color: var(--surface-color);
+            color: var(--on-surface-color);
+            transition: border-color 0.2s;
+        }
+
+        #tool-online-text-compare textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 98, 0, 238), 0.25); 
+        }
+        #tool-online-text-compare .dark-mode textarea:focus {
+             box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 187, 134, 252), 0.25);
+        }
+
+
+        #tool-online-text-compare .panel-controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        #tool-online-text-compare .panel-controls button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: var(--on-primary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        #tool-online-text-compare .panel-controls button:hover {
+            background-color: var(--primary-variant-color);
+            box-shadow: var(--box-shadow-hover);
+        }
+         #tool-online-text-compare .panel-controls button:active {
+            filter: brightness(0.9);
+        }
+
+
+        #tool-online-text-compare .diff-output {
+            width: 100%;
+            min-height: 30vh; /* Adjusted min-height */
+            max-height: 60vh; /* Added max-height */
+            padding: 0.75rem;
+            border: 1px solid var(--input-border-color);
+            border-radius: var(--border-radius);
+            font-family: monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+            background-color: var(--surface-color);
+            overflow-y: auto;
+        }
+
+        #tool-online-text-compare .diff-output span {
+            display: inline-block; 
+            width: 100%; 
+        }
+        #tool-online-text-compare .diff-output .added {
+            background-color: var(--diff-added-bg);
+            color: var(--diff-added-text);
+        }
+        #tool-online-text-compare .diff-output .removed {
+            background-color: var(--diff-removed-bg);
+            color: var(--diff-removed-text);
+            text-decoration: line-through;
+        }
+        #tool-online-text-compare .diff-output .common {
+            color: var(--diff-common-text);
+        }
+        #tool-online-text-compare .diff-output .placeholder { 
+            opacity: 0.5;
+            user-select: none;
+        }
+        
+        #tool-online-text-compare .material-icons {
+            font-size: 1.2em; 
+            vertical-align: middle;
+        }
+
+        @media (max-width: 992px) { 
+            #tool-online-text-compare .header-controls {
+                justify-content: flex-start; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            #tool-online-text-compare .comparison-area {
+                flex-direction: column;
+            }
+            #tool-online-text-compare header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            #tool-online-text-compare .header-controls {
+                width: 100%;
+            }
+             #tool-online-text-compare .header-controls select {
+                flex-grow: 1; 
+            }
+            #tool-online-text-compare textarea, #tool-online-text-compare .diff-output { /* Adjust height for smaller screens */
+                min-height: 25vh;
+                max-height: 50vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #tool-online-text-compare header h1 {
+                font-size: 1.5rem;
+            }
+            #tool-online-text-compare .panel-controls {
+                flex-direction: column; 
+            }
+            #tool-online-text-compare .panel-controls button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media print {
+            #tool-online-text-compare {
+                padding: 0;
+                font-size: 10pt; 
+            }
+            #tool-online-text-compare header, #tool-online-text-compare .panel-controls, #tool-online-text-compare textarea {
+                display: none !important; 
+            }
+            #tool-online-text-compare .container {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                padding: 0;
+            }
+            #tool-online-text-compare .comparison-area {
+                flex-direction: row; 
+                gap: 10px; 
+            }
+            #tool-online-text-compare .text-panel {
+                box-shadow: none;
+                border: 1px solid #ccc; 
+                padding: 5px;
+                flex: 1;
+            }
+            #tool-online-text-compare .diff-output {
+                min-height: auto; 
+                border: none;
+                font-size: 9pt;
+                background-color: #fff !important; 
+            }
+            #tool-online-text-compare .diff-output .added {
+                background-color: #d4edda !important;
+                color: #155724 !important;
+                border: 1px solid #c3e6cb !important;
+            }
+            #tool-online-text-compare .diff-output .removed {
+                background-color: #f8d7da !important;
+                color: #721c24 !important;
+                border: 1px solid #f5c6cb !important;
+                text-decoration: line-through;
+            }
+            #tool-online-text-compare .diff-output .common {
+                color: #000 !important;
+            }
+        }
