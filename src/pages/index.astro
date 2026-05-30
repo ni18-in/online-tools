@@ -1,10 +1,15 @@
 ---
-// P1 validation homepage (data-driven version lands in P2). Exercises the full shell:
-// PageLayout → BaseLayout (Seo/Analytics/MWC) + SiteHeader + SiteFooter + ToolCard + search.
 import PageLayout from '../layouts/PageLayout.astro';
 import ToolCard from '../components/ToolCard.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
 import { SITE_URL, DEFAULT_OG_IMAGE } from '../data/site';
+import { homepageGrid, homepageItemListOrder, getTool, toolUrl, homepageItemListItem } from '../data/tools';
+
+const collectionItems = homepageItemListOrder.map((slug, i) => ({
+  '@type': 'ListItem',
+  position: i + 1,
+  item: homepageItemListItem(getTool(slug)!),
+}));
 
 const seo: SeoProps = {
   title: 'Online Tools | Free Web Utilities, Calculators & Converters',
@@ -48,15 +53,26 @@ const seo: SeoProps = {
         'query-input': 'required name=search_term_string',
       },
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Online Tools - Free Web Utilities, Calculators & Converters',
+      description:
+        'A curated list of free online tools including calculators, text utilities, converters, and more, accessible directly via your browser.',
+      url: `${SITE_URL}/`,
+      mainEntity: { '@type': 'ItemList', itemListElement: collectionItems },
+    },
   ],
 };
 
-// Placeholder sample — replaced by the full data-driven grid in P2.
-const sample = [
-  { href: '/tools/json-visualizer-pro/', name: 'JSON Visualizer Pro', description: 'View, format, minify, copy, and validate JSON with a tree view and undo/redo.' },
-  { href: '/tools/px-to-rem-converter/', name: 'PX to REM Converter', description: 'Convert pixels to REM units with a custom base font size.' },
-  { href: '/tools/all-in-one-text-analyzer/', name: 'All-in-One Text Analyzer', description: 'Word, character, sentence counts, reading time, and keyword frequency.' },
-];
+// Resolve the grid into render-ready cards (preserving exact order).
+const cards = homepageGrid.map((entry) => {
+  if (typeof entry === 'string') {
+    const t = getTool(entry)!;
+    return { href: toolUrl(t.slug).replace(SITE_URL, ''), name: t.name, description: t.description, external: false };
+  }
+  return { href: entry.external, name: entry.name, description: entry.description, external: true };
+});
 ---
 <PageLayout seo={seo} lang="en" current="home" adsEnabled={true}>
   <section class="hero">
@@ -68,13 +84,7 @@ const sample = [
     <h2 id="search-heading" class="sr-only">Search Tools</h2>
     <form role="search" id="tool-search-form" onsubmit="return false;">
       <label for="tool-search-input" class="sr-only">Search for tools</label>
-      <input
-        type="search"
-        id="tool-search-input"
-        name="q"
-        placeholder="Search tools by name or description..."
-        autocomplete="off"
-      />
+      <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description..." autocomplete="off" />
     </form>
   </section>
 
@@ -84,8 +94,14 @@ const sample = [
       No tools found matching your search.
     </p>
     <div class="tool-grid">
-      {sample.map((t, i) => (
-        <ToolCard href={t.href} name={t.name} description={t.description} headingId={`tool-heading-${i + 1}`} />
+      {cards.map((c, i) => (
+        <ToolCard
+          href={c.href}
+          name={c.name}
+          description={c.description}
+          headingId={`tool-heading-${i + 1}`}
+          external={c.external}
+        />
       ))}
     </div>
   </section>
@@ -131,11 +147,7 @@ const sample = [
   #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
   .section-title { text-align: center; font-size: 1.75rem; margin: 16px 0 24px; color: var(--md-sys-color-on-surface); }
   .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px 0; }
-  .tool-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+  .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
   @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>
