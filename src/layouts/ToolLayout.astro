@@ -52,4 +52,12 @@ const {
   :global(.tool-island) {
     color: var(--md-sys-color-on-surface);
   }
+  /* Tailwind tools use a fixed light palette; present them as a self-contained light panel
+     so their white cards read correctly regardless of the shell's (possibly dark) theme. */
+  :global(.tool-island.legacy-tw) {
+    background: #f1f4fb;
+    color: #0f172a;
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 4px;
+  }
 </style>
