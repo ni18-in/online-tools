@@ -1,0 +1,34 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import body from '../../../components/legacy/tools/mh-meter-price-calculator/body.html?raw';
+import css from '../../../components/legacy/tools/mh-meter-price-calculator/styles.css?raw';
+import js from '../../../components/legacy/tools/mh-meter-price-calculator/script.js?raw';
+
+const tool = getTool('mh-meter-price-calculator')!;
+const seo = toolSeo(tool, {
+  title: 'MH Meter Price Calculator | Pune/Mumbai Auto & Taxi Fare 2025',
+  description:
+    'Calculate Auto Rickshaw, Black & Yellow Taxi, and Cool Cab fares in Mumbai & Maharashtra. Official 2025 Tariff rates (MMRTA). Offline capable.',
+  keywords: 'Mumbai Taxi Fare Calculator, Auto Rickshaw Meter Card 2025, MH Meter Price, Cool Cab Tariff, Mumbai Auto Fare',
+  author: 'MH Meter Price Calculator',
+  ogTitle: 'MH Meter Price Calculator',
+  ogDescription: 'Check the correct fair price for Auto and Taxis in Maharashtra based on the latest MMRTA rules.',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'MH Meter Price Calculator',
+    operatingSystem: 'Any',
+    applicationCategory: 'TravelApplication',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+    description: 'A web application to calculate taxi and auto-rickshaw fares in Mumbai Metropolitan Region based on official 2025 tariff cards.',
+    featureList: 'Auto Rickshaw Fare, Taxi Fare, Cool Cab Fare, Midnight Charges, AC Charges, Luggage Calculation',
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island" id="tool-mh-meter-price-calculator" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

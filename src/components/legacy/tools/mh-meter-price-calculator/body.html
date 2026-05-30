@@ -1,0 +1,140 @@
+<main class="container">
+        <header role="banner">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🚕</div>
+            <h1>MH Meter Price Calculator</h1>
+            <span class="subtitle">Official MMR Tariff (w.e.f. 01/02/2025)</span>
+        </header>
+
+        <article class="card">
+            <form id="fareForm" aria-label="Taxi Fare Calculator">
+
+                <div class="form-group">
+                    <label for="vehicleType">Select Vehicle Type</label>
+                    <select id="vehicleType" required onchange="updateFormUI()">
+                        <option value="auto">🛺 Auto Rickshaw</option>
+                        <option value="taxi_by">🚕 Taxi (Black & Yellow)</option>
+                        <option value="taxi_cool">🚙 Cool Cab (Blue/Silver)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="distance">Distance (in KM)</label>
+                    <input type="number" id="distance" inputmode="decimal" placeholder="e.g. 2.5" step="0.01" min="0"
+                        required aria-required="true">
+                    <div class="helper-text">Enter distance from meter or maps.</div>
+                </div>
+
+                <div class="checkbox-group" role="group" aria-label="Trip Modifiers">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="midnight">
+                        <span>Midnight <br><small class="tag tag-night">+25% (12AM-5AM)</small></span>
+                    </label>
+
+                    <label class="checkbox-item" id="acOptionContainer" style="display:none;">
+                        <input type="checkbox" id="ac">
+                        <span>AC Ride <br><small class="tag tag-ac">+10%</small></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="waiting">Waiting Time (Minutes)</label>
+                    <input type="number" id="waiting" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Traffic jams or signal stops.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="luggage">Big Luggage (Quantity)</label>
+                    <input type="number" id="luggage" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Items larger than 60x40cm (₹6/pc).</div>
+                </div>
+
+                <button type="submit" class="btn-primary">Calculate Fare</button>
+            </form>
+        </article>
+
+        <!-- NEW: How To Use Section -->
+        <details class="instructions-card">
+            <summary>❓ How to use this calculator?</summary>
+            <div class="instructions-content">
+                <ol>
+                    <li><strong>Choose Vehicle:</strong> Select Auto, Black & Yellow Taxi, or Cool Cab.</li>
+                    <li><strong>Enter Distance:</strong> Input the Kilometers (KM) shown on the meter or your GPS map
+                        app.</li>
+                    <li><strong>Midnight Option:</strong> Check this if your journey is between 12:00 AM and 5:00 AM.
+                    </li>
+                    <li><strong>AC Option:</strong> (For Black & Yellow Taxis only) Check if you used the AC.</li>
+                    <li><strong>Waiting & Luggage:</strong> Enter waiting time in minutes or number of large bags if
+                        applicable.</li>
+                    <li><strong>Calculate:</strong> Click the button to see the estimated official government fare.</li>
+                </ol>
+                <p style="margin-top:10px; font-size: 0.85rem; color: #777;">
+                    <em>Note: The final amount is rounded to the nearest Rupee as per RTO rules.</em>
+                </p>
+            </div>
+        </details>
+
+        <!-- Results Section -->
+        <section id="result-section" aria-live="polite">
+            <div class="result-card">
+                <div class="result-header">Estimated Fare Details</div>
+                <div class="result-body">
+                    <div class="fare-row">
+                        <span>Base Fare (Distance)</span>
+                        <span id="res-base">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-ac">
+                        <span>AC Surcharge</span>
+                        <span id="res-ac">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-midnight">
+                        <span>Midnight Charge</span>
+                        <span id="res-midnight">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Waiting Charges</span>
+                        <span id="res-waiting">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Luggage Charges</span>
+                        <span id="res-luggage">₹0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Pay</span>
+                        <span class="total-amount" id="res-total">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button id="aboutBtn" class="btn-about" aria-haspopup="dialog">About & Disclaimer</button>
+            <div style="text-align: center; margin-top: 10px; font-size: 0.7rem; color: #999;">
+                &copy; 2025 MH Meter Price Calculator
+            </div>
+        </footer>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Close Modal">&times;</button>
+            <h2 id="modalTitle" style="margin-bottom: 15px; color: var(--secondary);">⚠️ Important Disclaimer</h2>
+
+            <p style="margin-bottom: 15px;">
+                <strong>This is NOT an official government website.</strong>
+            </p>
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">
+                This tool is designed to help commuters estimate fares based on the tariff card effective 01/02/2025.
+                While we strive for accuracy, actual meter readings may vary slightly due to calibration.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 0.95rem;">
+                For official queries, complaints, or to download the signed PDF, please visit the Maharashtra Motor
+                Vehicle Department website:
+            </p>
+
+            <a href="https://transport.maharashtra.gov.in/Site/Common/ViewPdfList.aspx?Doctype=1d1f28f9-a4e5-4b09-ab8b-1d4576adca18"
+                target="_blank" rel="noopener noreferrer" class="official-link">
+                Visit Official Transport Website ↗
+            </a>
+        </div>
+    </div>

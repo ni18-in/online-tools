@@ -1,0 +1,34 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/advance-epoch-converter/body.html?raw';
+import css from '../../../components/legacy/tools/advance-epoch-converter/styles.css?raw';
+import js from '../../../components/legacy/tools/advance-epoch-converter/script.js?raw';
+
+const tool = getTool('advance-epoch-converter')!;
+const seo = toolSeo(tool, {
+  title: 'Advance Epoch & Unix Timestamp Converter',
+  description:
+    'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds, milliseconds, microseconds, nanoseconds, and timezones.',
+  keywords: 'epoch converter, unix timestamp, timestamp converter, epoch time, unix time, developer tool',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Advance Epoch & Unix Timestamp Converter',
+    description:
+      'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds, milliseconds, microseconds, nanoseconds, and timezones.',
+    url: `${SITE_URL}/tools/advance-epoch-converter/`,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@type': 'Person', name: 'ni18' },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island" id="tool-advance-epoch-converter" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>
