@@ -20,12 +20,13 @@ import path from 'node:path';
 import postcss from 'postcss';
 
 const slug = process.argv[2];
-if (!slug) { console.error('usage: extract-legacy.mjs <slug> [srcRelPath]'); process.exit(1); }
+if (!slug) { console.error('usage: extract-legacy.mjs <slug> [srcRelPath] [category]'); process.exit(1); }
 const srcRel = process.argv[3] || `tools/${slug}/index.html`;
+const category = process.argv[4] || 'tools'; // 'tools' | 'blogs' — controls output dir + scope id
 const root = path.resolve(import.meta.dirname, '..');
 const src = fs.readFileSync(path.join(root, srcRel), 'utf8');
 
-const scopeId = `#tool-${slug}`;
+const scopeId = category === 'blogs' ? `#blog-${slug}` : `#tool-${slug}`;
 
 // ---- sibling external assets (tools that ship their own style.css / script.js) ----
 const srcDir = path.dirname(path.join(root, srcRel));
@@ -72,6 +73,12 @@ body = body.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (full, attrs, cod
 // remove AdSense <ins> units
 body = body.replace(/<ins\b[^>]*class="[^"]*adsbygoogle[^"]*"[\s\S]*?<\/ins>/gi, '');
 
+// blogs reuse the old site chrome (header/footer); keep only the <main>/<article> content.
+if (category === 'blogs') {
+  const m = body.match(/<main[^>]*>[\s\S]*?<\/main>/i) || body.match(/<article[^>]*>[\s\S]*?<\/article>/i);
+  if (m) body = m[0];
+}
+
 // ---- external head deps (CDN libs/fonts) minus GA, ads, tailwind CDN, and the tool's own
 //      relative script.js (which we inline below) ----
 const headDeps = [];
@@ -84,7 +91,7 @@ for (const m of src.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*><\/script>/gi))
 if (extJs.trim()) inlineJs.push(extJs.trim());
 
 // ---- write partials ----
-const outDir = path.join(root, 'src/components/legacy/tools', slug);
+const outDir = path.join(root, 'src/components/legacy', category, slug);
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, 'body.html'), body.trim() + '\n');
 fs.writeFileSync(path.join(outDir, 'styles.css'), scopedCss.trim() + '\n');

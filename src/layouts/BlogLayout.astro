@@ -1,40 +1,40 @@
 ---
 /**
- * BlogLayout.astro — wraps a preserved blog-post article in the MD3 shell with a readable
- * column. Like ToolLayout, the legacy article HTML is injected verbatim via set:html.
+ * BlogLayout.astro — MD3 shell around a preserved blog article. Slot-based: the post page
+ * supplies the legacy <main> article (set:html) wrapped in .blog-island.legacy-tw (blogs used
+ * Tailwind), plus its scoped <style>. A reserved-height ad sits below the article.
  */
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
 import { type Locale } from '../data/i18n';
+import '../styles/tw-preflight-scoped.css';
 
 export interface Props {
   seo: SeoProps;
   lang?: Locale;
   altLinks?: Partial<Record<Locale, string>>;
-  bodyHtml: string;
   headRaw?: string;
   ad?: boolean;
 }
-const { seo, lang = 'en', altLinks = {}, bodyHtml, headRaw, ad = true } = Astro.props;
+const { seo, lang = 'en', altLinks = {}, headRaw, ad = true } = Astro.props;
 ---
 <BaseLayout seo={seo} lang={lang} current="blogs" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
-  <main id="main-content" class="blog-main">
-    {ad && <AdSlot placement="in-content" minHeight={250} class="blog-ad" />}
-    <article class="blog-article" set:html={bodyHtml} />
-  </main>
+  <div class="blog-shell">
+    <slot />
+    {ad && <AdSlot placement="below-content" minHeight={250} class="blog-ad" />}
+  </div>
 </BaseLayout>
 
 <style>
-  .blog-main {
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 32px 16px;
+  .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; }
+  .blog-ad { margin: 32px auto; max-width: 728px; }
+  /* Blog articles render on a clean light reading surface regardless of shell theme. */
+  :global(.blog-island.legacy-tw) {
+    background: #ffffff;
+    color: #1f2430;
+    border-radius: var(--md-sys-shape-corner-large);
+    overflow: hidden;
   }
-  .blog-ad { margin: 0 auto 24px; }
-  .blog-article :global(img) { max-width: 100%; height: auto; border-radius: 12px; }
-  .blog-article :global(h1) { font-size: 2rem; line-height: 1.2; }
-  .blog-article :global(h2) { font-size: 1.5rem; margin-top: 2rem; }
-  .blog-article :global(p) { line-height: 1.7; }
-  .blog-article :global(a) { color: var(--md-sys-color-primary); }
+  :global(.blog-island img) { max-width: 100%; height: auto; }
 </style>

@@ -1,10 +1,29 @@
 ---
-// PROBE PAGE (P0) — replaced in P6. THE critical test: blog posts must emit as a
-// literal /blogs/<name>.html FILE (not /blogs/<name>/index.html). getStaticPaths returns
-// the bare slug; build.format:'preserve' should append .html for this non-index route.
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { blogPosts, blogSeo } from '../../data/blogs';
+
+// Eager-load every blog partial; pick by slug at render time.
+const bodies = import.meta.glob('../../components/legacy/blogs/*/body.html', { query: '?raw', import: 'default', eager: true });
+const styles = import.meta.glob('../../components/legacy/blogs/*/styles.css', { query: '?raw', import: 'default', eager: true });
+const scripts = import.meta.glob('../../components/legacy/blogs/*/script.js', { query: '?raw', import: 'default', eager: true });
+const pick = (map: Record<string, unknown>, slug: string, file: string): string => {
+  const key = Object.keys(map).find((p) => p.endsWith(`/blogs/${slug}/${file}`));
+  return key ? (map[key] as string) : '';
+};
+
 export function getStaticPaths() {
-  return [{ params: { slug: 'demo-post' } }];
+  return blogPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
 }
-const { slug } = Astro.params;
+
+const { post } = Astro.props;
+const seo = blogSeo(post);
+const body = pick(bodies, post.slug, 'body.html');
+const css = pick(styles, post.slug, 'styles.css');
+const js = pick(scripts, post.slug, 'script.js');
 ---
-<html lang="en"><head><meta charset="utf-8" /><title>probe post {slug}</title></head><body><h1>blog post → /blogs/{slug}.html</h1></body></html>
+<BlogLayout seo={seo} lang="en">
+  <article class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
+</BlogLayout>
+
+<style is:global set:html={css}></style>
+{js.trim() && <script is:inline set:html={js}></script>}
