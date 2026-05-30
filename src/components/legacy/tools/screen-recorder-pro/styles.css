@@ -5,7 +5,6 @@
             color: var(--text-color-dark); 
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
 
