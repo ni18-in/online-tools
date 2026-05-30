@@ -42,17 +42,25 @@ const {
 </BaseLayout>
 
 <style>
+  /* width:100% defeats the flex shrink-wrap (a column flex item with auto cross-margins
+     collapses to content width) so every tool gets the full page width to lay out in. */
   .tool-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 16px;
+    width: 100%;
+    padding: 24px 16px 8px;
   }
-  .tool-ad { margin: 32px auto 0; max-width: 728px; }
-  /* The island is a transparent wrapper. Each tool brings its own canvas: custom-CSS tools via
-     their scoped #tool-<slug> rules; Tailwind tools by carrying their original <body> bg/text
-     classes onto the island element (so dark-themed or dark:-adaptive tools render correctly). */
-  :global(.tool-island.legacy-tw) {
-    border-radius: var(--md-sys-shape-corner-large);
-    overflow: hidden;
+  .tool-ad { margin: 28px auto 0; max-width: 728px; }
+  /* One consistent MD3 work-surface for EVERY tool: centered, capped width, themed card.
+     The extractor strips each tool's own page background, so this is the single canvas.
+     A few intentionally-themed islands (dark basic-auth, gradient AI tools) override the bg
+     in their own page via utility classes. */
+  :global(.tool-island) {
+    max-width: 1080px;
+    margin: 0 auto;
+    /* Soft neutral canvas — tools with their own dark/branded bg override via #tool-<slug>;
+       tools without one get this. No border/shadow so it never double-frames a tool's own cards. */
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    padding: clamp(12px, 2vw, 28px);
   }
 </style>

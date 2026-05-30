@@ -20,7 +20,6 @@
     font-family: var(--font-heading);
     background: var(--bg-gradient);
     color: var(--text-color);
-    min-height: 100vh;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;

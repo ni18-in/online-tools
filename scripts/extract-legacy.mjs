@@ -56,6 +56,16 @@ if (styleBlocks.trim()) {
       return `${scopeId} ${s}`;
     });
   });
+  // Strip only full-viewport sizing from the island-root rule (min-height/height:100vh would
+  // make the island fill the screen). Keep each tool's OWN background + text colors so its
+  // theme stays internally consistent and readable (some tools are intentionally dark).
+  tree.walkRules((rule) => {
+    if (rule.selectors.length === 1 && rule.selectors[0] === scopeId) {
+      rule.walkDecls((decl) => {
+        if (/^(min-height|height)$/i.test(decl.prop) && /vh|vw|%/.test(decl.value)) decl.remove();
+      });
+    }
+  });
   scopedCss = tree.toString();
 }
 

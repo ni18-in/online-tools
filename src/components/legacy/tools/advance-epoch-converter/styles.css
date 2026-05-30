@@ -41,7 +41,6 @@
             color: var(--text-primary);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
