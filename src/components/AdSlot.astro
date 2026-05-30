@@ -1,0 +1,65 @@
+---
+/**
+ * AdSlot.astro — one consistent, non-intrusive AdSense unit.
+ *
+ * Reserves vertical space (min-height) so ad insertion causes ZERO layout shift (CLS),
+ * and defers the adsbygoogle.push() until the slot nears the viewport (IntersectionObserver)
+ * to protect LCP/INP. The loader script itself is injected once by BaseLayout (adsEnabled).
+ * No interstitial / anchor / vignette / auto-ads — manual in-content units only.
+ */
+import { ADSENSE_CLIENT, ADSENSE_SLOT } from '../data/site';
+
+export interface Props {
+  client?: string;
+  slot?: string;
+  format?: string;
+  /** Reserved min-height in px to prevent CLS. Tune per placement. */
+  minHeight?: number;
+  placement?: 'in-content' | 'below-content';
+  class?: string;
+}
+
+const {
+  client = ADSENSE_CLIENT,
+  slot = ADSENSE_SLOT,
+  format = 'auto',
+  minHeight = 280,
+  placement = 'in-content',
+  class: className = '',
+} = Astro.props;
+---
+<aside
+  class:list={['ad-slot', `ad-slot--${placement}`, className]}
+  aria-label="Advertisement"
+  style={`min-height:${minHeight}px`}
+>
+  <ins
+    class="adsbygoogle"
+    style={`display:block;min-height:${minHeight}px`}
+    data-ad-client={client}
+    data-ad-slot={slot}
+    data-ad-format={format}
+    data-full-width-responsive="true"
+  ></ins>
+</aside>
+
+<script is:inline>
+  (function () {
+    var ins = document.currentScript.previousElementSibling.querySelector('ins.adsbygoogle');
+    if (!ins) return;
+    var pushed = false;
+    function load() {
+      if (pushed) return;
+      pushed = true;
+      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0] && entries[0].isIntersecting) { load(); io.disconnect(); }
+      }, { rootMargin: '300px' });
+      io.observe(ins);
+    } else {
+      load();
+    }
+  })();
+</script>

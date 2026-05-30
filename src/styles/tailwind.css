@@ -1,0 +1,8 @@
+/*
+ * Tailwind entry — utilities only, NO `@tailwind base`.
+ * Omitting the base layer means Tailwind's Preflight reset is never emitted, so the
+ * ~11 legacy tools that depend on their own inline CSS + browser defaults are untouched.
+ * (corePlugins.preflight:false in tailwind.config.mjs is the belt-and-suspenders.)
+ */
+@tailwind components;
+@tailwind utilities;

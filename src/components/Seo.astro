@@ -1,0 +1,106 @@
+---
+/**
+ * Seo.astro — the single source of head SEO truth.
+ *
+ * Reproduces the byte-for-byte head contract the site recovered its indexing with:
+ *   - exactly one <link rel="canonical"> = the deployed path
+ *   - reciprocal hreflang set (en/es/fr/x-default) where translations exist
+ *   - meta description/keywords/robots (robots is PER-PAGE — preserves `noindex, follow`)
+ *   - Open Graph + Twitter cards
+ *   - JSON-LD emitted via set:html(JSON.stringify(...)) so blocks are ALWAYS valid JSON
+ *     (no stray // comments possible) → scripts/validate-jsonld.js passes by construction.
+ */
+import { SITE_NAME, DEFAULT_OG_IMAGE, DEFAULT_ROBOTS } from '../data/site';
+
+export interface HreflangLink {
+  hreflang: string; // 'en' | 'es' | 'fr' | 'x-default'
+  href: string;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  robots?: string;
+  keywords?: string;
+  author?: string;
+  hreflang?: HreflangLink[];
+  og?: {
+    type?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+    siteName?: string;
+    locale?: string;
+    url?: string;
+  };
+  twitter?: {
+    card?: string;
+    domain?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+    url?: string;
+  };
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  robots = DEFAULT_ROBOTS,
+  keywords,
+  author,
+  hreflang = [],
+  og = {},
+  twitter = {},
+  jsonLd = [],
+} = Astro.props;
+
+const ogType = og.type ?? 'website';
+const ogTitle = og.title ?? title;
+const ogDescription = og.description ?? description;
+const ogImage = og.image ?? DEFAULT_OG_IMAGE;
+const ogUrl = og.url ?? canonical;
+const ogSiteName = og.siteName ?? SITE_NAME;
+
+const twCard = twitter.card ?? 'summary_large_image';
+const twTitle = twitter.title ?? ogTitle;
+const twDescription = twitter.description ?? ogDescription;
+const twImage = twitter.image ?? ogImage;
+const twUrl = twitter.url ?? canonical;
+---
+<title set:html={title}></title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+<meta name="robots" content={robots} />
+{author && <meta name="author" content={author} />}
+
+<link rel="canonical" href={canonical} />
+{hreflang.map((alt) => (
+  <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+))}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={ogUrl} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={ogImage} />
+{og.imageAlt && <meta property="og:image:alt" content={og.imageAlt} />}
+<meta property="og:site_name" content={ogSiteName} />
+{og.locale && <meta property="og:locale" content={og.locale} />}
+
+<meta name="twitter:card" content={twCard} />
+{twitter.domain && <meta property="twitter:domain" content={twitter.domain} />}
+<meta name="twitter:url" content={twUrl} />
+<meta name="twitter:title" content={twTitle} />
+<meta name="twitter:description" content={twDescription} />
+<meta name="twitter:image" content={twImage} />
+{twitter.imageAlt && <meta name="twitter:image:alt" content={twitter.imageAlt} />}
+
+{jsonLd.map((block) => (
+  <script type="application/ld+json" set:html={JSON.stringify(block)} />
+))}

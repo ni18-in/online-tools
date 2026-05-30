@@ -1,0 +1,128 @@
+/*
+ * Material Design 3 design tokens (indigo-seeded) + a MINIMAL, safe global base.
+ *
+ * Scoping rules (load-bearing — see plan):
+ *   - These tokens feed both the MD3 shell components and @material/web elements
+ *     (which read --md-sys-color-* / --md-sys-typescale-* directly).
+ *   - The global base here is deliberately minimal (body margin/font/colors only). It does
+ *     NOT reset headings/lists/box-sizing globally, because the 10 tools that never loaded
+ *     Tailwind rely on UA defaults. Tailwind tools get a SCOPED Preflight via .legacy-tw
+ *     (tw-preflight-scoped.css), applied per-tool in P3+.
+ */
+
+:root {
+  /* ----- MD3 color: light scheme ----- */
+  --md-sys-color-primary: #4f46e5;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #e1e0ff;
+  --md-sys-color-on-primary-container: #11118b;
+  --md-sys-color-secondary: #5a5b72;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #dfe0f9;
+  --md-sys-color-on-secondary-container: #171a2c;
+  --md-sys-color-surface: #fdfbff;
+  --md-sys-color-surface-dim: #dcd9e0;
+  --md-sys-color-surface-bright: #fdfbff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f7f4fb;
+  --md-sys-color-surface-container: #f1eef6;
+  --md-sys-color-surface-container-high: #ebe9f0;
+  --md-sys-color-surface-container-highest: #e5e3ea;
+  --md-sys-color-on-surface: #1b1b21;
+  --md-sys-color-on-surface-variant: #46464f;
+  --md-sys-color-outline: #777680;
+  --md-sys-color-outline-variant: #c7c5d0;
+  --md-sys-color-background: #fdfbff;
+  --md-sys-color-on-background: #1b1b21;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-inverse-surface: #303036;
+  --md-sys-color-inverse-on-surface: #f3eff7;
+
+  /* ----- MD3 typography ----- */
+  --md-ref-typeface-brand: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --md-ref-typeface-plain: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --md-sys-typescale-display-small-size: 2.25rem;
+  --md-sys-typescale-headline-large-size: 2rem;
+  --md-sys-typescale-headline-small-size: 1.5rem;
+  --md-sys-typescale-title-large-size: 1.375rem;
+  --md-sys-typescale-body-large-size: 1rem;
+  --md-sys-typescale-label-large-size: 0.875rem;
+
+  /* ----- MD3 shape ----- */
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+
+  /* ----- MD3 elevation (shadows) ----- */
+  --md-sys-elevation-1: 0 1px 2px rgba(0, 0, 0, .3), 0 1px 3px 1px rgba(0, 0, 0, .15);
+  --md-sys-elevation-2: 0 1px 2px rgba(0, 0, 0, .3), 0 2px 6px 2px rgba(0, 0, 0, .15);
+  --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, .15), 0 1px 3px rgba(0, 0, 0, .3);
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --md-sys-color-primary: #c0c1ff;
+  --md-sys-color-on-primary: #1c1d92;
+  --md-sys-color-primary-container: #3736aa;
+  --md-sys-color-on-primary-container: #e1e0ff;
+  --md-sys-color-secondary: #c3c4dd;
+  --md-sys-color-on-secondary: #2c2e42;
+  --md-sys-color-secondary-container: #424459;
+  --md-sys-color-on-secondary-container: #dfe0f9;
+  --md-sys-color-surface: #131318;
+  --md-sys-color-surface-dim: #131318;
+  --md-sys-color-surface-bright: #39383f;
+  --md-sys-color-surface-container-lowest: #0e0e13;
+  --md-sys-color-surface-container-low: #1b1b21;
+  --md-sys-color-surface-container: #1f1f25;
+  --md-sys-color-surface-container-high: #2a2930;
+  --md-sys-color-surface-container-highest: #35343b;
+  --md-sys-color-on-surface: #e5e1e9;
+  --md-sys-color-on-surface-variant: #c7c5d0;
+  --md-sys-color-outline: #918f9a;
+  --md-sys-color-outline-variant: #46464f;
+  --md-sys-color-background: #131318;
+  --md-sys-color-on-background: #e5e1e9;
+  --md-sys-color-inverse-surface: #e5e1e9;
+  --md-sys-color-inverse-on-surface: #303036;
+
+  color-scheme: dark;
+}
+
+/* ----- minimal, safe global base ----- */
+body {
+  margin: 0;
+  font-family: var(--md-ref-typeface-plain);
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* Page wrapper keeps footer at the bottom on short pages. */
+.site-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.site-shell > main { flex: 1 0 auto; }

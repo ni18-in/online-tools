@@ -1,0 +1,78 @@
+---
+/**
+ * ToolCard.astro — MD3 card for the homepage grid + tools listing.
+ * Keeps the .tool-card / h3>a / p structure so the existing client-side search
+ * (script.js reads `.tool-card h3 a` text + `p` text) keeps working unchanged.
+ * `external` cards link off-site (e.g. tools.ni18.in) and open in a new tab.
+ */
+export interface Props {
+  href: string;
+  name: string;
+  description: string;
+  headingId: string;
+  external?: boolean;
+  cta?: string;
+}
+const { href, name, description, headingId, external = false, cta = 'Use Tool' } = Astro.props;
+const rel = external ? 'noopener' : undefined;
+const target = external ? '_blank' : undefined;
+---
+<article class="tool-card" aria-labelledby={headingId}>
+  <div class="body">
+    <h3 id={headingId} class="title">
+      <a href={href} class="stretched-link" rel={rel} target={target}>{name}</a>
+    </h3>
+    <p class="desc">{description}</p>
+  </div>
+  <div class="foot">
+    <span class="cta">
+      {cta}{external ? ' ↗' : ''}
+      {!external && (
+        <svg class="arrow" viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+      )}
+    </span>
+  </div>
+</article>
+
+<style>
+  .tool-card {
+    position: relative;
+    background: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .tool-card:hover {
+    box-shadow: var(--md-sys-elevation-2);
+    transform: translateY(-2px);
+    border-color: var(--md-sys-color-primary);
+  }
+  .body { padding: 24px; flex: 1 1 auto; }
+  .title { margin: 0 0 8px; font-size: 1.25rem; font-weight: 600; color: var(--md-sys-color-on-surface); }
+  .title a { color: inherit; text-decoration: none; }
+  .desc { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 0.9375rem; line-height: 1.55; }
+  .foot {
+    padding: 16px 24px;
+    background: var(--md-sys-color-surface-container);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
+  }
+  .tool-card:hover .arrow { transform: translateX(3px); }
+  .arrow { transition: transform .15s; }
+  /* Make the whole card clickable via the title link. */
+  .stretched-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+</style>
