@@ -1,0 +1,55 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import type { Props as SeoProps } from '../../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+
+const bodies = import.meta.glob('../../../components/legacy/fr/blog-*/body.html', { query: '?raw', import: 'default', eager: true });
+const styles = import.meta.glob('../../../components/legacy/fr/blog-*/styles.css', { query: '?raw', import: 'default', eager: true });
+const pick = (map: Record<string, unknown>, partial: string, file: string): string => {
+  const key = Object.keys(map).find((p) => p.endsWith(`/fr/${partial}/${file}`));
+  return key ? (map[key] as string) : '';
+};
+
+interface FrPost { slug: string; partial: string; title: string; description: string; noindex?: boolean; hreflang?: SeoProps['hreflang'] }
+
+export function getStaticPaths() {
+  const posts: FrPost[] = [
+    {
+      slug: 'edit-images-like-pro-free-online-tool',
+      partial: 'blog-edit-images-like-pro-free-online-tool',
+      title: 'Éditez des Images comme un Pro Gratuitement avec cet Outil en Ligne en 2025',
+      description: 'Apprenez à éditer des images comme un pro avec un outil en ligne gratuit et puissant en 2025. Redimensionnez, recadrez, ajoutez du texte et plus encore.',
+      hreflang: [
+        { hreflang: 'en', href: `${SITE_URL}/blogs/edit-images-like-pro-free-online-tool.html` },
+        { hreflang: 'fr', href: `${SITE_URL}/fr/blogs/edit-images-like-pro-free-online-tool.html` },
+        { hreflang: 'x-default', href: `${SITE_URL}/blogs/edit-images-like-pro-free-online-tool.html` },
+      ],
+    },
+    {
+      slug: 'ai-beauty-test-free-online',
+      partial: 'blog-ai-beauty-test-free-online',
+      title: 'Test de Beauté IA : Découvrez Votre Score et Sosie Célébrité Gratuitement',
+      description: 'Découvrez votre score d’attractivité faciale avec notre Test de Beauté IA. Apprenez comment cela fonctionne et ce que vos résultats signifient.',
+      noindex: true,
+    },
+  ];
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props as { post: FrPost };
+const url = `${SITE_URL}/fr/blogs/${post.slug}.html`;
+const seo: SeoProps = {
+  title: post.title,
+  description: post.description,
+  canonical: url,
+  robots: post.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+  hreflang: post.hreflang,
+  og: { type: 'article', url, title: post.title, description: post.description, image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url, title: post.title, description: post.description, image: DEFAULT_OG_IMAGE },
+};
+const body = pick(bodies, post.partial, 'body.html');
+const css = pick(styles, post.partial, 'styles.css');
+---
+<BlogLayout seo={seo} lang="fr">
+  <article class="blog-island legacy-tw" id={`tool-${post.partial}`} set:html={body} />
+</BlogLayout>
+<style is:global set:html={css}></style>

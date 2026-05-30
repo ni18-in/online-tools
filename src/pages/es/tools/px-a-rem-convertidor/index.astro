@@ -1,0 +1,28 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-px-a-rem-convertidor/body.html?raw';
+import css from '../../../../components/legacy/es/tool-px-a-rem-convertidor/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-px-a-rem-convertidor/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertidor PX a REM – Herramienta Online Gratuita',
+  description: 'Una herramienta online simple y gratuita para convertir valores de píxeles (px) a unidades REM, siguiendo los principios de Material Design.',
+  keywords: 'px a rem, convertidor, css, material design, desarrollo web, diseño responsivo',
+  canonical: `${SITE_URL}/es/tools/px-a-rem-convertidor/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/px-to-rem-converter/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/px-a-rem-convertidor/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/px-to-rem-converter/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/px-a-rem-convertidor/`, title: 'Convertidor PX a REM', description: 'Convierte píxeles a REM al instante.', image: DEFAULT_OG_IMAGE, imageAlt: 'Imagen promocional para la herramienta Convertidor PX a REM.', locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/px-a-rem-convertidor/`, title: 'Convertidor PX a REM', description: 'Convierte píxeles a REM al instante.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Convertidor PX a REM', applicationCategory: 'WebApplication', operatingSystem: 'All', url: `${SITE_URL}/es/tools/px-a-rem-convertidor/`, description: 'Una herramienta online simple y gratuita para convertir px a REM.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/px-to-rem-converter/` }} adMinHeight={120}>
+  <div class="tool-island" id="tool-tool-px-a-rem-convertidor" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

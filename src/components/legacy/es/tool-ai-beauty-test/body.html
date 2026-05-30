@@ -1,0 +1,275 @@
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow">
+
+        <h1 class="sr-only">Test de Belleza IA: Puntuación Facial, Parecido a Celebridades y Herramienta de Análisis
+        </h1>
+
+        <section id="scanner" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-camera-retro text-indigo-500 mr-2 sm:mr-3"></i>Escaneo y Puntuación de Rasgos Faciales
+            </h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Obtén una puntuación detallada basada en tus rasgos
+                faciales como ojos, labios, nariz y más. El análisis de belleza facial suele implicar la aplicación de
+                modelos matemáticos o algorítmicos para evaluar la armonía, simetría y proporciones de las
+                características faciales.</p>
+            <div class="mb-6">
+                <label for="scanner-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Sube tu
+                    imagen:</label>
+                <input type="file" id="scanner-upload" accept="image/*"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+            </div>
+            <div id="scanner-preview" class="mb-6 text-center">
+                <img id="scanner-img-preview" alt="Vista previa del escáner facial" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Subir+Imagen" loading="lazy" decoding="async" width="400" height="300"
+                    alt="Área de vista previa para la imagen subida para el escaneo de belleza"
+                    class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300" />
+            </div>
+            <div id="scanner-loader" class="hidden loader-container">
+                <div class="loader-spinner"></div>
+                <div id="scanner-loader-text" class="loader-text">Cargando 0%</div>
+            </div>
+            <div id="scanner-results" class="hidden result-card border-indigo-200 bg-indigo-50">
+                <h3 class="text-lg sm:text-xl font-semibold text-indigo-800 mb-4 flex items-center"><i
+                        class="fas fa-poll mr-2"></i>Resultados del Análisis:</h3>
+                <div class="score-display bg-white border border-indigo-100">
+                    <span><i class="fas fa-star text-yellow-500"></i>Puntuación General:</span>
+                    <span id="scanner-score" class="score-value text-indigo-700">-- / 100</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="score-display">
+                        <span><i class="fas fa-eye"></i>Puntuación de Ojos:</span>
+                        <span id="scanner-eyes" class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-lips"></i>Puntuación de Labios:</span>
+                        <span id="scanner-lips" class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-draw-polygon"></i>Puntuación de Nariz:</span> <span id="scanner-nose"
+                            class="score-value">--</span>
+                    </div>
+                    <div class="score-display">
+                        <span><i class="fas fa-vector-square"></i>Puntuación de Simetría:</span>
+                        <span id="scanner-symmetry" class="score-value">--</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-xs text-gray-500 italic">*Los resultados pueden no ser 100% precisos.</p>
+            </div>
+        </section>
+
+        <section id="lookalike" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-user-astronaut text-purple-500 mr-2 sm:mr-3"></i>Parecido a Celebridades</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">¡Mira a qué celebridad te pareces más! Nuestros
+                algoritmos buscan similitudes en rasgos faciales como dimensiones y estructura ósea.</p>
+            <div class="mb-6">
+                <label for="lookalike-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Sube tu
+                    imagen:</label>
+                <input type="file" id="lookalike-upload" accept="image/*"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+            </div>
+            <div id="lookalike-preview" class="mb-6 text-center">
+                <img id="lookalike-img-preview" alt="Vista previa del parecido con famosos" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Subir+Imagen" loading="lazy" decoding="async" width="400" height="300"
+                    alt="Área de vista previa para la imagen subida para detección de parecido a celebridad"
+                    class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300" />
+            </div>
+            <div id="lookalike-loader" class="hidden loader-container">
+                <div class="loader-spinner"></div>
+                <div id="lookalike-loader-text" class="loader-text">Cargando 0%</div>
+            </div>
+            <div id="lookalike-results" class="hidden result-card border-green-200 bg-green-50 text-center">
+                <h3 class="text-lg sm:text-xl font-semibold text-green-800 mb-4 flex items-center justify-center"><i
+                        class="fas fa-award mr-2"></i>Tu Parecido a Celebridad:</h3>
+                <img id="celebrity-img" alt="Famoso emparejado" src="https://placehold.co/160x160/e2e8f0/cbd5e1?text=Celebridad"
+                    alt="Marcador de posición de Coincidencia de Celebridad"
+                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-4 shadow-lg object-cover border-4 border-white"
+                    loading="lazy" width="160" height="160" />
+                <p class="text-xl sm:text-2xl font-semibold text-gray-800"><span id="celebrity-name">--</span></p>
+                <p class="text-gray-600 text-base sm:text-lg mt-1">Confianza de Coincidencia: <span
+                        id="celebrity-confidence" class="font-bold text-green-700">--</span>%</p>
+                <p class="mt-4 text-xs text-gray-500 italic">*Los resultados pueden no ser 100% precisos.</p>
+            </div>
+        </section>
+
+        <section id="analysis" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-magnifying-glass-chart text-blue-500 mr-2 sm:mr-3"></i>Análisis de Partes del Rostro
+            </h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">Recibe información sobre partes específicas del rostro,
+                como ojos, labios, cejas y nariz. La lectura facial, arraigada en varias tradiciones, interpreta las
+                características externas como un reflejo de los rasgos internos.</p>
+            <div class="mb-6">
+                <label for="analysis-upload" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Sube tu
+                    imagen:</label>
+                <input type="file" id="analysis-upload" accept="image/*"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+            </div>
+            <div id="analysis-preview" class="mb-6 text-center">
+                <img id="analysis-img-preview" alt="Vista previa del análisis facial" src="https://placehold.co/400x300/e2e8f0/cbd5e1?text=Subir+Imagen" loading="lazy" decoding="async" width="400" height="300"
+                    alt="Área de vista previa para la imagen subida para análisis de partes de la cara"
+                    class="max-w-full sm:max-w-md mx-auto rounded-lg shadow-md" width="400" height="300" />
+            </div>
+            <div id="analysis-loader" class="hidden loader-container">
+                <div class="loader-spinner"></div>
+                <div id="analysis-loader-text" class="loader-text">Cargando 0%</div>
+            </div>
+            <div id="analysis-results" class="hidden mt-6 space-y-4 sm:space-y-5">
+                <div class="result-card border-blue-200 bg-blue-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-blue-800 flex items-center"><i
+                            class="fas fa-eye mr-2"></i>Análisis de Ojos:</h4>
+                    <p id="analysis-eyes-text" class="text-gray-700 text-sm">Sube una imagen para ver el análisis.</p>
+                </div>
+                <div class="result-card border-pink-200 bg-pink-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-pink-800 flex items-center"><i
+                            class="fas fa-lips mr-2"></i>Análisis de Labios:</h4>
+                    <p id="analysis-lips-text" class="text-gray-700 text-sm">Sube una imagen para ver el análisis.</p>
+                </div>
+                <div class="result-card border-purple-200 bg-purple-50">
+                    <h4 class="text-base sm:text-lg font-semibold text-purple-800 flex items-center">
+                        <i class="fas fa-draw-polygon mr-2"></i>Análisis de Nariz:
+                    </h4>
+                    <p id="analysis-nose-text" class="text-gray-700 text-sm">Sube una imagen para ver el análisis.</p>
+                </div>
+                <p class="mt-4 text-xs text-gray-500 italic">*Los resultados pueden no ser 100% precisos.</p>
+            </div>
+        </section>
+
+        <section id="showdown" class="content-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-trophy text-yellow-500 mr-2 sm:mr-3"></i>Duelo de Belleza</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">¡Sube dos imágenes, compara sus puntuaciones de belleza
+                IA basadas en la simetría y proporciones faciales y encuentra al ganador!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                <div>
+                    <label for="showdown-upload1" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Sube
+                        Imagen 1:</label>
+                    <input type="file" id="showdown-upload1" accept="image/*"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+                </div>
+                <div>
+                    <label for="showdown-upload2" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">Sube
+                        Imagen 2:</label>
+                    <input type="file" id="showdown-upload2" accept="image/*"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+                </div>
+            </div>
+            <div id="showdown-preview" class="mb-6 comparison-container">
+                <div class="comparison-item">
+                    <img id="showdown-img-preview1" alt="Imagen 1 del duelo de belleza" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Subir+Imagen+1"
+                        alt="Área de vista previa para la primera imagen en duelo de belleza"
+                        class="mx-auto rounded-lg shadow-md" loading="lazy" width="300" height="225" />
+                    <p class="text-xs sm:text-sm text-gray-600 font-medium mt-2">Imagen 1</p>
+                </div>
+                <div class="comparison-item">
+                    <img id="showdown-img-preview2" alt="Imagen 2 del duelo de belleza" src="https://placehold.co/300x225/e2e8f0/cbd5e1?text=Subir+Imagen+2"
+                        alt="Área de vista previa para la segunda imagen en duelo de belleza"
+                        class="mx-auto rounded-lg shadow-md" loading="lazy" width="300" height="225" />
+                    <p class="text-xs sm:text-sm text-gray-600 font-medium mt-2">Imagen 2</p>
+                </div>
+            </div>
+            <div id="showdown-loader" class="hidden loader-container">
+                <div class="loader-spinner"></div>
+                <div id="showdown-loader-text" class="loader-text">Cargando 0%</div>
+            </div>
+            <div id="showdown-results" class="hidden result-card border-yellow-200 bg-yellow-50 text-center">
+                <h3 class="text-lg sm:text-xl font-semibold text-yellow-800 mb-5 flex items-center justify-center"><i
+                        class="fas fa-balance-scale mr-2"></i>Resultados del Duelo:</h3>
+                <div class="flex flex-col sm:flex-row justify-around items-center mb-5 gap-4">
+                    <div
+                        class="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200 w-full sm:w-auto">
+                        <p class="text-gray-700 font-medium text-sm sm:text-base mb-1">Puntuación Imagen 1</p>
+                        <p id="showdown-score1" class="text-2xl sm:text-3xl font-bold text-indigo-600">--</p>
+                    </div>
+                    <div class="text-gray-400 text-xl sm:text-2xl font-light hidden sm:block">vs</div>
+                    <div
+                        class="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200 w-full sm:w-auto">
+                        <p class="text-gray-700 font-medium text-sm sm:text-base mb-1">Puntuación Imagen 2</p>
+                        <p id="showdown-score2" class="text-2xl sm:text-3xl font-bold text-indigo-600">--</p>
+                    </div>
+                </div>
+                <div id="showdown-winner" class="showdown-winner-card">
+                </div>
+                <p class="mt-4 text-xs text-gray-500 italic">*Los resultados pueden no ser 100% precisos.</p>
+            </div>
+        </section>
+
+        <section id="how-to-use"
+            class="content-section info-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-circle-question text-teal-500 mr-2 sm:mr-3"></i>Cómo Usar el Test de Belleza IA</h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">¡Usar el Test de Belleza IA es simple y divertido! Sigue
+                estos pasos:</p>
+            <ul>
+                <li><strong>Selecciona una Función:</strong> Haz clic en uno de los botones de navegación del encabezado
+                    (<i class="fas fa-camera-retro text-xs"></i> Escanear y Puntuar, <i
+                        class="fas fa-user-astronaut text-xs"></i> Parecido, etc.) para elegir el análisis que deseas
+                    realizar.</li>
+                <li><strong>Sube Imagen(es):</strong> Haz clic en el botón "Sube tu imagen". Elige una foto clara de un
+                    rostro. Para "<i class="fas fa-trophy text-xs"></i> Duelo de Belleza", sube dos imágenes.</li>
+                <li><strong>Espera el Análisis:</strong> La herramienta simula el análisis. Verás un cargador (<span
+                        class="loader-spinner inline-block w-4 h-4 border-2 border-t-indigo-500 align-middle"></span>).
+                </li>
+                <li><strong>Ver Resultados:</strong> Una vez completado, tus resultados (puntuaciones, coincidencia,
+                    análisis, comparación) aparecerán a continuación.</li>
+                <li><strong>¡Prueba Otro!:</strong> No dudes en probar diferentes funciones o imágenes.</li>
+            </ul>
+            <p class="mt-6 text-xs sm:text-sm text-gray-500 bg-gray-100 p-3 rounded-md border border-gray-200"><i
+                    class="fas fa-info-circle mr-2 text-gray-500"></i><strong>Nota:</strong> Esta herramienta es solo
+                para entretenimiento. El análisis de "IA" es simulado basado en el nombre del archivo.</p>
+        </section>
+
+        <section id="about"
+            class="content-section info-section bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 hidden">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-4 flex items-center"><i
+                    class="fas fa-circle-info text-cyan-500 mr-2 sm:mr-3"></i>Acerca del Test de Belleza IA</h2>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base">¡Bienvenido al Test de Belleza IA, tu destino divertido
+                para explorar los rasgos faciales a través de un análisis de IA simulado!</p>
+            <p class="text-gray-600 mb-2 text-sm sm:text-base"><strong>Lo que hace (Simulado):</strong></p>
+            <ul>
+                <li>Proporciona "puntuaciones de belleza" basadas en características faciales generales.</li>
+                <li>Compara tu foto con un parecido a celebridad.</li>
+                <li>Ofrece interpretaciones de partes faciales basadas en conceptos de lectura facial tradicional.</li>
+                <li>Compara las "puntuaciones de belleza" de dos imágenes diferentes.</li>
+            </ul>
+            <p class="text-gray-600 mt-6 mb-2 text-sm sm:text-base"><strong><i
+                        class="fas fa-triangle-exclamation text-red-500 mr-1"></i> Descargo de Responsabilidad
+                    Importante:</strong></p>
+            <ul class="[&>li]:before:content-['\f071'] [&>li]:before:text-red-500 text-sm sm:text-base">
+                <li><strong>Solo Entretenimiento:</strong> Esta herramienta está diseñada puramente para el
+                    entretenimiento. Los resultados son simulados y no reflejan análisis científico o medidas objetivas
+                    de belleza.</li>
+                <li><strong>IA Simulada:</strong> El "análisis de IA" utiliza el nombre del archivo de la imagen subida
+                    para demostración. No se realiza un procesamiento real de imágenes ni un modelado de IA complejo.
+                </li>
+                <li><strong>Sin Almacenamiento de Datos:</strong> Las imágenes se procesan localmente en tu navegador
+                    solo para vista previa y recuperación del nombre del archivo. NO se envían a ningún servidor ni se
+                    almacenan.</li>
+                <li><strong>Subjetividad de la Belleza:</strong> La belleza es subjetiva y diversa. Esta herramienta no
+                    define ni juzga estándares de belleza.</li>
+            </ul>
+            <p class="text-gray-600 mt-6 text-sm sm:text-base">¡Esperamos que disfrutes explorando las funciones del
+                Test de Belleza IA!</p>
+        </section>
+
+        <section id="why-choose" aria-labelledby="why-choose-heading"
+            class="content-section bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg mb-8 mt-12">
+            <h2 id="why-choose-heading"
+                class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-6 text-center">¿Por Qué Elegir el
+                Test de Belleza IA?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-center">
+                <div class="p-4 sm:p-6 rounded-lg bg-white shadow-sm border border-gray-200">
+                    <i class="fas fa-brain text-4xl sm:text-5xl text-indigo-500 mb-3" aria-hidden="true"></i>
+                    <h3 class="font-semibold text-lg sm:text-xl text-indigo-800 mb-2">Análisis Impulsado por IA*</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Resultados atractivos impulsados por algoritmos de IA
+                        *simulada* para divertirse.</p>
+                </div>
+                <div class="p-4 sm:p-6 rounded-lg bg-white shadow-sm border border-gray-200">
+                    <i class="fas fa-puzzle-piece text-4xl sm:text-5xl text-pink-500 mb-3" aria-hidden="true"></i>
+                    <h3 class="font-semibold text-lg sm:text-xl text-pink-800 mb-2">Divertido e Interactivo</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Perfecto para el entretenimiento, el
+                        autodescubrimiento y para compartir con amigos.</p>
+                </div>
+            </div>
+            <p class="text-center mt-6 sm:mt-8 text-base sm:text-lg text-gray-700 font-medium">¡Explora una nueva
+                perspectiva con el Test de Belleza IA!</p>
+        </section>
+
+    </main>

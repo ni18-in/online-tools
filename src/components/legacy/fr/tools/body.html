@@ -1,0 +1,102 @@
+<main> for the primary content -->
+  <header role="banner" class="bg-white shadow-md mb-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <div class="flex-shrink-0">
+          <h1 class="text-3xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-150 ease-in-out">
+            <a href="https://online-tools.ni18.in/" title="Aller à la page d'accueil">
+              Outils en Ligne
+            </a>
+          </h1>
+        </div>
+        <nav aria-label="Navigation principale" class="hidden md:block">
+          <ul class="flex items-center space-x-8">
+            <li><a href="https://online-tools.ni18.in/fr/blogs/"
+                class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Blogs</a>
+            </li>
+            <li><a href="https://online-tools.ni18.in/fr/tools/" aria-current="page"
+                class="text-indigo-600 bg-indigo-100 px-3 py-2 rounded-md text-sm font-medium">Outils</a></li>
+            <li><a href="https://online-tools.ni18.in/fr/about/"
+                class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">À
+                Propos</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="hidden md:flex items-center space-x-4">
+          <select aria-label="Sélecteur de langue" onchange="if(this.value) window.location.href=this.value"
+            class="bg-transparent text-gray-600 hover:text-indigo-600 text-sm font-medium focus:outline-none cursor-pointer border-none focus:ring-0">
+            <option value="" disabled>Langue</option>
+            <option value="https://online-tools.ni18.in/tools/">English</option>
+            <option value="https://online-tools.ni18.in/es/tools/">Español</option>
+            <option value="https://online-tools.ni18.in/fr/tools/" selected>Français</option>
+          </select>
+        </div>
+        <div class="md:hidden">
+          <button type="button"
+            class="text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            aria-expanded="false" aria-controls="mobile-menu"
+            onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <span class="sr-only">Ouvrir le menu principal</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="https://online-tools.ni18.in/fr/blogs/"
+          class="text-gray-600 hover:bg-gray-50 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Blogs</a>
+        <a href="https://online-tools.ni18.in/fr/tools/" aria-current="page"
+          class="text-indigo-600 bg-indigo-100 block px-3 py-2 rounded-md text-base font-medium">Outils</a>
+        <a href="https://online-tools.ni18.in/fr/about/"
+          class="text-gray-600 hover:bg-gray-50 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">À
+          Propos</a>
+        <div class="px-3 py-2">
+          <label for="mobile-lang-selector" class="sr-only">Sélectionner la langue</label>
+          <select id="mobile-lang-selector" onchange="if(this.value) window.location.href=this.value"
+            class="block w-full text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <option value="https://online-tools.ni18.in/tools/">English</option>
+            <option value="https://online-tools.ni18.in/es/tools/">Español</option>
+            <option value="https://online-tools.ni18.in/fr/tools/" selected>Français</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto">
+    <!-- Search Input -->
+    <div class="mb-8 shadow-xl rounded-xl">
+      <!-- A11y Improvement: Added accessible label -->
+      <label for="toolSearch" class="sr-only">Rechercher des Outils</label>
+      <input type="text" id="toolSearch" placeholder="Rechercher des outils par nom ou description..."
+        aria-label="Rechercher des Outils pour Développeurs"
+        class="w-full p-4 text-gray-700 border border-indigo-200 rounded-xl focus:ring-4 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out text-lg"
+        onkeyup="filterTools()">
+    </div>
+
+    <!-- Tools Container (A11y Improvement: role="feed" for dynamic content list) -->
+    <div id="toolsContainer" role="feed" aria-live="polite" aria-busy="false"
+      class="tools-container grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto max-h-[70vh]">
+      <!-- Tool cards will be injected here by JavaScript -->
+    </div>
+
+    <!-- No Results Message (Hidden by default) -->
+    <div id="noResults" class="text-center p-10 bg-white rounded-xl shadow-lg mt-6 hidden">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9.172 16.172A4 4 0 0112 11h.01M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m.463-2.585A6.002 6.002 0 0012 14c.94 0 1.847.197 2.684.555m.53-2.062a8.001 8.001 0 00-2.683-1.545">
+        </path>
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun résultat trouvé</h3>
+      <p class="mt-1 text-sm text-gray-500">
+        Essayez d'ajuster vos termes de recherche ou vérifiez votre orthographe.
+      </p>
+    </div>
+
+  </main>
