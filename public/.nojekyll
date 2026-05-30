@@ -1,0 +1,2 @@
+# Disables GitHub Pages' Jekyll processing of the built output (dist/).
+# Ensures Astro's _astro/ asset directory (underscore-prefixed) is served as-is.
