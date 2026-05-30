@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+import body from '../../../components/legacy/fr/tools/body.html?raw';
+import css from '../../../components/legacy/fr/tools/styles.css?raw';
+import '../../../styles/tw-preflight-scoped.css';
+
+const seo: SeoProps = {
+  title: 'Outils pour Développeurs: Ressources Gratuites',
+  description: 'Explorez le catalogue complet d’outils web gratuits de NI18 : convertisseurs, utilitaires de texte et outils pour développeurs.',
+  keywords: 'outils en ligne, utilitaires web, convertisseurs, calculatrices',
+  canonical: `${SITE_URL}/fr/tools/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/`, title: 'Outils – NI18', description: 'Catalogue d’outils web gratuits.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/`, title: 'Outils – NI18', description: 'Catalogue d’outils web gratuits.', image: DEFAULT_OG_IMAGE },
+};
+---
+<BaseLayout seo={seo} lang="fr" current="tools" altLinks={{ en: `${SITE_URL}/tools/`, es: `${SITE_URL}/es/tools/` }}>
+  <div class="page-island legacy-tw" set:html={body} />
+</BaseLayout>
+<style is:global set:html={css}></style>
+<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>

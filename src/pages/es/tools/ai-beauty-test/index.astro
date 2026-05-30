@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-ai-beauty-test/body.html?raw';
+import css from '../../../../components/legacy/es/tool-ai-beauty-test/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-ai-beauty-test/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Test de Belleza IA: Puntuación Facial Gratis',
+  description: 'Obtén una puntuación de belleza IA gratuita basada en rasgos faciales, encuentra tu doble de celebridad y compara fotos con el Test de Belleza IA.',
+  keywords: 'test de belleza ia, puntuación facial, análisis de belleza, doble de celebridad',
+  canonical: `${SITE_URL}/es/tools/ai-beauty-test/`,
+  robots: 'noindex, follow',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/ai-beauty-test/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/ai-beauty-test/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/ai-beauty-test/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/ai-beauty-test/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/ai-beauty-test/`, title: 'Test de Belleza IA', description: 'Puntuación de belleza IA gratuita.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/ai-beauty-test/`, title: 'Test de Belleza IA', description: 'Puntuación de belleza IA gratuita.', image: DEFAULT_OG_IMAGE },
+};
+const headRaw = '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+---
+<ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/ai-beauty-test/`, fr: `${SITE_URL}/fr/tools/ai-beauty-test/` }}>
+  <div class="tool-island legacy-tw bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 text-gray-800" id="tool-tool-ai-beauty-test" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

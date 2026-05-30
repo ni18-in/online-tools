@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+import body from '../../../components/legacy/fr/blogs/body.html?raw';
+import css from '../../../components/legacy/fr/blogs/styles.css?raw';
+import '../../../styles/tw-preflight-scoped.css';
+
+const seo: SeoProps = {
+  title: 'Blog et Articles – NI18 Outils en Ligne',
+  description: 'Lisez nos derniers articles, tutoriels et guides de l’équipe NI18 Outils en Ligne.',
+  keywords: 'blog, outils en ligne, tutoriels, guides',
+  canonical: `${SITE_URL}/fr/blogs/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/blogs/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/blogs/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/blogs/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/blogs/`, title: 'Blog – NI18', description: 'Articles et guides.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/blogs/`, title: 'Blog – NI18', description: 'Articles et guides.', image: DEFAULT_OG_IMAGE },
+};
+---
+<BaseLayout seo={seo} lang="fr" current="blogs" altLinks={{ en: `${SITE_URL}/blogs/` }}>
+  <div class="page-island legacy-tw" set:html={body} />
+</BaseLayout>
+<style is:global set:html={css}></style>
+<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>

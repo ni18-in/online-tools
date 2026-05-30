@@ -1,0 +1,28 @@
+/* Custom scrollbar styling for aesthetics */
+    #tool-tools .tools-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #tool-tools .tools-container::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      /* slate-300 */
+      border-radius: 4px;
+    }
+
+    #tool-tools .tools-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      /* slate-100 */
+    }
+
+    /* A11y Improvement: Screen reader only class for the label */
+    #tool-tools .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }

@@ -1,0 +1,402 @@
+#tool-advance-epoch-converter {
+            /* Light Mode Variables */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #007acc;
+            /* VS Code Blue */
+            --accent-hover: #0062a3;
+            --border-color: #dee2e6;
+            --code-bg: #f1f3f5;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+
+        #tool-advance-epoch-converter .dark {
+            /* Dark Mode Variables (Default) */
+            --bg-primary: #1e1e1e;
+            /* VS Code Editor Bg */
+            --bg-secondary: #252526;
+            /* VS Code Sidebar Bg */
+            --text-primary: #d4d4d4;
+            --text-secondary: #858585;
+            --accent-color: #007acc;
+            --accent-hover: #0098ff;
+            --border-color: #3e3e42;
+            --code-bg: #1e1e1e;
+            --success-color: #4ec9b0;
+            --error-color: #f48771;
+        }
+
+        #tool-advance-epoch-converter * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #tool-advance-epoch-converter {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        #tool-advance-epoch-converter .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        #tool-advance-epoch-converter header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #tool-advance-epoch-converter h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #tool-advance-epoch-converter h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Theme Toggle */
+        #tool-advance-epoch-converter .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        #tool-advance-epoch-converter .theme-toggle:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Dashboard (Real-time clock) */
+        #tool-advance-epoch-converter .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #tool-advance-epoch-converter .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #tool-advance-epoch-converter .clock-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        #tool-advance-epoch-converter .date-display {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        #tool-advance-epoch-converter .controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #tool-advance-epoch-converter button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        #tool-advance-epoch-converter button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        #tool-advance-epoch-converter button.secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        #tool-advance-epoch-converter button.secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Main Converter Input */
+        #tool-advance-epoch-converter .converter-section {
+            margin-bottom: 2rem;
+        }
+
+        #tool-advance-epoch-converter .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #tool-advance-epoch-converter .smart-input-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        #tool-advance-epoch-converter input[type="text"] {
+            flex: 1;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        #tool-advance-epoch-converter input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+        }
+
+        #tool-advance-epoch-converter .precision-toggles {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        #tool-advance-epoch-converter .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        #tool-advance-epoch-converter input[type="radio"] {
+            accent-color: var(--accent-color);
+        }
+
+        #tool-advance-epoch-converter .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Results Grid */
+        #tool-advance-epoch-converter .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            display: none;
+            /* Hidden by default until valid input */
+        }
+
+        #tool-advance-epoch-converter .results-grid.visible {
+            display: grid;
+        }
+
+        #tool-advance-epoch-converter .result-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        #tool-advance-epoch-converter .result-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        #tool-advance-epoch-converter .result-value-container {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+
+        #tool-advance-epoch-converter .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            flex: 1;
+            word-break: break-all;
+        }
+
+        #tool-advance-epoch-converter .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+
+        #tool-advance-epoch-converter .copy-btn:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 122, 204, 0.1);
+        }
+
+        /* Timezone Dropdown */
+        #tool-advance-epoch-converter .timezone-selector {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        #tool-advance-epoch-converter select {
+            padding: 0.5rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Developer Zone */
+        #tool-advance-epoch-converter .developer-zone {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        #tool-advance-epoch-converter .developer-zone.visible {
+            display: block;
+        }
+
+        #tool-advance-epoch-converter .code-snippet {
+            background-color: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        #tool-advance-epoch-converter .lang-tag {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Info Sections */
+        #tool-advance-epoch-converter .info-section {
+            margin-bottom: 2rem;
+        }
+
+        #tool-advance-epoch-converter .steps-list {
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        #tool-advance-epoch-converter .steps-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        #tool-advance-epoch-converter .steps-list strong {
+            color: var(--text-primary);
+        }
+
+        #tool-advance-epoch-converter .card-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        #tool-advance-epoch-converter .apps-list {
+            list-style: none;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+
+        #tool-advance-epoch-converter .apps-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        #tool-advance-epoch-converter .apps-list strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        #tool-advance-epoch-converter article h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        #tool-advance-epoch-converter article p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        #tool-advance-epoch-converter footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        /* Icons */
+        #tool-advance-epoch-converter .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }

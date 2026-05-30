@@ -1,0 +1,43 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import body from '../../../components/legacy/tools/ai-love-calculator/body.html?raw';
+import css from '../../../components/legacy/tools/ai-love-calculator/styles.css?raw';
+import js from '../../../components/legacy/tools/ai-love-calculator/script.js?raw';
+
+const tool = getTool('ai-love-calculator')!; // robots = noindex, follow (set in tools.ts)
+const seo = toolSeo(tool, {
+  title: 'AI Love Calculator - Find Your Love Score!',
+  description:
+    'Find out your love compatibility with our fun AI Love Calculator! Enter your names and ages to calculate your love score and get a fun future prediction. For entertainment purposes only.',
+  keywords: 'love calculator, ai love calculator, compatibility test, love score, relationship calculator, fun app',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'AI Love Calculator',
+    description:
+      "A fun, client-side web application that calculates a 'love score' based on two people's names and ages for entertainment purposes.",
+    applicationCategory: 'EntertainmentApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
+    offers: { '@type': 'Offer', price: '0' },
+    creator: { '@type': 'Person', name: 'ni18 tools' },
+    mainEntityOfPage: {
+      '@type': 'CreativeWork',
+      name: 'AI Love Calculator',
+      author: { '@type': 'Person', name: 'ni18 tools' },
+      description: "A fun tool for entertainment purposes only. Don't take results seriously! Love is more than numbers.",
+    },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div
+    class="tool-island legacy-tw bg-gradient-to-br from-rose-100 to-teal-100 flex items-center justify-center p-6 sm:p-10"
+    id="tool-ai-love-calculator"
+    set:html={body}
+  />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

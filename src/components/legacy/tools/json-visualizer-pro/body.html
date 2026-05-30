@@ -1,0 +1,94 @@
+<nav class="navbar flex justify-between items-center">
+        <h1 class="navbar-brand">
+            <i class="fas fa-code"></i> <span><a href="/">JSON Visualizer Pro</a></span>
+        </h1>
+        <div>
+            <button id="howToUseBtn" class="nav-button">
+                <i class="fas fa-question-circle mr-1"></i> How to Use
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-content-area">
+
+        <div class="w-full md:w-1/2 p-4 flex flex-col border-r border-gray-300 bg-white shadow-lg panel">
+            <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Input</h2>
+            <textarea id="jsonInput"
+                class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 panel-content h-full"
+                placeholder="Paste or type your JSON here...">{
+    "name": "Example JSON",
+    "version": 1.0,
+    "enabled": true,
+    "items": [
+        { "id": 1, "value": "apple" },
+        { "id": 2, "value": "banana" },
+        { "id": 3, "value": "cherry" }
+    ],
+    "settings": {
+        "theme": "dark",
+        "notifications": null,
+        "priority": 10
+    },
+    "otherItems": []
+}</textarea>
+            <div id="errorDisplay" class="text-red-600 text-xs mb-3 h-10 overflow-y-auto font-mono flex-shrink-0"></div>
+            <div class="button-container panel-controls">
+                <button id="undoBtn" title="Undo last change (Ctrl+Z)"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
+                    disabled><i class="fas fa-undo mr-2"></i>Undo</button>
+                <button id="redoBtn" title="Redo last undone change (Ctrl+Y)"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
+                    disabled><i class="fas fa-redo mr-2"></i>Redo</button>
+                <button id="visualizeBtn" title="Parse input and update visualization"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-sync-alt mr-2"></i>Visualize / Update</button>
+                <button id="formatBtn" title="Format JSON input with indentation"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-align-left mr-2"></i>Format</button>
+                <button id="minifyBtn" title="Remove whitespace from JSON input"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-compress-arrows-alt mr-2"></i>Minify</button>
+                <button id="copyBtn" title="Copy JSON input to clipboard"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-copy mr-2"></i>Copy</button>
+                <button id="clearBtn" title="Clear JSON input and visualization"
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
+                        class="fas fa-trash mr-2"></i>Clear</button>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-4 flex flex-col bg-gray-50 panel">
+            <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Visualization</h2>
+            <div id="jsonVisualizer" class="rounded p-3 bg-white shadow-inner json-visualizer panel-content">
+                <p class="text-gray-500 italic">Click 'Visualize / Update' to see the JSON structure here...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="howToUseModal" class="modal-overlay">
+        <div class="modal-content relative">
+            <button id="closeModalBtn" class="modal-close-btn" title="Close"><i class="fas fa-times"></i></button>
+            <h3>How to Use JSON Visualizer Pro</h3>
+            <p>This tool helps you view, format, and manage your JSON data easily.</p>
+            <ul>
+                <li><strong>JSON Input:</strong> Paste or type your JSON data into the left panel. Any syntax errors
+                    will be shown below the input area.</li>
+                <li><strong>Visualize / Update:</strong> Click this button to parse the input and display the structured
+                    tree view in the right panel.</li>
+                <li><strong>Format:</strong> Cleans up the JSON in the input area with standard indentation (2 spaces).
+                </li>
+                <li><strong>Minify:</strong> Removes all unnecessary whitespace from the JSON in the input area, making
+                    it compact.</li>
+                <li><strong>Copy:</strong> Copies the current content of the JSON input area to your clipboard.</li>
+                <li><strong>Clear:</strong> Empties the input area and the visualization panel.</li>
+                <li><strong>Undo (Ctrl+Z):</strong> Reverts the last action (Visualize/Update, Format, Minify, Clear).
+                </li>
+                <li><strong>Redo (Ctrl+Y):</strong> Re-applies the last undone action.</li>
+                <li><strong>Visualization Panel:</strong> Shows a color-coded, indented tree view of your valid JSON
+                    data.</li>
+            </ul>
+            <p>Use the buttons and keyboard shortcuts to manage your JSON effectively!</p>
+        </div>
+    </div>
+
+    <div id="messageBox" class="message-box"></div>

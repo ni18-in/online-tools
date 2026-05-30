@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/screen-recorder-pro/body.html?raw';
+import css from '../../../components/legacy/tools/screen-recorder-pro/styles.css?raw';
+import js from '../../../components/legacy/tools/screen-recorder-pro/script.js?raw';
+
+const tool = getTool('screen-recorder-pro')!;
+const seo = toolSeo(tool, {
+  title: 'Screen Recorder Pro - Free Online Screen Recording',
+  description:
+    'Screen Recorder Pro is a free, client-side web app to record your screen, window, or tab with audio. Easy to use, no uploads, and respects your privacy.',
+  keywords:
+    'screen recorder, screen recording, online screen recorder, free screen recorder, video recording, capture screen, browser recorder, client-side recorder, privacy, webm recorder',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Screen Recorder Pro',
+    abstract: 'A free client-side web application for screen recording.',
+    description:
+      'Screen Recorder Pro allows users to record their screen (entire screen, application window, or browser tab) with optional audio directly in the browser. All processing is done client-side, ensuring privacy. Recordings can be downloaded in .webm format.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web Browser (Windows, macOS, Linux, ChromeOS, Android, iOS with compatible browser)',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords: 'screen recorder, screen recording, online screen recorder, free screen recorder, video capture',
+    browserRequirements: 'Requires a modern web browser with support for MediaDevices API and MediaRecorder API (e.g., Chrome, Firefox, Edge).',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/screen-recorder-pro/` },
+    author: { '@type': 'Organization', name: 'ni18' },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island legacy-tw" id="tool-screen-recorder-pro" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

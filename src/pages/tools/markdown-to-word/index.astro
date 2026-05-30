@@ -1,0 +1,59 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/markdown-to-word/body.html?raw';
+import css from '../../../components/legacy/tools/markdown-to-word/styles.css?raw';
+import js from '../../../components/legacy/tools/markdown-to-word/script.js?raw';
+
+const tool = getTool('markdown-to-word')!;
+const seo = toolSeo(tool, {
+  title: 'Markdown to Word Converter – Convert ChatGPT to DOCX Online',
+  description:
+    'Free Markdown to Word converter. Convert ChatGPT, markdown files and rich text to DOCX instantly in your browser. No upload, no login.',
+  keywords:
+    'markdown to word, markdown to rich text, ChatGPT to word, convert markdown to docx, markdown to microsoft word, copy chatgpt to word, export chatgpt to docx',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: 'Markdown to Word Converter',
+        url: `${SITE_URL}/tools/markdown-to-word/`,
+        description: 'Convert Markdown and ChatGPT responses to fully formatted Word (.docx) documents directly in your browser.',
+        applicationCategory: 'Productivity',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      },
+      {
+        '@type': 'HowTo',
+        name: 'How to convert Markdown or ChatGPT text to Word',
+        step: [
+          { '@type': 'HowToStep', text: 'Paste your Markdown or ChatGPT response into the editor on the left.', name: 'Paste Content' },
+          { '@type': 'HowToStep', text: 'Review the live preview on the right to ensure formatting is correct.', name: 'Preview' },
+          { '@type': 'HowToStep', text: "Click 'Download Word (.docx)' to save the file to your device.", name: 'Download' },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'How to convert ChatGPT to Word?', acceptedAnswer: { '@type': 'Answer', text: 'Simply copy the Markdown response from ChatGPT and paste it into our editor. The tool will automatically format it, and you can download it as a DOCX file.' } },
+          { '@type': 'Question', name: 'Does this tool keep formatting?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, it preserves headings, bold, italic, lists, code blocks, and more when converting to Word.' } },
+          { '@type': 'Question', name: 'Is my data uploaded?', acceptedAnswer: { '@type': 'Answer', text: 'No. This tool runs 100% in your browser. No data is sent to any server.' } },
+        ],
+      },
+    ],
+  },
+});
+const headRaw = [
+  '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>',
+  '<script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island" id="tool-markdown-to-word" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

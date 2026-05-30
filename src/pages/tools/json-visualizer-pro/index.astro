@@ -1,0 +1,45 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/json-visualizer-pro/body.html?raw';
+import css from '../../../components/legacy/tools/json-visualizer-pro/styles.css?raw';
+import js from '../../../components/legacy/tools/json-visualizer-pro/script.js?raw';
+
+const tool = getTool('json-visualizer-pro')!; // robots = 'index, follow' (set in tools.ts)
+const seo = toolSeo(tool, {
+  title: 'JSON Visualizer Pro - View, Format & Edit JSON Online',
+  description:
+    'An easy-to-use online tool to visualize, format, minify, copy, and validate JSON data. Features include a tree view, undo/redo, and error checking.',
+  keywords:
+    'json visualizer, json viewer, json formatter, json editor, online json tool, json tree view, format json, minify json, validate json, json schema',
+  author: 'JSON Visualizer Pro',
+  ogTitle: 'JSON Visualizer Pro - View, Format & Edit JSON Online',
+  ogDescription: 'Visualize, format, minify, copy, and validate JSON data easily online.',
+  ogImage: `${SITE_URL}/blogs/images/json-visualizer-pro-banner.jpeg`,
+  ogImageAlt: 'JSON Visualizer Pro Tool Interface Preview',
+  twitterDomain: 'online-tools.ni18.in',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'JSON Visualizer Pro',
+    description:
+      'An easy-to-use online tool to visualize, format, minify, copy, and validate JSON data. Features include a tree view, undo/redo, and error checking.',
+    applicationCategory: 'DeveloperTool',
+    operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript. Works best in modern browsers.',
+    url: `${SITE_URL}/tools/json-visualizer-pro/`,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords:
+      'json visualizer, json viewer, json formatter, json editor, online json tool, json tree view, format json, minify json, validate json',
+    image: `${SITE_URL}/blogs/images/json-visualizer-pro-banner.jpeg`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/json-visualizer-pro/` },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island legacy-tw bg-gray-100 text-gray-800" id="tool-json-visualizer-pro" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+import body from '../../../components/legacy/es/blogs/body.html?raw';
+import css from '../../../components/legacy/es/blogs/styles.css?raw';
+import '../../../styles/tw-preflight-scoped.css';
+
+// /es/blogs/ is noindex and intentionally excluded from the sitemap (no translated posts yet).
+const seo: SeoProps = {
+  title: 'Blogs y Artículos – NI18 Herramientas Online',
+  description: 'Lee nuestros artículos sobre desarrollo web, diseño y utilidades de codificación.',
+  keywords: 'blog, herramientas online, tutoriales, guías',
+  canonical: `${SITE_URL}/es/blogs/`,
+  robots: 'noindex, follow',
+  og: { type: 'website', url: `${SITE_URL}/es/blogs/`, title: 'Blogs – NI18', description: 'Artículos y guías.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/blogs/`, title: 'Blogs – NI18', description: 'Artículos y guías.', image: DEFAULT_OG_IMAGE },
+};
+---
+<BaseLayout seo={seo} lang="es" current="blogs" altLinks={{ en: `${SITE_URL}/blogs/`, fr: `${SITE_URL}/fr/blogs/` }}>
+  <div class="page-island legacy-tw" set:html={body} />
+</BaseLayout>
+<style is:global set:html={css}></style>
+<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>

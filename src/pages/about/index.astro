@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import type { Props as SeoProps } from '../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
+import body from '../../components/legacy/pages/about/body.html?raw';
+import '../../styles/tw-preflight-scoped.css';
+
+const seo: SeoProps = {
+  title: 'About Online Tools | Our Mission and Features',
+  description:
+    'Learn more about Online Tools, our mission to provide simple, free, and useful web utilities accessible directly in your browser.',
+  keywords: 'about, online tools, free web utilities, mission, Nikhil Sharma, ni18',
+  canonical: `${SITE_URL}/about/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/about/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/about/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/about/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/about/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/about/`, title: 'About - Online Tools', description: 'Learn about the mission and features of Online Tools.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'en_US' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/about/`, title: 'About - Online Tools', description: 'Learn about the mission and features of Online Tools.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      alternateName: 'Online Web Tools and Utilities',
+      url: `${SITE_URL}/`,
+      potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/#search={search_term_string}` }, 'query-input': 'required name=search_term_string' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About Online Tools',
+      description: 'Learn about the mission and features of Online Tools, a collection of free web utilities.',
+      url: `${SITE_URL}/about/`,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/about/` },
+      publisher: { '@type': 'Organization', name: SITE_NAME, url: `${SITE_URL}/`, logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/favicon-32x32.png` } },
+    },
+  ],
+};
+---
+<BaseLayout seo={seo} lang="en" current="about" adsEnabled={true}>
+  <div class="page-island legacy-tw bg-gray-50 text-gray-800" set:html={body} />
+  <div class="about-ad-wrap"><AdSlot placement="below-content" minHeight={120} /></div>
+</BaseLayout>
+
+<style>
+  :global(.page-island.legacy-tw) { background: #f8fafc; color: #0f172a; }
+  .about-ad-wrap { max-width: 728px; margin: 24px auto; padding: 0 16px; }
+</style>

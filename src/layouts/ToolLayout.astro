@@ -1,0 +1,58 @@
+---
+/**
+ * ToolLayout.astro — MD3 shell around a preserved tool.
+ *
+ * The tool's markup goes in the page's <slot> wrapped in `.tool-island` (Tailwind tools add
+ * `.legacy-tw` for the scoped Preflight). The page keeps the tool's CSS in an Astro scoped
+ * <style> (auto-isolated → cannot leak into the shell or other tools) and its JS in an
+ * is:inline <script> (verbatim, untouched). CDN libs/fonts a tool needs go in `headRaw`;
+ * external tool scripts (script.js) in `scriptSrcs`.
+ */
+import BaseLayout from './BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import type { Props as SeoProps } from '../components/Seo.astro';
+import { type Locale } from '../data/i18n';
+import '../styles/tw-preflight-scoped.css';
+
+export interface Props {
+  seo: SeoProps;
+  lang?: Locale;
+  altLinks?: Partial<Record<Locale, string>>;
+  headRaw?: string;
+  scriptSrcs?: string[];
+  ad?: boolean;
+  adMinHeight?: number;
+}
+const {
+  seo,
+  lang = 'en',
+  altLinks = {},
+  headRaw,
+  scriptSrcs = [],
+  ad = true,
+  adMinHeight = 280,
+} = Astro.props;
+---
+<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
+  <main id="main-content" class="tool-main">
+    <slot />
+    {scriptSrcs.map((src) => <script is:inline src={src}></script>)}
+    {ad && <AdSlot placement="below-content" minHeight={adMinHeight} class="tool-ad" />}
+  </main>
+</BaseLayout>
+
+<style>
+  .tool-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  .tool-ad { margin: 32px auto 0; max-width: 728px; }
+  /* The island is a transparent wrapper. Each tool brings its own canvas: custom-CSS tools via
+     their scoped #tool-<slug> rules; Tailwind tools by carrying their original <body> bg/text
+     classes onto the island element (so dark-themed or dark:-adaptive tools render correctly). */
+  :global(.tool-island.legacy-tw) {
+    border-radius: var(--md-sys-shape-corner-large);
+    overflow: hidden;
+  }
+</style>

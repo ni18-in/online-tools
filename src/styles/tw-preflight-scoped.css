@@ -1,0 +1,101 @@
+/*
+ * Scoped Tailwind v3 Preflight. The ~11 tools that originally loaded the Tailwind CDN were
+ * designed WITH Preflight (margin:0 headings, border-box, reset lists, etc.). Global Preflight
+ * is off (it would break the 10 inline-CSS tools), so we re-supply the essential reset ONLY
+ * inside `.legacy-tw` wrappers. Applied per-tool in ToolLayout when tool.usesTailwind === true.
+ * Mirrors the load-bearing parts of Tailwind's preflight.css.
+ */
+.legacy-tw,
+.legacy-tw *,
+.legacy-tw *::before,
+.legacy-tw *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentColor;
+}
+
+.legacy-tw {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.5;
+}
+
+.legacy-tw h1,
+.legacy-tw h2,
+.legacy-tw h3,
+.legacy-tw h4,
+.legacy-tw h5,
+.legacy-tw h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+.legacy-tw p,
+.legacy-tw blockquote,
+.legacy-tw figure,
+.legacy-tw dl,
+.legacy-tw dd,
+.legacy-tw pre,
+.legacy-tw hr {
+  margin: 0;
+}
+
+.legacy-tw ol,
+.legacy-tw ul,
+.legacy-tw menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legacy-tw a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.legacy-tw button,
+.legacy-tw input,
+.legacy-tw optgroup,
+.legacy-tw select,
+.legacy-tw textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+
+.legacy-tw button,
+.legacy-tw [type='button'],
+.legacy-tw [type='reset'],
+.legacy-tw [type='submit'] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+
+.legacy-tw img,
+.legacy-tw svg,
+.legacy-tw video,
+.legacy-tw canvas,
+.legacy-tw audio,
+.legacy-tw iframe,
+.legacy-tw embed,
+.legacy-tw object {
+  display: block;
+  vertical-align: middle;
+}
+
+.legacy-tw img,
+.legacy-tw video {
+  max-width: 100%;
+  height: auto;
+}
+
+.legacy-tw table {
+  border-collapse: collapse;
+}

@@ -1,0 +1,31 @@
+---
+/** PageLayout.astro — standard content pages (homepage, tools listing, about). */
+import BaseLayout from './BaseLayout.astro';
+import type { Props as SeoProps } from '../components/Seo.astro';
+import { type Locale } from '../data/i18n';
+
+export interface Props {
+  seo: SeoProps;
+  lang?: Locale;
+  current?: 'home' | 'tools' | 'blogs' | 'about';
+  altLinks?: Partial<Record<Locale, string>>;
+  adsEnabled?: boolean;
+  width?: 'wide' | 'narrow';
+}
+const { seo, lang = 'en', current, altLinks = {}, adsEnabled = false, width = 'wide' } = Astro.props;
+---
+<BaseLayout seo={seo} lang={lang} current={current} altLinks={altLinks} adsEnabled={adsEnabled}>
+  <main id="main-content" class:list={['page', width]}>
+    <slot />
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 16px;
+  }
+  .wide { max-width: 1200px; }
+  .narrow { max-width: 768px; }
+</style>

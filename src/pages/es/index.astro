@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
+import body from '../../components/legacy/es/home/body.html?raw';
+import css from '../../components/legacy/es/home/styles.css?raw';
+import '../../styles/tw-preflight-scoped.css';
+
+const seo: SeoProps = {
+  title: 'NI18: Herramientas Web Gratuitas para Desarrolladores',
+  description: 'Herramientas web gratuitas: calculadoras, conversores y utilidades para desarrolladores, directamente en tu navegador.',
+  keywords: 'herramientas online, utilidades web gratis, conversores, calculadoras',
+  canonical: `${SITE_URL}/es/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/`, title: 'NI18 Herramientas Online', description: 'Herramientas web gratuitas en tu navegador.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/`, title: 'NI18 Herramientas Online', description: 'Herramientas web gratuitas en tu navegador.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'NI18 Herramientas Online', url: `${SITE_URL}/es/`, inLanguage: 'es' }],
+};
+---
+<BaseLayout seo={seo} lang="es" current="home" altLinks={{ en: `${SITE_URL}/`, fr: `${SITE_URL}/fr/` }}>
+  <div class="page-island legacy-tw" set:html={body} />
+</BaseLayout>
+<style is:global set:html={css}></style>
+<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>

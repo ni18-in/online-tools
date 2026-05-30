@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/iphone-photo-fixer/body.html?raw';
+import css from '../../../components/legacy/tools/iphone-photo-fixer/styles.css?raw';
+import js from '../../../components/legacy/tools/iphone-photo-fixer/script.js?raw';
+
+const tool = getTool('iphone-photo-fixer')!;
+const seo = toolSeo(tool, {
+  title: 'iPhone Photo Fixer | Convert HEIC to JPG on PC Free - Offline',
+  description:
+    'Convert HEIC images to JPG or PNG instantly on Windows, Mac, or Android. Free batch converter, runs 100% offline in your browser. No upload required.',
+  keywords:
+    'Convert HEIC to JPG PC free, Batch heic converter no upload, Open iPhone photos on Windows online, Offline HEIC to PNG, iPhone photo converter for Windows',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'iPhone Photo Fixer',
+    description: 'Convert HEIC images to JPG or PNG instantly in your browser.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/tools/iphone-photo-fixer/`,
+  },
+});
+const headRaw = [
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island" id="tool-iphone-photo-fixer" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

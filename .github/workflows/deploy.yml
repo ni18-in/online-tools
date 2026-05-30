@@ -1,0 +1,54 @@
+name: Build, verify & deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the GITHUB_TOKEN to deploy to Pages + verify the deployment origin.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; don't cancel an in-progress production deploy.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Verify SEO + URL inventory (gates deploy)
+        run: npm run verify:build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Functional smoke tests (per tool)
+        run: npm run test:e2e
+      - name: Lighthouse (Web Vitals budgets)
+        # Report-but-don't-block on the first deploys (perf budgets need a real CI baseline).
+        # Flip to blocking by removing continue-on-error once you've seen a green run.
+        continue-on-error: true
+        run: npm run test:lh
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

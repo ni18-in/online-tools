@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/basic-authentication-header-generator/body.html?raw';
+import css from '../../../components/legacy/tools/basic-authentication-header-generator/styles.css?raw';
+import js from '../../../components/legacy/tools/basic-authentication-header-generator/script.js?raw';
+
+const tool = getTool('basic-authentication-header-generator')!;
+const seo = toolSeo(tool, {
+  title: 'Basic Authentication Header Generator',
+  description:
+    'A free, secure, client-side tool to generate Basic Authentication headers for HTTP requests. No username or password data is ever stored or sent to a server.',
+  keywords: 'basic authentication, auth header, base64 encode, http authorization, developer tool, security, client-side',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Basic Authentication Header Generator',
+    description:
+      'A free and secure client-side tool to generate Basic Authentication headers for HTTP requests by Base64 encoding a username and password.',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    url: `${SITE_URL}/tools/basic-authentication-header-generator/`,
+  },
+});
+---
+<ToolLayout seo={seo} lang="en" adMinHeight={120}>
+  <div
+    class="tool-island legacy-tw bg-gray-900 text-gray-200 p-4 sm:p-6 lg:p-8"
+    id="tool-basic-authentication-header-generator"
+    set:html={body}
+  />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

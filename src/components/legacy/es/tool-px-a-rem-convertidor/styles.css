@@ -1,0 +1,218 @@
+/* Basic Reset and Global Styles */
+        #tool-tool-px-a-rem-convertidor {
+            --md-primary-color: #4285F4;
+            /* Google Blue */
+            --md-primary-dark-color: #3367D6;
+            --md-background-color: #f5f5f5;
+            --md-surface-color: #ffffff;
+            --md-text-primary-color: #202124;
+            --md-text-secondary-color: #5f6368;
+            --md-border-color: #dadce0;
+            --md-focus-ring-color: rgba(66, 133, 244, 0.2);
+        }
+
+        #tool-tool-px-a-rem-convertidor *,
+        #tool-tool-px-a-rem-convertidor *::before,
+        #tool-tool-px-a-rem-convertidor *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #tool-tool-px-a-rem-convertidor {
+            scroll-behavior: smooth;
+        }
+
+        #tool-tool-px-a-rem-convertidor {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-background-color);
+            color: var(--md-text-primary-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Layout Container */
+        #tool-tool-px-a-rem-convertidor .container {
+            width: 100%;
+            max-width: 720px;
+            /* Adjusted for better content readability */
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header and Footer */
+        #tool-tool-px-a-rem-convertidor header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor footer {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: var(--md-text-secondary-color);
+        }
+
+        /* Typography */
+        #tool-tool-px-a-rem-convertidor h1,
+        #tool-tool-px-a-rem-convertidor h2 {
+            font-weight: 500;
+        }
+
+        #tool-tool-px-a-rem-convertidor h1 {
+            font-size: 2.25rem;
+            color: var(--md-primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor h2 {
+            font-size: 1.5rem;
+            color: var(--md-text-primary-color);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--md-border-color);
+        }
+
+        /* Card Styling (Material Surface) */
+        #tool-tool-px-a-rem-convertidor .card {
+            background-color: var(--md-surface-color);
+            border: 1px solid var(--md-border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: box-shadow 0.3s cubic-bezier(.25, .8, .25, 1);
+            margin-bottom: 2rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor .card:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        /* Form Elements (Material Inspired) */
+        #tool-tool-px-a-rem-convertidor .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor label {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--md-text-secondary-color);
+        }
+
+        #tool-tool-px-a-rem-convertidor input[type="number"],
+        #tool-tool-px-a-rem-convertidor select {
+            width: 100%;
+            padding: 1rem 0.5rem 0.5rem 0.5rem;
+            border: none;
+            border-bottom: 1px solid var(--md-text-secondary-color);
+            background-color: transparent;
+            font-size: 1.1rem;
+            transition: border-bottom-color 0.2s;
+        }
+
+        #tool-tool-px-a-rem-convertidor input[type="number"]:focus,
+        #tool-tool-px-a-rem-convertidor select:focus {
+            outline: none;
+            border-bottom: 2px solid var(--md-primary-color);
+        }
+
+        #tool-tool-px-a-rem-convertidor .convert-button {
+            display: block;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background-color: var(--md-primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: background-color 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor .convert-button:hover {
+            background-color: var(--md-primary-dark-color);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        #tool-tool-px-a-rem-convertidor .convert-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px var(--md-focus-ring-color);
+        }
+
+        /* Result Display */
+        #tool-tool-px-a-rem-convertidor #result-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--md-background-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--md-text-secondary-color);
+        }
+
+        #tool-tool-px-a-rem-convertidor #result-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--md-primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* How-to Section */
+        #tool-tool-px-a-rem-convertidor .how-to ol {
+            padding-left: 20px;
+            color: var(--md-text-secondary-color);
+        }
+
+        #tool-tool-px-a-rem-convertidor .how-to li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Conversion Table */
+        #tool-tool-px-a-rem-convertidor .table-container {
+            overflow-x: auto;
+        }
+
+        #tool-tool-px-a-rem-convertidor table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        #tool-tool-px-a-rem-convertidor th,
+        #tool-tool-px-a-rem-convertidor td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--md-border-color);
+        }
+
+        #tool-tool-px-a-rem-convertidor thead th {
+            background-color: var(--md-background-color);
+            font-weight: 500;
+            color: var(--md-text-secondary-color);
+        }
+
+        /* Utility for screen readers */
+        #tool-tool-px-a-rem-convertidor .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }

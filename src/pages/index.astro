@@ -1,0 +1,153 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
+import type { Props as SeoProps } from '../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../data/site';
+import { homepageGrid, homepageItemListOrder, getTool, toolUrl, homepageItemListItem } from '../data/tools';
+
+const collectionItems = homepageItemListOrder.map((slug, i) => ({
+  '@type': 'ListItem',
+  position: i + 1,
+  item: homepageItemListItem(getTool(slug)!),
+}));
+
+const seo: SeoProps = {
+  title: 'Online Tools | Free Web Utilities, Calculators & Converters',
+  description:
+    'Your go-to hub for free online tools. Access calculators, text utilities, converters, and more useful web apps directly in your browser. Simple and easy to use.',
+  canonical: `${SITE_URL}/`,
+  keywords:
+    'online tools, free web utilities, calculators, converters, image editor, json visualizer, text analyzer, developer tools',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/` },
+  ],
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/`,
+    title: 'Online Tools | Free Web Utilities, Calculators & Converters',
+    description: 'A collection of handy, free online tools like calculators, text analyzers, and converters.',
+    image: DEFAULT_OG_IMAGE,
+    siteName: 'Online Tools',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/`,
+    title: 'Online Tools | Free Web Utilities & Apps',
+    description: 'A collection of handy, free online tools like calculators, text analyzers, and converters.',
+    image: DEFAULT_OG_IMAGE,
+  },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Online Tools',
+      alternateName: 'Online Web Tools and Utilities',
+      url: `${SITE_URL}/`,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/#search={search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Online Tools - Free Web Utilities, Calculators & Converters',
+      description:
+        'A curated list of free online tools including calculators, text utilities, converters, and more, accessible directly via your browser.',
+      url: `${SITE_URL}/`,
+      mainEntity: { '@type': 'ItemList', itemListElement: collectionItems },
+    },
+  ],
+};
+
+// Resolve the grid into render-ready cards (preserving exact order).
+const cards = homepageGrid.map((entry) => {
+  if (typeof entry === 'string') {
+    const t = getTool(entry)!;
+    return { href: toolUrl(t.slug).replace(SITE_URL, ''), name: t.name, description: t.description, external: false };
+  }
+  return { href: entry.external, name: entry.name, description: entry.description, external: true };
+});
+---
+<PageLayout seo={seo} lang="en" current="home" adsEnabled={true}>
+  <section class="hero">
+    <h1>Free Online Tools</h1>
+    <p>Calculators, converters, and developer utilities — fast, private, and right in your browser.</p>
+  </section>
+
+  <section aria-labelledby="search-heading" class="search">
+    <h2 id="search-heading" class="sr-only">Search Tools</h2>
+    <form role="search" id="tool-search-form" onsubmit="return false;">
+      <label for="tool-search-input" class="sr-only">Search for tools</label>
+      <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description..." autocomplete="off" />
+    </form>
+  </section>
+
+  <section aria-labelledby="tool-list-heading">
+    <h2 id="tool-list-heading" class="section-title">Available Tools</h2>
+    <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">
+      No tools found matching your search.
+    </p>
+    <div class="tool-grid">
+      {cards.map((c, i) => (
+        <ToolCard
+          href={c.href}
+          name={c.name}
+          description={c.description}
+          headingId={`tool-heading-${i + 1}`}
+          external={c.external}
+        />
+      ))}
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById('tool-search-input');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
+      var noResults = document.getElementById('no-results-message');
+      if (!input || !cards.length) return;
+      input.addEventListener('input', function () {
+        var q = input.value.toLowerCase().trim();
+        var found = 0;
+        cards.forEach(function (card) {
+          var a = card.querySelector('h3 a');
+          var p = card.querySelector('p');
+          var title = ((a && a.textContent) || '').toLowerCase();
+          var desc = ((p && p.textContent) || '').toLowerCase();
+          var visible = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+          card.style.display = visible ? '' : 'none';
+          if (visible) found++;
+        });
+        if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
+      });
+    })();
+  </script>
+</PageLayout>
+
+<style>
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .hero p { margin: 0 auto; max-width: 38rem; color: var(--md-sys-color-on-surface-variant); }
+  .search { max-width: 42rem; margin: 24px auto; }
+  #tool-search-input {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 999px;
+    background: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
+  }
+  #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
+  .section-title { text-align: center; font-size: 1.75rem; margin: 16px 0 24px; color: var(--md-sys-color-on-surface); }
+  .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px 0; }
+  .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

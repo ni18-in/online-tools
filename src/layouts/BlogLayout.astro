@@ -1,0 +1,40 @@
+---
+/**
+ * BlogLayout.astro — MD3 shell around a preserved blog article. Slot-based: the post page
+ * supplies the legacy <main> article (set:html) wrapped in .blog-island.legacy-tw (blogs used
+ * Tailwind), plus its scoped <style>. A reserved-height ad sits below the article.
+ */
+import BaseLayout from './BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import type { Props as SeoProps } from '../components/Seo.astro';
+import { type Locale } from '../data/i18n';
+import '../styles/tw-preflight-scoped.css';
+
+export interface Props {
+  seo: SeoProps;
+  lang?: Locale;
+  altLinks?: Partial<Record<Locale, string>>;
+  headRaw?: string;
+  ad?: boolean;
+}
+const { seo, lang = 'en', altLinks = {}, headRaw, ad = true } = Astro.props;
+---
+<BaseLayout seo={seo} lang={lang} current="blogs" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
+  <div class="blog-shell">
+    <slot />
+    {ad && <AdSlot placement="below-content" minHeight={250} class="blog-ad" />}
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; }
+  .blog-ad { margin: 32px auto; max-width: 728px; }
+  /* Blog articles render on a clean light reading surface regardless of shell theme. */
+  :global(.blog-island.legacy-tw) {
+    background: #ffffff;
+    color: #1f2430;
+    border-radius: var(--md-sys-shape-corner-large);
+    overflow: hidden;
+  }
+  :global(.blog-island img) { max-width: 100%; height: auto; }
+</style>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import type { Props as SeoProps } from '../../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+import body from '../../../components/legacy/es/about/body.html?raw';
+import css from '../../../components/legacy/es/about/styles.css?raw';
+import '../../../styles/tw-preflight-scoped.css';
+
+const seo: SeoProps = {
+  title: 'Acerca de Nosotros – NI18 Herramientas Online',
+  description: 'Conoce la misión de NI18 Herramientas Online: proporcionar utilidades web gratuitas, simples y útiles directamente en tu navegador.',
+  keywords: 'acerca de, herramientas online, utilidades web gratis, misión, ni18',
+  canonical: `${SITE_URL}/es/about/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/about/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/about/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/about/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/about/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/about/`, title: 'Acerca de – NI18', description: 'La misión de NI18 Herramientas Online.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/about/`, title: 'Acerca de – NI18', description: 'La misión de NI18 Herramientas Online.', image: DEFAULT_OG_IMAGE },
+};
+---
+<BaseLayout seo={seo} lang="es" current="about" altLinks={{ en: `${SITE_URL}/about/`, fr: `${SITE_URL}/fr/about/` }}>
+  <div class="page-island legacy-tw" set:html={body} />
+</BaseLayout>
+<style is:global set:html={css}></style>
+<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>

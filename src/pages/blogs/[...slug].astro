@@ -1,0 +1,29 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { blogPosts, blogSeo } from '../../data/blogs';
+
+// Eager-load every blog partial; pick by slug at render time.
+const bodies = import.meta.glob('../../components/legacy/blogs/*/body.html', { query: '?raw', import: 'default', eager: true });
+const styles = import.meta.glob('../../components/legacy/blogs/*/styles.css', { query: '?raw', import: 'default', eager: true });
+const scripts = import.meta.glob('../../components/legacy/blogs/*/script.js', { query: '?raw', import: 'default', eager: true });
+const pick = (map: Record<string, unknown>, slug: string, file: string): string => {
+  const key = Object.keys(map).find((p) => p.endsWith(`/blogs/${slug}/${file}`));
+  return key ? (map[key] as string) : '';
+};
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const seo = blogSeo(post);
+const body = pick(bodies, post.slug, 'body.html');
+const css = pick(styles, post.slug, 'styles.css');
+const js = pick(scripts, post.slug, 'script.js');
+---
+<BlogLayout seo={seo} lang="en">
+  <article class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
+</BlogLayout>
+
+<style is:global set:html={css}></style>
+{js.trim() && <script is:inline set:html={js}></script>}

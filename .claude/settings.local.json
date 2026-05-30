@@ -6,7 +6,24 @@
       "Bash(curl -sI -A \"Googlebot/2.1 \\(+http://www.google.com/bot.html\\)\" https://online-tools.ni18.in/)",
       "Bash(curl -sI https://online-tools.ni18.in/sitemap.xml)",
       "Bash(python -c ' *)",
-      "Bash(curl -sI https://online-tools.ni18.in/assets/og-image.png)"
+      "Bash(curl -sI https://online-tools.ni18.in/assets/og-image.png)",
+      "Bash(npm --version)",
+      "Bash(git checkout *)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx astro *)",
+      "Bash(npm ls *)",
+      "Bash(cp -r assets public/assets)",
+      "Bash(cp -r blogs/images public/blogs/images)",
+      "Bash([ -f \"dist/$f\" ])",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npm uninstall *)",
+      "Bash(xargs -n1 basename)",
+      "Bash(cd /c/zMyData/GitHub/online-tools && pwd && echo \"--- pages present? ---\" && ls src/pages/)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node -e ' *)",
+      "Bash(rm -rf \"src/pages/tools/[slug]\" && echo \"removed [slug] probe\" && ls src/pages/tools/)"
     ]
   }
 }

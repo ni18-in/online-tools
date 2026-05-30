@@ -1,0 +1,34 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/free-online-image-utility-tool/body.html?raw';
+import css from '../../../components/legacy/tools/free-online-image-utility-tool/styles.css?raw';
+import js from '../../../components/legacy/tools/free-online-image-utility-tool/script.js?raw';
+
+const tool = getTool('free-online-image-utility-tool')!;
+const seo = toolSeo(tool, {
+  title: 'Free Online Image Utility Tool | Resize, Compress & Convert Images',
+  description:
+    'Use our free online image utility tool to quickly resize, compress, convert, and optimize images. No downloads required. Fast, secure, and browser-based.',
+  keywords: 'image utility, image resizer, image compressor, image converter',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Free Online Image Utility Tool',
+    operatingSystem: 'Web',
+    applicationCategory: 'MultimediaApplication',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: 4.8, ratingCount: 5 },
+    url: `${SITE_URL}/tools/free-online-image-utility-tool/`,
+    description: 'A browser-based image tool that allows you to resize, compress, convert, and optimize images online for free.',
+  },
+});
+const headRaw = '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>';
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island legacy-tw bg-slate-50 text-slate-800" id="tool-free-online-image-utility-tool" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

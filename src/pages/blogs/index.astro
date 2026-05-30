@@ -1,0 +1,101 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import type { Props as SeoProps } from '../../components/Seo.astro';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
+import { indexedPosts, blogUrl } from '../../data/blogs';
+
+const posts = indexedPosts();
+const seo: SeoProps = {
+  title: 'Blog - Online Tools',
+  description:
+    'Read the latest articles, tutorials, and updates from the Online Tools team. Discover tips for using our web utilities effectively.',
+  keywords: 'blog, online tools, tutorials, web utilities, guides, tech articles',
+  canonical: `${SITE_URL}/blogs/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/blogs/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/blogs/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/blogs/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and updates from the Online Tools team.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'en_US' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and updates from the Online Tools team.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/#search={search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Online Tools Blog',
+      description: 'Articles, tutorials, and guides from the Online Tools team.',
+      url: `${SITE_URL}/blogs/`,
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/android-chrome-192x192.png` },
+      },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: posts.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'BlogPosting',
+            headline: p.title,
+            description: p.description,
+            datePublished: p.datePublished,
+            dateModified: p.dateModified,
+            image: p.image,
+            url: blogUrl(p.slug),
+            author: { '@type': 'Organization', name: p.author },
+          },
+        })),
+      },
+    },
+  ],
+};
+
+const fmt = (iso: string) => iso.slice(0, 10);
+---
+<PageLayout seo={seo} lang="en" current="blogs" width="narrow" adsEnabled={true}>
+  <header class="blog-head">
+    <h1>Blog</h1>
+    <p>Guides, tutorials, and updates from the Online Tools team.</p>
+  </header>
+  <ul class="post-list">
+    {posts.map((p) => (
+      <li class="post">
+        <a href={`/blogs/${p.slug}.html`} class="post-link">
+          <h2>{p.title}</h2>
+          <p class="excerpt">{p.description}</p>
+          <time datetime={p.datePublished}>{fmt(p.datePublished)}</time>
+        </a>
+      </li>
+    ))}
+  </ul>
+</PageLayout>
+
+<style>
+  .blog-head { text-align: center; margin-bottom: 24px; }
+  .blog-head h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .blog-head p { margin: 0; color: var(--md-sys-color-on-surface-variant); }
+  .post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .post-link {
+    display: block; text-decoration: none;
+    background: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 20px 24px; transition: box-shadow .2s, border-color .2s;
+  }
+  .post-link:hover { box-shadow: var(--md-sys-elevation-2); border-color: var(--md-sys-color-primary); }
+  .post h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--md-sys-color-on-surface); }
+  .excerpt { margin: 0 0 12px; color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem; line-height: 1.5; }
+  time { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.8; }
+</style>

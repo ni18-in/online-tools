@@ -1,0 +1,172 @@
+---
+/**
+ * SiteHeader.astro — MD3 top app bar: logo, primary nav, smart language switcher, theme
+ * toggle, and a mobile drawer. All nav text is real light-DOM HTML (crawlable pre-hydration);
+ * MWC (md-icon-button) only enhances the icon controls.
+ */
+import { type Locale, LOCALE_BASE, LOCALE_LABEL, LOCALES, NAV_LABELS } from '../data/i18n';
+
+export interface Props {
+  lang?: Locale;
+  current?: 'home' | 'tools' | 'blogs' | 'about';
+  /** Per-page translation URLs (slugs differ across locales). Missing → falls back to locale home. */
+  altLinks?: Partial<Record<Locale, string>>;
+}
+
+const { lang = 'en', current, altLinks = {} } = Astro.props;
+const base = LOCALE_BASE[lang];
+const labels = NAV_LABELS[lang];
+
+const nav = [
+  { key: 'tools', href: `${base}tools/`, label: labels.tools },
+  { key: 'blogs', href: `${base}blogs/`, label: labels.blogs },
+  { key: 'about', href: `${base}about/`, label: labels.about },
+];
+
+// Smart language switcher targets: this page's translation if known, else that locale's home.
+const langTargets = LOCALES.map((loc) => ({
+  loc,
+  label: LOCALE_LABEL[loc],
+  href: loc === lang ? '' : (altLinks[loc] ?? LOCALE_BASE[loc]),
+  current: loc === lang,
+}));
+---
+<header class="site-header" role="banner">
+  <div class="bar">
+    <a class="brand" href={base} aria-label="Online Tools — home">Online Tools</a>
+
+    <nav class="nav-desktop" aria-label="Main Navigation">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={['nav-link', { active: current === item.key }]}
+          aria-current={current === item.key ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="actions">
+      <label class="lang-wrap">
+        <span class="sr-only">Language</span>
+        <select
+          class="lang-select"
+          aria-label="Language selector"
+          onchange="if(this.value){window.location.href=this.value}"
+        >
+          {langTargets.map((t) => (
+            <option value={t.href} selected={t.current} disabled={t.current}>{t.label}</option>
+          ))}
+        </select>
+      </label>
+
+      <md-icon-button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
+        <svg class="i-sun" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 13h2a1 1 0 100-2H2a1 1 0 100 2zm18 0h2a1 1 0 100-2h-2a1 1 0 100 2zM11 2v2a1 1 0 102 0V2a1 1 0 10-2 0zm0 18v2a1 1 0 102 0v-2a1 1 0 10-2 0zM5.99 4.58a1 1 0 10-1.41 1.41l1.06 1.06a1 1 0 101.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 10-1.41 1.41l1.06 1.06a1 1 0 101.41-1.41l-1.06-1.06zm1.06-10.96a1 1 0 10-1.41-1.41l-1.06 1.06a1 1 0 101.41 1.41l1.06-1.06zM7.05 18.36a1 1 0 10-1.41-1.41l-1.06 1.06a1 1 0 101.41 1.41l1.06-1.06z"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M12.74 2.06a1 1 0 00-1.1.21A9 9 0 1021.73 12.4a1 1 0 00-1.3-1.28 7 7 0 01-9.55-9.06z"/></svg>
+      </md-icon-button>
+
+      <md-icon-button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </md-icon-button>
+    </div>
+  </div>
+
+  <nav id="mobile-drawer" class="nav-mobile" aria-label="Mobile Navigation" hidden>
+    {nav.map((item) => (
+      <a href={item.href} class:list={['nav-link', { active: current === item.key }]}>{item.label}</a>
+    ))}
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    var menuBtn = document.getElementById('menu-toggle');
+    var drawer = document.getElementById('mobile-drawer');
+    if (menuBtn && drawer) {
+      menuBtn.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menuBtn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    var themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function () {
+        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+    }
+  })();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: var(--md-sys-elevation-1);
+  }
+  .bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    font-weight: 700;
+    font-size: 1.375rem;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .nav-desktop { display: flex; gap: 4px; }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    transition: background-color .15s, color .15s;
+  }
+  .nav-link:hover { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); }
+  .nav-link.active { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+  .actions { display: flex; align-items: center; gap: 4px; }
+  .lang-select {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+  }
+  .theme-toggle { --md-icon-button-icon-color: var(--md-sys-color-on-surface-variant); }
+  .theme-toggle .i-moon { display: none; }
+  :global(:root[data-theme='dark']) .theme-toggle .i-sun { display: none; }
+  :global(:root[data-theme='dark']) .theme-toggle .i-moon { display: block; }
+  .menu-toggle { display: none; }
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: 8px 16px 16px;
+    gap: 4px;
+    background: var(--md-sys-color-surface-container);
+  }
+  .nav-mobile .nav-link { padding: 12px 16px; border-radius: 12px; }
+
+  @media (max-width: 768px) {
+    .nav-desktop { display: none; }
+    .menu-toggle { display: inline-flex; }
+    .nav-mobile:not([hidden]) { display: flex; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/json-comparison-tool/body.html?raw';
+import css from '../../../components/legacy/tools/json-comparison-tool/styles.css?raw';
+import js from '../../../components/legacy/tools/json-comparison-tool/script.js?raw';
+
+const tool = getTool('json-comparison-tool')!;
+const seo = toolSeo(tool, {
+  title: 'JSON Comparison Online - Diff Tool with Line Numbers',
+  description:
+    'Free online tool to compare, diff, and beautify two JSON objects or text blocks side-by-side with line numbers. Visualize differences with clear color highlighting. No server-side processing.',
+  keywords:
+    'json compare, text compare, json diff, text diff, json comparison, text comparison, json validator, json beautifier, online tool, developer tools, diff tool, compare json online, compare text online, line numbers, diff viewer',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'JSON Comparison Online with Line Numbers',
+    description:
+      'Free online tool to compare, diff, validate (optional), and beautify two JSON objects or text blocks side-by-side with visual highlighting and line numbers.',
+    url: `${SITE_URL}/tools/json-comparison-tool/`,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript. Works on modern browsers.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    featureList: [
+      'Compare JSON objects',
+      'Compare text blocks',
+      'Visualize differences (diff)',
+      'Line numbers for inputs',
+      'Beautify valid JSON',
+      'Validate JSON syntax (optional, on beautify)',
+      'File upload support',
+      'Dark mode',
+      'Ignore array order option (for JSON)',
+      'Client-side processing',
+    ],
+  },
+});
+const headRaw =
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/jsondiffpatch.umd.min.js" defer></script>';
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div
+    class="tool-island legacy-tw antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+    id="tool-json-comparison-tool"
+    set:html={body}
+  />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

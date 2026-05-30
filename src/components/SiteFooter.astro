@@ -1,0 +1,73 @@
+---
+/** SiteFooter.astro — consistent MD3 footer across every page (tool pages had none before). */
+import { type Locale, LOCALE_BASE, NAV_LABELS } from '../data/i18n';
+
+export interface Props {
+  lang?: Locale;
+}
+const { lang = 'en' } = Astro.props;
+const base = LOCALE_BASE[lang];
+const labels = NAV_LABELS[lang];
+const tagline: Record<Locale, string> = {
+  en: 'Free, private, browser-based tools. No sign-up, no uploads.',
+  es: 'Herramientas gratuitas y privadas en el navegador. Sin registro ni subidas.',
+  fr: 'Outils gratuits et privés dans le navigateur. Sans inscription ni téléversement.',
+};
+const rights: Record<Locale, string> = {
+  en: 'All rights reserved.',
+  es: 'Todos los derechos reservados.',
+  fr: 'Tous droits réservés.',
+};
+---
+<footer class="site-footer" role="contentinfo">
+  <div class="inner">
+    <div class="col brand-col">
+      <a class="brand" href={base}>Online Tools</a>
+      <p class="tagline">{tagline[lang]}</p>
+    </div>
+    <nav class="col" aria-label="Footer">
+      <a href={`${base}tools/`}>{labels.tools}</a>
+      <a href={`${base}blogs/`}>{labels.blogs}</a>
+      <a href={`${base}about/`}>{labels.about}</a>
+    </nav>
+  </div>
+  <div class="copyright">
+    <p>&copy; <span id="footer-year">2025</span> ni18 / Online Tools. {rights[lang]}</p>
+  </div>
+</footer>
+
+<script is:inline>
+  var y = document.getElementById('footer-year');
+  if (y) y.textContent = String(new Date().getFullYear());
+</script>
+
+<style>
+  .site-footer {
+    background: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+    margin-top: 64px;
+  }
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+  }
+  .col { display: flex; flex-direction: column; gap: 8px; }
+  .brand-col { max-width: 28rem; }
+  .brand { font-weight: 700; font-size: 1.25rem; color: inherit; text-decoration: none; }
+  .tagline { margin: 0; opacity: 0.8; font-size: 0.9375rem; line-height: 1.5; }
+  .col a { color: inherit; text-decoration: none; opacity: 0.85; font-size: 0.9375rem; }
+  .col a:hover { opacity: 1; text-decoration: underline; }
+  .copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+    padding: 16px;
+    font-size: 0.875rem;
+    opacity: 0.75;
+  }
+  .copyright p { margin: 0; }
+</style>

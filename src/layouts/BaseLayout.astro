@@ -1,0 +1,86 @@
+---
+/**
+ * BaseLayout.astro — the document shell every page uses.
+ * Head: charset/viewport, favicons + manifest, theme-color, Roboto (MD3), the design-token
+ * + Tailwind stylesheets, ThemeNoFlash (pre-paint), Analytics (GA4), <Seo>, an optional
+ * verbatim head escape-hatch (`headRaw`, for a tool's exact CDN deps), and the AdSense loader
+ * when ads are enabled. Body: sticky header + <slot/> + footer. MWC is a deferred module.
+ */
+import Seo, { type Props as SeoProps } from '../components/Seo.astro';
+import Analytics from '../components/Analytics.astro';
+import ThemeNoFlash from '../components/ThemeNoFlash.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { type Locale } from '../data/i18n';
+import { ADSENSE_CLIENT } from '../data/site';
+import '../styles/md3-tokens.css';
+import '../styles/tailwind.css';
+
+export interface Props {
+  seo: SeoProps;
+  lang?: Locale;
+  current?: 'home' | 'tools' | 'blogs' | 'about';
+  altLinks?: Partial<Record<Locale, string>>;
+  /** Verbatim HTML injected into <head> (a tool's exact CDN <link>/<script> deps). */
+  headRaw?: string;
+  /** Load the AdSense library (pages that render <AdSlot>). */
+  adsEnabled?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  seo,
+  lang = 'en',
+  current,
+  altLinks = {},
+  headRaw,
+  adsEnabled = false,
+  bodyClass,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4f46e5" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+    <link rel="manifest" href="/assets/icons/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <ThemeNoFlash />
+    <Analytics />
+    <Seo {...seo} />
+
+    {adsEnabled && import.meta.env.PROD && (
+      <script
+        is:inline
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        crossorigin="anonymous"></script>
+    )}
+
+    {headRaw && <Fragment set:html={headRaw} />}
+  </head>
+  <body class={bodyClass}>
+    <div class="site-shell">
+      <SiteHeader lang={lang} current={current} altLinks={altLinks} />
+      <slot />
+      <SiteFooter lang={lang} />
+    </div>
+
+    <!-- Material Web Components: deferred module, never blocks first paint. -->
+    <script>
+      import '../scripts/md3.ts';
+    </script>
+  </body>
+</html>

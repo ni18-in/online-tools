@@ -1,0 +1,28 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-rem-to-px-converter/body.html?raw';
+import css from '../../../../components/legacy/es/tool-rem-to-px-converter/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-rem-to-px-converter/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertidor REM a PX – Herramienta Online Gratuita',
+  description: 'Un convertidor REM a PX online, simple y gratuito para desarrolladores y diseñadores. Convierte unidades REM a píxeles al instante.',
+  keywords: 'rem a px, convertidor, css, desarrollo web, diseño responsivo',
+  canonical: `${SITE_URL}/es/tools/rem-to-px-converter/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/rem-to-px-converter/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/rem-to-px-converter/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/rem-to-px-converter/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/rem-to-px-converter/`, title: 'Convertidor REM a PX', description: 'Convierte REM a píxeles al instante.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/rem-to-px-converter/`, title: 'Convertidor REM a PX', description: 'Convierte REM a píxeles al instante.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Convertidor REM a PX', applicationCategory: 'DeveloperApplication', operatingSystem: 'Any', url: `${SITE_URL}/es/tools/rem-to-px-converter/`, description: 'Un convertidor REM a PX online simple y gratuito.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/rem-to-px-converter/` }} adMinHeight={120}>
+  <div class="tool-island legacy-tw bg-slate-50 text-slate-800" id="tool-tool-rem-to-px-converter" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>
