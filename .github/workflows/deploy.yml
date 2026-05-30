@@ -35,6 +35,9 @@ jobs:
       - name: Functional smoke tests (per tool)
         run: npm run test:e2e
       - name: Lighthouse (Web Vitals budgets)
+        # Report-but-don't-block on the first deploys (perf budgets need a real CI baseline).
+        # Flip to blocking by removing continue-on-error once you've seen a green run.
+        continue-on-error: true
         run: npm run test:lh
       - uses: actions/upload-pages-artifact@v3
         with:
