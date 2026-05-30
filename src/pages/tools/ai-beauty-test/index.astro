@@ -1,0 +1,61 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/ai-beauty-test/body.html?raw';
+import css from '../../../components/legacy/tools/ai-beauty-test/styles.css?raw';
+import js from '../../../components/legacy/tools/ai-beauty-test/script.js?raw';
+
+const tool = getTool('ai-beauty-test')!; // robots = noindex, follow (set in tools.ts)
+const seo = toolSeo(tool, {
+  title: 'AI Beauty Test - Free Online Face Score & Celebrity Look-Alike',
+  description:
+    'Get a free AI beauty score based on facial features, find your celebrity look-alike, analyze face parts, and compare photos with the AI Beauty Test tool. Fun, interactive, and insightful!',
+  keywords:
+    'AI beauty test, face score, beauty analysis, celebrity look-alike, face symmetry, facial features, online tool, free beauty score, beauty comparison, how to use beauty test, about beauty test',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'AI Beauty Test',
+    url: `${SITE_URL}/tools/ai-beauty-test/`,
+    description:
+      'Get a free AI beauty score based on facial features, find your celebrity look-alike, analyze face parts, and compare photos with the AI Beauty Test tool.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/tools/ai-beauty-test/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Online Tools',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/android-chrome-192x192.png` },
+    },
+    mainEntity: {
+      '@type': 'SoftwareApplication',
+      name: 'AI Beauty Test',
+      operatingSystem: 'Any (Web Browser)',
+      applicationCategory: 'WebApplication',
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.5', reviewCount: '150' },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description:
+        'An online tool using simulated AI to provide face beauty scores, celebrity look-alike matching, face parts analysis, and image comparison.',
+      url: `${SITE_URL}/tools/ai-beauty-test/`,
+    },
+  },
+});
+const altLinks = {
+  es: `${SITE_URL}/es/tools/ai-beauty-test/`,
+  fr: `${SITE_URL}/fr/tools/ai-beauty-test/`,
+};
+const headRaw = '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+---
+<ToolLayout seo={seo} lang="en" altLinks={altLinks} headRaw={headRaw}>
+  <div
+    class="tool-island legacy-tw bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 text-gray-800"
+    id="tool-ai-beauty-test"
+    set:html={body}
+  />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

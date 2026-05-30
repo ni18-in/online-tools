@@ -1,0 +1,658 @@
+#tool-guess-the-logo {
+            /* Modern Palette - Light Mode */
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: 1px solid rgba(255, 255, 255, 0.5);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+
+            /* Actions */
+            --brand-primary: #4f46e5;
+            /* Indigo */
+            --brand-secondary: #ec4899;
+            /* Pink */
+
+            /* States */
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+
+            /* Effects */
+            --glass-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            --neon-glow: 0 0 10px rgba(79, 70, 229, 0.3);
+
+            /* Typography */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --border-radius-lg: 1.5rem;
+            --border-radius-md: 1rem;
+        }
+
+        #tool-guess-the-logo .dark-mode {
+            /* Modern Palette - Dark Mode */
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --card-border: 1px solid rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+
+            --brand-primary: #818cf8;
+            --brand-secondary: #f472b6;
+        }
+
+        #tool-guess-the-logo * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #tool-guess-the-logo {
+            font-family: var(--font-body);
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 1rem;
+        }
+
+        /* Animated Background Pattern */
+        #tool-guess-the-logo ::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #tool-guess-the-logo .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: var(--card-border);
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative "Mesh" top bar */
+        #tool-guess-the-logo .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+        }
+
+        #tool-guess-the-logo h1 {
+            font-family: var(--font-heading);
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+            line-height: 1.2;
+        }
+
+        #tool-guess-the-logo h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        /* Custom Scrollbar for Highscores */
+        #tool-guess-the-logo ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #tool-guess-the-logo ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #tool-guess-the-logo ::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+
+        /* Game Screens Transition */
+        #tool-guess-the-logo .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        #tool-guess-the-logo .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Settings Styles */
+        #tool-guess-the-logo .settings-group {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            border: 1px solid transparent;
+        }
+
+        #tool-guess-the-logo .dark-mode .settings-group {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        #tool-guess-the-logo .settings-group legend {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--brand-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Custom Inputs */
+        #tool-guess-the-logo select,
+        #tool-guess-the-logo input[type="number"] {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            border: 2px solid transparent;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #tool-guess-the-logo select:focus,
+        #tool-guess-the-logo input[type="number"]:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            background: var(--card-bg);
+        }
+
+        /* Logo Display Area */
+        #tool-guess-the-logo .logo-container {
+            position: relative;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 250, 1) 100%);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        #tool-guess-the-logo .dark-mode .logo-container {
+            background: radial-gradient(circle, rgba(40, 40, 50, 1) 0%, rgba(20, 20, 30, 1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #tool-guess-the-logo .logo-container img {
+            max-width: 100%;
+            max-height: 200px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Buttons */
+        #tool-guess-the-logo .btn {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Primary Action Button (Start Game) */
+        #tool-guess-the-logo .btn-primary {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            /* Pill shape */
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        #tool-guess-the-logo .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Option Buttons */
+        #tool-guess-the-logo .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            perspective: 1000px;
+        }
+
+        @media (max-width: 500px) {
+            #tool-guess-the-logo .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #tool-guess-the-logo .btn-option {
+            background: var(--text-primary);
+            /* Inverted for high contrast */
+            color: var(--card-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #tool-guess-the-logo .dark-mode .btn-option {
+            background: #334155;
+            color: white;
+        }
+
+        #tool-guess-the-logo .btn-option:hover:not(:disabled) {
+            transform: translateY(-2px) rotateX(5deg);
+            opacity: 1;
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        /* Feedback States */
+        #tool-guess-the-logo .btn-option.correct {
+            background: var(--success-color) !important;
+            color: white !important;
+            animation: rubberBand 0.8s;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        #tool-guess-the-logo .btn-option.incorrect {
+            background: var(--error-color) !important;
+            color: white !important;
+            animation: shake 0.5s;
+        }
+
+        @keyframes rubberBand {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-10px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* HUD (Heads Up Display) */
+        #tool-guess-the-logo .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        #tool-guess-the-logo .dark-mode .game-info {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #tool-guess-the-logo #timer-display {
+            color: var(--brand-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Feedback Message */
+        #tool-guess-the-logo .feedback-message {
+            margin-top: 1.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border-radius: var(--border-radius-md);
+        }
+
+        #tool-guess-the-logo .feedback-message.correct {
+            color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        #tool-guess-the-logo .feedback-message.incorrect {
+            color: var(--error-color);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Dark Mode Toggle */
+        #tool-guess-the-logo .dark-mode-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #tool-guess-the-logo .dark-mode-toggle:hover {
+            color: var(--brand-primary);
+            border-color: var(--brand-primary);
+            transform: rotate(15deg);
+        }
+
+
+        /* Game Over Screen */
+        #tool-guess-the-logo #highscore-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid var(--card-border-color, var(--light-input-border));
+            border-radius: var(--border-radius);
+            padding: 0.75rem;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        #tool-guess-the-logo .dark-mode #highscore-list {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Highscore List */
+        #tool-guess-the-logo #highscore-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #tool-guess-the-logo #highscore-list li {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--text-secondary);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        #tool-guess-the-logo #highscore-list li:last-child {
+            border-bottom: none;
+        }
+
+        #tool-guess-the-logo #highscore-list li:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        #tool-guess-the-logo .dark-mode #highscore-list li:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Modals */
+        #tool-guess-the-logo .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        #tool-guess-the-logo .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: var(--card-border);
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        #tool-guess-the-logo .modal-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--brand-primary);
+            margin-bottom: 1rem;
+        }
+
+        #tool-guess-the-logo .modal-content p,
+        #tool-guess-the-logo .modal-content ul {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        #tool-guess-the-logo .modal-content ul {
+            padding-left: 1.5rem;
+        }
+
+        #tool-guess-the-logo .modal-content strong {
+            color: var(--text-primary);
+        }
+
+        #tool-guess-the-logo .close-btn {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 0.8;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        #tool-guess-the-logo .close-btn:hover {
+            color: var(--error-color);
+        }
+
+        /* Message Box */
+        #tool-guess-the-logo .message-box {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            border: 1px solid var(--warning-color);
+            color: var(--warning-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            display: none;
+            font-weight: 700;
+            animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #tool-guess-the-logo .dark-mode .message-box {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--brand-primary);
+        }
+
+        #tool-guess-the-logo .message-box.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* Party & Streaming Mode overrides */
+        #tool-guess-the-logo .party-mode .container,
+        #tool-guess-the-logo .streaming-mode .container {
+            max-width: 95vw;
+        }
+
+        #tool-guess-the-logo .party-mode .logo-container img,
+        #tool-guess-the-logo .streaming-mode .logo-container img {
+            max-height: 40vh;
+        }
+
+        #tool-guess-the-logo .party-mode .game-info,
+        #tool-guess-the-logo .streaming-mode .game-info {
+            font-size: 1.5rem;
+        }
+
+        #tool-guess-the-logo .streaming-mode .options-container,
+        #tool-guess-the-logo .streaming-mode #scoreDisplay,
+        #tool-guess-the-logo .streaming-mode #roundDisplay {
+            display: none;
+        }
+
+        #tool-guess-the-logo .streaming-mode #streamingModeTitle {
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            #tool-guess-the-logo .container {
+                padding: 1.5rem;
+            }
+
+            #tool-guess-the-logo h1 {
+                font-size: 2rem;
+            }
+
+            #tool-guess-the-logo .btn-primary {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            #tool-guess-the-logo .options-container {
+                grid-template-columns: 1fr;
+            }
+
+            #tool-guess-the-logo .logo-container {
+                min-height: 180px;
+                padding: 1rem;
+            }
+
+            #tool-guess-the-logo .logo-container img {
+                max-height: 150px;
+            }
+
+            #tool-guess-the-logo .settings-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }

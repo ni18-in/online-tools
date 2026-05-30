@@ -1,0 +1,33 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/subtitle-resync-tool/body.html?raw';
+import css from '../../../components/legacy/tools/subtitle-resync-tool/styles.css?raw';
+import js from '../../../components/legacy/tools/subtitle-resync-tool/script.js?raw';
+
+const tool = getTool('subtitle-resync-tool')!;
+const seo = toolSeo(tool, {
+  title: 'Subtitle Resync Tool - Fix Out of Sync Subtitles Online',
+  description:
+    'Fix out of sync subtitles easily. Upload your SRT and Video, adjust timing with a click, and download the permanently fixed subtitle file.',
+  keywords:
+    'Subtitle shifter online, Fix out of sync subtitles srt, Resync srt file permanent, Delay subtitles online tool, srt time shifter',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Subtitle Resync Tool',
+    description: 'Fix audio sync issues in SRT subtitle files online.',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/tools/subtitle-resync-tool/`,
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island" id="tool-subtitle-resync-tool" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

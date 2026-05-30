@@ -1,0 +1,44 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import body from '../../../components/legacy/tools/guess-the-logo/body.html?raw';
+import css from '../../../components/legacy/tools/guess-the-logo/styles.css?raw';
+import js from '../../../components/legacy/tools/guess-the-logo/script.js?raw';
+
+const tool = getTool('guess-the-logo')!;
+const seo = toolSeo(tool, {
+  title: 'Guess the Logo - Fun Brand Quiz Game',
+  description:
+    'Test your brand knowledge with Guess the Logo! A fun and addictive quiz game with multiple modes, difficulty levels, and endless logo challenges. Play now in your browser!',
+  keywords:
+    'guess the logo, logo quiz, brand game, trivia game, online game, browser game, party game, challenge game, html game, javascript game',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Guess the Logo',
+    alternateName: 'Logo Quiz Game',
+    description:
+      'Test your brand knowledge with Guess the Logo! A fun and addictive quiz game with multiple modes (Single Player, Party Mode, Challenge Mode, Streaming Mode), difficulty levels, and endless logo challenges. Play now in your browser!',
+    genre: ['Trivia', 'Quiz', 'Puzzle'],
+    applicationCategory: 'Game',
+    operatingSystem: 'All (Web browser)',
+    browserRequirements: 'Requires HTML5, CSS3, and JavaScript support.',
+    playMode: ['SinglePlayer', 'MultiPlayer'],
+    keywords:
+      'guess the logo, logo quiz, brand game, trivia game, online game, browser game, party game, challenge game, html game, javascript game',
+    author: { '@type': 'Organization', name: 'ni18' },
+    publisher: { '@type': 'Organization', name: 'ni18' },
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
+    learningResourceType: 'game',
+    typicalAgeRange: '8+',
+    numberOfPlayers: { '@type': 'QuantitativeValue', minValue: 1, description: 'Single player, or multiple players in Party Mode (pass and play).' },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island" id="tool-guess-the-logo" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

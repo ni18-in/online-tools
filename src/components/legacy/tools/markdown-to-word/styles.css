@@ -1,0 +1,311 @@
+#tool-markdown-to-word {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+            --editor-bg: #ffffff;
+            --preview-bg: #ffffff;
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        #tool-markdown-to-word {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #tool-markdown-to-word header {
+            background-color: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        #tool-markdown-to-word h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        #tool-markdown-to-word .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #tool-markdown-to-word .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #tool-markdown-to-word .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        #tool-markdown-to-word .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        #tool-markdown-to-word .btn-secondary {
+            background-color: white;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        #tool-markdown-to-word .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        #tool-markdown-to-word .upload-label {
+            cursor: pointer;
+        }
+
+        #tool-markdown-to-word input[type="file"] {
+            display: none;
+        }
+
+        #tool-markdown-to-word .workspace {
+            display: flex;
+            gap: 2rem;
+            height: 70vh;
+            min-height: 500px;
+        }
+
+        #tool-markdown-to-word .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--editor-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #tool-markdown-to-word .panel-header {
+            background-color: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #tool-markdown-to-word #editor {
+            flex: 1;
+            width: 100%;
+            padding: 1.5rem;
+            border: none;
+            resize: none;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            outline: none;
+            background-color: var(--editor-bg);
+            color: var(--text-color);
+        }
+
+        #tool-markdown-to-word #preview {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: var(--preview-bg);
+        }
+
+        /* Markdown Preview Styles (Targeting a Word-like look) */
+        #tool-markdown-to-word #preview h1,
+        #tool-markdown-to-word #preview h2,
+        #tool-markdown-to-word #preview h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        #tool-markdown-to-word #preview h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.3em;
+        }
+
+        #tool-markdown-to-word #preview h2 {
+            font-size: 1.5em;
+        }
+
+        #tool-markdown-to-word #preview p {
+            margin-bottom: 1em;
+        }
+
+        #tool-markdown-to-word #preview ul,
+        #tool-markdown-to-word #preview ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+
+        #tool-markdown-to-word #preview blockquote {
+            border-left: 4px solid #dfe2e5;
+            margin: 0;
+            padding-left: 1em;
+            color: #64748b;
+        }
+
+        #tool-markdown-to-word #preview pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        #tool-markdown-to-word #preview code {
+            font-family: var(--font-mono);
+            background-color: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        #tool-markdown-to-word #preview pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        #tool-markdown-to-word #preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        #tool-markdown-to-word #preview th,
+        #tool-markdown-to-word #preview td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5em;
+        }
+
+        #tool-markdown-to-word #preview th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+
+        #tool-markdown-to-word #preview img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Content Sections */
+        #tool-markdown-to-word .content-section {
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #tool-markdown-to-word .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+        }
+
+        #tool-markdown-to-word .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+
+        #tool-markdown-to-word .step-list li {
+            position: relative;
+            padding-left: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #tool-markdown-to-word .step-list li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2.5rem;
+            font-weight: bold;
+        }
+
+        #tool-markdown-to-word .faq-item {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        #tool-markdown-to-word .faq-item h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #0f172a;
+        }
+
+        #tool-markdown-to-word footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #tool-markdown-to-word .workspace {
+                flex-direction: column;
+                height: auto;
+            }
+
+            #tool-markdown-to-word .panel {
+                min-height: 400px;
+            }
+
+            #tool-markdown-to-word .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #tool-markdown-to-word .btn {
+                justify-content: center;
+            }
+        }

@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/happy-new-year/body.html?raw';
+import css from '../../../components/legacy/tools/happy-new-year/styles.css?raw';
+import js from '../../../components/legacy/tools/happy-new-year/script.js?raw';
+
+const tool = getTool('happy-new-year')!;
+const seo = toolSeo(tool, {
+  title: 'Happy New Year Wish Generator',
+  description: 'Create and share your personalized Happy New Year wishes! Dynamic, responsive, and serverless.',
+  keywords: 'happy new year, wish generator, new year greetings, personalized wishes',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Happy New Year Wish Generator',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/tools/happy-new-year/`,
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island" id="tool-happy-new-year" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,371 @@
+<header class="bg-white shadow-sm p-4 sticky top-0 z-40">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-600"><a href="/">Free Online Image Utility Tool</a></h1>
+
+            <div id="header-actions" class="flex items-center gap-3">
+                <p class="text-blue-600"><a href="/">How to use</a></p>
+
+                <button id="undo-btn"
+                    class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400"
+                    title="Undo last action" disabled>
+                    <i class="lucide lucide-undo-2"></i> Undo
+                </button>
+                <button id="redo-btn"
+                    class="text-sm text-slate-600 hover:text-blue-600 transition-colors disabled:text-slate-400 disabled:hover:text-slate-400"
+                    title="Redo last undone action" disabled>
+                    <i class="lucide lucide-redo-2"></i> Redo
+                </button>
+                <span class="text-slate-300">|</span>
+                <button id="reset-all-btn" class="text-sm text-slate-600 hover:text-red-600 transition-colors"
+                    title="Clear image and reset all settings">
+                    <i class="lucide lucide-trash-2"></i> Clear All
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+
+        <aside class="w-full lg:w-1/4 space-y-6">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">1. Upload Image</h2>
+                <label for="file-input" class="file-input-label block w-full">
+                    <i class="lucide lucide-upload-cloud text-4xl text-slate-400 mx-auto mb-2"></i>
+                    <span class="text-slate-600 font-medium">Click or Drag & Drop</span>
+                    <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, WEBP</p>
+                </label>
+                <input type="file" id="file-input" accept="image/jpeg, image/png, image/webp">
+                <div id="file-info" class="text-xs text-slate-500 mt-3 space-y-1">
+                    <p>Filename: <span id="info-filename">N/A</span></p>
+                    <p>Original Size: <span id="info-orig-size">N/A</span></p>
+                    <p>Original Dimensions: <span id="info-orig-dims">N/A</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">2. Tools</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="resize"><i class="lucide lucide-move-horizontal"></i> Resize</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="crop"><i class="lucide lucide-crop"></i> Crop</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="rotate"><i class="lucide lucide-rotate-cw"></i> Rotate</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="flip"><i class="lucide lucide-flip-horizontal-2"></i> Flip</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="adjust"><i class="lucide lucide-sliders-horizontal"></i> Adjust</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="border"><i class="lucide lucide-square"></i> Border</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="text"><i class="lucide lucide-type"></i> Text</button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="w-full lg:w-1/2 relative">
+            <div class="bg-white p-4 rounded-lg shadow sticky top-[80px]">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">Preview</h2>
+                <div id="preview-area"
+                    class="relative min-h-[200px] flex items-center justify-center bg-slate-100 rounded-md overflow-hidden">
+                    <div id="canvas-container">
+                        <canvas id="canvas"></canvas>
+                        <img id="cropper-image" alt="Image for cropping">
+                    </div>
+                    <p id="preview-placeholder"
+                        class="text-slate-500 p-5 text-center absolute inset-0 flex items-center justify-center">Upload
+                        an image to start editing</p>
+                    <div id="loading-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                <div id="image-details" class="text-sm text-slate-600 mt-3 space-y-1">
+                    <p>Current Dimensions: <span id="img-dimensions">N/A</span></p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="w-full lg:w-1/4 space-y-6">
+            <div id="options-panel-container" class="bg-white p-4 rounded-lg shadow min-h-[200px]">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">3. Tool Options</h2>
+                <div id="options-placeholder" class="text-slate-500 text-sm">Select a tool to see its options.</div>
+
+                <div id="options-resize" class="options-section space-y-3">
+                    <label class="block text-sm font-medium text-slate-700">Dimensions (px)</label>
+                    <div class="flex gap-2 items-center">
+                        <input type="number" id="resize-width" placeholder="Width"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
+                        <span class="text-slate-500">x</span>
+                        <input type="number" id="resize-height" placeholder="Height"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="resize-aspect-ratio" checked
+                            class="form-checkbox rounded text-blue-600">
+                        <label for="resize-aspect-ratio" class="ml-2 text-sm text-slate-600">Lock Aspect Ratio</label>
+                    </div>
+                    <button id="apply-resize-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Resize</button>
+                    <p class="text-xs text-slate-500">Live preview active. Uses browser default scaling.</p>
+                </div>
+
+                <div id="options-crop" class="options-section space-y-3">
+                    <p class="text-xs text-slate-500 mb-2">Drag handles to adjust crop area.</p>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Aspect Ratio</label>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="free">Free</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="1/1">1:1</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="4/3">4:3</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="16/9">16:9</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="orig">Original</button>
+                        </div>
+                    </div>
+                    <button id="apply-crop-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm mt-2">Apply
+                        Crop</button>
+                    <button id="cancel-crop-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Cancel
+                        Crop</button>
+                </div>
+
+                <div id="options-rotate" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="rotate-left-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-ccw"></i> 90° Left</button>
+                        <button id="rotate-right-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-cw"></i> 90° Right</button>
+                    </div>
+                </div>
+
+                <div id="options-flip" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="flip-horizontal-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-horizontal"></i> Horizontal</button>
+                        <button id="flip-vertical-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-vertical"></i> Vertical</button>
+                    </div>
+                </div>
+
+                <div id="options-adjust" class="options-section space-y-4">
+                    <div>
+                        <label for="brightness-slider" class="block text-sm font-medium text-slate-700 mb-1">Brightness
+                            (<span id="brightness-value">100</span>%)</label>
+                        <input type="range" id="brightness-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="contrast-slider" class="block text-sm font-medium text-slate-700 mb-1">Contrast
+                            (<span id="contrast-value">100</span>%)</label>
+                        <input type="range" id="contrast-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="saturation-slider" class="block text-sm font-medium text-slate-700 mb-1">Saturation
+                            (<span id="saturation-value">100</span>%)</label>
+                        <input type="range" id="saturation-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="grayscale-slider" class="block text-sm font-medium text-slate-700 mb-1">Grayscale
+                            (<span id="grayscale-value">0</span>%)</label>
+                        <input type="range" id="grayscale-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="sepia-slider" class="block text-sm font-medium text-slate-700 mb-1">Sepia (<span
+                                id="sepia-value">0</span>%)</label>
+                        <input type="range" id="sepia-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="blur-slider" class="block text-sm font-medium text-slate-700 mb-1">Blur (<span
+                                id="blur-value">0</span>px)</label>
+                        <input type="range" id="blur-slider" min="0" max="10" step="0.1" value="0"
+                            class="w-full form-range">
+                    </div>
+                    <button id="apply-adjust-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Adjustments</button>
+                    <button id="reset-adjust-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Reset
+                        Adjustments</button>
+                </div>
+
+                <div id="options-border" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="border-width" class="block text-sm font-medium text-slate-700">Width
+                                (px)</label>
+                            <input type="number" id="border-width" value="5" min="0"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                        <div>
+                            <label for="border-color" class="block text-sm font-medium text-slate-700">Color</label>
+                            <input type="color" id="border-color" value="#000000"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                        </div>
+                    </div>
+                    <button id="apply-border-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Border</button>
+                    <p class="text-xs text-slate-500">Live preview active.</p>
+                </div>
+
+
+                <div id="options-text" class="options-section space-y-3">
+                    <p class="text-xs text-slate-500 mb-2">Click on the preview to position text, then adjust options.
+                    </p>
+                    <label for="text-input" class="block text-sm font-medium text-slate-700">Text</label>
+                    <textarea id="text-input" placeholder="Your text here" rows="3"
+                        class="form-textarea w-full text-sm rounded-md border-slate-300"></textarea>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-font-family" class="block text-sm font-medium text-slate-700">Font</label>
+                            <select id="text-font-family"
+                                class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="'Courier New', Courier, monospace">Courier New</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Impact, Charcoal, sans-serif">Impact</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="text-size" class="block text-sm font-medium text-slate-700">Size (px)</label>
+                            <input type="number" id="text-size" value="30" min="8"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Style</label>
+                            <div class="flex gap-2 mt-1">
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-bold"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Bold
+                                </label>
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-italic"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Italic
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="text-color" class="block text-sm font-medium text-slate-700">Color</label>
+                            <input type="color" id="text-color" value="#ffffff"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-align" class="block text-sm font-medium text-slate-700">Align</label>
+                            <select id="text-align" class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="left">Left</option>
+                                <option value="center">Center</option>
+                                <option value="right">Right</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="text-rotation" class="block text-sm font-medium text-slate-700">Rotation
+                                (°)</label>
+                            <input type="number" id="text-rotation" value="0" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="text-opacity" class="block text-sm font-medium text-slate-700 mb-1">Opacity (<span
+                                id="text-opacity-value">0.7</span>)</label>
+                        <input type="range" id="text-opacity" min="0" max="1" step="0.05" value="0.7"
+                            class="w-full form-range">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-x" class="block text-sm font-medium text-slate-700">X Position</label>
+                            <input type="number" id="text-x" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                        <div>
+                            <label for="text-y" class="block text-sm font-medium text-slate-700">Y Position</label>
+                            <input type="number" id="text-y" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500">X/Y position is relative to the top-left corner.</p>
+
+                    <button id="apply-text-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Apply
+                        Text</button>
+                    <p class="text-xs text-slate-500">Live preview active.</p>
+                </div>
+
+            </div>
+
+            
+<!-- Free Online Image Utility Tool -->
+
+
+
+            <div id="export-panel" class="bg-white p-4 rounded-lg shadow space-y-3">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">4. Export Image</h2>
+                <div>
+                    <label for="convert-format" class="block text-sm font-medium text-slate-700">Output Format</label>
+                    <select id="convert-format" class="form-select w-full text-sm rounded-md border-slate-300 mt-1">
+                        <option value="image/png">PNG (Lossless)</option>
+                        <option value="image/jpeg">JPG (Lossy)</option>
+                        <option value="image/webp">WEBP (Lossy/Lossless)</option>
+                    </select>
+                </div>
+                <div id="quality-option" class="space-y-1 hidden">
+                    <label for="convert-quality" class="block text-sm font-medium text-slate-700 mb-1">Quality (<span
+                                id="quality-value">92</span>%)</label>
+                    <input type="range" id="convert-quality" min="1" max="100" value="92" class="w-full form-range">
+                    <p class="text-xs text-slate-500">Lower quality means smaller file size (for JPG/WEBP).</p>
+                </div>
+                <div id="webp-options" class="space-y-1 hidden">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="webp-lossless" class="form-checkbox rounded text-blue-600">
+                        <label for="webp-lossless" class="ml-2 text-sm text-slate-600">Use Lossless WEBP</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="download-filename" class="block text-sm font-medium text-slate-700">Filename</label>
+                    <input type="text" id="download-filename" value="edited-image"
+                        class="form-input w-full text-sm rounded-md border-slate-300 mt-1">
+                </div>
+                <div class="text-sm text-slate-600">
+                    Estimated Size: <span id="estimated-size" class="font-medium">N/A</span>
+                </div>
+                <button id="download-btn"
+                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center justify-center gap-2">
+                    <i class="lucide lucide-download"></i> Download Image
+                </button>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <div id="message-box">
+        <span id="message-text"></span>
+    </div>

@@ -27,8 +27,18 @@ const src = fs.readFileSync(path.join(root, srcRel), 'utf8');
 
 const scopeId = `#tool-${slug}`;
 
-// ---- CSS: concat all <style> blocks, scope every selector to the island ----
-const styleBlocks = [...src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map((m) => m[1]).join('\n');
+// ---- sibling external assets (tools that ship their own style.css / script.js) ----
+const srcDir = path.dirname(path.join(root, srcRel));
+const readSibling = (name) => {
+  const p = path.join(srcDir, name);
+  return fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '';
+};
+const extCss = readSibling('style.css');
+const extJs = readSibling('script.js');
+
+// ---- CSS: concat inline <style> + any external style.css, scope every selector to the island ----
+const styleBlocks =
+  [...src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map((m) => m[1]).join('\n') + '\n' + extCss;
 let scopedCss = '';
 if (styleBlocks.trim()) {
   const tree = postcss.parse(styleBlocks);
@@ -62,13 +72,16 @@ body = body.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (full, attrs, cod
 // remove AdSense <ins> units
 body = body.replace(/<ins\b[^>]*class="[^"]*adsbygoogle[^"]*"[\s\S]*?<\/ins>/gi, '');
 
-// ---- external head deps (CDN libs/fonts) minus GA, ads, tailwind CDN ----
+// ---- external head deps (CDN libs/fonts) minus GA, ads, tailwind CDN, and the tool's own
+//      relative script.js (which we inline below) ----
 const headDeps = [];
 for (const m of src.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*><\/script>/gi)) {
   const u = m[1];
   if (/googletagmanager|adsbygoogle|cdn\.tailwindcss\.com/.test(u)) continue;
+  if (/^(\.\/)?script\.js(\?|$)/.test(u) || u.endsWith('/script.js')) continue; // inlined
   headDeps.push(m[0].trim());
 }
+if (extJs.trim()) inlineJs.push(extJs.trim());
 
 // ---- write partials ----
 const outDir = path.join(root, 'src/components/legacy/tools', slug);

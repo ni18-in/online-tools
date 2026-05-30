@@ -1,0 +1,34 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import body from '../../../components/legacy/tools/vtf-converter/body.html?raw';
+import css from '../../../components/legacy/tools/vtf-converter/styles.css?raw';
+import js from '../../../components/legacy/tools/vtf-converter/script.js?raw';
+
+const tool = getTool('vtf-converter')!;
+const seo = toolSeo(tool, {
+  title: 'VTF Converter - Online Image to VTF Tool',
+  description:
+    'Convert images (PNG, JPG) to VTF (Valve Texture Format) online for free. Client-side, secure, and fast. Perfect for Source engine modding (CS:GO, TF2, L4D2).',
+  keywords: 'vtf converter, image to vtf, valve texture format, source engine',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'VTF Converter',
+    abstract: 'A free, client-side web tool to convert images to Valve Texture Format (VTF).',
+    description: 'Instantly convert PNG, JPG, and other image formats to VTF files directly in your browser. No server uploads required.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web Browser',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords: 'vtf converter, image to vtf, source engine texture, vtf edit online, valve texture format',
+    browserRequirements: 'Requires a modern web browser.',
+    author: { '@type': 'Organization', name: 'ni18 tools' },
+  },
+});
+---
+<ToolLayout seo={seo} lang="en">
+  <div class="tool-island legacy-tw" id="tool-vtf-converter" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

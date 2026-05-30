@@ -1,0 +1,98 @@
+<header>
+        <h1>Markdown to Word Converter</h1>
+        <a href="/online-tools/" style="text-decoration: none; color: var(--text-color); font-weight: 500;">&larr; More
+            Tools</a>
+    </header>
+
+    <div class="container">
+
+        <div class="toolbar">
+            <button class="btn btn-secondary" onclick="document.getElementById('file-upload').click()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Upload .md File
+            </button>
+            <input type="file" id="file-upload" accept=".md,.txt,.markdown" onchange="handleFileUpload(this)">
+
+            <button class="btn btn-secondary" onclick="copyRichText()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copy Rich Text
+            </button>
+
+            <button class="btn" style="margin-left: auto;" onclick="downloadDocx()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Word (.docx)
+            </button>
+        </div>
+
+        <div class="workspace">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Markdown / ChatGPT Input</span>
+                    <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">Type or Paste here</span>
+                </div>
+                <textarea id="editor" placeholder="# Paste your Markdown or ChatGPT content here...
+                
+- It will automatically convert.
+- Supports **bold**, *italic*, and more.
+
+1. Lists
+2. Tables
+3. Code blocks" spellcheck="false"></textarea>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Live Preview</span>
+                </div>
+                <!-- The Preview Div is where we render HTML for visual feedback -->
+                <div id="preview"></div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>How to Convert Markdown or ChatGPT to Word</h2>
+            <ol class="step-list">
+                <li><strong>Paste Content:</strong> Copy your text from ChatGPT, GitHub, or any text editor and paste it
+                    into the left panel. You can also upload a <code>.md</code> file directly.</li>
+                <li><strong>Check Preview:</strong> As you type, the right panel updates instantly to show you how your
+                    document will look.</li>
+                <li><strong>Download or Copy:</strong> Click <strong>Download Word (.docx)</strong> to save a fully
+                    formatted Microsoft Word file. Or click <strong>Copy Rich Text</strong> to paste formatted text into
+                    emails or Google Docs.</li>
+            </ol>
+        </section>
+
+        <section class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How to convert ChatGPT to Word?</h3>
+                <p>Simply click the "Copy" button on your ChatGPT response, then paste it into the editor on this page.
+                    Our tool reads the markdown formatting and lets you download a clean DOCX file.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does this tool keep formatting?</h3>
+                <p>Yes! We support headings (H1, H2, H3), bold, italic, bullet points, numbered lists, blockquotes, code
+                    blocks, and tables.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is this tool free and secure?</h3>
+                <p>Absolutely. It is 100% free and runs entirely in your browser. Your data never leaves your device and
+                    is not uploaded to any server.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Markdown to Word Converter. Built for privacy and speed by <a
+                href="https://online-tools.ni18.in/" style="color: inherit; text-decoration: underline;">Ni18 Tools</a>
+        </p>
+    </footer>
