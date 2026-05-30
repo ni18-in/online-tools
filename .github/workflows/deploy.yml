@@ -3,6 +3,8 @@ name: Build, verify & deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 # Allow the GITHUB_TOKEN to deploy to Pages + verify the deployment origin.
@@ -11,12 +13,13 @@ permissions:
   pages: write
   id-token: write
 
-# One deploy at a time; don't cancel an in-progress production deploy.
+# Serialize per ref so PR validation runs don't cancel a production deploy.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  # Runs on PRs AND main: builds, runs the SEO/URL gate + functional tests, uploads the artifact.
   build:
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +46,9 @@ jobs:
         with:
           path: dist
 
+  # Deploys ONLY from main (push or manual dispatch) — never from a pull request.
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
