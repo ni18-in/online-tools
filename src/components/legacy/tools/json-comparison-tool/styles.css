@@ -49,7 +49,7 @@
              --modal-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        #tool-json-comparison-tool .dark {
+        .dark #tool-json-comparison-tool {
              --bg-color: #111827; /* gray-900 */
              --text-color: #f9fafb; /* gray-50 */
              --text-secondary-color: #9ca3af; /* gray-400 */
@@ -126,7 +126,7 @@
              white-space: pre; overflow-wrap: normal; transition: color 0.3s ease;
         }
         #tool-json-comparison-tool textarea.editor-textarea:focus { box-shadow: none; border-color: transparent; }
-        #tool-json-comparison-tool textarea::placeholder { color: #6b7280; } #tool-json-comparison-tool .dark textarea::placeholder { color: #9ca3af; }
+        #tool-json-comparison-tool textarea::placeholder { color: #6b7280; } .dark #tool-json-comparison-tool textarea::placeholder { color: #9ca3af; }
 
 
         /* --- Diff Output Styles --- */
@@ -148,11 +148,11 @@
             display: inline-block; /* Ensure proper spacing */
             color: var(--text-secondary-color); /* Dimmer property names */
         }
-        #tool-json-comparison-tool .dark .jsondiffpatch-unchanged .jsondiffpatch-property-name,
-        #tool-json-comparison-tool .dark .jsondiffpatch-moved .jsondiffpatch-property-name,
-        #tool-json-comparison-tool .dark .jsondiffpatch-modified .jsondiffpatch-property-name,
-        #tool-json-comparison-tool .dark .jsondiffpatch-added .jsondiffpatch-property-name,
-        #tool-json-comparison-tool .dark .jsondiffpatch-deleted .jsondiffpatch-property-name {
+        .dark #tool-json-comparison-tool .jsondiffpatch-unchanged .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-moved .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-modified .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-added .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-deleted .jsondiffpatch-property-name {
              color: var(--text-secondary-color); /* Use dark mode secondary color */
         }
 

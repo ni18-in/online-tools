@@ -24,7 +24,7 @@
             --diff-common-text: var(--on-surface-color);
         }
 
-        #tool-online-text-compare .dark-mode {
+        .dark-mode #tool-online-text-compare {
             --primary-color: #BB86FC;
             --primary-variant-color: #3700B3;
             --secondary-color: #03DAC6; 
@@ -123,7 +123,7 @@
         #tool-online-text-compare .header-controls select:hover, #tool-online-text-compare .header-controls button:not(.compare-main-btn):hover {
             background-color: rgba(0,0,0,0.05);
         }
-        #tool-online-text-compare .dark-mode .header-controls select:hover, #tool-online-text-compare .dark-mode .header-controls button:not(.compare-main-btn):hover {
+        .dark-mode #tool-online-text-compare .header-controls select:hover, .dark-mode #tool-online-text-compare .header-controls button:not(.compare-main-btn):hover {
             background-color: rgba(255,255,255,0.1);
         }
         #tool-online-text-compare .header-controls button:active {
@@ -174,7 +174,7 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 98, 0, 238), 0.25); 
         }
-        #tool-online-text-compare .dark-mode textarea:focus {
+        .dark-mode #tool-online-text-compare textarea:focus {
              box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb, 187, 134, 252), 0.25);
         }
 
