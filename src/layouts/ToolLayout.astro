@@ -32,8 +32,11 @@ const {
   ad = true,
   adMinHeight = 280,
 } = Astro.props;
+
+// Ensure Material Icons font is loaded on all tool pages since many legacy tools use it.
+const finalHeadRaw = (headRaw || '') + '\n<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />';
 ---
-<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
+<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={finalHeadRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
     <slot />
     {scriptSrcs.map((src) => <script is:inline src={src}></script>)}
@@ -62,7 +65,12 @@ const {
 
 <style>
   /* Hide duplicate theme toggle buttons inside legacy tools */
-  :global(#themeToggleBtn), :global(#darkModeToggle), :global(.dark-mode-toggle) {
+  .tool-main :global(#themeToggleBtn),
+  .tool-main :global(#darkModeToggle),
+  .tool-main :global(.dark-mode-toggle),
+  .tool-main :global(#theme-toggle),
+  .tool-main :global(#theme-btn),
+  .tool-main :global(.theme-toggle) {
     display: none !important;
   }
 

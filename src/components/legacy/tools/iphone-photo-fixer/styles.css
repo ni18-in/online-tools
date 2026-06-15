@@ -1,5 +1,19 @@
 /* Global Styles */
 #tool-iphone-photo-fixer {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --surface-bg: #f1f5f9;
+    --text-color: #0f172a;
+    --text-muted: #475569;
+    --border-color: #cbd5e1;
+}
+
+#tool-iphone-photo-fixer.dark,
+#tool-iphone-photo-fixer.dark-mode {
     --primary-color: #3b82f6;
     /* Apple Blue-ish */
     --primary-hover: #2563eb;
@@ -65,6 +79,11 @@
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+#tool-iphone-photo-fixer.dark .drop-zone,
+#tool-iphone-photo-fixer.dark-mode .drop-zone {
     background-color: rgba(255, 255, 255, 0.02);
 }
 
@@ -206,8 +225,13 @@
 }
 
 #tool-iphone-photo-fixer .status-pending {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
     color: var(--text-muted);
+}
+
+#tool-iphone-photo-fixer.dark .status-pending,
+#tool-iphone-photo-fixer.dark-mode .status-pending {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #tool-iphone-photo-fixer .status-converting {

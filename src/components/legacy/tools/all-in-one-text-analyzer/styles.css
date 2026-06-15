@@ -68,3 +68,67 @@
             height: 1rem; /* h-4 */
             color: #16a34a; /* text-green-600 */
          }
+
+/* --- Dark Mode Support --- */
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .bg-white {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .text-gray-700,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .text-gray-800,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer label {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer textarea {
+    background-color: var(--md-sys-color-surface-container-lowest) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .result-card {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #wordCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #charCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #sentenceCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #paragraphCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #readingTime,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #readingEase {
+    color: var(--md-sys-color-primary) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .result-card h3 {
+    color: var(--md-sys-color-secondary) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .bg-gray-50 {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li {
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li span:first-child {
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li span:last-child {
+    background-color: var(--md-sys-color-primary-container) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .modal-content {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}

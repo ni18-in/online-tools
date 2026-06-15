@@ -1,20 +1,14 @@
-<nav class="navbar flex justify-between items-center">
-        <h1 class="navbar-brand">
-            <i class="fas fa-code"></i> <span><a href="/">JSON Visualizer Pro</a></span>
-        </h1>
-        <div>
-            <button id="howToUseBtn" class="nav-button">
-                <i class="fas fa-question-circle mr-1"></i> How to Use
-            </button>
-        </div>
-    </nav>
-
     <div class="main-content-area">
 
-        <div class="w-full md:w-1/2 p-4 flex flex-col border-r border-gray-300 bg-white shadow-lg panel">
-            <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Input</h2>
+        <div class="w-full md:w-1/2 p-4 flex flex-col border-r border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg panel">
+            <div class="flex justify-between items-center mb-3 flex-shrink-0">
+                <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200">JSON Input</h2>
+                <button id="howToUseBtn" class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    <i class="fas fa-question-circle mr-1"></i> How to Use
+                </button>
+            </div>
             <textarea id="jsonInput"
-                class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 panel-content h-full"
+                class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 panel-content h-full"
                 placeholder="Paste or type your JSON here...">{
     "name": "Example JSON",
     "version": 1.0,
@@ -31,7 +25,7 @@
     },
     "otherItems": []
 }</textarea>
-            <div id="errorDisplay" class="text-red-600 text-xs mb-3 h-10 overflow-y-auto font-mono flex-shrink-0"></div>
+            <div id="errorDisplay" class="text-red-600 dark:text-red-400 text-xs mb-3 h-10 overflow-y-auto font-mono flex-shrink-0"></div>
             <div class="button-container panel-controls">
                 <button id="undoBtn" title="Undo last change (Ctrl+Z)"
                     class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
@@ -57,10 +51,10 @@
             </div>
         </div>
 
-        <div class="w-full md:w-1/2 p-4 flex flex-col bg-gray-50 panel">
-            <h2 class="text-xl font-semibold mb-3 text-gray-700 flex-shrink-0">JSON Visualization</h2>
-            <div id="jsonVisualizer" class="rounded p-3 bg-white shadow-inner json-visualizer panel-content">
-                <p class="text-gray-500 italic">Click 'Visualize / Update' to see the JSON structure here...</p>
+        <div class="w-full md:w-1/2 p-4 flex flex-col bg-gray-50 dark:bg-gray-900/50 panel">
+            <h2 class="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-200 flex-shrink-0">JSON Visualization</h2>
+            <div id="jsonVisualizer" class="rounded p-3 bg-white dark:bg-gray-800 shadow-inner json-visualizer panel-content border border-gray-300 dark:border-gray-700">
+                <p class="text-gray-500 dark:text-gray-400 italic">Click 'Visualize / Update' to see the JSON structure here...</p>
             </div>
         </div>
     </div>

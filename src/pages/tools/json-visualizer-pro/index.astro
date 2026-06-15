@@ -36,8 +36,9 @@ const seo = toolSeo(tool, {
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/json-visualizer-pro/` },
   },
 });
+const headRaw = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">';
 ---
-<ToolLayout seo={seo} lang="en">
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-json-visualizer-pro" set:html={body} />
 </ToolLayout>
 

@@ -269,3 +269,97 @@
 
         /* Remove the custom media query as we handle responsiveness via Tailwind classes */
         /* @media (max-width: 768px) { ... } */
+
+/* --- Dark Mode Support --- */
+:global([data-theme="dark"]) #tool-ai-beauty-test {
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test header {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .text-2xl {
+    color: var(--md-sys-color-primary) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .nav-btn {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .nav-btn:hover {
+    color: var(--md-sys-color-primary) !important;
+    background-color: var(--md-sys-color-surface-container-highest) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .nav-btn.active {
+    color: var(--md-sys-color-on-primary-container) !important;
+    background-color: var(--md-sys-color-primary-container) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .content-section {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test h2 {
+    color: var(--md-sys-color-primary) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test p {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test label {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .score-display {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .score-value {
+    color: var(--md-sys-color-primary) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .result-card {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .comparison-item p {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .bg-white {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .bg-gray-100 {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test .border-gray-200 {
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test #why-choose {
+    background: linear-gradient(to right, var(--md-sys-color-primary-container), var(--md-sys-color-secondary-container)) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test #why-choose h2,
+:global([data-theme="dark"]) #tool-ai-beauty-test #why-choose h3 {
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+:global([data-theme="dark"]) #tool-ai-beauty-test #why-choose p {
+    color: var(--md-sys-color-on-primary-container) !important;
+    opacity: 0.9;
+}

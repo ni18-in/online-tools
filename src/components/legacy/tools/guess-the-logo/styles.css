@@ -189,8 +189,8 @@
             width: 100%;
             padding: 1rem;
             border-radius: var(--border-radius-md);
-            border: 2px solid transparent;
-            background: var(--bg-gradient);
+            border: 2px solid rgba(100, 116, 139, 0.2);
+            background-color: var(--card-bg);
             color: var(--text-primary);
             font-family: var(--font-heading);
             font-weight: 600;
@@ -202,7 +202,7 @@
         #tool-guess-the-logo input[type="number"]:focus {
             outline: none;
             border-color: var(--brand-primary);
-            background: var(--card-bg);
+            background-color: var(--card-bg);
         }
 
         /* Logo Display Area */

@@ -73,6 +73,16 @@
     text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
 }
 
+#tool-happy-new-year h1 .emoji,
+#tool-happy-new-year h2 .emoji {
+    background: none !important;
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    text-shadow: none !important;
+    display: inline-block;
+}
+
 #tool-happy-new-year .subtitle {
     font-size: 1rem;
     opacity: 0.8;
