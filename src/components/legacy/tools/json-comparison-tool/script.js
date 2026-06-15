@@ -96,23 +96,21 @@
 
         // --- Theme Management ---
         function applyTheme(theme) {
-            DOMElements.htmlElement.classList.toggle('dark', theme === 'dark');
-            localStorage.setItem(LOCAL_STORAGE_KEYS.theme, theme);
             updateThemeIcons();
         }
         function toggleTheme() {
-            const currentTheme = DOMElements.htmlElement.classList.contains('dark') ? 'dark' : 'light';
-            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+            const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            updateThemeIcons();
         }
         function loadThemePreference() {
-            const savedTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.theme);
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+            updateThemeIcons();
         }
         function updateThemeIcons() {
-            const isDark = DOMElements.htmlElement.classList.contains('dark');
-            DOMElements.themeIconLight.classList.toggle('hidden', !isDark);
-            DOMElements.themeIconDark.classList.toggle('hidden', isDark);
+            const isDark = document.documentElement.dataset.theme === 'dark';
+            if (DOMElements.themeIconLight) DOMElements.themeIconLight.classList.toggle('hidden', !isDark);
+            if (DOMElements.themeIconDark) DOMElements.themeIconDark.classList.toggle('hidden', isDark);
         }
 
         // --- LocalStorage for Inputs ---
@@ -606,6 +604,10 @@
              } else if (mediaQuery.addListener) {
                  mediaQuery.addListener(handleSystemThemeChange);
              }
+
+             // Global Theme Change Observer
+             var themeObserver = new MutationObserver(() => updateThemeIcons());
+             themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
             console.log("Event listeners added.");
         }

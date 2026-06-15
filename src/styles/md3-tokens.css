@@ -95,6 +95,7 @@
 }
 
 /* ----- minimal, safe global base ----- */
+html { overflow-x: clip; }
 body {
   margin: 0;
   font-family: var(--md-ref-typeface-plain);
@@ -102,6 +103,22 @@ body {
   color: var(--md-sys-color-on-background);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* `clip` (not `hidden`) avoids creating a scroll container so position:sticky in the
+     header still anchors to the viewport. Prevents AdSense Auto Ads — vignettes, anchor
+     ads, side-rail iframes — from ever pushing horizontal scroll on narrow viewports. */
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+/* AdSense-injected iframes/divs can ignore parent constraints. Belt-and-braces clamp:
+   any element AdSense (or any third-party) inserts cannot exceed the viewport width. */
+ins.adsbygoogle,
+.adsbygoogle,
+.google-auto-placed,
+[id^='google_ads_iframe_'],
+[id^='aswift_'] {
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 a { color: inherit; }

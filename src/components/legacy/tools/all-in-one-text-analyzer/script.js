@@ -217,7 +217,7 @@
 
 
         // --- Initial Setup ---
-        currentYearEl.textContent = new Date().getFullYear();
+        if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
         updateAnalysis(); // Initial analysis if needed
         // Set initial state for modal animations
         modalOverlay.classList.add('opacity-0');

@@ -32,8 +32,11 @@ const {
   ad = true,
   adMinHeight = 280,
 } = Astro.props;
+
+// Ensure Material Icons font is loaded on all tool pages since many legacy tools use it.
+const finalHeadRaw = (headRaw || '') + '\n<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />';
 ---
-<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
+<BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={finalHeadRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
     <slot />
     {scriptSrcs.map((src) => <script is:inline src={src}></script>)}
@@ -62,17 +65,25 @@ const {
 
 <style>
   /* Hide duplicate theme toggle buttons inside legacy tools */
-  :global(#themeToggleBtn), :global(#darkModeToggle), :global(.dark-mode-toggle) {
+  .tool-main :global(#themeToggleBtn),
+  .tool-main :global(#darkModeToggle),
+  .tool-main :global(.dark-mode-toggle),
+  .tool-main :global(#theme-toggle),
+  .tool-main :global(#theme-btn),
+  .tool-main :global(.theme-toggle) {
     display: none !important;
   }
 
   /* width:100% defeats the flex shrink-wrap (a column flex item with auto cross-margins
-     collapses to content width) so every tool gets the full page width to lay out in. */
+     collapses to content width) so every tool gets the full page width to lay out in.
+     box-sizing:border-box keeps padding INSIDE that 100% so .tool-main never exceeds the
+     viewport on narrow screens (was 360+32px=392px → horizontal overflow before). */
   .tool-main {
     width: 100%;
+    box-sizing: border-box;
     padding: 24px 16px 8px;
   }
-  .tool-ad { margin: 28px auto 0; max-width: 728px; }
+  .tool-ad { margin: 28px auto 0; max-width: min(728px, 100%); }
   /* One consistent MD3 work-surface for EVERY tool: centered, capped width, themed card.
      The extractor strips each tool's own page background, so this is the single canvas.
      A few intentionally-themed islands (dark basic-auth, gradient AI tools) override the bg
@@ -80,6 +91,7 @@ const {
   :global(.tool-island) {
     max-width: 1080px;
     margin: 0 auto;
+    box-sizing: border-box;
     /* Soft neutral canvas — tools with their own dark/branded bg override via #tool-<slug>;
        tools without one get this. No border/shadow so it never double-frames a tool's own cards. */
     background: var(--md-sys-color-surface-container);
