@@ -16,7 +16,9 @@ pnpm-debug.log*
 # test artifacts
 test-results/
 playwright-report/
+node_modules/
 .lighthouseci/
 # OS
 .DS_Store
 Thumbs.db
+node_modules

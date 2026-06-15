@@ -31,6 +31,7 @@ const langTargets = LOCALES.map((loc) => ({
   current: loc === lang,
 }));
 ---
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header" role="banner">
   <div class="bar">
     <a class="brand" href={base} aria-label="Online Tools — home">Online Tools</a>
@@ -82,10 +83,33 @@ const langTargets = LOCALES.map((loc) => ({
     var menuBtn = document.getElementById('menu-toggle');
     var drawer = document.getElementById('mobile-drawer');
     if (menuBtn && drawer) {
+      var openDrawer = function () {
+        drawer.removeAttribute('hidden');
+        menuBtn.setAttribute('aria-expanded', 'true');
+        menuBtn.setAttribute('aria-label', 'Close menu');
+        var firstLink = drawer.querySelector('a');
+        if (firstLink) firstLink.focus();
+      };
+      var closeDrawer = function (restoreFocus) {
+        if (drawer.hasAttribute('hidden')) return;
+        drawer.setAttribute('hidden', '');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Open menu');
+        if (restoreFocus) menuBtn.focus();
+      };
       menuBtn.addEventListener('click', function () {
-        var open = drawer.hasAttribute('hidden');
-        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
-        menuBtn.setAttribute('aria-expanded', String(open));
+        if (drawer.hasAttribute('hidden')) openDrawer(); else closeDrawer(true);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDrawer(true);
+      });
+      document.addEventListener('click', function (e) {
+        if (drawer.hasAttribute('hidden')) return;
+        if (drawer.contains(e.target) || menuBtn.contains(e.target)) return;
+        closeDrawer(false);
+      });
+      drawer.addEventListener('click', function (e) {
+        if (e.target && e.target.tagName === 'A') closeDrawer(false);
       });
     }
     var themeBtn = document.getElementById('theme-toggle');

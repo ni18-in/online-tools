@@ -23,7 +23,25 @@
       "Bash(cd /c/zMyData/GitHub/online-tools && pwd && echo \"--- pages present? ---\" && ls src/pages/)",
       "mcp__Claude_Preview__preview_start",
       "Bash(node -e ' *)",
-      "Bash(rm -rf \"src/pages/tools/[slug]\" && echo \"removed [slug] probe\" && ls src/pages/tools/)"
+      "Bash(rm -rf \"src/pages/tools/[slug]\" && echo \"removed [slug] probe\" && ls src/pages/tools/)",
+      "Bash(node scripts/extract-legacy.mjs mh-meter-price-calculator)",
+      "Bash(node scripts/extract-legacy.mjs advance-epoch-converter)",
+      "Bash(node -e 'const fs=require\\(\"fs\"\\);const t=fs.readFileSync\\(\"dist/blogs/index.html\",\"utf8\"\\);const re=/<script type=\"application\\\\/ld\\\\+json\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g;let m,n=0,e=0,ty=[];while\\(\\(m=re.exec\\(t\\)\\)\\){n++;try{ty.push\\(JSON.parse\\(m[1]\\)[\"@type\"]\\)}catch\\(x\\){e++}}console.log\\(\"blocks\",n,\"err\",e,ty.join\\(\",\"\\)\\);')",
+      "Bash(node scripts/extract-legacy.mjs about about/index.html pages)",
+      "Bash(node -e 'const fs=require\\(\"fs\"\\);const t=fs.readFileSync\\(\"dist/about/index.html\",\"utf8\"\\);const re=/<script type=\"application\\\\/ld\\\\+json\">\\([\\\\s\\\\S]*?\\)<\\\\/script>/g;let m,n=0,e=0,ty=[];while\\(\\(m=re.exec\\(t\\)\\)\\){n++;try{ty.push\\(JSON.parse\\(m[1]\\)[\"@type\"]\\)}catch\\(x\\){e++}}console.log\\(\"JSON-LD:\",n,\"err:\",e,ty.join\\(\",\"\\)\\);console.log\\(\"hreflang:\",\\(t.match\\(/hreflang=\"[a-z-]*\"/g\\)||[]\\).join\\(\" \"\\)\\);console.log\\(\"canonical:\",\\(t.match\\(/rel=\"canonical\" href=\"\\([^\"]*\\)\"/\\)||[]\\)[1]\\);')",
+      "Bash(npm run *)",
+      "Bash(npx playwright *)",
+      "Bash(gh auth *)",
+      "Bash(echo \"---exit:$?---\")",
+      "PowerShell($gh = Get-Command gh -ErrorAction SilentlyContinue; if \\($gh\\) { Write-Output \"gh: $\\($gh.Source\\)\"; gh auth status 2>&1 | Select-Object -First 3 } else { Write-Output \"gh: NOT FOUND\" }; Write-Output \"--- git remote ---\"; git -C C:\\\\zMyData\\\\GitHub\\\\online-tools remote get-url origin)",
+      "Bash(git push *)",
+      "Bash([ -f \"$M\" ])",
+      "Read(//c/Users/nitin/.claude/projects/C--zMyData-GitHub-online-tools/memory/**)",
+      "Bash(git ls-remote *)",
+      "Bash(git fetch *)",
+      "Bash(git ls-tree *)",
+      "Bash(grep -n 'class=\"tool-island' src/pages/tools/__TRACKED_VAR__/index.astro)",
+      "Bash(powershell -Command ' *)"
     ]
   }
 }
