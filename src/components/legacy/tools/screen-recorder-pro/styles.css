@@ -70,7 +70,7 @@
             --border-radius-full: 999px; /* For pills/chips */
         }
         
-        #tool-screen-recorder-pro .dark-mode {
+        .dark-mode #tool-screen-recorder-pro {
             --primary-color: #D0BCFF; /* M3 Primary - Light Purple */
             --on-primary-color: #381E72;
             --primary-container-color: #4F378B;
@@ -122,7 +122,7 @@
             --outline-variant-color: #49454F; /* Explicitly set for dark. */
         }
 
-        #tool-screen-recorder-pro .dark-mode {
+        .dark-mode #tool-screen-recorder-pro {
             background-color: var(--background-dark);
             color: var(--on-background-color); /* Default text color for dark mode */
         }
@@ -140,14 +140,14 @@
             z-index: 1000;
             border-bottom: 1px solid var(--outline-variant-color);
         }
-        #tool-screen-recorder-pro .dark-mode header {
+        .dark-mode #tool-screen-recorder-pro header {
             background-color: var(--surface-dark);
             color: var(--on-surface-color); /* Ensures header text adapts */
             border-bottom: 1px solid var(--outline-variant-color);
         }
 
         #tool-screen-recorder-pro .site-title { /* Changed from .logo-title for h1 */
-            display: flex;
+            display: none !important;
             align-items: center;
             font-size: 1.375rem; 
             font-weight: 500;
@@ -206,10 +206,10 @@
             background-color: var(--surface-variant-light);
             /* color already var(--on-surface-variant-color) which is correct on surface-variant-light */
         }
-        #tool-screen-recorder-pro .dark-mode .theme-toggle-btn {
+        .dark-mode #tool-screen-recorder-pro .theme-toggle-btn {
              color: var(--on-surface-variant-color); /* Ensures correct icon color in dark mode */
         }
-        #tool-screen-recorder-pro .dark-mode .theme-toggle-btn:hover {
+        .dark-mode #tool-screen-recorder-pro .theme-toggle-btn:hover {
             background-color: var(--surface-variant-dark);
         }
         #tool-screen-recorder-pro .theme-toggle-btn .material-icons {
@@ -237,7 +237,7 @@
             margin-bottom: 1.5rem; 
             border: 1px solid var(--outline-variant-color);
         }
-        #tool-screen-recorder-pro .dark-mode section {
+        .dark-mode #tool-screen-recorder-pro section {
             background-color: var(--surface-dark);
             color: var(--on-surface-color); /* Ensures section text adapts */
             box-shadow: 0 1px 2px rgba(var(--shadow-color), 0.15), 0 2px 4px rgba(var(--shadow-color), 0.15);
@@ -340,7 +340,7 @@
             background-color: color-mix(in srgb, var(--secondary-container-color) 90%, var(--on-secondary-container-color) 10%);
         }
         /* body.dark-mode .btn.secondary will use updated var values */
-        #tool-screen-recorder-pro .dark-mode .btn.secondary:hover {
+        .dark-mode #tool-screen-recorder-pro .btn.secondary:hover {
              background-color: color-mix(in srgb, var(--secondary-container-color) 90%, var(--on-secondary-container-color) 20%);
         }
 
@@ -352,11 +352,11 @@
         #tool-screen-recorder-pro .btn.error:hover {
             background-color: color-mix(in srgb, var(--error-color) 90%, black);
         }
-        #tool-screen-recorder-pro .dark-mode .btn.error {
+        .dark-mode #tool-screen-recorder-pro .btn.error {
             background-color: var(--error-container-color); /* Use error-container for dark */
             color: var(--on-error-container-color);
         }
-        #tool-screen-recorder-pro .dark-mode .btn.error:hover {
+        .dark-mode #tool-screen-recorder-pro .btn.error:hover {
             background-color: color-mix(in srgb, var(--error-container-color) 90%, white 5%);
         }
 
@@ -368,7 +368,7 @@
             box-shadow: none;
             transform: none;
         }
-        #tool-screen-recorder-pro .dark-mode .btn:disabled, #tool-screen-recorder-pro .dark-mode .btn[aria-disabled="true"] {
+        .dark-mode #tool-screen-recorder-pro .btn:disabled, .dark-mode #tool-screen-recorder-pro .btn[aria-disabled="true"] {
             background-color: color-mix(in srgb, var(--on-surface-color) 12%, var(--surface-dark));
             color: color-mix(in srgb, var(--on-surface-color) 38%, var(--surface-dark));
         }
@@ -415,7 +415,7 @@
             border-radius: var(--border-radius-medium); 
             border: 1px solid var(--outline-variant-color);
         }
-        #tool-screen-recorder-pro .dark-mode .settings-group {
+        .dark-mode #tool-screen-recorder-pro .settings-group {
             background-color: var(--surface-variant-dark);
             border-color: var(--outline-variant-color); /* Ensure border color uses the dark mode var */
         }
@@ -451,7 +451,7 @@
             position: relative;
             transition: background-color 0.2s, border-color 0.2s;
         }
-        #tool-screen-recorder-pro .dark-mode .settings-group input[type="checkbox"] {
+        .dark-mode #tool-screen-recorder-pro .settings-group input[type="checkbox"] {
             background-color: var(--surface-dark);
             border-color: var(--outline-color);
         }
@@ -481,7 +481,7 @@
         #tool-screen-recorder-pro .settings-group input[type="checkbox"]:disabled:checked::before {
             color: var(--text-color-light-variant); /* Ensure checkmark color is appropriate on disabled bg */
         }
-        #tool-screen-recorder-pro .dark-mode .settings-group input[type="checkbox"]:disabled:checked::before {
+        .dark-mode #tool-screen-recorder-pro .settings-group input[type="checkbox"]:disabled:checked::before {
              color: var(--on-surface-variant-color); /* Dark mode disabled checkmark */
         }
 
@@ -508,7 +508,7 @@
             border: 1px solid var(--outline-variant-color);
             color: var(--on-surface-variant-color);
         }
-        #tool-screen-recorder-pro .dark-mode #downloadsList li {
+        .dark-mode #tool-screen-recorder-pro #downloadsList li {
             background-color: var(--surface-variant-dark);
             border-color: var(--outline-variant-color); /* Ensure correct border */
             color: var(--on-surface-variant-color); /* Ensure correct text color */
@@ -536,7 +536,7 @@
             background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, var(--on-tertiary-container-color) 10%);
         }
         /* body.dark-mode download button colors handled by vars */
-        #tool-screen-recorder-pro .dark-mode #downloadsList li a.btn-download:hover {
+        .dark-mode #tool-screen-recorder-pro #downloadsList li a.btn-download:hover {
             background-color: color-mix(in srgb, var(--tertiary-container-color) 90%, var(--on-tertiary-container-color) 20%);
         }
 
@@ -570,7 +570,7 @@
             animation: slideIn 0.3s ease-out;
             border: 1px solid var(--outline-variant-color);
         }
-        #tool-screen-recorder-pro .dark-mode .modal-content {
+        .dark-mode #tool-screen-recorder-pro .modal-content {
             background-color: var(--surface-dark); 
             color: var(--on-surface-color); /* Ensure modal text adapts */
             border-color: var(--outline-variant-color);
@@ -595,7 +595,7 @@
             font-size: 1rem; 
             line-height: 1.6;
         }
-         #tool-screen-recorder-pro .dark-mode .modal-content p {
+         .dark-mode #tool-screen-recorder-pro .modal-content p {
              color: var(--on-surface-variant-color); /* Ensures this adapts */
          }
 
@@ -623,7 +623,7 @@
             font-size: 0.875rem; 
             box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1), 0 4px 8px rgba(var(--shadow-color), 0.1); 
         }
-        #tool-screen-recorder-pro .dark-mode #snackbar {
+        .dark-mode #tool-screen-recorder-pro #snackbar {
             background-color: var(--on-surface-color); 
             color: var(--surface-dark); /* Snackbar text on dark surface */
         }
@@ -687,10 +687,10 @@
         #tool-screen-recorder-pro .menu-toggle:hover {
             background-color: var(--surface-variant-light);
         }
-        #tool-screen-recorder-pro .dark-mode .menu-toggle {
+        .dark-mode #tool-screen-recorder-pro .menu-toggle {
             color: var(--on-surface-variant-color); /* ensure icon color adapts */
         }
-        #tool-screen-recorder-pro .dark-mode .menu-toggle:hover {
+        .dark-mode #tool-screen-recorder-pro .menu-toggle:hover {
             background-color: var(--surface-variant-dark);
         }
         #tool-screen-recorder-pro .menu-toggle .material-icons {
@@ -729,7 +729,7 @@
                 box-shadow: 0 4px 8px rgba(var(--shadow-color), 0.1);
                 border-top: 1px solid var(--outline-variant-color);
             }
-            #tool-screen-recorder-pro .dark-mode nav ul {
+            .dark-mode #tool-screen-recorder-pro nav ul {
                 background-color: var(--surface-dark);
                 border-top: 1px solid var(--outline-variant-color);
             }

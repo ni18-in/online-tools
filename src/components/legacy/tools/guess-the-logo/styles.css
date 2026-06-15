@@ -28,7 +28,7 @@
             --border-radius-md: 1rem;
         }
 
-        #tool-guess-the-logo .dark-mode {
+        .dark-mode #tool-guess-the-logo {
             /* Modern Palette - Dark Mode */
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             --card-bg: rgba(30, 41, 59, 0.8);
@@ -168,7 +168,7 @@
             border: 1px solid transparent;
         }
 
-        #tool-guess-the-logo .dark-mode .settings-group {
+        .dark-mode #tool-guess-the-logo .settings-group {
             background: rgba(255, 255, 255, 0.03);
         }
 
@@ -220,7 +220,7 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        #tool-guess-the-logo .dark-mode .logo-container {
+        .dark-mode #tool-guess-the-logo .logo-container {
             background: radial-gradient(circle, rgba(40, 40, 50, 1) 0%, rgba(20, 20, 30, 1) 100%);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -299,7 +299,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        #tool-guess-the-logo .dark-mode .btn-option {
+        .dark-mode #tool-guess-the-logo .btn-option {
             background: #334155;
             color: white;
         }
@@ -386,7 +386,7 @@
             font-weight: 700;
         }
 
-        #tool-guess-the-logo .dark-mode .game-info {
+        .dark-mode #tool-guess-the-logo .game-info {
             background: rgba(255, 255, 255, 0.05);
         }
 
@@ -419,7 +419,7 @@
         }
 
         /* Dark Mode Toggle */
-        #tool-guess-the-logo .dark-mode-toggle {
+        .dark-mode #tool-guess-the-logo-toggle {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
@@ -437,7 +437,7 @@
             transition: all 0.3s ease;
         }
 
-        #tool-guess-the-logo .dark-mode-toggle:hover {
+        .dark-mode #tool-guess-the-logo-toggle:hover {
             color: var(--brand-primary);
             border-color: var(--brand-primary);
             transform: rotate(15deg);
@@ -457,7 +457,7 @@
             background-color: rgba(0, 0, 0, 0.02);
         }
 
-        #tool-guess-the-logo .dark-mode #highscore-list {
+        .dark-mode #tool-guess-the-logo #highscore-list {
             background-color: rgba(255, 255, 255, 0.05);
         }
 
@@ -486,7 +486,7 @@
             background-color: rgba(0, 0, 0, 0.02);
         }
 
-        #tool-guess-the-logo .dark-mode #highscore-list li:nth-child(odd) {
+        .dark-mode #tool-guess-the-logo #highscore-list li:nth-child(odd) {
             background-color: rgba(255, 255, 255, 0.05);
         }
 
@@ -572,7 +572,7 @@
             animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #tool-guess-the-logo .dark-mode .message-box {
+        .dark-mode #tool-guess-the-logo .message-box {
             background: var(--card-bg);
             color: var(--text-primary);
             border: 1px solid var(--brand-primary);

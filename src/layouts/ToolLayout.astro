@@ -41,7 +41,31 @@ const {
   </main>
 </BaseLayout>
 
+<script is:inline>
+  (function () {
+    function sync() {
+      var isDark = document.documentElement.dataset.theme === 'dark';
+      document.body.classList.toggle('dark-mode', isDark);
+      document.body.classList.toggle('dark', isDark);
+      
+      var tool = document.querySelector('.tool-island');
+      if (tool) {
+        tool.classList.toggle('dark-mode', isDark);
+        tool.classList.toggle('dark', isDark);
+      }
+    }
+    sync();
+    var obs = new MutationObserver(sync);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>
+
 <style>
+  /* Hide duplicate theme toggle buttons inside legacy tools */
+  :global(#themeToggleBtn), :global(#darkModeToggle), :global(.dark-mode-toggle) {
+    display: none !important;
+  }
+
   /* width:100% defeats the flex shrink-wrap (a column flex item with auto cross-margins
      collapses to content width) so every tool gets the full page width to lay out in. */
   .tool-main {
