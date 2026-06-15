@@ -1,5 +1,5 @@
 #tool-screen-recorder-pro {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             margin: 0;
             background-color: var(--background-light);
             color: var(--text-color-dark); 

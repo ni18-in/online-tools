@@ -1,5 +1,5 @@
 #tool-all-in-one-text-analyzer {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             background-color: #f8fafc; /* bg-slate-50 */
         }
 

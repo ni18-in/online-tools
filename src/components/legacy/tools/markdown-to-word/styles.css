@@ -6,7 +6,7 @@
             --border-color: #cbd5e1;
             --editor-bg: #ffffff;
             --preview-bg: #ffffff;
-            --font-main: 'Inter', sans-serif;
+            --font-main: inherit;
             --font-mono: 'JetBrains Mono', monospace;
         }
 

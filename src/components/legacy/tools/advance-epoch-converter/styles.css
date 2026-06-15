@@ -36,7 +36,7 @@
         }
 
         #tool-advance-epoch-converter {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: inherit;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -296,7 +296,7 @@
             color: var(--text-primary);
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
         }
 
         /* Developer Zone */

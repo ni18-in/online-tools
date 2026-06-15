@@ -1,6 +1,6 @@
 /* Consistent font */
         #tool-json-visualizer-pro {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             overscroll-behavior: none;
             display: flex;
             flex-direction: column;

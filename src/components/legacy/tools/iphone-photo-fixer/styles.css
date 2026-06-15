@@ -14,7 +14,7 @@
 }
 
 #tool-iphone-photo-fixer {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: inherit;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;

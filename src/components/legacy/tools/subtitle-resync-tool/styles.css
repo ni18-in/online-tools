@@ -10,7 +10,7 @@
 }
 
 #tool-subtitle-resync-tool {
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;

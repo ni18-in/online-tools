@@ -1,6 +1,6 @@
 /* Consider minifying this CSS in a build step */
         #tool-ai-beauty-test {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             scroll-behavior: smooth;
             /* Add smooth scrolling */
         }

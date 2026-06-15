@@ -1,5 +1,5 @@
 #tool-basic-authentication-header-generator {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
         }
         /* Custom focus styles for better accessibility */
         #tool-basic-authentication-header-generator .form-input:focus, #tool-basic-authentication-header-generator .btn:focus-visible {
