@@ -5,8 +5,16 @@
  * Reserves vertical space (min-height) so insertion causes ZERO layout shift (CLS), and
  * defers the adsbygoogle.push() until the slot nears the viewport (IntersectionObserver) to
  * protect LCP/INP. In dev it renders a labeled, theme-aware placeholder (AdSense can't serve
- * on localhost); the real <ins> + loader only ship in production builds. No interstitial /
- * anchor / vignette / auto-ads — manual in-content units only.
+ * on localhost); the real <ins> + loader only ship in production builds.
+ *
+ * NOTE on Auto Ads: this component only renders manual in-content units, but loading the
+ * AdSense library at all activates Auto Ads if they're enabled in the AdSense console for
+ * this site. Auto Ads (vignettes, anchor ads, side rails, in-page) are ACCOUNT-LEVEL config
+ * and cannot be disabled from page code. To prevent intrusive formats:
+ *   AdSense console → Ads → Overview → site → Edit → Ad formats → turn OFF:
+ *     "Vignette ads", "Anchor ads", "Side rail ads", and any "Auto" in-page formats.
+ * The global overflow-x clamp in md3-tokens.css is a defense-in-depth guard against any
+ * third-party-injected element that ignores parent width.
  */
 import { ADSENSE_CLIENT, ADSENSE_SLOT } from '../data/site';
 

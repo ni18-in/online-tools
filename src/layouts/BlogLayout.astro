@@ -27,8 +27,8 @@ const { seo, lang = 'en', altLinks = {}, headRaw, ad = true } = Astro.props;
 </BaseLayout>
 
 <style>
-  .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; }
-  .blog-ad { margin: 32px auto; max-width: 728px; }
+  .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; box-sizing: border-box; }
+  .blog-ad { margin: 32px auto; max-width: min(728px, 100%); }
   /* Blog articles render on a clean light reading surface regardless of shell theme. */
   :global(.blog-island.legacy-tw) {
     background: #ffffff;
