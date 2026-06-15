@@ -22,6 +22,8 @@ export interface Props {
   scriptSrcs?: string[];
   ad?: boolean;
   adMinHeight?: number;
+  /** Load Google Material Icons font (only needed by legacy tools that use the icon font). */
+  materialIcons?: boolean;
 }
 const {
   seo,
@@ -31,10 +33,12 @@ const {
   scriptSrcs = [],
   ad = true,
   adMinHeight = 280,
+  materialIcons = false,
 } = Astro.props;
 
-// Ensure Material Icons font is loaded on all tool pages since many legacy tools use it.
-const finalHeadRaw = (headRaw || '') + '\n<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />';
+// Only load Material Icons font when a tool actually uses the icon font (screen-recorder-pro, online-text-compare).
+const materialIconsLink = materialIcons ? '\n<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />' : '';
+const finalHeadRaw = (headRaw || '') + materialIconsLink;
 ---
 <BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={finalHeadRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
@@ -157,6 +161,7 @@ const finalHeadRaw = (headRaw || '') + '\n<link rel="stylesheet" href="https://f
       max-width: calc(100vw - 16px);
       border-radius: var(--md-sys-shape-corner-large);
       padding: 12px;
+      overflow-x: clip;
     }
 
     :global(.tool-island h1) {
@@ -183,6 +188,25 @@ const finalHeadRaw = (headRaw || '') + '\n<link rel="stylesheet" href="https://f
     :global(#tool-advance-epoch-converter .results-grid),
     :global(#tool-advance-epoch-converter .card-grid-2) {
       grid-template-columns: 1fr;
+    }
+
+    :global(#tool-advance-epoch-converter .smart-input-container) {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    :global(#tool-advance-epoch-converter #convert-btn) {
+      width: 100%;
+    }
+
+    :global(#tool-vtf-converter div:has(> #resize-option)) {
+      align-items: stretch;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    :global(#tool-vtf-converter #resize-option) {
+      width: 100%;
     }
   }
 

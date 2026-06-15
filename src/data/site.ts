@@ -9,7 +9,7 @@ export const GA_ID = 'G-RJER6TKTQ3';
 export const ADSENSE_CLIENT = 'ca-pub-9080750085757406';
 export const ADSENSE_SLOT = '2773802330';
 
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/og-image.svg`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
 export const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1';
 
 /** Join the site origin with a root-relative path → absolute URL. */

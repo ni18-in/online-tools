@@ -32,14 +32,11 @@ const rights: Record<Locale, string> = {
     </nav>
   </div>
   <div class="copyright">
-    <p>&copy; <span id="footer-year">2025</span> ni18 / Online Tools. {rights[lang]}</p>
+    <p>&copy; {new Date().getFullYear()} ni18 / Online Tools. {rights[lang]}</p>
   </div>
 </footer>
 
-<script is:inline>
-  var y = document.getElementById('footer-year');
-  if (y) y.textContent = String(new Date().getFullYear());
-</script>
+
 
 <style>
   .site-footer {

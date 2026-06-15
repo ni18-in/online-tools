@@ -119,7 +119,7 @@ function blogPostingSchema(post: BlogPost) {
     dateModified: post.dateModified,
     image: post.image,
     url: blogUrl(post.slug),
-    author: { '@type': 'Organization', name: post.author },
+    author: { '@type': 'Person', name: post.author },
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
