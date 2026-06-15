@@ -2,11 +2,8 @@
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 import { getTool, toolSeo } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
-import body from '../../../components/legacy/tools/ai-beauty-test/body.html?raw';
-import css from '../../../components/legacy/tools/ai-beauty-test/styles.css?raw';
-import js from '../../../components/legacy/tools/ai-beauty-test/script.js?raw';
 
-const tool = getTool('ai-beauty-test')!; // robots = noindex, follow (set in tools.ts)
+const tool = getTool('ai-beauty-test')!;
 const seo = toolSeo(tool, {
   title: 'AI Beauty Test — Free Face Score & Celebrity Look-Alike',
   description:
@@ -35,15 +32,969 @@ const altLinks = {
   es: `${SITE_URL}/es/tools/ai-beauty-test/`,
   fr: `${SITE_URL}/fr/tools/ai-beauty-test/`,
 };
-const headRaw = '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+const headRaw = `
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+`;
 ---
 <ToolLayout seo={seo} lang="en" altLinks={altLinks} headRaw={headRaw}>
-  <div
-    class="tool-island legacy-tw bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 text-gray-800"
-    id="tool-ai-beauty-test"
-    set:html={body}
-  />
+  <div class="tool-island" id="tool-ai-beauty-test">
+
+    <!-- Tab Navigation -->
+    <nav class="beauty-nav" aria-label="Beauty Test Features">
+      <button class="beauty-tab active" data-target="scanner" aria-selected="true">
+        <i class="fas fa-wand-magic-sparkles"></i><span>Scan & Score</span>
+      </button>
+      <button class="beauty-tab" data-target="lookalike" aria-selected="false">
+        <i class="fas fa-star"></i><span>Look-Alike</span>
+      </button>
+      <button class="beauty-tab" data-target="analysis" aria-selected="false">
+        <i class="fas fa-magnifying-glass"></i><span>Face Parts</span>
+      </button>
+      <button class="beauty-tab" data-target="showdown" aria-selected="false">
+        <i class="fas fa-trophy"></i><span>Showdown</span>
+      </button>
+      <button class="beauty-tab" data-target="how-to-use" aria-selected="false">
+        <i class="fas fa-circle-question"></i><span>How to Use</span>
+      </button>
+    </nav>
+
+    <!-- 1. SCAN & SCORE -->
+    <section id="scanner" class="beauty-section">
+      <div class="section-header">
+        <div class="section-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+        <div>
+          <h2>Face Scanning & Scoring</h2>
+          <p>Upload a photo and get a fun beauty score based on facial features like eyes, lips, nose, and symmetry.</p>
+        </div>
+      </div>
+
+      <div class="upload-area" id="scanner-drop">
+        <input type="file" id="scanner-upload" accept="image/*" class="file-input" />
+        <label for="scanner-upload" class="upload-label">
+          <div class="upload-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+          <span class="upload-text">Drop your photo here or <strong>click to upload</strong></span>
+          <span class="upload-hint">JPG, PNG, GIF — any clear face photo</span>
+        </label>
+        <img id="scanner-preview" class="preview-img hidden" alt="Face preview for scanning" />
+      </div>
+
+      <div id="scanner-loader" class="loader hidden">
+        <div class="loader-ring"></div>
+        <p class="loader-label" id="scanner-loader-text">Scanning 0%</p>
+      </div>
+
+      <div id="scanner-results" class="results hidden">
+        <h3><i class="fas fa-chart-simple"></i> Your Beauty Score</h3>
+        <div class="score-hero">
+          <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill" id="scanner-ring" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+          </svg>
+          <div class="score-number" id="scanner-score">0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-details">
+          <div class="detail-item">
+            <i class="fas fa-eye"></i>
+            <span class="detail-label">Eyes</span>
+            <div class="detail-bar"><div class="detail-fill" id="scanner-eyes-bar"></div></div>
+            <span class="detail-val" id="scanner-eyes">0</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-face-kiss"></i>
+            <span class="detail-label">Lips</span>
+            <div class="detail-bar"><div class="detail-fill" id="scanner-lips-bar"></div></div>
+            <span class="detail-val" id="scanner-lips">0</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-head-side"></i>
+            <span class="detail-label">Nose</span>
+            <div class="detail-bar"><div class="detail-fill" id="scanner-nose-bar"></div></div>
+            <span class="detail-val" id="scanner-nose">0</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-arrows-left-right"></i>
+            <span class="detail-label">Symmetry</span>
+            <div class="detail-bar"><div class="detail-fill" id="scanner-sym-bar"></div></div>
+            <span class="detail-val" id="scanner-sym">0</span>
+          </div>
+        </div>
+        <p class="disclaimer">* This is for entertainment only — scores are simulated, not real AI.</p>
+      </div>
+    </section>
+
+    <!-- 2. LOOK-ALIKE -->
+    <section id="lookalike" class="beauty-section hidden">
+      <div class="section-header">
+        <div class="section-icon purple"><i class="fas fa-star"></i></div>
+        <div>
+          <h2>Celebrity Look-Alike</h2>
+          <p>See which fictional celebrity persona you resemble! Upload a photo for a fun match.</p>
+        </div>
+      </div>
+
+      <div class="upload-area" id="lookalike-drop">
+        <input type="file" id="lookalike-upload" accept="image/*" class="file-input" />
+        <label for="lookalike-upload" class="upload-label">
+          <div class="upload-icon purple"><i class="fas fa-cloud-arrow-up"></i></div>
+          <span class="upload-text">Drop your photo here or <strong>click to upload</strong></span>
+          <span class="upload-hint">A clear, front-facing photo works best</span>
+        </label>
+        <img id="lookalike-preview" class="preview-img hidden" alt="Face preview for look-alike" />
+      </div>
+
+      <div id="lookalike-loader" class="loader hidden">
+        <div class="loader-ring purple"></div>
+        <p class="loader-label" id="lookalike-loader-text">Finding Match 0%</p>
+      </div>
+
+      <div id="lookalike-results" class="results hidden">
+        <h3><i class="fas fa-award"></i> Your Celebrity Match</h3>
+        <div class="celeb-card">
+          <div class="celeb-avatar" id="celeb-avatar">🌟</div>
+          <div class="celeb-info">
+            <p class="celeb-name" id="celeb-name">—</p>
+            <p class="celeb-trait" id="celeb-trait">—</p>
+            <div class="confidence-bar-wrap">
+              <span class="confidence-label">Match Confidence</span>
+              <div class="confidence-bar"><div class="confidence-fill" id="celeb-conf-bar"></div></div>
+              <span class="confidence-val" id="celeb-confidence">0%</span>
+            </div>
+          </div>
+        </div>
+        <p class="disclaimer">* Celebrity personas are fictional — this is just for fun!</p>
+      </div>
+    </section>
+
+    <!-- 3. FACE PARTS -->
+    <section id="analysis" class="beauty-section hidden">
+      <div class="section-header">
+        <div class="section-icon blue"><i class="fas fa-magnifying-glass"></i></div>
+        <div>
+          <h2>Face Parts Analysis</h2>
+          <p>Get fun personality insights based on facial features like eyes, lips, and nose shape.</p>
+        </div>
+      </div>
+
+      <div class="upload-area" id="analysis-drop">
+        <input type="file" id="analysis-upload" accept="image/*" class="file-input" />
+        <label for="analysis-upload" class="upload-label">
+          <div class="upload-icon blue"><i class="fas fa-cloud-arrow-up"></i></div>
+          <span class="upload-text">Drop your photo here or <strong>click to upload</strong></span>
+          <span class="upload-hint">Best results with a clear face photo</span>
+        </label>
+        <img id="analysis-preview" class="preview-img hidden" alt="Face preview for analysis" />
+      </div>
+
+      <div id="analysis-loader" class="loader hidden">
+        <div class="loader-ring blue"></div>
+        <p class="loader-label" id="analysis-loader-text">Analyzing 0%</p>
+      </div>
+
+      <div id="analysis-results" class="results hidden">
+        <h3><i class="fas fa-magnifying-glass-chart"></i> Feature Insights</h3>
+        <div class="insight-cards">
+          <div class="insight-card eyes-card">
+            <div class="insight-icon"><i class="fas fa-eye"></i></div>
+            <h4>Eyes</h4>
+            <p id="analysis-eyes">Upload an image to see analysis.</p>
+          </div>
+          <div class="insight-card lips-card">
+            <div class="insight-icon"><i class="fas fa-face-smile"></i></div>
+            <h4>Lips</h4>
+            <p id="analysis-lips">Upload an image to see analysis.</p>
+          </div>
+          <div class="insight-card nose-card">
+            <div class="insight-icon"><i class="fas fa-wind"></i></div>
+            <h4>Nose</h4>
+            <p id="analysis-nose">Upload an image to see analysis.</p>
+          </div>
+        </div>
+        <p class="disclaimer">* Interpretations are for entertainment and based on traditional face reading concepts.</p>
+      </div>
+    </section>
+
+    <!-- 4. SHOWDOWN -->
+    <section id="showdown" class="beauty-section hidden">
+      <div class="section-header">
+        <div class="section-icon gold"><i class="fas fa-trophy"></i></div>
+        <div>
+          <h2>Beauty Showdown</h2>
+          <p>Upload two photos and compare their beauty scores. Who wins the crown?</p>
+        </div>
+      </div>
+
+      <div class="showdown-uploads">
+        <div class="upload-area compact" id="showdown-drop1">
+          <input type="file" id="showdown-upload1" accept="image/*" class="file-input" />
+          <label for="showdown-upload1" class="upload-label">
+            <div class="upload-icon gold"><i class="fas fa-cloud-arrow-up"></i></div>
+            <span class="upload-text"><strong>Image 1</strong></span>
+          </label>
+          <img id="showdown-preview1" class="preview-img hidden" alt="Showdown image 1 preview" />
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="upload-area compact" id="showdown-drop2">
+          <input type="file" id="showdown-upload2" accept="image/*" class="file-input" />
+          <label for="showdown-upload2" class="upload-label">
+            <div class="upload-icon gold"><i class="fas fa-cloud-arrow-up"></i></div>
+            <span class="upload-text"><strong>Image 2</strong></span>
+          </label>
+          <img id="showdown-preview2" class="preview-img hidden" alt="Showdown image 2 preview" />
+        </div>
+      </div>
+
+      <div id="showdown-loader" class="loader hidden">
+        <div class="loader-ring gold"></div>
+        <p class="loader-label" id="showdown-loader-text">Comparing 0%</p>
+      </div>
+
+      <div id="showdown-results" class="results hidden">
+        <h3><i class="fas fa-scale-balanced"></i> Showdown Results</h3>
+        <div class="showdown-scores">
+          <div class="sd-score-card">
+            <span class="sd-label">Image 1</span>
+            <span class="sd-score" id="sd-score1">0</span>
+          </div>
+          <div class="sd-vs">vs</div>
+          <div class="sd-score-card">
+            <span class="sd-label">Image 2</span>
+            <span class="sd-score" id="sd-score2">0</span>
+          </div>
+        </div>
+        <div id="showdown-winner" class="winner-badge hidden">
+          <i class="fas fa-crown"></i>
+          <span id="winner-text">—</span>
+        </div>
+        <p class="disclaimer">* Scores are simulated — this is for entertainment only!</p>
+      </div>
+    </section>
+
+    <!-- 5. HOW TO USE -->
+    <section id="how-to-use" class="beauty-section hidden">
+      <div class="section-header">
+        <div class="section-icon teal"><i class="fas fa-circle-question"></i></div>
+        <div>
+          <h2>How to Use</h2>
+          <p>AI Beauty Test is simple and fun — here's how each feature works.</p>
+        </div>
+      </div>
+      <div class="how-to-list">
+        <div class="how-step"><span class="step-num">1</span><div><strong>Pick a Feature</strong> — Choose from Scan & Score, Look-Alike, Face Parts, or Showdown using the tabs above.</div></div>
+        <div class="how-step"><span class="step-num">2</span><div><strong>Upload a Photo</strong> — Click or drag-and-drop a clear face photo. For Showdown, upload two photos.</div></div>
+        <div class="how-step"><span class="step-num">3</span><div><strong>Wait for Analysis</strong> — A fun loading animation plays while the tool "analyzes" your photo.</div></div>
+        <div class="how-step"><span class="step-num">4</span><div><strong>See Your Results</strong> — View animated scores, celebrity matches, personality insights, or showdown outcomes.</div></div>
+        <div class="how-step"><span class="step-num">5</span><div><strong>Try Again!</strong> — Upload different photos, try different features, and share the fun with friends.</div></div>
+      </div>
+      <div class="info-notice">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Note:</strong> This tool is for entertainment only. The "AI" analysis is simulated — no actual image processing occurs. Your photos are never uploaded or stored anywhere.</p>
+      </div>
+    </section>
+
+  </div>
 </ToolLayout>
 
-<style is:global set:html={css}></style>
-<script is:inline set:html={js}></script>
+<style>
+  /* ===== BASE STYLES ===== */
+  #tool-ai-beauty-test {
+    --bt-primary: #6366f1;
+    --bt-primary-light: #818cf8;
+    --bt-purple: #a855f7;
+    --bt-blue: #3b82f6;
+    --bt-gold: #f59e0b;
+    --bt-teal: #14b8a6;
+    --bt-surface: #ffffff;
+    --bt-surface-dim: #f8fafc;
+    --bt-text: #1e293b;
+    --bt-text-muted: #64748b;
+    --bt-border: #e2e8f0;
+    --bt-bg: linear-gradient(135deg, #eef2ff 0%, #faf5ff 50%, #fdf2f8 100%);
+    --bt-card-bg: rgba(255,255,255,0.8);
+    --bt-card-border: rgba(255,255,255,0.5);
+    --bt-glass: backdrop-filter: blur(12px);
+    background: var(--bt-bg) !important;
+    font-family: 'Roboto', system-ui, sans-serif;
+    padding: clamp(12px, 3vw, 32px);
+    max-width: 900px;
+  }
+
+  :global([data-theme="dark"]) #tool-ai-beauty-test {
+    --bt-primary: #a5b4fc;
+    --bt-primary-light: #c7d2fe;
+    --bt-purple: #c084fc;
+    --bt-blue: #60a5fa;
+    --bt-gold: #fbbf24;
+    --bt-teal: #2dd4bf;
+    --bt-surface: var(--md-sys-color-surface-container-high);
+    --bt-surface-dim: var(--md-sys-color-surface-container);
+    --bt-text: var(--md-sys-color-on-surface);
+    --bt-text-muted: var(--md-sys-color-on-surface-variant);
+    --bt-border: var(--md-sys-color-outline-variant);
+    --bt-bg: linear-gradient(135deg, #1e1b4b 0%, #1a0a2e 50%, #2d1036 100%);
+    --bt-card-bg: rgba(30,27,75,0.6);
+    --bt-card-border: rgba(99,102,241,0.2);
+    background: var(--bt-bg) !important;
+  }
+
+  .hidden { display: none !important; }
+
+  /* ===== TAB NAVIGATION ===== */
+  .beauty-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding: 8px;
+    background: var(--bt-card-bg);
+    border: 1px solid var(--bt-card-border);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .beauty-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--bt-text-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  .beauty-tab:hover { background: rgba(99,102,241,0.1); color: var(--bt-primary); }
+  .beauty-tab.active {
+    background: var(--bt-primary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.35);
+  }
+  :global([data-theme="dark"]) .beauty-tab.active {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    box-shadow: 0 2px 8px rgba(99,102,241,0.2);
+  }
+  .beauty-tab i { font-size: 0.875rem; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .section-icon {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+  }
+  .section-icon.purple { background: linear-gradient(135deg, #a855f7, #c084fc); box-shadow: 0 4px 12px rgba(168,85,247,0.3); }
+  .section-icon.blue { background: linear-gradient(135deg, #3b82f6, #60a5fa); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+  .section-icon.gold { background: linear-gradient(135deg, #f59e0b, #fbbf24); box-shadow: 0 4px 12px rgba(245,158,11,0.3); color: #78350f; }
+  .section-icon.teal { background: linear-gradient(135deg, #14b8a6, #2dd4bf); box-shadow: 0 4px 12px rgba(20,184,166,0.3); }
+
+  .section-header h2 { margin: 0 0 4px; font-size: 1.5rem; font-weight: 700; color: var(--bt-text); }
+  .section-header p { margin: 0; font-size: 0.9rem; color: var(--bt-text-muted); line-height: 1.5; }
+
+  /* ===== UPLOAD AREA ===== */
+  .upload-area {
+    position: relative;
+    border: 2px dashed var(--bt-border);
+    border-radius: 16px;
+    padding: 32px 20px;
+    text-align: center;
+    background: var(--bt-card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 20px;
+  }
+  .upload-area:hover, .upload-area.dragover { border-color: var(--bt-primary); background: rgba(99,102,241,0.05); }
+  .upload-area.compact { padding: 20px 12px; }
+
+  .file-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  .upload-area { cursor: pointer; }
+  .upload-label { display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; }
+  .upload-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    color: var(--bt-primary);
+    margin-bottom: 4px;
+  }
+  .upload-icon.purple { background: linear-gradient(135deg, #faf5ff, #f3e8ff); color: var(--bt-purple); }
+  .upload-icon.blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); color: var(--bt-blue); }
+  .upload-icon.gold { background: linear-gradient(135deg, #fffbeb, #fef3c7); color: var(--bt-gold); }
+
+  :global([data-theme="dark"]) .upload-icon { background: rgba(99,102,241,0.15); }
+  :global([data-theme="dark"]) .upload-icon.purple { background: rgba(168,85,247,0.15); }
+  :global([data-theme="dark"]) .upload-icon.blue { background: rgba(59,130,246,0.15); }
+  :global([data-theme="dark"]) .upload-icon.gold { background: rgba(245,158,11,0.15); }
+
+  .upload-text { font-size: 0.9rem; color: var(--bt-text-muted); }
+  .upload-text strong { color: var(--bt-primary); }
+  .upload-hint { font-size: 0.75rem; color: var(--bt-text-muted); opacity: 0.7; }
+
+  .preview-img {
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 12px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .upload-area:has(.preview-img:not(.hidden)) .upload-label { display: none; }
+  .upload-area:has(.preview-img:not(.hidden)) { border-style: solid; border-color: var(--bt-primary); padding: 12px; }
+
+  /* ===== LOADER ===== */
+  .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 0;
+  }
+  .loader-ring {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 4px solid var(--bt-border);
+    border-top-color: var(--bt-primary);
+    animation: spin 0.8s linear infinite;
+  }
+  .loader-ring.purple { border-top-color: var(--bt-purple); }
+  .loader-ring.blue { border-top-color: var(--bt-blue); }
+  .loader-ring.gold { border-top-color: var(--bt-gold); }
+  .loader-label { font-size: 0.9rem; font-weight: 600; color: var(--bt-primary); margin: 0; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== RESULTS COMMON ===== */
+  .results {
+    background: var(--bt-card-bg);
+    border: 1px solid var(--bt-card-border);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeUp 0.4s ease;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .results h3 {
+    margin: 0 0 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--bt-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .results h3 i { color: var(--bt-primary); }
+  .disclaimer { margin: 16px 0 0; font-size: 0.75rem; color: var(--bt-text-muted); font-style: italic; opacity: 0.8; }
+
+  /* ===== SCANNER RESULTS ===== */
+  .score-hero {
+    position: relative;
+    width: 160px; height: 160px;
+    margin: 0 auto 24px;
+  }
+  .score-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--bt-border); stroke-width: 8; }
+  .ring-fill {
+    fill: none;
+    stroke: url(#scoreGradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .score-number {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: var(--bt-primary);
+    line-height: 1;
+  }
+  .score-label {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, 60%);
+    font-size: 0.85rem;
+    color: var(--bt-text-muted);
+    font-weight: 500;
+  }
+
+  .score-details { display: flex; flex-direction: column; gap: 12px; }
+  .detail-item {
+    display: grid;
+    grid-template-columns: 24px 64px 1fr 36px;
+    align-items: center;
+    gap: 8px;
+  }
+  .detail-item i { color: var(--bt-primary); font-size: 0.9rem; text-align: center; }
+  .detail-label { font-size: 0.85rem; color: var(--bt-text-muted); font-weight: 500; }
+  .detail-bar { height: 8px; border-radius: 4px; background: var(--bt-border); overflow: hidden; }
+  .detail-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--bt-primary), var(--bt-primary-light));
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .detail-val { font-size: 0.85rem; font-weight: 700; color: var(--bt-text); text-align: right; }
+
+  /* ===== CELEB LOOK-ALIKE ===== */
+  .celeb-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--bt-surface-dim);
+    border-radius: 14px;
+    border: 1px solid var(--bt-border);
+  }
+  .celeb-avatar {
+    flex-shrink: 0;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #c084fc, #818cf8);
+    box-shadow: 0 4px 16px rgba(168,85,247,0.3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  .celeb-info { flex: 1; min-width: 0; }
+  .celeb-name { margin: 0 0 2px; font-size: 1.25rem; font-weight: 700; color: var(--bt-text); }
+  .celeb-trait { margin: 0 0 12px; font-size: 0.85rem; color: var(--bt-text-muted); font-style: italic; }
+  .confidence-bar-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .confidence-label { font-size: 0.75rem; color: var(--bt-text-muted); font-weight: 500; white-space: nowrap; }
+  .confidence-bar { flex: 1; min-width: 60px; height: 6px; border-radius: 3px; background: var(--bt-border); overflow: hidden; }
+  .confidence-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--bt-purple), #ec4899);
+    width: 0%;
+    transition: width 1s ease;
+  }
+  .confidence-val { font-size: 0.85rem; font-weight: 700; color: var(--bt-purple); white-space: nowrap; }
+
+  /* ===== FACE PARTS INSIGHTS ===== */
+  .insight-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 600px) { .insight-cards { grid-template-columns: repeat(3, 1fr); } }
+
+  .insight-card {
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid var(--bt-border);
+    background: var(--bt-surface-dim);
+    text-align: center;
+  }
+  .insight-card.eyes-card { border-left: 3px solid var(--bt-blue); }
+  .insight-card.lips-card { border-left: 3px solid #ec4899; }
+  .insight-card.nose-card { border-left: 3px solid var(--bt-purple); }
+
+  .insight-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 1rem;
+    background: rgba(99,102,241,0.1);
+    color: var(--bt-primary);
+  }
+  .lips-card .insight-icon { background: rgba(236,72,153,0.1); color: #ec4899; }
+  .nose-card .insight-icon { background: rgba(168,85,247,0.1); color: var(--bt-purple); }
+
+  .insight-card h4 { margin: 0 0 8px; font-size: 0.9rem; font-weight: 600; color: var(--bt-text); }
+  .insight-card p { margin: 0; font-size: 0.8rem; color: var(--bt-text-muted); line-height: 1.5; }
+
+  /* ===== SHOWDOWN ===== */
+  .showdown-uploads {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .showdown-uploads .upload-area { flex: 1; margin-bottom: 0; }
+  .vs-badge {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 800;
+    background: var(--bt-gold);
+    color: #78350f;
+    box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+  }
+  @media (max-width: 520px) {
+    .showdown-uploads { flex-direction: column; }
+    .vs-badge { width: 32px; height: 32px; font-size: 0.7rem; }
+  }
+
+  .showdown-scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .sd-score-card {
+    text-align: center;
+    padding: 16px 24px;
+    background: var(--bt-surface-dim);
+    border: 1px solid var(--bt-border);
+    border-radius: 14px;
+    min-width: 100px;
+  }
+  .sd-label { display: block; font-size: 0.8rem; color: var(--bt-text-muted); font-weight: 500; margin-bottom: 4px; }
+  .sd-score { display: block; font-size: 2rem; font-weight: 800; color: var(--bt-primary); }
+  .sd-vs { font-size: 1rem; font-weight: 700; color: var(--bt-text-muted); }
+
+  .winner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    animation: bounceIn 0.5s ease;
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
+  }
+  .winner-badge { display: flex; justify-content: center; }
+  .winner-badge.win1, .winner-badge.win2 {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    border: 1px solid #fbbf24;
+  }
+  .winner-badge.tie {
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    color: #3730a3;
+    border: 1px solid #a5b4fc;
+  }
+  :global([data-theme="dark"]) .winner-badge.win1,
+  :global([data-theme="dark"]) .winner-badge.win2 { background: rgba(245,158,11,0.2); color: var(--bt-gold); border-color: rgba(245,158,11,0.3); }
+  :global([data-theme="dark"]) .winner-badge.tie { background: rgba(99,102,241,0.2); color: var(--bt-primary); border-color: rgba(99,102,241,0.3); }
+
+  @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 100% { transform: scale(1); opacity: 1; } }
+
+  /* ===== HOW TO USE ===== */
+  .how-to-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .how-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--bt-surface-dim);
+    border: 1px solid var(--bt-border);
+    border-radius: 12px;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700;
+    background: var(--bt-primary);
+    color: #fff;
+  }
+  :global([data-theme="dark"]) .step-num { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+  .how-step div { font-size: 0.9rem; color: var(--bt-text-muted); line-height: 1.5; }
+  .how-step strong { color: var(--bt-text); }
+
+  .info-notice {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: rgba(99,102,241,0.06);
+    border: 1px solid rgba(99,102,241,0.15);
+    border-radius: 12px;
+  }
+  .info-notice i { color: var(--bt-primary); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+  .info-notice p { margin: 0; font-size: 0.8rem; color: var(--bt-text-muted); line-height: 1.5; }
+  .info-notice strong { color: var(--bt-text); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .section-header { flex-direction: column; align-items: center; text-align: center; }
+    .beauty-tab span { display: none; }
+    .beauty-tab { padding: 10px 12px; }
+    .beauty-tab i { font-size: 1rem; }
+    .celeb-card { flex-direction: column; text-align: center; }
+    .detail-item { grid-template-columns: 20px 48px 1fr 32px; gap: 4px; }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  function $(id) { return document.getElementById(id); }
+  function $$(sel, ctx) { return (ctx || document).querySelectorAll(sel); }
+  function show(el) { if (el) el.classList.remove('hidden'); }
+  function hide(el) { if (el) el.classList.add('hidden'); }
+
+  function imageHash(dataUrl) {
+    var h = 0;
+    var sample = dataUrl.substring(dataUrl.length - 2000);
+    for (var i = 0; i < sample.length; i++) {
+      h = ((h << 5) - h) + sample.charCodeAt(i);
+      h |= 0;
+    }
+    return Math.abs(h);
+  }
+
+  // ===== TAB NAVIGATION =====
+  $$('.beauty-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var target = this.getAttribute('data-target');
+      $$('.beauty-tab').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      $$('.beauty-section').forEach(function(s) { s.classList.add('hidden'); });
+      var el = $(target);
+      if (el) { show(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ===== FILE HANDLING =====
+  function handleFile(inputId, previewId, onFile) {
+    var input = $(inputId);
+    if (!input) return;
+
+    function processFile(file) {
+      var preview = $(previewId);
+      if (file && file.type.startsWith('image/')) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var dataUrl = e.target.result;
+          if (preview) { preview.src = dataUrl; show(preview); }
+          onFile(dataUrl);
+        };
+        reader.readAsDataURL(file);
+      } else if (file) {
+        alert('Please upload a valid image file (JPG, PNG, GIF).');
+      }
+    }
+
+    input.addEventListener('change', function() {
+      if (this.files && this.files[0]) processFile(this.files[0]);
+    });
+
+    var area = input.closest('.upload-area');
+    if (area) {
+      area.addEventListener('click', function() { input.click(); });
+      area.addEventListener('dragenter', function(e) { e.preventDefault(); e.stopPropagation(); area.classList.add('dragover'); });
+      area.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); area.classList.add('dragover'); });
+      area.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); area.classList.remove('dragover'); });
+      area.addEventListener('drop', function(e) {
+        e.preventDefault(); e.stopPropagation();
+        area.classList.remove('dragover');
+        var files = e.dataTransfer && e.dataTransfer.files;
+        if (files && files.length) processFile(files[0]);
+      });
+    }
+  }
+
+  // ===== LOADER =====
+  function runLoader(loaderId, textId, prefix, duration, onDone) {
+    var loader = $(loaderId);
+    var text = $(textId);
+    show(loader);
+    if (text) text.textContent = prefix + ' 0%';
+    var start = Date.now();
+    var iv = setInterval(function() {
+      var pct = Math.min(100, Math.floor(((Date.now() - start) / duration) * 100));
+      if (text) text.textContent = prefix + ' ' + pct + '%';
+      if (pct >= 100) clearInterval(iv);
+    }, 80);
+    setTimeout(function() {
+      clearInterval(iv);
+      if (text) text.textContent = prefix + ' 100%';
+      hide(loader);
+      onDone();
+    }, duration);
+  }
+
+  function animateNumber(el, from, to, duration) {
+    if (!el) return;
+    var start = Date.now();
+    var iv = setInterval(function() {
+      var pct = Math.min(1, (Date.now() - start) / duration);
+      var ease = 1 - Math.pow(1 - pct, 3);
+      el.textContent = Math.round(from + (to - from) * ease);
+      if (pct >= 1) clearInterval(iv);
+    }, 30);
+  }
+
+  function animateBar(barId, valId, value) {
+    var bar = $(barId);
+    if (bar) { bar.style.width = '0%'; setTimeout(function() { bar.style.width = value + '%'; }, 100); }
+    animateNumber($(valId), 0, value, 1000);
+  }
+
+  // ===== 1. SCAN & SCORE =====
+  handleFile('scanner-upload', 'scanner-preview', function(dataUrl) {
+    hide($('scanner-results'));
+    var hash = imageHash(dataUrl);
+    runLoader('scanner-loader', 'scanner-loader-text', 'Scanning', 2200, function() {
+      var overall = (hash % 31) + 70;
+      var eyes = ((hash >> 3) % 26) + 72;
+      var lips = ((hash >> 6) % 28) + 68;
+      var nose = ((hash >> 9) % 26) + 70;
+      var sym  = ((hash >> 12) % 21) + 75;
+
+      animateNumber($('scanner-score'), 0, overall, 1000);
+
+      var ring = $('scanner-ring');
+      if (ring) {
+        var circ = 2 * Math.PI * 52;
+        ring.style.strokeDasharray = circ;
+        ring.style.strokeDashoffset = circ;
+        setTimeout(function() { ring.style.strokeDashoffset = circ - (circ * overall / 100); }, 50);
+      }
+
+      animateBar('scanner-eyes-bar', 'scanner-eyes', eyes);
+      animateBar('scanner-lips-bar', 'scanner-lips', lips);
+      animateBar('scanner-nose-bar', 'scanner-nose', nose);
+      animateBar('scanner-sym-bar', 'scanner-sym', sym);
+
+      show($('scanner-results'));
+    });
+  });
+
+  // ===== 2. CELEBRITY LOOK-ALIKE =====
+  var celebs = [
+    { name: 'Aurora Starling', emoji: '✨', trait: 'Radiant charisma and magnetic presence' },
+    { name: 'Maximilian Blaze', emoji: '🔥', trait: 'Bold confidence and natural leadership' },
+    { name: 'Luna Evergreen', emoji: '🌙', trait: 'Mysterious elegance and quiet strength' },
+    { name: 'Phoenix Rivera', emoji: '🌟', trait: 'Vibrant energy and unstoppable ambition' },
+    { name: 'Serena Frost', emoji: '❄️', trait: 'Cool composure and sophisticated grace' },
+    { name: 'Orion Knight', emoji: '⚡', trait: 'Sharp intellect and fearless determination' },
+    { name: 'Ivy Luxe', emoji: '💎', trait: 'Timeless beauty and refined taste' },
+    { name: 'Atlas Storm', emoji: '🌊', trait: 'Powerful presence and adventurous spirit' },
+    { name: 'Celeste Moon', emoji: '🦋', trait: 'Gentle warmth and creative vision' },
+    { name: 'Rex Golden', emoji: '👑', trait: 'Natural born leader with a heart of gold' },
+  ];
+
+  handleFile('lookalike-upload', 'lookalike-preview', function(dataUrl) {
+    hide($('lookalike-results'));
+    var hash = imageHash(dataUrl);
+    runLoader('lookalike-loader', 'lookalike-loader-text', 'Finding Match', 2800, function() {
+      var celeb = celebs[hash % celebs.length];
+      var conf = ((hash >> 4) % 26) + 72;
+
+      $('celeb-avatar').textContent = celeb.emoji;
+      $('celeb-name').textContent = celeb.name;
+      $('celeb-trait').textContent = '“' + celeb.trait + '”';
+
+      var confBar = $('celeb-conf-bar');
+      if (confBar) { confBar.style.width = '0%'; setTimeout(function() { confBar.style.width = conf + '%'; }, 100); }
+      animateNumber($('celeb-confidence'), 0, conf, 800);
+      setTimeout(function() { $('celeb-confidence').textContent = conf + '%'; }, 850);
+
+      show($('lookalike-results'));
+    });
+  });
+
+  // ===== 3. FACE PARTS ANALYSIS =====
+  var insights = {
+    eyes: [
+      "Your eyes suggest a keen observer — someone who notices the small details others miss. A creative soul with a vivid inner world.",
+      "Deep, expressive eyes hint at emotional depth and strong intuition. You likely connect easily with others on a meaningful level.",
+      "Bright and clear eyes reflect abundant energy and curiosity. You’re the type who lights up every room you enter.",
+      "Your eye shape suggests balance and artistic sensibility — perhaps a love for aesthetics and visual harmony.",
+      "Wide-set eyes indicate an open, broad perspective and a natural tolerance for new ideas and diverse viewpoints."
+    ],
+    lips: [
+      "Full lips often signal generosity and warmth — you’re likely someone others turn to for comfort and support.",
+      "A defined cupid’s bow hints at strong communication skills and natural eloquence. You know how to make your words count.",
+      "Balanced, symmetrical lips reflect emotional stability and fairness. You value harmony in relationships.",
+      "A naturally upturned smile conveys optimism and approachability. People feel instantly at ease around you.",
+      "Your lip shape suggests a passionate nature — someone who pursues their interests with dedication and heart."
+    ],
+    nose: [
+      "A straight nose bridge is often linked to logic and organization — you likely approach challenges methodically.",
+      "A prominent nose suggests leadership qualities and ambition. You’re not afraid to take charge and make decisions.",
+      "A refined, smaller nose hints at sensitivity and attention to detail — you appreciate the finer things in life.",
+      "A rounded nose tip is associated with friendliness and sociability. You’re naturally approachable and warm.",
+      "A slightly upturned nose suggests optimism and playfulness — you keep things light and bring joy to those around you."
+    ]
+  };
+
+  handleFile('analysis-upload', 'analysis-preview', function(dataUrl) {
+    hide($('analysis-results'));
+    var hash = imageHash(dataUrl);
+    runLoader('analysis-loader', 'analysis-loader-text', 'Analyzing', 2000, function() {
+      $('analysis-eyes').textContent = insights.eyes[(hash + 1) % insights.eyes.length];
+      $('analysis-lips').textContent = insights.lips[(hash >> 5) % insights.lips.length];
+      $('analysis-nose').textContent = insights.nose[(hash >> 10) % insights.nose.length];
+      show($('analysis-results'));
+    });
+  });
+
+  // ===== 4. SHOWDOWN =====
+  var sdData = { d1: null, d2: null };
+
+  function checkShowdown() {
+    if (!sdData.d1 || !sdData.d2) return;
+    hide($('showdown-results'));
+    var h1 = imageHash(sdData.d1);
+    var h2 = imageHash(sdData.d2);
+    runLoader('showdown-loader', 'showdown-loader-text', 'Comparing', 3000, function() {
+      var s1 = ((h1 + 50) % 31) + 68;
+      var s2 = ((h2 + 60) % 31) + 68;
+
+      animateNumber($('sd-score1'), 0, s1, 1000);
+      animateNumber($('sd-score2'), 0, s2, 1000);
+
+      var badge = $('showdown-winner');
+      var wText = $('winner-text');
+
+      setTimeout(function() {
+        badge.className = 'winner-badge';
+        if (s1 > s2) { badge.classList.add('win1'); wText.textContent = 'Image 1 Wins! 🏆'; }
+        else if (s2 > s1) { badge.classList.add('win2'); wText.textContent = 'Image 2 Wins! 🏆'; }
+        else { badge.classList.add('tie'); wText.textContent = "It’s a Tie! 🤝"; }
+        show(badge);
+      }, 600);
+
+      show($('showdown-results'));
+    });
+  }
+
+  handleFile('showdown-upload1', 'showdown-preview1', function(d) { sdData.d1 = d; checkShowdown(); });
+  handleFile('showdown-upload2', 'showdown-preview2', function(d) { sdData.d2 = d; checkShowdown(); });
+
+})();
+</script>
