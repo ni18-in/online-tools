@@ -19,7 +19,7 @@ const seo: SeoProps = {
   ],
   og: { type: 'website', url: `${SITE_URL}/fr/`, title: 'NI18 Outils en Ligne', description: 'Outils web gratuits dans votre navigateur.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
   twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/`, title: 'NI18 Outils en Ligne', description: 'Outils web gratuits dans votre navigateur.', image: DEFAULT_OG_IMAGE },
-  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'NI18 Outils en Ligne', url: `${SITE_URL}/fr/`, inLanguage: 'fr', potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/fr/#search={search_term_string}` }, 'query-input': 'required name=search_term_string' } }],
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'NI18 Outils en Ligne', url: `${SITE_URL}/fr/`, inLanguage: 'fr' }],
 };
 ---
 <BaseLayout seo={seo} lang="fr" current="home" altLinks={{ en: `${SITE_URL}/`, es: `${SITE_URL}/es/` }}>
