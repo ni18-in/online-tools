@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-basic-authentication-header-generator/body.html?raw';
+import css from '../../../../components/legacy/es/tool-basic-authentication-header-generator/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-basic-authentication-header-generator/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Generador de Encabezados de Autenticación Básica',
+  description: 'Herramienta gratuita y segura para generar encabezados de autenticación básica HTTP. Todo en el navegador, sin enviar datos al servidor.',
+  keywords: 'autenticación básica, encabezado authorization, base64, herramienta desarrollador, http',
+  canonical: `${SITE_URL}/es/tools/basic-authentication-header-generator/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/basic-authentication-header-generator/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/basic-authentication-header-generator/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/basic-authentication-header-generator/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/basic-authentication-header-generator/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/basic-authentication-header-generator/`, title: 'Generador de Encabezados de Autenticación Básica', description: 'Herramienta gratuita y segura para generar encabezados de autenticación básica HTTP.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/basic-authentication-header-generator/`, title: 'Generador de Encabezados de Autenticación Básica', description: 'Herramienta gratuita y segura para generar encabezados de autenticación básica HTTP.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Generador de Encabezados de Autenticación Básica', applicationCategory: 'DeveloperApplication', operatingSystem: 'Any', url: `${SITE_URL}/es/tools/basic-authentication-header-generator/`, description: 'Herramienta gratuita y segura para generar encabezados de autenticación básica HTTP. Todo en el navegador.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/basic-authentication-header-generator/`, fr: `${SITE_URL}/fr/tools/basic-authentication-header-generator/` }} adMinHeight={120}>
+  <div class="tool-island legacy-tw bg-gray-900 text-gray-200 p-4 sm:p-6 lg:p-8" id="tool-basic-authentication-header-generator" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

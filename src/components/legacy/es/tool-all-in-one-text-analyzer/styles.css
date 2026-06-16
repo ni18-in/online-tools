@@ -1,0 +1,134 @@
+#tool-all-in-one-text-analyzer {
+            font-family: inherit;
+            background-color: #f8fafc; /* bg-slate-50 */
+        }
+
+        /* Simple scrollbar styling for textarea */
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-track {
+            background: #e2e8f0; /* bg-slate-200 */
+            border-radius: 10px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* bg-slate-400 */
+            border-radius: 10px;
+        }
+        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* bg-slate-500 */
+        }
+
+        /* Style for keyword list */
+         #tool-all-in-one-text-analyzer #keywordList li {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 4px; /* Increased padding */
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+         }
+         #tool-all-in-one-text-analyzer #keywordList li:last-child {
+            border-bottom: none;
+         }
+         #tool-all-in-one-text-analyzer #keywordList li span:first-child {
+             color: #374151; /* text-gray-700 */
+             font-weight: 500; /* font-medium */
+         }
+         #tool-all-in-one-text-analyzer #keywordList li span:last-child {
+             color: #4f46e5; /* text-indigo-600 */
+             font-weight: 600; /* font-semibold */
+             background-color: #e0e7ff; /* bg-indigo-100 */
+             padding: 0px 6px;
+             border-radius: 4px;
+             font-size: 0.8rem;
+         }
+
+        /* Ensure sticky works - parent needs alignment */
+        #tool-all-in-one-text-analyzer main.md\:flex {
+            align-items: flex-start; /* Important for sticky */
+        }
+
+        /* Modal styles */
+        #tool-all-in-one-text-analyzer .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #tool-all-in-one-text-analyzer .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Styling for How to Use list */
+        #tool-all-in-one-text-analyzer #howToUseList li {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the icon */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+         #tool-all-in-one-text-analyzer #howToUseList li svg {
+            position: absolute;
+            left: 0;
+            top: 4px; /* Adjust vertical alignment */
+            width: 1rem; /* w-4 */
+            height: 1rem; /* h-4 */
+            color: #16a34a; /* text-green-600 */
+         }
+
+/* --- Dark Mode Support --- */
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .bg-white {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .text-gray-700,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .text-gray-800,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer label {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer textarea {
+    background-color: var(--md-sys-color-surface-container-lowest) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .result-card {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #wordCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #charCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #sentenceCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #paragraphCount,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #readingTime,
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #readingEase {
+    color: var(--md-sys-color-primary) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .result-card h3 {
+    color: var(--md-sys-color-secondary) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .bg-gray-50 {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li {
+    border-color: var(--md-sys-color-outline-variant) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li span:first-child {
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer #keywordList li span:last-child {
+    background-color: var(--md-sys-color-primary-container) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+:global([data-theme="dark"]) #tool-all-in-one-text-analyzer .modal-content {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+}

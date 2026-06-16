@@ -1,0 +1,91 @@
+<header>
+        <h1>Convertidor de Markdown a Word</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="toolbar">
+            <button class="btn btn-secondary" onclick="document.getElementById('file-upload').click()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Subir archivo .md
+            </button>
+            <input type="file" id="file-upload" accept=".md,.txt,.markdown" onchange="handleFileUpload(this)">
+
+            <button class="btn btn-secondary" onclick="copyRichText()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copiar texto enriquecido
+            </button>
+
+            <button class="btn" style="margin-left: auto;" onclick="downloadDocx()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Descargar Word (.docx)
+            </button>
+        </div>
+
+        <div class="workspace">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Entrada Markdown / ChatGPT</span>
+                    <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">Escribe o pega aqui</span>
+                </div>
+                <textarea id="editor" placeholder="# Pega tu contenido Markdown o de ChatGPT aqui...
+
+- Se convertira automaticamente.
+- Soporta **negrita**, *cursiva* y mas.
+
+1. Listas
+2. Tablas
+3. Bloques de codigo" spellcheck="false"></textarea>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Vista previa en vivo</span>
+                </div>
+                <!-- The Preview Div is where we render HTML for visual feedback -->
+                <div id="preview"></div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>Como convertir Markdown o ChatGPT a Word</h2>
+            <ol class="step-list">
+                <li><strong>Pega el contenido:</strong> Copia tu texto de ChatGPT, GitHub o cualquier editor de texto y
+                    pegalo en el panel izquierdo. Tambien puedes subir un archivo <code>.md</code> directamente.</li>
+                <li><strong>Revisa la vista previa:</strong> Mientras escribes, el panel derecho se actualiza al instante
+                    para mostrarte como se vera tu documento.</li>
+                <li><strong>Descarga o copia:</strong> Haz clic en <strong>Descargar Word (.docx)</strong> para guardar un
+                    archivo de Microsoft Word con formato completo. O haz clic en <strong>Copiar texto enriquecido</strong>
+                    para pegar texto formateado en correos o Google Docs.</li>
+            </ol>
+        </section>
+
+        <section class="content-section">
+            <h2>Preguntas frecuentes</h2>
+            <div class="faq-item">
+                <h3>Como convertir ChatGPT a Word?</h3>
+                <p>Simplemente haz clic en el boton "Copiar" en tu respuesta de ChatGPT, luego pegala en el editor de
+                    esta pagina. Nuestra herramienta lee el formato Markdown y te permite descargar un archivo DOCX
+                    limpio.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Esta herramienta mantiene el formato?</h3>
+                <p>Si. Soportamos encabezados (H1, H2, H3), negrita, cursiva, viñetas, listas numeradas, citas,
+                    bloques de codigo y tablas.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Es gratuita y segura?</h3>
+                <p>Absolutamente. Es 100% gratuita y funciona completamente en tu navegador. Tus datos nunca salen de
+                    tu dispositivo y no se suben a ningun servidor.</p>
+            </div>
+        </section>
+
+    </div>

@@ -1,0 +1,154 @@
+<div class="container">
+        <header>
+            <h1 data-lang="pageTitle">Online Text Compare</h1>
+            <div class="header-controls">
+                <button id="compareButton" class="compare-main-btn" aria-label="Compare texts" title="Compare Texts">
+                    <i class="material-icons">compare_arrows</i> <span data-lang="compareButton">Compare</span>
+                </button>
+                <select id="languageSelector" aria-label="Select language">
+                    </select>
+                <button id="swapButton" aria-label="Swap texts" title="Swap Texts">
+                    <i class="material-icons">swap_horiz</i> <span data-lang="swapButton">Swap</span>
+                </button>
+                <button id="copyResultButton" aria-label="Copy result" title="Copy Result">
+                    <i class="material-icons">content_copy</i> <span data-lang="copyResultButton">Copy Result</span>
+                </button>
+                <button id="downloadButton" aria-label="Download diff" title="Download Diff">
+                    <i class="material-icons">download</i> <span data-lang="downloadButton">Download</span>
+                </button>
+                <button id="printButton" aria-label="Print diff" title="Print Diff">
+                    <i class="material-icons">print</i> <span data-lang="printButton">Print</span>
+                </button>
+                <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">
+                    <i class="material-icons">brightness_6</i>
+                </button>
+            </div>
+        </header>
+
+        <main class="comparison-area">
+            <div class="text-panel" id="panel1">
+                <label for="text1" data-lang="text1Label">Text 1</label>
+                <textarea id="text1" aria-label="Text input 1" placeholder="Paste or type text here..."></textarea>
+                <div class="panel-controls">
+                    <button class="copy-button" data-text-target="text1" aria-label="Copy text 1" title="Copy Text 1">
+                        <i class="material-icons">content_copy</i> <span data-lang="copyButton">Copy</span>
+                    </button>
+                    <button class="paste-button" data-text-target="text1" aria-label="Paste into text 1" title="Paste into Text 1">
+                        <i class="material-icons">content_paste</i> <span data-lang="pasteButton">Paste</span>
+                    </button>
+                    <button class="clear-button" data-text-target="text1" aria-label="Clear text 1" title="Clear Text 1">
+                        <i class="material-icons">clear</i> <span data-lang="clearButton">Clear</span>
+                    </button>
+                </div>
+                <div id="diffOutput1" class="diff-output" aria-live="polite" aria-atomic="true" data-lang-placeholder="diffOutputPlaceholder">Differences from Text 2 will appear here.</div>
+            </div>
+
+            <div class="text-panel" id="panel2">
+                <label for="text2" data-lang="text2Label">Text 2</label>
+                <textarea id="text2" aria-label="Text input 2" placeholder="Paste or type text here..."></textarea>
+                <div class="panel-controls">
+                    <button class="copy-button" data-text-target="text2" aria-label="Copy text 2" title="Copy Text 2">
+                        <i class="material-icons">content_copy</i> <span data-lang="copyButton">Copy</span>
+                    </button>
+                    <button class="paste-button" data-text-target="text2" aria-label="Paste into text 2" title="Paste into Text 2">
+                        <i class="material-icons">content_paste</i> <span data-lang="pasteButton">Paste</span>
+                    </button>
+                    <button class="clear-button" data-text-target="text2" aria-label="Clear text 2" title="Clear Text 2">
+                        <i class="material-icons">clear</i> <span data-lang="clearButton">Clear</span>
+                    </button>
+                </div>
+                <div id="diffOutput2" class="diff-output" aria-live="polite" aria-atomic="true" data-lang-placeholder="diffOutputPlaceholder">Differences from Text 1 will appear here.</div>
+            </div>
+        </main>
+    </div>
+
+    
+    
+
+    <!-- 
+    // sw.js
+    const CACHE_NAME = 'text-compare-v3'; // Increment version for updates
+    const urlsToCache = [
+        '/', 
+        'index.html', // Or your specific HTML file name if different
+        // CSS and JS are inlined, so not needed here unless they become separate files
+        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
+        'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js'
+    ];
+
+    self.addEventListener('install', event => {
+        event.waitUntil(
+            caches.open(CACHE_NAME)
+                .then(cache => {
+                    console.log('Opened cache');
+                    const requests = urlsToCache.map(url => {
+                        // For CDN resources, it's often good to fetch them fresh during install
+                        // as they might update, but be careful with opaque responses if not using CORS.
+                        // Google Fonts and Material Icons usually handle CORS well.
+                        if (url.startsWith('http')) {
+                            return new Request(url, { mode: 'cors', cache: 'no-cache' });
+                        }
+                        return new Request(url, { cache: 'no-cache' });
+                    });
+                    return cache.addAll(requests);
+                })
+                .catch(err => {
+                    console.error('Cache addAll failed:', err);
+                })
+        );
+    });
+
+    self.addEventListener('fetch', event => {
+        event.respondWith(
+            caches.match(event.request)
+                .then(response => {
+                    if (response) {
+                        return response; 
+                    }
+                    const fetchRequest = event.request.clone();
+
+                    return fetch(fetchRequest).then(
+                        response => {
+                            if (!response || response.status !== 200 ) { // Allow non-basic types for CDNs
+                                if (response && response.type === 'opaque') {
+                                     // Opaque responses can't be inspected but can be cached.
+                                     // Be cautious as you can't tell if it's an error.
+                                } else if (response) {
+                                    console.warn(`Fetch error for ${event.request.url}: Status ${response.status}`);
+                                }
+                                return response;
+                            }
+
+                            const responseToCache = response.clone();
+                            caches.open(CACHE_NAME)
+                                .then(cache => {
+                                    cache.put(event.request, responseToCache);
+                                });
+                            return response;
+                        }
+                    ).catch(err => {
+                        console.error('Service worker fetch failed for:', event.request.url, err);
+                        // Optionally return a fallback page or resource
+                        // return caches.match('/offline.html'); 
+                    });
+                }
+            )
+        );
+    });
+
+    self.addEventListener('activate', event => {
+        const cacheWhitelist = [CACHE_NAME];
+        event.waitUntil(
+            caches.keys().then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        if (cacheWhitelist.indexOf(cacheName) === -1) {
+                            return caches.delete(cacheName);
+                        }
+                    })
+                );
+            }).then(() => self.clients.claim()) // Ensure new SW takes control immediately
+        );
+    });
+    -->

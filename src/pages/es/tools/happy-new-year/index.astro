@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-happy-new-year/body.html?raw';
+import css from '../../../../components/legacy/es/tool-happy-new-year/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-happy-new-year/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Generador de Deseos de Ano Nuevo',
+  description: 'Crea y comparte deseos personalizados de Ano Nuevo online – gratis e instantaneo.',
+  keywords: 'ano nuevo, generador de deseos, felicitaciones, deseos personalizados',
+  canonical: `${SITE_URL}/es/tools/happy-new-year/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/happy-new-year/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/happy-new-year/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/happy-new-year/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/happy-new-year/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/happy-new-year/`, title: 'Generador de Deseos de Ano Nuevo', description: 'Crea y comparte deseos personalizados de Ano Nuevo online.', image: DEFAULT_OG_IMAGE, imageAlt: 'Imagen promocional del Generador de Deseos de Ano Nuevo.', locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/happy-new-year/`, title: 'Generador de Deseos de Ano Nuevo', description: 'Crea y comparte deseos personalizados de Ano Nuevo online.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Generador de Deseos de Ano Nuevo', applicationCategory: 'MultimediaApplication', operatingSystem: 'Web', url: `${SITE_URL}/es/tools/happy-new-year/`, description: 'Crea y comparte deseos personalizados de Ano Nuevo online – gratis e instantaneo.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/happy-new-year/`, fr: `${SITE_URL}/fr/tools/happy-new-year/` }} adMinHeight={120}>
+  <div class="tool-island" id="tool-happy-new-year" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

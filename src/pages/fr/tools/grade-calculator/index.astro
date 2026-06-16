@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-grade-calculator/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-grade-calculator/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-grade-calculator/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Calculateur de notes universel - Pondéré et facile',
+  description: 'Le calculateur de moyenne pondérée le plus rapide et le plus simple. Définissez des catégories, ajoutez des devoirs et obtenez votre note en temps réel.',
+  keywords: 'calculateur de notes, gpa scolaire, calculer moyenne ponderee',
+  canonical: 'https://online-tools.ni18.in/fr/tools/grade-calculator/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/grade-calculator/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/grade-calculator/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/grade-calculator/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/grade-calculator/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/grade-calculator/',
+    title: 'Calculateur de notes universel - Pondéré et facile',
+    description: 'Le calculateur de moyenne pondérée le plus rapide et le plus simple. Définissez des catégories, ajoutez des devoirs et obtenez votre note en temps réel.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/grade-calculator/',
+    title: 'Calculateur de notes universel - Pondéré et facile',
+    description: 'Le calculateur de moyenne pondérée le plus rapide et le plus simple. Définissez des catégories, ajoutez des devoirs et obtenez votre note en temps réel.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Calculateur de notes universel - Pondéré et facile',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/grade-calculator/',
+    description: 'Le calculateur de moyenne pondérée le plus rapide et le plus simple. Définissez des catégories, ajoutez des devoirs et obtenez votre note en temps réel.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/grade-calculator/', es: 'https://online-tools.ni18.in/es/tools/grade-calculator/' }} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-grade-calculator" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

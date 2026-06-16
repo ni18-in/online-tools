@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-ai-love-calculator/body.html?raw';
+import css from '../../../../components/legacy/es/tool-ai-love-calculator/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-ai-love-calculator/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Calculadora de Amor IA — ¡Descubre tu Puntuación!',
+  description: '¡Descubre tu compatibilidad amorosa con nuestra divertida Calculadora de Amor IA! Introduce nombres y edades para obtener tu puntuación y una predicción. Solo para entretenimiento.',
+  keywords: 'calculadora de amor, calculadora amor ia, test de compatibilidad, puntuación de amor, app divertida',
+  canonical: `${SITE_URL}/es/tools/ai-love-calculator/`,
+  robots: 'noindex, follow',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/ai-love-calculator/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/ai-love-calculator/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/ai-love-calculator/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/ai-love-calculator/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/ai-love-calculator/`, title: 'Calculadora de Amor IA', description: '¡Descubre tu puntuación de amor con nuestra IA divertida!', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/ai-love-calculator/`, title: 'Calculadora de Amor IA', description: '¡Descubre tu puntuación de amor con nuestra IA divertida!', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Calculadora de Amor IA', applicationCategory: 'EntertainmentApplication', operatingSystem: 'Any', url: `${SITE_URL}/es/tools/ai-love-calculator/`, description: 'Calculadora de amor divertida basada en IA. Solo para entretenimiento.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/ai-love-calculator/`, fr: `${SITE_URL}/fr/tools/ai-love-calculator/` }}>
+  <div class="tool-island legacy-tw bg-gradient-to-br from-rose-100 to-teal-100 flex items-center justify-center p-6 sm:p-10" id="tool-ai-love-calculator" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

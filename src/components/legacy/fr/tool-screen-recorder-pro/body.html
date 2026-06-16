@@ -1,0 +1,137 @@
+<a href="#mainContent" class="skip-link">Skip to main content</a>
+    <header>
+        <a href="https://online-tools.ni18.in/" class="site-title">
+            <h1>
+                <span class="material-icons" aria-hidden="true">screen_share</span>
+                Screen Recorder Pro
+            </h1>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+                <span class="material-icons">menu</span>
+            </button>
+            <ul id="navLinks">
+                <li><a href="#home" class="nav-link active" aria-current="page">Home</a></li>
+                <li><a href="#how-to-use" class="nav-link">How to Use</a></li>
+                <li><a href="#downloads" class="nav-link">Downloads</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+            <span class="material-icons">brightness_4</span> 
+        </button>
+    </header>
+
+    <main id="mainContent">
+        <section id="home" class="active" aria-labelledby="homeHeading">
+            <h2 id="homeHeading">Record Your Screen</h2>
+            <fieldset class="settings-group">
+                <legend>Recording Options</legend>
+                <label for="recordAudio">
+                    <input type="checkbox" id="recordAudio" checked>
+                    <span>Record Audio (Master Switch)</span>
+                </label>
+                 <label for="recordSystemAudio" class="mt-2"> <input type="checkbox" id="recordSystemAudio" checked>
+                    <span>Record System Audio (Tab/Window audio)</span>
+                </label>
+                 <label for="recordMicrophone" class="mt-2">
+                    <input type="checkbox" id="recordMicrophone" checked>
+                    <span>Record Microphone</span>
+                </label>
+            </fieldset>
+
+            <div class="button-group">
+                <button id="startRecordingBtn" class="btn">
+                    <span class="material-icons" aria-hidden="true">fiber_manual_record</span> Start Recording
+                </button>
+                <button id="pauseRecordingBtn" class="btn secondary" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">pause</span> Pause
+                </button>
+                <button id="resumeRecordingBtn" class="btn secondary" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">play_arrow</span> Resume
+                </button>
+                <button id="stopRecordingBtn" class="btn error" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">stop</span> Stop Recording
+                </button>
+            </div>
+
+            <div class="recording-status" style="display: none;" role="status">
+                <div class="recording-indicator" aria-hidden="true"></div>
+                <span>Recording...</span>
+                <span id="timer" aria-live="polite">00:00:00</span>
+            </div>
+            <video id="previewVideo" controls style="display:none; width: 100%; max-width: 600px; margin-top: 1.5rem; border-radius: var(--border-radius-medium); border: 1px solid var(--outline-variant-color);" title="Screen recording preview"></video>
+        </section>
+
+        <section id="how-to-use" aria-labelledby="howToUseHeading">
+            <h2 id="howToUseHeading">How to Use</h2>
+            <p>Follow these simple steps to record your screen:</p>
+            <ol>
+                <li><strong>Navigate to Home:</strong> Ensure you are on the "Home" tab.</li>
+                <li><strong>Configure Settings (Optional):</strong>
+                    <ul>
+                        <li>Check "Record Audio" if you want to include audio.</li>
+                        <li>If "Record Audio" is checked, you can further specify if you want to record "System Audio" (audio playing from the selected tab/window) and/or "Microphone".</li>
+                    </ul>
+                </li>
+                <li><strong>Start Recording:</strong> Click the "Start Recording" button.</li>
+                <li><strong>Choose Screen:</strong> Your browser will prompt you to select what you want to share: your entire screen, a specific application window, or a browser tab. Choose your preference and click "Share".</li>
+                <li><strong>Recording Controls:</strong>
+                    <ul>
+                        <li>Once recording starts, you'll see a timer and a visual indicator.</li>
+                        <li>Use "Pause" to temporarily halt the recording.</li>
+                        <li>Use "Resume" to continue a paused recording.</li>
+                        <li>Use "Stop Recording" to finish. You'll be asked for confirmation.</li>
+                    </ul>
+                </li>
+                <li><strong>Download:</strong> After stopping, your video will appear in the "Downloads" section. Click the "Download" button next to the filename to save the <code>.webm</code> or <code>.mp4</code> video file.</li>
+                <li><strong>Permissions:</strong> The first time you use the app, your browser will ask for permission to access your screen and microphone. Please grant these permissions for the app to function correctly.</li>
+            </ol>
+            <p class="message-box warning-box"><strong>Note:</strong> All recordings are processed and stored locally in your browser. No data is uploaded to any server.</p>
+        </section>
+
+        <section id="downloads" aria-labelledby="downloadsHeading">
+            <h2 id="downloadsHeading">Your Recordings</h2>
+            <p id="noDownloadsMsg">No recordings yet. Start a new recording on the Home page!</p>
+            <ul id="downloadsList" aria-live="polite">
+                </ul>
+        </section>
+
+        <section id="about" aria-labelledby="aboutHeading">
+            <h2 id="aboutHeading">About This App</h2>
+            <p>This Screen Recorder is a lightweight, client-side web application that allows you to easily record your screen, specific application windows, or browser tabs directly from your web browser.</p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Client-Side Recording:</strong> All processing happens in your browser. No data is sent to any server, ensuring your privacy.</li>
+                <li><strong>Multiple Recording Options:</strong> Choose to record your entire screen, a single window, or a browser tab.</li>
+                <li><strong>Audio Recording:</strong> Optionally include audio from your microphone and/or system audio (from the shared tab/window).</li>
+                <li><strong>Simple Controls:</strong> Easy-to-use start, pause, resume, and stop functionality.</li>
+                <li><strong>Instant Download:</strong> Recordings are available for download as <code>.webm</code> or <code>.mp4</code> files immediately after stopping.</li>
+                <li><strong>Material Design:</strong> A clean, modern, and responsive interface inspired by Google's Material Design 3.</li>
+                <li><strong>Dark Mode:</strong> Toggle between light and dark themes for comfortable viewing.</li>
+            </ul>
+            <h3>Use Cases:</h3>
+            <ul>
+                <li>Creating software tutorials or demonstrations.</li>
+                <li>Recording gameplay.</li>
+                <li>Capturing presentations or online meetings (ensure you have consent).</li>
+                <li>Bug reporting by visually showing an issue.</li>
+                <li>Saving online videos or streams (respect copyright and terms of service).</li>
+            </ul>
+            <p class="message-box info-box">This application utilizes the browser's built-in MediaStream Recording API, making it efficient and secure.</p>
+        </section>
+    </main>
+
+    <div id="customModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleEl" aria-describedby="modalMessageEl">
+        <div class="modal-content">
+            <h3 id="modalTitleEl">Confirmation</h3>
+            <p id="modalMessageEl">Are you sure you want to stop the recording?</p>
+            <div class="modal-actions">
+                <button id="modalCancelBtn" class="btn secondary">Cancel</button>
+                <button id="modalConfirmBtn" class="btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar" role="status" aria-live="polite">Snackbar message</div>

@@ -1,0 +1,92 @@
+<header>
+        <h1>Convertisseur Markdown vers Word</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="toolbar">
+            <button class="btn btn-secondary" onclick="document.getElementById('file-upload').click()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Importer un fichier .md
+            </button>
+            <input type="file" id="file-upload" accept=".md,.txt,.markdown" onchange="handleFileUpload(this)">
+
+            <button class="btn btn-secondary" onclick="copyRichText()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copier le texte enrichi
+            </button>
+
+            <button class="btn" style="margin-left: auto;" onclick="downloadDocx()">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Telecharger Word (.docx)
+            </button>
+        </div>
+
+        <div class="workspace">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Saisie Markdown / ChatGPT</span>
+                    <span style="font-size: 0.8rem; font-weight: normal; color: #64748b;">Tapez ou collez ici</span>
+                </div>
+                <textarea id="editor" placeholder="# Collez votre contenu Markdown ou ChatGPT ici...
+
+- La conversion est automatique.
+- Prend en charge le **gras**, l'*italique* et plus.
+
+1. Listes
+2. Tableaux
+3. Blocs de code" spellcheck="false"></textarea>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Apercu en direct</span>
+                </div>
+                <!-- The Preview Div is where we render HTML for visual feedback -->
+                <div id="preview"></div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>Comment convertir du Markdown ou ChatGPT en Word</h2>
+            <ol class="step-list">
+                <li><strong>Collez le contenu :</strong> Copiez votre texte depuis ChatGPT, GitHub ou tout editeur de
+                    texte et collez-le dans le panneau de gauche. Vous pouvez aussi importer un fichier <code>.md</code>
+                    directement.</li>
+                <li><strong>Verifiez l'apercu :</strong> Au fur et a mesure que vous tapez, le panneau de droite se met
+                    a jour instantanement pour vous montrer le rendu de votre document.</li>
+                <li><strong>Telechargez ou copiez :</strong> Cliquez sur <strong>Telecharger Word (.docx)</strong> pour
+                    enregistrer un fichier Microsoft Word entierement formate. Ou cliquez sur <strong>Copier le texte
+                    enrichi</strong> pour coller du texte formate dans vos e-mails ou Google Docs.</li>
+            </ol>
+        </section>
+
+        <section class="content-section">
+            <h2>Questions frequentes</h2>
+            <div class="faq-item">
+                <h3>Comment convertir ChatGPT en Word ?</h3>
+                <p>Cliquez simplement sur le bouton "Copier" de votre reponse ChatGPT, puis collez-la dans l'editeur
+                    de cette page. Notre outil lit le formatage Markdown et vous permet de telecharger un fichier DOCX
+                    propre.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Cet outil conserve-t-il le formatage ?</h3>
+                <p>Oui ! Nous prenons en charge les titres (H1, H2, H3), le gras, l'italique, les puces, les listes
+                    numerotees, les citations, les blocs de code et les tableaux.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Cet outil est-il gratuit et securise ?</h3>
+                <p>Absolument. Il est 100% gratuit et fonctionne entierement dans votre navigateur. Vos donnees ne
+                    quittent jamais votre appareil et ne sont envoyees a aucun serveur.</p>
+            </div>
+        </section>
+
+    </div>

@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-vtf-converter/body.html?raw';
+import css from '../../../../components/legacy/es/tool-vtf-converter/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-vtf-converter/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertidor de VTF - Herramienta Online de Imagen a VTF',
+  description: 'Convierte tus imágenes (PNG, JPG) a formato VTF (Valve Texture Format) de forma gratuita en tu navegador. Seguro, rápido y del lado del cliente.',
+  keywords: 'convertidor vtf, imagen a vtf, valve texture format, texturas source',
+  canonical: 'https://online-tools.ni18.in/es/tools/vtf-converter/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/vtf-converter/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/vtf-converter/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/vtf-converter/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/vtf-converter/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/vtf-converter/',
+    title: 'Convertidor de VTF - Herramienta Online de Imagen a VTF',
+    description: 'Convierte tus imágenes (PNG, JPG) a formato VTF (Valve Texture Format) de forma gratuita en tu navegador. Seguro, rápido y del lado del cliente.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/vtf-converter/',
+    title: 'Convertidor de VTF - Herramienta Online de Imagen a VTF',
+    description: 'Convierte tus imágenes (PNG, JPG) a formato VTF (Valve Texture Format) de forma gratuita en tu navegador. Seguro, rápido y del lado del cliente.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Convertidor de VTF - Herramienta Online de Imagen a VTF',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/vtf-converter/',
+    description: 'Convierte tus imágenes (PNG, JPG) a formato VTF (Valve Texture Format) de forma gratuita en tu navegador. Seguro, rápido y del lado del cliente.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/vtf-converter/', fr: 'https://online-tools.ni18.in/fr/tools/vtf-converter/' }} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-vtf-converter" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-guess-the-logo/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-guess-the-logo/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-guess-the-logo/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Devine le Logo - Jeu de Quiz de Marques',
+  description: 'Testez vos connaissances sur les marques avec Devine le Logo ! Un jeu de quiz amusant et addictif avec plusieurs modes de jeu.',
+  keywords: 'devine le logo, quiz de logos, jeu de marques, quiz de logotypes, jeu par navigateur',
+  canonical: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/guess-the-logo/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/guess-the-logo/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/guess-the-logo/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/',
+    title: 'Devine le Logo - Jeu de Quiz de Marques',
+    description: 'Testez vos connaissances sur les marques avec Devine le Logo ! Un jeu de quiz amusant et addictif avec plusieurs modes de jeu.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/',
+    title: 'Devine le Logo - Jeu de Quiz de Marques',
+    description: 'Testez vos connaissances sur les marques avec Devine le Logo ! Un jeu de quiz amusant et addictif avec plusieurs modes de jeu.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Devine le Logo - Jeu de Quiz de Marques',
+    applicationCategory: 'Game',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/',
+    description: 'Testez vos connaissances sur les marques avec Devine le Logo ! Un jeu de quiz amusant et addictif avec plusieurs modes de jeu.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/guess-the-logo/', es: 'https://online-tools.ni18.in/es/tools/guess-the-logo/' }} adMinHeight={120}>
+  <div class="tool-island" id="tool-guess-the-logo" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

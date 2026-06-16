@@ -1,0 +1,46 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-markdown-to-word/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-markdown-to-word/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-markdown-to-word/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertisseur Markdown vers Word – De ChatGPT a DOCX en Ligne',
+  description: 'Convertissez du Markdown et du texte ChatGPT en documents Word (.docx) instantanement dans votre navigateur. Sans televersement, sans inscription, gratuit.',
+  keywords: 'convertisseur markdown word, markdown en docx, chatgpt en word, convertir markdown en word en ligne, exporter chatgpt en docx',
+  canonical: `${SITE_URL}/fr/tools/markdown-to-word/`,
+  robots: 'index, follow',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/markdown-to-word/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/markdown-to-word/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/markdown-to-word/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/markdown-to-word/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/markdown-to-word/`, title: 'Convertisseur Markdown vers Word', description: 'Convertissez du Markdown et ChatGPT en Word (.docx) gratuitement dans votre navigateur.', image: DEFAULT_OG_IMAGE, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/markdown-to-word/`, title: 'Convertisseur Markdown vers Word', description: 'Convertissez du Markdown et ChatGPT en Word (.docx) gratuitement dans votre navigateur.', image: DEFAULT_OG_IMAGE },
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Convertisseur Markdown vers Word',
+    url: `${SITE_URL}/fr/tools/markdown-to-word/`,
+    description: 'Convertissez du Markdown et des reponses ChatGPT en documents Word (.docx) formates directement dans votre navigateur.',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    inLanguage: 'fr',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+};
+const headRaw = [
+  '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>',
+  '<script src="https://unpkg.com/docx@7.1.0/build/index.js"><\/script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"><\/script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="fr" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/markdown-to-word/`, es: `${SITE_URL}/es/tools/markdown-to-word/` }}>
+  <div class="tool-island" id="tool-markdown-to-word" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

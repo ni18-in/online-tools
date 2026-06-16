@@ -44,6 +44,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'MultimediaApplication',
     rating: { value: 4.6, count: 40 },
+    i18n: { es: 'free-online-image-utility-tool', fr: 'free-online-image-utility-tool' },
   },
   {
     slug: 'all-in-one-text-analyzer',
@@ -53,6 +54,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'UtilitiesApplication',
     rating: { value: 4.8, count: 20 },
+    i18n: { es: 'all-in-one-text-analyzer', fr: 'all-in-one-text-analyzer' },
   },
   {
     slug: 'json-visualizer-pro',
@@ -64,6 +66,7 @@ export const tools: Tool[] = [
     rating: { value: 4.6, count: 20 },
     // Historically the only tool with the bare robots value — preserved exactly.
     robots: 'index, follow',
+    i18n: { es: 'json-visualizer-pro', fr: 'json-visualizer-pro' },
   },
   {
     slug: 'json-comparison-tool',
@@ -73,6 +76,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'UtilitiesApplication',
     rating: { value: 4.8, count: 4 },
+    i18n: { es: 'json-comparison-tool', fr: 'json-comparison-tool' },
   },
   {
     slug: 'ai-beauty-test',
@@ -93,6 +97,7 @@ export const tools: Tool[] = [
     schemaType: 'VideoGame',
     applicationCategory: 'Game',
     rating: { value: 4.6, count: 67 },
+    i18n: { es: 'guess-the-logo', fr: 'guess-the-logo' },
   },
   {
     slug: 'online-text-compare',
@@ -102,6 +107,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'UtilitiesApplication',
     rating: { value: 4.6, count: 45 },
+    i18n: { es: 'online-text-compare', fr: 'online-text-compare' },
   },
   {
     slug: 'screen-recorder-pro',
@@ -111,6 +117,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'UtilitiesApplication',
     rating: { value: 4.7, count: 11 },
+    i18n: { es: 'screen-recorder-pro', fr: 'screen-recorder-pro' },
   },
   {
     slug: 'px-to-rem-converter',
@@ -120,7 +127,7 @@ export const tools: Tool[] = [
     schemaType: 'SoftwareApplication',
     applicationCategory: 'DeveloperApplication',
     rating: { value: 4.7, count: 10 },
-    i18n: { es: 'px-a-rem-convertidor' },
+    i18n: { es: 'px-a-rem-convertidor', fr: 'px-to-rem-converter' },
   },
   {
     slug: 'ai-love-calculator',
@@ -131,6 +138,7 @@ export const tools: Tool[] = [
     applicationCategory: 'EntertainmentApplication',
     robots: NOINDEX,
     inSitemap: false,
+    i18n: { es: 'ai-love-calculator', fr: 'ai-love-calculator' },
   },
   {
     slug: 'next-gen-gst-reforms',
@@ -139,6 +147,7 @@ export const tools: Tool[] = [
     category: 'calculator',
     schemaType: 'WebApplication',
     applicationCategory: 'FinanceApplication',
+    i18n: { es: 'next-gen-gst-reforms', fr: 'next-gen-gst-reforms' },
   },
   {
     slug: 'basic-authentication-header-generator',
@@ -147,6 +156,7 @@ export const tools: Tool[] = [
     category: 'developer',
     schemaType: 'WebApplication',
     applicationCategory: 'DeveloperApplication',
+    i18n: { es: 'basic-authentication-header-generator', fr: 'basic-authentication-header-generator' },
   },
   {
     slug: 'mh-meter-price-calculator',
@@ -156,6 +166,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'TravelApplication',
     rating: { value: 4.8, count: 25 },
+    i18n: { es: 'mh-meter-price-calculator', fr: 'mh-meter-price-calculator' },
   },
   {
     slug: 'vtf-converter',
@@ -165,6 +176,7 @@ export const tools: Tool[] = [
     schemaType: 'WebApplication',
     applicationCategory: 'MultimediaApplication',
     rating: { value: 5, count: 1 },
+    i18n: { es: 'vtf-converter', fr: 'vtf-converter' },
   },
   {
     slug: 'advance-epoch-converter',
@@ -173,6 +185,7 @@ export const tools: Tool[] = [
     category: 'developer',
     schemaType: 'WebApplication',
     applicationCategory: 'DeveloperApplication',
+    i18n: { es: 'advance-epoch-converter', fr: 'advance-epoch-converter' },
   },
   {
     slug: 'markdown-to-word',
@@ -181,6 +194,7 @@ export const tools: Tool[] = [
     category: 'text',
     schemaType: 'WebApplication',
     applicationCategory: 'UtilitiesApplication',
+    i18n: { es: 'markdown-to-word', fr: 'markdown-to-word' },
   },
   {
     slug: 'subtitle-resync-tool',
@@ -189,6 +203,7 @@ export const tools: Tool[] = [
     category: 'media',
     schemaType: 'WebApplication',
     applicationCategory: 'MultimediaApplication',
+    i18n: { es: 'subtitle-resync-tool', fr: 'subtitle-resync-tool' },
   },
   {
     slug: 'iphone-photo-fixer',
@@ -197,6 +212,7 @@ export const tools: Tool[] = [
     category: 'media',
     schemaType: 'WebApplication',
     applicationCategory: 'MultimediaApplication',
+    i18n: { es: 'iphone-photo-fixer', fr: 'iphone-photo-fixer' },
   },
   // ---- tools not on the homepage grid, but with their own pages + sitemap entries ----
   {
@@ -206,6 +222,7 @@ export const tools: Tool[] = [
     category: 'calculator',
     schemaType: 'WebApplication',
     applicationCategory: 'EducationalApplication',
+    i18n: { es: 'grade-calculator', fr: 'grade-calculator' },
   },
   {
     slug: 'rem-to-px-converter',
@@ -214,7 +231,7 @@ export const tools: Tool[] = [
     category: 'developer',
     schemaType: 'SoftwareApplication',
     applicationCategory: 'DeveloperApplication',
-    i18n: { es: 'rem-to-px-converter' },
+    i18n: { es: 'rem-to-px-converter', fr: 'rem-to-px-converter' },
   },
   {
     slug: 'happy-new-year',
@@ -223,6 +240,7 @@ export const tools: Tool[] = [
     category: 'fun',
     schemaType: 'WebApplication',
     applicationCategory: 'EntertainmentApplication',
+    i18n: { es: 'happy-new-year', fr: 'happy-new-year' },
   },
 ];
 

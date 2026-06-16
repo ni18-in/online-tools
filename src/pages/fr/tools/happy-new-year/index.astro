@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-happy-new-year/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-happy-new-year/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-happy-new-year/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Generateur de Voeux de Nouvel An',
+  description: 'Creez et partagez des voeux personnalises de Nouvel An en ligne – gratuit et instantane.',
+  keywords: 'nouvel an, generateur de voeux, felicitations, voeux personnalises',
+  canonical: `${SITE_URL}/fr/tools/happy-new-year/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/happy-new-year/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/happy-new-year/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/happy-new-year/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/happy-new-year/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/happy-new-year/`, title: 'Generateur de Voeux de Nouvel An', description: 'Creez et partagez des voeux personnalises de Nouvel An en ligne.', image: DEFAULT_OG_IMAGE, imageAlt: 'Image promotionnelle du Generateur de Voeux de Nouvel An.', locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/happy-new-year/`, title: 'Generateur de Voeux de Nouvel An', description: 'Creez et partagez des voeux personnalises de Nouvel An en ligne.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Generateur de Voeux de Nouvel An', applicationCategory: 'MultimediaApplication', operatingSystem: 'Web', url: `${SITE_URL}/fr/tools/happy-new-year/`, description: 'Creez et partagez des voeux personnalises de Nouvel An en ligne – gratuit et instantane.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/happy-new-year/`, es: `${SITE_URL}/es/tools/happy-new-year/` }} adMinHeight={120}>
+  <div class="tool-island" id="tool-happy-new-year" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

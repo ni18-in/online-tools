@@ -1,0 +1,387 @@
+/* Global Styles */
+#tool-subtitle-resync-tool {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #0f172a;
+    --text-muted: #475569;
+    --border-color: #cbd5e1;
+}
+
+#tool-subtitle-resync-tool.dark,
+#tool-subtitle-resync-tool.dark-mode {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+}
+
+#tool-subtitle-resync-tool {
+    font-family: inherit;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Tool Container */
+#tool-subtitle-resync-tool .tool-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header */
+#tool-subtitle-resync-tool header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#tool-subtitle-resync-tool h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #818cf8, #c084fc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#tool-subtitle-resync-tool .subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* Main Grid */
+#tool-subtitle-resync-tool .main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    #tool-subtitle-resync-tool .main-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Upload Section */
+#tool-subtitle-resync-tool .upload-section {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#tool-subtitle-resync-tool .file-input-wrapper {
+    position: relative;
+    background-color: var(--card-bg);
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#tool-subtitle-resync-tool .file-input-wrapper:hover,
+#tool-subtitle-resync-tool .file-input-wrapper.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+#tool-subtitle-resync-tool .file-input-wrapper input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#tool-subtitle-resync-tool .file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+
+#tool-subtitle-resync-tool .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+#tool-subtitle-resync-tool .file-name {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Video Player */
+#tool-subtitle-resync-tool .video-container {
+    background-color: #000;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#tool-subtitle-resync-tool video {
+    width: 100%;
+    height: 100%;
+    max-height: 70vh;
+}
+
+#tool-subtitle-resync-tool .video-placeholder {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Controls Panel */
+#tool-subtitle-resync-tool .controls-panel {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+#tool-subtitle-resync-tool .panel-section {
+    margin-bottom: 2rem;
+}
+
+#tool-subtitle-resync-tool .panel-section:last-child {
+    margin-bottom: 0;
+}
+
+#tool-subtitle-resync-tool h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+#tool-subtitle-resync-tool .shift-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+#tool-subtitle-resync-tool .btn-shift {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+#tool-subtitle-resync-tool.dark .btn-shift,
+#tool-subtitle-resync-tool.dark-mode .btn-shift {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#tool-subtitle-resync-tool .btn-shift:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+#tool-subtitle-resync-tool .manual-adjust {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+#tool-subtitle-resync-tool input[type="number"] {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    font-family: inherit;
+}
+
+#tool-subtitle-resync-tool.dark input[type="number"],
+#tool-subtitle-resync-tool.dark-mode input[type="number"] {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#tool-subtitle-resync-tool .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#tool-subtitle-resync-tool .btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+#tool-subtitle-resync-tool .btn-primary:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Status & Info */
+#tool-subtitle-resync-tool .offset-display {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#tool-subtitle-resync-tool.dark .offset-display,
+#tool-subtitle-resync-tool.dark-mode .offset-display {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#tool-subtitle-resync-tool .offset-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+#tool-subtitle-resync-tool .offset-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-feature-settings: "tnum";
+}
+
+#tool-subtitle-resync-tool .instructions {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+#tool-subtitle-resync-tool .instructions kbd {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+    font-family: monospace;
+    font-size: 0.8rem;
+}
+
+/* Navigation */
+#tool-subtitle-resync-tool .back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+}
+
+#tool-subtitle-resync-tool .back-link:hover {
+    color: var(--text-color);
+}
+
+/* Info Section (SEO Content) */
+#tool-subtitle-resync-tool .info-section {
+    margin-top: 4rem;
+    display: grid;
+    gap: 2rem;
+}
+
+#tool-subtitle-resync-tool .content-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+#tool-subtitle-resync-tool .content-card h2 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+#tool-subtitle-resync-tool .steps-list {
+    padding-left: 1.5rem;
+    color: var(--text-muted);
+}
+
+#tool-subtitle-resync-tool .steps-list li {
+    margin-bottom: 1rem;
+}
+
+#tool-subtitle-resync-tool .steps-list strong {
+    color: var(--text-color);
+}
+
+#tool-subtitle-resync-tool .steps-list ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+#tool-subtitle-resync-tool .badge {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+#tool-subtitle-resync-tool.dark .badge,
+#tool-subtitle-resync-tool.dark-mode .badge {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}
+
+#tool-subtitle-resync-tool code {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.3rem;
+    font-family: monospace;
+    color: #c2410c;
+}
+
+#tool-subtitle-resync-tool.dark code,
+#tool-subtitle-resync-tool.dark-mode code {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fca5a5;
+}
+
+#tool-subtitle-resync-tool .content-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+#tool-subtitle-resync-tool .content-card strong {
+    color: var(--text-color);
+    font-weight: 600;
+}

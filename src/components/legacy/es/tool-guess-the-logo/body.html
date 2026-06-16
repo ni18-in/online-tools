@@ -1,0 +1,157 @@
+<button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+    <div id="messageBox" class="message-box"></div>
+
+    <div class="container">
+        <div id="settingsScreen" class="screen active">
+            <div class="settings-header">
+                <h1>Guess the Logo</h1>
+                <p class="subtitle">Test your brand knowledge!</p>
+            </div>
+
+            <div class="settings-actions">
+                <button id="showAboutBtn" class="btn btn-info">About Game</button>
+                <button id="showHowToPlayBtn" class="btn btn-info">How to Play</button>
+            </div>
+
+            <div class="settings-group">
+                <label class="group-title" for="gameMode">Game Mode</label>
+                <div class="radio-group" id="gameMode">
+                    <input type="radio" id="modeSingle" name="gameMode" value="single" checked><label
+                        for="modeSingle">Single Player</label><br>
+                    <input type="radio" id="modeParty" name="gameMode" value="party"><label for="modeParty">Party
+                        Mode</label><br>
+                    <input type="radio" id="modeChallenge" name="gameMode" value="challenge"><label
+                        for="modeChallenge">Challenge Mode</label><br>
+                    <input type="radio" id="modeStreaming" name="gameMode" value="streaming"><label
+                        for="modeStreaming">Streaming Mode</label>
+                </div>
+            </div>
+            <div class="settings-group">
+                <label class="group-title" for="difficulty">Difficulty</label>
+                <div class="radio-group" id="difficulty">
+                    <input type="radio" id="diffEasy" name="difficulty" value="easy" checked><label
+                        for="diffEasy">Easy</label>
+                    <input type="radio" id="diffMedium" name="difficulty" value="medium"><label
+                        for="diffMedium">Medium</label>
+                    <input type="radio" id="diffHard" name="difficulty" value="hard"><label for="diffHard">Hard</label>
+                </div>
+            </div>
+            <div class="settings-group" id="roundsGroup">
+                <label class="group-title" for="numRounds">Game Length</label>
+                <label for="numRounds">Number of Rounds (1-200):</label>
+                <input type="number" id="numRounds" value="10" min="1" max="200">
+            </div>
+            <div class="settings-group" id="partyTimerGroup" style="display: none;">
+                <label class="group-title" for="partyTimer">Time Per Question</label>
+                <label for="partyTimer">Seconds (5-60):</label>
+                <input type="number" id="partyTimer" value="15" min="5" max="60">
+            </div>
+            <div class="settings-group" id="streamingTimerGroup" style="display: none;">
+                <label class="group-title" for="streamingTimer">Reveal Speed</label>
+                <label for="streamingTimer">Seconds to Reveal (3-20):</label>
+                <input type="number" id="streamingTimer" value="7" min="3" max="20">
+            </div>
+            <div class="settings-group" id="durationGroup" style="display: none;">
+                <label class="group-title" for="sessionDuration">Game Length</label>
+                <label for="sessionDuration">Session Duration (minutes):</label>
+                <select id="sessionDuration">
+                    <option value="1">1 Minute</option>
+                    <option value="2">2 Minutes</option>
+                    <option value="3">3 Minutes</option>
+                    <option value="5">5 Minutes</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label class="group-title">Options</label>
+                <input type="checkbox" id="soundEffects" checked>
+                <label for="soundEffects">Sound Effects</label>
+            </div>
+            <button id="startGameBtn" class="btn btn-primary"
+                style="width:100%; padding: 1.25rem; font-size: 1.4rem; margin-top:1rem;">Start Game</button>
+        </div>
+
+        <div id="gameScreen" class="screen">
+            <h2 id="streamingModeTitle" style="display:none;">Guess The Logo</h2>
+            <div class="game-header-info" style="text-align: center; margin-bottom: 1rem;">
+                <span id="currentModeLabel"
+                    style="display:inline-block; padding: 0.5rem 1rem; background: var(--brand-primary); color: white; border-radius: 20px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.5rem;">MODE</span>
+                <p id="modeInstruction" style="color: var(--text-secondary); font-size: 1rem; margin: 0;"></p>
+            </div>
+            <div class="game-info">
+                <span id="scoreDisplay">Score: 0</span>
+                <span id="roundDisplay">Round: 1/10</span>
+            </div>
+            <div id="timerDisplay" style="margin-bottom: 1rem;"></div>
+            <div class="logo-container">
+                <img id="logoImg" src="" alt="Logo"
+                    onerror="this.onerror=null; this.src='https://placehold.co/300x150/EFEFEF/AAAAAA&text=Logo+Error';">
+            </div>
+            <div id="optionsContainer" class="options-container">
+            </div>
+            <div id="feedbackMessage" class="feedback-message" style="display:none;"></div>
+            <button id="nextQuestionBtn" class="btn btn-primary" style="display:none; margin-top: 1rem;">Next
+                Question</button>
+        </div>
+
+        <div id="gameOverScreen" class="screen">
+            <h2>Game Over!</h2>
+            <p id="finalScoreDisplay" style="font-size: 1.5rem; margin-bottom: 1rem;"></p>
+            <div class="settings-group" id="highscoreSection">
+                <h3>High Scores</h3>
+                <ul id="highscoreList">
+                </ul>
+            </div>
+            <button id="playAgainBtn" class="btn btn-primary" style="margin-right: 0.5rem;">Play Again</button>
+            <button id="shareScoreBtn" class="btn btn-secondary">Share Score</button>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAboutModal">&times;</span>
+            <h3>About Guess the Logo</h3>
+            <p>Guess the Logo is a fun and challenging game designed to test your knowledge of popular brands from
+                around the world!</p>
+            <p>Put your brand recognition skills to the test across various difficulty levels and game modes. Whether
+                you're playing solo or with friends, get ready for an exciting logo guessing adventure.</p>
+            <p>This game is created with HTML, CSS, and Vanilla JavaScript, showcasing a lightweight and responsive web
+                application.</p>
+            <p>Enjoy playing!</p>
+        </div>
+    </div>
+
+    <div id="howToPlayModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeHowToPlayModal">&times;</span>
+            <h3>How to Play</h3>
+            <p><strong>General Gameplay:</strong> A logo will be displayed on the screen. Your task is to choose the
+                correct brand name from the four multiple-choice options provided.</p>
+            <ul>
+                <li><strong>Single Player Mode:</strong> Play at your own pace. Score points for each correct answer.
+                    Try to achieve the highest score and make it to the leaderboard!</li>
+                <li><strong>Party Mode:</strong> Perfect for playing with friends or on a larger screen! A timer adds to
+                    the excitement for each question, and the game automatically advances to the next logo.</li>
+                <li><strong>Challenge Mode:</strong> Race against the clock in this timed session. Answer as many logos
+                    correctly as you can before your time runs out.</li>
+                <li><strong>Streaming Mode:</strong> Sit back, relax, and learn! Logos and their correct answers will be
+                    displayed automatically one after another. This mode is great for a quick visual quiz or
+                    familiarizing yourself with brands.</li>
+            </ul>
+            <p><strong>Controls:</strong></p>
+            <ul>
+                <li>Use your <strong>mouse or tap</strong> to select an option or click buttons.</li>
+                <li><strong>Keyboard:</strong> Use keys <strong>1, 2, 3, 4</strong> or <strong>A, B, C, D</strong> to
+                    select the corresponding answer option. Use <strong>Enter</strong> or <strong>Spacebar</strong> for
+                    primary action buttons like "Start Game", "Next Question", or "Play Again".</li>
+            </ul>
+            <p><strong>Settings:</strong> Before starting, you can customize your game experience:</p>
+            <ul>
+                <li>Choose your preferred <strong>Game Mode</strong>.</li>
+                <li>Select the <strong>Difficulty</strong> (Easy, Medium, Hard).</li>
+                <li>Set the <strong>Number of Rounds</strong> (for Single Player/Party Mode) or <strong>Session
+                        Duration</strong> (for Challenge Mode).</li>
+                <li>Toggle <strong>Sound Effects</strong> on or off.</li>
+            </ul>
+            <p>Have fun guessing!</p>
+        </div>
+    </div>

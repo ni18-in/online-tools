@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-ai-love-calculator/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-ai-love-calculator/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-ai-love-calculator/script.js?raw';
+
+const seo: SeoProps = {
+  title: "Calculateur d'Amour IA — Découvrez Votre Score !",
+  description: "Découvrez votre compatibilité amoureuse avec notre Calculateur d'Amour IA ! Entrez vos prénoms et âges pour obtenir un score et une prédiction amusante. À but récréatif uniquement.",
+  keywords: "calculateur amour, calculateur amour ia, test compatibilité, score amour, app divertissante",
+  canonical: `${SITE_URL}/fr/tools/ai-love-calculator/`,
+  robots: 'noindex, follow',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/ai-love-calculator/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/ai-love-calculator/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/ai-love-calculator/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/ai-love-calculator/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/ai-love-calculator/`, title: "Calculateur d'Amour IA", description: "Découvrez votre score d'amour avec notre IA amusante !", image: DEFAULT_OG_IMAGE, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/ai-love-calculator/`, title: "Calculateur d'Amour IA", description: "Découvrez votre score d'amour avec notre IA amusante !", image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: "Calculateur d'Amour IA", applicationCategory: 'EntertainmentApplication', operatingSystem: 'Any', url: `${SITE_URL}/fr/tools/ai-love-calculator/`, description: "Calculateur d'amour amusant basé sur l'IA. À but récréatif uniquement.", offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/ai-love-calculator/`, es: `${SITE_URL}/es/tools/ai-love-calculator/` }}>
+  <div class="tool-island legacy-tw bg-gradient-to-br from-rose-100 to-teal-100 flex items-center justify-center p-6 sm:p-10" id="tool-ai-love-calculator" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

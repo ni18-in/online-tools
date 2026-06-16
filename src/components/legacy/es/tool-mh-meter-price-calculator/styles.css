@@ -1,0 +1,389 @@
+#tool-mh-meter-price-calculator {
+            --primary: #ffc107;
+            /* Taxi Yellow */
+            --primary-dark: #e0a800;
+            --secondary: #212529;
+            /* Asphalt */
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --accent: #0d6efd;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Accessibility: Focus visible */
+        #tool-mh-meter-price-calculator :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        #tool-mh-meter-price-calculator * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #tool-mh-meter-price-calculator {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #tool-mh-meter-price-calculator .container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Header */
+        #tool-mh-meter-price-calculator header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        #tool-mh-meter-price-calculator h1 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        #tool-mh-meter-price-calculator .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* Card Styles */
+        #tool-mh-meter-price-calculator .card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Form Elements */
+        #tool-mh-meter-price-calculator .form-group {
+            margin-bottom: 20px;
+        }
+
+        #tool-mh-meter-price-calculator label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        #tool-mh-meter-price-calculator select,
+        #tool-mh-meter-price-calculator input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            /* Prevents zoom on iOS */
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+            color: var(--text-main);
+        }
+
+        #tool-mh-meter-price-calculator select:focus,
+        #tool-mh-meter-price-calculator input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Checkboxes */
+        #tool-mh-meter-price-calculator .checkbox-group {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #tool-mh-meter-price-calculator .checkbox-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        #tool-mh-meter-price-calculator .checkbox-item input {
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            accent-color: var(--secondary);
+        }
+
+        #tool-mh-meter-price-calculator .tag {
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        #tool-mh-meter-price-calculator .tag-night {
+            background: #e2e6ea;
+            color: #d63384;
+        }
+
+        #tool-mh-meter-price-calculator .tag-ac {
+            background: #e7f1ff;
+            color: #0d6efd;
+        }
+
+        /* Buttons */
+        #tool-mh-meter-price-calculator .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        #tool-mh-meter-price-calculator .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Instructions Accordion */
+        #tool-mh-meter-price-calculator details.instructions-card {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border-left: 5px solid var(--primary);
+        }
+
+        #tool-mh-meter-price-calculator summary {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            list-style: none;
+            /* Hide default arrow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            transition: background-color 0.2s;
+        }
+
+        #tool-mh-meter-price-calculator summary::-webkit-details-marker {
+            display: none;
+        }
+
+        #tool-mh-meter-price-calculator summary:hover {
+            background-color: #f9f9f9;
+        }
+
+        #tool-mh-meter-price-calculator summary::after {
+            content: '+';
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        #tool-mh-meter-price-calculator details[open] summary::after {
+            content: '−';
+            /* Minus sign */
+        }
+
+        #tool-mh-meter-price-calculator .instructions-content {
+            padding: 0 20px 20px 20px;
+            color: #555;
+            font-size: 0.95rem;
+            border-top: 1px solid #eee;
+        }
+
+        #tool-mh-meter-price-calculator .instructions-content ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        #tool-mh-meter-price-calculator .instructions-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Result Section */
+        #tool-mh-meter-price-calculator #result-section {
+            margin-top: 25px;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #tool-mh-meter-price-calculator .result-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        #tool-mh-meter-price-calculator .result-header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        #tool-mh-meter-price-calculator .result-body {
+            padding: 20px;
+        }
+
+        #tool-mh-meter-price-calculator .fare-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        #tool-mh-meter-price-calculator .total-row {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #tool-mh-meter-price-calculator .total-amount {
+            color: var(--accent);
+        }
+
+        #tool-mh-meter-price-calculator .helper-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Footer & Modal */
+        #tool-mh-meter-price-calculator .btn-about {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            text-decoration: underline;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        #tool-mh-meter-price-calculator .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            padding: 20px;
+        }
+
+        #tool-mh-meter-price-calculator .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #tool-mh-meter-price-calculator .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        #tool-mh-meter-price-calculator .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f1f3f5;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #tool-mh-meter-price-calculator .official-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        #tool-mh-meter-price-calculator .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 400px) {
+            #tool-mh-meter-price-calculator .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            #tool-mh-meter-price-calculator h1 {
+                font-size: 1.4rem;
+            }
+        }

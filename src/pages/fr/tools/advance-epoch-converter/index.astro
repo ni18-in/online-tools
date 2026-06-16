@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-advance-epoch-converter/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-advance-epoch-converter/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-advance-epoch-converter/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertisseur d\'époque Unix avancé',
+  description: 'Convertissez des horodatages Unix (epoch) en dates lisibles et vice-versa. Gère les secondes, millisecondes, microsecondes, nanosecondes et fuseaux horaires.',
+  keywords: 'convertisseur d epoque, unix timestamp, epoch unix, horodatage unix, outil developpement',
+  canonical: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/advance-epoch-converter/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/advance-epoch-converter/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/',
+    title: 'Convertisseur d\'époque Unix avancé',
+    description: 'Convertissez des horodatages Unix (epoch) en dates lisibles et vice-versa. Gère les secondes, millisecondes, microsecondes, nanosecondes et fuseaux horaires.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/',
+    title: 'Convertisseur d\'époque Unix avancé',
+    description: 'Convertissez des horodatages Unix (epoch) en dates lisibles et vice-versa. Gère les secondes, millisecondes, microsecondes, nanosecondes et fuseaux horaires.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Convertisseur d\'époque Unix avancé',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/',
+    description: 'Convertissez des horodatages Unix (epoch) en dates lisibles et vice-versa. Gère les secondes, millisecondes, microsecondes, nanosecondes et fuseaux horaires.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/advance-epoch-converter/', es: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/' }} adMinHeight={120}>
+  <div class="tool-island" id="tool-advance-epoch-converter" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

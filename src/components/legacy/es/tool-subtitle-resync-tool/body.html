@@ -1,0 +1,127 @@
+<div class="tool-container">
+        <header>
+            <h1>Sincronizador de Subtitulos</h1>
+            <p class="subtitle">Corrige permanentemente archivos de subtitulos .SRT desincronizados</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="file-input-wrapper" id="video-drop-zone">
+                <input type="file" id="video-file" accept="video/*">
+                <div class="file-label">
+                    <span class="icon">🎥</span>
+                    <span>1. Sube un video (para vista previa)</span>
+                    <span class="file-name" id="video-file-name"></span>
+                </div>
+            </div>
+
+            <div class="file-input-wrapper" id="srt-drop-zone">
+                <input type="file" id="srt-file" accept=".srt">
+                <div class="file-label">
+                    <span class="icon">📝</span>
+                    <span>2. Sube el archivo .SRT</span>
+                    <span class="file-name" id="srt-file-name"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="video-container">
+                <video id="video-preview" controls playsinline>
+                    <track id="subtitle-track" kind="subtitles" label="Vista previa" default>
+                </video>
+                <div class="video-placeholder" id="video-placeholder">
+                    Sube un video para ver la vista previa
+                </div>
+            </div>
+
+            <aside class="controls-panel">
+                <div class="offset-display">
+                    <span class="offset-label">Desfase actual</span>
+                    <div class="offset-value" id="current-offset">0.0s</div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Ajuste rapido</h3>
+                    <div class="shift-buttons">
+                        <button class="btn-shift" data-amount="-0.1">- 0.1s</button>
+                        <button class="btn-shift" data-amount="0.1">+ 0.1s</button>
+                        <button class="btn-shift" data-amount="-0.5">- 0.5s</button>
+                        <button class="btn-shift" data-amount="0.5">+ 0.5s</button>
+                        <button class="btn-shift" data-amount="-1.0">- 1.0s</button>
+                        <button class="btn-shift" data-amount="1.0">+ 1.0s</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Ajuste manual</h3>
+                    <div class="manual-adjust">
+                        <input type="number" id="manual-offset" step="0.1" value="0" placeholder="Segundos (ej. -1.5)">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <button id="download-btn" class="btn-primary" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Descargar SRT corregido
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <p class="instructions">
+                        <strong>Consejo:</strong> Tambien puedes usar atajos de teclado para ajustar el tiempo mientras
+                        el video esta enfocado.<br>
+                        <kbd>Shift</kbd> + <kbd>←</kbd> / <kbd>→</kbd>
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <section class="info-section">
+            <div class="content-card">
+                <h2>Como resincronizar subtitulos en linea?</h2>
+                <ol class="steps-list">
+                    <li><strong>Sube video y subtitulos:</strong> Selecciona tu archivo de video (MP4, WebM, etc.) y el
+                        archivo .SRT desincronizado.</li>
+                    <li><strong>Verifica la sincronizacion:</strong> Reproduce el video para ver cuando ocurre el dialogo
+                        esperado frente a cuando aparece el subtitulo.</li>
+                    <li><strong>Ajusta el tiempo:</strong>
+                        <ul>
+                            <li>Si los subtitulos aparecen <strong>demasiado pronto</strong>, haz clic en <span class="badge">+ Ajuste</span>
+                                (Retrasar).</li>
+                            <li>Si los subtitulos aparecen <strong>demasiado tarde</strong>, haz clic en <span class="badge">- Ajuste</span>
+                                (Adelantar).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ajuste fino:</strong> Usa el campo manual para ajustes precisos en milisegundos (ej.
+                        <code>-1.5s</code>).</li>
+                    <li><strong>Descarga:</strong> Haz clic en "Descargar SRT corregido" para guardar el archivo
+                        permanentemente corregido.</li>
+                </ol>
+            </div>
+
+            <div class="content-card">
+                <h2>Acerca del Sincronizador de Subtitulos</h2>
+                <p>
+                    Frustrado con subtitulos que no coinciden con el audio? El <strong>Sincronizador de Subtitulos</strong>
+                    es la forma mas facil de <strong>corregir subtitulos SRT desincronizados</strong> directamente en tu
+                    navegador. No necesitas descargar software complejo ni editar marcas de tiempo manualmente.
+                </p>
+                <p>
+                    Ya seas un entusiasta del cine, fan del anime o estudiante de idiomas, nuestra herramienta de
+                    <strong>sincronizacion de subtitulos en linea</strong> te ayuda a alinear perfectamente el texto con
+                    el habla. Simplemente carga tu contenido, aplica un desfase de tiempo y <strong>resincroniza tu
+                    archivo SRT de forma permanente</strong> en segundos.
+                </p>
+                <p>
+                    Esta herramienta funciona completamente en tu dispositivo (del lado del cliente), garantizando que
+                    tus archivos de video y subtitulos permanezcan privados y seguros. Es la solucion definitiva para
+                    cualquier problema de sincronizacion en la reproduccion de video.
+                </p>
+            </div>
+        </section>
+    </div>

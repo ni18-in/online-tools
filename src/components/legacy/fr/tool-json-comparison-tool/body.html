@@ -1,0 +1,114 @@
+<div class="container mx-auto p-4 lg:p-6 max-w-screen-xl min-h-screen flex flex-col">
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-[var(--border-color)] gap-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400">JSON Comparison</h1>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button id="how-to-use-button" class="btn-link text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 focus:underline">How to Use</button>
+                <button id="theme-toggle" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Toggle Light/Dark Mode">
+                    <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591" /> </svg>
+                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /> </svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="ad-placeholder">Top Ad Placeholder (e.g., 728x90 or Responsive)</div>
+
+        <main class="flex-grow">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-4">
+                <section aria-labelledby="json1-heading">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 id="json1-heading" class="text-lg font-semibold">Input 1 (Left)</h2>
+                        <div class="flex space-x-1">
+                             <button id="paste-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                             <button id="copy-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                             <button id="beautify-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                             <label for="upload-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-left" type="file" accept=".json,application/json,.txt,text/plain" class="hidden"> </label>
+                             <button id="clear-left" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                        </div>
+                    </div>
+                    <div class="editor-container">
+                        <div id="line-numbers-left" class="line-numbers" aria-hidden="true">1</div>
+                        <textarea id="json-input-left" class="editor-textarea w-full text-sm" placeholder="Paste or type JSON/Text here..." spellcheck="false" aria-labelledby="json1-heading"></textarea>
+                    </div>
+                </section>
+
+                <section aria-labelledby="json2-heading">
+                     <div class="flex justify-between items-center mb-2">
+                         <h2 id="json2-heading" class="text-lg font-semibold">Input 2 (Right)</h2>
+                         <div class="flex space-x-1">
+                              <button id="paste-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Paste from Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.08.793.223 1.135m2.802.086c.052.282.107.559.168.832m-.468-.086a49.92 49.92 0 00-4.688-.086m-5.801 0c.058.272.121.54.19.804m-.191-.804A48.967 48.967 0 003 6.108V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-2.625" /> </svg> </button>
+                              <button id="copy-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Copy to Clipboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg> </button>
+                              <button id="beautify-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Beautify JSON (Ctrl+B)"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /> </svg> </button>
+                              <label for="upload-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out cursor-pointer" title="Upload File"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /> </svg> <input id="upload-right" type="file" accept=".json,application/json,.txt,text/plain" class="hidden"> </label>
+                              <button id="clear-right" class="btn-icon p-2 rounded-full text-[var(--btn-icon-text)] hover:text-[var(--btn-icon-hover-text)] hover:bg-[var(--btn-icon-hover-bg)] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-0 transition-colors duration-150 ease-in-out" title="Clear Input"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg> </button>
+                         </div>
+                     </div>
+                     <div class="editor-container">
+                        <div id="line-numbers-right" class="line-numbers" aria-hidden="true">1</div>
+                        <textarea id="json-input-right" class="editor-textarea w-full text-sm" placeholder="Paste or type JSON/Text here..." spellcheck="false" aria-labelledby="json2-heading"></textarea>
+                    </div>
+                </section>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                <div class="flex gap-2 flex-wrap justify-center sm:justify-start">
+                    <button id="compare-button" class="btn btn-primary inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l-3-3m3 3l3 3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" /> </svg>
+                        Compare
+                        <span class="ml-1 text-xs text-indigo-200">(Ctrl+Enter)</span>
+                    </button>
+                    <button id="download-button" class="btn btn-secondary hidden inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
+                         Download Diff
+                     </button>
+                     <button id="copy-results-button" class="btn btn-secondary hidden inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 transition-colors duration-150 ease-in-out text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:ring-indigo-500 dark:text-indigo-300 dark:bg-indigo-800 dark:hover:bg-indigo-700">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /> </svg>
+                          Copy Results
+                      </button>
+                </div>
+                <div class="flex items-center space-x-4">
+                     <label class="flex items-center space-x-2 cursor-pointer text-sm" title="Only applies when both inputs are valid JSON">
+                         <input type="checkbox" id="ignore-array-order">
+                         <span>Ignore Array Order (JSON only)</span>
+                     </label>
+                 </div>
+            </div>
+
+            <div id="message-area"></div>
+
+            <section id="diff-output-section" class="mt-6 hidden" aria-live="polite">
+                 <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold">Comparison Result</h2>
+                    <div class="text-xs space-x-2 hidden sm:block">
+                        <span style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-ins-border);">+ Added</span>
+                        <span style="background-color: var(--diff-del-bg); color: var(--diff-del-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-del-border); text-decoration: line-through;">- Deleted</span>
+                        <span style="background-color: var(--diff-modified-bg); color: var(--diff-modified-text); padding: 2px 4px; border-radius: 3px; border: 1px solid var(--diff-modified-border);">Modified</span>
+                    </div>
+                 </div>
+                <div id="diff-output-wrapper" class="diff-container"></div>
+            </section>
+
+             <div class="ad-placeholder mt-8">Bottom Ad Placeholder (e.g., Responsive)</div>
+
+        </main>
+
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay hidden" aria-hidden="true"></div>
+    <div id="how-to-use-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-header">
+            <h3 id="modal-title" class="modal-title">How to Use</h3>
+            <button id="close-modal-button" class="modal-close-button" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-content text-sm text-[var(--text-secondary-color)]">
+            <p class="mb-4">This tool helps you compare two JSON objects or text blocks and visualize their differences.</p>
+            <ul>
+                <li><strong>Input Data:</strong> Paste your JSON or text data into the left and right input areas (with line numbers!), or use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg> upload buttons to load from files (.json or .txt).</li>
+                <li><strong>Beautify (JSON only):</strong> Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M6.168 15.734a15.994 15.994 0 01-1.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774m0 0a15.997 15.997 0 01-3.388-1.621m5.043.025a15.995 15.995 0 001.622-3.39m-3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 003.388-1.622m-5.043-.025a15.995 15.995 0 011.622-3.39m3.421 1.773a3.001 3.001 0 00-1.774-1.774M12 6.002a15.998 15.998 0 00-3.388-1.622m5.043.025a15.995 15.995 0 01-1.622-3.39m3.421 1.774a3.001 3.001 0 001.774-1.774m0 0a15.997 15.997 0 013.388-1.621m-5.043.025a15.995 15.995 0 00-1.622-3.39m3.421 1.773a3.001 3.001 0 001.774-1.774m0 0a15.998 15.998 0 013.388-1.622m-5.043-.025a15.994 15.994 0 011.622-3.39m-3.421 1.773a3.001 3.001 0 00-1.774-1.774" /></svg> button (or <code>Ctrl+B</code>) to format the input *if it's valid JSON*. It won't work on plain text.</li>
+                <li><strong>Compare:</strong> Click the "Compare" button (or press <code>Ctrl+Enter</code>) to see the differences.</li>
+                <li><strong>Results:</strong> Differences are highlighted below (see legend above results). <span class="inline-block px-1 rounded" style="background-color: var(--diff-ins-bg); color: var(--diff-ins-text); border: 1px solid var(--diff-ins-border);">Green</span> indicates additions, <span class="inline-block px-1 rounded" style="background-color: var(--diff-del-bg); color: var(--diff-del-text); border: 1px solid var(--diff-del-border); text-decoration: line-through;">Red</span> indicates deletions, and <span class="inline-block px-1 rounded" style="background-color: var(--diff-modified-bg); color: var(--diff-modified-text); border: 1px solid var(--diff-modified-border);">Blue</span> indicates modifications.</li>
+                <li><strong>Options (JSON only):</strong> Use the "Ignore Array Order" checkbox if the order of elements within arrays doesn't matter for your comparison. This only applies if *both* inputs are valid JSON.</li>
+                <li><strong>Copy/Download:</strong> Use the buttons below the inputs to copy the diff results or download the raw diff data (as JSON, even if inputs were text).</li>
+                <li><strong>Dev Mode:</strong> Type <code>:dev</code> at the end of either input area to load sample JSON data.</li>
+            </ul>
+        </div>
+    </div>

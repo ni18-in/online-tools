@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-free-online-image-utility-tool/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-free-online-image-utility-tool/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-free-online-image-utility-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Outil d\'images en ligne gratuit | Redimensionner, compresser et convertir',
+  description: 'Outil d\'image en ligne gratuit pour redimensionner, compresser, convertir et optimiser rapidement des images dans votre navigateur.',
+  keywords: 'outil image, redimensionner image, compresser image, convertir image, optimiser image',
+  canonical: 'https://online-tools.ni18.in/fr/tools/free-online-image-utility-tool/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/free-online-image-utility-tool/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/free-online-image-utility-tool/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/free-online-image-utility-tool/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/free-online-image-utility-tool/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/free-online-image-utility-tool/',
+    title: 'Outil d\'images en ligne gratuit | Redimensionner, compresser et convertir',
+    description: 'Outil d\'image en ligne gratuit pour redimensionner, compresser, convertir et optimiser rapidement des images dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/free-online-image-utility-tool/',
+    title: 'Outil d\'images en ligne gratuit | Redimensionner, compresser et convertir',
+    description: 'Outil d\'image en ligne gratuit pour redimensionner, compresser, convertir et optimiser rapidement des images dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Outil d\'images en ligne gratuit | Redimensionner, compresser et convertir',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/free-online-image-utility-tool/',
+    description: 'Outil d\'image en ligne gratuit pour redimensionner, compresser, convertir et optimiser rapidement des images dans votre navigateur.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js\"></script>";
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/free-online-image-utility-tool/', es: 'https://online-tools.ni18.in/es/tools/free-online-image-utility-tool/' }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-free-online-image-utility-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

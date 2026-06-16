@@ -1,0 +1,56 @@
+<div class="w-full max-w-2xl mx-auto">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">G&eacute;n&eacute;rateur d'En-t&ecirc;tes d'Authentification Basic</h1>
+            <p class="mt-2 text-lg text-gray-400">G&eacute;n&eacute;rez des en-t&ecirc;tes `Authorization` en toute s&eacute;curit&eacute; dans votre navigateur.</p>
+        </header>
+
+        <!-- Main Application Section -->
+        <main class="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-700">
+            <div class="space-y-6">
+                <!-- Username Input -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" class="form-input w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-white placeholder-gray-500 focus:border-blue-500 transition duration-200" placeholder="Entrez votre nom d'utilisateur">
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-input w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-white placeholder-gray-500 focus:border-blue-500 transition duration-200" placeholder="Entrez votre mot de passe">
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generate-btn" class="btn w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:scale-105">
+                    G&eacute;n&eacute;rer l'en-t&ecirc;te
+                </button>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-container" class="mt-8 pt-6 border-t border-gray-700 hidden">
+                <h2 class="text-lg font-semibold text-white mb-3">En-t&ecirc;te g&eacute;n&eacute;r&eacute;</h2>
+                <div class="relative bg-gray-900 rounded-lg p-4 flex items-center justify-between">
+                    <pre class="code-block text-green-400 text-sm sm:text-base whitespace-pre-wrap"><code id="result-output"></code></pre>
+                    <button id="copy-btn" title="Copier dans le presse-papiers" class="btn absolute top-2 right-2 p-2 bg-gray-700 text-gray-300 rounded-md hover:bg-gray-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
+                            <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h6a2 2 0 00-2-2H5z" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Copy feedback message -->
+                <p id="copy-feedback" class="text-sm text-center text-green-500 mt-2 h-5" aria-live="polite"></p>
+            </div>
+        </main>
+
+        <!-- About Section -->
+        <section id="about" class="mt-12 text-center text-gray-500">
+            <h2 class="text-xl font-semibold text-gray-300 mb-4">&Agrave; propos de cet outil</h2>
+            <div class="max-w-xl mx-auto space-y-3 text-base">
+                <p>Cet outil g&eacute;n&egrave;re un en-t&ecirc;te d'authentification Basic en encodant vos identifiants au format Base64.</p>
+                <p><strong class="text-yellow-400">Votre s&eacute;curit&eacute; est primordiale.</strong> L'ensemble du processus d'encodage s'ex&eacute;cute localement dans votre navigateur via JavaScript. Votre nom d'utilisateur et votre mot de passe ne sont jamais envoy&eacute;s sur le r&eacute;seau, ni vus ou stock&eacute;s par ce site.</p>
+            </div>
+        </section>
+
+
+    </div>

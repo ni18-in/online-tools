@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-free-online-image-utility-tool/body.html?raw';
+import css from '../../../../components/legacy/es/tool-free-online-image-utility-tool/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-free-online-image-utility-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Herramienta de Imágenes Online Gratis | Redimensionar, Comprimir y Convertir',
+  description: 'Herramienta gratuita para redimensionar, comprimir, convertir y optimizar imágenes en línea. Sin descargas. Rápida, segura y basada en el navegador.',
+  keywords: 'herramienta de imágenes, redimensionar imagen, comprimir imagen, convertir imagen, optimizar imágenes gratis',
+  canonical: `${SITE_URL}/es/tools/free-online-image-utility-tool/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/free-online-image-utility-tool/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/free-online-image-utility-tool/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/free-online-image-utility-tool/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/free-online-image-utility-tool/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/free-online-image-utility-tool/`, title: 'Herramienta de Imágenes Online Gratis', description: 'Redimensiona, comprime, convierte y optimiza imágenes en línea. Sin descargas.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/free-online-image-utility-tool/`, title: 'Herramienta de Imágenes Online Gratis', description: 'Redimensiona, comprime, convierte y optimiza imágenes en línea. Sin descargas.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Herramienta de Imágenes Online Gratis', applicationCategory: 'MultimediaApplication', operatingSystem: 'Web', url: `${SITE_URL}/es/tools/free-online-image-utility-tool/`, description: 'Herramienta gratuita para redimensionar, comprimir, convertir y optimizar imágenes en línea.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
+};
+const headRaw = '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>';
+---
+<ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/free-online-image-utility-tool/`, fr: `${SITE_URL}/fr/tools/free-online-image-utility-tool/` }}>
+  <div class="tool-island legacy-tw" id="tool-free-online-image-utility-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

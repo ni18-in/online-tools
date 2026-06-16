@@ -1,0 +1,374 @@
+    <main class="container mx-auto p-4 md:p-6 lg:p-8 flex flex-col gap-6">
+        <!-- Editor Toolbar Card -->
+        <div class="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow border border-gray-100 dark:border-gray-700 flex flex-wrap justify-between items-center gap-4">
+             <div class="flex items-center gap-2">
+                 <span class="font-bold text-gray-800 dark:text-gray-200">Barre d'outils de l'éditeur</span>
+                 <a href="/blogs/edit-images-like-pro-free-online-tool.html" class="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
+                     <i class="lucide lucide-help-circle w-4 h-4"></i> Mode d'emploi
+                 </a>
+             </div>
+             <div id="header-actions" class="flex items-center gap-3">
+                <button id="undo-btn"
+                    class="text-sm text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors disabled:text-slate-400 dark:disabled:text-slate-600 disabled:hover:text-slate-400 flex items-center gap-1 bg-transparent border-0 cursor-pointer"
+                    title="Annuler la dernière action" disabled>
+                    <i class="lucide lucide-undo-2"></i> Annuler
+                </button>
+                <button id="redo-btn"
+                    class="text-sm text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors disabled:text-slate-400 dark:disabled:text-slate-600 disabled:hover:text-slate-400 flex items-center gap-1 bg-transparent border-0 cursor-pointer"
+                    title="Rétablir la dernière action annulée" disabled>
+                    <i class="lucide lucide-redo-2"></i> Rétablir
+                </button>
+                <span class="text-slate-300 dark:text-slate-600">|</span>
+                <button id="reset-all-btn" class="text-sm text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors flex items-center gap-1 bg-transparent border-0 cursor-pointer"
+                    title="Effacer l'image et réinitialiser tous les paramètres">
+                    <i class="lucide lucide-trash-2"></i> Tout effacer
+                </button>
+             </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+
+        <aside class="w-full lg:w-1/4 space-y-6">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">1. Importer une image</h2>
+                <label for="file-input" class="file-input-label block w-full">
+                    <i class="lucide lucide-upload-cloud text-4xl text-slate-400 mx-auto mb-2"></i>
+                    <span class="text-slate-600 font-medium">Cliquez ou glissez-déposez</span>
+                    <p class="text-xs text-slate-500 mt-1">Formats pris en charge : JPG, PNG, WEBP</p>
+                </label>
+                <input type="file" id="file-input" accept="image/jpeg, image/png, image/webp">
+                <div id="file-info" class="text-xs text-slate-500 mt-3 space-y-1">
+                    <p>Nom du fichier : <span id="info-filename">N/D</span></p>
+                    <p>Taille originale : <span id="info-orig-size">N/D</span></p>
+                    <p>Dimensions originales : <span id="info-orig-dims">N/D</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">2. Outils</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="resize"><i class="lucide lucide-move-horizontal"></i> Redimensionner</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="crop"><i class="lucide lucide-crop"></i> Rogner</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="rotate"><i class="lucide lucide-rotate-cw"></i> Pivoter</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="flip"><i class="lucide lucide-flip-horizontal-2"></i> Retourner</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="adjust"><i class="lucide lucide-sliders-horizontal"></i> Réglages</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="border"><i class="lucide lucide-square"></i> Bordure</button>
+                    <button
+                        class="tool-button p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"
+                        data-tool="text"><i class="lucide lucide-type"></i> Texte</button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="w-full lg:w-1/2 relative">
+            <div class="bg-white p-4 rounded-lg shadow sticky top-[80px]">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">Aperçu</h2>
+                <div id="preview-area"
+                    class="relative min-h-[200px] flex items-center justify-center bg-slate-100 rounded-md overflow-hidden">
+                    <div id="canvas-container">
+                        <canvas id="canvas"></canvas>
+                        <img id="cropper-image" alt="Image pour le rognage">
+                    </div>
+                    <p id="preview-placeholder"
+                        class="text-slate-500 p-5 text-center absolute inset-0 flex items-center justify-center">Importez
+                        une image pour commencer l'édition</p>
+                    <div id="loading-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                <div id="image-details" class="text-sm text-slate-600 mt-3 space-y-1">
+                    <p>Dimensions actuelles : <span id="img-dimensions">N/D</span></p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="w-full lg:w-1/4 space-y-6">
+            <div id="options-panel-container" class="bg-white p-4 rounded-lg shadow min-h-[200px]">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">3. Options de l'outil</h2>
+                <div id="options-placeholder" class="text-slate-500 text-sm">Sélectionnez un outil pour voir ses options.</div>
+
+                <div id="options-resize" class="options-section space-y-3">
+                    <label class="block text-sm font-medium text-slate-700">Dimensions (px)</label>
+                    <div class="flex gap-2 items-center">
+                        <input type="number" id="resize-width" placeholder="Largeur"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
+                        <span class="text-slate-500">x</span>
+                        <input type="number" id="resize-height" placeholder="Hauteur"
+                            class="form-input w-full text-sm rounded-md border-slate-300">
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="resize-aspect-ratio" checked
+                            class="form-checkbox rounded text-blue-600">
+                        <label for="resize-aspect-ratio" class="ml-2 text-sm text-slate-600">Verrouiller les proportions</label>
+                    </div>
+                    <button id="apply-resize-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Appliquer
+                        le redimensionnement</button>
+                    <p class="text-xs text-slate-500">Aperçu en direct actif. Utilise le redimensionnement par défaut du navigateur.</p>
+                </div>
+
+                <div id="options-crop" class="options-section space-y-3">
+                    <p class="text-xs text-slate-500 mb-2">Faites glisser les poignées pour ajuster la zone de rognage.</p>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Proportions</label>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="free">Libre</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="1/1">1:1</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="4/3">4:3</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="16/9">16:9</button>
+                            <button class="crop-aspect-btn text-xs border px-2 py-1 rounded hover:bg-slate-100"
+                                data-ratio="orig">Original</button>
+                        </div>
+                    </div>
+                    <button id="apply-crop-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm mt-2">Appliquer
+                        le rognage</button>
+                    <button id="cancel-crop-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Annuler
+                        le rognage</button>
+                </div>
+
+                <div id="options-rotate" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="rotate-left-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-ccw"></i> 90° Gauche</button>
+                        <button id="rotate-right-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-rotate-cw"></i> 90° Droite</button>
+                    </div>
+                </div>
+
+                <div id="options-flip" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="flip-horizontal-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-horizontal"></i> Horizontal</button>
+                        <button id="flip-vertical-btn"
+                            class="p-2 border rounded-md hover:bg-slate-100 transition-colors text-sm flex items-center justify-center"><i
+                                class="lucide lucide-flip-vertical"></i> Vertical</button>
+                    </div>
+                </div>
+
+                <div id="options-adjust" class="options-section space-y-4">
+                    <div>
+                        <label for="brightness-slider" class="block text-sm font-medium text-slate-700 mb-1">Luminosité
+                            (<span id="brightness-value">100</span>%)</label>
+                        <input type="range" id="brightness-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="contrast-slider" class="block text-sm font-medium text-slate-700 mb-1">Contraste
+                            (<span id="contrast-value">100</span>%)</label>
+                        <input type="range" id="contrast-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="saturation-slider" class="block text-sm font-medium text-slate-700 mb-1">Saturation
+                            (<span id="saturation-value">100</span>%)</label>
+                        <input type="range" id="saturation-slider" min="0" max="200" value="100"
+                            class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="grayscale-slider" class="block text-sm font-medium text-slate-700 mb-1">Niveaux de gris
+                            (<span id="grayscale-value">0</span>%)</label>
+                        <input type="range" id="grayscale-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="sepia-slider" class="block text-sm font-medium text-slate-700 mb-1">Sépia (<span
+                                id="sepia-value">0</span>%)</label>
+                        <input type="range" id="sepia-slider" min="0" max="100" value="0" class="w-full form-range">
+                    </div>
+                    <div>
+                        <label for="blur-slider" class="block text-sm font-medium text-slate-700 mb-1">Flou (<span
+                                id="blur-value">0</span>px)</label>
+                        <input type="range" id="blur-slider" min="0" max="10" step="0.1" value="0"
+                            class="w-full form-range">
+                    </div>
+                    <button id="apply-adjust-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Appliquer
+                        les réglages</button>
+                    <button id="reset-adjust-btn"
+                        class="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 transition-colors text-sm mt-2">Réinitialiser
+                        les réglages</button>
+                </div>
+
+                <div id="options-border" class="options-section space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="border-width" class="block text-sm font-medium text-slate-700">Épaisseur
+                                (px)</label>
+                            <input type="number" id="border-width" value="5" min="0"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                        <div>
+                            <label for="border-color" class="block text-sm font-medium text-slate-700">Couleur</label>
+                            <input type="color" id="border-color" value="#000000"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                        </div>
+                    </div>
+                    <button id="apply-border-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Appliquer
+                        la bordure</button>
+                    <p class="text-xs text-slate-500">Aperçu en direct actif.</p>
+                </div>
+
+
+                <div id="options-text" class="options-section space-y-3">
+                    <p class="text-xs text-slate-500 mb-2">Cliquez sur l'aperçu pour positionner le texte, puis ajustez les options.
+                    </p>
+                    <label for="text-input" class="block text-sm font-medium text-slate-700">Texte</label>
+                    <textarea id="text-input" placeholder="Votre texte ici" rows="3"
+                        class="form-textarea w-full text-sm rounded-md border-slate-300"></textarea>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-font-family" class="block text-sm font-medium text-slate-700">Police</label>
+                            <select id="text-font-family"
+                                class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="'Courier New', Courier, monospace">Courier New</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Impact, Charcoal, sans-serif">Impact</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="text-size" class="block text-sm font-medium text-slate-700">Taille (px)</label>
+                            <input type="number" id="text-size" value="30" min="8"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Style</label>
+                            <div class="flex gap-2 mt-1">
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-bold"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Gras
+                                </label>
+                                <label class="flex items-center text-sm">
+                                    <input type="checkbox" id="text-italic"
+                                        class="form-checkbox rounded text-blue-600 mr-1"> Italique
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="text-color" class="block text-sm font-medium text-slate-700">Couleur</label>
+                            <input type="color" id="text-color" value="#ffffff"
+                                class="form-input w-full h-10 text-sm rounded-md border-slate-300 p-1">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-align" class="block text-sm font-medium text-slate-700">Alignement</label>
+                            <select id="text-align" class="form-select w-full text-sm rounded-md border-slate-300">
+                                <option value="left">Gauche</option>
+                                <option value="center">Centre</option>
+                                <option value="right">Droite</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="text-rotation" class="block text-sm font-medium text-slate-700">Rotation
+                                (°)</label>
+                            <input type="number" id="text-rotation" value="0" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="text-opacity" class="block text-sm font-medium text-slate-700 mb-1">Opacité (<span
+                                id="text-opacity-value">0.7</span>)</label>
+                        <input type="range" id="text-opacity" min="0" max="1" step="0.05" value="0.7"
+                            class="w-full form-range">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="text-x" class="block text-sm font-medium text-slate-700">Position X</label>
+                            <input type="number" id="text-x" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                        <div>
+                            <label for="text-y" class="block text-sm font-medium text-slate-700">Position Y</label>
+                            <input type="number" id="text-y" value="50" step="1"
+                                class="form-input w-full text-sm rounded-md border-slate-300">
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500">La position X/Y est relative au coin supérieur gauche.</p>
+
+                    <button id="apply-text-btn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">Appliquer
+                        le texte</button>
+                    <p class="text-xs text-slate-500">Aperçu en direct actif.</p>
+                </div>
+
+            </div>
+
+
+<!-- Free Online Image Utility Tool -->
+
+
+
+            <div id="export-panel" class="bg-white p-4 rounded-lg shadow space-y-3">
+                <h2 class="text-lg font-semibold mb-3 border-b pb-2">4. Exporter l'image</h2>
+                <div>
+                    <label for="convert-format" class="block text-sm font-medium text-slate-700">Format de sortie</label>
+                    <select id="convert-format" class="form-select w-full text-sm rounded-md border-slate-300 mt-1">
+                        <option value="image/png">PNG (Sans perte)</option>
+                        <option value="image/jpeg">JPG (Avec perte)</option>
+                        <option value="image/webp">WEBP (Avec/Sans perte)</option>
+                    </select>
+                </div>
+                <div id="quality-option" class="space-y-1 hidden">
+                    <label for="convert-quality" class="block text-sm font-medium text-slate-700 mb-1">Qualité (<span
+                                id="quality-value">92</span>%)</label>
+                    <input type="range" id="convert-quality" min="1" max="100" value="92" class="w-full form-range">
+                    <p class="text-xs text-slate-500">Une qualité inférieure signifie un fichier plus petit (pour JPG/WEBP).</p>
+                </div>
+                <div id="webp-options" class="space-y-1 hidden">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="webp-lossless" class="form-checkbox rounded text-blue-600">
+                        <label for="webp-lossless" class="ml-2 text-sm text-slate-600">Utiliser le WEBP sans perte</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="download-filename" class="block text-sm font-medium text-slate-700">Nom du fichier</label>
+                    <input type="text" id="download-filename" value="image-editee"
+                        class="form-input w-full text-sm rounded-md border-slate-300 mt-1">
+                </div>
+                <div class="text-sm text-slate-600">
+                    Taille estimée : <span id="estimated-size" class="font-medium">N/D</span>
+                </div>
+                <button id="download-btn"
+                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm flex items-center justify-center gap-2">
+                    <i class="lucide lucide-download"></i> Télécharger l'image
+                </button>
+            </div>
+
+        </aside>
+
+    </div>
+    </main>
+
+    <div id="message-box">
+        <span id="message-text"></span>
+    </div>

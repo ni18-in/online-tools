@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-subtitle-resync-tool/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-subtitle-resync-tool/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-subtitle-resync-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Resynchronisation de Sous-titres — Corrigez les Sous-titres Décalés',
+  description: 'Corrigez facilement les sous-titres décalés. Importez votre fichier SRT et votre vidéo, ajustez le timing en un clic et téléchargez le fichier corrigé.',
+  keywords: 'synchroniser sous-titres, resynchroniser srt, corriger sous-titres, décaler sous-titres, outil srt',
+  canonical: `${SITE_URL}/fr/tools/subtitle-resync-tool/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/subtitle-resync-tool/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/subtitle-resync-tool/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/subtitle-resync-tool/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/subtitle-resync-tool/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/subtitle-resync-tool/`, title: 'Resynchronisation de Sous-titres en Ligne', description: 'Corrigez facilement les sous-titres décalés en ligne.', image: DEFAULT_OG_IMAGE, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/subtitle-resync-tool/`, title: 'Resynchronisation de Sous-titres en Ligne', description: 'Corrigez facilement les sous-titres décalés en ligne.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Resynchronisation de Sous-titres', applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web', url: `${SITE_URL}/fr/tools/subtitle-resync-tool/`, description: 'Corrigez les problèmes de synchronisation des sous-titres SRT en ligne.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/subtitle-resync-tool/`, es: `${SITE_URL}/es/tools/subtitle-resync-tool/` }}>
+  <div class="tool-island" id="tool-subtitle-resync-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

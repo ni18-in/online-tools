@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-json-comparison-tool/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-json-comparison-tool/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-json-comparison-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Comparateur JSON en ligne - Outil de Différence avec numéros de lignes',
+  description: 'Outil en ligne gratuit pour comparer, valider et embellir deux objets JSON côte à côte avec des numéros de lignes. Visualisez les différences avec coloration.',
+  keywords: 'comparer json, diff json, comparateur json en ligne, valider json',
+  canonical: 'https://online-tools.ni18.in/fr/tools/json-comparison-tool/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/json-comparison-tool/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/json-comparison-tool/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/json-comparison-tool/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/json-comparison-tool/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/json-comparison-tool/',
+    title: 'Comparateur JSON en ligne - Outil de Différence avec numéros de lignes',
+    description: 'Outil en ligne gratuit pour comparer, valider et embellir deux objets JSON côte à côte avec des numéros de lignes. Visualisez les différences avec coloration.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/json-comparison-tool/',
+    title: 'Comparateur JSON en ligne - Outil de Différence avec numéros de lignes',
+    description: 'Outil en ligne gratuit pour comparer, valider et embellir deux objets JSON côte à côte avec des numéros de lignes. Visualisez les différences avec coloration.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Comparateur JSON en ligne - Outil de Différence avec numéros de lignes',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/json-comparison-tool/',
+    description: 'Outil en ligne gratuit pour comparer, valider et embellir deux objets JSON côte à côte avec des numéros de lignes. Visualisez les différences avec coloration.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/jsondiffpatch.umd.min.js\" defer></script>";
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/json-comparison-tool/', es: 'https://online-tools.ni18.in/es/tools/json-comparison-tool/' }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-json-comparison-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>
