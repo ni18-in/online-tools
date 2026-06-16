@@ -5,9 +5,9 @@
                     <path
                         d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
                 </svg>
-                Epoch Converter
+                Convertidor de Época Unix
             </h1>
-            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark Mode">
+            <button class="theme-toggle" id="theme-btn" aria-label="Alternar modo oscuro">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path
                         d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
@@ -17,41 +17,41 @@
 
         <section class="dashboard">
             <div class="card">
-                <h2>Current Epoch Time</h2>
-                <div class="clock-display" id="current-epoch">Loading...</div>
+                <h2>Tiempo Epoch Actual</h2>
+                <div class="clock-display" id="current-epoch">Cargando...</div>
                 <div class="controls">
-                    <button id="pause-btn">Pause</button>
-                    <button class="secondary" id="reset-btn">Resume / Reset</button>
+                    <button id="pause-btn">Pausar</button>
+                    <button class="secondary" id="reset-btn">Reanudar / Reiniciar</button>
                 </div>
             </div>
             <div class="card">
-                <h2>Current Date (UTC)</h2>
-                <div class="date-display" id="current-utc">Loading...</div>
-                <h2 style="margin-top: 1rem;">Current Date (Local)</h2>
-                <div class="date-display" id="current-local">Loading...</div>
+                <h2>Fecha Actual (UTC)</h2>
+                <div class="date-display" id="current-utc">Cargando...</div>
+                <h2 style="margin-top: 1rem;">Fecha Actual (Local)</h2>
+                <div class="date-display" id="current-local">Cargando...</div>
             </div>
         </section>
 
         <main class="card converter-section">
             <div class="input-group">
-                <label for="main-input" style="color: var(--accent-color); font-weight: 600;">Converter Input</label>
+                <label for="main-input" style="color: var(--accent-color); font-weight: 600;">Entrada del Convertidor</label>
                 <div class="smart-input-container">
                     <input type="text" id="main-input"
-                        placeholder="Type a timestamp (e.g., 1704100000) or date string..." autocomplete="off">
-                    <button id="convert-btn">Convert</button>
+                        placeholder="Escribe un timestamp (ej. 1704100000) o cadena de fecha..." autocomplete="off">
+                    <button id="convert-btn">Convertir</button>
                 </div>
                 <div class="precision-toggles">
                     <label class="radio-label">
-                        <input type="radio" name="precision" value="seconds" checked> Seconds
+                        <input type="radio" name="precision" value="seconds" checked> Segundos
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="precision" value="milliseconds"> Milliseconds
+                        <input type="radio" name="precision" value="milliseconds"> Milisegundos
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="precision" value="microseconds"> Microseconds
+                        <input type="radio" name="precision" value="microseconds"> Microsegundos
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="precision" value="nanoseconds"> Nanoseconds
+                        <input type="radio" name="precision" value="nanoseconds"> Nanosegundos
                     </label>
                 </div>
                 <div id="error-msg" class="error-message"></div>
@@ -62,10 +62,10 @@
             <div class="card">
                 <h2>Timestamps</h2>
                 <div class="result-item">
-                    <span class="result-label">Seconds</span>
+                    <span class="result-label">Segundos</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-seconds"></span>
-                        <button class="copy-btn" data-target="res-seconds" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-seconds" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -73,10 +73,10 @@
                     </div>
                 </div>
                 <div class="result-item">
-                    <span class="result-label">Milliseconds</span>
+                    <span class="result-label">Milisegundos</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-ms"></span>
-                        <button class="copy-btn" data-target="res-ms" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-ms" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -86,12 +86,12 @@
             </div>
 
             <div class="card">
-                <h2>Date Formats</h2>
+                <h2>Formatos de Fecha</h2>
                 <div class="result-item">
                     <span class="result-label">GMT / UTC</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-utc"></span>
-                        <button class="copy-btn" data-target="res-utc" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-utc" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -99,10 +99,10 @@
                     </div>
                 </div>
                 <div class="result-item">
-                    <span class="result-label">Local Time</span>
+                    <span class="result-label">Hora Local</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-local"></span>
-                        <button class="copy-btn" data-target="res-local" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-local" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -113,7 +113,7 @@
                     <span class="result-label">ISO 8601</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-iso"></span>
-                        <button class="copy-btn" data-target="res-iso" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-iso" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -123,35 +123,35 @@
             </div>
 
             <div class="card">
-                <h2>Details & Timezone</h2>
+                <h2>Detalles y Zona Horaria</h2>
                 <div class="result-item">
-                    <span class="result-label">Relative Time</span>
+                    <span class="result-label">Tiempo Relativo</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-relative"></span>
                     </div>
                 </div>
                 <div class="result-item">
-                    <span class="result-label">Details</span>
+                    <span class="result-label">Detalles</span>
                     <div class="result-value-container">
                         <span class="result-value" id="res-details"></span>
                     </div>
                 </div>
 
                 <div class="timezone-selector">
-                    <span class="result-label" style="display:block; margin-bottom: 0.5rem;">Convert to Timezone</span>
+                    <span class="result-label" style="display:block; margin-bottom: 0.5rem;">Convertir a Zona Horaria</span>
                     <select id="tz-select">
-                        <option value="UTC">UTC (Universal Coordinated Time)</option>
-                        <option value="America/New_York">New York (EST/EDT)</option>
-                        <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
-                        <option value="Europe/London">London (GMT/BST)</option>
-                        <option value="Europe/Paris">Paris (CET/CEST)</option>
-                        <option value="Asia/Tokyo">Tokyo (JST)</option>
+                        <option value="UTC">UTC (Tiempo Universal Coordinado)</option>
+                        <option value="America/New_York">Nueva York (EST/EDT)</option>
+                        <option value="America/Los_Angeles">Los Ángeles (PST/PDT)</option>
+                        <option value="Europe/London">Londres (GMT/BST)</option>
+                        <option value="Europe/Paris">París (CET/CEST)</option>
+                        <option value="Asia/Tokyo">Tokio (JST)</option>
                         <option value="Asia/Kolkata">India (IST)</option>
-                        <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                        <option value="Australia/Sydney">Sídney (AEST/AEDT)</option>
                     </select>
                     <div class="result-value-container" style="margin-top: 0.5rem;">
                         <span class="result-value" id="res-tz-converted"></span>
-                        <button class="copy-btn" data-target="res-tz-converted" title="Copy"><svg class="icon"
+                        <button class="copy-btn" data-target="res-tz-converted" title="Copiar"><svg class="icon"
                                 viewBox="0 0 24 24">
                                 <path
                                     d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
@@ -161,27 +161,27 @@
             </div>
 
             <div class="card" style="grid-column: 1 / -1;">
-                <h2>Developer Zone</h2>
+                <h2>Zona de Desarrolladores</h2>
                 <div class="developer-zone visible">
                     <div class="code-snippet">
                         <div class="lang-tag">JavaScript / TypeScript</div>
-                        <code id="code-js">const timestamp = Date.now(); // milliseconds</code>
+                        <code id="code-js">const timestamp = Date.now(); // milisegundos</code>
                     </div>
                     <div class="code-snippet">
                         <div class="lang-tag">Python</div>
-                        <code id="code-python">import time; timestamp = int(time.time()) # seconds</code>
+                        <code id="code-python">import time; timestamp = int(time.time()) # segundos</code>
                     </div>
                     <div class="code-snippet">
                         <div class="lang-tag">Java</div>
-                        <code id="code-java">long timestamp = System.currentTimeMillis(); // milliseconds</code>
+                        <code id="code-java">long timestamp = System.currentTimeMillis(); // milisegundos</code>
                     </div>
                     <div class="code-snippet">
                         <div class="lang-tag">PHP</div>
-                        <code id="code-php">$timestamp = time(); // seconds</code>
+                        <code id="code-php">$timestamp = time(); // segundos</code>
                     </div>
                     <div class="code-snippet">
                         <div class="lang-tag">SQL</div>
-                        <code id="code-sql">SELECT UNIX_TIMESTAMP(); -- seconds</code>
+                        <code id="code-sql">SELECT UNIX_TIMESTAMP(); -- segundos</code>
                     </div>
                 </div>
             </div>
@@ -189,47 +189,33 @@
 
         <!-- How to Use Section -->
         <section class="info-section">
-            <h2>How to Use</h2>
+            <h2>Cómo Usar</h2>
             <article class="card">
                 <ol class="steps-list">
-                    <li><strong>Check the Clock:</strong> The dashboard at the top shows the current Unix Epoch time
-                        ticking in real-time. You can pause it if needed.</li>
-                    <li><strong>Smart Conversion:</strong> In the "Converter Input" box, type any <strong>Unix
-                            Timestamp</strong> (e.g., <code>1704067200</code>) or a <strong>Date String</strong> (e.g.,
-                        <code>2024-01-01</code>). The tool auto-detects the format.
-                    </li>
-                    <li><strong>Select Precision:</strong> If you are working with high-precision timestamps (like from
-                        a database or system log), select Milliseconds, Microseconds, or Nanoseconds to get accurate
-                        date conversions.</li>
-                    <li><strong>View Results:</strong> Instantly see the converted date in UTC, Local Time, and ISO 8601
-                        formats. Relative time (e.g., "2 years ago") is also displayed.</li>
-                    <li><strong>Timezone:</strong> Use the dropdown to convert the time into major global timezones like
-                        PST, EST, JST, or IST.</li>
+                    <li><strong>Revisa el Reloj:</strong> El panel superior muestra el tiempo Unix Epoch actual transcurriendo en tiempo real. Puedes pausarlo si es necesario.</li>
+                    <li><strong>Conversión Inteligente:</strong> En el cuadro de "Entrada del Convertidor", escribe cualquier <strong>Unix Timestamp</strong> (ej. <code>1704067200</code>) o una <strong>Cadena de Fecha</strong> (ej., <code>2024-01-01</code>). La herramienta detecta el formato automáticamente.</li>
+                    <li><strong>Selecciona Precisión:</strong> Si estás trabajando con timestamps de alta precisión (como los de una base de datos o registro del sistema), selecciona Milisegundos, Microsegundos o Nanosegundos para obtener conversiones de fecha exactas.</li>
+                    <li><strong>Ver Resultados:</strong> Visualiza al instante la fecha convertida en formatos UTC, Hora Local e ISO 8601. También se muestra el tiempo relativo (ej. "hace 2 años").</li>
+                    <li><strong>Zona Horaria:</strong> Usa el desplegable para convertir la hora a las principales zonas horarias del mundo como PST, EST, JST o IST.</li>
                 </ol>
             </article>
         </section>
 
         <!-- About & Applications Section -->
         <section class="info-section">
-            <h2>About & Applications</h2>
+            <h2>Acerca de y Aplicaciones</h2>
             <div class="card-grid-2">
                 <article class="card">
-                    <h3>What is Unix Epoch?</h3>
-                    <p>The <strong>Unix epoch</strong> (or Unix time, POSIX time) is the number of seconds that have
-                        elapsed since <strong>January 1, 1970 (00:00:00 UTC)</strong>, minus leap seconds. It provides a
-                        uniform way for computer systems to track time regardless of timezones.</p>
+                    <h3>¿Qué es la Época Unix?</h3>
+                    <p>La <strong>época Unix</strong> (o tiempo Unix, tiempo POSIX) es el número de segundos transcurridos desde el <strong>1 de enero de 1970 (00:00:00 UTC)</strong>, excluyendo los segundos intercalares. Proporciona una forma uniforme para que los sistemas informáticos rastreen el tiempo independientemente de las zonas horarias.</p>
                 </article>
                 <article class="card">
-                    <h3>Common Applications</h3>
+                    <h3>Aplicaciones Comunes</h3>
                     <ul class="apps-list">
-                        <li><strong>Databases:</strong> Storing time as a simple integer (timestamp) is efficient and
-                            avoids timezone confusion in databases like MySQL, PostgreSQL, and MongoDB.</li>
-                        <li><strong>APIs:</strong> JSON APIs often return timestamps to ensure the client application
-                            can parse the date into its own local time easily.</li>
-                        <li><strong>Logging & Debugging:</strong> Developers use timestamps to correlate events across
-                            distributed systems where server clocks might be in different timezones.</li>
-                        <li><strong>File Systems:</strong> Operating systems (Linux, macOS, Windows) use timestamps to
-                            track when files are created, modified, or accessed.</li>
+                        <li><strong>Bases de datos:</strong> Almacenar el tiempo como un entero simple (timestamp) es eficiente y evita confusiones de zonas horarias en bases de datos como MySQL, PostgreSQL y MongoDB.</li>
+                        <li><strong>APIs:</strong> Las APIs JSON a menudo devuelven timestamps para garantizar que la aplicación cliente pueda analizar la fecha en su propia hora local fácilmente.</li>
+                        <li><strong>Registro y Depuración (Logging):</strong> Los desarrolladores usan timestamps para correlacionar eventos en sistemas distribuidos donde los relojes de los servidores pueden estar en diferentes zonas horarias.</li>
+                        <li><strong>Sistemas de archivos:</strong> Los sistemas operativos (Linux, macOS, Windows) usan timestamps para rastrear cuándo se crean, modifican o acceden los archivos.</li>
                     </ul>
                 </article>
             </div>

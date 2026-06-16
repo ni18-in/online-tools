@@ -79,7 +79,6 @@
         const textOpacityValue = document.getElementById('text-opacity-value');
         const textXInput = document.getElementById('text-x'); // New
         const textYInput = document.getElementById('text-y'); // New
-        // const textPositionSelect = document.getElementById('text-position'); // Removed
         const applyTextBtn = document.getElementById('apply-text-btn');
 
         // Export Panel Elements
@@ -116,8 +115,8 @@
         // --- Utility Functions ---
         function debounce(func, delay) { clearTimeout(debounceTimer); debounceTimer = setTimeout(func, delay); }
         function showLoading(show) { isProcessing = show; loadingOverlay.classList.toggle('show', show); }
-        function showMessage(message, type = 'info', duration = 3000) { /* ... (no changes) ... */ messageText.textContent = message; messageBox.className = `show ${type}`; if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId); messageBox.timeoutId = setTimeout(() => { messageBox.classList.remove('show'); messageBox.timeoutId = null; }, duration); }
-        function formatBytes(bytes, decimals = 1) { /* ... (no changes) ... */ if (!bytes || bytes === 0) return '0 Bytes'; const k = 1024; const dm = decimals < 0 ? 0 : decimals; const sizes = ['Bytes', 'KB', 'MB', 'GB']; const i = (bytes > 0) ? Math.floor(Math.log(bytes) / Math.log(k)) : 0; return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]; }
+        function showMessage(message, type = 'info', duration = 3000) { messageText.textContent = message; messageBox.className = `show ${type}`; if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId); messageBox.timeoutId = setTimeout(() => { messageBox.classList.remove('show'); messageBox.timeoutId = null; }, duration); }
+        function formatBytes(bytes, decimals = 1) { if (!bytes || bytes === 0) return '0 Bytes'; const k = 1024; const dm = decimals < 0 ? 0 : decimals; const sizes = ['Octets', 'Ko', 'Mo', 'Go']; const i = (bytes > 0) ? Math.floor(Math.log(bytes) / Math.log(k)) : 0; return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]; }
 
         // --- History Functions ---
         function updateHistoryButtons() { undoBtn.disabled = historyIndex <= 0; redoBtn.disabled = historyIndex >= historyStack.length - 1; }
@@ -132,7 +131,7 @@
                 historyStack.push(dataUrl);
                 if (historyStack.length > MAX_HISTORY) historyStack.shift();
                 historyIndex = historyStack.length - 1;
-            } catch (error) { console.error("Error generating data URL for history:", error); showMessage("Failed to save history state.", "error"); return; }
+            } catch (error) { console.error("Error generating data URL for history:", error); showMessage("Échec de l'enregistrement de l'historique.", "error"); return; }
             updateHistoryButtons();
         }
         function loadHistoryState(index) {
@@ -149,10 +148,9 @@
                 updateEstimatedSize(); updateHistoryButtons(); showLoading(false); isHistoryNavigation = false;
                 if (activeTool === 'adjust') resetAdjustmentSliders(false);
                 if (activeTool === 'resize') { resizeWidthInput.value = currentWidth; resizeHeightInput.value = currentHeight; }
-                // Add resets for other tools if needed
                 drawCurrentImageToCanvas(); // Redraw again to clear any lingering previews
             };
-            img.onerror = (err) => { console.error("Error loading history state image:", err); showMessage('Error loading history state.', 'error', 5000); showLoading(false); isHistoryNavigation = false; updateHistoryButtons(); };
+            img.onerror = (err) => { console.error("Error loading history state image:", err); showMessage("Erreur lors du chargement de l'historique.", 'error', 5000); showLoading(false); isHistoryNavigation = false; updateHistoryButtons(); };
             img.src = dataUrl;
         }
 
@@ -172,16 +170,15 @@
             deactivateAllToolButtons(); exportPanel.classList.remove('active');
             // Reset tool inputs
             resizeWidthInput.value = ''; resizeHeightInput.value = ''; resizeAspectRatioCheckbox.checked = true;
-            // Crop inputs removed
             resetAdjustmentSliders(false);
             borderWidthInput.value = 5; borderColorInput.value = '#000000';
             textInput.value = ''; textFontFamilySelect.value = 'Arial, sans-serif'; textSizeInput.value = 30;
             textBoldCheckbox.checked = false; textItalicCheckbox.checked = false; textColorInput.value = '#ffffff';
-            textAlignSelect.value = 'left'; textRotationInput.value = 0; // Default align left for X/Y
+            textAlignSelect.value = 'left'; textRotationInput.value = 0;
             textOpacitySlider.value = 0.7; textOpacityValue.textContent = '0.7';
-            textXInput.value = 10; textYInput.value = 10; // Default X/Y
+            textXInput.value = 10; textYInput.value = 10;
             convertFormatSelect.value = 'image/png'; convertQualitySlider.value = 92; qualityValue.textContent = '92';
-            downloadFilenameInput.value = 'edited-image'; qualityOptionDiv.classList.add('hidden'); webpOptionsDiv.classList.add('hidden');
+            downloadFilenameInput.value = 'image-modifiee'; qualityOptionDiv.classList.add('hidden'); webpOptionsDiv.classList.add('hidden');
             showLoading(false);
         }
 
@@ -199,23 +196,16 @@
         function initializeCropper() {
             if (!currentImage || cropperInstance) return;
             console.log("Initializing Cropper");
-            // Use the current committed image data
-            cropperImage.src = currentImage.src; // Use the Image object's src
-            canvas.style.display = 'none'; // Hide canvas
-            cropperImage.style.display = 'block'; // Show image
+            cropperImage.src = currentImage.src;
+            canvas.style.display = 'none';
+            cropperImage.style.display = 'block';
 
-            // Ensure image is loaded before initializing cropper if src was just set
-            // However, currentImage.src should already be loaded dataURL/blobURL
             cropperInstance = new Cropper(cropperImage, {
-                viewMode: 1, // restrict crop box to canvas
+                viewMode: 1,
                 dragMode: 'move',
                 autoCropArea: 0.8,
-                background: false, // Use CSS background
-                // responsive: true, // Handled by CSS max-width? Check docs
-                // checkOrientation: false, // Assuming orientation handled on upload if needed
-                // ready() { console.log("Cropper ready"); }, // Debug
+                background: false,
             });
-            // Set initial aspect ratio if needed (e.g., free)
             setCropperAspectRatio('free');
         }
 
@@ -224,9 +214,8 @@
                 console.log("Destroying Cropper");
                 cropperInstance.destroy();
                 cropperInstance = null;
-                cropperImage.style.display = 'none'; // Hide image
-                canvas.style.display = 'block'; // Show canvas
-                // Redraw current state on canvas after destroying cropper
+                cropperImage.style.display = 'none';
+                canvas.style.display = 'block';
                 if (currentImage) drawCurrentImageToCanvas();
             }
         }
@@ -234,7 +223,7 @@
         function setCropperAspectRatio(ratio) {
             if (!cropperInstance) return;
             let aspectRatio;
-            if (ratio === 'free') aspectRatio = NaN; // Free ratio
+            if (ratio === 'free') aspectRatio = NaN;
             else if (ratio === 'orig') aspectRatio = currentAspectRatio;
             else {
                 const parts = ratio.split('/');
@@ -246,7 +235,6 @@
 
         // --- Core Drawing and State Update ---
         function drawCurrentImageToCanvas() {
-            // If cropper is active, don't draw on main canvas
             if (cropperInstance) return;
 
             if (!currentImage) { console.warn("drawCurrentImageToCanvas called with no currentImage."); return; }
@@ -259,7 +247,7 @@
             ctx.filter = filters;
 
             try { ctx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); }
-            catch (e) { console.error("Error drawing image:", e); showMessage("Error displaying preview.", "error", 5000); previewPlaceholder.style.display = 'block'; canvas.style.display = 'none'; showLoading(false); return; }
+            catch (e) { console.error("Error drawing image:", e); showMessage("Erreur lors de l'affichage de l'aperçu.", "error", 5000); previewPlaceholder.style.display = 'block'; canvas.style.display = 'none'; showLoading(false); return; }
             ctx.filter = 'none';
 
             if (activeTool === 'border') {
@@ -272,7 +260,6 @@
         }
 
         function updateCurrentImageFromDataURL(dataUrl, callback) {
-            // Destroy cropper if active before updating main image
             if (cropperInstance) destroyCropper();
 
             showLoading(true);
@@ -280,19 +267,19 @@
             img.onload = () => {
                 currentImage = img; currentWidth = img.naturalWidth; currentHeight = img.naturalHeight;
                 currentAspectRatio = (currentHeight > 0) ? currentWidth / currentHeight : 1;
-                drawCurrentImageToCanvas(); // Redraw canvas with the new image
-                pushHistoryState(); // Push history *after* successful update and redraw
+                drawCurrentImageToCanvas();
+                pushHistoryState();
                 updateEstimatedSize(); showLoading(false);
                 if (callback) callback();
             };
-            img.onerror = (err) => { console.error("Error loading image object:", err); showMessage('Error processing applied changes.', 'error', 5000); showLoading(false); };
+            img.onerror = (err) => { console.error("Error loading image object:", err); showMessage("Erreur lors du traitement des modifications appliquées.", 'error', 5000); showLoading(false); };
             img.src = dataUrl;
         }
 
 
         // --- Event Handlers ---
         function handleFileSelect(file) {
-            if (!file || !file.type.startsWith('image/')) { showMessage('Invalid image file.', 'error'); return; }
+            if (!file || !file.type.startsWith('image/')) { showMessage("Fichier image invalide.", 'error'); return; }
             if (isProcessing) return;
             resetAppState(); showLoading(true);
             originalFileData = { name: file.name, size: file.size };
@@ -307,14 +294,14 @@
                     currentWidth = originalWidth; currentHeight = originalHeight;
                     currentAspectRatio = (currentHeight > 0) ? currentWidth / currentHeight : 1;
                     infoOrigDims.textContent = `${originalWidth} x ${originalHeight} px`;
-                    drawCurrentImageToCanvas(); pushHistoryState(); // Save initial state
-                    showMessage('Image loaded.', 'success'); exportPanel.classList.add('active');
+                    drawCurrentImageToCanvas(); pushHistoryState();
+                    showMessage("Image chargée.", 'success'); exportPanel.classList.add('active');
                     updateEstimatedSize(); showLoading(false);
                 };
-                img.onerror = (err) => { console.error("Error loading initial image object:", err); showMessage('Could not load image.', 'error', 5000); resetAppState(); showLoading(false); };
+                img.onerror = (err) => { console.error("Error loading initial image object:", err); showMessage("Impossible de charger l'image.", 'error', 5000); resetAppState(); showLoading(false); };
                 img.src = imageDataUrl;
             };
-            reader.onerror = (err) => { console.error("FileReader error:", err); showMessage('Error reading file.', 'error', 5000); resetAppState(); showLoading(false); };
+            reader.onerror = (err) => { console.error("FileReader error:", err); showMessage("Erreur de lecture du fichier.", 'error', 5000); resetAppState(); showLoading(false); };
             reader.readAsDataURL(file);
         }
         fileInput.addEventListener('change', (e) => { if (e.target.files.length > 0) handleFileSelect(e.target.files[0]); });
@@ -338,54 +325,47 @@
                 if (!originalImage || isProcessing) return;
                 const tool = button.dataset.tool;
 
-                // Destroy cropper if switching away from crop tool or deactivating it
                 if (activeTool === 'crop' && tool !== 'crop' && cropperInstance) {
                     destroyCropper();
                 }
-                // Remove text tool cursor if switching away
                 if (activeTool === 'text') canvas.classList.remove('text-tool-active');
-
 
                 if (tool === activeTool) { // Deactivate current tool
                     activeTool = null; deactivateAllToolButtons(); hideAllOptionsPanels();
-                    drawCurrentImageToCanvas(); // Redraw without preview
+                    drawCurrentImageToCanvas();
                     return;
                 }
 
                 // Activate new tool
                 deactivateAllToolButtons(); hideAllOptionsPanels();
-                // Don't clear preview here, let the new tool setup handle it
                 button.classList.add('active'); activeTool = tool;
                 optionsPlaceholder.style.display = 'none';
                 const optionsSection = document.getElementById(`options-${tool}`);
 
                 if (optionsSection) {
                     optionsSection.classList.add('active');
-                    // Setup tool state and trigger initial preview/UI
                     if (tool === 'resize') {
                         resizeWidthInput.value = currentWidth; resizeHeightInput.value = currentHeight;
-                        if (resizeWidthInput.value) updateResizePreview(); // Trigger preview
+                        if (resizeWidthInput.value) updateResizePreview();
                     } else if (tool === 'crop') {
-                        initializeCropper(); // Initialize Cropper.js
+                        initializeCropper();
                     } else if (tool === 'border') {
-                        updateBorderPreview(); // Trigger preview
+                        updateBorderPreview();
                     } else if (tool === 'text') {
-                        canvas.classList.add('text-tool-active'); // Add cursor
-                        updateTextPreview(); // Trigger preview
+                        canvas.classList.add('text-tool-active');
+                        updateTextPreview();
                     } else if (tool === 'adjust') {
-                        updateAdjustmentPreview(); // Trigger preview
+                        updateAdjustmentPreview();
                     } else {
-                        // Ensure canvas is visible if switching to a non-cropper tool
                         if (canvas.style.display === 'none') {
                             canvas.style.display = 'block';
                             cropperImage.style.display = 'none';
-                            if (currentImage) drawCurrentImageToCanvas(); // Redraw if needed
+                            if (currentImage) drawCurrentImageToCanvas();
                         }
                     }
                 } else {
                     console.warn(`Options panel for tool "${tool}" not found.`);
                     optionsPlaceholder.style.display = 'block'; activeTool = null;
-                    // Ensure canvas is visible if options panel fails
                     if (canvas.style.display === 'none') {
                         canvas.style.display = 'block';
                         cropperImage.style.display = 'none';
@@ -398,11 +378,11 @@
         // --- Tool Implementations ---
 
         // -- Resize --
-        function updateResizePreview() { /* ... (no changes) ... */ if (!currentImage || activeTool !== 'resize' || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { drawCurrentImageToCanvas(); return; } updateImageDetails(newWidth, newHeight); ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.imageSmoothingQuality = 'high'; ctx.imageSmoothingEnabled = true; try { ctx.drawImage(currentImage, 0, 0, newWidth, newHeight); } catch (e) { console.error("Error drawing resize preview:", e); drawCurrentImageToCanvas(); } }
+        function updateResizePreview() { if (!currentImage || activeTool !== 'resize' || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { drawCurrentImageToCanvas(); return; } updateImageDetails(newWidth, newHeight); ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.imageSmoothingQuality = 'high'; ctx.imageSmoothingEnabled = true; try { ctx.drawImage(currentImage, 0, 0, newWidth, newHeight); } catch (e) { console.error("Error drawing resize preview:", e); drawCurrentImageToCanvas(); } }
         resizeWidthInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if (!isNaN(newWidth) && newWidth > 0) resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); else resizeHeightInput.value = ''; } debounce(updateResizePreview, 250); });
         resizeHeightInput.addEventListener('input', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newHeight = parseInt(resizeHeightInput.value, 10); if (!isNaN(newHeight) && newHeight > 0) resizeWidthInput.value = Math.round(newHeight * currentAspectRatio); else resizeWidthInput.value = ''; } debounce(updateResizePreview, 250); });
         resizeAspectRatioCheckbox.addEventListener('change', () => { if (resizeAspectRatioCheckbox.checked && currentAspectRatio > 0) { const newWidth = parseInt(resizeWidthInput.value, 10); if (!isNaN(newWidth) && newWidth > 0) { resizeHeightInput.value = Math.round(newWidth / currentAspectRatio); debounce(updateResizePreview, 250); } } });
-        applyResizeBtn.addEventListener('click', () => { if (!currentImage || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { showMessage('Invalid dimensions.', 'error'); return; } if (newWidth === currentWidth && newHeight === currentHeight) { showMessage('Dimensions unchanged.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.imageSmoothingQuality = 'high'; tempCtx.imageSmoothingEnabled = true; tempCtx.drawImage(currentImage, 0, 0, newWidth, newHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Resize applied.', 'success')); });
+        applyResizeBtn.addEventListener('click', () => { if (!currentImage || isProcessing) return; const newWidth = parseInt(resizeWidthInput.value, 10); const newHeight = parseInt(resizeHeightInput.value, 10); if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) { showMessage('Dimensions invalides.', 'error'); return; } if (newWidth === currentWidth && newHeight === currentHeight) { showMessage('Dimensions inchangées.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.imageSmoothingQuality = 'high'; tempCtx.imageSmoothingEnabled = true; tempCtx.drawImage(currentImage, 0, 0, newWidth, newHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Redimensionnement appliqué.', 'success')); });
 
         // -- Crop (Using Cropper.js) --
         cropAspectBtns.forEach(btn => {
@@ -415,35 +395,22 @@
             if (!cropperInstance || isProcessing) return;
             showLoading(true);
             try {
-                // Get cropped canvas from Cropper.js
-                const croppedCanvas = cropperInstance.getCroppedCanvas({
-                    // Options to maintain quality if possible
-                    // fillStyle: '#fff', // Optional background for transparent images
-                    // imageSmoothingEnabled: true,
-                    // imageSmoothingQuality: 'high',
-                });
-
+                const croppedCanvas = cropperInstance.getCroppedCanvas({});
                 if (!croppedCanvas) {
                     throw new Error("Failed to get cropped canvas.");
                 }
-
-                // Update the main image state
                 updateCurrentImageFromDataURL(croppedCanvas.toDataURL('image/png'), () => {
-                    showMessage('Crop applied.', 'success');
-                    // No need to destroy cropper here, updateCurrentImageFromDataURL handles it
+                    showMessage('Rognage appliqué.', 'success');
                 });
             } catch (error) {
                 console.error("Error applying crop:", error);
-                showMessage("Failed to apply crop.", "error");
+                showMessage("Échec de l'application du rognage.", "error");
                 showLoading(false);
-                // Optionally destroy cropper on error?
-                // destroyCropper();
             }
         });
         cancelCropBtn.addEventListener('click', () => {
             if (cropperInstance) {
                 destroyCropper();
-                // Optionally deactivate the tool button
                 activeTool = null;
                 deactivateAllToolButtons();
                 hideAllOptionsPanels();
@@ -452,34 +419,34 @@
 
 
         // -- Rotate --
-        function applyRotation(degrees) { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; showLoading(true); setTimeout(() => { try { const rad = degrees * Math.PI / 180; const sin = Math.sin(rad); const cos = Math.cos(rad); const newWidth = Math.abs(currentWidth * cos) + Math.abs(currentHeight * sin); const newHeight = Math.abs(currentWidth * sin) + Math.abs(currentHeight * cos); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = Math.round(newWidth); tempCanvas.height = Math.round(newHeight); tempCtx.translate(tempCanvas.width / 2, tempCanvas.height / 2); tempCtx.rotate(rad); tempCtx.drawImage(currentImage, -currentWidth / 2, -currentHeight / 2, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage(`Rotated ${degrees}°`, 'success')); } catch (error) { console.error("Error during rotation:", error); showMessage("Failed rotation.", "error"); showLoading(false); } }, 10); }
+        function applyRotation(degrees) { if (!currentImage || isProcessing) return; showLoading(true); setTimeout(() => { try { const rad = degrees * Math.PI / 180; const sin = Math.sin(rad); const cos = Math.cos(rad); const newWidth = Math.abs(currentWidth * cos) + Math.abs(currentHeight * sin); const newHeight = Math.abs(currentWidth * sin) + Math.abs(currentHeight * cos); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = Math.round(newWidth); tempCanvas.height = Math.round(newHeight); tempCtx.translate(tempCanvas.width / 2, tempCanvas.height / 2); tempCtx.rotate(rad); tempCtx.drawImage(currentImage, -currentWidth / 2, -currentHeight / 2, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage(`Rotation de ${degrees}° appliquée`, 'success')); } catch (error) { console.error("Error during rotation:", error); showMessage("Échec de la rotation.", "error"); showLoading(false); } }, 10); }
         rotateLeftBtn.addEventListener('click', () => applyRotation(-90));
         rotateRightBtn.addEventListener('click', () => applyRotation(90));
 
         // -- Flip --
-        function applyFlip(direction) { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; showLoading(true); setTimeout(() => { try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.translate(direction === 'horizontal' ? tempCanvas.width : 0, direction === 'vertical' ? tempCanvas.height : 0); tempCtx.scale(direction === 'horizontal' ? -1 : 1, direction === 'vertical' ? -1 : 1); tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage(`Flipped ${direction}ly`, 'success')); } catch (error) { console.error("Error during flip:", error); showMessage("Failed flip.", "error"); showLoading(false); } }, 10); }
+        function applyFlip(direction) { if (!currentImage || isProcessing) return; showLoading(true); setTimeout(() => { try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.translate(direction === 'horizontal' ? tempCanvas.width : 0, direction === 'vertical' ? tempCanvas.height : 0); tempCtx.scale(direction === 'horizontal' ? -1 : 1, direction === 'vertical' ? -1 : 1); tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage(`Retournement ${direction === 'horizontal' ? 'horizontal' : 'vertical'} appliqué`, 'success')); } catch (error) { console.error("Error during flip:", error); showMessage("Échec du retournement.", "error"); showLoading(false); } }, 10); }
         flipHorizontalBtn.addEventListener('click', () => applyFlip('horizontal'));
         flipVerticalBtn.addEventListener('click', () => applyFlip('vertical'));
 
 
         // -- Adjustments --
-        function updateAdjustmentPreview() { /* ... (no changes) ... */ if (!currentImage || isProcessing || activeTool !== 'adjust') return; drawCurrentImageToCanvas(); }
-        function resetAdjustmentSliders(redraw = true) { /* ... (no changes) ... */ brightnessSlider.value = 100; contrastSlider.value = 100; saturationSlider.value = 100; grayscaleSlider.value = 0; sepiaSlider.value = 0; blurSlider.value = 0; brightnessValue.textContent = '100'; contrastValue.textContent = '100'; saturationValue.textContent = '100'; grayscaleValue.textContent = '0'; sepiaValue.textContent = '0'; blurValue.textContent = '0'; if (redraw && currentImage) drawCurrentImageToCanvas(); }
+        function updateAdjustmentPreview() { if (!currentImage || isProcessing || activeTool !== 'adjust') return; drawCurrentImageToCanvas(); }
+        function resetAdjustmentSliders(redraw = true) { brightnessSlider.value = 100; contrastSlider.value = 100; saturationSlider.value = 100; grayscaleSlider.value = 0; sepiaSlider.value = 0; blurSlider.value = 0; brightnessValue.textContent = '100'; contrastValue.textContent = '100'; saturationValue.textContent = '100'; grayscaleValue.textContent = '0'; sepiaValue.textContent = '0'; blurValue.textContent = '0'; if (redraw && currentImage) drawCurrentImageToCanvas(); }
         [brightnessSlider, contrastSlider, saturationSlider, grayscaleSlider, sepiaSlider, blurSlider].forEach(slider => { slider.addEventListener('input', (e) => { const valueSpanId = `${e.target.id.split('-')[0]}-value`; document.getElementById(valueSpanId).textContent = e.target.value; debounce(updateAdjustmentPreview, 50); }); });
-        applyAdjustBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const currentFilters = [`brightness(${brightnessSlider.value}%)`, `contrast(${contrastSlider.value}%)`, `saturate(${saturationSlider.value}%)`, `grayscale(${grayscaleSlider.value}%)`, `sepia(${sepiaSlider.value}%)`, `blur(${blurSlider.value}px)`].join(' '); const isDefault = brightnessSlider.value == 100 && contrastSlider.value == 100 && saturationSlider.value == 100 && grayscaleSlider.value == 0 && sepiaSlider.value == 0 && blurSlider.value == 0; if (isDefault) { showMessage('No adjustments applied.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.filter = currentFilters; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Adjustments applied.', 'success')); });
+        applyAdjustBtn.addEventListener('click', () => { if (!currentImage || isProcessing) return; const currentFilters = [`brightness(${brightnessSlider.value}%)`, `contrast(${contrastSlider.value}%)`, `saturate(${saturationSlider.value}%)`, `grayscale(${grayscaleSlider.value}%)`, `sepia(${sepiaSlider.value}%)`, `blur(${blurSlider.value}px)`].join(' '); const isDefault = brightnessSlider.value == 100 && contrastSlider.value == 100 && saturationSlider.value == 100 && grayscaleSlider.value == 0 && sepiaSlider.value == 0 && blurSlider.value == 0; if (isDefault) { showMessage('Aucun ajustement appliqué.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.filter = currentFilters; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Ajustements appliqués.', 'success')); });
         resetAdjustBtn.addEventListener('click', () => resetAdjustmentSliders(true));
 
 
         // -- Border --
-        function updateBorderPreview() { /* ... (no changes) ... */ if (!currentImage || isProcessing || activeTool !== 'border') return; drawCurrentImageToCanvas(); }
+        function updateBorderPreview() { if (!currentImage || isProcessing || activeTool !== 'border') return; drawCurrentImageToCanvas(); }
         [borderWidthInput, borderColorInput].forEach(input => { input.addEventListener('input', () => debounce(updateBorderPreview, 100)); });
-        applyBorderBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const borderWidth = parseInt(borderWidthInput.value, 10); const borderColor = borderColorInput.value; if (isNaN(borderWidth) || borderWidth < 0) { showMessage('Invalid border width.', 'error'); return; } if (borderWidth === 0) { showMessage('Border width is zero.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const newWidth = currentWidth + borderWidth * 2; const newHeight = currentHeight + borderWidth * 2; tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.fillStyle = borderColor; tempCtx.fillRect(0, 0, newWidth, newHeight); tempCtx.drawImage(currentImage, borderWidth, borderWidth, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Border applied.', 'success')); });
+        applyBorderBtn.addEventListener('click', () => { if (!currentImage || isProcessing) return; const borderWidth = parseInt(borderWidthInput.value, 10); const borderColor = borderColorInput.value; if (isNaN(borderWidth) || borderWidth < 0) { showMessage('Largeur de bordure invalide.', 'error'); return; } if (borderWidth === 0) { showMessage('La largeur de la bordure est de zéro.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const newWidth = currentWidth + borderWidth * 2; const newHeight = currentHeight + borderWidth * 2; tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.fillStyle = borderColor; tempCtx.fillRect(0, 0, newWidth, newHeight); tempCtx.drawImage(currentImage, borderWidth, borderWidth, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Bordure appliquée.', 'success')); });
 
 
         // -- Text Tool (Enhanced) --
         function drawText(targetCtx, text, canvasWidth, canvasHeight) {
             const lines = text.split('\n');
-            if (!lines.length || !text) return; // Also check if text is empty
+            if (!lines.length || !text) return;
 
             const fontSize = parseInt(textSizeInput.value, 10) || 30;
             const fontFamily = textFontFamilySelect.value || 'Arial, sans-serif';
@@ -487,11 +454,11 @@
             const isItalic = textItalicCheckbox.checked;
             const color = textColorInput.value;
             const opacity = parseFloat(textOpacitySlider.value) || 0.7;
-            const align = textAlignSelect.value || 'left'; // Default left for X/Y coords
+            const align = textAlignSelect.value || 'left';
             const rotation = parseInt(textRotationInput.value, 10) || 0;
             const rotationRad = rotation * Math.PI / 180;
-            const x = parseInt(textXInput.value, 10) || 0; // Get X from input
-            const y = parseInt(textYInput.value, 10) || 0; // Get Y from input
+            const x = parseInt(textXInput.value, 10) || 0;
+            const y = parseInt(textYInput.value, 10) || 0;
 
             let fontStyle = isItalic ? 'italic' : 'normal';
             let fontWeight = isBold ? 'bold' : 'normal';
@@ -499,76 +466,70 @@
             targetCtx.fillStyle = color;
             targetCtx.globalAlpha = opacity;
             targetCtx.textAlign = align;
-            targetCtx.textBaseline = 'top'; // Use top baseline for easier X/Y positioning
+            targetCtx.textBaseline = 'top';
 
             const lineHeight = fontSize * 1.2;
 
             targetCtx.save();
-            targetCtx.translate(x, y); // Move origin to the specified X, Y (top-left)
-            targetCtx.rotate(rotationRad); // Rotate context around the new origin
+            targetCtx.translate(x, y);
+            targetCtx.rotate(rotationRad);
 
-            // Draw each line relative to the (rotated) origin
             for (let i = 0; i < lines.length; i++) {
-                targetCtx.fillText(lines[i], 0, i * lineHeight); // Draw at (0, N*lineHeight) relative to origin
+                targetCtx.fillText(lines[i], 0, i * lineHeight);
             }
 
-            targetCtx.restore(); // Restore context state
-            targetCtx.globalAlpha = 1.0; // Reset global alpha
+            targetCtx.restore();
+            targetCtx.globalAlpha = 1.0;
         }
 
         function updateTextPreview() {
             if (!currentImage || isProcessing || activeTool !== 'text') return;
-            drawCurrentImageToCanvas(); // Redraw with text preview
+            drawCurrentImageToCanvas();
         }
 
-        // Canvas click listener for text positioning
         canvas.addEventListener('click', (e) => {
-            if (activeTool !== 'text' || isProcessing || cropperInstance) return; // Only active for text tool when not cropping
+            if (activeTool !== 'text' || isProcessing || cropperInstance) return;
 
             const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;   // relationship bitmap vs. element for X
-            const scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
 
-            // Calculate click coordinates relative to the canvas's internal resolution
             const canvasX = Math.round((e.clientX - rect.left) * scaleX);
             const canvasY = Math.round((e.clientY - rect.top) * scaleY);
 
-            // Update the input fields
             textXInput.value = canvasX;
             textYInput.value = canvasY;
 
-            // Trigger preview update
             updateTextPreview();
         });
 
 
         textOpacitySlider.addEventListener('input', (e) => { textOpacityValue.textContent = parseFloat(e.target.value).toFixed(2); debounce(updateTextPreview, 100); });
-        // Add listeners for all text controls
         [textInput, textFontFamilySelect, textSizeInput, textBoldCheckbox, textItalicCheckbox,
-            textColorInput, textAlignSelect, textRotationInput, textXInput, textYInput /*, textPositionSelect - removed */].forEach(input => {
+            textColorInput, textAlignSelect, textRotationInput, textXInput, textYInput].forEach(input => {
                 input.addEventListener('input', () => debounce(updateTextPreview, 100));
-                input.addEventListener('change', () => debounce(updateTextPreview, 100)); // For selects/checkboxes/numbers
+                input.addEventListener('change', () => debounce(updateTextPreview, 100));
             });
 
         applyTextBtn.addEventListener('click', () => {
             if (!currentImage || isProcessing) return;
             const text = textInput.value;
-            if (!text) { showMessage('Please enter text to apply.', 'info'); return; }
+            if (!text) { showMessage('Veuillez saisir le texte à appliquer.', 'info'); return; }
             showLoading(true);
             const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
             tempCanvas.width = currentWidth; tempCanvas.height = currentHeight;
             tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight);
-            drawText(tempCtx, text, currentWidth, currentHeight); // Draw text on top
-            updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Text applied.', 'success'));
+            drawText(tempCtx, text, currentWidth, currentHeight);
+            updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Texte appliqué.', 'success'));
         });
 
 
         // -- Export / Download --
-        function updateEstimatedSize() { /* ... (no changes) ... */ if (!currentImage || isProcessing) { estimatedSizeSpan.textContent = 'N/A'; return; } setTimeout(() => { if (!currentImage) return; const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; let dataUrl; try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') dataUrl = tempCanvas.toDataURL('image/png'); else if (format === 'image/jpeg') dataUrl = tempCanvas.toDataURL('image/jpeg', quality); else if (format === 'image/webp') dataUrl = tempCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); else { estimatedSizeSpan.textContent = 'Error'; return; } const base64Length = dataUrl.length - dataUrl.indexOf(',') - 1; const approxBytes = Math.ceil(base64Length * 0.75); estimatedSizeSpan.textContent = `~ ${formatBytes(approxBytes)}`; } catch (error) { console.error("Size estimation error:", error); estimatedSizeSpan.textContent = 'Error'; } }, 10); }
+        function updateEstimatedSize() { if (!currentImage || isProcessing) { estimatedSizeSpan.textContent = 'N/A'; return; } setTimeout(() => { if (!currentImage) return; const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; let dataUrl; try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') dataUrl = tempCanvas.toDataURL('image/png'); else if (format === 'image/jpeg') dataUrl = tempCanvas.toDataURL('image/jpeg', quality); else if (format === 'image/webp') dataUrl = tempCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); else { estimatedSizeSpan.textContent = 'Erreur'; return; } const base64Length = dataUrl.length - dataUrl.indexOf(',') - 1; const approxBytes = Math.ceil(base64Length * 0.75); estimatedSizeSpan.textContent = `~ ${formatBytes(approxBytes)}`; } catch (error) { console.error("Size estimation error:", error); estimatedSizeSpan.textContent = 'Erreur'; } }, 10); }
         convertFormatSelect.addEventListener('change', () => { const format = convertFormatSelect.value; const isLossy = format === 'image/jpeg' || (format === 'image/webp' && !webpLosslessCheckbox.checked); qualityOptionDiv.classList.toggle('hidden', !isLossy); webpOptionsDiv.classList.toggle('hidden', format !== 'image/webp'); debounce(updateEstimatedSize, 200); });
         webpLosslessCheckbox.addEventListener('change', () => { convertFormatSelect.dispatchEvent(new Event('change')); });
         convertQualitySlider.addEventListener('input', (e) => { qualityValue.textContent = e.target.value; debounce(updateEstimatedSize, 200); });
-        downloadBtn.addEventListener('click', () => { /* ... (no changes) ... */ if (!currentImage || isProcessing) { showMessage('No image to download.', 'info'); return; } const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; const filename = (downloadFilenameInput.value || 'edited-image').replace(/[^a-z0-9_\-.]/gi, '_'); let finalFilename = filename; let fileExtension = ''; let dataUrl; try { showLoading(true); const finalCanvas = document.createElement('canvas'); const finalCtx = finalCanvas.getContext('2d'); finalCanvas.width = currentWidth; finalCanvas.height = currentHeight; finalCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') { dataUrl = finalCanvas.toDataURL('image/png'); fileExtension = '.png'; } else if (format === 'image/jpeg') { dataUrl = finalCanvas.toDataURL('image/jpeg', quality); fileExtension = '.jpg'; } else if (format === 'image/webp') { dataUrl = finalCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); fileExtension = '.webp'; } else { showMessage('Unsupported format.', 'error'); showLoading(false); return; } if (!finalFilename.toLowerCase().endsWith(fileExtension)) finalFilename += fileExtension; const link = document.createElement('a'); link.href = dataUrl; link.download = finalFilename; document.body.appendChild(link); link.click(); document.body.removeChild(link); showMessage('Download started.', 'success'); } catch (error) { console.error("Download Error:", error); showMessage(`Error generating image: ${error.message}`, 'error'); } finally { showLoading(false); } });
+        downloadBtn.addEventListener('click', () => { if (!currentImage || isProcessing) { showMessage('Aucune image à télécharger.', 'info'); return; } const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; const filename = (downloadFilenameInput.value || 'image-modifiee').replace(/[^a-z0-9_\-.]/gi, '_'); let finalFilename = filename; let fileExtension = ''; let dataUrl; try { showLoading(true); const finalCanvas = document.createElement('canvas'); const finalCtx = finalCanvas.getContext('2d'); finalCanvas.width = currentWidth; finalCanvas.height = currentHeight; finalCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') { dataUrl = finalCanvas.toDataURL('image/png'); fileExtension = '.png'; } else if (format === 'image/jpeg') { dataUrl = finalCanvas.toDataURL('image/jpeg', quality); fileExtension = '.jpg'; } else if (format === 'image/webp') { dataUrl = finalCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); fileExtension = '.webp'; } else { showMessage('Format non pris en charge.', 'error'); showLoading(false); return; } if (!finalFilename.toLowerCase().endsWith(fileExtension)) finalFilename += fileExtension; const link = document.createElement('a'); link.href = dataUrl; link.download = finalFilename; document.body.appendChild(link); link.click(); document.body.removeChild(link); showMessage('Téléchargement démarré.', 'success'); } catch (error) { console.error("Download Error:", error); showMessage(`Erreur de génération de l'image : ${error.message}`, 'error'); } finally { showLoading(false); } });
 
         // --- Initial Setup ---
         resetAppState(); // Initialize the UI correctly

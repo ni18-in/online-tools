@@ -247,7 +247,7 @@
         const downloadButton = document.getElementById('downloadButton');
         const printButton = document.getElementById('printButton');
 
-        let currentLanguage = 'en';
+        let currentLanguage = 'es';
 
         // --- Core Functions ---
         function performComparison() {
@@ -384,6 +384,7 @@
             currentLanguage = langCode;
             localStorage.setItem('textCompare_language', langCode);
             document.documentElement.lang = langCode; 
+            languageSelector.value = langCode;
             applyLocalization();
             if (text1Input.value === "" && text2Input.value === "") {
                 performComparison();

@@ -39,25 +39,25 @@
          */
         function clearData() {
             // Confirm with the user via the custom modal instead of alert/confirm
-            showModal('Confirm Clear', 'Are you sure you want to clear ALL saved data? This cannot be undone.', 'error');
+            showModal('Confirmar borrado', '¿Estás seguro de que quieres borrar TODOS los datos guardados? Esto no se puede deshacer.', 'error');
             
             // Override the modal's default close button action to include the clear logic
             const modalCloseBtn = document.querySelector('#app-modal button');
-            modalCloseBtn.textContent = 'Cancel';
+            modalCloseBtn.textContent = 'Cancelar';
             modalCloseBtn.onclick = closeModal;
             
             // Create a dedicated confirmation button
             const confirmBtn = document.createElement('button');
-            confirmBtn.textContent = 'Yes, Clear Data';
+            confirmBtn.textContent = 'Sí, borrar datos';
             confirmBtn.className = 'px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150 ml-2';
             confirmBtn.onclick = function() {
                 localStorage.removeItem('gradeCalculatorData');
                 categories = [];
                 renderCategories();
                 closeModal();
-                showModal('Data Cleared', 'All saved data has been successfully cleared!', 'success');
+                showModal('Datos borrados', '¡Todos los datos guardados han sido borrados con éxito!', 'success');
                 // Restore original close button handler after success
-                document.querySelector('#app-modal button').textContent = 'Close';
+                document.querySelector('#app-modal button').textContent = 'Cerrar';
                 document.querySelector('#app-modal button').onclick = closeModal;
             };
 
@@ -87,7 +87,7 @@
             linkElement.click();
             document.body.removeChild(linkElement); // Cleanup
             
-            showModal('Success', 'Data exported as grade_calculator_data.json!', 'success');
+            showModal('Éxito', '¡Datos exportados como grade_calculator_data.json!', 'success');
         }
 
         // --- Utility Functions (Modal) ---
@@ -117,7 +117,7 @@
             if (modalFooter.children.length > 1 || type === 'success') {
                  modalFooter.innerHTML = '';
                  const closeBtn = document.createElement('button');
-                 closeBtn.textContent = 'Close';
+                 closeBtn.textContent = 'Cerrar';
                  closeBtn.className = 'px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150';
                  closeBtn.onclick = closeModal;
                  modalFooter.appendChild(closeBtn);
@@ -183,7 +183,7 @@
 
             // Update Total Weight Display and Validation
             const actualTotalWeight = categories.reduce((sum, cat) => sum + cat.weight, 0);
-            totalWeightEl.textContent = `Total Weight: ${actualTotalWeight}%`;
+            totalWeightEl.textContent = `Peso total: ${actualTotalWeight}%`;
             
             if (actualTotalWeight !== 100 && categories.length > 0) {
                 weightErrorEl.classList.remove('hidden');
@@ -201,7 +201,7 @@
             }
             
             if (!allCategoriesHaveAssignments && categories.length > 0) {
-                 finalGradeEl.textContent = 'Incomplete Data';
+                 finalGradeEl.textContent = 'Datos incompletos';
             }
 
 
@@ -218,7 +218,7 @@
             summaryBreakdownEl.innerHTML = '';
 
             if (breakdown.length === 0) {
-                 summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">No categories defined.</p>';
+                 summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">No se han definido categorías.</p>';
                  return;
             }
 
@@ -231,7 +231,7 @@
                         <span class="font-bold text-lg">${item.score}%</span>
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-400">
-                        ${item.pointsEarned.toFixed(2)}/${item.pointsPossible.toFixed(2)} pts completed. Contributes ${item.contributes}%
+                        ${item.pointsEarned.toFixed(2)}/${item.pointsPossible.toFixed(2)} pts completados. Aporta ${item.contributes}%
                     </div>
                 `;
                 itemEl.innerHTML = content;
@@ -242,7 +242,7 @@
             const totalEl = document.createElement('div');
             totalEl.className = 'mt-3 pt-3 border-t border-gray-300 dark:border-gray-600 flex justify-between font-bold text-base';
             totalEl.innerHTML = `
-                <span>Total Calculated Weighted Score</span>
+                <span>Puntuación ponderada calculada total</span>
                 <span>${totalWeightedScore.toFixed(2)} pts</span>
             `;
             summaryBreakdownEl.appendChild(totalEl);
@@ -285,8 +285,8 @@
                 // Assignments Header (Table style)
                 categoryHTML += `
                     <div class="assignment-row-grid font-semibold text-sm text-gray-600 dark:text-gray-400 border-b pb-1" aria-hidden="true">
-                        <span class="truncate">Assignment Name</span>
-                        <span class="text-right">Score</span>
+                        <span class="truncate">Nombre de tarea</span>
+                        <span class="text-right">Nota</span>
                         <span></span>
                         <span class="text-right">Total</span>
                         <span></span>
@@ -303,11 +303,11 @@
                 // Add Assignment Form
                 categoryHTML += `
                     <div class="flex flex-wrap sm:flex-nowrap gap-2 pt-3 border-t border-indigo-200 dark:border-gray-700" role="form" aria-labelledby="cat-title-${catIndex}">
-                        <input type="text" id="assign-name-${catIndex}" placeholder="New Assignment Name" aria-label="New assignment name for ${category.name}" class="p-2 w-full sm:w-1/3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <input type="number" id="assign-score-${catIndex}" placeholder="Score" min="0" aria-label="Score earned for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <input type="number" id="assign-points-${catIndex}" placeholder="Total" min="1" aria-label="Total points for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <button onclick="addAssignment(${catIndex})" title="Add assignment to ${category.name}" class="p-2 w-full sm:w-1/6 bg-indigo-500 text-white text-sm rounded-lg hover:bg-indigo-600 transition duration-150 shadow-sm">
-                            Add
+                        <input type="text" id="assign-name-${catIndex}" placeholder="Nombre de tarea nueva" aria-label="Nombre de tarea nueva para ${category.name}" class="p-2 w-full sm:w-1/3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-score-${catIndex}" placeholder="Nota" min="0" aria-label="Nota obtenida para tarea nueva" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-points-${catIndex}" placeholder="Total" min="1" aria-label="Puntos totales para tarea nueva" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <button onclick="addAssignment(${catIndex})" title="Añadir tarea a ${category.name}" class="p-2 w-full sm:w-1/6 bg-indigo-500 text-white text-sm rounded-lg hover:bg-indigo-600 transition duration-150 shadow-sm">
+                            Añadir
                         </button>
                     </div>
                 `;
@@ -329,8 +329,8 @@
                     
                     <input type="number" value="${assignment.score !== null ? assignment.score : ''}" 
                            oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'score', this.value)" 
-                           placeholder="Score" min="0" 
-                           aria-label="Score earned for ${assignmentName}"
+                           placeholder="Nota" min="0" 
+                           aria-label="Nota obtenida para ${assignmentName}"
                            class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
                     
                     <span class="text-gray-500 dark:text-gray-400 text-center font-bold" aria-hidden="true">/</span>
@@ -338,7 +338,7 @@
                     <input type="number" value="${assignment.pointsPossible !== null ? assignment.pointsPossible : ''}" 
                            oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'pointsPossible', this.value)" 
                            placeholder="Total" min="1" 
-                           aria-label="Total possible points for ${assignmentName}"
+                           aria-label="Puntos totales posibles para ${assignmentName}"
                            class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
                     
                     <button onclick="removeAssignment(${catIndex}, ${assignIndex})" title="Remove Assignment: ${assignmentName}" aria-label="Remove assignment ${assignmentName}" class="text-red-400 hover:text-red-600 transition duration-150 p-1 ml-auto">
@@ -360,12 +360,12 @@
             const weight = parseFloat(weightInput.value);
 
             if (!name) {
-                showModal('Input Required', 'Please enter a name for the category.');
+                showModal('Entrada requerida', 'Por favor ingresa un nombre para la categoría.');
                 return;
             }
 
             if (isNaN(weight) || weight <= 0 || weight > 100) {
-                showModal('Invalid Weight', 'Please enter a valid weight between 1 and 100.');
+                showModal('Peso inválido', 'Por favor ingresa un peso válido entre 1 y 100.');
                 return;
             }
 
@@ -400,19 +400,19 @@
 
             // Basic validation for new assignment
             if (!name) {
-                showModal('Input Required', 'Please enter a name for the assignment.');
+                showModal('Entrada requerida', 'Por favor ingresa un nombre para la tarea.');
                 return;
             }
             if (scoreInput.value.trim() !== '' && (isNaN(score) || score < 0)) {
-                showModal('Invalid Score', 'Score must be a non-negative number.');
+                showModal('Puntuación inválida', 'La puntuación debe ser un número no negativo.');
                 return;
             }
             if (isNaN(pointsPossible) || pointsPossible <= 0) {
-                showModal('Invalid Total Points', 'Total Points must be a positive number.');
+                showModal('Puntos totales inválidos', 'Los puntos totales deben ser un número positivo.');
                 return;
             }
             if (score > pointsPossible) {
-                showModal('Score Error', 'The score cannot be greater than the total possible points.');
+                showModal('Error de puntuación', 'La puntuación no puede ser mayor que los puntos totales posibles.');
                 return;
             }
 
@@ -458,7 +458,7 @@
             // Simple validation check on update
             const assignment = categories[catIndex].assignments[assignIndex];
             if (assignment.score !== null && assignment.pointsPossible !== null && assignment.score > assignment.pointsPossible) {
-                showModal('Score Error', 'Score cannot be greater than Total Points.');
+                showModal('Error de puntuación', 'La puntuación no puede ser mayor que los puntos totales.');
                 
                 // Revert the change to prevent inconsistent display state, requires re-rendering
                 categories[catIndex].assignments[assignIndex][field] = null; 

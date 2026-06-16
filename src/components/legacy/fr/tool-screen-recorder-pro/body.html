@@ -1,137 +1,137 @@
-<a href="#mainContent" class="skip-link">Skip to main content</a>
+<a href="#mainContent" class="skip-link">Passer au contenu principal</a>
     <header>
-        <a href="https://online-tools.ni18.in/" class="site-title">
+        <a href="https://online-tools.ni18.in/fr/" class="site-title">
             <h1>
                 <span class="material-icons" aria-hidden="true">screen_share</span>
-                Screen Recorder Pro
+                Enregistreur d'Écran Pro
             </h1>
         </a>
 
-        <nav aria-label="Main navigation">
-            <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <nav aria-label="Navigation principale">
+            <button class="menu-toggle" id="menuToggleBtn" aria-label="Basculer le menu" aria-expanded="false" aria-controls="navLinks">
                 <span class="material-icons">menu</span>
             </button>
             <ul id="navLinks">
-                <li><a href="#home" class="nav-link active" aria-current="page">Home</a></li>
-                <li><a href="#how-to-use" class="nav-link">How to Use</a></li>
-                <li><a href="#downloads" class="nav-link">Downloads</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#home" class="nav-link active" aria-current="page">Accueil</a></li>
+                <li><a href="#how-to-use" class="nav-link">Comment utiliser</a></li>
+                <li><a href="#downloads" class="nav-link">Téléchargements</a></li>
+                <li><a href="#about" class="nav-link">À propos</a></li>
             </ul>
         </nav>
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Basculer le mode sombre">
             <span class="material-icons">brightness_4</span> 
         </button>
     </header>
 
     <main id="mainContent">
         <section id="home" class="active" aria-labelledby="homeHeading">
-            <h2 id="homeHeading">Record Your Screen</h2>
+            <h2 id="homeHeading">Enregistrer votre écran</h2>
             <fieldset class="settings-group">
-                <legend>Recording Options</legend>
+                <legend>Options d'enregistrement</legend>
                 <label for="recordAudio">
                     <input type="checkbox" id="recordAudio" checked>
-                    <span>Record Audio (Master Switch)</span>
+                    <span>Enregistrer l'audio (Interrupteur principal)</span>
                 </label>
                  <label for="recordSystemAudio" class="mt-2"> <input type="checkbox" id="recordSystemAudio" checked>
-                    <span>Record System Audio (Tab/Window audio)</span>
+                    <span>Enregistrer l'audio du système (audio de l'onglet/fenêtre)</span>
                 </label>
                  <label for="recordMicrophone" class="mt-2">
                     <input type="checkbox" id="recordMicrophone" checked>
-                    <span>Record Microphone</span>
+                    <span>Enregistrer le microphone</span>
                 </label>
             </fieldset>
 
             <div class="button-group">
                 <button id="startRecordingBtn" class="btn">
-                    <span class="material-icons" aria-hidden="true">fiber_manual_record</span> Start Recording
+                    <span class="material-icons" aria-hidden="true">fiber_manual_record</span> Démarrer l'enregistrement
                 </button>
                 <button id="pauseRecordingBtn" class="btn secondary" disabled aria-disabled="true">
-                    <span class="material-icons" aria-hidden="true">pause</span> Pause
+                    <span class="material-icons" aria-hidden="true">pause</span> Suspendre
                 </button>
                 <button id="resumeRecordingBtn" class="btn secondary" disabled aria-disabled="true">
-                    <span class="material-icons" aria-hidden="true">play_arrow</span> Resume
+                    <span class="material-icons" aria-hidden="true">play_arrow</span> Reprendre
                 </button>
                 <button id="stopRecordingBtn" class="btn error" disabled aria-disabled="true">
-                    <span class="material-icons" aria-hidden="true">stop</span> Stop Recording
+                    <span class="material-icons" aria-hidden="true">stop</span> Arrêter l'enregistrement
                 </button>
             </div>
 
             <div class="recording-status" style="display: none;" role="status">
                 <div class="recording-indicator" aria-hidden="true"></div>
-                <span>Recording...</span>
+                <span>Enregistrement en cours...</span>
                 <span id="timer" aria-live="polite">00:00:00</span>
             </div>
-            <video id="previewVideo" controls style="display:none; width: 100%; max-width: 600px; margin-top: 1.5rem; border-radius: var(--border-radius-medium); border: 1px solid var(--outline-variant-color);" title="Screen recording preview"></video>
+            <video id="previewVideo" controls style="display:none; width: 100%; max-width: 600px; margin-top: 1.5rem; border-radius: var(--border-radius-medium); border: 1px solid var(--outline-variant-color);" title="Aperçu de l'enregistrement de l'écran"></video>
         </section>
 
         <section id="how-to-use" aria-labelledby="howToUseHeading">
-            <h2 id="howToUseHeading">How to Use</h2>
-            <p>Follow these simple steps to record your screen:</p>
+            <h2 id="howToUseHeading">Comment utiliser</h2>
+            <p>Suivez ces étapes simples pour enregistrer votre écran :</p>
             <ol>
-                <li><strong>Navigate to Home:</strong> Ensure you are on the "Home" tab.</li>
-                <li><strong>Configure Settings (Optional):</strong>
+                <li><strong>Allez à l'accueil :</strong> Assurez-vous d'être sur l'onglet "Accueil".</li>
+                <li><strong>Configure les paramètres (Facultatif) :</strong>
                     <ul>
-                        <li>Check "Record Audio" if you want to include audio.</li>
-                        <li>If "Record Audio" is checked, you can further specify if you want to record "System Audio" (audio playing from the selected tab/window) and/or "Microphone".</li>
+                        <li>Cochez "Enregistrer l'audio" si vous souhaitez inclure du son.</li>
+                        <li>Si "Enregistrer l'audio" est coché, vous pouvez spécifier si vous souhaitez enregistrer "L'audio du système" (le son provenant de l'onglet ou de la fenêtre sélectionnée) et/ou le "Microphone".</li>
                     </ul>
                 </li>
-                <li><strong>Start Recording:</strong> Click the "Start Recording" button.</li>
-                <li><strong>Choose Screen:</strong> Your browser will prompt you to select what you want to share: your entire screen, a specific application window, or a browser tab. Choose your preference and click "Share".</li>
-                <li><strong>Recording Controls:</strong>
+                <li><strong>Démarrer l'enregistrement :</strong> Cliquez sur le bouton "Démarrer l'enregistrement".</li>
+                <li><strong>Choisir l'écran :</strong> Votre navigateur vous demandera de sélectionner ce que vous souhaitez partager : votre écran entier, une fenêtre d'application spécifique ou un onglet de navigateur. Faites votre choix et cliquez sur "Partager".</li>
+                <li><strong>Commandes d'enregistrement :</strong>
                     <ul>
-                        <li>Once recording starts, you'll see a timer and a visual indicator.</li>
-                        <li>Use "Pause" to temporarily halt the recording.</li>
-                        <li>Use "Resume" to continue a paused recording.</li>
-                        <li>Use "Stop Recording" to finish. You'll be asked for confirmation.</li>
+                        <li>Une fois l'enregistrement lancé, vous verrez un minuteur et un indicateur visuel.</li>
+                        <li>Utilisez "Suspendre" pour interrompre temporairement l'enregistrement.</li>
+                        <li>Utilisez "Reprendre" pour continuer un enregistrement suspendu.</li>
+                        <li>Utilisez "Arrêter l'enregistrement" pour terminer. Une confirmation vous sera demandée.</li>
                     </ul>
                 </li>
-                <li><strong>Download:</strong> After stopping, your video will appear in the "Downloads" section. Click the "Download" button next to the filename to save the <code>.webm</code> or <code>.mp4</code> video file.</li>
-                <li><strong>Permissions:</strong> The first time you use the app, your browser will ask for permission to access your screen and microphone. Please grant these permissions for the app to function correctly.</li>
+                <li><strong>Télécharger :</strong> Après l'arrêt, votre vidéo apparaîtra dans la section "Téléchargements". Cliquez sur le bouton "Télécharger" à côté du nom du fichier pour enregistrer le fichier vidéo <code>.webm</code> ou <code>.mp4</code>.</li>
+                <li><strong>Autorisations :</strong> La première fois que vous utilisez l'application, votre navigateur vous demandera l'autorisation d'accéder à votre écran et à votre microphone. Veuillez accorder ces autorisations pour que l'application fonctionne correctement.</li>
             </ol>
-            <p class="message-box warning-box"><strong>Note:</strong> All recordings are processed and stored locally in your browser. No data is uploaded to any server.</p>
+            <p class="message-box warning-box"><strong>Note :</strong> Tous les enregistrements sont traités et stockés localement dans votre navigateur. Aucune donnée n'est envoyée vers un serveur.</p>
         </section>
 
         <section id="downloads" aria-labelledby="downloadsHeading">
-            <h2 id="downloadsHeading">Your Recordings</h2>
-            <p id="noDownloadsMsg">No recordings yet. Start a new recording on the Home page!</p>
+            <h2 id="downloadsHeading">Vos enregistrements</h2>
+            <p id="noDownloadsMsg">Aucun enregistrement pour le moment. Démarrez un nouvel enregistrement sur la page d'accueil !</p>
             <ul id="downloadsList" aria-live="polite">
                 </ul>
         </section>
 
         <section id="about" aria-labelledby="aboutHeading">
-            <h2 id="aboutHeading">About This App</h2>
-            <p>This Screen Recorder is a lightweight, client-side web application that allows you to easily record your screen, specific application windows, or browser tabs directly from your web browser.</p>
-            <h3>Key Features:</h3>
+            <h2 id="aboutHeading">À propos de cette application</h2>
+            <p>Cet enregistreur d'écran est une application web légère et côté client qui vous permet d'enregistrer facilement votre écran, des fenêtres d'applications spécifiques ou des onglets directement depuis votre navigateur.</p>
+            <h3>Fonctionnalités clés :</h3>
             <ul>
-                <li><strong>Client-Side Recording:</strong> All processing happens in your browser. No data is sent to any server, ensuring your privacy.</li>
-                <li><strong>Multiple Recording Options:</strong> Choose to record your entire screen, a single window, or a browser tab.</li>
-                <li><strong>Audio Recording:</strong> Optionally include audio from your microphone and/or system audio (from the shared tab/window).</li>
-                <li><strong>Simple Controls:</strong> Easy-to-use start, pause, resume, and stop functionality.</li>
-                <li><strong>Instant Download:</strong> Recordings are available for download as <code>.webm</code> or <code>.mp4</code> files immediately after stopping.</li>
-                <li><strong>Material Design:</strong> A clean, modern, and responsive interface inspired by Google's Material Design 3.</li>
-                <li><strong>Dark Mode:</strong> Toggle between light and dark themes for comfortable viewing.</li>
+                <li><strong>Enregistrement côté client :</strong> Tout le traitement s'effectue dans votre navigateur. Aucune donnée n'est envoyée à un serveur, ce qui garantit votre confidentialité.</li>
+                <li><strong>Multiples options d'enregistrement :</strong> Choisissez d'enregistrer votre écran entier, une seule fenêtre ou un onglet de navigateur.</li>
+                <li><strong>Enregistrement audio :</strong> Incluez éventuellement le son de votre microphone et/ou l'audio du système (à partir de l'onglet/la fenêtre partagée).</li>
+                <li><strong>Commandes simples :</strong> Fonctions de démarrage, pause, reprise et arrêt faciles à utiliser.</li>
+                <li><strong>Téléchargement instantané :</strong> Les enregistrements sont disponibles au téléchargement sous forme de fichiers <code>.webm</code> ou <code>.mp4</code> immédiatement après l'arrêt.</li>
+                <li><strong>Design Material :</strong> Une interface propre, moderne et responsive inspirée par le Material Design 3 de Google.</li>
+                <li><strong>Mode sombre :</strong> Basculez entre les thèmes clair et sombre pour un confort visuel optimal.</li>
             </ul>
-            <h3>Use Cases:</h3>
+            <h3>Cas d'utilisation :</h3>
             <ul>
-                <li>Creating software tutorials or demonstrations.</li>
-                <li>Recording gameplay.</li>
-                <li>Capturing presentations or online meetings (ensure you have consent).</li>
-                <li>Bug reporting by visually showing an issue.</li>
-                <li>Saving online videos or streams (respect copyright and terms of service).</li>
+                <li>Créer des tutoriels ou des démonstrations de logiciels.</li>
+                <li>Enregistrer des sessions de jeu (gameplay).</li>
+                <li>Capturer des présentations ou des réunions en ligne (assurez-vous d'avoir le consentement des participants).</li>
+                <li>Signaler des bogues en montrant visuellement le problème.</li>
+                <li>Sauvegarder des vidéos ou des flux en ligne (veillez à respecter les droits d'auteur et les conditions d'utilisation).</li>
             </ul>
-            <p class="message-box info-box">This application utilizes the browser's built-in MediaStream Recording API, making it efficient and secure.</p>
+            <p class="message-box info-box">Cette application utilise l'API intégrée MediaStream Recording du navigateur, ce qui la rend efficace et sécurisée.</p>
         </section>
     </main>
 
     <div id="customModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleEl" aria-describedby="modalMessageEl">
         <div class="modal-content">
             <h3 id="modalTitleEl">Confirmation</h3>
-            <p id="modalMessageEl">Are you sure you want to stop the recording?</p>
+            <p id="modalMessageEl">Êtes-vous sûr de vouloir arrêter l'enregistrement ?</p>
             <div class="modal-actions">
-                <button id="modalCancelBtn" class="btn secondary">Cancel</button>
-                <button id="modalConfirmBtn" class="btn">Confirm</button>
+                <button id="modalCancelBtn" class="btn secondary">Annuler</button>
+                <button id="modalConfirmBtn" class="btn">Confirmer</button>
             </div>
         </div>
     </div>
 
-    <div id="snackbar" role="status" aria-live="polite">Snackbar message</div>
+    <div id="snackbar" role="status" aria-live="polite">Message du snackbar</div>

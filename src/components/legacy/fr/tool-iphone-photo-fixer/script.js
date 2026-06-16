@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Enable convert button if disabled
             convertBtn.disabled = false;
-            convertBtn.textContent = 'Start Conversion';
+            convertBtn.textContent = 'Lancer la conversion';
         });
     }
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="file-info">
                 <span class="file-name">${fileObj.file.name}</span>
                 <div class="file-status">
-                     <span class="status-badge status-pending">Pending</span>
+                     <span class="status-badge status-pending">En attente</span>
                      <span class="size-info">(${(fileObj.file.size / 1024 / 1024).toFixed(2)} MB)</span>
                 </div>
             </div>
@@ -118,11 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        convertBtn.textContent = `Converting...`;
+        convertBtn.textContent = `Conversion en cours...`;
 
         // Process sequentially to avoid memory crash
         for (const fileObj of pendingFiles) {
-            updateFileStatus(fileObj.id, 'converting', 'Converting...');
+            updateFileStatus(fileObj.id, 'converting', 'Conversion en cours...');
             fileObj.status = 'converting';
 
             try {
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 processedBlobs.push({ name: newName, blob: blob });
 
-                updateFileStatus(fileObj.id, 'done', 'Converted');
+                updateFileStatus(fileObj.id, 'done', 'Converti');
 
                 // Add individual download link (Optional, but user requested "Download All" preferred)
                 // Let's keep UI clean as requested.
@@ -147,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 console.error(err);
                 fileObj.status = 'error';
-                updateFileStatus(fileObj.id, 'error', 'Failed');
+                updateFileStatus(fileObj.id, 'error', 'Échoué');
             }
         }
 
         isConverting = false;
-        convertBtn.textContent = 'Conversion Complete';
+        convertBtn.textContent = 'Conversion terminée';
 
         if (processedBlobs.length > 0) {
             downloadAllBtn.classList.remove('hidden');
@@ -188,12 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
             zip.file(item.name, item.blob);
         });
 
-        downloadAllBtn.textContent = 'Zipping...';
+        downloadAllBtn.textContent = 'Création du ZIP...';
 
         zip.generateAsync({ type: 'blob' })
             .then(function (content) {
                 saveAs(content, 'converted_photos.zip');
-                downloadAllBtn.textContent = 'Download All (ZIP)';
+                downloadAllBtn.textContent = 'Télécharger tout (ZIP)';
             });
     }
 });
