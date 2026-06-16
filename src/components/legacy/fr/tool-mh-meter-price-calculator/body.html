@@ -1,0 +1,132 @@
+<main class="container">
+        <header role="banner">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🚕</div>
+            <h1>Calculateur de Tarifs MH</h1>
+            <span class="subtitle">Tarif officiel MMR (en vigueur depuis le 01/02/2025)</span>
+        </header>
+
+        <article class="card">
+            <form id="fareForm" aria-label="Calculateur de tarifs de taxi">
+
+                <div class="form-group">
+                    <label for="vehicleType">S&eacute;lectionner le type de v&eacute;hicule</label>
+                    <select id="vehicleType" required onchange="updateFormUI()">
+                        <option value="auto">🛺 Auto Rickshaw</option>
+                        <option value="taxi_by">🚕 Taxi (Noir et Jaune)</option>
+                        <option value="taxi_cool">🚙 Cool Cab (Bleu/Argent&eacute;)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="distance">Distance (en KM)</label>
+                    <input type="number" id="distance" inputmode="decimal" placeholder="ex. 2.5" step="0.01" min="0"
+                        required aria-required="true">
+                    <div class="helper-text">Entrez la distance du compteur ou de votre application GPS.</div>
+                </div>
+
+                <div class="checkbox-group" role="group" aria-label="Modificateurs de trajet">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="midnight">
+                        <span>Nocturne <br><small class="tag tag-night">+25% (00h-05h)</small></span>
+                    </label>
+
+                    <label class="checkbox-item" id="acOptionContainer" style="display:none;">
+                        <input type="checkbox" id="ac">
+                        <span>Trajet climatis&eacute; <br><small class="tag tag-ac">+10%</small></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="waiting">Temps d'attente (Minutes)</label>
+                    <input type="number" id="waiting" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Embouteillages ou arr&ecirc;ts aux feux.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="luggage">Gros bagages (Quantit&eacute;)</label>
+                    <input type="number" id="luggage" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Articles de plus de 60x40cm (₹6/pi&egrave;ce).</div>
+                </div>
+
+                <button type="submit" class="btn-primary">Calculer le tarif</button>
+            </form>
+        </article>
+
+        <!-- How To Use Section -->
+        <details class="instructions-card">
+            <summary>❓ Comment utiliser ce calculateur ?</summary>
+            <div class="instructions-content">
+                <ol>
+                    <li><strong>Choisissez le v&eacute;hicule :</strong> S&eacute;lectionnez Auto, Taxi Noir et Jaune ou Cool Cab.</li>
+                    <li><strong>Entrez la distance :</strong> Saisissez les kilom&egrave;tres (KM) indiqu&eacute;s sur le compteur ou votre app GPS.</li>
+                    <li><strong>Option nocturne :</strong> Cochez cette case si votre trajet est entre 00h00 et 05h00.</li>
+                    <li><strong>Option climatisation :</strong> (Taxi Noir et Jaune uniquement) Cochez si vous avez utilis&eacute; la climatisation.</li>
+                    <li><strong>Attente et bagages :</strong> Indiquez le temps d'attente en minutes ou le nombre de gros bagages le cas &eacute;ch&eacute;ant.</li>
+                    <li><strong>Calculer :</strong> Cliquez sur le bouton pour voir le tarif officiel estim&eacute;.</li>
+                </ol>
+                <p style="margin-top:10px; font-size: 0.85rem; color: #777;">
+                    <em>Note : Le montant final est arrondi &agrave; la Roupie la plus proche conform&eacute;ment aux r&egrave;gles du RTO.</em>
+                </p>
+            </div>
+        </details>
+
+        <!-- Results Section -->
+        <section id="result-section" aria-live="polite">
+            <div class="result-card">
+                <div class="result-header">D&eacute;tails du tarif estim&eacute;</div>
+                <div class="result-body">
+                    <div class="fare-row">
+                        <span>Tarif de base (Distance)</span>
+                        <span id="res-base">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-ac">
+                        <span>Suppl&eacute;ment climatisation</span>
+                        <span id="res-ac">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-midnight">
+                        <span>Suppl&eacute;ment nocturne</span>
+                        <span id="res-midnight">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Frais d'attente</span>
+                        <span id="res-waiting">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Frais de bagages</span>
+                        <span id="res-luggage">₹0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total &agrave; payer</span>
+                        <span class="total-amount" id="res-total">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button id="aboutBtn" class="btn-about" aria-haspopup="dialog">&Agrave; propos et Avertissement</button>
+        </footer>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Fermer la fen&ecirc;tre">&times;</button>
+            <h2 id="modalTitle" style="margin-bottom: 15px; color: var(--secondary);">⚠️ Avertissement important</h2>
+
+            <p style="margin-bottom: 15px;">
+                <strong>Ceci n'est PAS un site officiel du gouvernement.</strong>
+            </p>
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">
+                Cet outil est con&ccedil;u pour aider les usagers &agrave; estimer les tarifs bas&eacute;s sur la grille tarifaire en vigueur depuis le 01/02/2025. Bien que nous visions la pr&eacute;cision, les lectures r&eacute;elles du compteur peuvent varier l&eacute;g&egrave;rement en raison du calibrage.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 0.95rem;">
+                Pour les demandes officielles, r&eacute;clamations ou pour t&eacute;l&eacute;charger le PDF sign&eacute;, veuillez visiter le site du D&eacute;partement des V&eacute;hicules &agrave; Moteur du Maharashtra :
+            </p>
+
+            <a href="https://transport.maharashtra.gov.in/Site/Common/ViewPdfList.aspx?Doctype=1d1f28f9-a4e5-4b09-ab8b-1d4576adca18"
+                target="_blank" rel="noopener noreferrer" class="official-link">
+                Visiter le site officiel des transports ↗
+            </a>
+        </div>
+    </div>

@@ -1,0 +1,96 @@
+<main class="w-full max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl shadow-pink-200/50 overflow-hidden">
+        <div class="p-6 md:p-10">
+            <header class="text-center mb-8">
+                <h1 class="font-pacifico text-4xl md:text-6xl text-pink-500">Calculadora de Amor IA</h1>
+                <p class="text-gray-600 mt-2">¡Descubre tu potencial amoroso con nuestra «avanzada» IA! 💘</p>
+            </header>
+
+            <!-- Input Form -->
+            <div id="calculator-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                <!-- Partner 1 -->
+                <div class="bg-rose-50 p-6 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-semibold text-rose-600 mb-4 text-center">Persona 1 👩‍❤️‍👨</h2>
+                    <div>
+                        <label for="name1" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                        <input type="text" id="name1" placeholder="ej., Romeo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-rose-500 focus:border-rose-500 transition">
+                    </div>
+                    <div class="mt-4">
+                        <label for="age1" class="block text-sm font-medium text-gray-700 mb-1">Edad</label>
+                        <input type="number" id="age1" placeholder="ej., 21" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-rose-500 focus:border-rose-500 transition">
+                    </div>
+                </div>
+
+                <!-- Partner 2 -->
+                <div class="bg-teal-50 p-6 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-semibold text-teal-600 mb-4 text-center">Persona 2 💖</h2>
+                    <div>
+                        <label for="name2" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                        <input type="text" id="name2" placeholder="ej., Julieta" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    <div class="mt-4">
+                        <label for="age2" class="block text-sm font-medium text-gray-700 mb-1">Edad</label>
+                        <input type="number" id="age2" placeholder="ej., 19" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calculate Button -->
+            <div class="text-center mt-8">
+                <button id="calculate-btn" class="bg-gradient-to-r from-pink-500 to-orange-400 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Calcular Amor ✨
+                </button>
+                <p id="error-message" class="text-red-500 mt-2 h-5"></p>
+            </div>
+
+            <!-- Result Section -->
+            <div id="result-section" class="text-center mt-10 hidden">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-inner animate-fade-in-scale-up">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tu Puntuación de Amor:</h3>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-pink-400 to-red-500 h-8 rounded-full flex items-center justify-center text-white font-bold text-lg progress-bar-animated">
+                            <span id="score-text"></span>
+                        </div>
+                    </div>
+                    
+                    <p id="compatibility-status" class="text-3xl font-bold my-3"></p>
+                    <p id="future-prediction" class="text-lg text-gray-600"></p>
+
+                    <div class="mt-6">
+                        <button id="share-btn" class="bg-gray-200 text-gray-700 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition">
+                            Compartir tu Resultado 💌
+                        </button>
+                        <p id="share-feedback" class="text-green-600 text-sm mt-2 h-4"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fake Formula Display -->
+            <div class="text-center mt-8 text-gray-500 text-sm">
+                <p>Nuestra fórmula: <code class="bg-gray-200 p-1 rounded">(Σ(nombres) + Σ(edades)) % 💕 + ✨</code></p>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <section class="bg-gray-100 p-6 text-sm text-rose-900 bg-rose-50 rounded-2xl border border-rose-100 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="font-bold text-rose-800 mb-2">Sobre Esta App</h4>
+                    <p>¡Esta app es solo para diversión y entretenimiento! Nuestra «fórmula de amor IA» 💘 está diseñada para sacarte una sonrisa. ¡Disfruta!</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-rose-800 mb-2">Cómo Usar</h4>
+                    <ol class="list-decimal list-inside">
+                        <li>Introduce ambos nombres y edades.</li>
+                        <li>Haz clic en «Calcular Amor».</li>
+                        <li>¡Mira tu puntuación y predicción!</li>
+                    </ol>
+                </div>
+                <div>
+                    <h4 class="font-bold text-rose-800 mb-2">⚠️ Aviso</h4>
+                    <p>Esta es una herramienta de entretenimiento únicamente. ¡No te tomes los resultados en serio! El amor verdadero es complejo y no puede medirse con un algoritmo. ❤️</p>
+                </div>
+            </div>
+        </section>
+    </main>

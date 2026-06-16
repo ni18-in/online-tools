@@ -1,0 +1,30 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-json-comparison-tool/body.html?raw';
+import css from '../../../../components/legacy/es/tool-json-comparison-tool/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-json-comparison-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Comparador JSON Online — Herramienta de Diferencias con Números de Línea',
+  description: 'Herramienta gratuita para comparar, diferenciar y embellcer dos objetos JSON o bloques de texto lado a lado con números de línea. Sin procesamiento en el servidor.',
+  keywords: 'comparar json, diferencias json, comparador json, herramienta diff, validador json, desarrollador',
+  canonical: `${SITE_URL}/es/tools/json-comparison-tool/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/json-comparison-tool/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/json-comparison-tool/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/json-comparison-tool/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/json-comparison-tool/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/json-comparison-tool/`, title: 'Comparador JSON Online', description: 'Compara, diferencia y embellece dos objetos JSON lado a lado.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/json-comparison-tool/`, title: 'Comparador JSON Online', description: 'Compara, diferencia y embellece dos objetos JSON lado a lado.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Comparador JSON Online', applicationCategory: 'DeveloperApplication', operatingSystem: 'Any', url: `${SITE_URL}/es/tools/json-comparison-tool/`, description: 'Herramienta gratuita para comparar, diferenciar y embellcer dos objetos JSON o bloques de texto lado a lado.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+const headRaw = '<script src="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/jsondiffpatch.umd.min.js" defer></script>';
+---
+<ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/json-comparison-tool/`, fr: `${SITE_URL}/fr/tools/json-comparison-tool/` }}>
+  <div class="tool-island legacy-tw antialiased" id="tool-json-comparison-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

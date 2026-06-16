@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-advance-epoch-converter/body.html?raw';
+import css from '../../../../components/legacy/es/tool-advance-epoch-converter/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-advance-epoch-converter/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertidor de Época Unix Avanzado',
+  description: 'Convierte marcas de tiempo Unix (epoch) a fechas legibles por humanos y viceversa. Admite segundos, milisegundos, microsegundos, nanosegundos y zonas horarias.',
+  keywords: 'convertidor de epoca, unix timestamp, epoch unix, marca de tiempo unix, herramienta desarrollador',
+  canonical: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/advance-epoch-converter/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/advance-epoch-converter/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/',
+    title: 'Convertidor de Época Unix Avanzado',
+    description: 'Convierte marcas de tiempo Unix (epoch) a fechas legibles por humanos y viceversa. Admite segundos, milisegundos, microsegundos, nanosegundos y zonas horarias.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/',
+    title: 'Convertidor de Época Unix Avanzado',
+    description: 'Convierte marcas de tiempo Unix (epoch) a fechas legibles por humanos y viceversa. Admite segundos, milisegundos, microsegundos, nanosegundos y zonas horarias.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Convertidor de Época Unix Avanzado',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/advance-epoch-converter/',
+    description: 'Convierte marcas de tiempo Unix (epoch) a fechas legibles por humanos y viceversa. Admite segundos, milisegundos, microsegundos, nanosegundos y zonas horarias.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/advance-epoch-converter/', fr: 'https://online-tools.ni18.in/fr/tools/advance-epoch-converter/' }} adMinHeight={120}>
+  <div class="tool-island" id="tool-advance-epoch-converter" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,320 @@
+/* Consistent font */
+        #tool-json-visualizer-pro {
+            font-family: inherit;
+            overscroll-behavior: none;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        /* Monospace font for code areas */
+        #tool-json-visualizer-pro #jsonInput,
+        #tool-json-visualizer-pro #jsonVisualizer {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+        }
+
+
+
+        /* --- Main Content Area --- */
+        #tool-json-visualizer-pro .main-content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+
+            /* md breakpoint */
+            #tool-json-visualizer-pro .main-content-area {
+                flex-direction: row;
+            }
+        }
+
+        /* --- Panel Styles --- */
+        #tool-json-visualizer-pro .panel {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        /* Styles for the content area within a panel (textarea or visualizer div) */
+        #tool-json-visualizer-pro .panel-content {
+            flex-grow: 1;
+            /* Allow this area to grow and fill space */
+            overflow-y: auto;
+            /* Enable scrolling within this area if content overflows */
+            border: 1px solid #d1d5db;
+            /* Keep the border */
+            min-height: 150px;
+            /* Ensure a minimum height */
+            /* Removed fixed height calculation */
+        }
+
+        /* Ensure textarea fills its container */
+        #tool-json-visualizer-pro textarea.panel-content {
+            height: 100%;
+            /* Make textarea fill the height allocated by flex-grow */
+            resize: none;
+            /* Keep resize disabled */
+        }
+
+        #tool-json-visualizer-pro .panel-controls {
+            flex-shrink: 0;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        /* --- Visualizer Styles --- */
+        #tool-json-visualizer-pro .json-visualizer ul {
+            list-style: none;
+            padding-left: 1.75em;
+            margin-left: 0.5em;
+            border-left: 1px dashed #cbd5e0;
+        }
+
+        #tool-json-visualizer-pro .json-visualizer li {
+            position: relative;
+            padding: 2px 0;
+        }
+
+        #tool-json-visualizer-pro .json-key {
+            color: #c53030;
+            font-weight: 600;
+            margin-right: 0.5em;
+        }
+
+        #tool-json-visualizer-pro .json-string {
+            color: #2b6cb0;
+        }
+
+        #tool-json-visualizer-pro .json-number {
+            color: #2f855a;
+        }
+
+        #tool-json-visualizer-pro .json-boolean {
+            color: #c05621;
+        }
+
+        #tool-json-visualizer-pro .json-null {
+            color: #718096;
+            font-style: italic;
+        }
+
+        #tool-json-visualizer-pro .json-brace,
+        #tool-json-visualizer-pro .json-bracket {
+            color: #4a5568;
+        }
+
+        #tool-json-visualizer-pro .json-array>.empty-text,
+        #tool-json-visualizer-pro .json-object>.empty-text {
+            display: none;
+        }
+
+        #tool-json-visualizer-pro .json-array:empty>.empty-text,
+        #tool-json-visualizer-pro .json-object:empty>.empty-text {
+            display: inline;
+        }
+
+        /* --- Modal Styles --- */
+        #tool-json-visualizer-pro .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        #tool-json-visualizer-pro .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #tool-json-visualizer-pro .modal-content {
+            background-color: white;
+            color: #1f2937;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #tool-json-visualizer-pro .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        #tool-json-visualizer-pro .modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        #tool-json-visualizer-pro .modal-content p,
+        #tool-json-visualizer-pro .modal-content ul {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        #tool-json-visualizer-pro .modal-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+
+        #tool-json-visualizer-pro .modal-content code {
+            background-color: #e5e7eb;
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+
+        #tool-json-visualizer-pro .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #9ca3af;
+            transition: color 0.2s;
+        }
+
+        #tool-json-visualizer-pro .modal-close-btn:hover {
+            color: #1f2937;
+        }
+
+        /* --- Message Box --- */
+        #tool-json-visualizer-pro .message-box {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(45, 55, 72, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-out;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+        }
+
+        #tool-json-visualizer-pro .message-box.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        /* --- Button Styles --- */
+        #tool-json-visualizer-pro .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        #tool-json-visualizer-pro button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #9ca3af;
+        }
+
+        #tool-json-visualizer-pro button:disabled:hover {
+            background-color: #9ca3af;
+        }
+
+        /* Dark Mode Overrides */
+        #tool-json-visualizer-pro.dark,
+        #tool-json-visualizer-pro.dark-mode {
+            background-color: #1e293b;
+            color: #e2e8f0;
+        }
+
+        #tool-json-visualizer-pro.dark .panel-content,
+        #tool-json-visualizer-pro.dark-mode .panel-content {
+            border-color: #475569;
+        }
+
+        #tool-json-visualizer-pro.dark .json-visualizer ul,
+        #tool-json-visualizer-pro.dark-mode .json-visualizer ul {
+            border-left-color: #475569;
+        }
+
+        #tool-json-visualizer-pro.dark .json-key,
+        #tool-json-visualizer-pro.dark-mode .json-key {
+            color: #f87171;
+        }
+
+        #tool-json-visualizer-pro.dark .json-string,
+        #tool-json-visualizer-pro.dark-mode .json-string {
+            color: #60a5fa;
+        }
+
+        #tool-json-visualizer-pro.dark .json-number,
+        #tool-json-visualizer-pro.dark-mode .json-number {
+            color: #34d399;
+        }
+
+        #tool-json-visualizer-pro.dark .json-boolean,
+        #tool-json-visualizer-pro.dark-mode .json-boolean {
+            color: #fb923c;
+        }
+
+        #tool-json-visualizer-pro.dark .json-null,
+        #tool-json-visualizer-pro.dark-mode .json-null {
+            color: #94a3b8;
+        }
+
+        #tool-json-visualizer-pro.dark .json-brace,
+        #tool-json-visualizer-pro.dark-mode .json-brace,
+        #tool-json-visualizer-pro.dark .json-bracket,
+        #tool-json-visualizer-pro.dark-mode .json-bracket {
+            color: #cbd5e1;
+        }
+
+        #tool-json-visualizer-pro.dark .modal-content,
+        #tool-json-visualizer-pro.dark-mode .modal-content {
+            background-color: #1e293b;
+            color: #f8fafc;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        #tool-json-visualizer-pro.dark .modal-content h3,
+        #tool-json-visualizer-pro.dark-mode .modal-content h3 {
+            border-bottom-color: #334155;
+        }
+
+        #tool-json-visualizer-pro.dark .modal-content code,
+        #tool-json-visualizer-pro.dark-mode .modal-content code {
+            background-color: #334155;
+            color: #f8fafc;
+        }
+
+        #tool-json-visualizer-pro.dark .modal-close-btn,
+        #tool-json-visualizer-pro.dark-mode .modal-close-btn {
+            color: #64748b;
+        }
+
+        #tool-json-visualizer-pro.dark .modal-close-btn:hover,
+        #tool-json-visualizer-pro.dark-mode .modal-close-btn:hover {
+            color: #f8fafc;
+        }

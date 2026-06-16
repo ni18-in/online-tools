@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-json-visualizer-pro/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-json-visualizer-pro/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-json-visualizer-pro/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'JSON Visualizer Pro - Visualiser, formater et éditer JSON en ligne',
+  description: 'Outil en ligne simple pour visualiser, formater, minifier, copier et valider des données JSON avec vue en arbre et détection d\'erreurs.',
+  keywords: 'visualiseur json, formateur json, éditeur json, vue en arbre json, valider json',
+  canonical: 'https://online-tools.ni18.in/fr/tools/json-visualizer-pro/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/json-visualizer-pro/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/json-visualizer-pro/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/json-visualizer-pro/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/json-visualizer-pro/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/json-visualizer-pro/',
+    title: 'JSON Visualizer Pro - Visualiser, formater et éditer JSON en ligne',
+    description: 'Outil en ligne simple pour visualiser, formater, minifier, copier et valider des données JSON avec vue en arbre et détection d\'erreurs.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/json-visualizer-pro/',
+    title: 'JSON Visualizer Pro - Visualiser, formater et éditer JSON en ligne',
+    description: 'Outil en ligne simple pour visualiser, formater, minifier, copier et valider des données JSON avec vue en arbre et détection d\'erreurs.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'JSON Visualizer Pro - Visualiser, formater et éditer JSON en ligne',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/json-visualizer-pro/',
+    description: 'Outil en ligne simple pour visualiser, formater, minifier, copier et valider des données JSON avec vue en arbre et détection d\'erreurs.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">";
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/json-visualizer-pro/', es: 'https://online-tools.ni18.in/es/tools/json-visualizer-pro/' }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-json-visualizer-pro" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

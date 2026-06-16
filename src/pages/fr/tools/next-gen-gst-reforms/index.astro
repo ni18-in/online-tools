@@ -1,0 +1,320 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../../data/tools';
+import { SITE_URL } from '../../../../data/site';
+
+const tool = getTool('next-gen-gst-reforms')!;
+const base = `${SITE_URL}/fr/tools/next-gen-gst-reforms`;
+const seo = toolSeo(tool, {
+  title: 'Calculateur de TPS de Nouvelle Génération | Outil de calcul en temps réel',
+  description:
+    'Un outil en temps réel et adapté aux mobiles pour calculer instantanément la TPS sur la base des nouvelles réformes de l\'Inde. Ajoutez, supprimez ou trouvez facilement des taux de TPS.',
+  keywords: 'reformes tps, calculateur tps, tps inde, reforme fiscale, taxe sur les produits et services',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': ['WebSite', 'WebApplication'],
+        '@id': `${base}#website`,
+        name: 'Calculateur de TPS de Nouvelle Génération',
+        url: `${base}/`,
+        description:
+          'Comprenez et calculez la Taxe sur les Produits et Services (TPS) basée sur les réformes de TPS en Inde. Déterminez facilement les taux de taxe et les coûts globaux.',
+        applicationCategory: 'Calculator',
+        operatingSystem: 'Any',
+        browserRequirements: 'Requires JavaScript and HTML5 support.',
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${base}#webpage`,
+        url: `${base}/`,
+        name: 'Calculateur de TPS de Nouvelle Génération - Comprendre les réformes',
+        inLanguage: 'fr-FR',
+        isPartOf: { '@id': `${base}#website` },
+      },
+      {
+        '@type': 'HowTo',
+        '@id': `${base}#howto`,
+        name: 'Comment utiliser le calculateur de TPS',
+        description: 'Guide étape par étape pour calculer la TPS avec les nouvelles réformes.',
+        totalTime: 'PT1M',
+        step: [
+          { '@type': 'HowToStep', name: 'Sélectionner le Mode de Calcul', text: "Choisissez 'Ajouter la TPS' pour obtenir le prix total, 'Soustraire la TPS' pour obtenir le prix de base, ou 'Trouver le taux de TPS' pour calculer le taux à partir de deux prix." },
+          { '@type': 'HowToStep', name: 'Saisir le(s) Prix', text: 'Entrez le montant dans le champ désigné. Le calcul se met à jour en temps réel lors de la saisie.' },
+          { '@type': 'HowToStep', name: 'Sélectionner le taux de TPS', text: 'Choisissez le taux de TPS applicable dans le menu déroulant. Vous pouvez également cliquer sur un produit pour sélectionner son taux automatiquement.' },
+          { '@type': 'HowToStep', name: 'Afficher les résultats', text: 'Le calculateur affiche instantanément le montant de la TPS, CGST, SGST et le prix final.' },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Qu\'est-ce que la TPS et pourquoi est-elle importante ?', acceptedAnswer: { '@type': 'Answer', text: 'La TPS (Taxe sur les Produits et Services) est une taxe indirecte appliquée en Inde sur la fourniture de biens et de services. C\'est une taxe unique et globale qui a remplacé plusieurs anciennes taxes comme la TVA et la taxe sur les services. Elle simplifie la fiscalité et soutient l\'économie.' } },
+          { '@type': 'Question', name: 'Comment fonctionne le calculateur de TPS de Nouvelle Génération ?', acceptedAnswer: { '@type': 'Answer', text: 'Notre calculateur utilise les taux de la réforme de la TPS pour calculer précisément le montant de la taxe. Saisissez le prix de base et sélectionnez le taux pour obtenir le résultat en direct.' } },
+        ],
+      },
+    ],
+  },
+});
+seo.canonical = `${SITE_URL}/fr/tools/next-gen-gst-reforms/`;
+if (seo.og) {
+  seo.og.url = seo.canonical;
+  seo.og.locale = 'fr_FR';
+}
+if (seo.twitter) {
+  seo.twitter.url = seo.canonical;
+}
+const altLinks = {
+  en: `${SITE_URL}/tools/next-gen-gst-reforms/`,
+  es: `${SITE_URL}/es/tools/next-gen-gst-reforms/`,
+};
+---
+<ToolLayout seo={seo} lang="fr" altLinks={altLinks}>
+  <div class="tool-island legacy-tw" id="tool-next-gen-gst-reforms">
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-8">
+      <header class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-blue-700">Calculateur de TPS de Nouvelle Génération</h1>
+        <p class="mt-2 text-lg text-slate-600">Estimez votre assujettissement à la TPS avec les nouvelles réformes simplifiées.</p>
+      </header>
+
+      <main>
+        <section id="calculator" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-xl">
+          <h2 class="text-center font-bold text-2xl text-blue-600 mb-6">Outil de calcul de la TPS</h2>
+          <fieldset class="mb-8">
+            <legend class="sr-only">Sélectionner le Mode de Calcul</legend>
+            <div role="radiogroup" class="flex justify-center flex-wrap gap-4">
+              <div>
+                <input type="radio" id="add-gst" name="calc-mode" value="add" class="sr-only" checked />
+                <label for="add-gst" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Ajouter la TPS</label>
+              </div>
+              <div>
+                <input type="radio" id="remove-gst" name="calc-mode" value="remove" class="sr-only" />
+                <label for="remove-gst" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Soustraire la TPS</label>
+              </div>
+              <div>
+                <input type="radio" id="find-gst-rate" name="calc-mode" value="find" class="sr-only" />
+                <label for="find-gst-rate" class="cursor-pointer font-semibold whitespace-nowrap px-5 py-2.5 rounded-full transition-all duration-200 ease-in-out bg-slate-200 text-slate-600 hover:bg-slate-300 has-[:checked]:bg-blue-600 has-[:checked]:text-white has-[:checked]:shadow-md">Trouver le taux de TPS</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <div id="add-remove-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="price-input" id="price-label" class="block mb-1.5 font-semibold text-slate-700">Saisir le Prix de Base (₹) :</label>
+              <input type="number" id="price-input" placeholder="ex. 1000" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false" />
+            </div>
+            <div>
+              <label for="gst-rate" class="block mb-1.5 font-semibold text-slate-700">Sélectionner le taux de TPS (%) :</label>
+              <select id="gst-rate" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                <option value="">-- Sélectionner le taux --</option>
+                <option value="0">0%</option>
+                <option value="5">5%</option>
+                <option value="18">18%</option>
+                <option value="40">40%</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="find-rate-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+            <div>
+              <label for="base-price-input-find" class="block mb-1.5 font-semibold text-slate-700">Saisir le Prix de Base (₹) :</label>
+              <input type="number" id="base-price-input-find" placeholder="ex. 1000" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false" />
+            </div>
+            <div>
+              <label for="total-price-input-find" class="block mb-1.5 font-semibold text-slate-700">Saisir le Prix Total (₹) :</label>
+              <input type="number" id="total-price-input-find" placeholder="ex. 1180" class="w-full p-3 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" aria-invalid="false" />
+            </div>
+          </div>
+
+          <div id="result" class="bg-slate-100 rounded-xl p-6 mt-8 text-center hidden" aria-live="polite">
+            <p class="text-lg font-semibold text-slate-800" id="result-label-text">Prix Total :</p>
+            <div class="text-5xl font-bold text-blue-600 tracking-tight my-2" id="result-value">₹ 0.00</div>
+            <div id="gst-breakdown-details" class="hidden">
+              <p class="text-sm mt-2 text-slate-500">Comprend un montant de TPS de : <span id="gst-amount" class="font-semibold">₹ 0.00</span></p>
+              <div class="flex justify-center gap-6 mt-2 text-slate-500">
+                <span>CGST : <span id="cgst-amount" class="font-semibold">₹ 0.00</span></span>
+                <span>SGST : <span id="sgst-amount" class="font-semibold">₹ 0.00</span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <section id="information" class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300 hover:shadow-xl">
+        <div role="tablist" aria-label="Informations sur la TPS" class="flex flex-wrap border-b border-slate-200 mb-6">
+          <button role="tab" aria-selected="true" aria-controls="content-rates" id="tab-rates" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">Nouveaux taux de TPS</button>
+          <button role="tab" aria-selected="false" aria-controls="content-about" id="tab-about" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">À propos des réformes</button>
+          <button role="tab" aria-selected="false" aria-controls="content-how-to" id="tab-how-to" class="info-tab-button px-5 py-2.5 font-semibold text-slate-500 border-b-2 border-transparent hover:text-blue-600 data-[selected=true]:text-blue-600 data-[selected=true]:border-blue-600">Mode d'emploi</button>
+        </div>
+
+        <div role="tabpanel" id="content-rates" class="info-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+              <h3 class="font-bold text-lg mb-2 text-blue-700">Articles de première nécessité (5%)</h3>
+              <label for="daily-essential" class="sr-only">Sélectionner un article de première nécessité :</label>
+              <select id="daily-essential" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
+                <option value="">-- Sélectionner un produit --</option>
+                <option value="5">Huile capillaire, shampoing, etc. (18% &rarr; 5%)</option>
+                <option value="5">Beurre, ghee, fromage (12% &rarr; 5%)</option>
+              </select>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+              <h3 class="font-bold text-lg mb-2 text-blue-700">Agriculteurs et Agriculture (5%)</h3>
+              <label for="agriculture" class="sr-only">Sélectionner un article agricole :</label>
+              <select id="agriculture" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
+                <option value="">-- Sélectionner un produit --</option>
+                <option value="5">Pneus et pièces de tracteurs (18% &rarr; 5%)</option>
+              </select>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl shadow-inner">
+              <h3 class="font-bold text-lg mb-2 text-blue-700">Santé (0% et 5%)</h3>
+              <label for="healthcare" class="sr-only">Sélectionner un service de santé :</label>
+              <select id="healthcare" data-rate-selector class="w-full mt-1 p-2 border border-slate-300 rounded-lg bg-white">
+                <option value="">-- Sélectionner une prestation --</option>
+                <option value="0">Assurance maladie individuelle (18% &rarr; 0%)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div role="tabpanel" id="content-about" class="info-content hidden prose max-w-none">
+          <p>Les réformes de la « TPS de nouvelle génération » représentent une simplification majeure de la structure fiscale de l'Inde. Le système précédent à quatre niveaux a été rationalisé en un système simplifié à deux niveaux avec des taux principaux de 5 % (pour les biens essentiels) et 18 % (pour les biens standard). Une nouvelle tranche supérieure de 40 % a été introduite pour les biens de luxe et les produits de "péché".</p>
+          <p>Cette réforme vise à réduire la charge fiscale pour le citoyen moyen, à corriger la structure tarifaire inversée et à simplifier la conformité fiscale. De nombreux produits de première nécessité, appareils électroménagers et véhicules ont vu leurs taux d'imposition considérablement réduits.</p>
+        </div>
+
+        <div role="tabpanel" id="content-how-to" class="info-content hidden prose max-w-none">
+          <ol>
+            <li><strong>Choisissez votre mode de calcul :</strong> « Ajouter la TPS », « Soustraire la TPS » ou « Trouver le taux de TPS ».</li>
+            <li><strong>Saisissez les prix :</strong> Saisissez le ou les prix requis. Le résultat se met à jour automatiquement !</li>
+            <li><strong>Sélectionnez un taux :</strong> Choisissez un taux de TPS dans la liste déroulante, ou choisissez un article dans l'onglet « Nouveaux taux de TPS » pour définir le taux automatiquement.</li>
+            <li><strong>Affichez les résultats :</strong> Le calculateur affiche instantanément un aperçu complet du calcul.</li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = {
+      calcModeRadios: document.querySelectorAll('input[name="calc-mode"]'),
+      addRemoveInputs: document.getElementById('add-remove-inputs'),
+      findRateInputs: document.getElementById('find-rate-inputs'),
+      priceInput: document.getElementById('price-input'),
+      priceLabel: document.getElementById('price-label'),
+      gstRateSelect: document.getElementById('gst-rate'),
+      basePriceFindInput: document.getElementById('base-price-input-find'),
+      totalPriceFindInput: document.getElementById('total-price-input-find'),
+      resultBox: document.getElementById('result'),
+      resultLabel: document.getElementById('result-label-text'),
+      resultValue: document.getElementById('result-value'),
+      gstBreakdownDetails: document.getElementById('gst-breakdown-details'),
+      gstAmountEl: document.getElementById('gst-amount'),
+      cgstAmountEl: document.getElementById('cgst-amount'),
+      sgstAmountEl: document.getElementById('sgst-amount'),
+      infoTabs: document.querySelectorAll('.info-tab-button'),
+      infoContents: document.querySelectorAll('.info-content'),
+      rateSelectors: document.querySelectorAll('[data-rate-selector]'),
+    };
+
+    const calculateGST = () => {
+      const calcMode = document.querySelector('input[name="calc-mode"]:checked').value;
+      let basePrice, totalPrice, gstRate, gstAmount;
+      let isValid = true;
+      [elements.priceInput, elements.basePriceFindInput, elements.totalPriceFindInput].forEach((el) => el.setAttribute('aria-invalid', 'false'));
+
+      if (calcMode === 'add' || calcMode === 'remove') {
+        const price = parseFloat(elements.priceInput.value);
+        gstRate = parseFloat(elements.gstRateSelect.value);
+        if (isNaN(price) || price <= 0 || isNaN(gstRate)) {
+          isValid = false;
+        } else {
+          if (calcMode === 'add') {
+            basePrice = price;
+            gstAmount = basePrice * (gstRate / 100);
+            totalPrice = basePrice + gstAmount;
+            updateResultUI('Prix Total :', totalPrice, gstAmount);
+          } else {
+            totalPrice = price;
+            basePrice = totalPrice / (1 + gstRate / 100);
+            gstAmount = totalPrice - basePrice;
+            updateResultUI('Prix de Base :', basePrice, gstAmount);
+          }
+        }
+      } else {
+        basePrice = parseFloat(elements.basePriceFindInput.value);
+        totalPrice = parseFloat(elements.totalPriceFindInput.value);
+        if (isNaN(basePrice) || basePrice <= 0 || isNaN(totalPrice) || totalPrice <= 0 || totalPrice < basePrice) {
+          isValid = false;
+          if (totalPrice < basePrice) elements.totalPriceFindInput.setAttribute('aria-invalid', 'true');
+        } else {
+          gstRate = ((totalPrice - basePrice) / basePrice) * 100;
+          updateResultUI('Taux de TPS calculé :', `${gstRate.toFixed(2)}%`, null);
+        }
+      }
+      elements.resultBox.classList.toggle('hidden', !isValid);
+    };
+
+    const updateResultUI = (label, value, gstAmount) => {
+      elements.resultLabel.textContent = label;
+      if (typeof value === 'number') {
+        elements.resultValue.textContent = `₹ ${value.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      } else {
+        elements.resultValue.textContent = value;
+      }
+      if (gstAmount !== null) {
+        const cgst = (gstAmount / 2).toFixed(2);
+        elements.gstAmountEl.textContent = `₹ ${gstAmount.toFixed(2)}`;
+        elements.cgstAmountEl.textContent = `₹ ${cgst}`;
+        elements.sgstAmountEl.textContent = `₹ ${cgst}`;
+        elements.gstBreakdownDetails.classList.remove('hidden');
+      } else {
+        elements.gstBreakdownDetails.classList.add('hidden');
+      }
+    };
+
+    const switchCalcMode = (mode) => {
+      const isFindMode = mode === 'find';
+      elements.addRemoveInputs.classList.toggle('hidden', isFindMode);
+      elements.findRateInputs.classList.toggle('hidden', !isFindMode);
+      if (!isFindMode) {
+        elements.priceLabel.textContent = mode === 'add' ? 'Saisir le Prix de Base (₹) :' : 'Saisir le Prix Total (₹) :';
+      }
+      calculateGST();
+    };
+
+    const switchTab = (targetTab) => {
+      elements.infoTabs.forEach((tab) => {
+        const isSelected = tab === targetTab;
+        tab.setAttribute('aria-selected', isSelected);
+        tab.dataset.selected = isSelected;
+      });
+      elements.infoContents.forEach((content) => {
+        content.classList.toggle('hidden', content.id !== targetTab.getAttribute('aria-controls'));
+      });
+    };
+
+    elements.calcModeRadios.forEach((radio) => radio.addEventListener('change', (e) => switchCalcMode(e.target.value)));
+    elements.infoTabs.forEach((tab) => tab.addEventListener('click', () => switchTab(tab)));
+    elements.rateSelectors.forEach((select) => {
+      select.addEventListener('change', (e) => {
+        const selectedValue = e.target.value;
+        if (selectedValue) {
+          elements.gstRateSelect.value = selectedValue;
+          calculateGST();
+        }
+      });
+    });
+    const inputsToTrack = [elements.priceInput, elements.basePriceFindInput, elements.totalPriceFindInput, elements.gstRateSelect];
+    inputsToTrack.forEach((input) => {
+      input.addEventListener('input', calculateGST);
+      input.addEventListener('change', calculateGST);
+    });
+
+    switchCalcMode(document.querySelector('input[name="calc-mode"]:checked').value);
+  });
+</script>
+
+<style>
+  .tool-island [aria-invalid='true'] { border-color: #ef4444; }
+</style>

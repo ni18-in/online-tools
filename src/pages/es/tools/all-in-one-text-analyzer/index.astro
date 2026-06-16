@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-all-in-one-text-analyzer/body.html?raw';
+import css from '../../../../components/legacy/es/tool-all-in-one-text-analyzer/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-all-in-one-text-analyzer/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Analizador de Texto Todo en Uno - Profesional',
+  description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.',
+  keywords: 'analizador de texto, contador de palabras, contador de caracteres, tiempo de lectura, densidad de palabras clave, herramienta de texto',
+  canonical: 'https://online-tools.ni18.in/es/tools/all-in-one-text-analyzer/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/all-in-one-text-analyzer/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/all-in-one-text-analyzer/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/all-in-one-text-analyzer/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/all-in-one-text-analyzer/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/all-in-one-text-analyzer/',
+    title: 'Analizador de Texto Todo en Uno - Profesional',
+    description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/all-in-one-text-analyzer/',
+    title: 'Analizador de Texto Todo en Uno - Profesional',
+    description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Analizador de Texto Todo en Uno - Profesional',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/all-in-one-text-analyzer/',
+    description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<script src=\"https://unpkg.com/lucide@latest\"></script>";
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/all-in-one-text-analyzer/', fr: 'https://online-tools.ni18.in/fr/tools/all-in-one-text-analyzer/' }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-all-in-one-text-analyzer" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,12 @@
+#tool-basic-authentication-header-generator {
+            font-family: inherit;
+        }
+        /* Custom focus styles for better accessibility */
+        #tool-basic-authentication-header-generator .form-input:focus, #tool-basic-authentication-header-generator .btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+        /* Style for the generated code block */
+        #tool-basic-authentication-header-generator .code-block {
+            word-break: break-all;
+        }

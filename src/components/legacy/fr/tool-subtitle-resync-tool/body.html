@@ -1,0 +1,128 @@
+<div class="tool-container">
+        <header>
+            <h1>Resynchronisation de Sous-titres</h1>
+            <p class="subtitle">Corrigez definitivement les fichiers de sous-titres .SRT desynchronises</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="file-input-wrapper" id="video-drop-zone">
+                <input type="file" id="video-file" accept="video/*">
+                <div class="file-label">
+                    <span class="icon">🎥</span>
+                    <span>1. Televersez une video (pour l'apercu)</span>
+                    <span class="file-name" id="video-file-name"></span>
+                </div>
+            </div>
+
+            <div class="file-input-wrapper" id="srt-drop-zone">
+                <input type="file" id="srt-file" accept=".srt">
+                <div class="file-label">
+                    <span class="icon">📝</span>
+                    <span>2. Televersez le fichier .SRT</span>
+                    <span class="file-name" id="srt-file-name"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="video-container">
+                <video id="video-preview" controls playsinline>
+                    <track id="subtitle-track" kind="subtitles" label="Apercu" default>
+                </video>
+                <div class="video-placeholder" id="video-placeholder">
+                    Televersez une video pour voir l'apercu
+                </div>
+            </div>
+
+            <aside class="controls-panel">
+                <div class="offset-display">
+                    <span class="offset-label">Decalage actuel</span>
+                    <div class="offset-value" id="current-offset">0.0s</div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Ajustement rapide</h3>
+                    <div class="shift-buttons">
+                        <button class="btn-shift" data-amount="-0.1">- 0.1s</button>
+                        <button class="btn-shift" data-amount="0.1">+ 0.1s</button>
+                        <button class="btn-shift" data-amount="-0.5">- 0.5s</button>
+                        <button class="btn-shift" data-amount="0.5">+ 0.5s</button>
+                        <button class="btn-shift" data-amount="-1.0">- 1.0s</button>
+                        <button class="btn-shift" data-amount="1.0">+ 1.0s</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Ajustement manuel</h3>
+                    <div class="manual-adjust">
+                        <input type="number" id="manual-offset" step="0.1" value="0" placeholder="Secondes (ex. -1.5)">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <button id="download-btn" class="btn-primary" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Telecharger le SRT corrige
+                    </button>
+                </div>
+
+                <div class="panel-section">
+                    <p class="instructions">
+                        <strong>Astuce :</strong> Vous pouvez aussi utiliser les raccourcis clavier pour ajuster le
+                        timing pendant la lecture de la video.<br>
+                        <kbd>Shift</kbd> + <kbd>←</kbd> / <kbd>→</kbd>
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <section class="info-section">
+            <div class="content-card">
+                <h2>Comment resynchroniser des sous-titres en ligne ?</h2>
+                <ol class="steps-list">
+                    <li><strong>Televersez video et sous-titres :</strong> Selectionnez votre fichier video (MP4, WebM,
+                        etc.) et le fichier .SRT desynchronise.</li>
+                    <li><strong>Verifiez la synchronisation :</strong> Lisez la video pour voir quand le dialogue attendu
+                        se produit par rapport a l'apparition du sous-titre.</li>
+                    <li><strong>Ajustez le timing :</strong>
+                        <ul>
+                            <li>Si les sous-titres apparaissent <strong>trop tot</strong>, cliquez sur <span class="badge">+ Decalage</span>
+                                (Retarder).</li>
+                            <li>Si les sous-titres apparaissent <strong>trop tard</strong>, cliquez sur <span class="badge">- Decalage</span>
+                                (Avancer).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ajustement fin :</strong> Utilisez le champ manuel pour des ajustements precis en
+                        millisecondes (ex. <code>-1.5s</code>).</li>
+                    <li><strong>Telechargez :</strong> Cliquez sur "Telecharger le SRT corrige" pour sauvegarder le
+                        fichier definitivement corrige.</li>
+                </ol>
+            </div>
+
+            <div class="content-card">
+                <h2>A propos de l'outil de resynchronisation</h2>
+                <p>
+                    Frustre par des sous-titres qui ne correspondent pas a l'audio ? L'<strong>outil de
+                    resynchronisation de sous-titres</strong> est le moyen le plus simple de <strong>corriger les
+                    sous-titres SRT desynchronises</strong> directement dans votre navigateur. Pas besoin de telecharger
+                    de logiciel complexe ni de modifier manuellement les marqueurs temporels.
+                </p>
+                <p>
+                    Que vous soyez cinephile, fan d'anime ou apprenant en langues, notre outil de <strong>synchronisation
+                    de sous-titres en ligne</strong> vous aide a aligner parfaitement le texte avec la parole. Chargez
+                    simplement votre contenu, appliquez un decalage temporel et <strong>resynchronisez votre fichier SRT
+                    de facon permanente</strong> en quelques secondes.
+                </p>
+                <p>
+                    Cet outil fonctionne entierement sur votre appareil (cote client), garantissant que vos fichiers
+                    video et sous-titres restent prives et securises. C'est la solution ideale pour tout probleme de
+                    synchronisation de lecture video.
+                </p>
+            </div>
+        </section>
+    </div>

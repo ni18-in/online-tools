@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-guess-the-logo/body.html?raw';
+import css from '../../../../components/legacy/es/tool-guess-the-logo/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-guess-the-logo/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Adivina el Logo - Juego de Quiz de Marcas',
+  description: '¡Pon a prueba tus conocimientos sobre marcas comerciales con Adivina el Logo! Un divertido y adictivo juego de preguntas con múltiples modos de juego.',
+  keywords: 'adivina el logo, quiz de logos, juego de marcas, preguntas de logotipos, juego de navegador',
+  canonical: 'https://online-tools.ni18.in/es/tools/guess-the-logo/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/guess-the-logo/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/guess-the-logo/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/guess-the-logo/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/guess-the-logo/',
+    title: 'Adivina el Logo - Juego de Quiz de Marcas',
+    description: '¡Pon a prueba tus conocimientos sobre marcas comerciales con Adivina el Logo! Un divertido y adictivo juego de preguntas con múltiples modos de juego.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/guess-the-logo/',
+    title: 'Adivina el Logo - Juego de Quiz de Marcas',
+    description: '¡Pon a prueba tus conocimientos sobre marcas comerciales con Adivina el Logo! Un divertido y adictivo juego de preguntas con múltiples modos de juego.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Adivina el Logo - Juego de Quiz de Marcas',
+    applicationCategory: 'Game',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/guess-the-logo/',
+    description: '¡Pon a prueba tus conocimientos sobre marcas comerciales con Adivina el Logo! Un divertido y adictivo juego de preguntas con múltiples modos de juego.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/guess-the-logo/', fr: 'https://online-tools.ni18.in/fr/tools/guess-the-logo/' }} adMinHeight={120}>
+  <div class="tool-island" id="tool-guess-the-logo" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

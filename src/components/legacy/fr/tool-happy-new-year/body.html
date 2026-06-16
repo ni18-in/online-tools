@@ -1,0 +1,81 @@
+<canvas id="fireworksCanvas"></canvas>
+
+    <div class="container">
+        <!-- Afficher le Voeu -->
+        <div id="wish-display" class="glass-card hidden">
+            <h1 class="animate-pop">Bonne Annee <span class="current-year">202X</span> ! <span class="emoji">🎉</span></h1>
+            <p class="wish-text">Pour toi de la part de <span id="sender-name-display" class="highlight-name"></span></p>
+            <div class="message-box">
+                <p id="custom-message-display"></p>
+            </div>
+            <button id="create-own-btn" class="btn primary-btn">Creer Votre Propre Voeu</button>
+        </div>
+
+        <!-- Creer un Voeu -->
+        <div id="create-wish" class="glass-card">
+            <h1>Creez Votre Voeu de Nouvel An <span class="emoji">🎆</span></h1>
+            <p class="subtitle">Envoyez un voeu personnalise a vos proches pour le <span
+                    class="current-year">202X</span> !</p>
+
+            <form id="wish-form">
+                <div class="input-group" style="text-align: center;">
+                    <label style="display:inline-block; margin-bottom: 10px;">Choisir un Theme</label>
+                    <div class="theme-selector">
+                        <div class="theme-option opt-default selected" data-theme="default" title="Fete de Minuit">
+                        </div>
+                        <div class="theme-option opt-golden" data-theme="theme-golden" title="Eclat Dore"></div>
+                        <div class="theme-option opt-neon" data-theme="theme-neon" title="Neon Cyberpunk"></div>
+                        <div class="theme-option opt-snow" data-theme="theme-snow" title="Neige Hivernale"></div>
+                    </div>
+                    <input type="hidden" id="selected-theme" value="default">
+                </div>
+
+                <div class="input-group">
+                    <label for="sender-name">Votre Nom</label>
+                    <input type="text" id="sender-name" placeholder="Ex. Nitin" required maxlength="30">
+                </div>
+
+                <div class="input-group">
+                    <label for="custom-message">Votre Message</label>
+                    <textarea id="custom-message" placeholder="Je vous souhaite joie, prosperite et bonheur..." required
+                        maxlength="200"></textarea>
+                </div>
+
+                <button type="submit" class="btn shine-btn">Generer le Lien du Voeu 🚀</button>
+            </form>
+        </div>
+
+        <!-- Section de Partage -->
+        <div id="share-section" class="glass-card hidden">
+            <h2>Votre Voeu est Pret ! <span class="emoji">🌟</span></h2>
+            <p>Partagez ce lien avec vos proches :</p>
+
+            <div class="link-box">
+                <input type="text" id="share-link" readonly>
+                <button id="copy-link-btn" class="icon-btn" aria-label="Copier le Lien">📋</button>
+            </div>
+
+            <div class="social-buttons">
+                <a href="#" id="share-whatsapp" target="_blank" class="social-btn whatsapp">WhatsApp</a>
+                <a href="#" id="share-facebook" target="_blank" class="social-btn facebook">Facebook</a>
+                <a href="#" id="share-twitter" target="_blank" class="social-btn twitter">X (Twitter)</a>
+            </div>
+
+            <button id="make-another-btn" class="btn secondary-btn">Creer un Autre</button>
+        </div>
+    </div>
+
+    <!-- Controle de la Musique -->
+    <div class="music-control">
+        <button id="music-toggle" aria-label="Activer/Desactiver la Musique">🎵</button>
+    </div>
+    <audio id="bg-music" loop>
+    </audio>
+
+    <!-- Google Ads Container -->
+    <div class="ad-container">
+
+
+
+    </div>
+

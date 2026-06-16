@@ -1,0 +1,46 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-markdown-to-word/body.html?raw';
+import css from '../../../../components/legacy/es/tool-markdown-to-word/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-markdown-to-word/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Convertidor de Markdown a Word – De ChatGPT a DOCX Online',
+  description: 'Convierte Markdown y texto de ChatGPT a documentos Word (.docx) al instante en tu navegador. Sin subidas, sin registro, gratis.',
+  keywords: 'convertidor markdown a word, markdown a docx, chatgpt a word, convertir markdown a word online, exportar chatgpt a docx',
+  canonical: `${SITE_URL}/es/tools/markdown-to-word/`,
+  robots: 'index, follow',
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/markdown-to-word/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/markdown-to-word/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/markdown-to-word/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/markdown-to-word/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/markdown-to-word/`, title: 'Convertidor de Markdown a Word', description: 'Convierte Markdown y ChatGPT a Word (.docx) gratis en tu navegador.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/markdown-to-word/`, title: 'Convertidor de Markdown a Word', description: 'Convierte Markdown y ChatGPT a Word (.docx) gratis en tu navegador.', image: DEFAULT_OG_IMAGE },
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Convertidor de Markdown a Word',
+    url: `${SITE_URL}/es/tools/markdown-to-word/`,
+    description: 'Convierte Markdown y respuestas de ChatGPT a documentos Word (.docx) formateados directamente en tu navegador.',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    inLanguage: 'es',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+};
+const headRaw = [
+  '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>',
+  '<script src="https://unpkg.com/docx@7.1.0/build/index.js"><\/script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"><\/script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/markdown-to-word/`, fr: `${SITE_URL}/fr/tools/markdown-to-word/` }}>
+  <div class="tool-island" id="tool-markdown-to-word" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-online-text-compare/body.html?raw';
+import css from '../../../../components/legacy/es/tool-online-text-compare/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-online-text-compare/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Comparador de Texto en Línea - Comprobador de Diferencias',
+  description: 'Compara dos textos para encontrar las diferencias al instante. Admite múltiples idiomas, modo oscuro y resalta las líneas agregadas, eliminadas y comunes.',
+  keywords: 'comparador de texto, herramienta diff, comparar textos, encontrar diferencias',
+  canonical: 'https://online-tools.ni18.in/es/tools/online-text-compare/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/online-text-compare/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/online-text-compare/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/online-text-compare/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/online-text-compare/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/online-text-compare/',
+    title: 'Comparador de Texto en Línea - Comprobador de Diferencias',
+    description: 'Compara dos textos para encontrar las diferencias al instante. Admite múltiples idiomas, modo oscuro y resalta las líneas agregadas, eliminadas y comunes.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/online-text-compare/',
+    title: 'Comparador de Texto en Línea - Comprobador de Diferencias',
+    description: 'Compara dos textos para encontrar las diferencias al instante. Admite múltiples idiomas, modo oscuro y resalta las líneas agregadas, eliminadas y comunes.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Comparador de Texto en Línea - Comprobador de Diferencias',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/online-text-compare/',
+    description: 'Compara dos textos para encontrar las diferencias al instante. Admite múltiples idiomas, modo oscuro y resalta las líneas agregadas, eliminadas y comunes.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js\" defer></script>";
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/online-text-compare/', fr: 'https://online-tools.ni18.in/fr/tools/online-text-compare/' }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island" id="tool-online-text-compare" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

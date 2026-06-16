@@ -1,0 +1,137 @@
+<a href="#mainContent" class="skip-link">Saltar al contenido principal</a>
+    <header>
+        <a href="https://online-tools.ni18.in/" class="site-title">
+            <h1>
+                <span class="material-icons" aria-hidden="true">screen_share</span>
+                Grabador de Pantalla Pro
+            </h1>
+        </a>
+
+        <nav aria-label="Navegación principal">
+            <button class="menu-toggle" id="menuToggleBtn" aria-label="Alternar menú" aria-expanded="false" aria-controls="navLinks">
+                <span class="material-icons">menu</span>
+            </button>
+            <ul id="navLinks">
+                <li><a href="#home" class="nav-link active" aria-current="page">Inicio</a></li>
+                <li><a href="#how-to-use" class="nav-link">Cómo Usar</a></li>
+                <li><a href="#downloads" class="nav-link">Descargas</a></li>
+                <li><a href="#about" class="nav-link">Acerca de</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Alternar modo oscuro">
+            <span class="material-icons">brightness_4</span>
+        </button>
+    </header>
+
+    <main id="mainContent">
+        <section id="home" class="active" aria-labelledby="homeHeading">
+            <h2 id="homeHeading">Graba Tu Pantalla</h2>
+            <fieldset class="settings-group">
+                <legend>Opciones de Grabación</legend>
+                <label for="recordAudio">
+                    <input type="checkbox" id="recordAudio" checked>
+                    <span>Grabar Audio (Interruptor Principal)</span>
+                </label>
+                 <label for="recordSystemAudio" class="mt-2"> <input type="checkbox" id="recordSystemAudio" checked>
+                    <span>Grabar Audio del Sistema (audio de pestaña/ventana)</span>
+                </label>
+                 <label for="recordMicrophone" class="mt-2">
+                    <input type="checkbox" id="recordMicrophone" checked>
+                    <span>Grabar Micrófono</span>
+                </label>
+            </fieldset>
+
+            <div class="button-group">
+                <button id="startRecordingBtn" class="btn">
+                    <span class="material-icons" aria-hidden="true">fiber_manual_record</span> Iniciar Grabación
+                </button>
+                <button id="pauseRecordingBtn" class="btn secondary" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">pause</span> Pausar
+                </button>
+                <button id="resumeRecordingBtn" class="btn secondary" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">play_arrow</span> Reanudar
+                </button>
+                <button id="stopRecordingBtn" class="btn error" disabled aria-disabled="true">
+                    <span class="material-icons" aria-hidden="true">stop</span> Detener Grabación
+                </button>
+            </div>
+
+            <div class="recording-status" style="display: none;" role="status">
+                <div class="recording-indicator" aria-hidden="true"></div>
+                <span>Grabando...</span>
+                <span id="timer" aria-live="polite">00:00:00</span>
+            </div>
+            <video id="previewVideo" controls style="display:none; width: 100%; max-width: 600px; margin-top: 1.5rem; border-radius: var(--border-radius-medium); border: 1px solid var(--outline-variant-color);" title="Vista previa de la grabación de pantalla"></video>
+        </section>
+
+        <section id="how-to-use" aria-labelledby="howToUseHeading">
+            <h2 id="howToUseHeading">Cómo Usar</h2>
+            <p>Sigue estos sencillos pasos para grabar tu pantalla:</p>
+            <ol>
+                <li><strong>Ve a Inicio:</strong> Asegúrate de estar en la pestaña "Inicio".</li>
+                <li><strong>Configura las Opciones (Opcional):</strong>
+                    <ul>
+                        <li>Marca "Grabar Audio" si deseas incluir audio.</li>
+                        <li>Si "Grabar Audio" está marcado, puedes especificar si deseas grabar "Audio del Sistema" (audio de la pestaña/ventana seleccionada) y/o "Micrófono".</li>
+                    </ul>
+                </li>
+                <li><strong>Iniciar Grabación:</strong> Haz clic en el botón "Iniciar Grabación".</li>
+                <li><strong>Elige la Pantalla:</strong> Tu navegador te pedirá que selecciones lo que deseas compartir: toda la pantalla, una ventana de aplicación específica o una pestaña del navegador. Elige tu preferencia y haz clic en "Compartir".</li>
+                <li><strong>Controles de Grabación:</strong>
+                    <ul>
+                        <li>Una vez iniciada la grabación, verás un temporizador y un indicador visual.</li>
+                        <li>Usa "Pausar" para detener temporalmente la grabación.</li>
+                        <li>Usa "Reanudar" para continuar una grabación pausada.</li>
+                        <li>Usa "Detener Grabación" para finalizar. Se te pedirá confirmación.</li>
+                    </ul>
+                </li>
+                <li><strong>Descargar:</strong> Después de detener, tu video aparecerá en la sección "Descargas". Haz clic en el botón "Descargar" junto al nombre del archivo para guardar el archivo de video <code>.webm</code> o <code>.mp4</code>.</li>
+                <li><strong>Permisos:</strong> La primera vez que uses la aplicación, tu navegador te pedirá permiso para acceder a tu pantalla y micrófono. Por favor, otorga estos permisos para que la aplicación funcione correctamente.</li>
+            </ol>
+            <p class="message-box warning-box"><strong>Nota:</strong> Todas las grabaciones se procesan y almacenan localmente en tu navegador. No se sube ningún dato a ningún servidor.</p>
+        </section>
+
+        <section id="downloads" aria-labelledby="downloadsHeading">
+            <h2 id="downloadsHeading">Tus Grabaciones</h2>
+            <p id="noDownloadsMsg">Aún no hay grabaciones. ¡Inicia una nueva grabación en la página de Inicio!</p>
+            <ul id="downloadsList" aria-live="polite">
+                </ul>
+        </section>
+
+        <section id="about" aria-labelledby="aboutHeading">
+            <h2 id="aboutHeading">Acerca de Esta Aplicación</h2>
+            <p>Este Grabador de Pantalla es una aplicación web ligera del lado del cliente que te permite grabar fácilmente tu pantalla, ventanas de aplicaciones específicas o pestañas del navegador directamente desde tu navegador web.</p>
+            <h3>Características Principales:</h3>
+            <ul>
+                <li><strong>Grabación del Lado del Cliente:</strong> Todo el procesamiento ocurre en tu navegador. No se envían datos a ningún servidor, garantizando tu privacidad.</li>
+                <li><strong>Múltiples Opciones de Grabación:</strong> Elige grabar toda tu pantalla, una sola ventana o una pestaña del navegador.</li>
+                <li><strong>Grabación de Audio:</strong> Incluye opcionalmente audio de tu micrófono y/o audio del sistema (de la pestaña/ventana compartida).</li>
+                <li><strong>Controles Sencillos:</strong> Funcionalidad fácil de usar para iniciar, pausar, reanudar y detener.</li>
+                <li><strong>Descarga Instantánea:</strong> Las grabaciones están disponibles para descargar como archivos <code>.webm</code> o <code>.mp4</code> inmediatamente después de detener.</li>
+                <li><strong>Material Design:</strong> Una interfaz limpia, moderna y responsiva inspirada en Material Design 3 de Google.</li>
+                <li><strong>Modo Oscuro:</strong> Alterna entre temas claro y oscuro para una visualización cómoda.</li>
+            </ul>
+            <h3>Casos de Uso:</h3>
+            <ul>
+                <li>Crear tutoriales o demostraciones de software.</li>
+                <li>Grabar videojuegos.</li>
+                <li>Capturar presentaciones o reuniones en línea (asegúrate de tener consentimiento).</li>
+                <li>Reportar errores mostrando visualmente un problema.</li>
+                <li>Guardar videos o transmisiones en línea (respeta los derechos de autor y los términos de servicio).</li>
+            </ul>
+            <p class="message-box info-box">Esta aplicación utiliza la API de Grabación MediaStream integrada del navegador, lo que la hace eficiente y segura.</p>
+        </section>
+    </main>
+
+    <div id="customModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitleEl" aria-describedby="modalMessageEl">
+        <div class="modal-content">
+            <h3 id="modalTitleEl">Confirmación</h3>
+            <p id="modalMessageEl">¿Estás seguro de que deseas detener la grabación?</p>
+            <div class="modal-actions">
+                <button id="modalCancelBtn" class="btn secondary">Cancelar</button>
+                <button id="modalConfirmBtn" class="btn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar" role="status" aria-live="polite">Mensaje de notificación</div>

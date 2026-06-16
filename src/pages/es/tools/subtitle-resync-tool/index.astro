@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-subtitle-resync-tool/body.html?raw';
+import css from '../../../../components/legacy/es/tool-subtitle-resync-tool/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-subtitle-resync-tool/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Resincronizador de Subtítulos — Corrige Subtítulos Desfasados Online',
+  description: 'Corrige subtítulos desfasados fácilmente. Sube tu archivo SRT y vídeo, ajusta el tiempo con un clic y descarga el archivo de subtítulos corregido.',
+  keywords: 'sincronizar subtítulos, resincronizar srt, corregir subtítulos, retrasar subtítulos, herramienta srt',
+  canonical: `${SITE_URL}/es/tools/subtitle-resync-tool/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/subtitle-resync-tool/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/subtitle-resync-tool/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/subtitle-resync-tool/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/subtitle-resync-tool/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/tools/subtitle-resync-tool/`, title: 'Resincronizador de Subtítulos Online', description: 'Corrige subtítulos desfasados fácilmente.', image: DEFAULT_OG_IMAGE, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/subtitle-resync-tool/`, title: 'Resincronizador de Subtítulos Online', description: 'Corrige subtítulos desfasados fácilmente.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Resincronizador de Subtítulos', applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web', url: `${SITE_URL}/es/tools/subtitle-resync-tool/`, description: 'Corrige subtítulos desfasados en archivos SRT online.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/subtitle-resync-tool/`, fr: `${SITE_URL}/fr/tools/subtitle-resync-tool/` }}>
+  <div class="tool-island" id="tool-subtitle-resync-tool" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

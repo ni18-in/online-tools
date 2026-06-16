@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-iphone-photo-fixer/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-iphone-photo-fixer/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-iphone-photo-fixer/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'iPhone Photo Fixer | Convertisseur HEIC en JPG hors ligne',
+  description: 'Convertissez des images HEIC iPhone en JPG ou PNG instantanément. Convertisseur par lots, fonctionne 100% hors ligne dans votre navigateur, sans téléversement.',
+  keywords: 'convertir heic en jpg gratuit, convertisseur heic par lot, ouvrir photos iphone sur windows',
+  canonical: 'https://online-tools.ni18.in/fr/tools/iphone-photo-fixer/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/iphone-photo-fixer/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/iphone-photo-fixer/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/iphone-photo-fixer/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/iphone-photo-fixer/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/fr/tools/iphone-photo-fixer/',
+    title: 'iPhone Photo Fixer | Convertisseur HEIC en JPG hors ligne',
+    description: 'Convertissez des images HEIC iPhone en JPG ou PNG instantanément. Convertisseur par lots, fonctionne 100% hors ligne dans votre navigateur, sans téléversement.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/fr/tools/iphone-photo-fixer/',
+    title: 'iPhone Photo Fixer | Convertisseur HEIC en JPG hors ligne',
+    description: 'Convertissez des images HEIC iPhone en JPG ou PNG instantanément. Convertisseur par lots, fonctionne 100% hors ligne dans votre navigateur, sans téléversement.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'iPhone Photo Fixer | Convertisseur HEIC en JPG hors ligne',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/fr/tools/iphone-photo-fixer/',
+    description: 'Convertissez des images HEIC iPhone en JPG ou PNG instantanément. Convertisseur par lots, fonctionne 100% hors ligne dans votre navigateur, sans téléversement.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/iphone-photo-fixer/', es: 'https://online-tools.ni18.in/es/tools/iphone-photo-fixer/' }} adMinHeight={120}>
+  <div class="tool-island" id="tool-iphone-photo-fixer" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

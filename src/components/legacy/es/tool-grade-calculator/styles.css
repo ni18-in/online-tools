@@ -1,0 +1,19 @@
+        #tool-grade-calculator {
+            font-family: inherit;
+        }
+        /* Custom styling for editable table look */
+        #tool-grade-calculator .assignment-row-grid {
+            /* 3fr for name, 1fr for score, fixed gap, 1fr for total, fixed width for remove button */
+            display: grid;
+            grid-template-columns: 3fr 1fr 10px 1fr 40px; 
+            align-items: center;
+        }
+        /* Ensure inputs match the font and style */
+        #tool-grade-calculator input[type="number"], #tool-grade-calculator input[type="text"] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+        #tool-grade-calculator input::-webkit-outer-spin-button,
+        #tool-grade-calculator input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }

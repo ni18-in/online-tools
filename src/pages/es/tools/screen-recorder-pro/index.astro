@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-screen-recorder-pro/body.html?raw';
+import css from '../../../../components/legacy/es/tool-screen-recorder-pro/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-screen-recorder-pro/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Grabador de Pantalla Pro - Grabación de Pantalla Online Gratis',
+  description: 'Graba tu pantalla, ventana o pestaña con audio de forma gratuita en tu navegador. 100% del lado del cliente, respetando tu privacidad.',
+  keywords: 'grabador de pantalla, grabacion de pantalla, grabar pantalla gratis, captura de pantalla',
+  canonical: 'https://online-tools.ni18.in/es/tools/screen-recorder-pro/',
+  hreflang: [
+    { hreflang: 'en', href: 'https://online-tools.ni18.in/tools/screen-recorder-pro/' },
+    { hreflang: 'es', href: 'https://online-tools.ni18.in/es/tools/screen-recorder-pro/' },
+    { hreflang: 'fr', href: 'https://online-tools.ni18.in/fr/tools/screen-recorder-pro/' },
+    { hreflang: 'x-default', href: 'https://online-tools.ni18.in/tools/screen-recorder-pro/' },
+  ],
+  og: {
+    type: 'website',
+    url: 'https://online-tools.ni18.in/es/tools/screen-recorder-pro/',
+    title: 'Grabador de Pantalla Pro - Grabación de Pantalla Online Gratis',
+    description: 'Graba tu pantalla, ventana o pestaña con audio de forma gratuita en tu navegador. 100% del lado del cliente, respetando tu privacidad.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: 'https://online-tools.ni18.in/es/tools/screen-recorder-pro/',
+    title: 'Grabador de Pantalla Pro - Grabación de Pantalla Online Gratis',
+    description: 'Graba tu pantalla, ventana o pestaña con audio de forma gratuita en tu navegador. 100% del lado del cliente, respetando tu privacidad.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Grabador de Pantalla Pro - Grabación de Pantalla Online Gratis',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'All',
+    url: 'https://online-tools.ni18.in/es/tools/screen-recorder-pro/',
+    description: 'Graba tu pantalla, ventana o pestaña con audio de forma gratuita en tu navegador. 100% del lado del cliente, respetando tu privacidad.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+
+---
+<ToolLayout seo={seo} lang="es" altLinks={{ en: 'https://online-tools.ni18.in/tools/screen-recorder-pro/', fr: 'https://online-tools.ni18.in/fr/tools/screen-recorder-pro/' }} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-screen-recorder-pro" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

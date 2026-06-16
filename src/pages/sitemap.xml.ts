@@ -3,7 +3,7 @@
 // the noindex blogs, and /es/blogs/. Single source of truth: tools.ts + blogs.ts + the locale
 // clusters below. The P9 URL-inventory test asserts dist matches this set.
 import { SITE_URL } from '../data/site';
-import { sitemapTools, toolUrl } from '../data/tools';
+import { sitemapTools, toolUrl, toolHreflang } from '../data/tools';
 import { indexedPosts, blogUrl } from '../data/blogs';
 
 const LASTMOD = '2026-05-30';
@@ -33,20 +33,35 @@ const landing: Entry[] = [
   { loc: U('/fr/blogs/'), alts: cluster({ en: '/blogs/', fr: '/fr/blogs/' }, '/blogs/') },
 ];
 
-// Translated tool clusters (px-to-rem ↔ px-a-rem-convertidor; rem-to-px ↔ rem-to-px-converter).
-const pxCluster = (xd: string) => cluster({ en: '/tools/px-to-rem-converter/', es: '/es/tools/px-a-rem-convertidor/' }, xd);
-const remCluster = (xd: string) => cluster({ en: '/tools/rem-to-px-converter/', es: '/es/tools/rem-to-px-converter/' }, xd);
-const TRANSLATED_TOOL_ALTS: Record<string, Alt[]> = {
-  'px-to-rem-converter': pxCluster('/tools/px-to-rem-converter/'),
-  'rem-to-px-converter': remCluster('/tools/rem-to-px-converter/'),
-};
+const toolEntries: Entry[] = [];
+const esToolEntries: Entry[] = [];
+const frToolEntries: Entry[] = [];
 
-const toolEntries: Entry[] = sitemapTools().map((t) => ({ loc: toolUrl(t.slug), alts: TRANSLATED_TOOL_ALTS[t.slug] }));
+sitemapTools().forEach((t) => {
+  const alts = toolHreflang(t);
+  
+  // English entry
+  toolEntries.push({
+    loc: toolUrl(t.slug),
+    alts,
+  });
 
-const esToolEntries: Entry[] = [
-  { loc: U('/es/tools/px-a-rem-convertidor/'), alts: pxCluster('/tools/px-to-rem-converter/') },
-  { loc: U('/es/tools/rem-to-px-converter/'), alts: remCluster('/tools/rem-to-px-converter/') },
-];
+  // Spanish entry
+  if (t.i18n?.es) {
+    esToolEntries.push({
+      loc: U(`/es/tools/${t.i18n.es}/`),
+      alts,
+    });
+  }
+
+  // French entry
+  if (t.i18n?.fr) {
+    frToolEntries.push({
+      loc: U(`/fr/tools/${t.i18n.fr}/`),
+      alts,
+    });
+  }
+});
 
 // Blog posts: edit-images has a FR translation (reciprocal); the others stand alone.
 const editImagesAlts = cluster(
@@ -61,7 +76,7 @@ const frBlogEntries: Entry[] = [
   { loc: U('/fr/blogs/edit-images-like-pro-free-online-tool.html'), alts: editImagesAlts },
 ];
 
-const all: Entry[] = [...landing, ...toolEntries, ...esToolEntries, ...blogEntries, ...frBlogEntries];
+const all: Entry[] = [...landing, ...toolEntries, ...esToolEntries, ...frToolEntries, ...blogEntries, ...frBlogEntries];
 
 function render(e: Entry): string {
   const alts = (e.alts ?? [])

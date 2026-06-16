@@ -1,0 +1,285 @@
+/* --- Base & Theme Variables --- */
+        #tool-json-comparison-tool {
+             --bg-color: #f9fafb; /* gray-50 */
+             --text-color: #111827; /* gray-900 */
+             --text-secondary-color: #4b5563; /* gray-600 */
+             --textarea-bg: #ffffff; /* white */
+             --textarea-border: #d1d5db; /* gray-300 */
+             --textarea-focus-border: #4f46e5; /* indigo-600 */
+             --line-number-bg: #f3f4f6; /* gray-100 */
+             --line-number-text: #6b7280; /* gray-500 */
+             --diff-bg-color: #ffffff; /* white */
+             --diff-text-color: #1f2937; /* gray-800 */
+             --diff-border-color: #e5e7eb; /* gray-200 */
+             /* Diff Colors - Enhanced Contrast */
+             --diff-ins-bg: #ddfada; /* Lighter green */
+             --diff-ins-text: #057a55; /* Darker green */
+             --diff-ins-border: #a7f3d0; /* Green border */
+             --diff-del-bg: #fee2e2; /* Lighter red */
+             --diff-del-text: #c81e1e; /* Darker red */
+             --diff-del-border: #fecaca; /* Red border */
+             --diff-moved-bg: #fef3c7; /* Lighter yellow */
+             --diff-moved-text: #a16207; /* Darker yellow */
+             --diff-moved-border: #fde68a; /* Yellow border */
+             --diff-modified-bg: #e0f2fe; /* Lighter blue */
+             --diff-modified-text: #0284c7; /* Darker blue */
+             --diff-modified-border: #bae6fd; /* Blue border */
+
+             --border-color: #e5e7eb; /* gray-200 */
+             --scrollbar-track-color: #f7fafc;
+             --scrollbar-thumb-color: #cbd5e0;
+             --scrollbar-thumb-hover-color: #a0aec0;
+             --error-bg: #fee2e2; /* red-100 */
+             --error-text: #b91c1c; /* red-700 */
+             --error-border: #fca5a5; /* red-300 */
+             --info-bg: #e0f2fe; /* sky-100 */
+             --info-text: #0369a1; /* sky-700 */
+             --info-border: #bae6fd; /* sky-200 */
+             --warning-bg: #fef3c7; /* amber-100 */
+             --warning-text: #92400e; /* amber-700 */
+             --warning-border: #fde68a; /* amber-200 */
+             --ad-bg: #e5e7eb; /* gray-200 */
+             --ad-border: #d1d5db; /* gray-300 */
+             --ad-text: #6b7280; /* gray-500 */
+             --btn-icon-text: #4b5563; /* gray-600 */
+             --btn-icon-hover-text: #111827; /* gray-900 */
+             --btn-icon-hover-bg: #f3f4f6; /* gray-100 */
+             --modal-bg: #ffffff;
+             --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+             --modal-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark #tool-json-comparison-tool {
+             --bg-color: #111827; /* gray-900 */
+             --text-color: #f9fafb; /* gray-50 */
+             --text-secondary-color: #9ca3af; /* gray-400 */
+             --textarea-bg: #1f2937; /* gray-800 */
+             --textarea-border: #4b5563; /* gray-600 */
+             --textarea-focus-border: #818cf8; /* indigo-400 */
+             --line-number-bg: #374151; /* gray-700 */
+             --line-number-text: #9ca3af; /* gray-400 */
+             --diff-bg-color: #1f2937; /* gray-800 */
+             --diff-text-color: #e5e7eb; /* gray-200 */
+             --diff-border-color: #374151; /* gray-700 */
+             /* Diff Colors - Enhanced Contrast (Dark) */
+             --diff-ins-bg: #052e16; /* Darker green */
+             --diff-ins-text: #a7f3d0; /* Lighter green */
+             --diff-ins-border: #10b981; /* Green border */
+             --diff-del-bg: #450a0a; /* Darker red */
+             --diff-del-text: #fecaca; /* Lighter red */
+             --diff-del-border: #ef4444; /* Red border */
+             --diff-moved-bg: #422006; /* Darker yellow */
+             --diff-moved-text: #fcd34d; /* Lighter yellow */
+             --diff-moved-border: #f59e0b; /* Yellow border */
+             --diff-modified-bg: #0c4a6e; /* Darker blue */
+             --diff-modified-text: #bae6fd; /* Lighter blue */
+             --diff-modified-border: #38bdf8; /* Blue border */
+
+             --border-color: #374151; /* gray-700 */
+             --scrollbar-track-color: #1f2937; /* gray-800 */
+             --scrollbar-thumb-color: #4b5563; /* gray-600 */
+             --scrollbar-thumb-hover-color: #6b7280; /* gray-500 */
+             --error-bg: #450a0a; /* red-950 */
+             --error-text: #fecaca; /* red-200 */
+             --error-border: #7f1d1d; /* red-800 */
+             --info-bg: #0c4a6e; /* sky-900 */
+             --info-text: #bae6fd; /* sky-200 */
+             --info-border: #075985; /* sky-800 */
+             --warning-bg: #451a03; /* amber-950 */
+             --warning-text: #fcd34d; /* amber-300 */
+             --warning-border: #78350f; /* amber-800 */
+             --ad-bg: #374151; /* gray-700 */
+             --ad-border: #4b5563; /* gray-600 */
+             --ad-text: #9ca3af; /* gray-400 */
+             --btn-icon-text: #d1d5db; /* gray-300 */
+             --btn-icon-hover-text: #f9fafb; /* gray-50 */
+             --btn-icon-hover-bg: #374151; /* gray-700 */
+             --modal-bg: #1f2937; /* gray-800 */
+             --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+             --modal-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply base styles */
+        #tool-json-comparison-tool { scroll-behavior: smooth; font-size: 16px; }
+        #tool-json-comparison-tool {
+             font-family: inherit;
+             background-color: var(--bg-color);
+             color: var(--text-color);
+             transition: background-color 0.3s ease, color 0.3s ease;
+             line-height: 1.6;
+        }
+
+        /* --- Editor Input Styles --- */
+        #tool-json-comparison-tool .editor-container {
+            display: flex; border: 1px solid var(--textarea-border); border-radius: 0.5rem; overflow: hidden;
+            position: relative; background-color: var(--textarea-bg); transition: border-color 0.2s ease, background-color 0.3s ease;
+        }
+        #tool-json-comparison-tool .editor-container:focus-within { border-color: var(--textarea-focus-border); box-shadow: 0 0 0 2px var(--textarea-focus-border); }
+        #tool-json-comparison-tool .line-numbers {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6; padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+            background-color: var(--line-number-bg); color: var(--line-number-text); text-align: right; user-select: none; overflow-y: hidden;
+            flex-shrink: 0; white-space: pre; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #tool-json-comparison-tool textarea.editor-textarea {
+             border: none; border-radius: 0; box-shadow: none; outline: none; padding: 0.75rem; background-color: transparent; color: var(--text-color);
+             flex-grow: 1; min-height: 20rem; resize: none; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;
+             white-space: pre; overflow-wrap: normal; transition: color 0.3s ease;
+        }
+        #tool-json-comparison-tool textarea.editor-textarea:focus { box-shadow: none; border-color: transparent; }
+        #tool-json-comparison-tool textarea::placeholder { color: #6b7280; } .dark #tool-json-comparison-tool textarea::placeholder { color: #9ca3af; }
+
+
+        /* --- Diff Output Styles --- */
+        #tool-json-comparison-tool .diff-container {
+             background-color: var(--diff-bg-color); color: var(--diff-text-color); border: 1px solid var(--diff-border-color); border-radius: 0.5rem;
+             padding: 1.5rem; /* Increased padding */ margin-top: 1rem; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; font-size: 0.875rem;
+             line-height: 1.7; /* Slightly increased line-height */ white-space: pre-wrap; word-wrap: break-word;
+             transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Override default library styles for better clarity */
+        #tool-json-comparison-tool .jsondiffpatch-delta { padding-left: 1.5em; /* Indent nested levels */ }
+        #tool-json-comparison-tool .jsondiffpatch-unchanged .jsondiffpatch-property-name,
+        #tool-json-comparison-tool .jsondiffpatch-moved .jsondiffpatch-property-name,
+        #tool-json-comparison-tool .jsondiffpatch-modified .jsondiffpatch-property-name,
+        #tool-json-comparison-tool .jsondiffpatch-added .jsondiffpatch-property-name,
+        #tool-json-comparison-tool .jsondiffpatch-deleted .jsondiffpatch-property-name {
+            font-weight: 600; /* Bolder property names */
+            margin-right: 0.5em;
+            display: inline-block; /* Ensure proper spacing */
+            color: var(--text-secondary-color); /* Dimmer property names */
+        }
+        .dark #tool-json-comparison-tool .jsondiffpatch-unchanged .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-moved .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-modified .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-added .jsondiffpatch-property-name,
+        .dark #tool-json-comparison-tool .jsondiffpatch-deleted .jsondiffpatch-property-name {
+             color: var(--text-secondary-color); /* Use dark mode secondary color */
+        }
+
+        /* Added items */
+        #tool-json-comparison-tool .jsondiffpatch-added .jsondiffpatch-value,
+        #tool-json-comparison-tool .jsondiffpatch-added > ins { /* Target direct ins for block adds */
+            background-color: var(--diff-ins-bg) !important; /* Override library */
+            color: var(--diff-ins-text) !important;
+            text-decoration: none !important;
+            display: block; /* Make added blocks distinct */
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            border: 1px solid var(--diff-ins-border);
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        #tool-json-comparison-tool .jsondiffpatch-added > ins::before { content: "+ "; font-weight: bold; } /* Add '+' symbol */
+        #tool-json-comparison-tool .jsondiffpatch-added .jsondiffpatch-value pre { /* Style pre within added */
+             background-color: transparent !important;
+             color: inherit !important;
+        }
+
+        /* Deleted items */
+        #tool-json-comparison-tool .jsondiffpatch-deleted .jsondiffpatch-value,
+        #tool-json-comparison-tool .jsondiffpatch-deleted > del { /* Target direct del for block deletes */
+            background-color: var(--diff-del-bg) !important; /* Override library */
+            color: var(--diff-del-text) !important;
+            text-decoration: line-through !important;
+            display: block; /* Make deleted blocks distinct */
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            border: 1px solid var(--diff-del-border);
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        #tool-json-comparison-tool .jsondiffpatch-deleted > del::before { content: "- "; font-weight: bold; } /* Add '-' symbol */
+        #tool-json-comparison-tool .jsondiffpatch-deleted .jsondiffpatch-value pre { /* Style pre within deleted */
+             background-color: transparent !important;
+             color: inherit !important;
+             text-decoration: line-through !important;
+        }
+
+        /* Modified items */
+        #tool-json-comparison-tool .jsondiffpatch-modified .jsondiffpatch-value > del {
+            background-color: var(--diff-del-bg) !important;
+            color: var(--diff-del-text) !important;
+            text-decoration: line-through !important;
+            padding: 0.1em 0.3em;
+            border-radius: 0.2rem;
+            border: 1px dashed var(--diff-del-border); /* Dashed border for inline changes */
+        }
+        #tool-json-comparison-tool .jsondiffpatch-modified .jsondiffpatch-value > ins {
+            background-color: var(--diff-ins-bg) !important;
+            color: var(--diff-ins-text) !important;
+            text-decoration: none !important;
+            padding: 0.1em 0.3em;
+            border-radius: 0.2rem;
+            border: 1px dashed var(--diff-ins-border); /* Dashed border for inline changes */
+        }
+        /* Style the container for modified values */
+        #tool-json-comparison-tool .jsondiffpatch-modified > .jsondiffpatch-value {
+             background-color: var(--diff-modified-bg);
+             border: 1px solid var(--diff-modified-border);
+             color: var(--diff-modified-text);
+             padding: 0.2em 0.5em;
+             border-radius: 0.25rem;
+             display: inline-block; /* Keep modifications inline where possible */
+             margin-top: 0.2em;
+             margin-bottom: 0.2em;
+        }
+
+        /* Moved items (less common, basic styling) */
+        #tool-json-comparison-tool .jsondiffpatch-moved .jsondiffpatch-value {
+            background-color: var(--diff-moved-bg);
+            border: 1px solid var(--diff-moved-border);
+            color: var(--diff-moved-text);
+            padding: 0.2em 0.5em;
+            border-radius: 0.25rem;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        #tool-json-comparison-tool .jsondiffpatch-moved::before { content: ">> "; font-weight: bold; color: var(--diff-moved-text); } /* Indicate move */
+
+        /* Text diffs */
+        #tool-json-comparison-tool .jsondiffpatch-textdiff ins, #tool-json-comparison-tool .jsondiffpatch-textdiff del {
+            padding: 0.1em;
+            border-radius: 0.2rem;
+        }
+        #tool-json-comparison-tool .jsondiffpatch-textdiff ins { background-color: var(--diff-ins-bg); color: var(--diff-ins-text); border: 1px dashed var(--diff-ins-border); text-decoration: none; }
+        #tool-json-comparison-tool .jsondiffpatch-textdiff del { background-color: var(--diff-del-bg); color: var(--diff-del-text); border: 1px dashed var(--diff-del-border); text-decoration: line-through; }
+
+
+        /* General structure improvements */
+        #tool-json-comparison-tool .jsondiffpatch-delta ul { list-style: none; padding: 0; margin: 0; margin-left: 1em; }
+        #tool-json-comparison-tool .jsondiffpatch-delta li { padding: 0; margin: 0.1em 0; }
+        #tool-json-comparison-tool .jsondiffpatch-object-header { margin-bottom: 0.2em; }
+        #tool-json-comparison-tool .jsondiffpatch-array-header { margin-bottom: 0.2em; }
+
+
+        /* Custom Scrollbar */
+        #tool-json-comparison-tool ::-webkit-scrollbar { width: 8px; height: 8px; } #tool-json-comparison-tool ::-webkit-scrollbar-track { background: var(--scrollbar-track-color); border-radius: 10px; }
+        #tool-json-comparison-tool ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb-color); border-radius: 10px; } #tool-json-comparison-tool ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover-color); }
+        #tool-json-comparison-tool .line-numbers::-webkit-scrollbar { display: none; }
+        #tool-json-comparison-tool .line-numbers { scrollbar-width: none; -ms-overflow-style: none; }
+
+        /* Placeholder Ad Styling */
+        #tool-json-comparison-tool .ad-placeholder { min-height: 90px; background-color: var(--ad-bg); border: 1px dashed var(--ad-border); display: none; align-items: center; justify-content: center; color: var(--ad-text); font-size: 0.875rem; border-radius: 0.5rem; margin: 1rem 0; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+
+        /* Message Box Styling */
+        #tool-json-comparison-tool .message-box { border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; font-size: 0.875rem; display: none; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+        #tool-json-comparison-tool .message-box-error { background-color: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); }
+        #tool-json-comparison-tool .message-box-info { background-color: var(--info-bg); color: var(--info-text); border: 1px solid var(--info-border); }
+        #tool-json-comparison-tool .message-box-warning { background-color: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
+
+        /* Checkbox styling */
+        #tool-json-comparison-tool input[type="checkbox"] { @apply rounded text-indigo-600 focus:ring-indigo-500 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-indigo-400 dark:checked:border-transparent; }
+
+        /* Tooltip Styling (Basic) */
+        #tool-json-comparison-tool [title]:hover::after { content: attr(title); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 5px; padding: 4px 8px; background-color: #333; color: white; font-size: 0.75rem; border-radius: 4px; white-space: nowrap; z-index: 10; opacity: 0.9; pointer-events: none; }
+        #tool-json-comparison-tool [title] { position: relative; }
+
+        /* Modal Styles */
+        #tool-json-comparison-tool .modal-overlay { position: fixed; inset: 0; background-color: var(--modal-overlay-bg); z-index: 40; }
+        #tool-json-comparison-tool .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--modal-bg); border-radius: 0.5rem; padding: 1.5rem; box-shadow: var(--modal-shadow); z-index: 50; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
+        #tool-json-comparison-tool .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        #tool-json-comparison-tool .modal-title { font-size: 1.25rem; font-weight: 600; }
+        #tool-json-comparison-tool .modal-close-button { background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-secondary-color); }
+        #tool-json-comparison-tool .modal-content ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        #tool-json-comparison-tool .modal-content li { margin-bottom: 0.5rem; }
+        #tool-json-comparison-tool .modal-content code { background-color: var(--textarea-bg); padding: 0.1em 0.3em; border-radius: 3px; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }

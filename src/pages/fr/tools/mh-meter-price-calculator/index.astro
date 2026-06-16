@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-mh-meter-price-calculator/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-mh-meter-price-calculator/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-mh-meter-price-calculator/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Calculateur de Tarifs MH | Taxi et Rickshaw à Mumbai',
+  description: 'Calculez les tarifs de rickshaw, taxi et Cool Cab à Mumbai et dans le Maharashtra. Tarifs officiels 2025 (MMRTA).',
+  keywords: 'calculateur taxi mumbai, tarif rickshaw, taxi maharashtra, cool cab, mmrta 2025',
+  canonical: `${SITE_URL}/fr/tools/mh-meter-price-calculator/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/mh-meter-price-calculator/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/mh-meter-price-calculator/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/mh-meter-price-calculator/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/mh-meter-price-calculator/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/fr/tools/mh-meter-price-calculator/`, title: 'Calculateur de Tarifs MH | Taxi et Rickshaw à Mumbai', description: 'Calculez les tarifs de rickshaw, taxi et Cool Cab à Mumbai et dans le Maharashtra.', image: DEFAULT_OG_IMAGE, locale: 'fr_FR' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/mh-meter-price-calculator/`, title: 'Calculateur de Tarifs MH | Taxi et Rickshaw à Mumbai', description: 'Calculez les tarifs de rickshaw, taxi et Cool Cab à Mumbai et dans le Maharashtra.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Calculateur de Tarifs MH', applicationCategory: 'TravelApplication', operatingSystem: 'Any', url: `${SITE_URL}/fr/tools/mh-meter-price-calculator/`, description: 'Calculez les tarifs de rickshaw, taxi et Cool Cab à Mumbai et dans le Maharashtra. Tarifs officiels 2025 (MMRTA).', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+};
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/mh-meter-price-calculator/`, es: `${SITE_URL}/es/tools/mh-meter-price-calculator/` }} adMinHeight={120}>
+  <div class="tool-island" id="tool-mh-meter-price-calculator" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

@@ -1,0 +1,132 @@
+<main class="container">
+        <header role="banner">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🚕</div>
+            <h1>Calculadora de Tarifas MH</h1>
+            <span class="subtitle">Tarifa oficial MMR (vigente desde 01/02/2025)</span>
+        </header>
+
+        <article class="card">
+            <form id="fareForm" aria-label="Calculadora de tarifas de taxi">
+
+                <div class="form-group">
+                    <label for="vehicleType">Seleccionar tipo de veh&iacute;culo</label>
+                    <select id="vehicleType" required onchange="updateFormUI()">
+                        <option value="auto">🛺 Auto Rickshaw</option>
+                        <option value="taxi_by">🚕 Taxi (Negro y Amarillo)</option>
+                        <option value="taxi_cool">🚙 Cool Cab (Azul/Plateado)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="distance">Distancia (en KM)</label>
+                    <input type="number" id="distance" inputmode="decimal" placeholder="ej. 2.5" step="0.01" min="0"
+                        required aria-required="true">
+                    <div class="helper-text">Ingresa la distancia del tax&iacute;metro o de mapas.</div>
+                </div>
+
+                <div class="checkbox-group" role="group" aria-label="Modificadores del viaje">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="midnight">
+                        <span>Nocturno <br><small class="tag tag-night">+25% (12AM-5AM)</small></span>
+                    </label>
+
+                    <label class="checkbox-item" id="acOptionContainer" style="display:none;">
+                        <input type="checkbox" id="ac">
+                        <span>Viaje con AC <br><small class="tag tag-ac">+10%</small></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="waiting">Tiempo de espera (Minutos)</label>
+                    <input type="number" id="waiting" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Atascos de tr&aacute;fico o paradas en sem&aacute;foros.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="luggage">Equipaje grande (Cantidad)</label>
+                    <input type="number" id="luggage" inputmode="numeric" placeholder="0" min="0">
+                    <div class="helper-text">Art&iacute;culos mayores de 60x40cm (₹6/pieza).</div>
+                </div>
+
+                <button type="submit" class="btn-primary">Calcular Tarifa</button>
+            </form>
+        </article>
+
+        <!-- How To Use Section -->
+        <details class="instructions-card">
+            <summary>❓ &iquest;C&oacute;mo usar esta calculadora?</summary>
+            <div class="instructions-content">
+                <ol>
+                    <li><strong>Elige el veh&iacute;culo:</strong> Selecciona Auto, Taxi Negro y Amarillo, o Cool Cab.</li>
+                    <li><strong>Ingresa la distancia:</strong> Introduce los kil&oacute;metros (KM) del tax&iacute;metro o de tu app de mapas GPS.</li>
+                    <li><strong>Opci&oacute;n nocturna:</strong> Marca esta casilla si tu viaje es entre las 12:00 AM y las 5:00 AM.</li>
+                    <li><strong>Opci&oacute;n AC:</strong> (Solo para Taxi Negro y Amarillo) Marca si usaste el aire acondicionado.</li>
+                    <li><strong>Espera y equipaje:</strong> Ingresa el tiempo de espera en minutos o la cantidad de maletas grandes si aplica.</li>
+                    <li><strong>Calcular:</strong> Haz clic en el bot&oacute;n para ver la tarifa oficial estimada del gobierno.</li>
+                </ol>
+                <p style="margin-top:10px; font-size: 0.85rem; color: #777;">
+                    <em>Nota: El monto final se redondea a la Rupia m&aacute;s cercana seg&uacute;n las reglas del RTO.</em>
+                </p>
+            </div>
+        </details>
+
+        <!-- Results Section -->
+        <section id="result-section" aria-live="polite">
+            <div class="result-card">
+                <div class="result-header">Detalles de la tarifa estimada</div>
+                <div class="result-body">
+                    <div class="fare-row">
+                        <span>Tarifa base (Distancia)</span>
+                        <span id="res-base">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-ac">
+                        <span>Recargo por AC</span>
+                        <span id="res-ac">₹0.00</span>
+                    </div>
+                    <div class="fare-row hidden" id="row-midnight">
+                        <span>Cargo nocturno</span>
+                        <span id="res-midnight">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Cargos por espera</span>
+                        <span id="res-waiting">₹0.00</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Cargos por equipaje</span>
+                        <span id="res-luggage">₹0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total a pagar</span>
+                        <span class="total-amount" id="res-total">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button id="aboutBtn" class="btn-about" aria-haspopup="dialog">Acerca de y Aviso legal</button>
+        </footer>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal" aria-label="Cerrar modal">&times;</button>
+            <h2 id="modalTitle" style="margin-bottom: 15px; color: var(--secondary);">⚠️ Aviso legal importante</h2>
+
+            <p style="margin-bottom: 15px;">
+                <strong>Este NO es un sitio web oficial del gobierno.</strong>
+            </p>
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">
+                Esta herramienta est&aacute; dise&ntilde;ada para ayudar a los pasajeros a estimar tarifas seg&uacute;n la tarjeta de tarifas vigente desde el 01/02/2025. Aunque nos esforzamos por ser precisos, las lecturas reales del tax&iacute;metro pueden variar ligeramente debido a la calibraci&oacute;n.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 0.95rem;">
+                Para consultas oficiales, quejas o para descargar el PDF firmado, visita el sitio web del Departamento de Veh&iacute;culos de Motor de Maharashtra:
+            </p>
+
+            <a href="https://transport.maharashtra.gov.in/Site/Common/ViewPdfList.aspx?Doctype=1d1f28f9-a4e5-4b09-ab8b-1d4576adca18"
+                target="_blank" rel="noopener noreferrer" class="official-link">
+                Visitar sitio web oficial de transporte ↗
+            </a>
+        </div>
+    </div>
