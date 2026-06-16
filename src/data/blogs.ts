@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     keywords: 'px to rem, rem converter, responsive design, css units',
     datePublished: '2025-11-23T15:14:00+05:30',
     dateModified: '2025-11-23T15:14:00+05:30',
-    image: `${SITE_URL}/assets/blog/px-to-rem-converter-banner.png`,
+    image: `${SITE_URL}/assets/blog/px-to-rem-converter-banner.webp`,
     author: 'ni18',
   },
   {
@@ -63,7 +63,7 @@ export const blogPosts: BlogPost[] = [
     keywords: 'json visualizer, json formatter, json validator, developer tool',
     datePublished: '2025-04-12T13:14:00+05:30',
     dateModified: '2025-04-12T13:14:00+05:30',
-    image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.png`,
+    image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.webp`,
     author: 'ni18',
   },
   {
@@ -73,7 +73,7 @@ export const blogPosts: BlogPost[] = [
     keywords: 'image editor, free online tool, photo editing, resize image, crop image',
     datePublished: '2025-04-05T18:00:00+05:30',
     dateModified: '2025-04-05T18:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/edit-images-pro-tool-banner.png`,
+    image: `${SITE_URL}/assets/blog/edit-images-pro-tool-banner.webp`,
     author: 'ni18',
   },
   // ---- noindex posts (excluded from sitemap) ----

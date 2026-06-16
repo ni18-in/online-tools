@@ -21,7 +21,8 @@ const seo: SeoProps = {
   twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/tools/free-online-image-utility-tool/`, title: 'Herramienta de Imágenes Online Gratis', description: 'Redimensiona, comprime, convierte y optimiza imágenes en línea. Sin descargas.', image: DEFAULT_OG_IMAGE },
   jsonLd: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Herramienta de Imágenes Online Gratis', applicationCategory: 'MultimediaApplication', operatingSystem: 'Web', url: `${SITE_URL}/es/tools/free-online-image-utility-tool/`, description: 'Herramienta gratuita para redimensionar, comprimir, convertir y optimizar imágenes en línea.', offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' } }],
 };
-const headRaw = '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>';
+const headRaw =
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">';
 ---
 <ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/free-online-image-utility-tool/`, fr: `${SITE_URL}/fr/tools/free-online-image-utility-tool/` }}>
   <div class="tool-island legacy-tw" id="tool-free-online-image-utility-tool" set:html={body} />
