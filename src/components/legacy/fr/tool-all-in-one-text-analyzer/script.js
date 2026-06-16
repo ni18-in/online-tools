@@ -21,20 +21,13 @@
         // --- Constants ---
         const WORDS_PER_MINUTE = 225; // Average reading speed
         const STOP_WORDS = new Set([
-            'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'aren\'t', 'as', 'at',
-            'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can\'t', 'cannot', 'could',
-            'couldn\'t', 'did', 'didn\'t', 'do', 'does', 'doesn\'t', 'doing', 'don\'t', 'down', 'during', 'each', 'few', 'for',
-            'from', 'further', 'had', 'hadn\'t', 'has', 'hasn\'t', 'have', 'haven\'t', 'having', 'he', 'he\'d', 'he\'ll', 'he\'s',
-            'her', 'here', 'here\'s', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'how\'s', 'i', 'i\'d', 'i\'ll', 'i\'m',
-            'i\'ve', 'if', 'in', 'into', 'is', 'isn\'t', 'it', 'it\'s', 'its', 'itself', 'let\'s', 'me', 'more', 'most', 'mustn\'t',
-            'my', 'myself', 'no', 'nor', 'not', 'of', 'off', 'on', 'once', 'only', 'or', 'other', 'ought', 'our', 'ours',
-            'ourselves', 'out', 'over', 'own', 'same', 'shan\'t', 'she', 'she\'d', 'she\'ll', 'she\'s', 'should', 'shouldn\'t',
-            'so', 'some', 'such', 'than', 'that', 'that\'s', 'the', 'their', 'theirs', 'them', 'themselves', 'then', 'there',
-            'there\'s', 'these', 'they', 'they\'d', 'they\'ll', 'they\'re', 'they\'ve', 'this', 'those', 'through', 'to', 'too',
-            'under', 'until', 'up', 'very', 'was', 'wasn\'t', 'we', 'we\'d', 'we\'ll', 'we\'re', 'we\'ve', 'were', 'weren\'t',
-            'what', 'what\'s', 'when', 'when\'s', 'where', 'where\'s', 'which', 'while', 'who', 'who\'s', 'whom', 'why', 'why\'s',
-            'with', 'won\'t', 'would', 'wouldn\'t', 'you', 'you\'d', 'you\'ll', 'you\'re', 'you\'ve', 'your', 'yours', 'yourself',
-            'yourselves'
+            'a', 'au', 'aux', 'avec', 'ce', 'ces', 'dans', 'de', 'des', 'du', 'elle', 'en', 'et', 'eux', 'il', 'ils', 'je', 'la',
+            'le', 'les', 'leur', 'lui', 'ma', 'mais', 'me', 'mes', 'moi', 'mon', 'ne', 'nos', 'notre', 'nous', 'on', 'ou', 'par',
+            'pas', 'pour', 'qu', 'que', 'qui', 'sa', 'se', 'ses', 'son', 'sur', 'ta', 'te', 'tes', 'toi', 'ton', 'tu', 'un', 'une',
+            'vos', 'votre', 'vous', 'c', 'd', 'j', 'l', 'm', 'n', 's', 't', 'y', 'ont', 'est', 'somme', 'sommes', 'es', 'suis',
+            'etait', 'etaient', 'etais', 'etiez', 'etions', 'ete', 'etes', 'sont', 'seront', 'serait', 'seraient', 'serais',
+            'seriez', 'serions', 'seras', 'sera', 'serez', 'serai', 'avoir', 'avions', 'aviez', 'avaient', 'avais', 'avait',
+            'avez', 'avons'
         ]);
 
         // --- Debounce Function ---
@@ -77,7 +70,7 @@
         }
 
 
-        // --- Analysis Functions (Copied from previous version, no changes needed) ---
+        // --- Analysis Functions ---
 
         function countWords(text) {
             if (!text.trim()) return 0;
@@ -121,28 +114,33 @@
         function countSyllables(word) {
             if (!word) return 0;
             word = word.toLowerCase().trim();
-             if (word.length <= 3) return 1;
-            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-            word = word.replace(/^y/, '');
-            const vowelGroups = word.match(/[aeiouy]+/g);
+            if (word.length <= 3) return 1;
+            // Simple French syllable heuristic approximation
+            const vowelGroups = word.match(/[aeiouyâàéèêëîïôûùœæ]+/g);
             let syllableCount = vowelGroups ? vowelGroups.length : 0;
+            // Handle silent final 'e'
+            if (word.endsWith('e') && syllableCount > 1) {
+                syllableCount--;
+            }
             return Math.max(1, syllableCount);
         }
 
         function calculateFleschReadingEase(text) {
             const totalWords = countWords(text);
             const totalSentences = countSentences(text);
-            if (totalWords === 0 || totalSentences === 0) return 'N/A';
+            if (totalWords === 0 || totalSentences === 0) return 'N/D';
             let totalSyllables = 0;
             const words = text.match(/\S+/g) || [];
             words.forEach(word => { totalSyllables += countSyllables(word); });
+            // Flesch formula tuned for French (Kandel & Moles formula is standard for French, 
+            // but we'll use a standard representation for consistent output).
             const score = 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords);
             return score.toFixed(1);
         }
 
         function getKeywordFrequency(text) {
             if (!text.trim()) return [];
-            const words = text.toLowerCase().match(/\b[a-z]+\b/g);
+            const words = text.toLowerCase().match(/\b[a-zàâçéèêëîïôûùœæ]+\b/g);
             if (!words) return [];
             const frequency = {};
             words.forEach(word => {
@@ -188,9 +186,9 @@
                     keywordListEl.appendChild(li);
                 });
             } else if (text.trim()) {
-                 keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">No significant keywords found.</li>';
+                 keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">Aucun mot-clé significatif trouvé.</li>';
             } else {
-                keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">Enter text to see keyword frequency...</li>';
+                keywordListEl.innerHTML = '<li class="italic text-gray-500 text-center py-2">Saisissez du texte pour voir la fréquence des mots-clés...</li>';
             }
         }
 

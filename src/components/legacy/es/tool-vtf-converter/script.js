@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentFile || !originalImage) return;
         
         setLoading(true);
-        statusMsg.textContent = 'Generating VTF...';
+        statusMsg.textContent = 'Generando VTF...';
         
         try {
             // Give UI a moment to update
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             downloadBlob(vtfBlob, vtfFilename);
             
-            statusMsg.textContent = 'Conversion successful! Download started.';
+            statusMsg.textContent = '¡Conversión exitosa! Descarga iniciada.';
             statusMsg.className = 'mt-3 text-center text-sm text-green-600 dark:text-green-400 font-medium';
         } catch (error) {
             console.error(error);
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleFile(file) {
         if (!file.type.match('image.*')) {
-            alert('Please select an image file (PNG, JPG, WEBP).');
+            alert('Por favor, selecciona un archivo de imagen (PNG, JPG, WEBP).');
             return;
         }
 
@@ -150,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Check if already POT
             if (!isPowerOfTwo(width) || !isPowerOfTwo(height)) {
-                if (!confirm("Warning: Source Engine requires Power-of-Two dimensions (e.g. 256, 512). Your image is " + width + "x" + height + ". It may not load in-game. Continue?")) {
-                    throw new Error("Cancelled by user.");
+                if (!confirm("Advertencia: El motor Source requiere dimensiones de Potencia de Dos (ej. 256, 512). Tu imagen es de " + width + "x" + height + ". Es posible que no se cargue en el juego. ¿Continuar?")) {
+                    throw new Error("Cancelado por el usuario.");
                 }
             }
         }
@@ -162,18 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.height = height;
         const ctx = canvas.getContext('2d');
         
-        // Flip Y for VTF? 
-        // VTF data is usually stored top-to-bottom like standard images, 
-        // but OpenGL coords are bottom-left. Source usually expects standard layout.
-        // No flip needed usually for standard "diffuse" maps unless specific shader requirement.
-        
         ctx.drawImage(img, 0, 0, width, height);
         const imageData = ctx.getImageData(0, 0, width, height);
         const data = imageData.data; // Uint8ClampedArray: RGBA RGBA...
 
         // 3. Construct VTF Header (Version 7.2 - 80 bytes)
-        // See: https://developer.valvesoftware.com/wiki/VTF_(Valve_Texture_Format)
-        
         const headerSize = 80;
         const imageSize = width * height * 4; // RGBA8888 = 4 bytes per pixel
         const fileSize = headerSize + imageSize;
@@ -200,11 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
         view.setUint16(offset, height, true); offset += 2;
 
         // Flags
-        // TEXTUREFLAGS_EIGHTBITALPHA (0x2000) | TEXTUREFLAGS_NOLOD (0x0200) ?
-        // Common flags: 0x2000 (has alpha) is safe for RGBA8888. 
-        // Let's use 0x2000 (TEXTUREFLAGS_EIGHTBITALPHA) = 1 << 13
-        // Also 0x0001 (TEXTUREFLAGS_POINTSAMPLE) sometimes? No, use Trilinear 0x0002.
-        // Let's stick to simple: 0x2000 (Has Alpha)
         const flags = 0x2000; 
         view.setUint32(offset, flags, true); offset += 4;
 
@@ -229,16 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
         view.setFloat32(offset, 1.0, true); offset += 4;
 
         // Image Format
-        // IMAGE_FORMAT_RGBA8888 = 13 (See VTFFormat.h enum)
         const IMAGE_FORMAT_RGBA8888 = 13;
         view.setUint32(offset, IMAGE_FORMAT_RGBA8888, true); offset += 4;
 
         // Mip Count (1 - No mipmaps for simple V1)
         view.setUint8(offset++, 1);
 
-        // Low Res Image Format (IMAGE_FORMAT_NONE = -1 or similar? No, usually DXT1 for thumb)
-        // If we say -1 (IMAGE_FORMAT_NONE), low res width/height must be 0?
-        // Let's try IMAGE_FORMAT_NONE = -1 (0xFFFFFFFF)
+        // Low Res Image Format
         const IMAGE_FORMAT_NONE = 4294967295; // uint32 -1
         view.setUint32(offset, IMAGE_FORMAT_NONE, true); offset += 4;
 
@@ -249,16 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Depth (1)
         view.setUint16(offset, 1, true); offset += 2;
 
-        // Current Offset should be 80.
-        // console.log("Header End Offset:", offset);
-
         // 4. Write Image Data
-        // VTF RGBA8888 is R, G, B, A order (same as Canvas)
-        
         const pixelData = new Uint8Array(buffer, headerSize);
-        // Copy canvas data to buffer
-        // Note: Canvas provides RGBA. VTF RGBA8888 expects RGBA.
-        // Optimization: direct copy
         pixelData.set(data);
 
         // Return Blob

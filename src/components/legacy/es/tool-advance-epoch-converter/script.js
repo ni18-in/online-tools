@@ -41,12 +41,12 @@
             const now = new Date();
             els.currentEpoch.textContent = Math.floor(now.getTime() / 1000);
             els.currentUtc.textContent = now.toUTCString();
-            els.currentLocal.textContent = now.toLocaleString();
+            els.currentLocal.textContent = now.toLocaleString('es-ES');
         }
 
         function toggleClock() {
             clockRunning = !clockRunning;
-            els.pauseBtn.textContent = clockRunning ? "Pause" : "Resume";
+            els.pauseBtn.textContent = clockRunning ? "Pausar" : "Reanudar";
             if (clockRunning) {
                 updateClock();
             }
@@ -68,14 +68,6 @@
             try {
                 if (isTimestamp) {
                     let num = parseFloat(val);
-                    /* 
-                       Logic for precision:
-                       JS Date works with milliseconds.
-                       If input is Seconds -> * 1000
-                       If input is Milliseconds -> * 1
-                       If input is Microseconds -> / 1000
-                       If input is Nanoseconds -> / 1000000
-                    */
                     let msValue = num;
                     if (precision === 'seconds') msValue = num * 1000;
                     else if (precision === 'microseconds') msValue = num / 1000;
@@ -85,15 +77,15 @@
                 } else {
                     // Try parsing date string
                     const parsed = Date.parse(val);
-                    if (isNaN(parsed)) throw new Error("Invalid date format");
+                    if (isNaN(parsed)) throw new Error("Format de fecha inválido");
                     dateObj = new Date(parsed);
                 }
 
-                if (isNaN(dateObj.getTime())) throw new Error("Invalid date");
+                if (isNaN(dateObj.getTime())) throw new Error("Fecha inválida");
 
                 displayResults(dateObj);
             } catch (e) {
-                els.errorMsg.textContent = "Oops! Could not parse that. Try a standard format like '2024-01-01' or a numeric timestamp.";
+                els.errorMsg.textContent = "¡Ups! No se pudo procesar. Prueba con un formato estándar como '2024-01-01' o un timestamp numérico.";
                 els.errorMsg.style.display = 'block';
             }
         }
@@ -108,13 +100,13 @@
             els.resSeconds.textContent = s;
             els.resMs.textContent = ms;
             els.resUtc.textContent = date.toUTCString();
-            els.resLocal.textContent = date.toString();
+            els.resLocal.textContent = date.toLocaleString('es-ES');
             els.resIso.textContent = date.toISOString();
 
-            // Relative time (Simple implementation)
+            // Relative time
             const now = new Date();
             const diffSeconds = Math.floor((now - date) / 1000);
-            const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+            const rtf = new Intl.RelativeTimeFormat('es', { numeric: 'auto' });
 
             if (Math.abs(diffSeconds) < 60) els.resRelative.textContent = rtf.format(-diffSeconds, 'second');
             else if (Math.abs(diffSeconds) < 3600) els.resRelative.textContent = rtf.format(-Math.floor(diffSeconds / 60), 'minute');
@@ -131,7 +123,7 @@
             const oneDay = 1000 * 60 * 60 * 24;
             const dayOfYear = Math.floor(diff / oneDay);
 
-            els.resDetails.textContent = `Leap Year: ${isLeap ? "Yes" : "No"} | Day of Year: ${dayOfYear}`;
+            els.resDetails.textContent = `Año Bisiesto: ${isLeap ? "Sí" : "No"} | Día del Año: ${dayOfYear}`;
 
             // Update Timezone
             updateTimezone();
@@ -144,13 +136,13 @@
             if (!lastConvertedDate) return;
             const tz = els.tzSelect.value;
             try {
-                els.resTzConverted.textContent = new Intl.DateTimeFormat('en-US', {
+                els.resTzConverted.textContent = new Intl.DateTimeFormat('es-ES', {
                     dateStyle: 'full',
                     timeStyle: 'long',
                     timeZone: tz
                 }).format(lastConvertedDate);
             } catch (e) {
-                els.resTzConverted.textContent = "Timezone conversion error";
+                els.resTzConverted.textContent = "Error de conversión de zona horaria";
             }
         }
 
@@ -172,7 +164,7 @@
         els.pauseBtn.addEventListener('click', toggleClock);
         els.resetBtn.addEventListener('click', () => {
             clockRunning = true;
-            els.pauseBtn.textContent = "Pause";
+            els.pauseBtn.textContent = "Pausar";
             updateClock();
             els.mainInput.value = "";
             els.errorMsg.style.display = 'none';
@@ -187,7 +179,6 @@
         // Conversion
         els.convertBtn.addEventListener('click', processInput);
         els.mainInput.addEventListener('input', () => {
-            // Optional: Debounce this if it gets heavy, currently instantaneous
             processInput();
         });
         els.precisionRadios.forEach(radio => radio.addEventListener('change', processInput));

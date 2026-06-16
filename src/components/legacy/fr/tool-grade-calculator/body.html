@@ -1,32 +1,32 @@
 <div class="max-w-4xl mx-auto">
         
-        <!-- Navigation Bar (Sticky for easy access) -->
-        <nav class="flex justify-between items-center py-3 px-6 bg-indigo-600 dark:bg-gray-900/90 shadow-xl rounded-xl mb-8 sticky top-4 z-10 transition-shadow duration-300" aria-label="Main Navigation">
+        <!-- Navigation Bar -->
+        <nav class="flex justify-between items-center py-3 px-6 bg-indigo-600 dark:bg-gray-900/90 shadow-xl rounded-xl mb-8 sticky top-4 z-10 transition-shadow duration-300" aria-label="Navigation principale">
             <h1 class="text-2xl font-bold text-white">GradeCalc</h1>
             <div class="space-x-4">
-                <a href="#how-to-use" class="text-white hover:text-indigo-200 transition duration-150 p-2 rounded-lg font-medium" aria-label="Jump to How to Use section">How to Use</a>
-                <a href="#about" class="text-white hover:text-indigo-200 transition duration-150 p-2 rounded-lg font-medium" aria-label="Jump to About section">About</a>
+                <a href="#how-to-use" class="text-white hover:text-indigo-200 transition duration-150 p-2 rounded-lg font-medium" aria-label="Aller à la section Mode d'emploi">Mode d'emploi</a>
+                <a href="#about" class="text-white hover:text-indigo-200 transition duration-150 p-2 rounded-lg font-medium" aria-label="Aller à la section À propos">À propos</a>
             </div>
         </nav>
 
         <!-- Main Content Header -->
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-600 dark:text-indigo-400 sr-only">
-                Universal Grade Calculator
+                Calculateur de notes universel
             </h1>
             <p class="mt-2 text-xl text-gray-600 dark:text-gray-400">
-                Calculate your weighted course grade, fast and easy. Data is saved automatically.
+                Calculez votre moyenne pondérée facilement et rapidement. Les données sont sauvegardées automatiquement.
             </p>
         </header>
 
-        <!-- How To Use Section (Accessibility Requirement) -->
+        <!-- How To Use Section -->
         <section id="how-to-use" aria-labelledby="how-to-use-title" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl mb-8">
-            <h2 id="how-to-use-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">How to Use</h2>
+            <h2 id="how-to-use-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">Mode d'emploi</h2>
             <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
-                <li><strong>Define Categories:</strong> In the input box, enter a category name (e.g., <em>Labs</em>) and its <strong>Weight (%)</strong>, then click "Add Category". It is recommended weights add up to 100%.</li>
-                <li><strong>Add Assignments:</strong> Under each category, use the form to enter the assignment name, your score, and the total possible points. Click the small "Add" button for that category.</li>
-                <li><strong>Real-time Grade:</strong> Your calculated overall grade is automatically updated in the <strong>Final Grade</strong> box on the right side of the screen as you input scores.</li>
-                <li><strong>Data Persistence:</strong> Your data is saved locally to your browser. Use the <strong>Export</strong> button to create a backup JSON file or <strong>Clear All Data</strong> to reset the calculator entirely.</li>
+                <li><strong>Définir les catégories :</strong> Saisissez un nom de catégorie (ex. <em>Travaux pratiques</em>) et son <strong>coefficient/poids (%)</strong>, puis cliquez sur "Ajouter une catégorie". Il est recommandé que la somme des poids soit égale à 100%.</li>
+                <li><strong>Ajouter des devoirs :</strong> Sous chaque catégorie, utilisez le formulaire pour saisir le nom du devoir, votre note et le total des points possibles. Cliquez sur le bouton "Ajouter" de cette catégorie.</li>
+                <li><strong>Note en temps réel :</strong> Votre note globale calculée est automatiquement mise à jour dans l'encadré <strong>Note finale</strong> sur le côté droit de l'écran au fur et à mesure que vous saisissez vos notes.</li>
+                <li><strong>Persistance des données :</strong> Vos données sont sauvegardées localement dans votre navigateur. Utilisez le bouton <strong>Exporter</strong> pour créer un fichier JSON de sauvegarde ou <strong>Effacer toutes les données</strong> pour réinitialiser complètement le calculateur.</li>
             </ol>
         </section>
 
@@ -35,73 +35,70 @@
 
             <!-- Category Input Section (Col 1 & 2) -->
             <section id="input-section" class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl space-y-6" aria-labelledby="category-input-title">
-                <h2 id="category-input-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">1. Define Categories & Weights</h2>
+                <h2 id="category-input-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">1. Définir les catégories et coefficients</h2>
 
-                <!-- Category Input Form (Now with ARIA labels on inputs) -->
+                <!-- Category Input Form -->
                 <div class="flex flex-col sm:flex-row gap-3 mb-6 p-4 border border-indigo-200 dark:border-indigo-800 rounded-lg bg-indigo-50 dark:bg-gray-700/50" role="form">
-                    <!-- Note: Inputs here don't have explicit <label> but are self-explanatory with placeholder + aria-label -->
-                    <input type="text" id="category-name" placeholder="Category Name (e.g., Exams)" aria-label="Category Name" class="p-3 w-full sm:w-1/2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900/80">
-                    <input type="number" id="category-weight" placeholder="Weight (%)" min="1" max="100" aria-label="Category Weight in Percent" class="p-3 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900/80">
-                    <button id="add-category-btn" title="Add New Category" class="p-3 w-full sm:w-1/4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
-                        Add Category
+                    <input type="text" id="category-name" placeholder="Nom de la catégorie (ex. Examens)" aria-label="Nom de la catégorie" class="p-3 w-full sm:w-1/2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900/80">
+                    <input type="number" id="category-weight" placeholder="Coefficient (%)" min="1" max="100" aria-label="Poids de la catégorie en pourcentage" class="p-3 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900/80">
+                    <button id="add-category-btn" title="Ajouter une nouvelle catégorie" class="p-3 w-full sm:w-1/4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
+                        Ajouter une catégorie
                     </button>
                 </div>
                 
-                <p id="weight-error" role="alert" class="text-sm text-red-500 hidden mb-4 font-medium">Warning: Weights do not sum to 100%. The final grade will be normalized.</p>
-                <div id="total-weight" class="text-lg font-bold mb-4">Total Weight: 0%</div>
-
+                <p id="weight-error" role="alert" class="text-sm text-red-500 hidden mb-4 font-medium">Attention : La somme des coefficients n'est pas égale à 100%. La note finale sera normalisée.</p>
+                <div id="total-weight" class="text-lg font-bold mb-4">Coefficient total : 0%</div>
 
                 <!-- Dynamic Category List -->
                 <div id="categories-container" class="space-y-6" role="list">
-                    <!-- Categories will be added here -->
-                    <p id="placeholder-text" class="text-center text-gray-400 italic p-6">Add your first category to begin.</p>
+                    <p id="placeholder-text" class="text-center text-gray-400 italic p-6">Ajoutez votre première catégorie pour commencer.</p>
                 </div>
             </section>
 
             <!-- Results Section (Col 3) -->
             <section id="results-section" class="lg:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl sticky top-24 h-fit" aria-labelledby="final-grade-title">
-                <h2 id="final-grade-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-green-600 dark:border-gray-700">2. Final Grade</h2>
+                <h2 id="final-grade-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-green-600 dark:border-gray-700">2. Note finale</h2>
 
                 <!-- Overall Grade Display -->
                 <div class="text-center py-6 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-dashed border-green-300 dark:border-green-700" role="status">
-                    <p class="text-lg font-medium text-gray-500 dark:text-gray-400">Current Overall Grade</p>
+                    <p class="text-lg font-medium text-gray-500 dark:text-gray-400">Note globale actuelle</p>
                     <p id="final-grade" class="text-6xl font-extrabold text-green-600 dark:text-green-400 mt-2" aria-live="polite">--</p>
                 </div>
 
                 <!-- Summary Table -->
-                <h3 class="text-xl font-semibold mt-6 mb-3 border-b pb-2 dark:border-gray-700">Category Breakdown</h3>
+                <h3 class="text-xl font-semibold mt-6 mb-3 border-b pb-2 dark:border-gray-700">Détail par catégorie</h3>
                 <div id="summary-breakdown" class="space-y-2 text-sm" role="list">
-                    <p class="text-gray-500 italic">No categories defined.</p>
+                    <p class="text-gray-500 italic">Aucune catégorie définie.</p>
                 </div>
                 
                 <!-- Actions -->
                 <h3 class="text-xl font-semibold mt-6 mb-3 border-b pb-2 dark:border-gray-700">Actions</h3>
-                <button onclick="exportData()" title="Export all calculator data" class="w-full p-3 bg-indigo-500 text-white font-medium rounded-lg hover:bg-indigo-600 transition duration-150 shadow-md">
-                    Export Data (JSON)
+                <button onclick="exportData()" title="Exporter toutes les données" class="w-full p-3 bg-indigo-500 text-white font-medium rounded-lg hover:bg-indigo-600 transition duration-150 shadow-md">
+                    Exporter les données (JSON)
                 </button>
-                <button onclick="clearData()" title="Clear all data and reset the calculator" class="w-full mt-2 p-3 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-150 shadow-md">
-                    Clear All Data
+                <button onclick="clearData()" title="Effacer toutes les données et réinitialiser" class="w-full mt-2 p-3 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-150 shadow-md">
+                    Effacer toutes les données
                 </button>
             </section>
 
         </main>
         
-        <!-- About Section (Footer area) -->
+        <!-- About Section -->
         <section id="about" aria-labelledby="about-title" class="mt-12 bg-gray-100 dark:bg-gray-900 p-6 rounded-xl shadow-inner">
-            <h2 id="about-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">About This Calculator</h2>
-            <p class="text-gray-700 dark:text-gray-300">This Universal Grade Calculator is designed to provide a quick and easy way to calculate your weighted course grade. It is built using modern HTML, Tailwind CSS for a responsive design, and vanilla JavaScript for robust, client-side calculations. <strong>Accessibility</strong> has been considered using semantic elements and ARIA attributes to ensure usability with assistive technologies like screen readers.</p>
-            <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">All data is saved automatically in your browser's local storage.</p>
+            <h2 id="about-title" class="text-2xl font-semibold border-b pb-3 mb-4 text-indigo-600 dark:border-gray-700">À propos de ce calculateur</h2>
+            <p class="text-gray-700 dark:text-gray-300">Ce calculateur de notes universel est conçu pour fournir un moyen simple et rapide de calculer votre moyenne de cours pondérée. Il est construit en HTML moderne, avec Tailwind CSS pour un design adaptatif, et du JavaScript natif pour des calculs robustes côté client. <strong>L'accessibilité</strong> a été prise en compte en utilisant des éléments sémantiques et des attributs ARIA pour garantir l'utilisation avec des technologies d'assistance comme les lecteurs d'écran.</p>
+            <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">Toutes les données sont automatiquement sauvegardées dans le stockage local de votre navigateur.</p>
         </section>
     </div>
 
     <!-- Custom Modal for Notifications -->
     <div id="app-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden flex items-center justify-center p-4 z-50 transition-opacity duration-300" onclick="closeModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div id="modal-content" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-2xl max-w-sm w-full transition-transform duration-300" onclick="event.stopPropagation()">
-            <h3 id="modal-title" class="text-xl font-bold mb-3 text-red-600 dark:text-red-400">Error</h3>
+            <h3 id="modal-title" class="text-xl font-bold mb-3 text-red-600 dark:text-red-400">Erreur</h3>
             <p id="modal-message" class="text-gray-700 dark:text-gray-300"></p>
             <div class="mt-4 text-right">
-                <button onclick="closeModal()" title="Close Notification" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
-                    Close
+                <button onclick="closeModal()" title="Fermer la notification" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150">
+                    Fermer
                 </button>
             </div>
         </div>

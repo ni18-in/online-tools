@@ -175,7 +175,7 @@
                         });
                     } catch (micError) {
                         console.warn("Microphone access denied or no microphone found:", micError);
-                        showSnackbar("Mic access denied/not found. Recording without mic.", "warning");
+                        showSnackbar("Acceso al micrófono denegado/no encontrado. Grabando sin micrófono.", "warning");
                     }
                 }
                 
@@ -191,7 +191,7 @@
                 
                 const hasAudioTracks = tracks.some(track => track.kind === 'audio');
                 if (recordAudioCheckbox.checked && !hasAudioTracks && (shouldRecordMicrophone || shouldRecordSystemAudio)) {
-                     showSnackbar("No audio source captured despite selection. Recording video only.", "warning");
+                     showSnackbar("No se capturó ninguna fuente de audio a pesar de la selección. Grabando solo video.", "warning");
                 }
 
                 mediaStream = new MediaStream(tracks);
@@ -199,7 +199,7 @@
                 screenStream.getVideoTracks()[0].onended = () => {
                     if (mediaRecorder && mediaRecorder.state !== "inactive") {
                         if (!stopRecordingBtn.disabled) { 
-                            showSnackbar("Screen sharing stopped externally.", "info");
+                            showSnackbar("La compartición de pantalla se detuvo externamente.", "info");
                             stopActualRecording(); 
                         }
                     }
@@ -221,7 +221,7 @@
                     }
                 }
                 if (!selectedMimeType) {
-                    showSnackbar("No suitable video MIME type found for recording.", "error");
+                    showSnackbar("No se encontró un tipo MIME de video adecuado para la grabación.", "error");
                     resetRecordingState();
                     return;
                 }
@@ -255,12 +255,12 @@
                     // screenStream and audioStream tracks are part of mediaStream, so they are stopped too.
                     
                     resetRecordingState();
-                    showSnackbar("Recording stopped and saved!", "success");
+                    showSnackbar("¡Grabación detenida y guardada!", "success");
                 };
                 
                 mediaRecorder.onerror = (event) => {
                     console.error("MediaRecorder error:", event.error);
-                    showSnackbar(`Recording error: ${event.error.name}`, "error");
+                    showSnackbar(`Error de grabación: ${event.error.name}`, "error");
                     stopActualRecording(); 
                 };
 
@@ -271,14 +271,14 @@
             } catch (err) {
                 console.error("Error starting recording:", err);
                 if (err.name === "NotAllowedError" || err.message?.includes("Permission denied")) {
-                    showSnackbar("Permission denied. Please allow screen/audio access.", "error");
+                    showSnackbar("Permiso denegado. Por favor, permite el acceso a la pantalla y al audio.", "error");
                 } else if (err.name === "NotFoundError") {
-                    showSnackbar("No screen or audio source found. Check connections.", "error");
+                    showSnackbar("No se encontró ninguna fuente de pantalla o de audio. Comprueba las conexiones.", "error");
                 } else if (err.name === "NotReadableError" || err.name === "AbortError") {
-                     showSnackbar("Could not start recording. Source might be busy or unavailable.", "error");
+                     showSnackbar("No se pudo iniciar la grabación. La fuente podría estar ocupada o no disponible.", "error");
                 }
                 else {
-                    showSnackbar(`Error starting: ${err.name || 'Unknown error'}`, "error");
+                    showSnackbar(`Error al iniciar: ${err.name || 'Error desconocido'}`, "error");
                 }
                 resetRecordingState();
             }
@@ -309,7 +309,7 @@
                 pauseTimer();
                 updateButtonDisabledState(pauseRecordingBtn, true);
                 updateButtonDisabledState(resumeRecordingBtn, false);
-                showSnackbar("Recording paused", "info");
+                showSnackbar("Grabación pausada", "info");
             }
         }
 
@@ -319,7 +319,7 @@
                 startTimer(); 
                 updateButtonDisabledState(pauseRecordingBtn, false);
                 updateButtonDisabledState(resumeRecordingBtn, true);
-                showSnackbar("Recording resumed", "info");
+                showSnackbar("Grabación reanudada", "info");
             }
         }
         
@@ -334,7 +334,7 @@
 
         function confirmStopRecording() {
             if (mediaRecorder && (mediaRecorder.state === "recording" || mediaRecorder.state === "paused")) {
-                showModal("Stop Recording", "Are you sure you want to stop? The recording will be saved.", () => {
+                showModal("Detener Grabación", "¿Estás seguro de que deseas detener la grabación? Se guardará el archivo.", () => {
                     stopActualRecording();
                 });
             }
@@ -394,7 +394,7 @@
             const downloadLink = document.createElement('a');
             downloadLink.href = url;
             downloadLink.download = filename;
-            downloadLink.textContent = "Download";
+            downloadLink.textContent = "Descargar";
             downloadLink.classList.add('btn-download'); 
             downloadLink.setAttribute('role', 'button');
 
@@ -509,18 +509,18 @@
             resetRecordingState(); 
 
             if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-                showSnackbar("Screen Recording API not supported.", "error");
+                showSnackbar("La API de grabación de pantalla no es compatible.", "error");
                 updateButtonDisabledState(startRecordingBtn, true);
                 document.querySelectorAll('.settings-group input, .button-group button:not(#startRecordingBtn)').forEach(el => updateButtonDisabledState(el, true));
-                modalMessageEl.textContent = "Your browser does not support Screen Recording. Try Chrome, Firefox, or Edge.";
-                modalTitleEl.textContent = "Unsupported Browser";
+                modalMessageEl.textContent = "Tu navegador no admite la grabación de pantalla. Prueba con Chrome, Firefox o Edge.";
+                modalTitleEl.textContent = "Navegador no compatible";
                 modalConfirmBtn.style.display = 'none';
-                modalCancelBtn.textContent = "Close";
+                modalCancelBtn.textContent = "Cerrar";
                 showModal(modalTitleEl.textContent, modalMessageEl.textContent, () => {}); // Empty confirm
                 return; 
             }
             if (!window.MediaRecorder) {
-                showSnackbar("MediaRecorder API not supported. Cannot record.", "error");
+                showSnackbar("La API MediaRecorder no es compatible. No se puede grabar.", "error");
                 updateButtonDisabledState(startRecordingBtn, true);
                 document.querySelectorAll('.settings-group input, .button-group button:not(#startRecordingBtn)').forEach(el => updateButtonDisabledState(el, true));
                 return;

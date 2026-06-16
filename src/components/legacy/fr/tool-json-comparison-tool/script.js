@@ -84,12 +84,12 @@
                      return true;
                  } catch (error) {
                      console.error("Error creating jsondiffpatch instance:", error);
-                     displayMessage("Failed to initialize comparison library.", 'error');
+                     displayMessage("Échec de l'initialisation de la bibliothèque de comparaison.", 'error');
                      return false;
                  }
              } else {
                  console.error("jsondiffpatch library is not available.");
-                 displayMessage("Comparison library (jsondiffpatch) is not loaded.", 'error');
+                 displayMessage("La bibliothèque de comparaison (jsondiffpatch) n'est pas chargée.", 'error');
                  return false;
              }
          }
@@ -135,7 +135,7 @@
                 // Line numbers will be updated during initializeApp
             } catch (error) {
                 console.error("Error loading inputs from localStorage:", error);
-                displayMessage("Could not load previously saved inputs.", 'error');
+                displayMessage("Impossible de charger les entrées précédemment sauvegardées.", 'error');
             }
         }
 
@@ -218,8 +218,8 @@
             parseResultLeft = parseInput(DOMElements.jsonInputLeft, 'Left');
             parseResultRight = parseInput(DOMElements.jsonInputRight, 'Right');
 
-            if (parseResultLeft.type === 'text') warnings.push("Left input treated as text (not valid JSON object/array).");
-            if (parseResultRight.type === 'text') warnings.push("Right input treated as text (not valid JSON object/array).");
+            if (parseResultLeft.type === 'text') warnings.push("L'entrée de gauche est traitée comme du texte (objet/tableau JSON non valide).");
+            if (parseResultRight.type === 'text') warnings.push("L'entrée de droite est traitée comme du texte (objet/tableau JSON non valide).");
 
             if (warnings.length > 0) {
                 displayMessage(warnings.join('\n'), 'warning');
@@ -229,7 +229,7 @@
             const valueRight = parseResultRight.value;
 
             if (valueLeft === null && valueRight === null) {
-                displayMessage("Both inputs are empty.", 'info');
+                displayMessage("Les deux entrées sont vides.", 'info');
                 DOMElements.diffOutputSection.classList.add('hidden');
                 return;
             }
@@ -262,7 +262,7 @@
                     DOMElements.copyResultsButton.classList.remove('hidden');
                 } else {
                     // No differences found
-                    DOMElements.diffOutputWrapper.innerHTML = '<p class="p-4 text-green-600 dark:text-green-400 font-semibold">No Differences Found.</p>';
+                    DOMElements.diffOutputWrapper.innerHTML = '<p class="p-4 text-green-600 dark:text-green-400 font-semibold">Aucune différence trouvée.</p>';
                     DOMElements.diffOutputSection.classList.remove('hidden');
                 }
 
@@ -270,7 +270,7 @@
 
             } catch (error) {
                 console.error("Error during comparison:", error);
-                displayMessage(`An unexpected error occurred during comparison: ${error.message}`, 'error');
+                displayMessage(`Une erreur inattendue est survenue lors de la comparaison : ${error.message}`, 'error');
                 currentDiffDelta = null;
             }
         }
@@ -282,25 +282,25 @@
             const currentText = inputElement.value.trim();
 
             if (!currentText) {
-                displayMessage(`${inputName} input is empty.`, 'info');
+                displayMessage(`L'entrée ${inputName === 'Left' ? 'gauche' : 'droite'} est vide.`, 'info');
                 return;
             }
 
             try {
                 const parsedJson = JSON.parse(currentText);
                  if (typeof parsedJson !== 'object' || parsedJson === null) {
-                     displayMessage(`${inputName} input is a valid JSON literal, but not an object or array. Cannot beautify.`, 'info');
+                     displayMessage(`L'entrée ${inputName === 'Left' ? 'gauche' : 'droite'} est un littéral JSON valide, mais pas un objet ni un tableau. Impossible de mettre en forme.`, 'info');
                      return;
                  }
 
                 inputElement.value = JSON.stringify(parsedJson, null, 2);
                 updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after beautify
                 debouncedSave();
-                displayMessage(`${inputName} input successfully beautified.`, 'info');
+                displayMessage(`L'entrée ${inputName === 'Left' ? 'gauche' : 'droite'} a été mise en forme avec succès.`, 'info');
 
             } catch (error) {
                 inputElement.focus();
-                displayMessage(`${inputName} input is not valid JSON. Cannot beautify.`, 'info');
+                displayMessage(`L'entrée ${inputName === 'Left' ? 'gauche' : 'droite'} n'est pas du JSON valide. Impossible de mettre en forme.`, 'info');
                 console.warn(`Beautify failed for ${inputName}: ${error.message}`);
             }
         }
@@ -327,7 +327,7 @@
             const textToCopy = inputElement.value;
 
             if (!textToCopy) {
-                displayMessage(`Input ${inputName} is empty. Nothing to copy.`, 'info');
+                displayMessage(`L'entrée ${inputName === 'Left' ? 'gauche' : 'droite'} est vide. Rien à copier.`, 'info');
                 return;
             }
 
@@ -341,7 +341,7 @@
                     buttonElement.disabled = false;
                 }, 1500);
             } catch (err) {
-                displayMessage(`Failed to copy ${inputName} text. Browser may not support or allow clipboard access.`, 'error');
+                displayMessage(`Échec de la copie du texte ${inputName === 'Left' ? 'gauche' : 'droite'}. Le navigateur peut ne pas prendre en charge ou autoriser l'accès au presse-papiers.`, 'error');
                 console.error('Copy failed:', err);
             }
         }
@@ -349,21 +349,21 @@
         async function copyResultsToClipboard(buttonElement) {
              const diffContent = DOMElements.diffOutputWrapper.innerText;
              if (!currentDiffDelta || !diffContent?.trim()) {
-                 displayMessage('No results to copy.', 'info');
+                 displayMessage('Aucun résultat à copier.', 'info');
                  return;
              }
              try {
                  await navigator.clipboard.writeText(diffContent);
                  const originalHTML = buttonElement.innerHTML;
                  const svgIcon = buttonElement.querySelector('svg')?.outerHTML || '';
-                 buttonElement.innerHTML = `${svgIcon} <span class="ml-2">Copied!</span>`;
+                 buttonElement.innerHTML = `${svgIcon} <span class="ml-2">Copié !</span>`;
                  buttonElement.disabled = true;
                  setTimeout(() => {
                      buttonElement.innerHTML = originalHTML;
                      buttonElement.disabled = false;
                  }, 1500);
              } catch (err) {
-                 displayMessage('Failed to copy results. Browser may not support or allow clipboard access.', 'error');
+                 displayMessage(`Échec de la copie des résultats. Le navigateur peut ne pas prendre en charge ou autoriser l'accès au presse-papiers.`, 'error');
                  console.error('Copy results failed:', err);
              }
          }
@@ -373,7 +373,7 @@
             const lineNumbersElement = inputElement.id.includes('left') ? DOMElements.lineNumbersLeft : DOMElements.lineNumbersRight;
 
             if (!navigator.clipboard || !navigator.clipboard.readText) {
-                displayMessage('Clipboard API not supported or permission denied by your browser.', 'error');
+                displayMessage("L'API du presse-papiers n'est pas prise en charge ou la permission a été refusée par votre navigateur.", 'error');
                 return;
             }
 
@@ -384,9 +384,9 @@
                 debouncedSave();
             } catch (err) {
                 if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
-                    displayMessage('Clipboard paste permission denied by your browser or operating system.', 'error');
+                    displayMessage("La permission de coller depuis le presse-papiers a été refusée par votre navigateur ou système d'exploitation.", 'error');
                 } else {
-                    displayMessage('Failed to read from clipboard.', 'error');
+                    displayMessage("Échec de la lecture depuis le presse-papiers.", 'error');
                 }
                 console.error('Paste failed:', err);
             }
@@ -405,14 +405,14 @@
             const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
 
             if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
-                 displayMessage(`Invalid file type (${file.type || fileExtension}). Please upload a .json or .txt file.`, 'error');
+                 displayMessage(`Type de fichier invalide (${file.type || fileExtension}). Veuillez charger un fichier .json ou .txt.`, 'error');
                  event.target.value = '';
                  return;
             }
 
              const maxSizeMB = 10;
              if (file.size > maxSizeMB * 1024 * 1024) {
-                 displayMessage(`File too large (max ${maxSizeMB} MB).`, 'error');
+                 displayMessage(`Fichier trop volumineux (max ${maxSizeMB} Mo).`, 'error');
                  event.target.value = '';
                  return;
              }
@@ -424,13 +424,13 @@
                     updateLineNumbers(inputElement, lineNumbersElement); // Update line numbers after file load
                     debouncedSave();
                 } catch (readError) {
-                    displayMessage(`Error processing file content: ${readError.message}`, 'error');
+                    displayMessage(`Erreur lors du traitement du contenu du fichier : ${readError.message}`, 'error');
                 } finally {
                     event.target.value = '';
                 }
             };
             reader.onerror = (e) => {
-                displayMessage(`Error reading file.`, 'error');
+                displayMessage("Erreur lors de la lecture du fichier.", 'error');
                 console.error("FileReader error:", e);
                 event.target.value = '';
             };
@@ -440,7 +440,7 @@
         // --- Download ---
         function downloadDiff() {
             if (!currentDiffDelta) {
-                displayMessage("No comparison results available to download.", 'info');
+                displayMessage("Aucun résultat de comparaison disponible pour le téléchargement.", 'info');
                 return;
             }
             try {
@@ -457,7 +457,7 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             } catch (error) {
-                displayMessage("Failed to generate download file.", 'error');
+                displayMessage("Échec de la génération du fichier de téléchargement.", 'error');
                 console.error("Download error:", error);
             }
         }
@@ -486,7 +486,7 @@
                      updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight);
 
                      debouncedSave();
-                     displayMessage('Developer mode: Sample JSON loaded!', 'info');
+                     displayMessage("Mode développeur : exemples de données JSON chargés !", 'info');
                      compareJson();
                  }
              }
@@ -590,7 +590,7 @@
                  if (event.key === 'Escape' && !DOMElements.howToUseModal.classList.contains('hidden')) {
                      closeModal();
                  }
-            });
+             });
 
              // System Theme Change Listener
              const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

@@ -2,21 +2,21 @@
 
         <div class="w-full md:w-1/2 p-4 flex flex-col border-r border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg panel">
             <div class="flex justify-between items-center mb-3 flex-shrink-0">
-                <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200">JSON Input</h2>
+                <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200">Entrée JSON</h2>
                 <button id="howToUseBtn" class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                    <i class="fas fa-question-circle mr-1"></i> How to Use
+                    <i class="fas fa-question-circle mr-1"></i> Mode d'emploi
                 </button>
             </div>
             <textarea id="jsonInput"
                 class="rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 panel-content h-full"
-                placeholder="Paste or type your JSON here...">{
-    "name": "Example JSON",
+                placeholder="Coller ou saisir votre JSON ici...">{
+    "name": "Exemple JSON",
     "version": 1.0,
     "enabled": true,
     "items": [
-        { "id": 1, "value": "apple" },
-        { "id": 2, "value": "banana" },
-        { "id": 3, "value": "cherry" }
+        { "id": 1, "value": "pomme" },
+        { "id": 2, "value": "banane" },
+        { "id": 3, "value": "cerise" }
     ],
     "settings": {
         "theme": "dark",
@@ -27,61 +27,55 @@
 }</textarea>
             <div id="errorDisplay" class="text-red-600 dark:text-red-400 text-xs mb-3 h-10 overflow-y-auto font-mono flex-shrink-0"></div>
             <div class="button-container panel-controls">
-                <button id="undoBtn" title="Undo last change (Ctrl+Z)"
+                <button id="undoBtn" title="Annuler la dernière action (Ctrl+Z)"
                     class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
-                    disabled><i class="fas fa-undo mr-2"></i>Undo</button>
-                <button id="redoBtn" title="Redo last undone change (Ctrl+Y)"
+                    disabled><i class="fas fa-undo mr-2"></i>Annuler</button>
+                <button id="redoBtn" title="Rétablir la dernière action (Ctrl+Y)"
                     class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"
-                    disabled><i class="fas fa-redo mr-2"></i>Redo</button>
-                <button id="visualizeBtn" title="Parse input and update visualization"
+                    disabled><i class="fas fa-redo mr-2"></i>Rétablir</button>
+                <button id="visualizeBtn" title="Analyser l'entrée et mettre à jour la visualisation"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
-                        class="fas fa-sync-alt mr-2"></i>Visualize / Update</button>
-                <button id="formatBtn" title="Format JSON input with indentation"
+                        class="fas fa-sync-alt mr-2"></i>Visualiser / Mettre à jour</button>
+                <button id="formatBtn" title="Mettre en forme le JSON avec retrait"
                     class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
-                        class="fas fa-align-left mr-2"></i>Format</button>
-                <button id="minifyBtn" title="Remove whitespace from JSON input"
+                        class="fas fa-align-left mr-2"></i>Mettre en forme</button>
+                <button id="minifyBtn" title="Supprimer les espaces vides du JSON"
                     class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
-                        class="fas fa-compress-arrows-alt mr-2"></i>Minify</button>
-                <button id="copyBtn" title="Copy JSON input to clipboard"
+                        class="fas fa-compress-arrows-alt mr-2"></i>Minifier</button>
+                <button id="copyBtn" title="Copier le JSON dans le presse-papiers"
                     class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
-                        class="fas fa-copy mr-2"></i>Copy</button>
-                <button id="clearBtn" title="Clear JSON input and visualization"
+                        class="fas fa-copy mr-2"></i>Copier</button>
+                <button id="clearBtn" title="Effacer le JSON et la visualisation"
                     class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition duration-150 ease-in-out flex items-center"><i
-                        class="fas fa-trash mr-2"></i>Clear</button>
+                        class="fas fa-trash mr-2"></i>Effacer</button>
             </div>
         </div>
 
         <div class="w-full md:w-1/2 p-4 flex flex-col bg-gray-50 dark:bg-gray-900/50 panel">
-            <h2 class="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-200 flex-shrink-0">JSON Visualization</h2>
+            <h2 class="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-200 flex-shrink-0">Visualisation du JSON</h2>
             <div id="jsonVisualizer" class="rounded p-3 bg-white dark:bg-gray-800 shadow-inner json-visualizer panel-content border border-gray-300 dark:border-gray-700">
-                <p class="text-gray-500 dark:text-gray-400 italic">Click 'Visualize / Update' to see the JSON structure here...</p>
+                <p class="text-gray-500 dark:text-gray-400 italic">Cliquez sur 'Visualiser / Mettre à jour' pour afficher la structure du JSON ici...</p>
             </div>
         </div>
     </div>
 
     <div id="howToUseModal" class="modal-overlay">
         <div class="modal-content relative">
-            <button id="closeModalBtn" class="modal-close-btn" title="Close"><i class="fas fa-times"></i></button>
-            <h3>How to Use JSON Visualizer Pro</h3>
-            <p>This tool helps you view, format, and manage your JSON data easily.</p>
+            <button id="closeModalBtn" class="modal-close-btn" title="Fermer"><i class="fas fa-times"></i></button>
+            <h3>Comment utiliser JSON Visualizer Pro</h3>
+            <p>Cet outil vous permet de visualiser, de mettre en forme et de gérer facilement vos données JSON.</p>
             <ul>
-                <li><strong>JSON Input:</strong> Paste or type your JSON data into the left panel. Any syntax errors
-                    will be shown below the input area.</li>
-                <li><strong>Visualize / Update:</strong> Click this button to parse the input and display the structured
-                    tree view in the right panel.</li>
-                <li><strong>Format:</strong> Cleans up the JSON in the input area with standard indentation (2 spaces).
-                </li>
-                <li><strong>Minify:</strong> Removes all unnecessary whitespace from the JSON in the input area, making
-                    it compact.</li>
-                <li><strong>Copy:</strong> Copies the current content of the JSON input area to your clipboard.</li>
-                <li><strong>Clear:</strong> Empties the input area and the visualization panel.</li>
-                <li><strong>Undo (Ctrl+Z):</strong> Reverts the last action (Visualize/Update, Format, Minify, Clear).
-                </li>
-                <li><strong>Redo (Ctrl+Y):</strong> Re-applies the last undone action.</li>
-                <li><strong>Visualization Panel:</strong> Shows a color-coded, indented tree view of your valid JSON
-                    data.</li>
+                <li><strong>Entrée JSON :</strong> Collez ou saisissez vos données JSON dans le panneau de gauche. Les erreurs de syntaxe éventuelles s'afficheront sous la zone de saisie.</li>
+                <li><strong>Visualiser / Mettre à jour :</strong> Cliquez sur ce bouton pour analyser la saisie et afficher l'arborescence structurée dans le panneau de droite.</li>
+                <li><strong>Mettre en forme :</strong> Nettoie et formate le JSON dans la zone de saisie avec une indentation standard (2 espaces).</li>
+                <li><strong>Minifier :</strong> Supprime tous les espaces vides superflus du JSON dans la zone de saisie pour le rendre compact.</li>
+                <li><strong>Copier :</strong> Copie le contenu actuel de la zone de saisie JSON dans le presse-papiers.</li>
+                <li><strong>Effacer :</strong> Vide la zone de saisie et le panneau de visualisation.</li>
+                <li><strong>Annuler (Ctrl+Z) :</strong> Annule la dernière action effectuée (Visualisation/Mise à jour, Mise en forme, Minification, Effacement).</li>
+                <li><strong>Rétablir (Ctrl+Y) :</strong> Rétablit la dernière action annulée.</li>
+                <li><strong>Panneau de visualisation :</strong> Affiche une arborescence indentée avec coloration syntaxique de vos données JSON valides.</li>
             </ul>
-            <p>Use the buttons and keyboard shortcuts to manage your JSON effectively!</p>
+            <p>Utilisez les boutons et les raccourcis clavier pour gérer efficacement votre JSON !</p>
         </div>
     </div>
 

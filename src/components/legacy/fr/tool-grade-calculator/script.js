@@ -39,25 +39,25 @@
          */
         function clearData() {
             // Confirm with the user via the custom modal instead of alert/confirm
-            showModal('Confirm Clear', 'Are you sure you want to clear ALL saved data? This cannot be undone.', 'error');
+            showModal('Confirmer la réinitialisation', 'Voulez-vous vraiment effacer TOUTES les données sauvegardées ? Cette action est irréversible.', 'error');
             
             // Override the modal's default close button action to include the clear logic
             const modalCloseBtn = document.querySelector('#app-modal button');
-            modalCloseBtn.textContent = 'Cancel';
+            modalCloseBtn.textContent = 'Annuler';
             modalCloseBtn.onclick = closeModal;
             
             // Create a dedicated confirmation button
             const confirmBtn = document.createElement('button');
-            confirmBtn.textContent = 'Yes, Clear Data';
+            confirmBtn.textContent = 'Oui, effacer les données';
             confirmBtn.className = 'px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-150 ml-2';
             confirmBtn.onclick = function() {
                 localStorage.removeItem('gradeCalculatorData');
                 categories = [];
                 renderCategories();
                 closeModal();
-                showModal('Data Cleared', 'All saved data has been successfully cleared!', 'success');
+                showModal('Données effacées', 'Toutes les données sauvegardées ont été effacées avec succès !', 'success');
                 // Restore original close button handler after success
-                document.querySelector('#app-modal button').textContent = 'Close';
+                document.querySelector('#app-modal button').textContent = 'Fermer';
                 document.querySelector('#app-modal button').onclick = closeModal;
             };
 
@@ -87,7 +87,7 @@
             linkElement.click();
             document.body.removeChild(linkElement); // Cleanup
             
-            showModal('Success', 'Data exported as grade_calculator_data.json!', 'success');
+            showModal('Succès', 'Données exportées sous le nom grade_calculator_data.json !', 'success');
         }
 
         // --- Utility Functions (Modal) ---
@@ -117,7 +117,7 @@
             if (modalFooter.children.length > 1 || type === 'success') {
                  modalFooter.innerHTML = '';
                  const closeBtn = document.createElement('button');
-                 closeBtn.textContent = 'Close';
+                 closeBtn.textContent = 'Fermer';
                  closeBtn.className = 'px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150';
                  closeBtn.onclick = closeModal;
                  modalFooter.appendChild(closeBtn);
@@ -183,7 +183,7 @@
 
             // Update Total Weight Display and Validation
             const actualTotalWeight = categories.reduce((sum, cat) => sum + cat.weight, 0);
-            totalWeightEl.textContent = `Total Weight: ${actualTotalWeight}%`;
+            totalWeightEl.textContent = `Coefficient total : ${actualTotalWeight}%`;
             
             if (actualTotalWeight !== 100 && categories.length > 0) {
                 weightErrorEl.classList.remove('hidden');
@@ -201,7 +201,7 @@
             }
             
             if (!allCategoriesHaveAssignments && categories.length > 0) {
-                 finalGradeEl.textContent = 'Incomplete Data';
+                 finalGradeEl.textContent = 'Données incomplètes';
             }
 
 
@@ -218,7 +218,7 @@
             summaryBreakdownEl.innerHTML = '';
 
             if (breakdown.length === 0) {
-                 summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">No categories defined.</p>';
+                 summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">Aucune catégorie définie.</p>';
                  return;
             }
 
@@ -231,7 +231,7 @@
                         <span class="font-bold text-lg">${item.score}%</span>
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-400">
-                        ${item.pointsEarned.toFixed(2)}/${item.pointsPossible.toFixed(2)} pts completed. Contributes ${item.contributes}%
+                        ${item.pointsEarned.toFixed(2)}/${item.pointsPossible.toFixed(2)} pts terminés. Contribution : ${item.contributes}%
                     </div>
                 `;
                 itemEl.innerHTML = content;
@@ -242,7 +242,7 @@
             const totalEl = document.createElement('div');
             totalEl.className = 'mt-3 pt-3 border-t border-gray-300 dark:border-gray-600 flex justify-between font-bold text-base';
             totalEl.innerHTML = `
-                <span>Total Calculated Weighted Score</span>
+                <span>Note globale pondérée calculée</span>
                 <span>${totalWeightedScore.toFixed(2)} pts</span>
             `;
             summaryBreakdownEl.appendChild(totalEl);
@@ -274,7 +274,7 @@
                 let categoryHTML = `
                     <div class="flex justify-between items-center pb-2 border-b border-indigo-200 dark:border-gray-700">
                         <h3 class="text-xl font-bold text-indigo-700 dark:text-indigo-300" id="cat-title-${catIndex}">${category.name} (${category.weight}%)</h3>
-                        <button onclick="removeCategory(${catIndex})" title="Remove Category: ${category.name}" aria-label="Remove category ${category.name}" class="text-red-500 hover:text-red-700 transition duration-150 p-1 rounded-full">
+                        <button onclick="removeCategory(${catIndex})" title="Supprimer la catégorie : ${category.name}" aria-label="Supprimer la catégorie ${category.name}" class="text-red-500 hover:text-red-700 transition duration-150 p-1 rounded-full">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
@@ -285,8 +285,8 @@
                 // Assignments Header (Table style)
                 categoryHTML += `
                     <div class="assignment-row-grid font-semibold text-sm text-gray-600 dark:text-gray-400 border-b pb-1" aria-hidden="true">
-                        <span class="truncate">Assignment Name</span>
-                        <span class="text-right">Score</span>
+                        <span class="truncate">Nom du devoir</span>
+                        <span class="text-right">Note</span>
                         <span></span>
                         <span class="text-right">Total</span>
                         <span></span>
@@ -303,11 +303,11 @@
                 // Add Assignment Form
                 categoryHTML += `
                     <div class="flex flex-wrap sm:flex-nowrap gap-2 pt-3 border-t border-indigo-200 dark:border-gray-700" role="form" aria-labelledby="cat-title-${catIndex}">
-                        <input type="text" id="assign-name-${catIndex}" placeholder="New Assignment Name" aria-label="New assignment name for ${category.name}" class="p-2 w-full sm:w-1/3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <input type="number" id="assign-score-${catIndex}" placeholder="Score" min="0" aria-label="Score earned for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <input type="number" id="assign-points-${catIndex}" placeholder="Total" min="1" aria-label="Total points for new assignment" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
-                        <button onclick="addAssignment(${catIndex})" title="Add assignment to ${category.name}" class="p-2 w-full sm:w-1/6 bg-indigo-500 text-white text-sm rounded-lg hover:bg-indigo-600 transition duration-150 shadow-sm">
-                            Add
+                        <input type="text" id="assign-name-${catIndex}" placeholder="Nom du nouveau devoir" aria-label="Nom du nouveau devoir pour ${category.name}" class="p-2 w-full sm:w-1/3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-score-${catIndex}" placeholder="Note" min="0" aria-label="Note obtenue pour le nouveau devoir" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <input type="number" id="assign-points-${catIndex}" placeholder="Total" min="1" aria-label="Total des points pour le nouveau devoir" class="p-2 w-full sm:w-1/4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800/80">
+                        <button onclick="addAssignment(${catIndex})" title="Ajouter le devoir à ${category.name}" class="p-2 w-full sm:w-1/6 bg-indigo-500 text-white text-sm rounded-lg hover:bg-indigo-600 transition duration-150 shadow-sm">
+                            Ajouter
                         </button>
                     </div>
                 `;
@@ -329,8 +329,8 @@
                     
                     <input type="number" value="${assignment.score !== null ? assignment.score : ''}" 
                            oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'score', this.value)" 
-                           placeholder="Score" min="0" 
-                           aria-label="Score earned for ${assignmentName}"
+                           placeholder="Note" min="0" 
+                           aria-label="Note obtenue pour ${assignmentName}"
                            class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
                     
                     <span class="text-gray-500 dark:text-gray-400 text-center font-bold" aria-hidden="true">/</span>
@@ -338,10 +338,10 @@
                     <input type="number" value="${assignment.pointsPossible !== null ? assignment.pointsPossible : ''}" 
                            oninput="updateAssignmentScore(${catIndex}, ${assignIndex}, 'pointsPossible', this.value)" 
                            placeholder="Total" min="1" 
-                           aria-label="Total possible points for ${assignmentName}"
+                           aria-label="Total des points possibles pour ${assignmentName}"
                            class="w-full p-1 border border-gray-300 dark:border-gray-600 rounded-md text-right bg-white dark:bg-gray-900/80 focus:ring-indigo-500 focus:border-indigo-500">
                     
-                    <button onclick="removeAssignment(${catIndex}, ${assignIndex})" title="Remove Assignment: ${assignmentName}" aria-label="Remove assignment ${assignmentName}" class="text-red-400 hover:text-red-600 transition duration-150 p-1 ml-auto">
+                    <button onclick="removeAssignment(${catIndex}, ${assignIndex})" title="Supprimer le devoir : ${assignmentName}" aria-label="Supprimer le devoir ${assignmentName}" class="text-red-400 hover:text-red-600 transition duration-150 p-1 ml-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -360,12 +360,12 @@
             const weight = parseFloat(weightInput.value);
 
             if (!name) {
-                showModal('Input Required', 'Please enter a name for the category.');
+                showModal('Saisie requise', 'Veuillez saisir un nom pour la catégorie.');
                 return;
             }
 
             if (isNaN(weight) || weight <= 0 || weight > 100) {
-                showModal('Invalid Weight', 'Please enter a valid weight between 1 and 100.');
+                showModal('Coefficient invalide', 'Veuillez saisir un coefficient valide entre 1 et 100.');
                 return;
             }
 
@@ -400,19 +400,19 @@
 
             // Basic validation for new assignment
             if (!name) {
-                showModal('Input Required', 'Please enter a name for the assignment.');
+                showModal('Saisie requise', 'Veuillez saisir un nom pour le devoir.');
                 return;
             }
             if (scoreInput.value.trim() !== '' && (isNaN(score) || score < 0)) {
-                showModal('Invalid Score', 'Score must be a non-negative number.');
+                showModal('Note invalide', 'La note doit être un nombre positif ou nul.');
                 return;
             }
             if (isNaN(pointsPossible) || pointsPossible <= 0) {
-                showModal('Invalid Total Points', 'Total Points must be a positive number.');
+                showModal('Total des points invalide', 'Le total des points doit être un nombre strictement positif.');
                 return;
             }
             if (score > pointsPossible) {
-                showModal('Score Error', 'The score cannot be greater than the total possible points.');
+                showModal('Erreur de note', 'La note ne peut pas être supérieure au total des points possibles.');
                 return;
             }
 
@@ -458,7 +458,7 @@
             // Simple validation check on update
             const assignment = categories[catIndex].assignments[assignIndex];
             if (assignment.score !== null && assignment.pointsPossible !== null && assignment.score > assignment.pointsPossible) {
-                showModal('Score Error', 'Score cannot be greater than Total Points.');
+                showModal('Erreur de note', 'La note ne peut pas être supérieure au total des points.');
                 
                 // Revert the change to prevent inconsistent display state, requires re-rendering
                 categories[catIndex].assignments[assignIndex][field] = null; 

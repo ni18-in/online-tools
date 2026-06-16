@@ -309,7 +309,7 @@
 
             let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
             if (questionsByDifficulty.length === 0) {
-                showMessage(`No questions available for ${difficulty} difficulty. Try another.`, 'warning');
+                showMessage(`No hay preguntas disponibles para la dificultad ${difficulty}. Intenta otra.`, 'warning');
                 return;
             }
 
@@ -325,7 +325,7 @@
             } else { // Single or Party
                 totalRounds = parseInt(numRoundsInput.value);
                 if (isNaN(totalRounds) || totalRounds <= 0 || totalRounds > 200) {
-                    showMessage(`Please enter a valid number of rounds`, 'warning');
+                    showMessage(`Por favor, introduce un número válido de rondas`, 'warning');
                     numRoundsInput.value = 10;
                     return;
                 }
@@ -396,11 +396,11 @@
 
             if (gameMode === 'streaming') {
                 optionsContainer.style.display = 'none';
-                timerDisplay.textContent = `Revealing in: ${streamingRevealDuration}s`;
+                timerDisplay.textContent = `Revelando en: ${streamingRevealDuration}s`;
                 timeLeft = streamingRevealDuration;
                 streamingRevealInterval = setInterval(() => {
                     timeLeft--;
-                    timerDisplay.textContent = `Revealing in: ${timeLeft}s`;
+                    timerDisplay.textContent = `Revelando en: ${timeLeft}s`;
                     if (timeLeft <= 0) {
                         clearInterval(streamingRevealInterval);
                         revealAnswerAndLoadNextStreaming();
@@ -427,7 +427,7 @@
         }
 
         function restartPartyBatch() {
-            showMessage("Loading more logos...", "success", 1000);
+            showMessage("Cargando más logotipos...", "success", 1000);
             let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
             currentQuestions = shuffleArray([...questionsByDifficulty]);
             let batchSize = parseInt(numRoundsInput.value) || 10;
@@ -446,20 +446,20 @@
             let instruction = '';
             switch (gameMode) {
                 case 'single':
-                    label = 'Single Player';
-                    instruction = 'Take your time and guess the logo.';
+                    label = 'Un jugador';
+                    instruction = 'Tómate tu tiempo y adivina el logotipo.';
                     break;
                 case 'party':
-                    label = 'Party Mode';
-                    instruction = `Guess quickly! You have ${partyTimerDuration} seconds per logo.`;
+                    label = 'Modo Fiesta';
+                    instruction = `¡Adivina rápido! Tienes ${partyTimerDuration} segundos por logotipo.`;
                     break;
                 case 'challenge':
-                    label = 'Challenge Mode';
-                    instruction = 'Answer as many as you can before the session ends!';
+                    label = 'Modo Desafío';
+                    instruction = '¡Responde a tantos como puedas antes de que termine la sesión!';
                     break;
                 case 'streaming':
-                    label = 'Streaming Mode';
-                    instruction = 'Sit back and watch the answers reveal.';
+                    label = 'Modo Streaming';
+                    instruction = 'Relájate y observa cómo se revelan las respuestas.';
                     break;
             }
             if (currentModeLabel) currentModeLabel.textContent = label;
@@ -472,16 +472,16 @@
                 loadQuestion(); // Try to load next or reset
                 return;
             }
-            feedbackMessage.textContent = `The answer is: ${question.brandName}`;
+            feedbackMessage.textContent = `La respuesta es: ${question.brandName}`;
             feedbackMessage.className = 'feedback-message info';
             feedbackMessage.style.display = 'block';
             playSound('correct');
 
-            timerDisplay.textContent = `Next in: ${STREAMING_NEXT_DELAY}s`;
+            timerDisplay.textContent = `Siguiente en: ${STREAMING_NEXT_DELAY}s`;
             timeLeft = STREAMING_NEXT_DELAY;
             streamingNextInterval = setInterval(() => {
                 timeLeft--;
-                timerDisplay.textContent = `Next in: ${timeLeft}s`;
+                timerDisplay.textContent = `Siguiente en: ${timeLeft}s`;
                 if (timeLeft <= 0) {
                     clearInterval(streamingNextInterval);
                     currentQuestionIndex++;
@@ -492,14 +492,14 @@
 
 
         function updateScoreDisplay() {
-            scoreDisplay.textContent = `Score: ${score}`;
+            scoreDisplay.textContent = `Puntuación: ${score}`;
         }
 
         function updateRoundDisplay() {
             if (gameMode !== 'challenge' && gameMode !== 'streaming') {
-                roundDisplay.textContent = `Round: ${currentQuestionIndex + 1}/${totalRounds}`;
+                roundDisplay.textContent = `Ronda: ${currentQuestionIndex + 1}/${totalRounds}`;
             } else if (gameMode === 'challenge') {
-                roundDisplay.textContent = `Question: ${currentQuestionIndex + 1}`;
+                roundDisplay.textContent = `Pregunta: ${currentQuestionIndex + 1}`;
             }
         }
 
@@ -513,10 +513,10 @@
         function startQuestionTimer(duration) {
             clearAllTimers();
             timeLeft = duration;
-            timerDisplay.textContent = `Time: ${timeLeft}s`;
+            timerDisplay.textContent = `Tiempo: ${timeLeft}s`;
             questionTimerInterval = setInterval(() => {
                 timeLeft--;
-                timerDisplay.textContent = `Time: ${timeLeft}s`;
+                timerDisplay.textContent = `Tiempo: ${timeLeft}s`;
                 if (timeLeft <= 0) {
                     clearInterval(questionTimerInterval);
                     handleTimeout();
@@ -526,14 +526,14 @@
 
         function startSessionTimer() {
             clearAllTimers();
-            timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
+            timerDisplay.textContent = `Tiempo sesión: ${formatTime(timeLeft)}`;
             sessionTimerInterval = setInterval(() => {
                 timeLeft--;
-                timerDisplay.textContent = `Session Time: ${formatTime(timeLeft)}`;
+                timerDisplay.textContent = `Tiempo sesión: ${formatTime(timeLeft)}`;
                 if (timeLeft <= 0) {
                     clearInterval(sessionTimerInterval);
                     if (gameScreen.classList.contains('active')) {
-                        showMessage("Session time's up!", 'info');
+                        showMessage("¡Tiempo de la sesión terminado!", 'info');
                         endGame();
                     }
                 }
@@ -549,7 +549,7 @@
 
         function handleTimeout() {
             if (!currentQuestions[currentQuestionIndex]) return; // Safety check
-            feedbackMessage.textContent = "Time's up! The correct answer was: " + currentQuestions[currentQuestionIndex].brandName;
+            feedbackMessage.textContent = "¡Tiempo terminado! La respuesta correcta era: " + currentQuestions[currentQuestionIndex].brandName;
             feedbackMessage.className = 'feedback-message info';
             feedbackMessage.style.display = 'block';
             playSound('incorrect');
@@ -565,11 +565,11 @@
 
             if (selectedOption === correctAnswer) {
                 score++;
-                feedbackMessage.textContent = 'Correct!';
+                feedbackMessage.textContent = '¡Correcto!';
                 feedbackMessage.className = 'feedback-message correct';
                 playSound('correct');
             } else {
-                feedbackMessage.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+                feedbackMessage.textContent = `Incorrecto. Respuesta correcta: ${correctAnswer}`;
                 feedbackMessage.className = 'feedback-message incorrect';
                 playSound('incorrect');
             }
@@ -593,11 +593,11 @@
             if (gameMode === 'party') {
                 // Party Mode Interstitial
                 let interstitialTime = 4;
-                timerDisplay.textContent = `Next logo in: ${interstitialTime}s`;
+                timerDisplay.textContent = `Siguiente logotipo en: ${interstitialTime}s`;
 
                 const partyNextInterval = setInterval(() => {
                     interstitialTime--;
-                    timerDisplay.textContent = `Next logo in: ${interstitialTime}s`;
+                    timerDisplay.textContent = `Siguiente logotipo en: ${interstitialTime}s`;
                     if (interstitialTime <= 0) {
                         clearInterval(partyNextInterval);
                         currentQuestionIndex++;
@@ -616,10 +616,10 @@
                 }, 2000);
             } else if (gameMode === 'single') {
                 if (currentQuestionIndex < totalRounds - 1) {
-                    nextQuestionBtn.textContent = 'Next Question';
+                    nextQuestionBtn.textContent = 'Siguiente pregunta';
                     nextQuestionBtn.style.display = 'block';
                 } else {
-                    nextQuestionBtn.textContent = 'Show Results';
+                    nextQuestionBtn.textContent = 'Mostrar resultados';
                     nextQuestionBtn.style.display = 'block';
                 }
             } else if (gameMode === 'challenge' && timeLeft <= 0) {
@@ -644,15 +644,15 @@
             showScreen('gameOverScreen');
 
             if (gameMode === 'streaming') {
-                finalScoreDisplay.textContent = "Streaming session ended. Select 'Play Again' to return to settings.";
+                finalScoreDisplay.textContent = "Sesión de streaming finalizada. Selecciona 'Jugar de nuevo' para volver a los ajustes.";
                 highscoreSection.style.display = 'none';
                 shareScoreBtn.style.display = 'none';
             } else {
                 highscoreSection.style.display = 'block';
                 shareScoreBtn.style.display = 'inline-block';
-                let resultText = `You scored ${score} out of ${currentQuestionIndex > 0 ? currentQuestionIndex : totalRounds} questions attempted.`;
+                let resultText = `Conseguiste ${score} de ${currentQuestionIndex > 0 ? currentQuestionIndex : totalRounds} preguntas intentadas.`;
                 if (gameMode !== 'challenge') {
-                    resultText = `You scored ${score} out of ${totalRounds} rounds.`;
+                    resultText = `Conseguiste ${score} de ${totalRounds} rondas.`;
                 }
                 finalScoreDisplay.textContent = resultText;
                 saveHighScore(score, gameMode, difficulty, gameMode === 'challenge' ? currentQuestionIndex : totalRounds);
@@ -687,17 +687,19 @@
                 const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
                 highscoreList.innerHTML = '';
                 if (highScores.length === 0) {
-                    highscoreList.innerHTML = '<li>No high scores yet!</li>';
+                    highscoreList.innerHTML = '<li>¡Aún no hay puntuaciones altas!</li>';
                     return;
                 }
                 highScores.forEach(entry => {
+                    const translatedMode = entry.mode === 'single' ? 'Un jugador' : entry.mode === 'party' ? 'Modo Fiesta' : 'Modo Desafío';
+                    const translatedDiff = entry.difficulty === 'easy' ? 'Fácil' : entry.difficulty === 'medium' ? 'Medio' : 'Difícil';
                     const li = document.createElement('li');
-                    li.textContent = `${entry.score}/${entry.rounds} (${entry.difficulty}, ${entry.mode}) - ${entry.date}`;
+                    li.textContent = `${entry.score}/${entry.rounds} (${translatedDiff}, ${translatedMode}) - ${entry.date}`;
                     highscoreList.appendChild(li);
                 });
             } catch (e) {
                 console.error("Could not display high scores:", e);
-                highscoreList.innerHTML = '<li>Error loading scores.</li>';
+                highscoreList.innerHTML = '<li>Error al cargar las puntuaciones.</li>';
             }
         }
 
@@ -717,7 +719,9 @@
 
         shareScoreBtn.addEventListener('click', () => {
             playSound('click');
-            const textToCopy = `I scored ${score} in Guess The Logo! (Mode: ${gameMode}, Difficulty: ${difficulty}, Rounds/Questions: ${gameMode === 'challenge' ? currentQuestionIndex : totalRounds}). Try it out!`;
+            const translatedMode = gameMode === 'single' ? 'Un jugador' : gameMode === 'party' ? 'Modo Fiesta' : gameMode === 'challenge' ? 'Modo Desafío' : 'Modo Streaming';
+            const translatedDiff = difficulty === 'easy' ? 'Fácil' : difficulty === 'medium' ? 'Medio' : 'Difícil';
+            const textToCopy = `¡He conseguido ${score} puntos en Adivina el Logotipo! (Modo: ${translatedMode}, Dificultad: ${translatedDiff}, Rondas/Preguntas: ${gameMode === 'challenge' ? currentQuestionIndex : totalRounds}). ¡Pruébalo!`;
             const textArea = document.createElement('textarea');
             textArea.value = textToCopy;
             textArea.style.position = 'fixed';
@@ -726,9 +730,9 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                showMessage('Score copied to clipboard!', 'success', 2000);
+                showMessage('¡Puntuación copiada al portapapeles!', 'success', 2000);
             } catch (err) {
-                showMessage('Failed to copy score.', 'error', 2000);
+                showMessage('Error al copiar la puntuación.', 'error', 2000);
             }
             document.body.removeChild(textArea);
         });
