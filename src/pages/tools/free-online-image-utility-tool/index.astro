@@ -24,7 +24,8 @@ const seo = toolSeo(tool, {
     description: 'A browser-based image tool that allows you to resize, compress, convert, and optimize images online for free.',
   },
 });
-const headRaw = '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>';
+const headRaw =
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">';
 ---
 <ToolLayout seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-free-online-image-utility-tool" set:html={body} />
