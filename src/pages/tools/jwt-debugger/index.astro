@@ -1,0 +1,43 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/jwt-debugger/body.html?raw';
+import css from '../../../components/legacy/tools/jwt-debugger/styles.css?raw';
+import js from '../../../components/legacy/tools/jwt-debugger/script.js?raw';
+
+const tool = getTool('jwt-debugger')!;
+const seo = toolSeo(tool, {
+  title: 'JWT Debugger & Inspect Tool - Decode JSON Web Tokens Online',
+  description:
+    'An easy-to-use online tool to decode, inspect, and verify JSON Web Tokens (JWT) client-side. View header, payload claims, and verify signatures instantly.',
+  keywords:
+    'jwt debugger, jwt decoder, jwt viewer, decode jwt, verify jwt, json web token, jwt signature verify, hs256 verification, token claims, online jwt tool',
+  author: 'JWT Debugger',
+  ogTitle: 'JWT Debugger & Inspect Tool - Decode JSON Web Tokens Online',
+  ogDescription: 'Decode, inspect, and verify JSON Web Tokens (JWT) client-side instantly and securely.',
+  twitterDomain: 'online-tools.ni18.in',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'JWT Debugger & Inspect Tool',
+    description:
+      'An easy-to-use online tool to decode, inspect, and verify JSON Web Tokens (JWT) client-side. View header, payload claims, and verify signatures instantly.',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript. Works best in modern browsers.',
+    url: `${SITE_URL}/tools/jwt-debugger/`,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    keywords:
+      'jwt debugger, jwt decoder, jwt viewer, decode jwt, verify jwt, json web token, jwt signature verify, hs256 verification',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/jwt-debugger/` },
+  },
+});
+const headRaw = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">';
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island legacy-tw" id="tool-jwt-debugger" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

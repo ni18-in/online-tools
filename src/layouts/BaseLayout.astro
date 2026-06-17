@@ -89,6 +89,98 @@ const {
       <SiteFooter lang={lang} />
     </div>
 
+    <div id="global-snackbar" class="md3-snackbar" role="status" aria-live="polite">
+      <span id="global-snackbar-text" class="md3-snackbar__text"></span>
+      <button id="global-snackbar-action" class="md3-snackbar__action" style="display: none;"></button>
+    </div>
+
+    <script is:inline>
+      window.showToast = function(message, duration = 4000, actionText = '', actionCallback = null) {
+        const snackbar = document.getElementById('global-snackbar');
+        const textEl = document.getElementById('global-snackbar-text');
+        const actionBtn = document.getElementById('global-snackbar-action');
+        
+        if (!snackbar || !textEl) return;
+        
+        textEl.textContent = message;
+        
+        if (actionText && actionCallback) {
+          actionBtn.textContent = actionText;
+          actionBtn.style.display = 'inline-block';
+          actionBtn.onclick = () => {
+            actionCallback();
+            snackbar.classList.remove('md3-snackbar--active');
+          };
+        } else {
+          actionBtn.style.display = 'none';
+          actionBtn.onclick = null;
+        }
+        
+        snackbar.classList.add('md3-snackbar--active');
+        
+        if (window.snackbarTimer) {
+          clearTimeout(window.snackbarTimer);
+        }
+        
+        window.snackbarTimer = setTimeout(() => {
+          snackbar.classList.remove('md3-snackbar--active');
+        }, duration);
+      };
+
+      // Intercept legacy window.alert calls
+      window.alert = function(message) {
+        window.showToast(message);
+        console.log("Alert intercepted:", message);
+      };
+    </script>
+
+    <style is:global>
+      .md3-snackbar {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background-color: var(--md-sys-color-inverse-surface, #313033);
+        color: var(--md-sys-color-inverse-on-surface, #f4f0f4);
+        padding: 14px 16px;
+        border-radius: 8px;
+        box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 288px;
+        max-width: 568px;
+        z-index: 9999;
+        transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1), opacity 0.25s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .md3-snackbar--active {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .md3-snackbar__text {
+        flex-grow: 1;
+        font-size: 0.875rem;
+        line-height: 1.43;
+        letter-spacing: 0.01786em;
+      }
+
+      .md3-snackbar__action {
+        background: none;
+        border: none;
+        color: var(--md-sys-color-inverse-primary, #d0bcff);
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        padding: 0 8px;
+        text-transform: uppercase;
+      }
+    </style>
+
     <!-- Material Web Components: deferred module, never blocks first paint. -->
     <script>
       import '../scripts/md3.ts';

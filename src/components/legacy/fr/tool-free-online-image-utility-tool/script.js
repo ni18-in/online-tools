@@ -115,7 +115,19 @@
         // --- Utility Functions ---
         function debounce(func, delay) { clearTimeout(debounceTimer); debounceTimer = setTimeout(func, delay); }
         function showLoading(show) { isProcessing = show; loadingOverlay.classList.toggle('show', show); }
-        function showMessage(message, type = 'info', duration = 3000) { messageText.textContent = message; messageBox.className = `show ${type}`; if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId); messageBox.timeoutId = setTimeout(() => { messageBox.classList.remove('show'); messageBox.timeoutId = null; }, duration); }
+        function showMessage(message, type = 'info', duration = 3000) {
+            if (window.showToast) {
+                window.showToast(message, duration);
+            } else {
+                messageText.textContent = message;
+                messageBox.className = `show ${type}`;
+                if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId);
+                messageBox.timeoutId = setTimeout(() => {
+                    messageBox.classList.remove('show');
+                    messageBox.timeoutId = null;
+                }, duration);
+            }
+        }
         function formatBytes(bytes, decimals = 1) { if (!bytes || bytes === 0) return '0 Bytes'; const k = 1024; const dm = decimals < 0 ? 0 : decimals; const sizes = ['Octets', 'Ko', 'Mo', 'Go']; const i = (bytes > 0) ? Math.floor(Math.log(bytes) / Math.log(k)) : 0; return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]; }
 
         // --- History Functions ---

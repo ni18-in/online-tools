@@ -242,6 +242,16 @@ export const tools: Tool[] = [
     applicationCategory: 'EntertainmentApplication',
     i18n: { es: 'happy-new-year', fr: 'happy-new-year' },
   },
+  {
+    slug: 'jwt-debugger',
+    name: 'JWT Debugger & Inspect Tool',
+    description: 'Decodes JSON Web Tokens (JWT) online. View payload and header structures, verify signatures, and inspect claim parameters instantly.',
+    category: 'developer',
+    schemaType: 'WebApplication',
+    applicationCategory: 'DeveloperApplication',
+    rating: { value: 4.8, count: 12 },
+    i18n: { es: 'jwt-debugger', fr: 'jwt-debugger' },
+  },
 ];
 
 export interface ExternalCard {
@@ -264,6 +274,7 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'ai-love-calculator',
   'next-gen-gst-reforms',
   'basic-authentication-header-generator',
+  'jwt-debugger',
   {
     external: 'https://tools.ni18.in/p/majhi-ladki-bahin-yojana-kyc-status.html',
     name: 'Majhi Ladki Bahin Yojana - KYC Status Checker',

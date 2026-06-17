@@ -21,7 +21,19 @@
         let redoStack = [];
 
         // --- Utility Functions (Unchanged) ---
-        function showMessage(message, duration = 2000) { messageBox.textContent = message; messageBox.classList.add('show'); if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId); messageBox.timeoutId = setTimeout(() => { messageBox.classList.remove('show'); messageBox.timeoutId = null; }, duration); }
+        function showMessage(message, duration = 2000) {
+            if (window.showToast) {
+                window.showToast(message, duration);
+            } else {
+                messageBox.textContent = message;
+                messageBox.classList.add('show');
+                if (messageBox.timeoutId) clearTimeout(messageBox.timeoutId);
+                messageBox.timeoutId = setTimeout(() => {
+                    messageBox.classList.remove('show');
+                    messageBox.timeoutId = null;
+                }, duration);
+            }
+        }
         function deepCopy(obj) { if (obj === null || typeof obj !== 'object') { return obj; } try { return JSON.parse(JSON.stringify(obj)); } catch (e) { console.error("Deep copy failed:", e); return null; } }
         function updateHistoryButtons() { undoBtn.disabled = historyStack.length <= 1; redoBtn.disabled = redoStack.length === 0; }
         function saveState() { const stateToSave = deepCopy(currentJsonObject); if (stateToSave === null && currentJsonObject !== null) { showMessage("Error saving history state.", 3000); return; } if (historyStack.length > 0) { const previousStateString = JSON.stringify(historyStack[historyStack.length - 1]); const currentStateString = JSON.stringify(stateToSave); if (previousStateString === currentStateString) return; } historyStack.push(stateToSave); if (historyStack.length > MAX_HISTORY_SIZE) historyStack.shift(); if (redoStack.length > 0) redoStack = []; updateHistoryButtons(); }

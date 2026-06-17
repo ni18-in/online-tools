@@ -1,0 +1,106 @@
+<div class="jwt-container">
+    <div class="jwt-grid">
+        <!-- Left Column: Encoded Input -->
+        <div class="jwt-panel encoded-panel">
+            <div class="panel-header">
+                <h2>Encoded</h2>
+                <span class="badge badge-encoded">Paste your token below</span>
+            </div>
+            
+            <div class="textarea-wrapper">
+                <textarea id="encodedInput" placeholder="Paste or type your JWT token here (e.g. header.payload.signature)..."></textarea>
+            </div>
+            
+            <div class="panel-controls">
+                <button id="btnPasteSample" class="btn btn-secondary">
+                    <i class="fas fa-clipboard mr-1"></i> Paste Sample
+                </button>
+                <button id="btnClear" class="btn btn-outlined">
+                    <i class="fas fa-trash-alt mr-1"></i> Clear
+                </button>
+            </div>
+            
+            <div id="validationStatus" class="validation-status status-info">
+                Enter a JWT token to begin decoding.
+            </div>
+        </div>
+
+        <!-- Right Column: Decoded Output -->
+        <div class="jwt-panel decoded-panel">
+            <div class="panel-header">
+                <h2>Decoded</h2>
+            </div>
+
+            <!-- Decoded Header Section -->
+            <div class="decoded-section">
+                <div class="section-title">
+                    <span class="color-dot dot-header"></span>
+                    <h3>HEADER:</h3>
+                    <span class="section-subtitle">ALGORITHM & TOKEN TYPE</span>
+                    <button class="btn-copy-section" data-target="headerOutput" title="Copy Header">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <pre class="code-block"><code id="headerOutput" class="json-output">{}</code></pre>
+            </div>
+
+            <!-- Decoded Payload Section -->
+            <div class="decoded-section">
+                <div class="section-title">
+                    <span class="color-dot dot-payload"></span>
+                    <h3>PAYLOAD:</h3>
+                    <span class="section-subtitle">DATA / CLAIMS</span>
+                    <button class="btn-copy-section" data-target="payloadOutput" title="Copy Payload">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <pre class="code-block"><code id="payloadOutput" class="json-output">{}</code></pre>
+            </div>
+
+            <!-- Claims Analysis Section -->
+            <div id="claimsAnalysis" class="claims-analysis" style="display: none;">
+                <h4>Claims Details</h4>
+                <div class="claims-list">
+                    <div class="claim-item" id="claimExp">
+                        <span class="claim-key">exp (Expiration):</span>
+                        <span class="claim-val" id="claimExpVal">N/A</span>
+                    </div>
+                    <div class="claim-item" id="claimIat">
+                        <span class="claim-key">iat (Issued At):</span>
+                        <span class="claim-val" id="claimIatVal">N/A</span>
+                    </div>
+                    <div class="claim-item" id="claimNbf">
+                        <span class="claim-key">nbf (Not Before):</span>
+                        <span class="claim-val" id="claimNbfVal">N/A</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature Verification Section -->
+            <div class="decoded-section signature-section">
+                <div class="section-title">
+                    <span class="color-dot dot-signature"></span>
+                    <h3>VERIFY SIGNATURE</h3>
+                    <span class="section-subtitle">HMAC-SHA VERIFICATION</span>
+                </div>
+                
+                <div class="signature-input-group">
+                    <div class="input-wrapper">
+                        <input type="password" id="hmacSecret" placeholder="Enter HS256 secret key..." disabled />
+                        <button id="btnToggleSecret" class="btn-toggle-secret" title="Show/Hide Secret" disabled>
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <label class="secret-base64-label">
+                        <input type="checkbox" id="secretBase64" disabled />
+                        <span>Secret is Base64 encoded</span>
+                    </label>
+                </div>
+                
+                <div id="signatureStatus" class="signature-status status-unverified">
+                    <i class="fas fa-info-circle mr-1"></i> Signature verification requires HS256, HS384, or HS512.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

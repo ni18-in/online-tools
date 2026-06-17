@@ -158,19 +158,23 @@
         }
 
         function showMessage(text, type = 'info', duration = 3000) {
-            messageBox.textContent = text;
-            messageBox.className = 'message-box';
-            messageBox.classList.add(type);
-            messageBox.style.display = 'block';
-            void messageBox.offsetWidth;
-            messageBox.classList.add('visible');
+            if (window.showToast) {
+                window.showToast(text, duration);
+            } else {
+                messageBox.textContent = text;
+                messageBox.className = 'message-box';
+                messageBox.classList.add(type);
+                messageBox.style.display = 'block';
+                void messageBox.offsetWidth;
+                messageBox.classList.add('visible');
 
-            setTimeout(() => {
-                messageBox.classList.remove('visible');
                 setTimeout(() => {
-                    messageBox.style.display = 'none';
-                }, 500);
-            }, duration - 500 < 0 ? duration : duration - 500);
+                    messageBox.classList.remove('visible');
+                    setTimeout(() => {
+                        messageBox.style.display = 'none';
+                    }, 500);
+                }, duration - 500 < 0 ? duration : duration - 500);
+            }
         }
 
         function playSound(type) {

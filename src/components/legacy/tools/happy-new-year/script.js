@@ -140,6 +140,9 @@ copyLinkBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(shareLinkInput.value).then(() => {
         const originalText = copyLinkBtn.textContent;
         copyLinkBtn.textContent = '✅';
+        if (window.showToast) {
+            window.showToast('Link copied to clipboard!');
+        }
         setTimeout(() => copyLinkBtn.textContent = originalText, 2000);
     });
 });
