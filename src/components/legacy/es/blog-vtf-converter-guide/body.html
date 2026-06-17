@@ -1,0 +1,87 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-full-header mb-8 text-center">
+            <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+                Dominando la Conversión VTF: Herramienta Online para Modders del Source Engine
+            </h1>
+            <p class="post-meta text-sm text-gray-500">
+                Publicado el <time datetime="2025-12-31" itemprop="datePublished">31 de diciembre de 2025</time>
+                por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+                &bull; <span class="text-indigo-500 font-semibold">Desarrollo</span>
+            </p>
+            <img src="/assets/blog/vtf-converter-guide-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Textura VTF en Source Engine" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image">
+        </header>
+
+        <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+            <p>Si alguna vez has modificado juegos como <strong>Counter-Strike: Global Offensive</strong>, <strong>Team Fortress 2</strong> o <strong>Left 4 Dead 2</strong>, conoces la dificultad de trabajar con el formato <a href="https://developer.valvesoftware.com/wiki/VTF_(Valve_Texture_Format)">Valve Texture Format (VTF)</a>. Es el núcleo visual del Source Engine, usado para todo, desde texturas de paredes hasta sprays y skins de personajes.</p>
+            <p>¿Pero crear estos archivos? Eso normalmente implica descargar software antiguo y tosco que falla a menudo. Presentamos nuestro <a href="/es/tools/vtf-converter/"><strong>Convertidor Online Gratuito de VTF</strong></a>, una solución moderna y en tu navegador para facilitar tu vida de modding.</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">¿Qué es un archivo VTF?</h2>
+            <p>El <strong>Valve Texture Format (.vtf)</strong> es un formato de imagen propietario creado por Valve. A diferencia de un PNG o JPEG estándar, un archivo VTF contiene datos específicos que la tarjeta gráfica lee directamente.</p>
+            <p>Las características clave de VTF incluyen:</p>
+            <ul>
+                <li><strong>Mipmaps:</strong> Versiones más pequeñas de la textura guardadas en el archivo para renderizar a distancia.</li>
+                <li><strong>Compresión:</strong> Formatos especializados como DXT1 o DXT5 para ahorrar memoria de video.</li>
+                <li><strong>Flags (Banderas):</strong> Ajustes que le dicen al motor si una textura es transparente, con bordes fijos o un skybox.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">¿Por qué usar nuestro convertidor online de VTF?</h2>
+            <h3 class="text-2xl font-semibold mt-10 mb-4">1. Sin instalar software</h3>
+            <p>Olvídate de lidiar con VTFEdit o herramientas de línea de comandos como VTEX. Nuestra herramienta se ejecuta 100% en navegadores Chrome, Firefox o Edge de forma segura e instantánea.</p>
+
+            <h3 class="text-2xl font-semibold mt-10 mb-4">2. Redimensionamiento automático (Potencia de dos)</h3>
+            <p>El motor Source requiere texturas que tengan dimensiones de "Potencia de dos" (ej. 64, 128, 256, 512, 1024). Si subes una imagen de 500x500, la mayoría de los convertidores fallarán o el juego se cerrará. Nuestra herramienta detecta esto automáticamente y te ofrece redimensionar tu imagen a la potencia de dos más cercana (ej. 512x512).</p>
+
+            <h3 class="text-2xl font-semibold mt-10 mb-4">3. Alta calidad RGBA8888</h3>
+            <p>Usamos el formato <strong>RGBA8888</strong> para la conversión. Proporciona la mayor calidad visual posible con soporte completo para transparencia (canal alfa). Aunque el tamaño del archivo es ligeramente superior a los formatos comprimidos, garantiza que tus sprays y skins se vean nítidos y sin artefactos.</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Cómo crear un Spray para CS:GO / CSS</h2>
+            <p>Uno de los usos más comunes de los archivos VTF es crear sprays personalizados:</p>
+            <ol>
+                <li><strong>Prepara tu imagen:</strong> Consigue tu meme o logo en formato PNG o JPG.</li>
+                <li><strong>Súbela:</strong> Arrástrala y suéltala en el <a href="/es/tools/vtf-converter/">Convertidor VTF</a>.</li>
+                <li><strong>Dimensiones:</strong> Asegúrate de que el "Modo de Redimensionamiento" esté en "Potencia de 2 más cercana".</li>
+                <li><strong>Convierte:</strong> Haz clic en el botón y descarga tu archivo <code>.vtf</code>.</li>
+                <li><strong>Crea el archivo VMT:</strong> También necesitarás un archivo de texto <code>.vmt</code> (Valve Material Type) complementario. Uno básico se ve así:</li>
+            </ol>
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto"><code>"LightmappedGeneric"
+{
+    "$basetexture" "users/mi_spray"
+    "$translucent" 1
+}</code></pre>
+            <p class="mt-4">Coloca ambos archivos en la carpeta <code>materials</code> de tu juego, ¡y listo!</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Preguntas Frecuentes</h2>
+            <h3 class="text-xl font-bold mt-6 mb-2">¿Es seguro?</h3>
+            <p><strong>Sí.</strong> La conversión ocurre en tu dispositivo (del lado del cliente). Nunca subimos tus imágenes a nuestros servidores.</p>
+
+            <h3 class="text-xl font-bold mt-6 mb-2">¡Mi spray es invisible en el juego!</h3>
+            <p>Esto suele ocurrir si el spray no tiene un archivo VMT correspondiente o si las dimensiones son demasiado grandes. Intenta mantener tus sprays por debajo de 256x256 o 512x512 píxeles.</p>
+        </section>
+
+        <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+            <nav class="post-navigation flex justify-between items-center" aria-label="Navegación del post">
+                <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+                    <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                    Volver al Blog
+                </a>
+                <a href="/es/tools/vtf-converter/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+                    Probar la Herramienta
+                    <svg class="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </nav>
+        </footer>
+    </article>
+</main>
