@@ -1,0 +1,52 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-jwt-debugger/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-jwt-debugger/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-jwt-debugger/script.js?raw';
+
+const seo: SeoProps = {
+  title: 'Débogueur et Inspecteur JWT - Décoder des JSON Web Tokens Online',
+  description: 'Outil en ligne simple pour décoder, inspecter et vérifier des JSON Web Tokens (JWT) côté client. Affichez les en-têtes, la charge utile et vérifiez les signatures.',
+  keywords: 'debogueur jwt, decodeur jwt, inspecteur jwt, decoder jwt, verifier jwt, signature jwt, reclamations token',
+  canonical: `${SITE_URL}/fr/tools/jwt-debugger/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/jwt-debugger/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/jwt-debugger/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/jwt-debugger/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/jwt-debugger/` },
+  ],
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/fr/tools/jwt-debugger/`,
+    title: 'Débogueur et Inspecteur JWT - Décoder des JSON Web Tokens Online',
+    description: 'Décodez, inspectez et vérifiez des JSON Web Tokens (JWT) localement et en toute sécurité.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/fr/tools/jwt-debugger/`,
+    title: 'Débogueur et Inspecteur JWT - Décoder des JSON Web Tokens Online',
+    description: 'Décodez, inspectez et vérifiez des JSON Web Tokens (JWT) localement et en toute sécurité.',
+    image: DEFAULT_OG_IMAGE
+  },
+  jsonLd: [{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Débogueur et Inspecteur JWT',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/fr/tools/jwt-debugger/`,
+    description: 'Outil en ligne simple pour décoder, inspecter et vérifier des JSON Web Tokens (JWT) côté client.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+  }],
+};
+const headRaw = "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">";
+---
+<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/jwt-debugger/`, es: `${SITE_URL}/es/tools/jwt-debugger/` }} headRaw={headRaw} adMinHeight={120}>
+  <div class="tool-island legacy-tw" id="tool-jwt-debugger" set:html={body} />
+</ToolLayout>
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

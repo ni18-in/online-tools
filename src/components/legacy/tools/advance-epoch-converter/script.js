@@ -159,6 +159,9 @@
             navigator.clipboard.writeText(text).then(() => {
                 const originalHtml = btn.innerHTML;
                 btn.innerHTML = `<svg class="icon" style="color:var(--success-color)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+                if (window.showToast) {
+                    window.showToast('Copied to clipboard!');
+                }
                 setTimeout(() => {
                     btn.innerHTML = originalHtml;
                 }, 1500);

@@ -6,9 +6,9 @@ const TOOL_SLUGS = [
   'advance-epoch-converter', 'ai-beauty-test', 'ai-love-calculator', 'all-in-one-text-analyzer',
   'basic-authentication-header-generator', 'free-online-image-utility-tool', 'grade-calculator',
   'guess-the-logo', 'happy-new-year', 'iphone-photo-fixer', 'json-comparison-tool',
-  'json-visualizer-pro', 'markdown-to-word', 'mh-meter-price-calculator', 'next-gen-gst-reforms',
-  'online-text-compare', 'px-to-rem-converter', 'rem-to-px-converter', 'screen-recorder-pro',
-  'subtitle-resync-tool', 'vtf-converter',
+  'json-visualizer-pro', 'jwt-debugger', 'markdown-to-word', 'mh-meter-price-calculator',
+  'next-gen-gst-reforms', 'online-text-compare', 'px-to-rem-converter', 'rem-to-px-converter',
+  'screen-recorder-pro', 'subtitle-resync-tool', 'vtf-converter',
 ];
 
 function trackErrors(page: Page): string[] {
@@ -61,3 +61,11 @@ test('homepage search filters tool cards', async ({ page }) => {
   await expect(page.locator('.tool-card:visible').first()).toBeVisible();
   expect(await page.locator('.tool-card:visible').count()).toBeLessThan(total);
 });
+
+test('jwt-debugger decodes sample token on button click', async ({ page }) => {
+  await page.goto('/tools/jwt-debugger/');
+  await page.click('#btnPasteSample');
+  await expect(page.locator('#headerOutput')).toContainText('HS256');
+  await expect(page.locator('#payloadOutput')).toContainText('John Doe');
+});
+

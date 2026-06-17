@@ -133,6 +133,9 @@ copyLinkBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(shareLinkInput.value).then(() => {
         const originalText = copyLinkBtn.textContent;
         copyLinkBtn.textContent = '✅';
+        if (window.showToast) {
+            window.showToast('Lien copié dans le presse-papiers !');
+        }
         setTimeout(() => copyLinkBtn.textContent = originalText, 2000);
     });
 });
