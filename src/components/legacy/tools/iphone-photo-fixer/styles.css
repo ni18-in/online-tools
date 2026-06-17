@@ -325,3 +325,126 @@
 #tool-iphone-photo-fixer .back-link:hover {
     color: var(--text-color);
 }
+
+/* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+#tool-iphone-photo-fixer {
+    background-color: transparent !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+#tool-iphone-photo-fixer header {
+    display: none !important;
+}
+
+#tool-iphone-photo-fixer .tool-card,
+#tool-iphone-photo-fixer .info-card {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    border-radius: 24px !important;
+    box-shadow: none !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+
+#tool-iphone-photo-fixer .drop-zone {
+    background-color: var(--md-sys-color-surface-container-lowest) !important;
+    border: 2px dashed var(--md-sys-color-outline-variant) !important;
+    border-radius: 16px !important;
+    color: var(--md-sys-color-on-surface) !important;
+}
+#tool-iphone-photo-fixer .drop-zone:hover,
+#tool-iphone-photo-fixer .drop-zone.drag-over {
+    border-color: var(--md-sys-color-primary) !important;
+    background-color: var(--md-sys-color-primary-container) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+#tool-iphone-photo-fixer .drop-icon,
+#tool-iphone-photo-fixer .drop-subtext {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+#tool-iphone-photo-fixer .controls-area {
+    border-top: 1px solid var(--md-sys-color-outline-variant) !important;
+}
+
+#tool-iphone-photo-fixer .format-select {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    border-radius: 8px !important;
+}
+
+#tool-iphone-photo-fixer .btn {
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+#tool-iphone-photo-fixer .btn-primary {
+    background-color: var(--md-sys-color-primary) !important;
+    color: var(--md-sys-color-on-primary) !important;
+}
+#tool-iphone-photo-fixer .btn-primary:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+}
+#tool-iphone-photo-fixer .btn-primary:disabled {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface-variant) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+}
+
+#tool-iphone-photo-fixer .btn-success {
+    background-color: var(--md-sys-color-tertiary) !important;
+    color: var(--md-sys-color-on-tertiary) !important;
+}
+#tool-iphone-photo-fixer .btn-success:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 90%, black) !important;
+}
+
+#tool-iphone-photo-fixer .file-item {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border-radius: 12px !important;
+}
+#tool-iphone-photo-fixer .file-name {
+    color: var(--md-sys-color-on-surface) !important;
+}
+#tool-iphone-photo-fixer .file-status {
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+#tool-iphone-photo-fixer .status-pending {
+    background-color: var(--md-sys-color-surface-container-highest) !important;
+    color: var(--md-sys-color-on-surface-variant) !important;
+}
+
+#tool-iphone-photo-fixer .status-converting {
+    background-color: var(--md-sys-color-primary-container) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+#tool-iphone-photo-fixer .status-done {
+    background-color: var(--md-sys-color-tertiary-container) !important;
+    color: var(--md-sys-color-on-tertiary-container) !important;
+}
+
+#tool-iphone-photo-fixer .status-error {
+    background-color: var(--md-sys-color-error-container) !important;
+    color: var(--md-sys-color-on-error-container) !important;
+}
+
+#tool-iphone-photo-fixer .info-card h2,
+#tool-iphone-photo-fixer .info-card h3 {
+    color: var(--md-sys-color-on-surface) !important;
+    border-bottom: 2px solid var(--md-sys-color-primary) !important;
+}
+
+#tool-iphone-photo-fixer .faq-list details {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border-radius: 12px !important;
+}
+#tool-iphone-photo-fixer .faq-list summary {
+    color: var(--md-sys-color-on-surface) !important;
+}
+

@@ -132,3 +132,115 @@
     background-color: var(--md-sys-color-surface-container-high) !important;
     color: var(--md-sys-color-on-surface) !important;
 }
+
+/* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+#tool-all-in-one-text-analyzer {
+    background-color: transparent !important;
+}
+
+#tool-all-in-one-text-analyzer .bg-white {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    border-radius: 16px !important;
+}
+
+/* Centered Clear Button and MD3 Buttons */
+#tool-all-in-one-text-analyzer #clearButton {
+    margin: 16px auto 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background-color: var(--md-sys-color-error-container) !important;
+    color: var(--md-sys-color-on-error-container) !important;
+    border-radius: 999px !important;
+    padding: 8px 24px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+}
+#tool-all-in-one-text-analyzer #clearButton:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-error-container) 90%, black) !important;
+}
+
+#tool-all-in-one-text-analyzer #howToUseBtn {
+    background-color: var(--md-sys-color-primary) !important;
+    color: var(--md-sys-color-on-primary) !important;
+    border-radius: 999px !important;
+    padding: 6px 16px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+#tool-all-in-one-text-analyzer #howToUseBtn:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+}
+
+#tool-all-in-one-text-analyzer #closeModalBtn {
+    background-color: transparent !important;
+    color: var(--md-sys-color-on-surface-variant) !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+/* Result cards styling */
+#tool-all-in-one-text-analyzer .result-card {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    border-radius: 12px !important;
+    transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+#tool-all-in-one-text-analyzer .result-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* Keyword List bg override */
+#tool-all-in-one-text-analyzer .bg-gray-50 {
+    background-color: var(--md-sys-color-surface-container-low) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    border-radius: 12px !important;
+}
+#tool-all-in-one-text-analyzer #keywordList li span:last-child {
+    background-color: var(--md-sys-color-primary-container) !important;
+    color: var(--md-sys-color-on-primary-container) !important;
+}
+
+/* Textarea MD3 Outlined style */
+#tool-all-in-one-text-analyzer textarea {
+    background-color: var(--md-sys-color-surface-container-lowest) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+#tool-all-in-one-text-analyzer textarea:focus {
+    outline: none !important;
+    border-color: var(--md-sys-color-primary) !important;
+    box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+}
+
+/* Modal MD3 styling */
+#tool-all-in-one-text-analyzer .modal-content {
+    background-color: var(--md-sys-color-surface-container-high) !important;
+    color: var(--md-sys-color-on-surface) !important;
+    border-radius: 28px !important;
+    padding: 24px !important;
+    border: 1px solid var(--md-sys-color-outline-variant) !important;
+}
+#tool-all-in-one-text-analyzer #modal-title {
+    color: var(--md-sys-color-on-surface) !important;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+}
+#tool-all-in-one-text-analyzer #howToUseList li svg {
+    color: var(--md-sys-color-primary) !important;
+}

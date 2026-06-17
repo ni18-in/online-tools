@@ -318,3 +318,127 @@
         #tool-json-visualizer-pro.dark-mode .modal-close-btn:hover {
             color: #f8fafc;
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-json-visualizer-pro {
+            background: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface);
+        }
+
+        #tool-json-visualizer-pro .panel {
+            background-color: var(--md-sys-color-surface-container) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: none !important;
+        }
+
+        #tool-json-visualizer-pro .panel:first-child {
+            border-right: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-bottom: none !important;
+        }
+
+        #tool-json-visualizer-pro #jsonInput,
+        #tool-json-visualizer-pro #jsonVisualizer {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 12px !important;
+            padding: 12px !important;
+        }
+
+        #tool-json-visualizer-pro #jsonInput:focus {
+            outline: none !important;
+            border-color: var(--md-sys-color-primary) !important;
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+        }
+
+        /* Buttons MD3 Styling */
+        #tool-json-visualizer-pro button {
+            border-radius: 999px !important;
+            padding: 8px 16px !important;
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            transition: all 0.2s ease !important;
+            border: none !important;
+            box-shadow: none !important;
+            cursor: pointer !important;
+        }
+
+        #tool-json-visualizer-pro #visualizeBtn {
+            background-color: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+        }
+        #tool-json-visualizer-pro #visualizeBtn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+        }
+
+        #tool-json-visualizer-pro #undoBtn,
+        #tool-json-visualizer-pro #redoBtn {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline) !important;
+        }
+        #tool-json-visualizer-pro #undoBtn:hover:not(:disabled),
+        #tool-json-visualizer-pro #redoBtn:hover:not(:disabled) {
+            background-color: var(--md-sys-color-surface-container-highest) !important;
+        }
+
+        #tool-json-visualizer-pro #formatBtn,
+        #tool-json-visualizer-pro #minifyBtn,
+        #tool-json-visualizer-pro #copyBtn,
+        #tool-json-visualizer-pro #howToUseBtn {
+            background-color: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+        }
+        #tool-json-visualizer-pro #formatBtn:hover,
+        #tool-json-visualizer-pro #minifyBtn:hover,
+        #tool-json-visualizer-pro #copyBtn:hover,
+        #tool-json-visualizer-pro #howToUseBtn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
+        }
+
+        #tool-json-visualizer-pro #clearBtn {
+            background-color: var(--md-sys-color-error-container) !important;
+            color: var(--md-sys-color-on-error-container) !important;
+        }
+        #tool-json-visualizer-pro #clearBtn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-error-container) 90%, black) !important;
+        }
+
+        #tool-json-visualizer-pro button:disabled {
+            background-color: var(--md-sys-color-surface-container-highest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            opacity: 0.38 !important;
+            cursor: not-allowed !important;
+            border-color: var(--md-sys-color-outline-variant) !important;
+        }
+
+        /* Mobile Adjustments */
+        #tool-json-visualizer-pro .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        @media (max-width: 767px) {
+            #tool-json-visualizer-pro .panel:first-child {
+                border-right: none !important;
+                border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+                padding-bottom: 24px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #tool-json-visualizer-pro .button-container button {
+                flex: 1 1 calc(50% - 8px);
+                min-width: 120px;
+            }
+            #tool-json-visualizer-pro #visualizeBtn {
+                flex: 1 1 100% !important;
+            }
+        }

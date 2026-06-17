@@ -655,3 +655,209 @@
                 gap: 0.5rem;
             }
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-guess-the-logo {
+            --bg-gradient: transparent !important;
+            --card-bg: var(--md-sys-color-surface-container-low) !important;
+            --card-border: 1px solid var(--md-sys-color-outline-variant) !important;
+            --text-primary: var(--md-sys-color-on-surface) !important;
+            --text-secondary: var(--md-sys-color-on-surface-variant) !important;
+            --brand-primary: var(--md-sys-color-primary) !important;
+            --brand-secondary: var(--md-sys-color-tertiary) !important;
+            background: transparent !important;
+        }
+
+        .dark-mode #tool-guess-the-logo {
+            --bg-gradient: transparent !important;
+            --card-bg: var(--md-sys-color-surface-container-low) !important;
+            --card-border: 1px solid var(--md-sys-color-outline-variant) !important;
+            --text-primary: var(--md-sys-color-on-surface) !important;
+            --text-secondary: var(--md-sys-color-on-surface-variant) !important;
+            --brand-primary: var(--md-sys-color-primary) !important;
+            --brand-secondary: var(--md-sys-color-tertiary) !important;
+        }
+
+        #tool-guess-the-logo #darkModeToggle {
+            display: none !important;
+        }
+
+        #tool-guess-the-logo .container {
+            background: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 28px !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        #tool-guess-the-logo .container::after {
+            display: none !important;
+        }
+
+        #tool-guess-the-logo h1 {
+            background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary)) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+        /* Buttons */
+        #tool-guess-the-logo .btn-primary {
+            background: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            font-weight: 700 !important;
+            box-shadow: none !important;
+            border: none !important;
+            height: auto !important;
+        }
+        #tool-guess-the-logo .btn-primary:hover {
+            background: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+            box-shadow: none !important;
+            transform: translateY(-1px) !important;
+        }
+
+        #tool-guess-the-logo .btn-secondary {
+            background: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+            border-radius: 999px !important;
+            font-weight: 700 !important;
+            border: none !important;
+            height: auto !important;
+        }
+        #tool-guess-the-logo .btn-secondary:hover {
+            background: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
+        }
+
+        #tool-guess-the-logo .btn-info {
+            background: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 999px !important;
+            font-weight: 500 !important;
+            padding: 8px 16px !important;
+            height: auto !important;
+        }
+        #tool-guess-the-logo .btn-info:hover {
+            background: var(--md-sys-color-surface-container-highest) !important;
+        }
+
+        #tool-guess-the-logo .btn-option {
+            background: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+        }
+        .dark-mode #tool-guess-the-logo .btn-option {
+            background: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-guess-the-logo .btn-option:hover:not(:disabled) {
+            background: var(--md-sys-color-primary-container) !important;
+            color: var(--md-sys-color-on-primary-container) !important;
+            border-color: var(--md-sys-color-primary) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* Radio group */
+        #tool-guess-the-logo input[type="radio"] {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            width: 20px !important;
+            height: 20px !important;
+            border: 2px solid var(--md-sys-color-outline) !important;
+            border-radius: 50% !important;
+            outline: none !important;
+            margin: 0 6px 0 0 !important;
+            display: inline-grid !important;
+            place-content: center !important;
+            cursor: pointer !important;
+            vertical-align: middle !important;
+            background-color: transparent !important;
+        }
+        #tool-guess-the-logo input[type="radio"]::before {
+            content: "" !important;
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            transform: scale(0) !important;
+            transition: 120ms transform ease-in-out !important;
+            background-color: var(--md-sys-color-primary) !important;
+        }
+        #tool-guess-the-logo input[type="radio"]:checked {
+            border-color: var(--md-sys-color-primary) !important;
+        }
+        #tool-guess-the-logo input[type="radio"]:checked::before {
+            transform: scale(1) !important;
+        }
+        #tool-guess-the-logo .radio-group label {
+            margin-right: 16px !important;
+            cursor: pointer !important;
+            font-weight: 500 !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        /* Number and Select */
+        #tool-guess-the-logo select,
+        #tool-guess-the-logo input[type="number"] {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            padding: 8px 12px !important;
+            font-family: inherit !important;
+            font-weight: 500 !important;
+            width: 100% !important;
+        }
+        #tool-guess-the-logo select:focus,
+        #tool-guess-the-logo input[type="number"]:focus {
+            border-color: var(--md-sys-color-primary) !important;
+        }
+
+        #tool-guess-the-logo input[type="checkbox"] {
+            accent-color: var(--md-sys-color-primary) !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+
+        #tool-guess-the-logo .logo-container {
+            background: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+        }
+        .dark-mode #tool-guess-the-logo .logo-container {
+            background: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-guess-the-logo .modal-content {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 28px !important;
+        }
+        #tool-guess-the-logo .modal-content h3 {
+            color: var(--md-sys-color-primary) !important;
+        }
+        #tool-guess-the-logo .modal-content p,
+        #tool-guess-the-logo .modal-content ul {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-guess-the-logo .close-btn {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-guess-the-logo .game-info {
+            background: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-guess-the-logo #highscore-list {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+        #tool-guess-the-logo #highscore-list li {
+            border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+

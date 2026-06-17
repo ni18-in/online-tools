@@ -308,3 +308,134 @@
                 justify-content: center;
             }
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-markdown-to-word {
+            background-color: transparent !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word header {
+            display: none !important;
+        }
+
+        #tool-markdown-to-word .container {
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 1rem !important;
+        }
+
+        #tool-markdown-to-word .workspace {
+            height: 70vh !important;
+            min-height: 500px !important;
+            gap: 1.5rem !important;
+        }
+
+        #tool-markdown-to-word .panel {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+        }
+
+        #tool-markdown-to-word .panel-header {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-markdown-to-word #editor {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+
+        #tool-markdown-to-word #preview {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word #preview h1 {
+            color: var(--md-sys-color-on-surface) !important;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-markdown-to-word #preview h2,
+        #tool-markdown-to-word #preview h3 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word #preview code {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word #preview pre {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-markdown-to-word #preview table {
+            border-collapse: collapse !important;
+        }
+
+        #tool-markdown-to-word #preview th,
+        #tool-markdown-to-word #preview td {
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-markdown-to-word #preview th {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word .btn {
+            background-color: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+            border: none !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #tool-markdown-to-word .btn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+            transform: scale(1.02) !important;
+        }
+
+        #tool-markdown-to-word .btn-secondary {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface-variant) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+
+        #tool-markdown-to-word .btn-secondary:hover {
+            background-color: var(--md-sys-color-surface-container-highest) !important;
+            color: var(--md-sys-color-primary) !important;
+        }
+
+        #tool-markdown-to-word .faq-item {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 12px !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word .faq-item h3 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word .content-section h2 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-markdown-to-word .step-list li::before {
+            background-color: var(--md-sys-color-primary-container) !important;
+            color: var(--md-sys-color-on-primary-container) !important;
+        }
+
+        #tool-markdown-to-word footer {
+            display: none !important;
+        }

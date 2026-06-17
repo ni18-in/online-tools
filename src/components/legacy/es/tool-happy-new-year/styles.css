@@ -469,3 +469,59 @@
 #tool-happy-new-year .opt-snow {
     background: linear-gradient(160deg, #0093E9, #80D0C7);
 }
+
+/* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+#tool-happy-new-year input,
+#tool-happy-new-year textarea {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    padding: 14px 16px !important;
+    outline: none !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+#tool-happy-new-year input:focus,
+#tool-happy-new-year textarea:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--secondary-color, #08d9d6) !important;
+    box-shadow: 0 0 0 3px rgba(8, 217, 214, 0.3) !important;
+}
+
+#tool-happy-new-year .btn {
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    padding: 14px 28px !important;
+    box-shadow: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.2s ease !important;
+}
+
+#tool-happy-new-year .btn:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+#tool-happy-new-year .glass-card {
+    border-radius: 28px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+#tool-happy-new-year .theme-snow input,
+#tool-happy-new-year .theme-snow textarea {
+    color: #00334e !important;
+    border-color: rgba(0, 51, 78, 0.2) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+#tool-happy-new-year .theme-snow input:focus,
+#tool-happy-new-year .theme-snow textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(0, 147, 233, 0.25) !important;
+}
+

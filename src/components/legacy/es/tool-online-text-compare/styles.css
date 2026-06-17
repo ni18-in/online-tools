@@ -333,3 +333,127 @@
                 color: #000 !important;
             }
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-online-text-compare {
+            background-color: transparent !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        #tool-online-text-compare .container {
+            background-color: transparent !important;
+            min-height: auto !important;
+            padding: 1rem 0 !important;
+        }
+
+        #tool-online-text-compare header h1,
+        #tool-online-text-compare #darkModeToggle {
+            display: none !important;
+        }
+
+        #tool-online-text-compare header {
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
+            margin-bottom: 1rem !important;
+        }
+
+        #tool-online-text-compare .text-panel {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+            padding: 1.5rem !important;
+        }
+
+        #tool-online-text-compare textarea {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            transition: border-color 0.2s, box-shadow 0.2s !important;
+        }
+        #tool-online-text-compare textarea:focus {
+            border-color: var(--md-sys-color-primary) !important;
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+        }
+
+        #tool-online-text-compare .diff-output {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+        }
+
+        #tool-online-text-compare .diff-output .added {
+            background-color: var(--md-sys-color-primary-container) !important;
+            color: var(--md-sys-color-on-primary-container) !important;
+        }
+        #tool-online-text-compare .diff-output .removed {
+            background-color: var(--md-sys-color-error-container) !important;
+            color: var(--md-sys-color-on-error-container) !important;
+        }
+        #tool-online-text-compare .diff-output .common {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        /* Buttons */
+        #tool-online-text-compare #compareButton {
+            background-color: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            border: none !important;
+            padding: 8px 20px !important;
+            font-weight: 500 !important;
+            height: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            cursor: pointer !important;
+        }
+        #tool-online-text-compare #compareButton:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+        }
+
+        #tool-online-text-compare .header-controls button:not(.compare-main-btn) {
+            background-color: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+            border: none !important;
+            border-radius: 999px !important;
+            padding: 8px 20px !important;
+            font-weight: 500 !important;
+            height: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            cursor: pointer !important;
+        }
+        #tool-online-text-compare .header-controls button:not(.compare-main-btn):hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
+        }
+
+        #tool-online-text-compare .panel-controls button {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface-variant) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 999px !important;
+            padding: 6px 16px !important;
+            height: auto !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+        }
+        #tool-online-text-compare .panel-controls button:hover {
+            background-color: var(--md-sys-color-surface-container-highest) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-online-text-compare .header-controls select {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            padding: 8px 12px !important;
+            font-family: inherit !important;
+            cursor: pointer !important;
+        }
+

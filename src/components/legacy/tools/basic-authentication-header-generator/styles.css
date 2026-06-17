@@ -10,3 +10,100 @@
         #tool-basic-authentication-header-generator .code-block {
             word-break: break-all;
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-basic-authentication-header-generator {
+            background: transparent !important;
+        }
+        #tool-basic-authentication-header-generator header {
+            display: none !important;
+        }
+        #tool-basic-authentication-header-generator main {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 28px !important;
+            box-shadow: none !important;
+        }
+
+        :global([data-theme="dark"]) #tool-basic-authentication-header-generator main {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-basic-authentication-header-generator input[type="text"],
+        #tool-basic-authentication-header-generator input[type="password"] {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            padding: 12px 16px !important;
+            outline: none !important;
+            width: 100% !important;
+            transition: border-color 0.2s, box-shadow 0.2s !important;
+        }
+        #tool-basic-authentication-header-generator input[type="text"]:focus,
+        #tool-basic-authentication-header-generator input[type="password"]:focus {
+            border-color: var(--md-sys-color-primary) !important;
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+        }
+
+        #tool-basic-authentication-header-generator #generate-btn {
+            background-color: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 12px 24px !important;
+            height: auto !important;
+            transition: background-color 0.2s, transform 0.2s !important;
+            cursor: pointer !important;
+        }
+        #tool-basic-authentication-header-generator #generate-btn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+            transform: scale(1.02) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-basic-authentication-header-generator #copy-btn {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface-variant) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+        }
+        #tool-basic-authentication-header-generator #copy-btn:hover {
+            background-color: var(--md-sys-color-surface-container-highest) !important;
+            color: var(--md-sys-color-primary) !important;
+        }
+
+        #tool-basic-authentication-header-generator label {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-basic-authentication-header-generator h2 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-basic-authentication-header-generator #result-container {
+            border-color: var(--md-sys-color-outline-variant) !important;
+        }
+        #tool-basic-authentication-header-generator #result-container .relative {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+        }
+        #tool-basic-authentication-header-generator #result-output {
+            color: var(--md-sys-color-primary) !important;
+        }
+
+        #tool-basic-authentication-header-generator #about h2 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-basic-authentication-header-generator #about p {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-basic-authentication-header-generator #about .text-yellow-400 {
+            color: var(--md-sys-color-error) !important;
+        }
+

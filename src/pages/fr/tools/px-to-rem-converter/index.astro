@@ -67,7 +67,6 @@ const altLinks = {
             </select>
             <p id="base-font-description" class="sr-only">Sélectionnez la taille de police de base pour le calcul de conversion. La valeur par défaut est de 16 pixels.</p>
           </div>
-          <button type="submit" class="convert-button">Convertir</button>
         </form>
         <div id="result-container" aria-live="polite">
           Résultat en REM
@@ -82,7 +81,7 @@ const altLinks = {
         <ol>
           <li>Saisissez la valeur en pixels (px) souhaitée dans le premier champ.</li>
           <li>Ajustez la taille de police de base dans le menu déroulant si votre projet utilise une valeur par défaut différente (la norme est de 16px).</li>
-          <li>L'équivalent REM est calculé et affiché en temps réel dans la zone de résultat.</li>
+          <li>L\'équivalent REM est calculé et affiché en temps réel dans la zone de résultat.</li>
           <li>Pour une référence rapide, consultez le tableau de conversion ci-dessous basé sur une taille de police de base de 16px.</li>
         </ol>
       </div>
@@ -176,25 +175,20 @@ const altLinks = {
   }
 
   .form-group { position: relative; margin-bottom: 2rem; }
-  label { font-size: 1rem; color: var(--md-text-secondary-color); }
+  label { font-size: 0.85rem; font-weight: 500; color: var(--md-primary-color); position: absolute; top: 6px; left: 12px; z-index: 1; }
   input[type='number'], select {
-    width: 100%; padding: 1rem 0.5rem 0.5rem; border: none;
+    width: 100%; padding: 1.5rem 0.75rem 0.5rem; border: none;
     border-bottom: 1px solid var(--md-text-secondary-color);
-    background-color: transparent; color: var(--md-text-primary-color); font-size: 1.1rem;
-    transition: border-bottom-color 0.2s;
+    background-color: var(--md-background-color); color: var(--md-text-primary-color); font-size: 1.1rem;
+    border-radius: 8px 8px 0 0;
+    transition: border-bottom-color 0.2s, background-color 0.2s;
   }
-  input[type='number']:focus, select:focus { outline: none; border-bottom: 2px solid var(--md-primary-color); }
-  select option { color: initial; }
-
-  .convert-button {
-    display: block; width: 100%; padding: 0.85rem 1rem;
-    background-color: var(--md-primary-color); color: var(--md-sys-color-on-primary);
-    border: none; border-radius: 999px; font-size: 1rem; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;
-    box-shadow: var(--md-sys-elevation-1); transition: box-shadow 0.2s; margin-top: 1rem;
+  input[type='number']:focus, select:focus {
+    outline: none;
+    border-bottom: 2px solid var(--md-primary-color);
+    background-color: color-mix(in srgb, var(--md-primary-color) 8%, var(--md-background-color));
   }
-  .convert-button:hover { box-shadow: var(--md-sys-elevation-2); }
-  .convert-button:focus { outline: none; box-shadow: 0 0 0 4px var(--md-focus-ring-color); }
+  select option { color: initial; background-color: var(--md-surface-color); }
 
   #result-container {
     margin-top: 2rem; padding: 1.5rem; background-color: var(--md-background-color);
@@ -207,8 +201,9 @@ const altLinks = {
 
   .table-container { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-  th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--md-border-color); }
+  th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--md-border-color); }
   thead th { background-color: var(--md-background-color); font-weight: 500; color: var(--md-text-secondary-color); }
+  tbody tr:hover { background-color: color-mix(in srgb, var(--md-primary-color) 4%, transparent); }
 
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
