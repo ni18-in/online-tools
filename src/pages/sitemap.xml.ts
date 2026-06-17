@@ -4,7 +4,7 @@
 // clusters below. The P9 URL-inventory test asserts dist matches this set.
 import { SITE_URL } from '../data/site';
 import { sitemapTools, toolUrl, toolHreflang } from '../data/tools';
-import { indexedPosts, blogUrl } from '../data/blogs';
+import { indexedPosts, blogUrl, blogHreflang } from '../data/blogs';
 
 const LASTMOD = new Date().toISOString().split('T')[0];
 const U = (p: string) => `${SITE_URL}${p}`;
@@ -29,8 +29,9 @@ const landing: Entry[] = [
   { loc: U('/about/'), alts: cluster({ en: '/about/', es: '/es/about/', fr: '/fr/about/' }, '/about/') },
   { loc: U('/es/about/'), alts: cluster({ en: '/about/', es: '/es/about/', fr: '/fr/about/' }, '/about/') },
   { loc: U('/fr/about/'), alts: cluster({ en: '/about/', es: '/es/about/', fr: '/fr/about/' }, '/about/') },
-  { loc: U('/blogs/'), alts: cluster({ en: '/blogs/', fr: '/fr/blogs/' }, '/blogs/') }, // /es/blogs/ excluded
-  { loc: U('/fr/blogs/'), alts: cluster({ en: '/blogs/', fr: '/fr/blogs/' }, '/blogs/') },
+  { loc: U('/blogs/'), alts: cluster({ en: '/blogs/', es: '/es/blogs/', fr: '/fr/blogs/' }, '/blogs/') },
+  { loc: U('/es/blogs/'), alts: cluster({ en: '/blogs/', es: '/es/blogs/', fr: '/fr/blogs/' }, '/blogs/') },
+  { loc: U('/fr/blogs/'), alts: cluster({ en: '/blogs/', es: '/es/blogs/', fr: '/fr/blogs/' }, '/blogs/') },
 ];
 
 const toolEntries: Entry[] = [];
@@ -63,20 +64,27 @@ sitemapTools().forEach((t) => {
   }
 });
 
-// Blog posts: edit-images has a FR translation (reciprocal); the others stand alone.
-const editImagesAlts = cluster(
-  { en: '/blogs/edit-images-like-pro-free-online-tool.html', fr: '/fr/blogs/edit-images-like-pro-free-online-tool.html' },
-  '/blogs/edit-images-like-pro-free-online-tool.html',
-);
+// Blog posts: dynamically generated with correct reciprocal alternates.
 const blogEntries: Entry[] = indexedPosts().map((p) => ({
-  loc: blogUrl(p.slug),
-  alts: p.slug === 'edit-images-like-pro-free-online-tool' ? editImagesAlts : undefined,
+  loc: blogUrl(p.slug, 'en'),
+  alts: blogHreflang(p),
 }));
-const frBlogEntries: Entry[] = [
-  { loc: U('/fr/blogs/edit-images-like-pro-free-online-tool.html'), alts: editImagesAlts },
-];
 
-const all: Entry[] = [...landing, ...toolEntries, ...esToolEntries, ...frToolEntries, ...blogEntries, ...frBlogEntries];
+const esBlogEntries: Entry[] = indexedPosts()
+  .filter((p) => p.i18n?.es)
+  .map((p) => ({
+    loc: blogUrl(p.slug, 'es'),
+    alts: blogHreflang(p),
+  }));
+
+const frBlogEntries: Entry[] = indexedPosts()
+  .filter((p) => p.i18n?.fr)
+  .map((p) => ({
+    loc: blogUrl(p.slug, 'fr'),
+    alts: blogHreflang(p),
+  }));
+
+const all: Entry[] = [...landing, ...toolEntries, ...esToolEntries, ...frToolEntries, ...blogEntries, ...esBlogEntries, ...frBlogEntries];
 
 function render(e: Entry): string {
   const alts = (e.alts ?? [])

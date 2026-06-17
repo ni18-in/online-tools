@@ -2,8 +2,8 @@
 import BlogLayout from '../../../layouts/BlogLayout.astro';
 import { blogPosts, blogSeo } from '../../../data/blogs';
 
-const bodies = import.meta.glob('../../../components/legacy/fr/blog-*/body.html', { query: '?raw', import: 'default', eager: true });
-const styles = import.meta.glob('../../../components/legacy/fr/blog-*/styles.css', { query: '?raw', import: 'default', eager: true });
+const bodies = import.meta.glob('../../../components/legacy/es/blog-*/body.html', { query: '?raw', import: 'default', eager: true });
+const styles = import.meta.glob('../../../components/legacy/es/blog-*/styles.css', { query: '?raw', import: 'default', eager: true });
 
 const pick = (map: Record<string, unknown>, slug: string, file: string): string => {
   const key = Object.keys(map).find((p) => p.endsWith(`/blog-${slug}/${file}`));
@@ -11,19 +11,19 @@ const pick = (map: Record<string, unknown>, slug: string, file: string): string 
 };
 
 export function getStaticPaths() {
-  const frPosts = blogPosts.filter((p) => p.i18n?.fr);
-  return frPosts.map((post) => ({
-    params: { slug: post.i18n!.fr!.slug },
+  const esPosts = blogPosts.filter((p) => p.i18n?.es);
+  return esPosts.map((post) => ({
+    params: { slug: post.i18n!.es!.slug },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const seo = blogSeo(post, 'fr');
+const seo = blogSeo(post, 'es');
 const body = pick(bodies, post.slug, 'body.html');
 const css = pick(styles, post.slug, 'styles.css');
 ---
-<BlogLayout seo={seo} lang="fr">
+<BlogLayout seo={seo} lang="es">
   <article class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
 </BlogLayout>
 

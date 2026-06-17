@@ -14,6 +14,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { type Locale } from '../data/i18n';
 import { ADSENSE_CLIENT, SITE_URL } from '../data/site';
 import { tools } from '../data/tools';
+import { blogPosts } from '../data/blogs';
 import '../styles/md3-tokens.css';
 import '../styles/tailwind.css';
 
@@ -60,12 +61,24 @@ if (seo.canonical) {
     if (matchingTool.i18n?.fr && !resolvedAltLinks.fr) {
       resolvedAltLinks.fr = `${SITE_URL}/fr/tools/${matchingTool.i18n.fr}/`;
     }
-  } else if (canonical.includes('edit-images-like-pro-free-online-tool')) {
-    if (!resolvedAltLinks.en) {
-      resolvedAltLinks.en = `${SITE_URL}/blogs/edit-images-like-pro-free-online-tool.html`;
-    }
-    if (!resolvedAltLinks.fr) {
-      resolvedAltLinks.fr = `${SITE_URL}/fr/blogs/edit-images-like-pro-free-online-tool.html`;
+  } else {
+    const matchingBlog = blogPosts.find((p) => {
+      if (canonical.includes(`/blogs/${p.slug}.html`)) return true;
+      if (p.i18n?.es && canonical.includes(`/blogs/${p.i18n.es.slug}.html`)) return true;
+      if (p.i18n?.fr && canonical.includes(`/blogs/${p.i18n.fr.slug}.html`)) return true;
+      return false;
+    });
+
+    if (matchingBlog) {
+      if (!resolvedAltLinks.en) {
+        resolvedAltLinks.en = `${SITE_URL}/blogs/${matchingBlog.slug}.html`;
+      }
+      if (matchingBlog.i18n?.es && !resolvedAltLinks.es) {
+        resolvedAltLinks.es = `${SITE_URL}/es/blogs/${matchingBlog.i18n.es.slug}.html`;
+      }
+      if (matchingBlog.i18n?.fr && !resolvedAltLinks.fr) {
+        resolvedAltLinks.fr = `${SITE_URL}/fr/blogs/${matchingBlog.i18n.fr.slug}.html`;
+      }
     }
   }
 }

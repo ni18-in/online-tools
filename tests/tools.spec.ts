@@ -79,4 +79,34 @@ test('smart language switcher has correct alternates', async ({ page }) => {
   await expect(optionFr).toHaveCount(1);
 });
 
+test('blog lists load and alternates redirect correctly', async ({ page }) => {
+  const errors = trackErrors(page);
+  
+  // Verify English blog list
+  await page.goto('/blogs/');
+  await expect(page.locator('h1')).toHaveText('Blog');
+  await expect(page.locator('.post-list')).toBeVisible();
+
+  // Verify Spanish blog list
+  await page.goto('/es/blogs/');
+  await expect(page.locator('h1')).toHaveText('Blog');
+  await expect(page.locator('.post-list')).toBeVisible();
+
+  // Verify French blog list
+  await page.goto('/fr/blogs/');
+  await expect(page.locator('h1')).toHaveText('Blog');
+  await expect(page.locator('.post-list')).toBeVisible();
+
+  // Verify smart language switching on translated post
+  await page.goto('/blogs/edit-images-like-pro-free-online-tool');
+  const select = page.locator('.lang-select');
+  await expect(select).toBeVisible();
+  const optionEs = select.locator('option[value*="/es/blogs/editar-imagenes-como-un-profesional-herramienta-gratuita-online.html"]');
+  await expect(optionEs).toHaveCount(1);
+  const optionFr = select.locator('option[value*="/fr/blogs/edit-images-like-pro-free-online-tool.html"]');
+  await expect(optionFr).toHaveCount(1);
+
+  expect(errors).toEqual([]);
+});
+
 

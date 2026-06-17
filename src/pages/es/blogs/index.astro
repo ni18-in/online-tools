@@ -1,24 +1,107 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageLayout from '../../../layouts/PageLayout.astro';
 import type { Props as SeoProps } from '../../../components/Seo.astro';
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
-import body from '../../../components/legacy/es/blogs/body.html?raw';
-import css from '../../../components/legacy/es/blogs/styles.css?raw';
-import '../../../styles/tw-preflight-scoped.css';
+import { indexedPosts, blogUrl } from '../../../data/blogs';
 
-// /es/blogs/ is noindex and intentionally excluded from the sitemap (no translated posts yet).
+const posts = indexedPosts().filter((p) => p.i18n?.es);
+
 const seo: SeoProps = {
-  title: 'Blogs y Artículos – NI18 Herramientas Online',
-  description: 'Lee nuestros artículos sobre desarrollo web, diseño y utilidades de codificación.',
-  keywords: 'blog, herramientas online, tutoriales, guías',
+  title: 'Blog y Artículos – NI18 Herramientas Online',
+  description: 'Lee los últimos artículos, tutoriales y guías del equipo de NI18 Herramientas Online.',
+  keywords: 'blog, herramientas online, tutoriales, guías, artículos técnicos',
   canonical: `${SITE_URL}/es/blogs/`,
-  robots: 'noindex, follow',
-  og: { type: 'website', url: `${SITE_URL}/es/blogs/`, title: 'Blogs – NI18', description: 'Artículos y guías.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
-  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/blogs/`, title: 'Blogs – NI18', description: 'Artículos y guías.', image: DEFAULT_OG_IMAGE },
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/blogs/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/blogs/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/blogs/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/blogs/` },
+  ],
+  og: { type: 'website', url: `${SITE_URL}/es/blogs/`, title: 'Blog – NI18', description: 'Artículos y guías del equipo de NI18.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/blogs/`, title: 'Blog – NI18', description: 'Artículos y guías.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: `${SITE_URL}/es/`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Blog de NI18 Herramientas Online',
+      description: 'Artículos, tutoriales y guías del equipo de NI18 Herramientas Online.',
+      url: `${SITE_URL}/es/blogs/`,
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/android-chrome-192x192.png` },
+      },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: posts.map((p, i) => {
+          const title = p.i18n?.es?.title || p.title;
+          const description = p.i18n?.es?.description || p.description;
+          const esSlug = p.i18n?.es?.slug || p.slug;
+          return {
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'BlogPosting',
+              headline: title,
+              description: description,
+              datePublished: p.datePublished,
+              dateModified: p.dateModified,
+              image: p.image,
+              url: `${SITE_URL}/es/blogs/${esSlug}.html`,
+              author: { '@type': 'Person', name: p.author },
+            },
+          };
+        }),
+      },
+    },
+  ],
 };
+
+const fmt = (iso: string) => iso.slice(0, 10);
 ---
-<BaseLayout seo={seo} lang="es" current="blogs" altLinks={{ en: `${SITE_URL}/blogs/`, fr: `${SITE_URL}/fr/blogs/` }}>
-  <div class="page-island legacy-tw" set:html={body} />
-</BaseLayout>
-<style is:global set:html={css}></style>
-<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>
+<PageLayout seo={seo} lang="es" current="blogs" width="narrow" adsEnabled={true}>
+  <header class="blog-head">
+    <h1>Blog</h1>
+    <p>Guías, tutoriales y novedades del equipo de NI18 Herramientas Online.</p>
+  </header>
+  <ul class="post-list">
+    {posts.map((p) => {
+      const title = p.i18n?.es?.title || p.title;
+      const description = p.i18n?.es?.description || p.description;
+      const esSlug = p.i18n?.es?.slug || p.slug;
+      return (
+        <li class="post">
+          <a href={`/es/blogs/${esSlug}.html`} class="post-link">
+            <h2>{title}</h2>
+            <p class="excerpt">{description}</p>
+            <time datetime={p.datePublished}>{fmt(p.datePublished)}</time>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</PageLayout>
+
+<style>
+  .blog-head { text-align: center; margin-bottom: 24px; }
+  .blog-head h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .blog-head p { margin: 0; color: var(--md-sys-color-on-surface-variant); }
+  .post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .post-link {
+    display: block; text-decoration: none;
+    background: var(--md-sys-color-surface-container-lowest);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 20px 24px; transition: box-shadow .2s, border-color .2s;
+  }
+  .post-link:hover { box-shadow: var(--md-sys-elevation-2); border-color: var(--md-sys-color-primary); }
+  .post h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--md-sys-color-on-surface); }
+  .excerpt { margin: 0 0 12px; color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem; line-height: 1.5; }
+  time { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.8; }
+</style>
