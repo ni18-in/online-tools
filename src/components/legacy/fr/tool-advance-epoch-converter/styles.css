@@ -399,3 +399,174 @@
             height: 16px;
             fill: currentColor;
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-advance-epoch-converter {
+            background-color: transparent !important;
+        }
+
+        /* Hide duplicate header and theme toggle */
+        #tool-advance-epoch-converter header {
+            display: none !important;
+        }
+
+        #tool-advance-epoch-converter .container {
+            padding: 1rem 0 !important;
+        }
+
+        #tool-advance-epoch-converter .card {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+            padding: 1.5rem !important;
+        }
+
+        /* Clock & displays */
+        #tool-advance-epoch-converter .clock-display {
+            color: var(--md-sys-color-primary) !important;
+        }
+        #tool-advance-epoch-converter .date-display {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-advance-epoch-converter h2 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+
+        /* Buttons */
+        #tool-advance-epoch-converter button:not(.secondary):not(.copy-btn) {
+            background-color: var(--md-sys-color-primary) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            font-weight: 500 !important;
+            padding: 8px 24px !important;
+            border: none !important;
+            height: auto !important;
+            transition: background-color 0.2s ease !important;
+        }
+        #tool-advance-epoch-converter button:not(.secondary):not(.copy-btn):hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
+        }
+
+        #tool-advance-epoch-converter button.secondary {
+            background-color: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+            border-radius: 999px !important;
+            font-weight: 500 !important;
+            padding: 8px 24px !important;
+            border: none !important;
+            height: auto !important;
+            transition: background-color 0.2s ease !important;
+        }
+        #tool-advance-epoch-converter button.secondary:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
+        }
+
+        /* Input and Timezone Select */
+        #tool-advance-epoch-converter input[type="text"] {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 12px !important;
+            padding: 12px 16px !important;
+            font-family: inherit !important;
+            transition: border-color 0.2s, box-shadow 0.2s !important;
+        }
+        #tool-advance-epoch-converter input[type="text"]:focus {
+            border-color: var(--md-sys-color-primary) !important;
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+        }
+
+        #tool-advance-epoch-converter select {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            padding: 8px 12px !important;
+            font-family: inherit !important;
+        }
+        #tool-advance-epoch-converter select:focus {
+            outline: none !important;
+            border-color: var(--md-sys-color-primary) !important;
+        }
+
+        /* Radio Buttons */
+        #tool-advance-epoch-converter input[type="radio"] {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            width: 20px !important;
+            height: 20px !important;
+            border: 2px solid var(--md-sys-color-outline) !important;
+            border-radius: 50% !important;
+            outline: none !important;
+            margin: 0 !important;
+            display: inline-grid !important;
+            place-content: center !important;
+            cursor: pointer !important;
+            background-color: transparent !important;
+            transition: border-color 0.2s, background-color 0.2s !important;
+        }
+        #tool-advance-epoch-converter input[type="radio"]::before {
+            content: "" !important;
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            transform: scale(0) !important;
+            transition: 120ms transform ease-in-out !important;
+            background-color: var(--md-sys-color-primary) !important;
+        }
+        #tool-advance-epoch-converter input[type="radio"]:checked {
+            border-color: var(--md-sys-color-primary) !important;
+        }
+        #tool-advance-epoch-converter input[type="radio"]:checked::before {
+            transform: scale(1) !important;
+        }
+        #tool-advance-epoch-converter .radio-label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            color: var(--md-sys-color-on-surface) !important;
+            font-weight: 500 !important;
+        }
+
+        /* Result Item */
+        #tool-advance-epoch-converter .result-value-container {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+        }
+        #tool-advance-epoch-converter .result-value {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-advance-epoch-converter .result-label {
+            color: var(--md-sys-color-primary) !important;
+        }
+
+        /* Developer Zone */
+        #tool-advance-epoch-converter .code-snippet {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-advance-epoch-converter .lang-tag {
+            background-color: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+        }
+        #tool-advance-epoch-converter .copy-btn {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-advance-epoch-converter .copy-btn:hover {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-primary) !important;
+        }
+        #tool-advance-epoch-converter .apps-list li {
+            border-left: 3px solid var(--md-sys-color-primary) !important;
+        }
+        #tool-advance-epoch-converter .steps-list strong {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-advance-epoch-converter footer {
+            display: none !important;
+        }
+

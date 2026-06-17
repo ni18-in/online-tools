@@ -461,6 +461,201 @@
 #tool-happy-new-year .opt-golden {
     background: radial-gradient(circle, #f1c40f, #2c2c2c);
 }
+    z-index: 10;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tool-happy-new-year footer {
+    position: relative;
+    z-index: 10;
+    margin-top: auto;
+    padding: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#tool-happy-new-year .animate-pop {
+    animation: pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    #tool-happy-new-year h1 {
+        font-size: 2rem;
+    }
+
+    #tool-happy-new-year .glass-card {
+        padding: 20px;
+    }
+}
+
+/* Theme: Golden Glitz */
+#tool-happy-new-year .theme-golden {
+    --primary-color: #d4af37;
+    --secondary-color: #f1c40f;
+    --accent-color: #ffffff;
+    --bg-gradient: radial-gradient(circle, #2c2c2c, #000000);
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-border: rgba(212, 175, 55, 0.3);
+    --text-color: #fceea7;
+}
+
+#tool-happy-new-year .theme-golden h1 {
+    background: linear-gradient(to right, #d4af37, #f1c40f, #fff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+#tool-happy-new-year .theme-golden .highlight-name {
+    color: #fff;
+    text-shadow: 0 0 10px #d4af37;
+}
+
+/* Theme: Neon Cyberpunk */
+#tool-happy-new-year .theme-neon {
+    --primary-color: #ff00ff;
+    --secondary-color: #00ffff;
+    --accent-color: #00ff00;
+    --bg-gradient: linear-gradient(45deg, #050510, #200020, #001020);
+    --glass-bg: rgba(0, 0, 0, 0.7);
+    --glass-border: rgba(255, 0, 255, 0.4);
+    --text-color: #ffffff;
+}
+
+#tool-happy-new-year .theme-neon h1 {
+    text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+    background: white;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+}
+
+#tool-happy-new-year .theme-neon .glass-card {
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--primary-color);
+}
+
+/* Theme: Winter Snow */
+#tool-happy-new-year .theme-snow {
+    --primary-color: #0093E9;
+    --secondary-color: #80D0C7;
+    --accent-color: #002c50;
+    --bg-gradient: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-color: #00334e;
+}
+
+#tool-happy-new-year .theme-snow h1 {
+    background: linear-gradient(to right, #005c97, #363795);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+#tool-happy-new-year .theme-snow label {
+    color: #00334e;
+}
+
+#tool-happy-new-year .theme-snow .glass-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+#tool-happy-new-year .theme-snow input,
+#tool-happy-new-year .theme-snow textarea {
+    background: rgba(255, 255, 255, 0.6);
+    color: #00334e;
+    border-color: #fff;
+}
+
+#tool-happy-new-year .theme-snow input::placeholder,
+#tool-happy-new-year .theme-snow textarea::placeholder {
+    color: rgba(0, 51, 78, 0.6);
+}
+
+/* Template Selector UI */
+#tool-happy-new-year .theme-selector {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+#tool-happy-new-year .theme-option {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#tool-happy-new-year .theme-option:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+#tool-happy-new-year .theme-option.selected {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    transform: scale(1.15);
+}
+
+#tool-happy-new-year .theme-option.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Preview Dots for Selection */
+#tool-happy-new-year .opt-default {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+}
+
+#tool-happy-new-year .opt-golden {
+    background: radial-gradient(circle, #f1c40f, #2c2c2c);
+}
 
 #tool-happy-new-year .opt-neon {
     background: linear-gradient(45deg, #ff00ff, #00ffff);
@@ -468,4 +663,59 @@
 
 #tool-happy-new-year .opt-snow {
     background: linear-gradient(160deg, #0093E9, #80D0C7);
+}
+
+/* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+#tool-happy-new-year input,
+#tool-happy-new-year textarea {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    padding: 14px 16px !important;
+    outline: none !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+#tool-happy-new-year input:focus,
+#tool-happy-new-year textarea:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--secondary-color, #08d9d6) !important;
+    box-shadow: 0 0 0 3px rgba(8, 217, 214, 0.3) !important;
+}
+
+#tool-happy-new-year .btn {
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    padding: 14px 28px !important;
+    box-shadow: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.2s ease !important;
+}
+
+#tool-happy-new-year .btn:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+#tool-happy-new-year .glass-card {
+    border-radius: 28px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+#tool-happy-new-year .theme-snow input,
+#tool-happy-new-year .theme-snow textarea {
+    color: #00334e !important;
+    border-color: rgba(0, 51, 78, 0.2) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+#tool-happy-new-year .theme-snow input:focus,
+#tool-happy-new-year .theme-snow textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(0, 147, 233, 0.25) !important;
 }

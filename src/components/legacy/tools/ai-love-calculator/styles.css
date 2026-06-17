@@ -27,3 +27,127 @@
         #tool-ai-love-calculator .progress-bar-animated {
             animation: progress-bar 1.5s ease-out forwards;
         }
+
+        /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
+        #tool-ai-love-calculator {
+            background: transparent !important;
+        }
+
+        #tool-ai-love-calculator main {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 28px !important;
+            box-shadow: none !important;
+        }
+
+        :global([data-theme="dark"]) #tool-ai-love-calculator main {
+            background-color: var(--md-sys-color-surface-container-low) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-ai-love-calculator .bg-rose-50 {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            box-shadow: none !important;
+        }
+        #tool-ai-love-calculator .bg-teal-50 {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-ai-love-calculator h1 {
+            color: var(--md-sys-color-primary) !important;
+        }
+        #tool-ai-love-calculator h2 {
+            color: var(--md-sys-color-secondary) !important;
+        }
+        #tool-ai-love-calculator h3 {
+            color: var(--md-sys-color-on-surface) !important;
+        }
+        #tool-ai-love-calculator p {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-ai-love-calculator label {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+
+        #tool-ai-love-calculator input[type="text"],
+        #tool-ai-love-calculator input[type="number"] {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 8px !important;
+            padding: 8px 12px !important;
+            outline: none !important;
+            width: 100% !important;
+        }
+        #tool-ai-love-calculator input[type="text"]:focus,
+        #tool-ai-love-calculator input[type="number"]:focus {
+            border-color: var(--md-sys-color-primary) !important;
+            box-shadow: 0 0 0 2px var(--md-sys-color-primary-container) !important;
+        }
+
+        #tool-ai-love-calculator #calculate-btn {
+            background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary)) !important;
+            color: var(--md-sys-color-on-primary) !important;
+            border-radius: 999px !important;
+            box-shadow: none !important;
+            border: none !important;
+            transition: transform 0.2s !important;
+            height: auto !important;
+        }
+        #tool-ai-love-calculator #calculate-btn:hover {
+            transform: scale(1.02) !important;
+            box-shadow: none !important;
+        }
+
+        #tool-ai-love-calculator #share-btn {
+            background-color: var(--md-sys-color-secondary-container) !important;
+            color: var(--md-sys-color-on-secondary-container) !important;
+            border-radius: 999px !important;
+            border: none !important;
+            padding: 8px 24px !important;
+            height: auto !important;
+        }
+        #tool-ai-love-calculator #share-btn:hover {
+            background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
+        }
+
+        #tool-ai-love-calculator #result-section .bg-white {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+        }
+        #tool-ai-love-calculator .w-full.bg-gray-200 {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+        }
+        #tool-ai-love-calculator #progress-bar {
+            background: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-error)) !important;
+        }
+
+        #tool-ai-love-calculator section.bg-rose-50 {
+            background-color: var(--md-sys-color-surface-container-lowest) !important;
+            color: var(--md-sys-color-on-surface) !important;
+            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-radius: 16px !important;
+        }
+        #tool-ai-love-calculator section.bg-rose-50 h4 {
+            color: var(--md-sys-color-primary) !important;
+        }
+        #tool-ai-love-calculator section.bg-rose-50 p,
+        #tool-ai-love-calculator section.bg-rose-50 li {
+            color: var(--md-sys-color-on-surface-variant) !important;
+        }
+        #tool-ai-love-calculator code {
+            background-color: var(--md-sys-color-surface-container-high) !important;
+            color: var(--md-sys-color-on-surface) !important;
+        }
+

@@ -128,22 +128,23 @@
         }
 
         #tool-screen-recorder-pro header {
-            background-color: var(--surface-light); 
+            background-color: transparent; 
             color: var(--on-surface-color);
-            padding: 0.75rem 1rem; 
-            box-shadow: 0 1px 2px 0 rgba(var(--shadow-color), 0.1), 0 1px 3px 0 rgba(var(--shadow-color), 0.08); 
+            padding: 0.5rem 0; 
+            box-shadow: none; 
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 64px;
-            z-index: 40;
-            border-bottom: 1px solid var(--outline-variant-color);
+            position: static;
+            z-index: 10;
+            border-bottom: none;
+            margin-bottom: 1.5rem;
+            width: 100%;
         }
         .dark-mode #tool-screen-recorder-pro header {
-            background-color: var(--surface-dark);
+            background-color: transparent;
             color: var(--on-surface-color); /* Ensures header text adapts */
-            border-bottom: 1px solid var(--outline-variant-color);
+            border-bottom: none;
         }
 
         #tool-screen-recorder-pro .site-title { /* Changed from .logo-title for h1 */
@@ -160,17 +161,24 @@
             font-size: 1.75rem; 
         }
 
+        #tool-screen-recorder-pro nav {
+            width: 100%;
+        }
+
         #tool-screen-recorder-pro nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
         }
 
         #tool-screen-recorder-pro nav ul li a {
             color: var(--on-surface-variant-color); /* Default link color */
             text-decoration: none;
-            padding: 0.625rem 1rem; 
+            padding: 0.625rem 1.25rem; 
             display: block;
             border-radius: var(--border-radius-full);
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -719,44 +727,40 @@
             #tool-screen-recorder-pro .site-title .material-icons { font-size: 1.5rem; }
             
             #tool-screen-recorder-pro nav ul {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: calc(100% + 1px); 
-                left: 0;
-                width: 100%;
-                background-color: var(--surface-light); 
-                box-shadow: 0 4px 8px rgba(var(--shadow-color), 0.1);
-                border-top: 1px solid var(--outline-variant-color);
+                display: flex !important; 
+                flex-direction: row !important;
+                position: static !important;
+                width: auto !important;
+                background-color: transparent !important; 
+                box-shadow: none !important;
+                border-top: none !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 6px !important;
             }
             .dark-mode #tool-screen-recorder-pro nav ul {
-                background-color: var(--surface-dark);
-                border-top: 1px solid var(--outline-variant-color);
-            }
-            #tool-screen-recorder-pro nav ul.open {
-                display: flex; 
+                background-color: transparent !important;
+                border-top: none !important;
             }
             #tool-screen-recorder-pro nav ul li a {
-                padding: 1rem; 
-                border-bottom: 1px solid var(--outline-variant-color);
-                border-radius: 0; 
-                color: var(--on-surface-color); /* Mobile nav links color */
+                padding: 0.5rem 0.75rem !important; 
+                border-bottom: none !important;
+                border-radius: var(--border-radius-full) !important; 
+                color: var(--on-surface-variant-color) !important; /* Mobile nav links color */
             }
-            /* body.dark-mode nav ul li a color handled by var */
             #tool-screen-recorder-pro nav ul li a.active, #tool-screen-recorder-pro nav ul li a[aria-current="page"] {
-                background-color: var(--primary-container-color);
-                color: var(--on-primary-container-color);
+                background-color: var(--primary-container-color) !important;
+                color: var(--on-primary-container-color) !important;
             }
-            /* body.dark-mode nav ul li a.active handled by vars */
 
             #tool-screen-recorder-pro .menu-toggle {
-                display: block; 
+                display: none !important; 
             }
             #tool-screen-recorder-pro .theme-toggle-btn {
-                margin-left: auto; 
+                display: none !important;
             }
             #tool-screen-recorder-pro header {
-                padding: 0.5rem 1rem; 
+                padding: 0.5rem 0; 
             }
             #tool-screen-recorder-pro main {
                 padding: 1rem;
