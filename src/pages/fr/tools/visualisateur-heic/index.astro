@@ -1,0 +1,45 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../../data/tools';
+import { SITE_URL } from '../../../../data/site';
+import body from '../../../../components/legacy/fr/tool-visualisateur-heic/body.html?raw';
+import css from '../../../../components/legacy/fr/tool-visualisateur-heic/styles.css?raw';
+import js from '../../../../components/legacy/fr/tool-visualisateur-heic/script.js?raw';
+
+const tool = getTool('heic-viewer')!;
+const seo = toolSeo(tool, {
+  title: 'Visualisateur HEIC en Ligne | Ouvrir & Voir des Photos iPhone sur Windows',
+  description:
+    'Visualiseur de fichiers HEIC gratuit en ligne. Ouvrez et visualisez les photos HEIC de votre iPhone directement dans votre navigateur sous Windows. 100% privé, local et hors ligne.',
+  keywords:
+    'visualisateur heic en ligne, ouvrir fichiers heic windows, voir photo iphone pc gratuit, lecteur heic hors ligne, convertir heic en jpg, verifier proprietes heic',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Visualisateur HEIC en Ligne',
+    description: 'Ouvrez et visualisez les photos HEIC de votre iPhone dans votre navigateur.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/fr/tools/visualisateur-heic/`,
+  },
+});
+seo.canonical = `${SITE_URL}/fr/tools/visualisateur-heic/`;
+if (seo.og) {
+  seo.og.url = seo.canonical;
+  seo.og.locale = 'fr_FR';
+}
+if (seo.twitter) {
+  seo.twitter.url = seo.canonical;
+}
+const headRaw = [
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="fr" headRaw={headRaw}>
+  <div class="tool-island" id="tool-heic-viewer" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

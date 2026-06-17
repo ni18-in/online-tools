@@ -1,0 +1,132 @@
+<div class="heic-viewer-container">
+    <header class="tool-header">
+        <h1>Visor HEIC Online</h1>
+        <p class="tagline">Abre y Visualiza Fotos HEIC de iPhone en Windows – Gratis, Privado y Sin Conexión</p>
+    </header>
+
+    <main class="viewer-main">
+        <!-- Área del Visor y Lienzo -->
+        <div class="viewport-card">
+            <div id="drop-zone" class="drop-zone">
+                <div class="drop-content">
+                    <span class="drop-icon">🖼️</span>
+                    <p class="drop-text">Arrastra y suelta un archivo HEIC aquí</p>
+                    <p class="drop-subtext">o haz clic para buscar en tu equipo</p>
+                    <input type="file" id="file-input" class="file-input" accept=".heic,.HEIC,.heif,.HEIF">
+                </div>
+            </div>
+
+            <div id="viewer-stage" class="viewer-stage hidden">
+                <div id="canvas-container" class="canvas-container">
+                    <canvas id="image-canvas"></canvas>
+                </div>
+                <!-- Controles del Visor -->
+                <div class="viewport-controls">
+                    <button id="zoom-out-btn" class="control-btn" title="Alejar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                    <button id="zoom-in-btn" class="control-btn" title="Acercar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                    <button id="rotate-left-btn" class="control-btn" title="Rotar a la Izquierda">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                    </button>
+                    <button id="rotate-right-btn" class="control-btn" title="Rotar a la Derecha">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 2v6h6M2.66 15.57a10 10 0 1 0 .57-8.38l-5.67-5.67"></path></svg>
+                    </button>
+                    <button id="fit-btn" class="control-btn" title="Ajustar a la Pantalla">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 4 20 10 20"></polyline><polyline points="20 10 20 4 14 4"></polyline><line x1="14" y1="10" x2="20" y2="4"></line><line x1="10" y1="14" x2="4" y2="20"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="loading-spinner" class="loading-spinner hidden">
+                <div class="spinner"></div>
+                <p>Abriendo foto HEIC localmente...</p>
+            </div>
+        </div>
+
+        <!-- Panel Lateral / Detalles -->
+        <div class="sidebar-card">
+            <div class="sidebar-section">
+                <h2>Acciones</h2>
+                <div class="action-buttons">
+                    <button id="open-new-btn" class="btn btn-secondary">Abrir Nueva Foto</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Información de la Imagen</h2>
+                <div id="meta-placeholder" class="meta-placeholder">
+                    Ninguna imagen cargada. Suelta un archivo para ver detalles.
+                </div>
+                <ul id="meta-list" class="meta-list hidden">
+                    <li><strong>Nombre:</strong> <span id="meta-name">-</span></li>
+                    <li><strong>Tamaño:</strong> <span id="meta-size">-</span></li>
+                    <li><strong>Dimensiones:</strong> <span id="meta-dims">-</span></li>
+                    <li><strong>Aspecto:</strong> <span id="meta-ratio">-</span></li>
+                    <li><strong>Formato:</strong> <span id="meta-format">-</span></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Guardar / Convertir</h2>
+                <div class="save-controls">
+                    <div class="input-group">
+                        <label for="save-format">Formato de Exportación:</label>
+                        <select id="save-format" class="select-input">
+                            <option value="image/jpeg">JPEG (.jpg)</option>
+                            <option value="image/png">PNG (.png)</option>
+                        </select>
+                    </div>
+                    <div id="quality-container" class="input-group">
+                        <label for="save-quality">Calidad: <span id="quality-val">90%</span></label>
+                        <input type="range" id="save-quality" min="10" max="100" value="90" class="range-input">
+                    </div>
+                    <button id="save-btn" class="btn btn-primary" disabled>Guardar Imagen</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sección Informativa -->
+    <section class="faq-section">
+        <article class="faq-card">
+            <h2>Cómo abrir archivos HEIC en Windows de forma nativa</h2>
+            <p>Desde que Apple adoptó el formato HEIC en iOS 11, los usuarios de Windows han tenido problemas para abrir estas fotos. Aquí te explicamos cómo verlas de forma nativa en tu PC:</p>
+            <ol>
+                <li><strong>Instala las Extensiones de Imagen HEIF:</strong> Abre la Microsoft Store en Windows 10 u 11, busca <strong>Extensiones de imagen HEIF</strong> (publicada por Microsoft) e instálala. Es gratuita y habilita al visor nativo Fotos para abrir archivos HEIC.</li>
+                <li><strong>Instala las Extensiones de Vídeo HEVC:</strong> En algunos casos, la decodificación HEIC requiere el códec HEVC. Microsoft vende esta extensión por $0.99 en su tienda, o bien puedes usar nuestra herramienta web gratuita para verlas al instante y sin pagar nada.</li>
+                <li><strong>Convierte a JPG:</strong> Si necesitas enviar las fotos a personas que no usan Windows 10/11, la opción más segura es convertirlas a JPEG.</li>
+            </ol>
+        </article>
+
+        <article class="faq-card">
+            <h2>¿Por qué usar nuestro visor HEIC en la web?</h2>
+            <ul>
+                <li><strong>100% Seguro y Privado:</strong> La decodificación se ejecuta totalmente en tu navegador (del lado del cliente) a través de JavaScript. Tus fotos nunca se envían a internet.</li>
+                <li><strong>Zoom, Desplazamiento y Rotación:</strong> Gira fotos verticales que aparezcan de lado o haz zoom para revisar los detalles fácilmente.</li>
+                <li><strong>Funciona Sin Conexión:</strong> Una vez cargada, la herramienta funciona sin internet. Útil en aviones, viajes o zonas sin cobertura.</li>
+                <li><strong>Guardar y Convertir:</strong> Convierte y descarga cualquier foto HEIC a JPEG o PNG con parámetros de calidad personalizados.</li>
+            </ul>
+        </article>
+
+        <article class="faq-card full-width">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>¿Qué es un archivo HEIC?</h3>
+                    <p>HEIC (High Efficiency Image Container) es la versión de Apple del formato HEIF. Utiliza algoritmos avanzados de compresión para guardar imágenes a la mitad del tamaño de un JPG manteniendo una calidad superior.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Por qué mi PC con Windows no puede abrir HEIC?</h3>
+                    <p>Windows no incluye las licencias y códecs de HEIC/HEVC por defecto. Sin las extensiones instaladas desde la Microsoft Store, el sistema no puede descifrar y mostrar el contenido de la imagen.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Hay un límite de tamaño?</h3>
+                    <p>¡No hay límites! Sin embargo, como el procesamiento se hace en la memoria RAM de tu computadora, fotos sumamente grandes (ej. panorámicas de más de 50MB) pueden tardar unos segundos en cargar.</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

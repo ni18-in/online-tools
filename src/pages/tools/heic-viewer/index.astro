@@ -1,0 +1,37 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import body from '../../../components/legacy/tools/heic-viewer/body.html?raw';
+import css from '../../../components/legacy/tools/heic-viewer/styles.css?raw';
+import js from '../../../components/legacy/tools/heic-viewer/script.js?raw';
+
+const tool = getTool('heic-viewer')!;
+const seo = toolSeo(tool, {
+  title: 'HEIC Viewer Online | Open & View iPhone Photos on Windows Free',
+  description:
+    'Free online HEIC viewer. Open, view, and inspect Apple iPhone HEIC/HEIF photos directly in your browser on Windows. 100% private, local and offline.',
+  keywords:
+    'heic viewer online, open heic files on windows, view iphone photo pc, free offline heic reader, heic to jpg, heic properties checker',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'HEIC Viewer Online',
+    description: 'Open, view, and inspect iPhone HEIC/HEIF photos in your browser.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/tools/heic-viewer/`,
+  },
+});
+const headRaw = [
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+  <div class="tool-island" id="tool-heic-viewer" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>

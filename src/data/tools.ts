@@ -214,6 +214,16 @@ export const tools: Tool[] = [
     applicationCategory: 'MultimediaApplication',
     i18n: { es: 'iphone-photo-fixer', fr: 'iphone-photo-fixer' },
   },
+  {
+    slug: 'heic-viewer',
+    name: 'HEIC Viewer Online',
+    description: 'Free online HEIC viewer. Open, view, and inspect iPhone HEIC photos directly in your browser. 100% private, runs offline, supports zoom & rotate.',
+    category: 'media',
+    schemaType: 'WebApplication',
+    applicationCategory: 'MultimediaApplication',
+    rating: { value: 4.8, count: 12 },
+    i18n: { es: 'visor-heic', fr: 'visualisateur-heic' },
+  },
   // ---- tools not on the homepage grid, but with their own pages + sitemap entries ----
   {
     slug: 'grade-calculator',
@@ -286,6 +296,7 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'markdown-to-word',
   'subtitle-resync-tool',
   'iphone-photo-fixer',
+  'heic-viewer',
 ];
 
 // Order of tools shown in the homepage CollectionPage > ItemList JSON-LD (the curated 10).
@@ -649,6 +660,16 @@ export const TOOL_TRANSLATIONS: Record<
     fr: {
       name: 'Débogueur et Inspecteur JWT',
       description: 'Outil en ligne simple pour décoder, inspecter et vérifier des JSON Web Tokens (JWT) côté client. Affichez les en-têtes, la charge utile et vérifiez les signatures.'
+    }
+  },
+  'heic-viewer': {
+    es: {
+      name: 'Visor HEIC Online',
+      description: 'Visor de archivos HEIC gratis en línea. Abre y visualiza fotos HEIC de iPhone directamente en tu navegador en Windows, Android o Linux. 100% privado y sin subir archivos.'
+    },
+    fr: {
+      name: 'Visualisateur HEIC en Ligne',
+      description: 'Visualiseur de fichiers HEIC gratuit en ligne. Ouvrez et visualisez les photos HEIC de votre iPhone directement dans votre navigateur sous Windows, Android ou Linux. 100% privé et sans téléversement.'
     }
   }
 };
