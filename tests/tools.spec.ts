@@ -69,3 +69,14 @@ test('jwt-debugger decodes sample token on button click', async ({ page }) => {
   await expect(page.locator('#payloadOutput')).toContainText('John Doe');
 });
 
+test('smart language switcher has correct alternates', async ({ page }) => {
+  await page.goto('/tools/px-to-rem-converter/');
+  const select = page.locator('.lang-select');
+  await expect(select).toBeVisible();
+  const optionEs = select.locator('option[value*="/es/tools/px-a-rem-convertidor/"]');
+  await expect(optionEs).toHaveCount(1);
+  const optionFr = select.locator('option[value*="/fr/tools/px-to-rem-converter/"]');
+  await expect(optionFr).toHaveCount(1);
+});
+
+

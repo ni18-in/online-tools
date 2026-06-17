@@ -1,28 +1,164 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageLayout from '../../../layouts/PageLayout.astro';
+import ToolCard from '../../../components/ToolCard.astro';
 import type { Props as SeoProps } from '../../../components/Seo.astro';
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
-import body from '../../../components/legacy/fr/tools/body.html?raw';
-import css from '../../../components/legacy/fr/tools/styles.css?raw';
-import '../../../styles/tw-preflight-scoped.css';
+import { tools, toolUrl, TOOL_TRANSLATIONS, type ToolCategory } from '../../../data/tools';
+
+const CATEGORY_ORDER: ToolCategory[] = ['developer', 'text', 'media', 'calculator', 'fun'];
+
+const CATEGORY_LABELS_FR: Record<ToolCategory, string> = {
+  developer: 'Développement',
+  text: 'Texte et Contenu',
+  media: 'Images et Médias',
+  calculator: 'Calculatrices',
+  fun: 'Jeux et Divertissement',
+};
+
+// Filter to only include tools that have a French translation (t.i18n.fr)
+const frTools = tools.filter((t) => t.i18n?.fr);
+
+const grouped = CATEGORY_ORDER.map((cat) => ({
+  cat,
+  label: CATEGORY_LABELS_FR[cat],
+  items: frTools.filter((t) => t.category === cat),
+})).filter((g) => g.items.length > 0);
 
 const seo: SeoProps = {
-  title: 'Outils pour Développeurs: Ressources Gratuites',
+  title: 'Tous les Outils | NI18 Outils en Ligne',
   description: 'Explorez le catalogue complet d’outils web gratuits de NI18 : convertisseurs, utilitaires de texte et outils pour développeurs.',
-  keywords: 'outils en ligne, utilitaires web, convertisseurs, calculatrices',
   canonical: `${SITE_URL}/fr/tools/`,
+  keywords: 'outils en ligne, utilitaires web, convertisseurs, calculatrices, developpement',
   hreflang: [
     { hreflang: 'en', href: `${SITE_URL}/tools/` },
     { hreflang: 'es', href: `${SITE_URL}/es/tools/` },
     { hreflang: 'fr', href: `${SITE_URL}/fr/tools/` },
     { hreflang: 'x-default', href: `${SITE_URL}/tools/` },
   ],
-  og: { type: 'website', url: `${SITE_URL}/fr/tools/`, title: 'Outils – NI18', description: 'Catalogue d’outils web gratuits.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
-  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/tools/`, title: 'Outils – NI18', description: 'Catalogue d’outils web gratuits.', image: DEFAULT_OG_IMAGE },
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/fr/tools/`,
+    title: 'Tous les Outils – NI18',
+    description: 'Catalogue d’outils web gratuits dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE,
+    siteName: SITE_NAME,
+    locale: 'fr_FR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/fr/tools/`,
+    title: 'Tous les Outils – NI18',
+    description: 'Catalogue d’outils web gratuits dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE,
+  },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Répertoire des Outils en Ligne',
+      description: 'Un répertoire complet d’outils et d’utilitaires web gratuits s’exécutant côté client dans le navigateur.',
+      url: `${SITE_URL}/fr/tools/`,
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: frTools.map((t, i) => {
+          const frSlug = t.i18n?.fr || t.slug;
+          const trans = TOOL_TRANSLATIONS[t.slug]?.fr;
+          return {
+            '@type': t.schemaType,
+            position: i + 1,
+            name: trans?.name || t.name,
+            url: `${SITE_URL}/fr/tools/${frSlug}/`,
+          };
+        }),
+      },
+    },
+  ],
 };
+let cardIndex = 0;
 ---
-<BaseLayout seo={seo} lang="fr" current="tools" altLinks={{ en: `${SITE_URL}/tools/`, es: `${SITE_URL}/es/tools/` }}>
-  <div class="page-island legacy-tw" set:html={body} />
-</BaseLayout>
-<style is:global set:html={css}></style>
-<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>
+<PageLayout seo={seo} lang="fr" current="tools" adsEnabled={true}>
+  <header class="listing-head">
+    <h1>Tous les Outils</h1>
+    <p>Chaque outil est gratuit, s'exécute entièrement dans votre navigateur et ne téléverse jamais vos données.</p>
+  </header>
+
+  <section aria-label="Rechercher" class="search">
+    <label for="tool-search-input" class="sr-only">Rechercher des outils</label>
+    <input type="search" id="tool-search-input" placeholder="Rechercher des outils par nom ou description..." autocomplete="off" />
+  </section>
+  <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">
+    Aucun outil trouvé correspondant à votre recherche.
+  </p>
+
+  {grouped.map((g) => (
+    <section class="cat" aria-labelledby={`cat-${g.cat}`}>
+      <h2 id={`cat-${g.cat}`} class="cat-title">{g.label}</h2>
+      <div class="tool-grid">
+        {g.items.map((t) => {
+          cardIndex++;
+          const frSlug = t.i18n?.fr || t.slug;
+          const trans = TOOL_TRANSLATIONS[t.slug]?.fr;
+          return (
+            <ToolCard
+              href={`/fr/tools/${frSlug}/`}
+              name={trans?.name || t.name}
+              description={trans?.description || t.description}
+              headingId={`tool-heading-${cardIndex}`}
+              cta="Lancer"
+            />
+          );
+        })}
+      </div>
+    </section>
+  ))}
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById('tool-search-input');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
+      var noResults = document.getElementById('no-results-message');
+      if (!input || !cards.length) return;
+      input.addEventListener('input', function () {
+        var q = input.value.toLowerCase().trim();
+        var found = 0;
+        cards.forEach(function (card) {
+          var a = card.querySelector('h3 a');
+          var p = card.querySelector('p');
+          var title = ((a && a.textContent) || '').toLowerCase();
+          var desc = ((p && p.textContent) || '').toLowerCase();
+          var visible = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+          card.style.display = visible ? '' : 'none';
+          if (visible) found++;
+        });
+        document.querySelectorAll('.cat').forEach(function (sec) {
+          var any = Array.prototype.slice.call(sec.querySelectorAll('.tool-card')).some(function (c) { return c.style.display !== 'none'; });
+          sec.style.display = any ? '' : 'none';
+        });
+        if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
+      });
+    })();
+  </script>
+</PageLayout>
+
+<style>
+  .listing-head { text-align: center; padding: 16px 0 8px; }
+  .listing-head h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .listing-head p { margin: 0 auto; max-width: 38rem; color: var(--md-sys-color-on-surface-variant); }
+  .search { max-width: 42rem; margin: 24px auto 8px; }
+  #tool-search-input {
+    width: 100%; padding: 14px 20px; font-size: 1rem;
+    border: 1px solid var(--md-sys-color-outline); border-radius: 999px;
+    background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);
+  }
+  #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
+  .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 24px 0; }
+  .cat { margin: 32px 0; }
+  .cat-title {
+    font-size: 1.375rem; margin: 0 0 16px; padding-bottom: 8px;
+    color: var(--md-sys-color-on-surface);
+    border-bottom: 2px solid var(--md-sys-color-primary-container);
+  }
+  .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

@@ -6,7 +6,7 @@ import { SITE_URL } from '../data/site';
 import { sitemapTools, toolUrl, toolHreflang } from '../data/tools';
 import { indexedPosts, blogUrl } from '../data/blogs';
 
-const LASTMOD = '2026-05-30';
+const LASTMOD = new Date().toISOString().split('T')[0];
 const U = (p: string) => `${SITE_URL}${p}`;
 
 interface Alt { hreflang: string; href: string }

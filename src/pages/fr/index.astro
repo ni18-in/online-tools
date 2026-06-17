@@ -1,29 +1,170 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
 import type { Props as SeoProps } from '../../components/Seo.astro';
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
-import body from '../../components/legacy/fr/home/body.html?raw';
-import css from '../../components/legacy/fr/home/styles.css?raw';
-import '../../styles/tw-preflight-scoped.css';
+import { homepageGrid, homepageItemListOrder, getTool, homepageItemListItem, TOOL_TRANSLATIONS } from '../../data/tools';
+
+const collectionItems = homepageItemListOrder.map((slug, i) => {
+  const t = getTool(slug)!;
+  const item = homepageItemListItem(t);
+  // Localize ItemList schema for SEO
+  if (t.i18n?.fr) {
+    item.url = `${SITE_URL}/fr/tools/${t.i18n.fr}/`;
+    if (TOOL_TRANSLATIONS[t.slug]?.fr) {
+      item.name = TOOL_TRANSLATIONS[t.slug].fr.name;
+      item.description = TOOL_TRANSLATIONS[t.slug].fr.description;
+    }
+  }
+  return {
+    '@type': 'ListItem',
+    position: i + 1,
+    item,
+  };
+});
 
 const seo: SeoProps = {
-  title: 'NI18 : Outils Web Gratuits pour Développeurs',
-  description: 'Outils web gratuits : calculatrices, convertisseurs et utilitaires pour développeurs, directement dans votre navigateur.',
-  keywords: 'outils en ligne, utilitaires web gratuits, convertisseurs, calculatrices',
+  title: 'NI18 | Outils Web Gratuits et Convertisseurs en Ligne',
+  description: 'Votre plateforme d’outils en ligne gratuits. Accédez à des calculatrices, utilitaires de texte, convertisseurs et plus encore, directement dans votre navigateur.',
   canonical: `${SITE_URL}/fr/`,
+  keywords: 'outils en ligne, utilitaires web gratuits, convertisseurs, calculatrices, developpement',
   hreflang: [
     { hreflang: 'en', href: `${SITE_URL}/` },
     { hreflang: 'es', href: `${SITE_URL}/es/` },
     { hreflang: 'fr', href: `${SITE_URL}/fr/` },
     { hreflang: 'x-default', href: `${SITE_URL}/` },
   ],
-  og: { type: 'website', url: `${SITE_URL}/fr/`, title: 'NI18 Outils en Ligne', description: 'Outils web gratuits dans votre navigateur.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'fr_FR' },
-  twitter: { card: 'summary_large_image', url: `${SITE_URL}/fr/`, title: 'NI18 Outils en Ligne', description: 'Outils web gratuits dans votre navigateur.', image: DEFAULT_OG_IMAGE },
-  jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'NI18 Outils en Ligne', url: `${SITE_URL}/fr/`, inLanguage: 'fr' }],
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/fr/`,
+    title: 'NI18 | Outils Web Gratuits et Convertisseurs',
+    description: 'Une collection d’outils web gratuits et pratiques directement dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE,
+    siteName: SITE_NAME,
+    locale: 'fr_FR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/fr/`,
+    title: 'NI18 | Outils Web Gratuits et Convertisseurs',
+    description: 'Une collection d’outils web gratuits et pratiques directement dans votre navigateur.',
+    image: DEFAULT_OG_IMAGE,
+  },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'NI18 Outils en Ligne',
+      url: `${SITE_URL}/fr/`,
+      inLanguage: 'fr',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Outils en Ligne - Convertisseurs et Calculatrices Gratuits',
+      description: 'Une sélection d’outils web utiles et gratuits fonctionnant 100% côté client.',
+      url: `${SITE_URL}/fr/`,
+      mainEntity: { '@type': 'ItemList', itemListElement: collectionItems },
+    },
+  ],
 };
+
+// Resolve cards, localizing name and description
+const cards = homepageGrid.map((entry) => {
+  if (typeof entry === 'string') {
+    const t = getTool(entry)!;
+    const frSlug = t.i18n?.fr || t.slug;
+    const trans = TOOL_TRANSLATIONS[t.slug]?.fr;
+    return {
+      href: `/fr/tools/${frSlug}/`,
+      name: trans?.name || t.name,
+      description: trans?.description || t.description,
+      external: false,
+    };
+  }
+  return {
+    href: entry.external,
+    name: entry.name,
+    description: entry.description,
+    external: true,
+  };
+});
 ---
-<BaseLayout seo={seo} lang="fr" current="home" altLinks={{ en: `${SITE_URL}/`, es: `${SITE_URL}/es/` }}>
-  <div class="page-island legacy-tw" set:html={body} />
-</BaseLayout>
-<style is:global set:html={css}></style>
-<style>:global(.page-island.legacy-tw){background:#f8fafc;color:#0f172a;}</style>
+<PageLayout seo={seo} lang="fr" current="home" adsEnabled={true}>
+  <section class="hero">
+    <h1>Outils Web Gratuits</h1>
+    <p>Calculatrices, convertisseurs et utilitaires pour développeurs — rapides, privés et directement dans votre navigateur.</p>
+  </section>
+
+  <section aria-labelledby="search-heading" class="search">
+    <h2 id="search-heading" class="sr-only">Rechercher des Outils</h2>
+    <form role="search" id="tool-search-form" onsubmit="return false;">
+      <label for="tool-search-input" class="sr-only">Rechercher des outils</label>
+      <input type="search" id="tool-search-input" name="q" placeholder="Rechercher des outils par nom ou description..." autocomplete="off" />
+    </form>
+  </section>
+
+  <section aria-labelledby="tool-list-heading">
+    <h2 id="tool-list-heading" class="section-title">Outils Disponibles</h2>
+    <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">
+      Aucun outil trouvé correspondant à votre recherche.
+    </p>
+    <div class="tool-grid">
+      {cards.map((c, i) => (
+        <ToolCard
+          href={c.href}
+          name={c.name}
+          description={c.description}
+          headingId={`tool-heading-${i + 1}`}
+          external={c.external}
+          cta="Lancer"
+        />
+      ))}
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById('tool-search-input');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
+      var noResults = document.getElementById('no-results-message');
+      if (!input || !cards.length) return;
+      input.addEventListener('input', function () {
+        var q = input.value.toLowerCase().trim();
+        var found = 0;
+        cards.forEach(function (card) {
+          var a = card.querySelector('h3 a');
+          var p = card.querySelector('p');
+          var title = ((a && a.textContent) || '').toLowerCase();
+          var desc = ((p && p.textContent) || '').toLowerCase();
+          var visible = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+          card.style.display = visible ? '' : 'none';
+          if (visible) found++;
+        });
+        if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
+      });
+    })();
+  </script>
+</PageLayout>
+
+<style>
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .hero p { margin: 0 auto; max-width: 38rem; color: var(--md-sys-color-on-surface-variant); }
+  .search { max-width: 42rem; margin: 24px auto; }
+  #tool-search-input {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 999px;
+    background: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
+  }
+  #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
+  .section-title { text-align: center; font-size: 1.75rem; margin: 16px 0 24px; color: var(--md-sys-color-on-surface); }
+  .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px 0; }
+  .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
