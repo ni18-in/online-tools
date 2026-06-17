@@ -12,7 +12,8 @@ import ThemeNoFlash from '../components/ThemeNoFlash.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { type Locale } from '../data/i18n';
-import { ADSENSE_CLIENT } from '../data/site';
+import { ADSENSE_CLIENT, SITE_URL } from '../data/site';
+import { tools } from '../data/tools';
 import '../styles/md3-tokens.css';
 import '../styles/tailwind.css';
 
@@ -37,6 +38,37 @@ const {
   adsEnabled = false,
   bodyClass,
 } = Astro.props;
+
+// Auto-populate altLinks if they are missing
+let resolvedAltLinks = { ...altLinks };
+if (seo.canonical) {
+  const canonical = seo.canonical;
+  const matchingTool = tools.find((t) => {
+    if (canonical.includes(`/tools/${t.slug}/`)) return true;
+    if (t.i18n?.es && canonical.includes(`/tools/${t.i18n.es}/`)) return true;
+    if (t.i18n?.fr && canonical.includes(`/tools/${t.i18n.fr}/`)) return true;
+    return false;
+  });
+
+  if (matchingTool) {
+    if (!resolvedAltLinks.en) {
+      resolvedAltLinks.en = `${SITE_URL}/tools/${matchingTool.slug}/`;
+    }
+    if (matchingTool.i18n?.es && !resolvedAltLinks.es) {
+      resolvedAltLinks.es = `${SITE_URL}/es/tools/${matchingTool.i18n.es}/`;
+    }
+    if (matchingTool.i18n?.fr && !resolvedAltLinks.fr) {
+      resolvedAltLinks.fr = `${SITE_URL}/fr/tools/${matchingTool.i18n.fr}/`;
+    }
+  } else if (canonical.includes('edit-images-like-pro-free-online-tool')) {
+    if (!resolvedAltLinks.en) {
+      resolvedAltLinks.en = `${SITE_URL}/blogs/edit-images-like-pro-free-online-tool.html`;
+    }
+    if (!resolvedAltLinks.fr) {
+      resolvedAltLinks.fr = `${SITE_URL}/fr/blogs/edit-images-like-pro-free-online-tool.html`;
+    }
+  }
+}
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -84,7 +116,7 @@ const {
   </head>
   <body class={bodyClass}>
     <div class="site-shell">
-      <SiteHeader lang={lang} current={current} altLinks={altLinks} />
+      <SiteHeader lang={lang} current={current} altLinks={resolvedAltLinks} />
       <slot />
       <SiteFooter lang={lang} />
     </div>

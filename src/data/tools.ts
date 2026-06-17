@@ -423,3 +423,233 @@ export function toolSeo(tool: Tool, opts: ToolSeoOpts): SeoProps {
     jsonLd,
   };
 }
+
+export const TOOL_TRANSLATIONS: Record<
+  string,
+  {
+    es: { name: string; description: string };
+    fr: { name: string; description: string };
+  }
+> = {
+  'free-online-image-utility-tool': {
+    es: {
+      name: 'Herramienta de Imágenes Online Gratis | Redimensionar, Comprimir y Convertir',
+      description: 'Herramienta gratuita para redimensionar, comprimir, convertir y optimizar imágenes en línea. Sin descargas. Rápida, segura y basada en el navegador.'
+    },
+    fr: {
+      name: "Outil d'images en ligne gratuit",
+      description: "Outil d'image en ligne gratuit pour redimensionner, compresser, convertir et optimiser rapidement des images dans votre navigateur."
+    }
+  },
+  'all-in-one-text-analyzer': {
+    es: {
+      name: 'Analizador de Texto Todo en Uno',
+      description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.'
+    },
+    fr: {
+      name: 'Analyseur de texte tout-en-un',
+      description: 'Analyseur de texte professionnel : obtenez le nombre de mots, de caractères, de phrases, de paragraphes, le temps de lecture, le score de lisibilité et la fréquence des mots-clés.'
+    }
+  },
+  'json-visualizer-pro': {
+    es: {
+      name: 'JSON Visualizer Pro',
+      description: 'Herramienta online fácil de usar para visualizar, formatear, minimizar, copiar y validar datos JSON con vista de árbol y control de errores.'
+    },
+    fr: {
+      name: 'JSON Visualizer Pro',
+      description: "Outil en ligne simple pour visualiser, formater, minifier, copier et valider des données JSON avec vue en arbre et détection d'erreurs."
+    }
+  },
+  'json-comparison-tool': {
+    es: {
+      name: 'Comparador JSON Online',
+      description: 'Herramienta gratuita para comparar, diferenciar y embellecer dos objetos JSON o bloques de texto lado a lado con números de línea. Sin procesamiento en el servidor.'
+    },
+    fr: {
+      name: 'Comparateur JSON en ligne',
+      description: 'Outil en ligne gratuit pour comparer, valider et embellir deux objets JSON côte à côte avec des numéros de lignes. Visualisez les différences avec coloration.'
+    }
+  },
+  'ai-beauty-test': {
+    es: {
+      name: 'Test de Belleza IA',
+      description: 'Obtén una puntuación de belleza IA gratuita basada en rasgos faciales, encuentra tu doble de celebridad y compara fotos con el Test de Belleza IA.'
+    },
+    fr: {
+      name: 'Test de Beauté IA',
+      description: 'Obtenez un score de beauté IA gratuit basé sur les traits du visage, trouvez votre sosie de célébrité et comparez des photos avec le Test de Beauté IA.'
+    }
+  },
+  'guess-the-logo': {
+    es: {
+      name: 'Adivina el Logo',
+      description: '¡Pon a prueba tus conocimientos sobre marcas comerciales con Adivina el Logo! Un divertido y adictivo juego de preguntas con múltiples modos de juego.'
+    },
+    fr: {
+      name: 'Devine le Logo',
+      description: 'Testez vos connaissances sur les marques avec Devine le Logo ! Un jeu de quiz amusant et addictif avec plusieurs modes de jeu.'
+    }
+  },
+  'online-text-compare': {
+    es: {
+      name: 'Comparador de Texto en Línea',
+      description: 'Compara dos textos para encontrar las diferencias al instante. Admite múltiples idiomas, modo oscuro y resalta las líneas agregadas, eliminadas y comunes.'
+    },
+    fr: {
+      name: 'Comparateur de texte en ligne',
+      description: 'Comparez deux textes pour trouver les différences instantanément. Supporte plusieurs langues, le mode sombre et surligne les lignes ajoutées, supprimées et communes.'
+    }
+  },
+  'screen-recorder-pro': {
+    es: {
+      name: 'Grabador de Pantalla Pro',
+      description: 'Graba tu pantalla, ventana o pestaña con audio de forma gratuita en tu navegador. 100% del lado del cliente, respetando tu privacidad.'
+    },
+    fr: {
+      name: "Enregistreur d'écran Pro",
+      description: "Enregistrez votre écran, fenêtre ou onglet avec audio gratuitement dans votre navigateur. 100% côté client, respectant votre vie privée."
+    }
+  },
+  'px-to-rem-converter': {
+    es: {
+      name: 'Convertidor PX a REM',
+      description: 'Una herramienta online simple y gratuita para convertir valores de píxeles (px) a unidades REM, siguiendo los principios de Material Design.'
+    },
+    fr: {
+      name: 'Convertisseur PX en REM',
+      description: 'Un outil en ligne simple et gratuit pour convertir les valeurs en pixels (px) en unités REM avec une taille de police de base personnalisable, suivant les principes de Material Design.'
+    }
+  },
+  'ai-love-calculator': {
+    es: {
+      name: 'Calculadora de Amor IA',
+      description: '¡Descubre tu compatibilidad amorosa con nuestra divertida Calculadora de Amor IA! Introduce nombres y edades para obtener tu puntuación y una predicción. Solo para entretenimiento.'
+    },
+    fr: {
+      name: "Calculateur d'Amour IA",
+      description: "Découvrez votre compatibilité amoureuse avec notre Calculateur d'Amour IA ! Entrez vos prénoms et âges pour obtenir un score et une prédiction amusante. À but récréatif uniquement."
+    }
+  },
+  'next-gen-gst-reforms': {
+    es: {
+      name: 'Calculadora de GST de Próxima Generación',
+      description: 'Una herramienta en tiempo real y optimizada para móviles para calcular instantáneamente el GST basado en las nuevas reformas de la India. Sume, reste o busque tasas de GST con facilidad.'
+    },
+    fr: {
+      name: 'Calculateur de TPS de Nouvelle Génération',
+      description: "Un outil en temps réel et adapté aux mobiles pour calculer instantanément la TPS sur la base des nouvelles réformes de l'Inde. Saisissez, soustrayez ou recherchez des taux de TPS en toute simplicité."
+    }
+  },
+  'basic-authentication-header-generator': {
+    es: {
+      name: 'Generador de Encabezados de Autenticación Básica',
+      description: 'Herramienta gratuita y segura para generar encabezados de autenticación básica HTTP. Todo en el navegador, sin enviar datos al servidor.'
+    },
+    fr: {
+      name: "Générateur d'En-têtes d'Authentification Basic",
+      description: "Outil gratuit et sécurisé pour générer des en-têtes d'authentification Basic HTTP. Tout dans le navigateur, aucune donnée envoyée au serveur."
+    }
+  },
+  'mh-meter-price-calculator': {
+    es: {
+      name: 'Calculadora de Tarifas MH',
+      description: 'Calcula tarifas de Auto Rickshaw, Taxi y Cool Cab en Mumbai y Maharashtra. Tarifas oficiales 2025 (MMRTA).'
+    },
+    fr: {
+      name: 'Calculateur de Tarifs MH',
+      description: 'Calculez les tarifs de rickshaw, taxi et Cool Cab à Mumbai et dans le Maharashtra. Tarifs officiels 2025 (MMRTA).'
+    }
+  },
+  'vtf-converter': {
+    es: {
+      name: 'Convertidor de VTF',
+      description: 'Convierte tus imágenes (PNG, JPG) a formato VTF (Valve Texture Format) de forma gratuita en tu navegador. Seguro, rápido y del lado del cliente.'
+    },
+    fr: {
+      name: 'Convertisseur VTF',
+      description: 'Convertissez vos images (PNG, JPG) au format VTF (Valve Texture Format) gratuitement dans votre navigateur. Sécurisé, rapide et côté client.'
+    }
+  },
+  'advance-epoch-converter': {
+    es: {
+      name: 'Convertidor de Época Unix Avanzado',
+      description: 'Convierte marcas de tiempo Unix (epoch) a fechas legibles por humanos y viceversa. Admite segundos, milisegundos, microsegundos, nanosegundos y zonas horarias.'
+    },
+    fr: {
+      name: "Convertisseur d'époque Unix avancé",
+      description: "Convertissez des horodatages Unix (epoch) en dates lisibles et vice-versa. Gère les secondes, millisecondes, microsecondes, nanosecondes et fuseaux horaires."
+    }
+  },
+  'markdown-to-word': {
+    es: {
+      name: 'Convertidor de Markdown a Word',
+      description: 'Convierte Markdown y texto de ChatGPT a documentos Word (.docx) al instante en tu navegador. Sin subidas, sin registro, gratis.'
+    },
+    fr: {
+      name: 'Convertisseur Markdown vers Word',
+      description: 'Convertissez du Markdown et du texte ChatGPT en documents Word (.docx) instantanément dans votre navigateur. Sans téléversement, sans inscription, gratuit.'
+    }
+  },
+  'subtitle-resync-tool': {
+    es: {
+      name: 'Resincronizador de Subtítulos',
+      description: 'Corrige subtítulos desfasados fácilmente. Sube tu archivo SRT y vídeo, ajusta el tiempo con un clic y descarga el archivo de subtítulos corregido.'
+    },
+    fr: {
+      name: 'Resynchronisation de Sous-titres',
+      description: 'Corrigez facilement les sous-titres décalés. Importez votre fichier SRT et votre vidéo, ajustez le timing en un clic et téléchargez le fichier corrigé.'
+    }
+  },
+  'iphone-photo-fixer': {
+    es: {
+      name: 'iPhone Photo Fixer',
+      description: 'Convierte imágenes HEIC de iPhone a JPG o PNG al instante. Convertidor por lotes, funciona 100% offline en tu navegador, sin subir archivos.'
+    },
+    fr: {
+      name: 'iPhone Photo Fixer',
+      description: 'Convertissez des images HEIC iPhone en JPG ou PNG instantanément. Convertisseur par lots, fonctionne 100% hors ligne dans votre navigateur, sans téléversement.'
+    }
+  },
+  'grade-calculator': {
+    es: {
+      name: 'Calculadora de Calificaciones Universal',
+      description: 'La calculadora de promedio ponderado más rápida y sencilla. Define categorías, agrega tareas y obtén tu calificación de curso en tiempo real.'
+    },
+    fr: {
+      name: 'Calculateur de notes universel',
+      description: 'Le calculateur de moyenne pondérée le plus rapide et le plus simple. Définissez des catégories, ajoutez des devoirs et obtenez votre note en réel.'
+    }
+  },
+  'rem-to-px-converter': {
+    es: {
+      name: 'Convertidor REM a PX',
+      description: 'Un convertidor REM a PX online, simple y gratuito para desarrolladores y diseñadores. Convierte unidades REM a píxeles al instante.'
+    },
+    fr: {
+      name: 'Convertisseur REM en PX',
+      description: 'Un outil en ligne simple et gratuit pour convertir les unités REM en valeurs de pixels (px) avec une taille de police de base personnalisable, adapté aux concepteurs et développeurs.'
+    }
+  },
+  'happy-new-year': {
+    es: {
+      name: 'Generador de Deseos de Año Nuevo',
+      description: 'Crea y comparte deseos personalizados de Año Nuevo online – gratis e instantáneo.'
+    },
+    fr: {
+      name: 'Générateur de Voeux de Nouvel An',
+      description: 'Créez et partagez des voeux personnalisés de Nouvel An en ligne – gratuit et instantané.'
+    }
+  },
+  'jwt-debugger': {
+    es: {
+      name: 'Depurador y Visor de JWT',
+      description: 'Herramienta online fácil de usar para decodificar, inspeccionar y verificar JSON Web Tokens (JWT) del lado del cliente. Visualiza encabezado, carga útil y firma.'
+    },
+    fr: {
+      name: 'Débogueur et Inspecteur JWT',
+      description: 'Outil en ligne simple pour décoder, inspecter et vérifier des JSON Web Tokens (JWT) côté client. Affichez les en-têtes, la charge utile et vérifiez les signatures.'
+    }
+  }
+};
+

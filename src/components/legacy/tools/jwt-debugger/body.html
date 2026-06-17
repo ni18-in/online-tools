@@ -20,7 +20,7 @@
                 </button>
             </div>
             
-            <div id="validationStatus" class="validation-status status-info">
+            <div id="validationStatus" class="validation-status status-info" aria-live="polite">
                 Enter a JWT token to begin decoding.
             </div>
         </div>
@@ -97,7 +97,7 @@
                     </label>
                 </div>
                 
-                <div id="signatureStatus" class="signature-status status-unverified">
+                <div id="signatureStatus" class="signature-status status-unverified" aria-live="polite">
                     <i class="fas fa-info-circle mr-1"></i> Signature verification requires HS256, HS384, or HS512.
                 </div>
             </div>
