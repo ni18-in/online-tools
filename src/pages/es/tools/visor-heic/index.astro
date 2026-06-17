@@ -1,0 +1,45 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../../data/tools';
+import { SITE_URL } from '../../../../data/site';
+import body from '../../../../components/legacy/es/tool-visor-heic/body.html?raw';
+import css from '../../../../components/legacy/es/tool-visor-heic/styles.css?raw';
+import js from '../../../../components/legacy/es/tool-visor-heic/script.js?raw';
+
+const tool = getTool('heic-viewer')!;
+const seo = toolSeo(tool, {
+  title: 'Visor HEIC Online | Abrir y Ver Fotos de iPhone en Windows Gratis',
+  description:
+    'Visor de archivos HEIC gratis en línea. Abre y visualiza fotos HEIC de iPhone directamente en tu navegador en Windows, Android o Linux. 100% privado.',
+  keywords:
+    'visor heic online, abrir archivos heic windows, ver fotos iphone pc gratis, lector heic offline, convertir heic a jpg, comprobar heic',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Visor HEIC Online',
+    description: 'Abre y visualiza fotos HEIC de iPhone en tu navegador.',
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
+    url: `${SITE_URL}/es/tools/visor-heic/`,
+  },
+});
+seo.canonical = `${SITE_URL}/es/tools/visor-heic/`;
+if (seo.og) {
+  seo.og.url = seo.canonical;
+  seo.og.locale = 'es_ES';
+}
+if (seo.twitter) {
+  seo.twitter.url = seo.canonical;
+}
+const headRaw = [
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>',
+  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+].join('\n');
+---
+<ToolLayout seo={seo} lang="es" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/heic-viewer/` }}>
+  <div class="tool-island" id="tool-heic-viewer" set:html={body} />
+</ToolLayout>
+
+<style is:global set:html={css}></style>
+<script is:inline set:html={js}></script>
