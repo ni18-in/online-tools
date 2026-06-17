@@ -70,17 +70,46 @@ const fmt = (iso: string) => iso.slice(0, 10);
     <h1>Blog</h1>
     <p>Guías, tutoriales y novedades del equipo de NI18 Herramientas Online.</p>
   </header>
-  <ul class="post-list">
+  
+  <ul class="post-grid post-list">
     {posts.map((p) => {
       const title = p.i18n?.es?.title || p.title;
       const description = p.i18n?.es?.description || p.description;
+      const category = p.i18n?.es?.category || p.category;
       const esSlug = p.i18n?.es?.slug || p.slug;
+      
+      const getBadgeClass = (catStr: string) => {
+        const cat = catStr.toLowerCase();
+        if (cat.includes('utilidad') || cat.includes('utility')) return 'utility';
+        if (cat.includes('productividad') || cat.includes('productivity')) return 'productivity';
+        if (cat.includes('desarrollo') || cat.includes('development')) return 'development';
+        if (cat.includes('diseño') || cat.includes('design')) return 'design';
+        if (cat.includes('programación') || cat.includes('developer')) return 'developer';
+        return '';
+      };
       return (
-        <li class="post">
-          <a href={`/es/blogs/${esSlug}.html`} class="post-link">
-            <h2>{title}</h2>
-            <p class="excerpt">{description}</p>
-            <time datetime={p.datePublished}>{fmt(p.datePublished)}</time>
+        <li class="post-item">
+          <a href={`/es/blogs/${esSlug}.html`} class="post-card">
+            <div class="post-banner-wrapper">
+              <img src={p.image} alt={title} class="post-banner" loading="lazy" decoding="async" />
+              <span class={`category-badge ${getBadgeClass(category)}`}>{category}</span>
+            </div>
+            <div class="post-content">
+              <div class="post-meta">
+                <time datetime={p.datePublished}>{fmt(p.datePublished)}</time>
+                <span class="meta-dot">&bull;</span>
+                <span class="post-author">Por {p.author}</span>
+              </div>
+              <h2 class="post-title">{title}</h2>
+              <p class="post-excerpt">{description}</p>
+              <span class="read-more">
+                Leer Artículo
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
           </a>
         </li>
       );
@@ -89,19 +118,129 @@ const fmt = (iso: string) => iso.slice(0, 10);
 </PageLayout>
 
 <style>
-  .blog-head { text-align: center; margin-bottom: 24px; }
-  .blog-head h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
-  .blog-head p { margin: 0; color: var(--md-sys-color-on-surface-variant); }
-  .post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
-  .post-link {
-    display: block; text-decoration: none;
-    background: var(--md-sys-color-surface-container-lowest);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: 20px 24px; transition: box-shadow .2s, border-color .2s;
+  .blog-head { text-align: center; margin-bottom: 40px; }
+  .blog-head h1 { font-size: 2.75rem; margin: 0 0 12px; font-weight: 800; color: var(--md-sys-color-on-surface); letter-spacing: -0.02em; }
+  .blog-head p { font-size: 1.1rem; margin: 0; color: var(--md-sys-color-on-surface-variant); }
+  
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
-  .post-link:hover { box-shadow: var(--md-sys-elevation-2); border-color: var(--md-sys-color-primary); }
-  .post h2 { margin: 0 0 8px; font-size: 1.25rem; color: var(--md-sys-color-on-surface); }
-  .excerpt { margin: 0 0 12px; color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem; line-height: 1.5; }
-  time { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.8; }
+  .post-item { display: flex; }
+  
+  .post-card {
+    text-decoration: none;
+    background: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--md-sys-elevation-3);
+    border-color: var(--md-sys-color-primary);
+  }
+  
+  .post-banner-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+    background: var(--md-sys-color-surface-container-highest);
+  }
+  .post-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .post-card:hover .post-banner {
+    transform: scale(1.05);
+  }
+  
+  .category-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 12px;
+    border-radius: var(--md-sys-shape-corner-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .category-badge.utility { background: #e0f2fe; color: #0369a1; }
+  .category-badge.productivity { background: #f0fdf4; color: #15803d; }
+  .category-badge.development { background: #faf5ff; color: #7e22ce; }
+  .category-badge.design { background: #fff7ed; color: #c2410c; }
+  .category-badge.developer { background: #f0f9ff; color: #1d4ed8; }
+
+  .post-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .post-meta {
+    font-size: 0.8rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+  }
+  .meta-dot { font-weight: bold; }
+  
+  .post-title {
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--md-sys-color-on-surface);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-excerpt {
+    margin: 0 0 20px;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  
+  .read-more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    transition: color 0.2s ease;
+  }
+  .read-more svg {
+    transition: transform 0.2s ease;
+  }
+  .post-card:hover .read-more svg {
+    transform: translateX(4px);
+  }
 </style>

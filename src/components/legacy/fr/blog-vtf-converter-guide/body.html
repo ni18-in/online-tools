@@ -1,0 +1,87 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-full-header mb-8 text-center">
+            <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+                Maîtriser la Conversion VTF : Outil en Ligne pour Moddeurs Source Engine
+            </h1>
+            <p class="post-meta text-sm text-gray-500">
+                Publié le <time datetime="2025-12-31" itemprop="datePublished">31 décembre 2025</time>
+                par <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+                &bull; <span class="text-indigo-500 font-semibold">Développement</span>
+            </p>
+            <img src="/assets/blog/vtf-converter-guide-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Texture VTF Source Engine" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image">
+        </header>
+
+        <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+            <p>Si vous avez déjà créé des mods pour des jeux comme <strong>Counter-Strike: Global Offensive</strong>, <strong>Team Fortress 2</strong> ou <strong>Left 4 Dead 2</strong>, vous connaissez le casse-tête du format <a href="https://developer.valvesoftware.com/wiki/VTF_(Valve_Texture_Format)">Valve Texture Format (VTF)</a>. Il s'agit du format de texture natif du Source Engine, utilisé pour tout : textures de murs, sprays ou skins d'armes.</p>
+            <p>Créer ces fichiers imposait jusqu'ici d'utiliser de vieux logiciels instables comme VTFEdit. Nous avons donc conçu notre <a href="/fr/tools/vtf-converter/"><strong>Convertisseur VTF en Ligne Gratuit</strong></a>, une alternative moderne intégrée à votre navigateur web.</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Qu'est-ce qu'un fichier VTF ?</h2>
+            <p>Le <strong>Valve Texture Format (.vtf)</strong> est un format d'image propriétaire de Valve. Contrairement à un PNG classique, un fichier VTF intègre des métadonnées lisibles directement par la carte graphique.</p>
+            <p>Les caractéristiques majeures du VTF :</p>
+            <ul>
+                <li><strong>Mipmaps :</strong> Versions de taille réduite stockées pour le rendu longue distance.</li>
+                <li><strong>Compression :</strong> Formats dédiés (comme DXT1 ou DXT5) optimisant la mémoire vidéo.</li>
+                <li><strong>Drapeaux (Flags) :</strong> Paramètres indiquant si la texture est transparente, répétée ou fait partie d'une skybox.</li>
+            </ul>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Pourquoi choisir notre convertisseur VTF en ligne ?</h2>
+            <h3 class="text-2xl font-semibold mt-10 mb-4">1. Aucun logiciel à installer</h3>
+            <p>Oubliez VTFEdit ou l'outil en ligne de commande VTEX. Our convertisseur s'exécute à 100 % dans Chrome, Firefox ou Edge, de manière ultra-sécurisée et instantanée.</p>
+
+            <h3 class="text-2xl font-semibold mt-10 mb-4">2. Redimensionnement automatique (Puissance de deux)</h3>
+            <p>Le Source Engine exige des textures dont les dimensions sont des puissances de deux (ex: 64, 128, 256, 512, 1024). Une image de 500x500 entraînera une erreur de compilation ou un plantage du jeu. Notre outil ajuste automatiquement l'image à la puissance de deux la plus proche (ex: 512x512).</p>
+
+            <h3 class="text-2xl font-semibold mt-10 mb-4">3. Qualité maximale RGBA8888</h3>
+            <p>Nous convertissons en format <strong>RGBA8888</strong>. Cela offre une fidélité d'image maximale avec support de la transparence. Bien que les fichiers soient plus lourds qu'avec une compression avec perte, vos sprays et modèles resteront parfaitement nets en jeu.</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Comment créer un spray pour CS:GO / CSS</h2>
+            <p>Créer un spray personnalisé est l'usage le plus courant des fichiers VTF :</p>
+            <ol>
+                <li><strong>Préparez votre image :</strong> Utilisez votre visuel préféré en format PNG ou JPG.</li>
+                <li><strong>Téléversez :</strong> Glissez-le dans le <a href="/fr/tools/vtf-converter/">Convertisseur VTF</a>.</li>
+                <li><strong>Dimensions :</strong> Vérifiez que le "Mode de redimensionnement" est sur "Puissance de 2 la plus proche".</li>
+                <li><strong>Convertissez :</strong> Cliquez et téléchargez le fichier <code>.vtf</code>.</li>
+                <li><strong>Générez le VMT :</strong> Un fichier <code>.vmt</code> (Valve Material Type) est requis en parallèle. Exemple de structure :</li>
+            </ol>
+            <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto"><code>"LightmappedGeneric"
+{
+    "$basetexture" "users/my_spray"
+    "$translucent" 1
+}</code></pre>
+            <p class="mt-4">Placez les deux fichiers dans le répertoire <code>materials</code> de votre jeu. C'est tout !</p>
+
+            <hr>
+
+            <h2 class="text-3xl font-bold mt-12 mb-6 pb-3 border-b border-gray-200">Foire Aux Questions (FAQ)</h2>
+            <h3 class="text-xl font-bold mt-6 mb-2">Est-ce sécurisé ?</h3>
+            <p><strong>Oui.</strong> Le traitement est effectué sur votre navigateur (côté client). Vos images ne sont jamais envoyées sur le réseau.</p>
+
+            <h3 class="text-xl font-bold mt-6 mb-2">Mon spray n'apparaît pas en jeu !</h3>
+            <p>Assurez-vous d'avoir créé le fichier VMT associé et que les dimensions ne sont pas trop élevées. Nous préconisons un format maximal de 256x256 ou 512x512 pixels.</p>
+        </section>
+
+        <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+            <nav class="post-navigation flex justify-between items-center" aria-label="Navigation de l'article">
+                <a href="/fr/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+                    <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                    Retour au Blog
+                </a>
+                <a href="/fr/tools/vtf-converter/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+                    Essayer l'Outil
+                    <svg class="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </nav>
+        </footer>
+    </article>
+</main>
