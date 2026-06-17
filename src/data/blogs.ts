@@ -1,7 +1,8 @@
 // Blog catalog. Posts live at /blogs/<slug>.html (literal .html, per the URL contract).
 // 6 are indexed (in sitemap); ai-love-calculator + face-beauty-test are noindex (excluded).
 import { SITE_URL, SITE_NAME } from './site';
-import type { Props as SeoProps } from '../components/Seo.astro';
+import type { HreflangLink, Props as SeoProps } from '../components/Seo.astro';
+import type { Locale } from './i18n';
 
 export interface BlogPost {
   slug: string; // filename without .html
@@ -13,6 +14,20 @@ export interface BlogPost {
   image: string;
   author: string;
   noindex?: boolean;
+  i18n?: {
+    es?: {
+      slug: string;
+      title: string;
+      description: string;
+      keywords: string;
+    };
+    fr?: {
+      slug: string;
+      title: string;
+      description: string;
+      keywords: string;
+    };
+  };
 }
 
 export const blogPosts: BlogPost[] = [
@@ -75,6 +90,20 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2025-04-05T18:00:00+05:30',
     image: `${SITE_URL}/assets/blog/edit-images-pro-tool-banner.webp`,
     author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'editar-imagenes-como-un-profesional-herramienta-gratuita-online',
+        title: 'Edita Imágenes como un Pro Gratis con esta Increíble Herramienta Online en 2025',
+        description: 'Aprende a editar imágenes como un profesional con una herramienta gratuita en línea en 2025. Redimensiona, recorta y optimiza fotos sin descargas ni costos.',
+        keywords: 'editor de imagenes, herramienta online gratis, edicion de fotos, redimensionar imagen, recortar imagen',
+      },
+      fr: {
+        slug: 'edit-images-like-pro-free-online-tool',
+        title: 'Éditez des Images comme un Pro Gratuitement avec cet Outil en Ligne en 2025',
+        description: 'Apprenez à éditer des images comme un pro avec un outil en ligne gratuit et puissant en 2025. Redimensionnez, recadrez, ajoutez du texte et plus encore.',
+        keywords: 'editeur d images, outil en ligne gratuit, retouche photo, redimensionner image, recadrer image',
+      }
+    }
   },
   // ---- noindex posts (excluded from sitemap) ----
   {
@@ -98,10 +127,28 @@ export const blogPosts: BlogPost[] = [
     image: `${SITE_URL}/assets/og-image.svg`,
     author: 'ni18',
     noindex: true,
+    i18n: {
+      fr: {
+        slug: 'ai-beauty-test-free-online',
+        title: 'Test de Beauté IA : Découvrez Votre Score et Sosie Célébrité Gratuitement',
+        description: 'Découvrez votre score d’attractivité faciale avec notre Test de Beauté IA. Apprenez comment cela fonctionne et ce que vos résultats signifient.',
+        keywords: 'test de beaute, score du visage, attractivite ia, analyse faciale',
+      }
+    }
   },
 ];
 
-export function blogUrl(slug: string): string {
+export function blogUrl(slug: string, lang: Locale = 'en'): string {
+  if (lang === 'es') {
+    const post = blogPosts.find((p) => p.slug === slug);
+    const esSlug = post?.i18n?.es?.slug || slug;
+    return `${SITE_URL}/es/blogs/${esSlug}.html`;
+  }
+  if (lang === 'fr') {
+    const post = blogPosts.find((p) => p.slug === slug);
+    const frSlug = post?.i18n?.fr?.slug || slug;
+    return `${SITE_URL}/fr/blogs/${frSlug}.html`;
+  }
   return `${SITE_URL}/blogs/${slug}.html`;
 }
 
@@ -109,57 +156,75 @@ export function indexedPosts(): BlogPost[] {
   return blogPosts.filter((p) => !p.noindex);
 }
 
-function blogPostingSchema(post: BlogPost) {
+function blogPostingSchema(post: BlogPost, lang: Locale = 'en') {
+  const title = lang === 'es' ? post.i18n?.es?.title : lang === 'fr' ? post.i18n?.fr?.title : post.title;
+  const description = lang === 'es' ? post.i18n?.es?.description : lang === 'fr' ? post.i18n?.fr?.description : post.description;
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.description,
+    headline: title || post.title,
+    description: description || post.description,
     datePublished: post.datePublished,
     dateModified: post.dateModified,
     image: post.image,
-    url: blogUrl(post.slug),
+    url: blogUrl(post.slug, lang),
     author: { '@type': 'Person', name: post.author },
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/android-chrome-192x192.png` },
     },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': blogUrl(post.slug) },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': blogUrl(post.slug, lang) },
   };
 }
 
-export function blogBreadcrumb(post: BlogPost) {
+export function blogBreadcrumb(post: BlogPost, lang: Locale = 'en') {
+  const homeLabel = lang === 'es' ? 'Inicio' : lang === 'fr' ? 'Accueil' : 'Home';
+  const blogLabel = lang === 'es' ? 'Blog' : lang === 'fr' ? 'Blog' : 'Blog';
+  const postTitle = lang === 'es' ? post.i18n?.es?.title : lang === 'fr' ? post.i18n?.fr?.title : post.title;
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blogs/` },
-      { '@type': 'ListItem', position: 3, name: post.title },
+      { '@type': 'ListItem', position: 1, name: homeLabel, item: `${SITE_URL}${lang === 'en' ? '' : '/' + lang}/` },
+      { '@type': 'ListItem', position: 2, name: blogLabel, item: `${SITE_URL}${lang === 'en' ? '' : '/' + lang}/blogs/` },
+      { '@type': 'ListItem', position: 3, name: postTitle || post.title },
     ],
   };
 }
 
+export function blogHreflang(post: BlogPost): HreflangLink[] {
+  const links: HreflangLink[] = [{ hreflang: 'en', href: blogUrl(post.slug, 'en') }];
+  if (post.i18n?.es) links.push({ hreflang: 'es', href: blogUrl(post.slug, 'es') });
+  if (post.i18n?.fr) links.push({ hreflang: 'fr', href: blogUrl(post.slug, 'fr') });
+  links.push({ hreflang: 'x-default', href: blogUrl(post.slug, 'en') });
+  return links;
+}
+
 /** Full SEO props for a blog post page (canonical .html, robots, OG article, BlogPosting + Breadcrumb). */
-export function blogSeo(post: BlogPost): SeoProps {
-  const url = blogUrl(post.slug);
+export function blogSeo(post: BlogPost, lang: Locale = 'en'): SeoProps {
+  const url = blogUrl(post.slug, lang);
+  const title = lang === 'es' ? post.i18n?.es?.title : lang === 'fr' ? post.i18n?.fr?.title : post.title;
+  const description = lang === 'es' ? post.i18n?.es?.description : lang === 'fr' ? post.i18n?.fr?.description : post.description;
+  const keywords = lang === 'es' ? post.i18n?.es?.keywords : lang === 'fr' ? post.i18n?.fr?.keywords : post.keywords;
+  const localeStr = lang === 'es' ? 'es_ES' : lang === 'fr' ? 'fr_FR' : 'en_US';
   return {
-    title: post.title,
-    description: post.description,
-    keywords: post.keywords,
+    title: title || post.title,
+    description: description || post.description,
+    keywords: keywords || post.keywords,
     canonical: url,
     robots: post.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+    hreflang: blogHreflang(post),
     og: {
       type: 'article',
       url,
-      title: post.title,
-      description: post.description,
+      title: title || post.title,
+      description: description || post.description,
       image: post.image,
       siteName: SITE_NAME,
-      locale: 'en_US',
+      locale: localeStr,
     },
-    twitter: { card: 'summary_large_image', url, title: post.title, description: post.description, image: post.image },
-    jsonLd: [blogPostingSchema(post), blogBreadcrumb(post)],
+    twitter: { card: 'summary_large_image', url, title: title || post.title, description: description || post.description, image: post.image },
+    jsonLd: [blogPostingSchema(post, lang), blogBreadcrumb(post, lang)],
   };
 }
