@@ -250,6 +250,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'chrome-privacy-shift-jwt-debugger',
+    title: 'Chrome\'s New Privacy API Broke My Workflow—Here\'s the Fix for JWT Debugging',
+    description: 'With Chrome\'s August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.',
+    keywords: 'chrome privacy update 2026, jwt debugger, client-side jwt, browser privacy api, developer tools',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cambio-privacidad-chrome-depurador-jwt',
+        title: 'La Nueva API de Privacidad de Chrome Rompió mi Flujo—Aquí está la Solución para JWT',
+        description: 'Con el cambio de privacidad de Chrome en agosto de 2026, la depuración de JWT del lado del cliente es esencial. Prueba nuestra herramienta gratuita.',
+        keywords: 'actualizacion privacidad chrome 2026, depurador jwt, jwt lado del cliente, api privacidad navegador, herramientas desarrollador',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'changement-confidentialite-chrome-debogueur-jwt',
+        title: 'La Nouvelle API de Confidentialité de Chrome a Cassé mon Flux : La Solution pour JWT',
+        description: 'Avec le changement de confidentialité de Chrome en août 2026, le débogage JWT côté client est essentiel. Essayez notre outil gratuit.',
+        keywords: 'mise a jour confidentialite chrome 2026, debogueur jwt, jwt cote client, api confidentialite navigateur, outils developpement',
+        category: 'Développement'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
