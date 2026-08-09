@@ -223,6 +223,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'private-screen-recorder-no-software-guide',
+    title: 'How to Record Screen Privately in Browser Without Software',
+    description: 'Learn how to record your screen privately in any browser without software or extensions using our free, offline-ready Screen Recorder Pro tool.',
+    keywords: 'private screen recording, record screen without software, browser screen recorder, online screen recorder, no extension screen recorder',
+    category: 'Media',
+    datePublished: '2026-03-04T12:00:00+05:30',
+    dateModified: '2026-03-04T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/private-screen-recorder-no-software-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-grabador-pantalla-privado-sin-software',
+        title: 'Cómo Grabar Pantalla Privado en el Navegador sin Software',
+        description: 'Aprende cómo grabar tu pantalla de forma privada en el navegador sin instalar programas o extensiones con nuestro Screen Recorder Pro gratuito.',
+        keywords: 'grabar pantalla sin software, grabador de pantalla online, grabar pantalla gratis navegador, grabador pantalla privado',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'guide-enregistreur-ecran-prive-sans-logiciel',
+        title: 'Comment Enregistrer son Écran Privé sans Logiciel',
+        description: 'Apprenez à enregistrer votre écran de manière privée dans votre navigateur sans installer de logiciel ou d' + "'extension avec Screen Recorder Pro.",
+        keywords: 'enregistrer ecran sans logiciel, enregistreur ecran en ligne, enregistreur ecran gratuit, enregistreur ecran prive',
+        category: 'Média'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
