@@ -42,25 +42,6 @@ jobs:
         with:
           path: dist
 
-  # Automatically merges Pull Requests into main after all build & test checks pass.
-  automerge:
-    if: github.event_name == 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
-      - name: Auto-merge PR on green CI build
-        run: |
-          echo "Attempting auto-merge for PR #${{ github.event.pull_request.number }}..."
-          gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --delete-branch || \
-          gh pr merge "${{ github.event.pull_request.number }}" --admin --squash --delete-branch || \
-          gh pr merge "${{ github.event.pull_request.number }}" --squash --delete-branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # Deploys ONLY from main (push or manual dispatch) — never from a pull request.
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
