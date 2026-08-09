@@ -277,6 +277,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'secure-basic-auth-header',
+    title: 'Stop Leaking Credentials: Secure Basic Auth Header Guide',
+    description: 'Protect your API keys from leak reports. Learn how to generate secure HTTP Basic Authentication headers 100% client-side in your browser.',
+    keywords: 'basic authentication header, stop leaking credentials, secure basic auth, client-side header generator, http basic authentication',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-encabezado-autenticacion-basica',
+        title: 'Evita Fugas de Credenciales: Guía de Encabezado Basic Auth',
+        description: 'Protege tus claves API contra filtraciones. Genera encabezados de autenticación básica HTTP 100% en el lado del cliente y de forma segura.',
+        keywords: 'encabezado autenticacion basica, evitar fuga de credenciales, basic auth seguro, generador de encabezado cliente, autenticacion basica http',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'securite-entete-authentification-basique',
+        title: 'Évitez les Fuites d\'Identifiants : Guide de l\'Entête Basic Auth',
+        description: 'Protégez vos clés API des fuites de données. Générez des en-têtes d\'authentification Basic HTTP 100% côté client de manière sécurisée.',
+        keywords: 'entete authentification basique, eviter fuite identifiants, basic auth securise, generateur entete cote client, authentification basique http',
+        category: 'Développement'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
