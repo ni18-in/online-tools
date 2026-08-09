@@ -1,6 +1,6 @@
 // Blog catalog. Posts live at /blogs/<slug>.html (literal .html, per the URL contract).
 // 6 are indexed (in sitemap); ai-love-calculator + face-beauty-test are noindex (excluded).
-import { SITE_URL, SITE_NAME } from './site';
+import { SITE_URL, SITE_NAME, abs } from './site';
 import type { HreflangLink, Props as SeoProps } from '../components/Seo.astro';
 import type { Locale } from './i18n';
 
@@ -35,6 +35,28 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'jwt-debugger-guide',
+    title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix for JWT Debugging",
+    description: "With Chrome's August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.",
+    keywords: 'jwt debugger, chrome privacy api, decode jwt, verify json web token, client-side jwt tool',
+    category: 'Developer',
+    datePublished: '2026-08-09T14:00:00+05:30',
+    dateModified: '2026-08-09T14:00:00+05:30',
+    image: '/assets/blog/jwt-debugger-guide-banner.webp',
+    author: 'ni18',
+  },
+  {
+    slug: 'basic-auth-header-guide',
+    title: 'Stop Leaking Credentials: Secure Basic Auth Header Guide',
+    description: 'Protect your API keys from leak reports. Learn how to generate secure HTTP Basic Authentication headers 100% client-side in your browser.',
+    keywords: 'basic auth header, http basic authentication, base64 auth header, generate basic auth, secure api headers',
+    category: 'Developer',
+    datePublished: '2026-08-09T14:00:00+05:30',
+    dateModified: '2026-08-09T14:00:00+05:30',
+    image: '/assets/blog/basic-auth-header-guide-banner.webp',
+    author: 'ni18',
+  },
+  {
     slug: 'screen-recorder-pro-guide',
     title: 'How to Record Screen with Audio Online Free (No Watermark & 100% Private)',
     description: 'Learn how to record your screen, browser window, or webcam with audio directly in your browser using Screen Recorder Pro. Free, client-side, no watermark, and zero uploads.',
@@ -42,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Productivity',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/screen-recorder-pro-guide-banner.webp`,
+    image: '/assets/blog/screen-recorder-pro-guide-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -69,7 +91,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Utility',
     datePublished: '2026-01-16T12:00:00+05:30',
     dateModified: '2026-01-16T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/iphone-photo-fixer-guide-banner.webp`,
+    image: '/assets/blog/iphone-photo-fixer-guide-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -96,7 +118,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Productivity',
     datePublished: '2026-01-11T12:00:00+05:30',
     dateModified: '2026-01-11T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/markdown-to-word-guide-banner.webp`,
+    image: '/assets/blog/markdown-to-word-guide-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -123,7 +145,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Development',
     datePublished: '2025-12-31T12:00:00+05:30',
     dateModified: '2025-12-31T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/vtf-converter-guide-banner.webp`,
+    image: '/assets/blog/vtf-converter-guide-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -150,7 +172,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Design',
     datePublished: '2025-11-23T15:14:00+05:30',
     dateModified: '2025-11-23T15:14:00+05:30',
-    image: `${SITE_URL}/assets/blog/px-to-rem-converter-banner.webp`,
+    image: '/assets/blog/px-to-rem-converter-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -177,7 +199,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2025-04-12T13:14:00+05:30',
     dateModified: '2025-04-12T13:14:00+05:30',
-    image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.webp`,
+    image: '/assets/blog/json-visualizer-pro-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -204,7 +226,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Design',
     datePublished: '2025-04-05T18:00:00+05:30',
     dateModified: '2025-04-05T18:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/edit-images-pro-tool-banner.webp`,
+    image: '/assets/blog/edit-images-pro-tool-banner.webp',
     author: 'ni18',
     i18n: {
       es: {
@@ -313,7 +335,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-09T18:00:00+05:30',
     dateModified: '2026-01-09T18:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/ai-love-calculator-banner.webp`,
+    image: '/assets/blog/ai-love-calculator-banner.webp',
     author: 'ni18',
     noindex: true,
   },
@@ -325,7 +347,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-06T18:00:00+05:30',
     dateModified: '2026-01-06T18:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/face-beauty-test-banner.webp`,
+    image: '/assets/blog/face-beauty-test-banner.webp',
     author: 'ni18',
     noindex: true,
     i18n: {
@@ -368,7 +390,7 @@ function blogPostingSchema(post: BlogPost, lang: Locale = 'en') {
     description: description || post.description,
     datePublished: post.datePublished,
     dateModified: post.dateModified,
-    image: post.image,
+    image: abs(post.image),
     url: blogUrl(post.slug, lang),
     author: { '@type': 'Person', name: post.author },
     publisher: {
@@ -422,11 +444,11 @@ export function blogSeo(post: BlogPost, lang: Locale = 'en'): SeoProps {
       url,
       title: title || post.title,
       description: description || post.description,
-      image: post.image,
+      image: abs(post.image),
       siteName: SITE_NAME,
       locale: localeStr,
     },
-    twitter: { card: 'summary_large_image', url, title: title || post.title, description: description || post.description, image: post.image },
+    twitter: { card: 'summary_large_image', url, title: title || post.title, description: description || post.description, image: abs(post.image) },
     jsonLd: [blogPostingSchema(post, lang), blogBreadcrumb(post, lang)],
   };
 }
