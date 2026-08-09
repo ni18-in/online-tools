@@ -7,11 +7,12 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Allow the GITHUB_TOKEN to deploy to Pages + verify the deployment origin.
+# Allow the GITHUB_TOKEN to deploy to Pages + verify the deployment origin + merge PRs.
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  pull-requests: write
 
 # Serialize per ref so PR validation runs don't cancel a production deploy.
 concurrency:
@@ -46,6 +47,18 @@ jobs:
         with:
           path: dist
 
+  # Automatically merges Pull Requests into main after all build & test checks pass.
+  automerge:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge PR on green CI build
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   # Deploys ONLY from main (push or manual dispatch) — never from a pull request.
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -57,3 +70,4 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
