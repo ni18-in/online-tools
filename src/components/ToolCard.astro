@@ -10,14 +10,15 @@ export interface Props {
   name: string;
   description: string;
   headingId: string;
+  category?: string;
   external?: boolean;
   cta?: string;
 }
-const { href, name, description, headingId, external = false, cta = 'Use Tool' } = Astro.props;
+const { href, name, description, headingId, category, external = false, cta = 'Use Tool' } = Astro.props;
 const rel = external ? 'noopener' : undefined;
 const target = external ? '_blank' : undefined;
 ---
-<article class="tool-card" aria-labelledby={headingId}>
+<article class="tool-card" aria-labelledby={headingId} data-category={category}>
   <div class="body">
     <h3 id={headingId} class="title">
       <a href={href} class="stretched-link" rel={rel} target={target}>{name}</a>

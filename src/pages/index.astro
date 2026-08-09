@@ -64,10 +64,19 @@ const seo: SeoProps = {
 const cards = homepageGrid.map((entry) => {
   if (typeof entry === 'string') {
     const t = getTool(entry)!;
-    return { href: toolUrl(t.slug).replace(SITE_URL, ''), name: t.name, description: t.description, external: false };
+    return { href: toolUrl(t.slug).replace(SITE_URL, ''), name: t.name, description: t.description, category: t.category, external: false };
   }
-  return { href: entry.external, name: entry.name, description: entry.description, external: true };
+  return { href: entry.external, name: entry.name, description: entry.description, category: 'fun', external: true };
 });
+
+const filterCategories = [
+  { id: 'all', label: 'All Tools' },
+  { id: 'developer', label: 'Developer' },
+  { id: 'text', label: 'Text & Content' },
+  { id: 'media', label: 'Media & Images' },
+  { id: 'calculator', label: 'Calculators' },
+  { id: 'fun', label: 'Fun & Games' },
+];
 ---
 <PageLayout seo={seo} lang="en" current="home" adsEnabled={true}>
   <section class="hero">
@@ -83,6 +92,20 @@ const cards = homepageGrid.map((entry) => {
     </form>
   </section>
 
+  <div class="category-pills" role="tablist" aria-label="Filter tools by category">
+    {filterCategories.map((cat, idx) => (
+      <button
+        type="button"
+        class:list={['pill-btn', { active: idx === 0 }]}
+        data-category-filter={cat.id}
+        role="tab"
+        aria-selected={idx === 0 ? 'true' : 'false'}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
   <section aria-labelledby="tool-list-heading">
     <h2 id="tool-list-heading" class="section-title">Available Tools</h2>
     <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">
@@ -94,6 +117,7 @@ const cards = homepageGrid.map((entry) => {
           href={c.href}
           name={c.name}
           description={c.description}
+          category={c.category}
           headingId={`tool-heading-${i + 1}`}
           external={c.external}
         />
@@ -104,22 +128,47 @@ const cards = homepageGrid.map((entry) => {
   <script is:inline>
     (function () {
       var input = document.getElementById('tool-search-input');
+      var pills = Array.prototype.slice.call(document.querySelectorAll('[data-category-filter]'));
       var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
       var noResults = document.getElementById('no-results-message');
-      if (!input || !cards.length) return;
-      input.addEventListener('input', function () {
-        var q = input.value.toLowerCase().trim();
+      if (!cards.length) return;
+
+      var activeCat = 'all';
+
+      function filterTools() {
+        var q = input ? input.value.toLowerCase().trim() : '';
         var found = 0;
         cards.forEach(function (card) {
           var a = card.querySelector('h3 a');
           var p = card.querySelector('p');
           var title = ((a && a.textContent) || '').toLowerCase();
           var desc = ((p && p.textContent) || '').toLowerCase();
-          var visible = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+          var cardCat = card.getAttribute('data-category') || '';
+
+          var matchCat = activeCat === 'all' || cardCat === activeCat;
+          var matchSearch = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+
+          var visible = matchCat && matchSearch;
           card.style.display = visible ? '' : 'none';
           if (visible) found++;
         });
-        if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
+
+        if (noResults) noResults.style.display = found === 0 ? 'block' : 'none';
+      }
+
+      if (input) input.addEventListener('input', filterTools);
+
+      pills.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          pills.forEach(function (p) {
+            p.classList.remove('active');
+            p.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          activeCat = btn.getAttribute('data-category-filter') || 'all';
+          filterTools();
+        });
       });
     })();
   </script>
@@ -129,7 +178,7 @@ const cards = homepageGrid.map((entry) => {
   .hero { text-align: center; padding: 24px 0 8px; }
   .hero h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
   .hero p { margin: 0 auto; max-width: 38rem; color: var(--md-sys-color-on-surface-variant); }
-  .search { max-width: 42rem; margin: 24px auto; }
+  .search { max-width: 42rem; margin: 24px auto 12px; }
   #tool-search-input {
     width: 100%;
     padding: 14px 20px;
@@ -140,6 +189,36 @@ const cards = homepageGrid.map((entry) => {
     color: var(--md-sys-color-on-surface);
   }
   #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
+  .category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 8px auto 28px;
+    max-width: 50rem;
+  }
+  .pill-btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 999px;
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .pill-btn:hover {
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    border-color: var(--md-sys-color-outline);
+  }
+  .pill-btn.active {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-color: var(--md-sys-color-primary);
+    box-shadow: var(--md-sys-elevation-1);
+  }
   .section-title { text-align: center; font-size: 1.75rem; margin: 16px 0 24px; color: var(--md-sys-color-on-surface); }
   .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px 0; }
   .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
