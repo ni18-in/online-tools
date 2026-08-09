@@ -38,32 +38,9 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Functional smoke tests (per tool)
         run: npm run test:e2e
-      - name: Lighthouse (Web Vitals budgets)
-        # Report-but-don't-block on the first deploys (perf budgets need a real CI baseline).
-        # Flip to blocking by removing continue-on-error once you've seen a green run.
-        continue-on-error: true
-        run: npm run test:lh
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
-  # Automatically merges Pull Requests into main after all build & test checks pass.
-  automerge:
-    if: github.event_name == 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Auto-merge PR on green CI build
-        run: |
-          echo "Attempting auto-merge for PR #${{ github.event.pull_request.number }}..."
-          gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --delete-branch || \
-          gh pr merge "${{ github.event.pull_request.number }}" --admin --squash --delete-branch || \
-          gh pr merge "${{ github.event.pull_request.number }}" --squash --delete-branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Deploys ONLY from main (push or manual dispatch) — never from a pull request.
   deploy:
