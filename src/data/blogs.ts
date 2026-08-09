@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'screen-recorder-pro-guide',
+    title: 'How to Record Screen with Audio Online Free (No Watermark & 100% Private)',
+    description: 'Learn how to record your screen, browser window, or webcam with audio directly in your browser using Screen Recorder Pro. Free, client-side, no watermark, and zero uploads.',
+    keywords: 'screen recorder online, free screen recorder no watermark, record screen with audio, browser screen recorder, private screen recorder',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/screen-recorder-pro-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-screen-recorder-pro',
+        title: 'Cómo Grabar la Pantalla con Audio Gratis en Línea (Sin Marca de Agua y 100% Privado)',
+        description: 'Aprende a grabar tu pantalla, ventana o cámara web con audio directamente en tu navegador usando Screen Recorder Pro. Gratis, privado y sin marcas de agua.',
+        keywords: 'grabar pantalla gratis, grabador de pantalla online, grabar pantalla con audio, grabador sin marca de agua, grabador de pantalla privado',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'guide-screen-recorder-pro',
+        title: 'Comment Enregistrer son Écran avec le Son Gratuitement (Sans Filigrane & 100% Privé)',
+        description: 'Découvrez comment enregistrer votre écran, fenêtre ou webcam avec audio directement dans votre navigateur grâce à Screen Recorder Pro. Outil gratuit, sécurisé et sans filigrane.',
+        keywords: 'enregistrer son ecran gratuit, enregistreur d ecran en ligne, enregistrer ecran avec audio, enregistreur sans filigrane, enregistreur ecran prive',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'iphone-photo-fixer-guide',
     title: 'How to Convert HEIC to JPG on PC Free (Offline & Private) - iPhone Photo Fixer Guide',
     description: 'Learn how to convert HEIC photos to JPG or PNG instantly on Windows PC using our free, offline, and private iPhone Photo Fixer tool.',
