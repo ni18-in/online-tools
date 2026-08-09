@@ -313,7 +313,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-09T18:00:00+05:30',
     dateModified: '2026-01-09T18:00:00+05:30',
-    image: `${SITE_URL}/assets/og-image.svg`,
+    image: `${SITE_URL}/assets/blog/ai-love-calculator-banner.webp`,
     author: 'ni18',
     noindex: true,
   },
@@ -325,7 +325,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-06T18:00:00+05:30',
     dateModified: '2026-01-06T18:00:00+05:30',
-    image: `${SITE_URL}/assets/og-image.svg`,
+    image: `${SITE_URL}/assets/blog/face-beauty-test-banner.webp`,
     author: 'ni18',
     noindex: true,
     i18n: {
