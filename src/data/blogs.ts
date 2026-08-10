@@ -326,6 +326,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'chrome-firefox-heic-viewer-guide',
+    title: 'How to Open and View HEIC Photos on Chrome & Firefox Free (2026)',
+    description: 'Still unable to open HEIC files on Chrome or Firefox in August 2026? Learn how to view and convert iPhone HEIC photos online 100% privately.',
+    keywords: 'open heic chrome, view heic firefox, how to view heic online, iphone heic viewer, free offline heic converter, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-firefox-heic-viewer-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-visor-heic-chrome-firefox',
+        title: 'Cómo Abrir y Ver Fotos HEIC en Chrome y Firefox Gratis (2026)',
+        description: '¿Aún no puedes abrir archivos HEIC en Chrome o Firefox? Aprende a ver y convertir fotos HEIC de iPhone en línea de forma 100% privada.',
+        keywords: 'abrir heic chrome, ver heic firefox, como ver heic online, visor heic iphone, convertidor heic offline gratis, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'guide-visualisateur-heic-chrome-firefox',
+        title: 'Comment Ouvrir et Voir des Photos HEIC sur Chrome & Firefox (2026)',
+        description: 'Impossible d\'ouvrir les fichiers HEIC sur Chrome ou Firefox ? Découvrez comment visualiser et convertir vos photos HEIC iPhone 100% en privé.',
+        keywords: 'ouvrir heic chrome, voir heic firefox, comment voir heic en ligne, visualiseur heic iphone, convertisseur heic gratuit, ni18',
+        category: 'Média'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
