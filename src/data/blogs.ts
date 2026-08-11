@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fastjson-vulnerability-json-security-guide',
+    title: 'Fastjson RCE Bug CVE-2026-16723: Secure Your JSON Workflows Now',
+    description: 'Learn about the critical Fastjson RCE vulnerability (CVE-2026-16723) in August 2026 and how to securely validate and diff JSON entirely client-side.',
+    keywords: 'fastjson vulnerability, CVE-2026-16723, fastjson rce, secure json validator, json comparison tool, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/fastjson-vulnerability-json-security-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-seguridad-json-vulnerabilidad-fastjson',
+        title: 'Vulnerabilidad Fastjson CVE-2026-16723: Protege tus Flujos JSON',
+        description: 'Descubre la vulnerabilidad crítica de Fastjson RCE (CVE-2026-16723) de agosto de 2026 y cómo validar y comparar JSON de forma segura 100% local.',
+        keywords: 'vulnerabilidad fastjson, CVE-2026-16723, rce fastjson, validador json seguro, herramienta comparacion json, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'guide-securite-json-vulnerabilite-fastjson',
+        title: 'Failles Fastjson RCE CVE-2026-16723 : Sécurisez vos Flux JSON',
+        description: 'En savoir plus sur la faille critique Fastjson RCE (CVE-2026-16723) d\'août 2026 et comment valider et comparer des JSON 100% côté client de manière sécurisée.',
+        keywords: 'faille fastjson, CVE-2026-16723, rce fastjson, validateur json securise, comparateur json en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'jwt-debugger-guide',
     title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix for JWT Debugging",
     description: "With Chrome's August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.",
