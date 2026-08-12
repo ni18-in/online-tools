@@ -1,7 +1,7 @@
 {
   "name": "online-tools",
   "version": "1.0.0",
-  "description": "**Online Tools** is a comprehensive collection of free, browser-based utilities designed to simplify daily tasks for developers, designers, content creators, and casual users.\r Access the live site here: [https://online-tools.ni18.in/](https://online-tools.ni18.in/)",
+  "description": "A collection of free, privacy-respecting browser-based utility tools. Everything runs client-side — no uploads, no server processing. Built with Astro + Material Web Components.",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -15,15 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nitinkanade/online-tools.git"
+    "url": "git+https://github.com/ni18-in/online-tools.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "online-tools",
+    "client-side",
+    "astro",
+    "material-web",
+    "static-site"
+  ],
+  "author": "ni18",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nitinkanade/online-tools/issues"
+    "url": "https://github.com/ni18-in/online-tools/issues"
   },
-  "homepage": "https://github.com/nitinkanade/online-tools#readme",
+  "homepage": "https://online-tools.ni18.in",
   "dependencies": {
     "@material/web": "^2.4.1",
     "astro": "^6.4.2",

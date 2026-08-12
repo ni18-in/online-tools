@@ -1,5 +1,95 @@
 # Identified Issues and Recommendations - Audit Status
 
+## Round 3: 2026-08-12 Post-migration audit (Astro site)
+
+A full scan of the built `dist/` (122 pages) for defects the existing gate did
+not cover. Four correctness bugs, then the gate was extended so each one fails
+the build from now on.
+
+### Fixed in this round
+
+#### Two French blog pages shipped completely blank
+`/fr/blogs/ai-beauty-test-free-online.html` and
+`/fr/blogs/guide-iphone-photo-fixer.html` rendered an empty `<article>`. The
+blog routes resolve partials by the **English** slug (`blog-<en-slug>/`), but
+those two directories were named after the French slug, so the lookup returned
+`''`. Directories renamed; `pick()` now takes `required=true` for `body.html`
+and throws during the build instead of emitting a blank page.
+
+#### Duplicate title + description on two blog pairs
+`basic-auth-header-guide` / `jwt-debugger-guide` (thin, ~2.5 KB) carried
+byte-identical titles *and* descriptions to `secure-basic-auth-header` /
+`chrome-privacy-shift-jwt-debugger` (~13 KB) — the same duplicate-signal class
+Round 2 blames for the deindexing. Consolidated onto the long articles; neither
+thin page had ever deployed, so no index equity was lost.
+
+#### Four `og:image` URLs pointed at files that were never committed
+The newest four posts referenced `/assets/blog/<slug>-banner.webp` with no such
+file, so social previews were broken. The consolidated posts' banners were
+repointed to the surviving articles; fastjson/heic reuse related banners.
+
+#### `<h1>` structure
+17 tool pages had **no** `h1` (their markup starts at `h2`) and
+`happy-new-year` had **two** in all three locales. `ToolLayout` now takes an
+optional visually-hidden `h1`; the hidden shared-wish heading became
+`h2.as-h1`, which inherits the `h1` styling across themes and breakpoints.
+
+#### SERP truncation
+45 titles >65 chars / descriptions >165 chars trimmed across en/es/fr. The gate
+reports 0 length warnings now. Stale "in 2025" markers in three blog titles
+were dropped rather than bumped.
+
+### Guard rails added (so Round 4 isn't a repeat)
+
+`scripts/verify-build.mjs` gained five hard checks — single `h1`, social image
+resolves, no duplicate titles/descriptions, non-empty main content, no broken
+internal links / missing `alt`. Each was negative-tested by injecting the
+defect into `dist` and confirming the gate fails.
+
+Playwright: the tool list is read from `src/data/tools.ts` instead of being
+hand-copied (it claimed 21 while holding 23), plus smoke coverage for all 42
+`es`/`fr` tool pages — each locale tool ships its own `body.html` + `script.js`,
+so a JS error in a localized copy was previously invisible. 74 tests (was 30).
+
+#### Two article heroes rendered a broken image
+The fastjson and heic posts referenced `/assets/blog/<slug>-banner.webp` from an
+inline `<img>` that was never committed. The gate had missed it because it only
+validated `og:image`; it now checks every local `<img src>` as well.
+
+#### Five image files were mislabeled
+`*-banner.webp` for screen-recorder, face-beauty, ai-love-calculator,
+secure-basic-auth and chrome-privacy-shift are **JPEGs** (confirmed via magic
+bytes), so they were served as `image/webp` while containing JFIF data. Renamed
+to `.jpg` with every reference updated across all three locales.
+
+### Investigated and dismissed
+
+- **Image CLS is NOT a problem.** A scan flagged 62 `<img>` without
+  `width`/`height`, but `.post-banner` is absolutely positioned at 100%/100%
+  with `object-fit: cover` inside a `padding-top: 56.25%` wrapper — the box is
+  already reserved, so the attributes would change nothing. The other 21 are
+  JS-populated preview elements for user-uploaded images, where a fixed
+  intrinsic size would be wrong. No change made.
+- **Per-tool smoke tests already existed.** Round 2 lists them as an open item;
+  the Playwright suite has covered every tool slug in a loop for some time.
+
+### Still open (deliberately not done here)
+
+- **The 5 JPEGs are 492–785 KB each** (~2.7 MB total) where the genuine webp
+  banners are 43–129 KB. Recompressing needs an encoder — no `cwebp`/ImageMagick
+  in this environment — so it wants its own PR adding `sharp` as a
+  devDependency. Biggest remaining payload win.
+- **Third-party tool libraries** load from `cdnjs`, `unpkg`, `jsdelivr` on 6
+  tools. A CDN outage breaks those tools, and it's third-party code on pages
+  that advertise "100% client-side". Vendoring them locally is the fix.
+- **Google Fonts** is still a render-blocking third-party request on every page.
+- **`GSC_VERIFICATION`** in `src/data/site.ts` is wired but empty — paste the
+  token from Search Console to emit the backup verification tag.
+- **Legacy hand-written HTML** still in the tree; delete after the Pages source
+  is switched to GitHub Actions.
+
+---
+
 ## Round 2: 2026-05-02 Indexability Recovery
 
 The site had disappeared from Google search results. A second SEO audit found

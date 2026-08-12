@@ -22,7 +22,7 @@ const seo: SeoProps = {
   jsonLd: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Convertidor PX a REM', applicationCategory: 'WebApplication', operatingSystem: 'All', url: `${SITE_URL}/es/tools/px-a-rem-convertidor/`, description: 'Una herramienta online simple y gratuita para convertir px a REM.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
 };
 ---
-<ToolLayout seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/px-to-rem-converter/` }} adMinHeight={120}>
+<ToolLayout h1="Convertidor PX a REM" seo={seo} lang="es" altLinks={{ en: `${SITE_URL}/tools/px-to-rem-converter/` }} adMinHeight={120}>
   <div class="tool-island" id="tool-tool-px-a-rem-convertidor" set:html={body} />
 </ToolLayout>
 <style is:global set:html={css}></style>

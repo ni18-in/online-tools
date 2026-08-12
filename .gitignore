@@ -22,3 +22,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 node_modules
+# stray dev-server output (was committed by accident)
+*.log
+http_server.log
+preview_server.log
+# local Claude Code permission state — machine-specific, not shared config
+.claude/settings.local.json

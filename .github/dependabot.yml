@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # npm deps. Astro/Tailwind/Playwright majors land as separate PRs so a breaking
+  # upgrade is reviewable on its own; everything else is grouped to cut PR noise.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        patterns: ['*']
+        update-types: [minor, patch]
+    commit-message:
+      prefix: 'chore(deps)'
+
+  # Action versions — these pin the deploy path, so keep them current.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: 'chore(actions)'

@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A static collection of browser-based utility tools deployed to GitHub Pages at `online-tools.ni18.in` (see `CNAME`). The `redesign/astro-md3` branch is a full **Astro 6 SSG + Material Web Components (MD3)** rewrite of what used to be hand-written HTML on `main`. All 48 pages (21 tools, homepage, `/tools/` listing, 8 blogs, about, 404, plus `/es/` + `/fr/` locales) have been migrated. `main` still holds the legacy hand-written HTML — until the Pages source is cut over, both coexist.
+A static collection of browser-based utility tools deployed to GitHub Pages at `online-tools.ni18.in` (see `CNAME`). The site is a full **Astro 6 SSG + Material Web Components (MD3)** rewrite of what used to be hand-written HTML. It builds **122 pages** — 23 tools, 14 blog posts, homepage, `/tools/` listing, `/blogs/` listing, about, 404, each mirrored across `/es/` + `/fr/` where a translation exists. The Astro source now lives on `main`; the legacy hand-written HTML is still in the tree (see "Legacy files" below) until the Pages source is cut over to GitHub Actions.
+
+Counts drift as tools and posts are added — `npm run verify` prints the live page/indexable/sitemap totals, so trust it over this paragraph.
 
 Tools remain client-side only. Don't introduce server calls or third-party data exfiltration — anything that touches user input (JSON, images, recordings) must stay in-browser.
 
@@ -14,7 +16,7 @@ Tools remain client-side only. Don't introduce server calls or third-party data 
 npm run dev            # astro dev server
 npm run build          # astro build → dist/
 npm run preview        # serve built dist/
-npm run verify         # build + verify-build.mjs (canonical / JSON-LD / URL / no-Tailwind-CDN gate)
+npm run verify         # build + verify-build.mjs (the full SEO/correctness gate — see below)
 npm run verify:build   # run gate alone against existing dist/
 npm run test:e2e       # Playwright (see tests/tools.spec.ts)
 npm run test:lh        # Lighthouse CI (lighthouserc.json) — non-blocking
@@ -62,7 +64,13 @@ CI (`.github/workflows/deploy.yml`) runs `verify` + Playwright on PRs and gates 
 `scripts/` are standalone Node/Bash helpers — no npm aliases for most:
 
 - `scripts/extract-legacy.mjs <slug> [src] [category]` — legacy-tool ingestion (see above).
-- `scripts/verify-build.mjs` — the build gate (wired as `verify:build`).
+- `scripts/verify-build.mjs` — the build gate (wired as `verify:build`). Hard-fails on: canonical
+  ≠ deployed path, invalid JSON-LD, sitemap/dist URL drift, a `cdn.tailwindcss.com` reference,
+  a page without exactly one `<h1>`, an `og:image`/`twitter:image` missing from `dist`, two
+  indexable pages sharing a title or description, an `<article>`/`<main>` that renders almost no
+  text (the blank-page guard), a broken internal link, or an `<img>` without `alt`. Title >65 /
+  description >165 chars are warnings, not failures. Each check exists because that exact defect
+  shipped once — don't weaken one without reading `ISSUES.md` Round 3.
 - `scripts/validate-jsonld.js`, `scripts/validate-canonicals.js`, `scripts/strip-jsonld-comments.js` — legacy validators, still useful when touching SEO across the locale tree.
 - `scripts/add-breadcrumbs.sh`, `scripts/optimize-images.sh` — Bash idempotent sweeps; need the Bash tool on Windows.
 

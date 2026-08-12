@@ -10,7 +10,7 @@ const tool = getTool('all-in-one-text-analyzer')!;
 const seo = toolSeo(tool, {
   title: 'All-in-One Text Analyzer - Professional Layout',
   description:
-    'Professional text analyzer tool: Get word count, character count, sentence count, paragraph count, reading time, readability score, and keyword frequency with a clean interface.',
+    'Professional text analyzer: word count, character count, sentence and paragraph count, reading time, readability score, and keyword frequency.',
   keywords:
     'text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis, professional text tool',
   appSchema: {
@@ -35,7 +35,7 @@ const seo = toolSeo(tool, {
 });
 const headRaw = '<script src="https://unpkg.com/lucide@latest"></script>';
 ---
-<ToolLayout seo={seo} lang="en" headRaw={headRaw}>
+<ToolLayout h1="All-in-One Text Analyzer" seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-all-in-one-text-analyzer" set:html={body} />
 </ToolLayout>
 

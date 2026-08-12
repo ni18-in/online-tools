@@ -5,8 +5,17 @@ import { blogPosts, blogSeo } from '../../../data/blogs';
 const bodies = import.meta.glob('../../../components/legacy/fr/blog-*/body.html', { query: '?raw', import: 'default', eager: true });
 const styles = import.meta.glob('../../../components/legacy/fr/blog-*/styles.css', { query: '?raw', import: 'default', eager: true });
 
-const pick = (map: Record<string, unknown>, slug: string, file: string): string => {
+// Partial dirs are named after the ENGLISH slug (blog-<en-slug>/), not the localized one.
+// A miss used to return '' and silently ship an empty <article> — two fr posts shipped blank
+// that way. `required` makes the build fail instead.
+const pick = (map: Record<string, unknown>, slug: string, file: string, required = false): string => {
   const key = Object.keys(map).find((p) => p.endsWith(`/blog-${slug}/${file}`));
+  if (!key && required) {
+    throw new Error(
+      `[fr/blogs] no ${file} for post '${slug}'. Expected src/components/legacy/fr/blog-${slug}/${file} ` +
+        `(directories are named after the English slug).`
+    );
+  }
   return key ? (map[key] as string) : '';
 };
 
@@ -20,7 +29,7 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const seo = blogSeo(post, 'fr');
-const body = pick(bodies, post.slug, 'body.html');
+const body = pick(bodies, post.slug, 'body.html', true);
 const css = pick(styles, post.slug, 'styles.css');
 ---
 <BlogLayout seo={seo} lang="fr">
