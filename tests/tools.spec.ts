@@ -1,15 +1,18 @@
 import { test, expect, type Page } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
 
-// All 21 migrated tool slugs. Smoke goal: each page loads, renders its preserved island,
-// and throws no uncaught page errors (catches set:html/scope/JS-wiring regressions).
-const TOOL_SLUGS = [
-  'advance-epoch-converter', 'ai-beauty-test', 'ai-love-calculator', 'all-in-one-text-analyzer',
-  'basic-authentication-header-generator', 'free-online-image-utility-tool', 'grade-calculator',
-  'guess-the-logo', 'happy-new-year', 'heic-viewer', 'iphone-photo-fixer', 'json-comparison-tool',
-  'json-visualizer-pro', 'jwt-debugger', 'markdown-to-word', 'mh-meter-price-calculator',
-  'next-gen-gst-reforms', 'online-text-compare', 'px-to-rem-converter', 'rem-to-px-converter',
-  'screen-recorder-pro', 'subtitle-resync-tool', 'vtf-converter',
-];
+// Slugs are read out of the catalog rather than hand-copied, so a newly added tool is smoke-tested
+// automatically and the list can never drift (it previously claimed 21 while holding 23).
+// Read as text — importing tools.ts would drag in its `.astro` type imports.
+const CATALOG = fs.readFileSync(path.resolve('src/data/tools.ts'), 'utf8');
+const TOOL_SLUGS = [...CATALOG.matchAll(/^ {4}slug: '([^']+)'/gm)].map((m) => m[1]);
+
+test('catalog parsed for smoke coverage', () => {
+  // Guards the regex above: if the catalog's formatting changes and this yields nothing,
+  // every per-tool test below would silently vanish instead of failing.
+  expect(TOOL_SLUGS.length).toBeGreaterThan(20);
+});
 
 function trackErrors(page: Page): string[] {
   const errors: string[] = [];
@@ -28,6 +31,37 @@ for (const slug of TOOL_SLUGS) {
     await expect(island).toHaveCount(1);
     await page.waitForTimeout(400); // let inline JS run
     expect(errors, `page errors on ${slug}: ${errors.join(' | ')}`).toEqual([]);
+  });
+}
+
+// ---- locale tool pages ----
+// Every es/fr tool ships its OWN copy of the body + script.js, so an error in a localized copy
+// used to be invisible: nothing executed those 42 pages. Island ids differ per page (some reuse
+// the English slug), so assert on structure rather than a specific id.
+const LOCALE_SLUGS: Array<[string, string]> = [];
+for (const locale of ['es', 'fr'] as const) {
+  const dir = path.resolve(`src/components/legacy/${locale}`);
+  for (const entry of fs.readdirSync(dir)) {
+    if (entry.startsWith('tool-')) LOCALE_SLUGS.push([locale, entry.slice('tool-'.length)]);
+  }
+}
+
+test('locale tool bodies discovered', () => {
+  expect(LOCALE_SLUGS.length).toBeGreaterThan(30);
+});
+
+for (const [locale, slug] of LOCALE_SLUGS) {
+  test(`locale tool loads without errors: ${locale}/${slug}`, async ({ page }) => {
+    const errors = trackErrors(page);
+    const res = await page.goto(`/${locale}/tools/${slug}/`);
+    expect(res?.status(), `HTTP status for /${locale}/tools/${slug}/`).toBeLessThan(400);
+    await expect(page.locator('.site-header')).toBeVisible();
+    await expect(page.locator('h1')).toHaveCount(1);
+    const island = page.locator('.tool-island');
+    await expect(island).toHaveCount(1);
+    expect((await island.innerText()).trim().length, 'tool island renders text').toBeGreaterThan(0);
+    await page.waitForTimeout(400); // let inline JS run
+    expect(errors, `page errors on ${locale}/${slug}: ${errors.join(' | ')}`).toEqual([]);
   });
 }
 
