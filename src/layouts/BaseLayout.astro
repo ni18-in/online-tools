@@ -12,7 +12,7 @@ import ThemeNoFlash from '../components/ThemeNoFlash.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { type Locale } from '../data/i18n';
-import { ADSENSE_CLIENT, SITE_URL } from '../data/site';
+import { ADSENSE_CLIENT, SITE_URL, GSC_VERIFICATION } from '../data/site';
 import { tools } from '../data/tools';
 import { blogPosts } from '../data/blogs';
 import '../styles/md3-tokens.css';
@@ -89,6 +89,7 @@ if (seo.canonical) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#4f46e5" />
+    {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />

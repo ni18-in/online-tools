@@ -42,7 +42,8 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/fastjson-vulnerability-json-security-guide-banner.webp`,
+    // No bespoke banner for this post; reuse the on-topic JSON tooling banner.
+    image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.webp`,
     author: 'ni18',
     i18n: {
       es: {
@@ -62,49 +63,27 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
-    slug: 'jwt-debugger-guide',
-    title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix for JWT Debugging",
-    description: "With Chrome's August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.",
-    keywords: 'jwt debugger, chrome privacy api, decode jwt, verify json web token, client-side jwt tool',
-    category: 'Developer',
-    datePublished: '2026-08-09T14:00:00+05:30',
-    dateModified: '2026-08-09T14:00:00+05:30',
-    image: '/assets/blog/jwt-debugger-guide-banner.webp',
-    author: 'ni18',
-  },
-  {
-    slug: 'basic-auth-header-guide',
-    title: 'Stop Leaking Credentials: Secure Basic Auth Header Guide',
-    description: 'Protect your API keys from leak reports. Learn how to generate secure HTTP Basic Authentication headers 100% client-side in your browser.',
-    keywords: 'basic auth header, http basic authentication, base64 auth header, generate basic auth, secure api headers',
-    category: 'Developer',
-    datePublished: '2026-08-09T14:00:00+05:30',
-    dateModified: '2026-08-09T14:00:00+05:30',
-    image: '/assets/blog/basic-auth-header-guide-banner.webp',
-    author: 'ni18',
-  },
-  {
     slug: 'screen-recorder-pro-guide',
-    title: 'How to Record Screen with Audio Online Free (No Watermark & 100% Private)',
-    description: 'Learn how to record your screen, browser window, or webcam with audio directly in your browser using Screen Recorder Pro. Free, client-side, no watermark, and zero uploads.',
+    title: 'Record Screen with Audio Online Free — No Watermark',
+    description: 'Record your screen, a browser window, or your webcam with audio directly in your browser. Free, client-side, no watermark, and zero uploads.',
     keywords: 'screen recorder online, free screen recorder no watermark, record screen with audio, browser screen recorder, private screen recorder',
     category: 'Productivity',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: '/assets/blog/screen-recorder-pro-guide-banner.webp',
+    image: '/assets/blog/screen-recorder-pro-guide-banner.jpg',
     author: 'ni18',
     i18n: {
       es: {
         slug: 'guia-screen-recorder-pro',
-        title: 'Cómo Grabar la Pantalla con Audio Gratis en Línea (Sin Marca de Agua y 100% Privado)',
+        title: 'Grabar Pantalla con Audio Gratis (Sin Marca de Agua)',
         description: 'Aprende a grabar tu pantalla, ventana o cámara web con audio directamente en tu navegador usando Screen Recorder Pro. Gratis, privado y sin marcas de agua.',
         keywords: 'grabar pantalla gratis, grabador de pantalla online, grabar pantalla con audio, grabador sin marca de agua, grabador de pantalla privado',
         category: 'Productividad'
       },
       fr: {
         slug: 'guide-screen-recorder-pro',
-        title: 'Comment Enregistrer son Écran avec le Son Gratuitement (Sans Filigrane & 100% Privé)',
-        description: 'Découvrez comment enregistrer votre écran, fenêtre ou webcam avec audio directement dans votre navigateur grâce à Screen Recorder Pro. Outil gratuit, sécurisé et sans filigrane.',
+        title: 'Enregistrer son Écran avec le Son Gratuitement',
+        description: 'Enregistrez votre écran, une fenêtre ou votre webcam avec le son directement dans votre navigateur. Gratuit, côté client et sans filigrane.',
         keywords: 'enregistrer son ecran gratuit, enregistreur d ecran en ligne, enregistrer ecran avec audio, enregistreur sans filigrane, enregistreur ecran prive',
         category: 'Productivité'
       }
@@ -112,7 +91,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'iphone-photo-fixer-guide',
-    title: 'How to Convert HEIC to JPG on PC Free (Offline & Private) - iPhone Photo Fixer Guide',
+    title: 'Convert HEIC to JPG on PC Free (Offline & Private)',
     description: 'Learn how to convert HEIC photos to JPG or PNG instantly on Windows PC using our free, offline, and private iPhone Photo Fixer tool.',
     keywords: 'heic to jpg, iphone photo fixer, convert heic, offline converter',
     category: 'Utility',
@@ -130,7 +109,7 @@ export const blogPosts: BlogPost[] = [
       },
       fr: {
         slug: 'guide-iphone-photo-fixer',
-        title: 'Comment Convertir HEIC en JPG sur PC Gratuitement (Hors Ligne & Privé)',
+        title: 'Convertir HEIC en JPG sur PC Gratuitement (Hors Ligne)',
         description: 'Découvrez comment convertir vos photos HEIC en JPG ou PNG instantanément sur Windows avec notre outil gratuit et local iPhone Photo Fixer.',
         keywords: 'heic en jpg, iphone photo fixer, convertir heic, convertisseur hors ligne',
         category: 'Utilitaire'
@@ -157,7 +136,7 @@ export const blogPosts: BlogPost[] = [
       },
       fr: {
         slug: 'guide-convertir-markdown-en-word',
-        title: 'Comment Convertir Markdown et ChatGPT en Word Gratuitement (Guide 2026)',
+        title: 'Convertir Markdown et ChatGPT en Word Gratuitement',
         description: 'Apprenez à convertir des fichiers Markdown et des réponses ChatGPT en documents Microsoft Word (.docx) avec notre outil en ligne gratuit.',
         keywords: 'markdown en word, chatgpt en word, convertisseur docx, guide markdown',
         category: 'Productivité'
@@ -166,7 +145,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'vtf-converter-guide',
-    title: 'Mastering VTF Conversion: A Free Online Tool for Source Engine Modders',
+    title: 'VTF Converter — Free Online Tool for Source Engine Mods',
     description: 'Convert images to Valve Texture Format (VTF) instantly with this free online tool. Perfect for CS:GO, TF2, and L4D2 modders.',
     keywords: 'vtf converter, valve texture format, source engine modding, texture tool',
     category: 'Development',
@@ -177,14 +156,14 @@ export const blogPosts: BlogPost[] = [
     i18n: {
       es: {
         slug: 'guia-convertidor-vtf',
-        title: 'Dominando la Conversión VTF: Herramienta Online para Modders del Source Engine',
+        title: 'Conversión VTF: Herramienta Online para Modders',
         description: 'Convierte imágenes a Valve Texture Format (VTF) al instante de forma gratuita. Ideal para modders de CS:GO, TF2 y L4D2.',
         keywords: 'convertidor vtf, valve texture format, modding source engine, texturas vtf',
         category: 'Desarrollo'
       },
       fr: {
         slug: 'guide-convertisseur-vtf',
-        title: 'Maîtriser la Conversion VTF : Outil en Ligne pour Moddeurs Source Engine',
+        title: 'Conversion VTF : Outil en Ligne pour Moddeurs Source',
         description: 'Convertissez des images en Valve Texture Format (VTF) instantanément avec cet outil gratuit. Parfait pour les moddeurs de CS:GO, TF2 et L4D2.',
         keywords: 'convertisseur vtf, valve texture format, modding source engine, outil texture',
         category: 'Développement'
@@ -193,7 +172,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'px-to-rem-converter',
-    title: 'Why You Should Be Using REMs and How Our PX to REM Converter Can Help',
+    title: 'Why Use REM Units — Free PX to REM Converter Guide',
     description: 'Learn why REM units are essential for modern, responsive web design and how our free PX to REM Converter can streamline your workflow.',
     keywords: 'px to rem, rem converter, responsive design, css units',
     category: 'Design',
@@ -204,14 +183,14 @@ export const blogPosts: BlogPost[] = [
     i18n: {
       es: {
         slug: 'convertidor-px-a-rem-guia',
-        title: 'Por Qué Deberías Usar REM y Cómo Nuestro Convertidor PX a REM Ayuda',
+        title: 'Por Qué Usar REM: Guía del Convertidor PX a REM',
         description: 'Descubre por qué las unidades REM son esenciales para el diseño web adaptativo y cómo nuestro convertidor PX a REM optimiza tu flujo de trabajo.',
         keywords: 'px a rem, convertidor rem, diseno responsivo, unidades css',
         category: 'Diseño'
       },
       fr: {
         slug: 'convertisseur-px-en-rem-guide',
-        title: 'Pourquoi Utiliser des REM et Comment Notre Convertisseur PX en REM Vous Aide',
+        title: 'Pourquoi Utiliser les REM : Convertisseur PX en REM',
         description: 'Découvrez pourquoi les unités REM sont essentielles pour le design web adaptatif et comment notre convertisseur PX en REM simplifie votre travail.',
         keywords: 'px en rem, convertisseur rem, design adaptatif, unites css',
         category: 'Design'
@@ -247,8 +226,8 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'edit-images-like-pro-free-online-tool',
-    title: 'Edit Images Like a Pro for Free with This Amazing Online Tool in 2025',
-    description: 'Learn how to edit images like a pro with a free, powerful online tool in 2025. Resize, crop, add text, and more—no downloads or costs. Perfect for beginners and pros alike!',
+    title: 'Edit Images Like a Pro, Free — Online Image Editor',
+    description: 'Learn how to edit images like a pro with a free online tool. Resize, crop, add text and more — no downloads, no cost, entirely in your browser.',
     keywords: 'image editor, free online tool, photo editing, resize image, crop image',
     category: 'Design',
     datePublished: '2025-04-05T18:00:00+05:30',
@@ -258,14 +237,14 @@ export const blogPosts: BlogPost[] = [
     i18n: {
       es: {
         slug: 'editar-imagenes-como-un-profesional-herramienta-gratuita-online',
-        title: 'Edita Imágenes como un Pro Gratis con esta Increíble Herramienta Online en 2025',
+        title: 'Edita Imágenes como un Pro Gratis: Editor Online',
         description: 'Aprende a editar imágenes como un profesional con una herramienta gratuita en línea en 2025. Redimensiona, recorta y optimiza fotos sin descargas ni costos.',
         keywords: 'editor de imagenes, herramienta online gratis, edicion de fotos, redimensionar imagen, recortar imagen',
         category: 'Diseño'
       },
       fr: {
         slug: 'edit-images-like-pro-free-online-tool',
-        title: 'Éditez des Images comme un Pro Gratuitement avec cet Outil en Ligne en 2025',
+        title: 'Éditez vos Images comme un Pro : Éditeur en Ligne',
         description: 'Apprenez à éditer des images comme un pro avec un outil en ligne gratuit et puissant en 2025. Redimensionnez, recadrez, ajoutez du texte et plus encore.',
         keywords: 'editeur d images, outil en ligne gratuit, retouche photo, redimensionner image, recadrer image',
         category: 'Design'
@@ -301,25 +280,25 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'chrome-privacy-shift-jwt-debugger',
-    title: 'Chrome\'s New Privacy API Broke My Workflow—Here\'s the Fix for JWT Debugging',
+    title: 'Chrome\'s Privacy API Broke JWT Debugging — Here\'s the Fix',
     description: 'With Chrome\'s August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.',
     keywords: 'chrome privacy update 2026, jwt debugger, client-side jwt, browser privacy api, developer tools',
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.webp`,
+    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.jpg`,
     author: 'ni18',
     i18n: {
       es: {
         slug: 'cambio-privacidad-chrome-depurador-jwt',
-        title: 'La Nueva API de Privacidad de Chrome Rompió mi Flujo—Aquí está la Solución para JWT',
+        title: 'La API de Privacidad de Chrome y JWT: la Solución',
         description: 'Con el cambio de privacidad de Chrome en agosto de 2026, la depuración de JWT del lado del cliente es esencial. Prueba nuestra herramienta gratuita.',
         keywords: 'actualizacion privacidad chrome 2026, depurador jwt, jwt lado del cliente, api privacidad navegador, herramientas desarrollador',
         category: 'Programación'
       },
       fr: {
         slug: 'changement-confidentialite-chrome-debogueur-jwt',
-        title: 'La Nouvelle API de Confidentialité de Chrome a Cassé mon Flux : La Solution pour JWT',
+        title: 'L\'API de Confidentialité de Chrome et JWT : la Solution',
         description: 'Avec le changement de confidentialité de Chrome en août 2026, le débogage JWT côté client est essentiel. Essayez notre outil gratuit.',
         keywords: 'mise a jour confidentialite chrome 2026, debogueur jwt, jwt cote client, api confidentialite navigateur, outils developpement',
         category: 'Développement'
@@ -334,7 +313,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.webp`,
+    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.jpg`,
     author: 'ni18',
     i18n: {
       es: {
@@ -361,7 +340,8 @@ export const blogPosts: BlogPost[] = [
     category: 'Media',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/chrome-firefox-heic-viewer-guide-banner.webp`,
+    // No bespoke banner for this post; reuse the on-topic iPhone/HEIC photo banner.
+    image: `${SITE_URL}/assets/blog/iphone-photo-fixer-guide-banner.webp`,
     author: 'ni18',
     i18n: {
       es: {
@@ -373,7 +353,7 @@ export const blogPosts: BlogPost[] = [
       },
       fr: {
         slug: 'guide-visualisateur-heic-chrome-firefox',
-        title: 'Comment Ouvrir et Voir des Photos HEIC sur Chrome & Firefox (2026)',
+        title: 'Ouvrir et Voir des Photos HEIC sur Chrome & Firefox',
         description: 'Impossible d\'ouvrir les fichiers HEIC sur Chrome ou Firefox ? Découvrez comment visualiser et convertir vos photos HEIC iPhone 100% en privé.',
         keywords: 'ouvrir heic chrome, voir heic firefox, comment voir heic en ligne, visualiseur heic iphone, convertisseur heic gratuit, ni18',
         category: 'Média'
@@ -389,7 +369,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-09T18:00:00+05:30',
     dateModified: '2026-01-09T18:00:00+05:30',
-    image: '/assets/blog/ai-love-calculator-banner.webp',
+    image: '/assets/blog/ai-love-calculator-banner.jpg',
     author: 'ni18',
     noindex: true,
   },
@@ -401,7 +381,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-06T18:00:00+05:30',
     dateModified: '2026-01-06T18:00:00+05:30',
-    image: '/assets/blog/face-beauty-test-banner.webp',
+    image: '/assets/blog/face-beauty-test-banner.jpg',
     author: 'ni18',
     noindex: true,
     i18n: {

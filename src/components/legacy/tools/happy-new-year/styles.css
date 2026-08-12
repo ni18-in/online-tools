@@ -63,7 +63,7 @@
     display: none;
 }
 
-#tool-happy-new-year h1 {
+#tool-happy-new-year h1, #tool-happy-new-year .as-h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     background: linear-gradient(to right, #ff9966, #ff5e62);
@@ -74,7 +74,7 @@
 }
 
 #tool-happy-new-year h1 .emoji,
-#tool-happy-new-year h2 .emoji {
+#tool-happy-new-year h2 .emoji, #tool-happy-new-year .as-h1 .emoji {
     background: none !important;
     background-clip: border-box !important;
     -webkit-background-clip: border-box !important;
@@ -312,7 +312,7 @@
 }
 
 @media (max-width: 480px) {
-    #tool-happy-new-year h1 {
+    #tool-happy-new-year h1, #tool-happy-new-year .as-h1 {
         font-size: 2rem;
     }
 
@@ -332,7 +332,7 @@
     --text-color: #fceea7;
 }
 
-#tool-happy-new-year .theme-golden h1 {
+#tool-happy-new-year .theme-golden h1, #tool-happy-new-year .theme-golden .as-h1 {
     background: linear-gradient(to right, #d4af37, #f1c40f, #fff);
     background-clip: text;
     -webkit-background-clip: text;
@@ -356,7 +356,7 @@
     --text-color: #ffffff;
 }
 
-#tool-happy-new-year .theme-neon h1 {
+#tool-happy-new-year .theme-neon h1, #tool-happy-new-year .theme-neon .as-h1 {
     text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
     background: white;
     background-clip: text;
@@ -380,7 +380,7 @@
     --text-color: #00334e;
 }
 
-#tool-happy-new-year .theme-snow h1 {
+#tool-happy-new-year .theme-snow h1, #tool-happy-new-year .theme-snow .as-h1 {
     background: linear-gradient(to right, #005c97, #363795);
     background-clip: text;
     -webkit-background-clip: text;
@@ -507,7 +507,7 @@
 }
 
 @media (max-width: 480px) {
-    #tool-happy-new-year h1 {
+    #tool-happy-new-year h1, #tool-happy-new-year .as-h1 {
         font-size: 2rem;
     }
 
@@ -527,7 +527,7 @@
     --text-color: #fceea7;
 }
 
-#tool-happy-new-year .theme-golden h1 {
+#tool-happy-new-year .theme-golden h1, #tool-happy-new-year .theme-golden .as-h1 {
     background: linear-gradient(to right, #d4af37, #f1c40f, #fff);
     background-clip: text;
     -webkit-background-clip: text;
@@ -551,7 +551,7 @@
     --text-color: #ffffff;
 }
 
-#tool-happy-new-year .theme-neon h1 {
+#tool-happy-new-year .theme-neon h1, #tool-happy-new-year .theme-neon .as-h1 {
     text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
     background: white;
     background-clip: text;
@@ -575,7 +575,7 @@
     --text-color: #00334e;
 }
 
-#tool-happy-new-year .theme-snow h1 {
+#tool-happy-new-year .theme-snow h1, #tool-happy-new-year .theme-snow .as-h1 {
     background: linear-gradient(to right, #005c97, #363795);
     background-clip: text;
     -webkit-background-clip: text;
