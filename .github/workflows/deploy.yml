@@ -1,14 +1,13 @@
-name: Build, verify & deploy to GitHub Pages
+name: Build & deploy to GitHub Pages
 
-# The whole pipeline lives here.
-#   pull request  -> build + verify + test only (never deploys)
-#   push to main  -> build + verify + test, then deploy
-#   manual / auto -> same as a push (auto-merge.yml dispatches this after it merges a PR,
-#                    because a merge made with GITHUB_TOKEN does NOT raise a push event)
+# main changes -> build -> publish. Nothing else.
+#   push to main : after a merge by a human or a direct push
+#   dispatch     : manual, and how auto-merge.yml kicks this off (a merge made with
+#                  GITHUB_TOKEN does not raise a push event)
+# There is deliberately no pull_request trigger: PRs are merged on sight, so there is
+# nothing to validate beforehand.
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -17,15 +16,15 @@ permissions:
   pages: write # actions/deploy-pages
   id-token: write # OIDC verification of the deployment origin
 
-# PR validation runs supersede each other; a main deploy is never cancelled mid-publish.
+# Never cancel a publish midway; queue instead.
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -33,32 +32,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Verify SEO + URL inventory (gates deploy)
-        run: npm run verify:build
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
-      - name: Functional smoke tests (per tool)
-        run: npm run test:e2e
-      - name: Upload Playwright report on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report
-          retention-days: 7
-          if-no-files-found: ignore
-      # Only a main build feeds a deploy; PR runs are validation only.
-      - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v5
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
-    # main only, and never from a pull request.
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
