@@ -42,7 +42,8 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/fastjson-vulnerability-json-security-guide-banner.webp`,
+    // No bespoke banner for this post; reuse the on-topic JSON tooling banner.
+    image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.webp`,
     author: 'ni18',
     i18n: {
       es: {
@@ -60,28 +61,6 @@ export const blogPosts: BlogPost[] = [
         category: 'Développement'
       }
     }
-  },
-  {
-    slug: 'jwt-debugger-guide',
-    title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix for JWT Debugging",
-    description: "With Chrome's August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.",
-    keywords: 'jwt debugger, chrome privacy api, decode jwt, verify json web token, client-side jwt tool',
-    category: 'Developer',
-    datePublished: '2026-08-09T14:00:00+05:30',
-    dateModified: '2026-08-09T14:00:00+05:30',
-    image: '/assets/blog/jwt-debugger-guide-banner.webp',
-    author: 'ni18',
-  },
-  {
-    slug: 'basic-auth-header-guide',
-    title: 'Stop Leaking Credentials: Secure Basic Auth Header Guide',
-    description: 'Protect your API keys from leak reports. Learn how to generate secure HTTP Basic Authentication headers 100% client-side in your browser.',
-    keywords: 'basic auth header, http basic authentication, base64 auth header, generate basic auth, secure api headers',
-    category: 'Developer',
-    datePublished: '2026-08-09T14:00:00+05:30',
-    dateModified: '2026-08-09T14:00:00+05:30',
-    image: '/assets/blog/basic-auth-header-guide-banner.webp',
-    author: 'ni18',
   },
   {
     slug: 'screen-recorder-pro-guide',
@@ -361,7 +340,8 @@ export const blogPosts: BlogPost[] = [
     category: 'Media',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/chrome-firefox-heic-viewer-guide-banner.webp`,
+    // No bespoke banner for this post; reuse the on-topic iPhone/HEIC photo banner.
+    image: `${SITE_URL}/assets/blog/iphone-photo-fixer-guide-banner.webp`,
     author: 'ni18',
     i18n: {
       es: {

@@ -45,7 +45,7 @@ const seo: SeoProps = {
 };
 const headRaw = "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">";
 ---
-<ToolLayout seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/jwt-debugger/`, es: `${SITE_URL}/es/tools/jwt-debugger/` }} headRaw={headRaw} adMinHeight={120}>
+<ToolLayout h1="Débogueur et inspecteur JWT" seo={seo} lang="fr" altLinks={{ en: `${SITE_URL}/tools/jwt-debugger/`, es: `${SITE_URL}/es/tools/jwt-debugger/` }} headRaw={headRaw} adMinHeight={120}>
   <div class="tool-island legacy-tw" id="tool-jwt-debugger" set:html={body} />
 </ToolLayout>
 <style is:global set:html={css}></style>

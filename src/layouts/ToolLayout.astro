@@ -24,6 +24,12 @@ export interface Props {
   adMinHeight?: number;
   /** Load Google Material Icons font (only needed by legacy tools that use the icon font). */
   materialIcons?: boolean;
+  /**
+   * Visually-hidden <h1> for tools whose own markup starts at <h2>. Every page needs exactly
+   * one h1 for SEO/a11y; pass this ONLY when the tool body has none, or you create a second.
+   * verify-build.mjs enforces the exactly-one rule, so a mistake here fails the build.
+   */
+  h1?: string;
 }
 const {
   seo,
@@ -34,6 +40,7 @@ const {
   ad = true,
   adMinHeight = 280,
   materialIcons = false,
+  h1,
 } = Astro.props;
 
 // Only load Material Icons font when a tool actually uses the icon font (screen-recorder-pro, online-text-compare).
@@ -42,6 +49,7 @@ const finalHeadRaw = (headRaw || '') + materialIconsLink;
 ---
 <BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={finalHeadRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
+    {h1 && <h1 class="sr-only">{h1}</h1>}
     <slot />
     {scriptSrcs.map((src) => <script is:inline src={src}></script>)}
     {ad && <AdSlot placement="below-content" minHeight={adMinHeight} class="tool-ad" />}

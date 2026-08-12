@@ -6,8 +6,13 @@ import { blogPosts, blogSeo } from '../../data/blogs';
 const bodies = import.meta.glob('../../components/legacy/blogs/*/body.html', { query: '?raw', import: 'default', eager: true });
 const styles = import.meta.glob('../../components/legacy/blogs/*/styles.css', { query: '?raw', import: 'default', eager: true });
 const scripts = import.meta.glob('../../components/legacy/blogs/*/script.js', { query: '?raw', import: 'default', eager: true });
-const pick = (map: Record<string, unknown>, slug: string, file: string): string => {
+// A miss returns '' — harmless for optional styles/scripts, but an empty body ships a blank
+// page, so pass required=true for body.html and fail the build instead.
+const pick = (map: Record<string, unknown>, slug: string, file: string, required = false): string => {
   const key = Object.keys(map).find((p) => p.endsWith(`/blogs/${slug}/${file}`));
+  if (!key && required) {
+    throw new Error(`[blogs] no ${file} for post '${slug}'. Expected src/components/legacy/blogs/${slug}/${file}.`);
+  }
   return key ? (map[key] as string) : '';
 };
 
@@ -17,7 +22,7 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const seo = blogSeo(post);
-const body = pick(bodies, post.slug, 'body.html');
+const body = pick(bodies, post.slug, 'body.html', true);
 const css = pick(styles, post.slug, 'styles.css');
 const js = pick(scripts, post.slug, 'script.js');
 ---
