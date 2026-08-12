@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fastjson-vulnerability-json-security-guide',
+    title: 'Fastjson RCE Bug CVE-2026-16723: Secure Your JSON Workflows Now',
+    description: 'Learn about the critical Fastjson RCE vulnerability (CVE-2026-16723) in August 2026 and how to securely validate and diff JSON entirely client-side.',
+    keywords: 'fastjson vulnerability, CVE-2026-16723, fastjson rce, secure json validator, json comparison tool, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/fastjson-vulnerability-json-security-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-seguridad-json-vulnerabilidad-fastjson',
+        title: 'Vulnerabilidad Fastjson CVE-2026-16723: Protege tus Flujos JSON',
+        description: 'Descubre la vulnerabilidad crítica de Fastjson RCE (CVE-2026-16723) de agosto de 2026 y cómo validar y comparar JSON de forma segura 100% local.',
+        keywords: 'vulnerabilidad fastjson, CVE-2026-16723, rce fastjson, validador json seguro, herramienta comparacion json, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'guide-securite-json-vulnerabilite-fastjson',
+        title: 'Failles Fastjson RCE CVE-2026-16723 : Sécurisez vos Flux JSON',
+        description: 'En savoir plus sur la faille critique Fastjson RCE (CVE-2026-16723) d\'août 2026 et comment valider et comparer des JSON 100% côté client de manière sécurisée.',
+        keywords: 'faille fastjson, CVE-2026-16723, rce fastjson, validateur json securise, comparateur json en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'jwt-debugger-guide',
     title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix for JWT Debugging",
     description: "With Chrome's August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.",
@@ -242,6 +269,114 @@ export const blogPosts: BlogPost[] = [
         description: 'Apprenez à éditer des images comme un pro avec un outil en ligne gratuit et puissant en 2025. Redimensionnez, recadrez, ajoutez du texte et plus encore.',
         keywords: 'editeur d images, outil en ligne gratuit, retouche photo, redimensionner image, recadrer image',
         category: 'Design'
+      }
+    }
+  },
+  {
+    slug: 'private-screen-recorder-no-software-guide',
+    title: 'How to Record Screen Privately in Browser Without Software',
+    description: 'Learn how to record your screen privately in any browser without software or extensions using our free, offline-ready Screen Recorder Pro tool.',
+    keywords: 'private screen recording, record screen without software, browser screen recorder, online screen recorder, no extension screen recorder',
+    category: 'Media',
+    datePublished: '2026-03-04T12:00:00+05:30',
+    dateModified: '2026-03-04T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/private-screen-recorder-no-software-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-grabador-pantalla-privado-sin-software',
+        title: 'Cómo Grabar Pantalla Privado en el Navegador sin Software',
+        description: 'Aprende cómo grabar tu pantalla de forma privada en el navegador sin instalar programas o extensiones con nuestro Screen Recorder Pro gratuito.',
+        keywords: 'grabar pantalla sin software, grabador de pantalla online, grabar pantalla gratis navegador, grabador pantalla privado',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'guide-enregistreur-ecran-prive-sans-logiciel',
+        title: 'Comment Enregistrer son Écran Privé sans Logiciel',
+        description: 'Apprenez à enregistrer votre écran de manière privée dans votre navigateur sans installer de logiciel ou d' + "'extension avec Screen Recorder Pro.",
+        keywords: 'enregistrer ecran sans logiciel, enregistreur ecran en ligne, enregistreur ecran gratuit, enregistreur ecran prive',
+        category: 'Média'
+      }
+    }
+  },
+  {
+    slug: 'chrome-privacy-shift-jwt-debugger',
+    title: 'Chrome\'s New Privacy API Broke My Workflow—Here\'s the Fix for JWT Debugging',
+    description: 'With Chrome\'s August 2026 privacy shift, client-side JWT debugging is now essential. Try our free browser tool—zero uploads, instant results.',
+    keywords: 'chrome privacy update 2026, jwt debugger, client-side jwt, browser privacy api, developer tools',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cambio-privacidad-chrome-depurador-jwt',
+        title: 'La Nueva API de Privacidad de Chrome Rompió mi Flujo—Aquí está la Solución para JWT',
+        description: 'Con el cambio de privacidad de Chrome en agosto de 2026, la depuración de JWT del lado del cliente es esencial. Prueba nuestra herramienta gratuita.',
+        keywords: 'actualizacion privacidad chrome 2026, depurador jwt, jwt lado del cliente, api privacidad navegador, herramientas desarrollador',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'changement-confidentialite-chrome-debogueur-jwt',
+        title: 'La Nouvelle API de Confidentialité de Chrome a Cassé mon Flux : La Solution pour JWT',
+        description: 'Avec le changement de confidentialité de Chrome en août 2026, le débogage JWT côté client est essentiel. Essayez notre outil gratuit.',
+        keywords: 'mise a jour confidentialite chrome 2026, debogueur jwt, jwt cote client, api confidentialite navigateur, outils developpement',
+        category: 'Développement'
+      }
+    }
+  },
+  {
+    slug: 'secure-basic-auth-header',
+    title: 'Stop Leaking Credentials: Secure Basic Auth Header Guide',
+    description: 'Protect your API keys from leak reports. Learn how to generate secure HTTP Basic Authentication headers 100% client-side in your browser.',
+    keywords: 'basic authentication header, stop leaking credentials, secure basic auth, client-side header generator, http basic authentication',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-encabezado-autenticacion-basica',
+        title: 'Evita Fugas de Credenciales: Guía de Encabezado Basic Auth',
+        description: 'Protege tus claves API contra filtraciones. Genera encabezados de autenticación básica HTTP 100% en el lado del cliente y de forma segura.',
+        keywords: 'encabezado autenticacion basica, evitar fuga de credenciales, basic auth seguro, generador de encabezado cliente, autenticacion basica http',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'securite-entete-authentification-basique',
+        title: 'Évitez les Fuites d\'Identifiants : Guide de l\'Entête Basic Auth',
+        description: 'Protégez vos clés API des fuites de données. Générez des en-têtes d\'authentification Basic HTTP 100% côté client de manière sécurisée.',
+        keywords: 'entete authentification basique, eviter fuite identifiants, basic auth securise, generateur entete cote client, authentification basique http',
+        category: 'Développement'
+      }
+    }
+  },
+  {
+    slug: 'chrome-firefox-heic-viewer-guide',
+    title: 'How to Open and View HEIC Photos on Chrome & Firefox Free (2026)',
+    description: 'Still unable to open HEIC files on Chrome or Firefox in August 2026? Learn how to view and convert iPhone HEIC photos online 100% privately.',
+    keywords: 'open heic chrome, view heic firefox, how to view heic online, iphone heic viewer, free offline heic converter, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-firefox-heic-viewer-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-visor-heic-chrome-firefox',
+        title: 'Cómo Abrir y Ver Fotos HEIC en Chrome y Firefox Gratis (2026)',
+        description: '¿Aún no puedes abrir archivos HEIC en Chrome o Firefox? Aprende a ver y convertir fotos HEIC de iPhone en línea de forma 100% privada.',
+        keywords: 'abrir heic chrome, ver heic firefox, como ver heic online, visor heic iphone, convertidor heic offline gratis, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'guide-visualisateur-heic-chrome-firefox',
+        title: 'Comment Ouvrir et Voir des Photos HEIC sur Chrome & Firefox (2026)',
+        description: 'Impossible d\'ouvrir les fichiers HEIC sur Chrome ou Firefox ? Découvrez comment visualiser et convertir vos photos HEIC iPhone 100% en privé.',
+        keywords: 'ouvrir heic chrome, voir heic firefox, comment voir heic en ligne, visualiseur heic iphone, convertisseur heic gratuit, ni18',
+        category: 'Média'
       }
     }
   },

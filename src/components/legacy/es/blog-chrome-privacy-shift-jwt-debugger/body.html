@@ -1,0 +1,147 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        La Nueva API de Privacidad de Chrome Rompió mi Flujo—Aquí está la Solución para JWT
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Programación</span>
+      </p>
+      <img src="/assets/blog/chrome-privacy-shift-jwt-debugger-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Herramienta JWT Debugger ejecutándose del lado del cliente en un navegador" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Imagen+No+Encontrada';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>Tras la actualización de Google Chrome en agosto de 2026 que integra una privacidad más estricta, enviar tokens a servidores externos es cada vez más restringido y riesgoso.</li>
+        <li>Los desarrolladores están teniendo problemas con el bloqueo de la transmisión de tokens entre sitios durante el desarrollo, lo que obstaculiza las herramientas de depuración tradicionales.</li>
+        <li>Nuestro Depurador JWT, 100% del lado del cliente, te permite analizar, inspeccionar y verificar tokens instantáneamente en tu navegador sin ninguna carga a servidores.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        A medida que Google implementa sus últimas características del I/O 2026 en las versiones estables de Chrome este mes de agosto, incluyendo capacidades web agénticas más profundas y controles de privacidad más estrictos, los desarrolladores se dan cuenta de que los flujos de trabajo tradicionales de depuración se están rompiendo. Probamos varios escenarios de desarrollo comunes, y algo quedó claro de inmediato: manejar de manera descuidada los JSON Web Tokens (JWT) utilizando servicios externos es un camino rápido hacia solicitudes bloqueadas y seguridad comprometida.
+      </p>
+      <p>
+        El cambio hacia APIs que preservan la privacidad y el golpe final a las cookies de terceros significan que los navegadores están examinando agresivamente cómo se transmiten los encabezados de autorización y los tokens. Si has estado dependiendo de sitios web de terceros que envían tus JWT sensibles a un servidor backend solo para decodificarlos, no solo estás arriesgando fugas de datos, sino que también podrías encontrar tu flujo de trabajo interrumpido por las políticas modernas de seguridad del navegador.
+      </p>
+      <p>
+        Para resolver esto sin instalar software de escritorio ni subir datos sensibles a la nube, nuestra utilidad gratuita de navegador <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> se ejecuta completamente del lado del cliente, lo que significa que tus tokens nunca salen de tu dispositivo.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Por Qué la Actualización de Chrome de Agosto de 2026 Importa Ahora</h2>
+      <p>Con la versión 148 de Chrome (y actualizaciones posteriores) empujando los límites de las capacidades web con agentes de IA, el perímetro de seguridad en torno a datos sensibles como los tokens de autenticación se ha endurecido significativamente. El navegador ahora desalienta activamente la transmisión de tokens al portador a través de orígenes a menos que estén configurados explícita y estrictamente.</p>
+      <p>Para ti como desarrollador, esto significa que el viejo hábito de copiar un JWT de producción o pruebas y pegarlo en un decodificador en línea arbitrario es más peligroso que nunca. Si esos decodificadores procesan el token del lado del servidor, esencialmente están capturando tu sesión. En un mundo donde los agentes de navegador podrían interactuar de manera autónoma con formularios y APIs, asegurar que tus tokens no estén flotando en registros de servidores de terceros es fundamental.</p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">El Problema con las Soluciones Tradicionales de JWT</h2>
+      <p>Muchas de las herramientas populares de decodificación de JWT en el mercado son pesadas, requieren registro o, lo peor de todo, procesan la carga útil en su backend. Este enfoque presenta varios problemas evidentes:</p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Riesgo de Privacidad:</strong> Enviar un token que contiene Información de Identificación Personal (PII) o reclamos de sesión activa a un servidor externo viola los estándares modernos de cumplimiento y los principios de confianza cero.</li>
+        <li><strong>Costo de Rendimiento:</strong> Esperar un viaje de ida y vuelta al servidor para decodificar una simple cadena codificada en Base64 es innecesario y ralentiza tu ciclo de depuración.</li>
+        <li><strong>Compatibilidad:</strong> Las pesadas aplicaciones de escritorio utilizadas como alternativas a menudo consumen enormes cantidades de RAM y requieren actualizaciones constantes.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Ventajas Clave de Nuestra Herramienta del Lado del Cliente</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% del Lado del Cliente:</strong> Todo el procesamiento, decodificación y verificación de firmas ocurre directamente en la memoria de tu navegador. Cero cargas al servidor. Cero filtración de datos. Cero registros.</li>
+        <li><strong>⚡ Cero Instalación y Acceso Instantáneo:</strong> Abre la página y comienza a trabajar de inmediato. Sin registros, sin descargas, sin bloatware.</li>
+        <li><strong>🚀 Alto Rendimiento:</strong> Decodifica cadenas codificadas en URL Base64 al instante utilizando APIs web modernas.</li>
+        <li><strong>🌐 Compatible con Cualquier Navegador:</strong> Funciona sin problemas en Chrome, Firefox, Safari y Edge.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guía de Flujo de Trabajo Paso a Paso</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la página del <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador JWT</a> en cualquier navegador moderno.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Pega tu token JSON Web codificado en el área de entrada. La herramienta detectará y dividirá instantáneamente el token en su Encabezado, Carga Útil y Firma.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Inspecciona el JSON decodificado para verificar que tus reclamos (como `exp`, `sub` o roles personalizados) sean correctos sin que se realicen solicitudes de red.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Si tienes la clave secreta, puedes ingresarla opcionalmente para verificar la firma criptográficamente, todo hecho localmente en tu navegador.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Consejos Pro para Depuración Avanzada de JWT</h2>
+      <p>Al trabajar con las fechas de expiración (`exp`) o emitido en (`iat`), a menudo necesitas convertir la marca de tiempo de Unix a una fecha legible por humanos. Puedes combinar fácilmente el Depurador JWT con nuestro <a href="/es/tools/advance-epoch-converter/" class="text-indigo-600 hover:underline">Convertidor Avanzado de Epoch</a> para verificar exactamente cuándo expira tu token. Además, como la herramienta es completamente del lado del cliente, puedes usarla de forma segura en una ventana de incógnito, asegurando que una vez cerrada la ventana, los datos de tu token se eliminen completamente de la memoria.</p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusión y Primeros Pasos</h2>
+      <p>A medida que evolucionan las políticas de privacidad de los navegadores en agosto de 2026, los desarrolladores deben adaptarse adoptando herramientas que respeten la ejecución local y la soberanía de los datos. No te arriesgues a filtrar los tokens de seguridad de tu aplicación a servidores de terceros solo para leer un payload.</p>
+      <p class="mt-4">
+        <a href="/es/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Inicia el Depurador JWT Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿El Depurador JWT envía mi token a un servidor?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">No. Nuestro Depurador JWT funciona 100% del lado del cliente. Tus tokens se decodifican directamente en tu navegador usando JavaScript, y no se envían datos a nuestros servidores.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Cómo afectan las actualizaciones de Chrome de agosto de 2026 a los desarrolladores?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Las recientes actualizaciones de Chrome imponen controles de privacidad más estrictos y restricciones de intercambio de datos entre sitios, lo que hace arriesgado y a veces difícil usar herramientas basadas en servidores de terceros para manejar encabezados de autorización sensibles.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Puedo verificar la firma de mi JWT?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Sí. Si proporcionas la clave secreta, la herramienta realizará una comprobación criptográfica localmente en tu navegador para verificar que la firma del token sea válida y no haya sido alterada.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Esta herramienta es compatible con todos los navegadores?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Absolutamente. Dado que depende de APIs Web estándar y JavaScript, funciona a la perfección en las versiones modernas de Chrome, Firefox, Safari y Edge.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Por qué elegir esto en lugar de un software de escritorio?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Las aplicaciones de escritorio requieren instalación, ocupan espacio de almacenamiento y necesitan actualizaciones periódicas. Nuestra herramienta web te brinda las mismas capacidades al instante, directamente desde tu navegador, con las mismas garantías de privacidad ya que procesa todo localmente.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navegación de la publicación">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>
