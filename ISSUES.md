@@ -51,10 +51,34 @@ hand-copied (it claimed 21 while holding 23), plus smoke coverage for all 42
 `es`/`fr` tool pages — each locale tool ships its own `body.html` + `script.js`,
 so a JS error in a localized copy was previously invisible. 74 tests (was 30).
 
+#### Two article heroes rendered a broken image
+The fastjson and heic posts referenced `/assets/blog/<slug>-banner.webp` from an
+inline `<img>` that was never committed. The gate had missed it because it only
+validated `og:image`; it now checks every local `<img src>` as well.
+
+#### Five image files were mislabeled
+`*-banner.webp` for screen-recorder, face-beauty, ai-love-calculator,
+secure-basic-auth and chrome-privacy-shift are **JPEGs** (confirmed via magic
+bytes), so they were served as `image/webp` while containing JFIF data. Renamed
+to `.jpg` with every reference updated across all three locales.
+
+### Investigated and dismissed
+
+- **Image CLS is NOT a problem.** A scan flagged 62 `<img>` without
+  `width`/`height`, but `.post-banner` is absolutely positioned at 100%/100%
+  with `object-fit: cover` inside a `padding-top: 56.25%` wrapper — the box is
+  already reserved, so the attributes would change nothing. The other 21 are
+  JS-populated preview elements for user-uploaded images, where a fixed
+  intrinsic size would be wrong. No change made.
+- **Per-tool smoke tests already existed.** Round 2 lists them as an open item;
+  the Playwright suite has covered every tool slug in a loop for some time.
+
 ### Still open (deliberately not done here)
 
-- **CLS**: 62 `<img>` without `width`/`height`, 24 without `loading`. Needs the
-  intrinsic dimensions of each asset; worth a dedicated pass.
+- **The 5 JPEGs are 492–785 KB each** (~2.7 MB total) where the genuine webp
+  banners are 43–129 KB. Recompressing needs an encoder — no `cwebp`/ImageMagick
+  in this environment — so it wants its own PR adding `sharp` as a
+  devDependency. Biggest remaining payload win.
 - **Third-party tool libraries** load from `cdnjs`, `unpkg`, `jsdelivr` on 6
   tools. A CDN outage breaks those tools, and it's third-party code on pages
   that advertise "100% client-side". Vendoring them locally is the fix.
