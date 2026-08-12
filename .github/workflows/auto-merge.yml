@@ -1,5 +1,8 @@
 name: Auto-Merge Pull Requests
 
+# Runs as pull_request_target so forked PRs still get a write-scoped token.
+# NOTE: this workflow must never check out or execute PR code — it only calls
+# the GitHub API with the PR number.
 on:
   pull_request_target:
     types:
@@ -9,15 +12,85 @@ on:
       - ready_for_review
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write # squash-merge + delete branch
+  pull-requests: write # enable auto-merge
+  actions: write # dispatch deploy.yml after the merge lands
+
+# One waiter per PR — a new push to the PR replaces the previous waiter.
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   enable-automerge:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR: ${{ github.event.pull_request.number }}
+      REPO: ${{ github.repository }}
+      BASE: ${{ github.event.pull_request.base.ref }}
     steps:
-      - name: Enable GitHub Native Auto-Merge
+      # `--auto` needs "Allow auto-merge" enabled in repo settings and at least
+      # one required status check. If either is missing, fall back to a direct
+      # squash merge (which the branch protection rules still gate).
+      - name: Enable auto-merge (fall back to direct squash)
         run: |
-          gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --delete-branch --repo "${{ github.repository }}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          set -uo pipefail
+          if gh pr merge "$PR" --auto --squash --delete-branch --repo "$REPO"; then
+            echo "Auto-merge enabled for PR #$PR."
+          else
+            echo "::warning::--auto was rejected (auto-merge disabled, or no required checks). Trying a direct squash merge."
+            gh pr merge "$PR" --squash --delete-branch --repo "$REPO"
+          fi
+
+      # A merge performed with GITHUB_TOKEN does NOT create a push workflow run,
+      # so deploy.yml never fires on main after an auto-merge. Wait for the merge
+      # to land, then trigger the deploy explicitly — workflow_dispatch is the one
+      # event type that IS delivered when GITHUB_TOKEN is the actor.
+      - name: Wait for merge, then dispatch the Pages deploy
+        if: env.BASE == 'main'
+        run: |
+          set -uo pipefail
+          deadline=$(( $(date +%s) + 45 * 60 ))
+
+          while [ "$(date +%s)" -lt "$deadline" ]; do
+            # Tolerate transient API failures: an empty read just retries.
+            info="$(gh pr view "$PR" --repo "$REPO" \
+              --json state,mergeStateStatus \
+              -q '[.state, .mergeStateStatus] | @tsv' 2>/dev/null || true)"
+
+            if [ -n "$info" ]; then
+              IFS=$'\t' read -r state merge_state <<<"$info"
+
+              case "$state" in
+                MERGED)
+                  echo "PR #$PR merged into main — dispatching deploy.yml."
+                  for attempt in 1 2 3; do
+                    if gh workflow run deploy.yml --repo "$REPO" --ref main; then
+                      echo "Deploy dispatched (attempt $attempt)."
+                      exit 0
+                    fi
+                    sleep 10
+                  done
+                  echo "::error::PR #$PR merged but dispatching deploy.yml failed 3x. Run the deploy workflow manually on main."
+                  exit 1
+                  ;;
+                CLOSED)
+                  echo "PR #$PR was closed without merging — nothing to deploy."
+                  exit 0
+                  ;;
+              esac
+
+              # Auto-merge will never fire while the PR is unmergeable.
+              if [ "$merge_state" = "DIRTY" ]; then
+                echo "::warning::PR #$PR has merge conflicts — auto-merge is parked until they are resolved."
+                exit 0
+              fi
+            fi
+
+            sleep 20
+          done
+
+          echo "::warning::PR #$PR still open after 45m (checks failing or review pending). Once it merges, run 'Build, verify & deploy to GitHub Pages' manually on main."

@@ -3,26 +3,28 @@ name: Build, verify & deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Auto-merges are performed by GITHUB_TOKEN, which suppresses the push event
+  # above — auto-merge.yml dispatches this workflow on main instead.
+  workflow_dispatch:
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
-# Allow the GITHUB_TOKEN to deploy to Pages + verify the deployment origin + merge PRs.
 permissions:
-  contents: write
-  pages: write
-  id-token: write
-  pull-requests: write
+  contents: read
+  pages: write # actions/deploy-pages
+  id-token: write # OIDC verification of the deployment origin
 
-# Serialize per ref so PR validation runs don't cancel a production deploy.
+# Serialize per ref. PR validation runs supersede each other; a main deploy is
+# never cancelled mid-publish.
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # Runs on PRs AND main: builds, runs the SEO/URL gate + functional tests, uploads the artifact.
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,19 +40,30 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Functional smoke tests (per tool)
         run: npm run test:e2e
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+          if-no-files-found: ignore
+      # Only the main build feeds a deploy; PR runs are validation only.
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
-  # Deploys ONLY from main (push or manual dispatch) — never from a pull request.
+  # Deploys ONLY from main (push or manual/auto-merge dispatch) — never from a pull request.
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-
