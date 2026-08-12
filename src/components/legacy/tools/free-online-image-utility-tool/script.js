@@ -177,6 +177,10 @@
             // Clear UI
             infoFilename.textContent = 'N/A'; infoOrigSize.textContent = 'N/A'; infoOrigDims.textContent = 'N/A';
             imgDimensions.textContent = 'N/A'; estimatedSizeSpan.textContent = 'N/A';
+            // looked up directly: the `const` below is still in TDZ on the init call, and
+            // `typeof` does not shield you from that — it throws for let/const.
+            const deltaEl = document.getElementById('size-delta');
+            if (deltaEl) deltaEl.textContent = '';
             previewPlaceholder.style.display = 'block'; canvas.style.display = 'none'; cropperImage.style.display = 'none';
             ctx.clearRect(0, 0, canvas.width, canvas.height); fileInput.value = null;
             // Reset UI elements
@@ -262,22 +266,27 @@
             if (cropperInstance) return;
 
             if (!currentImage) { console.warn("drawCurrentImageToCanvas called with no currentImage."); return; }
-            updateImageDetails(currentWidth, currentHeight);
+
+            // The border preview must match what Apply produces. Apply GROWS the canvas by
+            // 2*width and insets the image; the preview used to strokeRect INSIDE the existing
+            // canvas, which covered the image edges and showed the wrong output dimensions.
+            const previewBorder = (activeTool === 'border') ? Math.max(0, parseInt(borderWidthInput.value, 10) || 0) : 0;
+            const drawWidth = currentWidth + previewBorder * 2;
+            const drawHeight = currentHeight + previewBorder * 2;
+
+            updateImageDetails(drawWidth, drawHeight);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.filter = 'none'; ctx.globalAlpha = 1.0; ctx.strokeStyle = 'transparent';
+
+            if (previewBorder > 0) { ctx.fillStyle = borderColorInput.value; ctx.fillRect(0, 0, drawWidth, drawHeight); }
 
             let filters = 'none';
             if (activeTool === 'adjust') { filters = [`brightness(${brightnessSlider.value}%)`, `contrast(${contrastSlider.value}%)`, `saturate(${saturationSlider.value}%)`, `grayscale(${grayscaleSlider.value}%)`, `sepia(${sepiaSlider.value}%)`, `blur(${blurSlider.value}px)`].join(' '); }
             ctx.filter = filters;
 
-            try { ctx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); }
+            try { ctx.drawImage(currentImage, previewBorder, previewBorder, currentWidth, currentHeight); }
             catch (e) { console.error("Error drawing image:", e); showMessage("Error displaying preview.", "error", 5000); previewPlaceholder.style.display = 'block'; canvas.style.display = 'none'; showLoading(false); return; }
             ctx.filter = 'none';
-
-            if (activeTool === 'border') {
-                const borderWidth = parseInt(borderWidthInput.value, 10);
-                if (!isNaN(borderWidth) && borderWidth > 0) { ctx.strokeStyle = borderColorInput.value; ctx.lineWidth = borderWidth; ctx.strokeRect(borderWidth / 2, borderWidth / 2, currentWidth - borderWidth, currentHeight - borderWidth); }
-            }
             if (activeTool === 'text') { const text = textInput.value; if (text) drawText(ctx, text, currentWidth, currentHeight); }
 
             previewPlaceholder.style.display = 'none'; canvas.style.display = 'block';
@@ -294,7 +303,7 @@
                 currentAspectRatio = (currentHeight > 0) ? currentWidth / currentHeight : 1;
                 drawCurrentImageToCanvas(); // Redraw canvas with the new image
                 pushHistoryState(); // Push history *after* successful update and redraw
-                updateEstimatedSize(); showLoading(false);
+                showLoading(false); updateEstimatedSize(); // order matters — see handleFileSelect
                 if (callback) callback();
             };
             img.onerror = (err) => { console.error("Error loading image object:", err); showMessage('Error processing applied changes.', 'error', 5000); showLoading(false); };
@@ -321,7 +330,10 @@
                     infoOrigDims.textContent = `${originalWidth} x ${originalHeight} px`;
                     drawCurrentImageToCanvas(); pushHistoryState(); // Save initial state
                     showMessage('Image loaded.', 'success'); exportPanel.classList.add('active');
-                    updateEstimatedSize(); showLoading(false);
+                    // showLoading(false) must come first: updateEstimatedSize() bails out while
+                    // isProcessing is true, which is why the estimate read "N/A" until you
+                    // happened to touch the format or quality control.
+                    showLoading(false); updateEstimatedSize();
                 };
                 img.onerror = (err) => { console.error("Error loading initial image object:", err); showMessage('Could not load image.', 'error', 5000); resetAppState(); showLoading(false); };
                 img.src = imageDataUrl;
@@ -478,14 +490,27 @@
         function updateAdjustmentPreview() { /* ... (no changes) ... */ if (!currentImage || isProcessing || activeTool !== 'adjust') return; drawCurrentImageToCanvas(); }
         function resetAdjustmentSliders(redraw = true) { /* ... (no changes) ... */ brightnessSlider.value = 100; contrastSlider.value = 100; saturationSlider.value = 100; grayscaleSlider.value = 0; sepiaSlider.value = 0; blurSlider.value = 0; brightnessValue.textContent = '100'; contrastValue.textContent = '100'; saturationValue.textContent = '100'; grayscaleValue.textContent = '0'; sepiaValue.textContent = '0'; blurValue.textContent = '0'; if (redraw && currentImage) drawCurrentImageToCanvas(); }
         [brightnessSlider, contrastSlider, saturationSlider, grayscaleSlider, sepiaSlider, blurSlider].forEach(slider => { slider.addEventListener('input', (e) => { const valueSpanId = `${e.target.id.split('-')[0]}-value`; document.getElementById(valueSpanId).textContent = e.target.value; debounce(updateAdjustmentPreview, 50); }); });
-        applyAdjustBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const currentFilters = [`brightness(${brightnessSlider.value}%)`, `contrast(${contrastSlider.value}%)`, `saturate(${saturationSlider.value}%)`, `grayscale(${grayscaleSlider.value}%)`, `sepia(${sepiaSlider.value}%)`, `blur(${blurSlider.value}px)`].join(' '); const isDefault = brightnessSlider.value == 100 && contrastSlider.value == 100 && saturationSlider.value == 100 && grayscaleSlider.value == 0 && sepiaSlider.value == 0 && blurSlider.value == 0; if (isDefault) { showMessage('No adjustments applied.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.filter = currentFilters; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Adjustments applied.', 'success')); });
+        applyAdjustBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const currentFilters = [`brightness(${brightnessSlider.value}%)`, `contrast(${contrastSlider.value}%)`, `saturate(${saturationSlider.value}%)`, `grayscale(${grayscaleSlider.value}%)`, `sepia(${sepiaSlider.value}%)`, `blur(${blurSlider.value}px)`].join(' '); const isDefault = brightnessSlider.value == 100 && contrastSlider.value == 100 && saturationSlider.value == 100 && grayscaleSlider.value == 0 && sepiaSlider.value == 0 && blurSlider.value == 0; if (isDefault) { showMessage('No adjustments applied.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.filter = currentFilters; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => {
+            // The filters are now baked into the pixels, so the sliders must return to neutral.
+            // They used to stay where you left them, which both misreported the image's state and
+            // silently re-applied the same adjustment on every further click (200% -> 400% -> ...).
+            resetAdjustmentSliders(false);
+            showMessage('Adjustments applied.', 'success');
+        }); });
         resetAdjustBtn.addEventListener('click', () => resetAdjustmentSliders(true));
 
 
         // -- Border --
         function updateBorderPreview() { /* ... (no changes) ... */ if (!currentImage || isProcessing || activeTool !== 'border') return; drawCurrentImageToCanvas(); }
         [borderWidthInput, borderColorInput].forEach(input => { input.addEventListener('input', () => debounce(updateBorderPreview, 100)); });
-        applyBorderBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const borderWidth = parseInt(borderWidthInput.value, 10); const borderColor = borderColorInput.value; if (isNaN(borderWidth) || borderWidth < 0) { showMessage('Invalid border width.', 'error'); return; } if (borderWidth === 0) { showMessage('Border width is zero.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const newWidth = currentWidth + borderWidth * 2; const newHeight = currentHeight + borderWidth * 2; tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.fillStyle = borderColor; tempCtx.fillRect(0, 0, newWidth, newHeight); tempCtx.drawImage(currentImage, borderWidth, borderWidth, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => showMessage('Border applied.', 'success')); });
+        applyBorderBtn.addEventListener('click', () => { /* ... (no changes, uses updateCurrentImageFromDataURL) ... */ if (!currentImage || isProcessing) return; const borderWidth = parseInt(borderWidthInput.value, 10); const borderColor = borderColorInput.value; if (isNaN(borderWidth) || borderWidth < 0) { showMessage('Invalid border width.', 'error'); return; } if (borderWidth === 0) { showMessage('Border width is zero.', 'info'); return; } showLoading(true); const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); const newWidth = currentWidth + borderWidth * 2; const newHeight = currentHeight + borderWidth * 2; tempCanvas.width = newWidth; tempCanvas.height = newHeight; tempCtx.fillStyle = borderColor; tempCtx.fillRect(0, 0, newWidth, newHeight); tempCtx.drawImage(currentImage, borderWidth, borderWidth, currentWidth, currentHeight); updateCurrentImageFromDataURL(tempCanvas.toDataURL('image/png'), () => {
+            // The border is now part of the image. Zero the input so the live preview stops
+            // drawing a SECOND border on top of the baked one (which made the canvas look
+            // 2x thicker than the real result), then redraw to show the true output.
+            borderWidthInput.value = 0;
+            drawCurrentImageToCanvas();
+            showMessage('Border applied.', 'success');
+        }); });
 
 
         // -- Text Tool (Enhanced) --
@@ -576,11 +601,140 @@
 
 
         // -- Export / Download --
-        function updateEstimatedSize() { /* ... (no changes) ... */ if (!currentImage || isProcessing) { estimatedSizeSpan.textContent = 'N/A'; return; } setTimeout(() => { if (!currentImage) return; const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; let dataUrl; try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') dataUrl = tempCanvas.toDataURL('image/png'); else if (format === 'image/jpeg') dataUrl = tempCanvas.toDataURL('image/jpeg', quality); else if (format === 'image/webp') dataUrl = tempCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); else { estimatedSizeSpan.textContent = 'Error'; return; } const base64Length = dataUrl.length - dataUrl.indexOf(',') - 1; const approxBytes = Math.ceil(base64Length * 0.75); estimatedSizeSpan.textContent = `~ ${formatBytes(approxBytes)}`; } catch (error) { console.error("Size estimation error:", error); estimatedSizeSpan.textContent = 'Error'; } }, 10); }
+        function updateEstimatedSize() { /* ... (no changes) ... */ if (!currentImage || isProcessing) { estimatedSizeSpan.textContent = 'N/A'; return; } setTimeout(() => { if (!currentImage) return; const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; let dataUrl; try { const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d'); tempCanvas.width = currentWidth; tempCanvas.height = currentHeight; tempCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') dataUrl = tempCanvas.toDataURL('image/png'); else if (format === 'image/jpeg') dataUrl = tempCanvas.toDataURL('image/jpeg', quality); else if (format === 'image/webp') dataUrl = tempCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); else { estimatedSizeSpan.textContent = 'Error'; return; } const base64Length = dataUrl.length - dataUrl.indexOf(',') - 1; const approxBytes = Math.ceil(base64Length * 0.75); estimatedSizeSpan.textContent = `~ ${formatBytes(approxBytes)}`; updateSizeDelta(approxBytes); } catch (error) { console.error("Size estimation error:", error); estimatedSizeSpan.textContent = 'Error'; } }, 10); }
         convertFormatSelect.addEventListener('change', () => { const format = convertFormatSelect.value; const isLossy = format === 'image/jpeg' || (format === 'image/webp' && !webpLosslessCheckbox.checked); qualityOptionDiv.classList.toggle('hidden', !isLossy); webpOptionsDiv.classList.toggle('hidden', format !== 'image/webp'); debounce(updateEstimatedSize, 200); });
         webpLosslessCheckbox.addEventListener('change', () => { convertFormatSelect.dispatchEvent(new Event('change')); });
         convertQualitySlider.addEventListener('input', (e) => { qualityValue.textContent = e.target.value; debounce(updateEstimatedSize, 200); });
         downloadBtn.addEventListener('click', () => { /* ... (no changes) ... */ if (!currentImage || isProcessing) { showMessage('No image to download.', 'info'); return; } const format = convertFormatSelect.value; const quality = parseInt(convertQualitySlider.value, 10) / 100; const filename = (downloadFilenameInput.value || 'edited-image').replace(/[^a-z0-9_\-.]/gi, '_'); let finalFilename = filename; let fileExtension = ''; let dataUrl; try { showLoading(true); const finalCanvas = document.createElement('canvas'); const finalCtx = finalCanvas.getContext('2d'); finalCanvas.width = currentWidth; finalCanvas.height = currentHeight; finalCtx.drawImage(currentImage, 0, 0, currentWidth, currentHeight); if (format === 'image/png') { dataUrl = finalCanvas.toDataURL('image/png'); fileExtension = '.png'; } else if (format === 'image/jpeg') { dataUrl = finalCanvas.toDataURL('image/jpeg', quality); fileExtension = '.jpg'; } else if (format === 'image/webp') { dataUrl = finalCanvas.toDataURL('image/webp', webpLosslessCheckbox.checked ? 1.0 : quality); fileExtension = '.webp'; } else { showMessage('Unsupported format.', 'error'); showLoading(false); return; } if (!finalFilename.toLowerCase().endsWith(fileExtension)) finalFilename += fileExtension; const link = document.createElement('a'); link.href = dataUrl; link.download = finalFilename; document.body.appendChild(link); link.click(); document.body.removeChild(link); showMessage('Download started.', 'success'); } catch (error) { console.error("Download Error:", error); showMessage(`Error generating image: ${error.message}`, 'error'); } finally { showLoading(false); } });
+
+        // ---------------------------------------------------------------------------
+        // Input convenience: paste, drop-anywhere, keyboard shortcuts
+        // Drag & drop previously only worked on the small upload label, and there was no way
+        // to paste a screenshot or undo from the keyboard.
+        // ---------------------------------------------------------------------------
+        const toolRoot = document.getElementById('tool-free-online-image-utility-tool');
+
+        document.addEventListener('paste', (e) => {
+            const items = e.clipboardData && e.clipboardData.items;
+            if (!items) return;
+            for (const item of items) {
+                if (item.kind === 'file' && item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    if (file) { e.preventDefault(); handleFileSelect(file); showMessage('Image pasted from clipboard.', 'success'); }
+                    return;
+                }
+            }
+        });
+
+        if (toolRoot) {
+            let dragDepth = 0;
+            const setDragState = (on) => toolRoot.classList.toggle('iu-drop-active', on);
+            toolRoot.addEventListener('dragenter', (e) => { e.preventDefault(); dragDepth++; setDragState(true); });
+            toolRoot.addEventListener('dragover', (e) => { e.preventDefault(); });
+            // dragleave fires for child elements too, so count enters/leaves instead of toggling.
+            toolRoot.addEventListener('dragleave', () => { dragDepth = Math.max(0, dragDepth - 1); if (!dragDepth) setDragState(false); });
+            toolRoot.addEventListener('drop', (e) => {
+                e.preventDefault(); dragDepth = 0; setDragState(false);
+                const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+                if (file) handleFileSelect(file);
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const el = document.activeElement;
+            // never steal Ctrl+Z etc. from a field the user is typing in
+            if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+            if (e.key === 'Escape' && cropperInstance) { e.preventDefault(); cancelCropBtn.click(); return; }
+            if (!(e.ctrlKey || e.metaKey)) return;
+            const k = e.key.toLowerCase();
+            if (k === 'z' && !e.shiftKey) { if (!undoBtn.disabled) { e.preventDefault(); undoBtn.click(); } }
+            else if ((k === 'z' && e.shiftKey) || k === 'y') { if (!redoBtn.disabled) { e.preventDefault(); redoBtn.click(); } }
+        });
+
+        // ---------------------------------------------------------------------------
+        // Export: savings readout + compress-to-target-size
+        // ---------------------------------------------------------------------------
+        const sizeDeltaSpan = document.getElementById('size-delta');
+        const targetSizeEnabled = document.getElementById('target-size-enabled');
+        const targetSizeControls = document.getElementById('target-size-controls');
+        const targetSizeKbInput = document.getElementById('target-size-kb');
+        const findQualityBtn = document.getElementById('find-quality-btn');
+
+        /** Shows how the estimated export compares with the file the user brought in. */
+        function updateSizeDelta(bytes) {
+            if (!sizeDeltaSpan) return;
+            const orig = originalFileData && originalFileData.size;
+            if (!orig || !bytes) { sizeDeltaSpan.textContent = ''; return; }
+            const pct = Math.round((1 - bytes / orig) * 100);
+            if (pct > 0) { sizeDeltaSpan.textContent = `(${pct}% smaller)`; sizeDeltaSpan.className = 'ml-1 text-green-600 dark:text-green-400'; }
+            else if (pct < 0) { sizeDeltaSpan.textContent = `(${Math.abs(pct)}% larger)`; sizeDeltaSpan.className = 'ml-1 text-amber-600 dark:text-amber-400'; }
+            else { sizeDeltaSpan.textContent = '(about the same)'; sizeDeltaSpan.className = 'ml-1 text-slate-500'; }
+        }
+
+        if (targetSizeEnabled) {
+            targetSizeEnabled.addEventListener('change', () => {
+                targetSizeControls.classList.toggle('hidden', !targetSizeEnabled.checked);
+            });
+        }
+
+        /** Encodes the current image at `quality` and resolves its real byte length. */
+        function encodedSize(format, quality) {
+            return new Promise((resolve) => {
+                const c = document.createElement('canvas');
+                c.width = currentWidth; c.height = currentHeight;
+                c.getContext('2d').drawImage(currentImage, 0, 0, currentWidth, currentHeight);
+                c.toBlob((blob) => resolve(blob ? blob.size : Infinity), format, quality);
+            });
+        }
+
+        if (findQualityBtn) {
+            findQualityBtn.addEventListener('click', async () => {
+                if (!currentImage || isProcessing) { showMessage('Load an image first.', 'info'); return; }
+                const targetKb = parseFloat(targetSizeKbInput.value);
+                if (!isFinite(targetKb) || targetKb <= 0) { showMessage('Enter a target size in KB.', 'error'); return; }
+                const targetBytes = targetKb * 1024;
+
+                // PNG is lossless — quality is meaningless, so move to a lossy format.
+                let format = convertFormatSelect.value;
+                if (format === 'image/png') {
+                    format = 'image/jpeg';
+                    convertFormatSelect.value = format;
+                    convertFormatSelect.dispatchEvent(new Event('change'));
+                    showMessage('Switched to JPG — PNG cannot be compressed to a size target.', 'info', 4000);
+                }
+                if (format === 'image/webp' && webpLosslessCheckbox.checked) {
+                    webpLosslessCheckbox.checked = false;
+                    webpLosslessCheckbox.dispatchEvent(new Event('change'));
+                }
+
+                showLoading(true);
+                try {
+                    // Is it even reachable at the lowest quality?
+                    const floorSize = await encodedSize(format, 0.01);
+                    if (floorSize > targetBytes) {
+                        showMessage(`Cannot reach ${targetKb} KB at these dimensions (smallest is ${formatBytes(floorSize)}). Resize the image first.`, 'error', 6000);
+                        return;
+                    }
+                    // Binary search the highest quality that still fits.
+                    let lo = 1, hi = 100, best = 1, bestSize = floorSize;
+                    for (let i = 0; i < 8 && lo <= hi; i++) {
+                        const mid = Math.floor((lo + hi) / 2);
+                        const size = await encodedSize(format, mid / 100);
+                        if (size <= targetBytes) { best = mid; bestSize = size; lo = mid + 1; }
+                        else { hi = mid - 1; }
+                    }
+                    convertQualitySlider.value = best;
+                    qualityValue.textContent = String(best);
+                    updateEstimatedSize();
+                    showMessage(`Quality ${best}% fits your budget — about ${formatBytes(bestSize)}.`, 'success', 5000);
+                } catch (err) {
+                    console.error('Target-size search failed:', err);
+                    showMessage('Could not compute a quality for that size.', 'error');
+                } finally {
+                    showLoading(false);
+                }
+            });
+        }
 
         // --- Initial Setup ---
         resetAppState(); // Initialize the UI correctly

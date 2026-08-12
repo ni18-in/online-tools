@@ -21,6 +21,19 @@
             display: none;
         }
 
+        /* Whole-tool drop target. Dropping used to work only on the small upload label, so a
+           file released anywhere else navigated away from the page. */
+        #tool-free-online-image-utility-tool.iu-drop-active {
+            outline: 3px dashed #3b82f6;
+            outline-offset: 4px;
+            background-color: rgba(59, 130, 246, 0.06);
+        }
+
+        #tool-free-online-image-utility-tool.iu-drop-active .file-input-label {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.08);
+        }
+
         /* Canvas Styling */
         #tool-free-online-image-utility-tool #canvas-container {
             /* Added container */
@@ -64,24 +77,36 @@
             color: white;
         }
 
-        #tool-free-online-image-utility-tool .lucide {
+        /* Inline SVG icons (see the <symbol> sprite at the top of the body). These replaced
+           `<i class="lucide ...">` placeholders that rendered nothing — no icon library was
+           ever loaded on this page, so all 17 were empty boxes with a stray right margin. */
+        #tool-free-online-image-utility-tool .iu-icon {
             vertical-align: middle;
             display: inline-block;
             width: 1.1em;
             height: 1.1em;
             margin-right: 0.35rem;
-            stroke-width: 2;
+            flex-shrink: 0;
         }
 
-        #tool-free-online-image-utility-tool button .lucide {
+        #tool-free-online-image-utility-tool button .iu-icon {
             width: 1em;
             height: 1em;
         }
 
-        #tool-free-online-image-utility-tool #header-actions button .lucide {
+        #tool-free-online-image-utility-tool #header-actions button .iu-icon {
             margin-right: 0.15rem;
             width: 1.1em;
             height: 1.1em;
+        }
+
+        /* The upload affordance's cloud icon is decorative and large. */
+        #tool-free-online-image-utility-tool .file-input-label .iu-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            margin: 0 auto 0.5rem;
+            display: block;
+            color: #94a3b8;
         }
 
         #tool-free-online-image-utility-tool #message-box {
@@ -305,9 +330,43 @@
             color: var(--md-sys-color-on-primary) !important;
         }
         #tool-free-online-image-utility-tool button#cancel-crop-btn,
-        #tool-free-online-image-utility-tool button#reset-adjust-btn {
+        #tool-free-online-image-utility-tool button#reset-adjust-btn,
+        /* "Find best quality" supports the Download action rather than competing with it. */
+        #tool-free-online-image-utility-tool button#find-quality-btn {
             background-color: var(--md-sys-color-secondary-container) !important;
             color: var(--md-sys-color-on-secondary-container) !important;
+        }
+
+        /* The target-size divider used a fixed light slate, which showed up as a bright line
+           in dark mode. MD3 outline token follows the theme. */
+        #tool-free-online-image-utility-tool #target-size-block {
+            border-top-color: var(--md-sys-color-outline-variant) !important;
+        }
+
+        /* Touch targets. On a phone the 7 tool buttons were 26px tall and the toolbar actions
+           24px — well under the ~44px a finger needs. Scoped to coarse pointers so the compact
+           desktop layout is untouched. */
+        @media (pointer: coarse) {
+
+            #tool-free-online-image-utility-tool .tool-button {
+                min-height: 44px;
+            }
+
+            #tool-free-online-image-utility-tool #header-actions button {
+                min-height: 44px;
+                padding: 0 10px;
+            }
+
+            #tool-free-online-image-utility-tool .crop-aspect-btn {
+                min-height: 40px;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            /* Range inputs are hard to grab at the default track height. */
+            #tool-free-online-image-utility-tool input[type="range"] {
+                height: 28px;
+            }
         }
 
         /* Crop aspect buttons */
