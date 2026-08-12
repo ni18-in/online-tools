@@ -12,6 +12,16 @@ updates:
       minor-and-patch:
         patterns: ['*']
         update-types: [minor, patch]
+    ignore:
+      # Build-critical majors, opted out of automation on purpose.
+      # tailwindcss v4 moved its PostCSS plugin to @tailwindcss/postcss and stopped reading
+      # tailwind.config.mjs, so an auto-merged v3->v4 bump broke `npm run build` on main
+      # outright. astro majors can change build.format/trailingSlash, i.e. the URL contract
+      # verify-build.mjs enforces. Both need a deliberate migration PR, not a bot bump.
+      - dependency-name: tailwindcss
+        update-types: [version-update:semver-major]
+      - dependency-name: astro
+        update-types: [version-update:semver-major]
     commit-message:
       prefix: 'chore(deps)'
 
