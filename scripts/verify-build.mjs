@@ -96,9 +96,12 @@ for (const f of htmlFiles) {
     if (text.length < 40) fail.push(`${rel}: <${region[1]}> renders almost no text (${text.length} chars) — blank page?`);
   }
 
-  // (9) alt text + internal link collection
+  // (9) alt text, and every local <img src> must resolve — two article heroes rendered a
+  // broken image because only og:image was ever checked.
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     if (!/\salt=/.test(m[0])) fail.push(`${rel}: <img> without alt`);
+    const src = (m[0].match(/\ssrc="([^"]+)"/) || [])[1];
+    if (src && src.startsWith('/') && !resolves(src)) fail.push(`${rel}: <img src> file missing — ${src}`);
   }
   for (const m of html.matchAll(/<a\b[^>]*href="(\/[^"]*)"/g)) {
     if (!linkSources.has(m[1])) linkSources.set(m[1], new Set());

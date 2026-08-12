@@ -70,7 +70,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Productivity',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: '/assets/blog/screen-recorder-pro-guide-banner.webp',
+    image: '/assets/blog/screen-recorder-pro-guide-banner.jpg',
     author: 'ni18',
     i18n: {
       es: {
@@ -286,7 +286,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.webp`,
+    image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.jpg`,
     author: 'ni18',
     i18n: {
       es: {
@@ -313,7 +313,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Developer',
     datePublished: '2026-08-09T12:00:00+05:30',
     dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.webp`,
+    image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.jpg`,
     author: 'ni18',
     i18n: {
       es: {
@@ -369,7 +369,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-09T18:00:00+05:30',
     dateModified: '2026-01-09T18:00:00+05:30',
-    image: '/assets/blog/ai-love-calculator-banner.webp',
+    image: '/assets/blog/ai-love-calculator-banner.jpg',
     author: 'ni18',
     noindex: true,
   },
@@ -381,7 +381,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Fun',
     datePublished: '2026-01-06T18:00:00+05:30',
     dateModified: '2026-01-06T18:00:00+05:30',
-    image: '/assets/blog/face-beauty-test-banner.webp',
+    image: '/assets/blog/face-beauty-test-banner.jpg',
     author: 'ni18',
     noindex: true,
     i18n: {
