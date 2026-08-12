@@ -1,23 +1,85 @@
-name: Auto-Merge Pull Requests
+name: Auto-merge green PRs
 
+# Runs AFTER the build workflow finishes on a pull request. That ordering is the whole point:
+#   * it can only ever merge a PR whose build, SEO gate and Playwright tests already passed,
+#   * it needs no polling and no idle runner (the old version sat in a wait loop),
+#   * it is not a PR status check, so it can never paint a PR red,
+#   * it does not depend on the "Allow auto-merge" repo setting.
+#
+# It also dispatches the deploy explicitly: a merge performed with GITHUB_TOKEN does NOT raise
+# a push event, so deploy.yml would otherwise never fire on main. workflow_dispatch is the one
+# event GitHub still delivers when GITHUB_TOKEN is the actor.
 on:
-  pull_request_target:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
+  workflow_run:
+    workflows: ['Build, verify & deploy to GitHub Pages']
+    types: [completed]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write # squash-merge + delete branch
+  pull-requests: write # read PR state, merge
+  actions: write # dispatch deploy.yml
 
 jobs:
-  enable-automerge:
+  merge-and-deploy:
+    # Only for a *successful* build of a *pull request*.
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      SHA: ${{ github.event.workflow_run.head_sha }}
     steps:
-      - name: Enable GitHub Native Auto-Merge
+      - name: Merge the PR this build belongs to, then deploy
         run: |
-          gh pr merge "${{ github.event.pull_request.number }}" --auto --squash --delete-branch --repo "${{ github.repository }}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          set -uo pipefail
+
+          # Resolve the PR from the commit the build ran on. This API works for fork PRs too,
+          # where github.event.workflow_run.pull_requests comes back empty.
+          # `// empty` on a no-match yields no output, which the -z check below handles.
+          # One field per line, read with mapfile. NOT @tsv + `read`: tab is IFS whitespace, so
+          # bash collapses consecutive tabs and an unlabelled PR (an empty field) would shift
+          # every later field left — author would arrive holding the association.
+          mapfile -t f < <(gh api "repos/$REPO/commits/$SHA/pulls" \
+            --jq '.[0] // empty | [(.number|tostring), .state, (.draft|tostring), .base.ref, ([.labels[]?.name]|join(",")), (.user.login//""), (.author_association//"")] | .[]' \
+            2>/dev/null || true)
+
+          if [ "${#f[@]}" -lt 7 ]; then echo "No PR for $SHA — nothing to merge."; exit 0; fi
+          number="${f[0]}"; state="${f[1]}"; draft="${f[2]}"; base="${f[3]}"
+          labels="${f[4]}"; author="${f[5]}"; association="${f[6]}"
+          echo "PR #$number | state=$state draft=$draft base=$base author=$author ($association) labels=${labels:-none}"
+
+          # Only auto-merge work that already belongs to this repo or Dependabot. Without this,
+          # anyone could open a fork PR that passes CI and have it merged and published to the
+          # live site with no human ever looking at it.
+          trusted=no
+          case "$association" in OWNER|MEMBER|COLLABORATOR) trusted=yes ;; esac
+          case "$author" in dependabot|dependabot\[bot\]) trusted=yes ;; esac
+          if [ "$trusted" != "yes" ]; then
+            echo "::warning::PR #$number is from $author ($association) — not auto-merging. Review and merge it yourself."
+            exit 0
+          fi
+
+          if [ "$state" != "open" ]; then echo "PR #$number is not open."; exit 0; fi
+          if [ "$draft" = "true" ]; then echo "PR #$number is a draft — leaving it alone."; exit 0; fi
+          if [ "$base" != "main" ]; then echo "PR #$number targets '$base', not main."; exit 0; fi
+          case ",$labels," in
+            *,hold,*|*,do-not-merge,*|*,wip,*)
+              echo "PR #$number carries a blocking label — leaving it alone."; exit 0 ;;
+          esac
+
+          if ! gh pr merge "$number" --squash --delete-branch --repo "$REPO"; then
+            echo "::warning::Could not merge PR #$number (conflicts, or a branch rule blocked it). Nothing deployed."
+            exit 0
+          fi
+          echo "Merged PR #$number."
+
+          for attempt in 1 2 3; do
+            if gh workflow run deploy.yml --repo "$REPO" --ref main; then
+              echo "Deploy dispatched on main (attempt $attempt)."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::PR #$number merged but dispatching deploy.yml failed. Run it manually on main."
+          exit 1
