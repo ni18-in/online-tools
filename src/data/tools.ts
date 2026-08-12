@@ -92,7 +92,7 @@ export const tools: Tool[] = [
   {
     slug: 'guess-the-logo',
     name: 'Guess the Logo - Fun Brand Quiz Game',
-    description: 'Test your brand knowledge with Guess the Logo! A fun and addictive quiz game with multiple modes, difficulty levels, and endless logo challenges. Play now in your browser!',
+    description: 'Test your brand knowledge with Guess the Logo — a fun quiz game with multiple modes, difficulty levels, and endless logo challenges. Play in your browser.',
     category: 'fun',
     schemaType: 'VideoGame',
     applicationCategory: 'Game',
@@ -228,7 +228,7 @@ export const tools: Tool[] = [
   {
     slug: 'grade-calculator',
     name: 'Universal Grade Calculator',
-    description: 'The fastest and easiest universal weighted grade calculator. Define categories, add assignments, and get your grade instantly.',
+    description: 'The fastest universal weighted grade calculator. Define categories, add assignments, and get your real-time course grade. Built for students and teachers.',
     category: 'calculator',
     schemaType: 'WebApplication',
     applicationCategory: 'EducationalApplication',
@@ -455,11 +455,11 @@ export const TOOL_TRANSLATIONS: Record<
   'all-in-one-text-analyzer': {
     es: {
       name: 'Analizador de Texto Todo en Uno',
-      description: 'Analizador de texto profesional: obtén el recuento de palabras, caracteres, oraciones, párrafos, tiempo de lectura, puntuación de legibilidad y frecuencia de palabras clave.'
+      description: 'Analizador de texto profesional: recuento de palabras, caracteres, oraciones y párrafos, tiempo de lectura, legibilidad y frecuencia de palabras clave.'
     },
     fr: {
       name: 'Analyseur de texte tout-en-un',
-      description: 'Analyseur de texte professionnel : obtenez le nombre de mots, de caractères, de phrases, de paragraphes, le temps de lecture, le score de lisibilité et la fréquence des mots-clés.'
+      description: 'Analyseur de texte professionnel : nombre de mots, caractères, phrases et paragraphes, temps de lecture, score de lisibilité et fréquence des mots-clés.'
     }
   },
   'json-visualizer-pro': {
@@ -529,7 +529,7 @@ export const TOOL_TRANSLATIONS: Record<
     },
     fr: {
       name: 'Convertisseur PX en REM',
-      description: 'Un outil en ligne simple et gratuit pour convertir les valeurs en pixels (px) en unités REM avec une taille de police de base personnalisable, suivant les principes de Material Design.'
+      description: 'Outil en ligne gratuit pour convertir des pixels (px) en unités REM avec une taille de police de base personnalisable, selon Material Design.'
     }
   },
   'ai-love-calculator': {
@@ -545,11 +545,11 @@ export const TOOL_TRANSLATIONS: Record<
   'next-gen-gst-reforms': {
     es: {
       name: 'Calculadora de GST de Próxima Generación',
-      description: 'Una herramienta en tiempo real y optimizada para móviles para calcular instantáneamente el GST basado en las nuevas reformas de la India. Sume, reste o busque tasas de GST con facilidad.'
+      description: 'Herramienta en tiempo real y optimizada para móviles para calcular el GST según las nuevas reformas de India. Suma, resta o busca tasas al instante.'
     },
     fr: {
       name: 'Calculateur de TPS de Nouvelle Génération',
-      description: "Un outil en temps réel et adapté aux mobiles pour calculer instantanément la TPS sur la base des nouvelles réformes de l'Inde. Saisissez, soustrayez ou recherchez des taux de TPS en toute simplicité."
+      description: 'Outil en temps réel et adapté aux mobiles pour calculer la TPS selon les nouvelles réformes indiennes. Ajoutez, retirez ou trouvez un taux instantanément.'
     }
   },
   'basic-authentication-header-generator': {
@@ -639,7 +639,7 @@ export const TOOL_TRANSLATIONS: Record<
     },
     fr: {
       name: 'Convertisseur REM en PX',
-      description: 'Un outil en ligne simple et gratuit pour convertir les unités REM en valeurs de pixels (px) avec une taille de police de base personnalisable, adapté aux concepteurs et développeurs.'
+      description: 'Outil en ligne gratuit pour convertir des unités REM en pixels (px) avec une taille de police de base personnalisable, pour designers et développeurs.'
     }
   },
   'happy-new-year': {
@@ -669,7 +669,7 @@ export const TOOL_TRANSLATIONS: Record<
     },
     fr: {
       name: 'Visualisateur HEIC en Ligne',
-      description: 'Visualiseur de fichiers HEIC gratuit en ligne. Ouvrez et visualisez les photos HEIC de votre iPhone directement dans votre navigateur sous Windows, Android ou Linux. 100% privé et sans téléversement.'
+      description: 'Visualiseur HEIC gratuit en ligne. Ouvrez vos photos HEIC d\'iPhone dans votre navigateur sous Windows. 100% privé, local et hors ligne.'
     }
   }
 };

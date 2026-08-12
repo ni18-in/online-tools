@@ -9,6 +9,12 @@ export const GA_ID = 'G-RJER6TKTQ3';
 export const ADSENSE_CLIENT = 'ca-pub-9080750085757406';
 export const ADSENSE_SLOT = '2773802330';
 
+// Google Search Console ownership. DNS verification is the primary method; this is the backup
+// ISSUES.md asks for, so verification survives a DNS change. Paste the token from
+// GSC → Settings → Ownership verification → HTML tag (the content="..." value only).
+// Empty string = no tag emitted.
+export const GSC_VERIFICATION = '';
+
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
 export const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1';
 
