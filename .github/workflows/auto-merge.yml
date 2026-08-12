@@ -1,85 +1,66 @@
-name: Auto-merge green PRs
+name: Auto-merge PRs
 
-# Runs AFTER the build workflow finishes on a pull request. That ordering is the whole point:
-#   * it can only ever merge a PR whose build, SEO gate and Playwright tests already passed,
-#   * it needs no polling and no idle runner (the old version sat in a wait loop),
-#   * it is not a PR status check, so it can never paint a PR red,
-#   * it does not depend on the "Allow auto-merge" repo setting.
-#
-# It also dispatches the deploy explicitly: a merge performed with GITHUB_TOKEN does NOT raise
-# a push event, so deploy.yml would otherwise never fire on main. workflow_dispatch is the one
-# event GitHub still delivers when GITHUB_TOKEN is the actor.
+# A PR is raised -> squash-merge it immediately -> kick off the build & deploy.
+# No waiting for checks: there are none.
 on:
-  workflow_run:
-    workflows: ['Build, verify & deploy to GitHub Pages']
-    types: [completed]
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: write # squash-merge + delete branch
-  pull-requests: write # read PR state, merge
+  pull-requests: write # merge the PR
   actions: write # dispatch deploy.yml
+
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   merge-and-deploy:
-    # Only for a *successful* build of a *pull request*.
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.pull_request.draft == false && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REPO: ${{ github.repository }}
-      SHA: ${{ github.event.workflow_run.head_sha }}
+      PR: ${{ github.event.pull_request.number }}
+      AUTHOR: ${{ github.event.pull_request.user.login }}
+      ASSOCIATION: ${{ github.event.pull_request.author_association }}
     steps:
-      - name: Merge the PR this build belongs to, then deploy
+      - name: Merge the PR, then deploy
         run: |
           set -uo pipefail
 
-          # Resolve the PR from the commit the build ran on. This API works for fork PRs too,
-          # where github.event.workflow_run.pull_requests comes back empty.
-          # `// empty` on a no-match yields no output, which the -z check below handles.
-          # One field per line, read with mapfile. NOT @tsv + `read`: tab is IFS whitespace, so
-          # bash collapses consecutive tabs and an unlabelled PR (an empty field) would shift
-          # every later field left — author would arrive holding the association.
-          mapfile -t f < <(gh api "repos/$REPO/commits/$SHA/pulls" \
-            --jq '.[0] // empty | [(.number|tostring), .state, (.draft|tostring), .base.ref, ([.labels[]?.name]|join(",")), (.user.login//""), (.author_association//"")] | .[]' \
-            2>/dev/null || true)
-
-          if [ "${#f[@]}" -lt 7 ]; then echo "No PR for $SHA — nothing to merge."; exit 0; fi
-          number="${f[0]}"; state="${f[1]}"; draft="${f[2]}"; base="${f[3]}"
-          labels="${f[4]}"; author="${f[5]}"; association="${f[6]}"
-          echo "PR #$number | state=$state draft=$draft base=$base author=$author ($association) labels=${labels:-none}"
-
-          # Only auto-merge work that already belongs to this repo or Dependabot. Without this,
-          # anyone could open a fork PR that passes CI and have it merged and published to the
-          # live site with no human ever looking at it.
+          # The one guard kept: merging is instant and publishes straight to the live site, so
+          # a stranger's fork PR must not be able to put code on your domain unattended.
           trusted=no
-          case "$association" in OWNER|MEMBER|COLLABORATOR) trusted=yes ;; esac
-          case "$author" in dependabot|dependabot\[bot\]) trusted=yes ;; esac
+          case "$ASSOCIATION" in OWNER|MEMBER|COLLABORATOR) trusted=yes ;; esac
+          case "$AUTHOR" in dependabot|dependabot\[bot\]) trusted=yes ;; esac
           if [ "$trusted" != "yes" ]; then
-            echo "::warning::PR #$number is from $author ($association) — not auto-merging. Review and merge it yourself."
+            echo "::warning::PR #$PR is from $AUTHOR ($ASSOCIATION) — not auto-merging. Merge it yourself if you trust it."
             exit 0
           fi
 
-          if [ "$state" != "open" ]; then echo "PR #$number is not open."; exit 0; fi
-          if [ "$draft" = "true" ]; then echo "PR #$number is a draft — leaving it alone."; exit 0; fi
-          if [ "$base" != "main" ]; then echo "PR #$number targets '$base', not main."; exit 0; fi
-          case ",$labels," in
-            *,hold,*|*,do-not-merge,*|*,wip,*)
-              echo "PR #$number carries a blocking label — leaving it alone."; exit 0 ;;
-          esac
-
-          if ! gh pr merge "$number" --squash --delete-branch --repo "$REPO"; then
-            echo "::warning::Could not merge PR #$number (conflicts, or a branch rule blocked it). Nothing deployed."
+          # GitHub can need a moment to work out mergeability on a freshly opened PR.
+          merged=no
+          for attempt in 1 2 3; do
+            if gh pr merge "$PR" --squash --delete-branch --repo "$REPO"; then merged=yes; break; fi
+            echo "merge attempt $attempt failed; retrying..."
+            sleep 5
+          done
+          if [ "$merged" != "yes" ]; then
+            echo "::warning::Could not merge PR #$PR (conflicts, or a branch rule blocked it). Nothing deployed."
             exit 0
           fi
-          echo "Merged PR #$number."
+          echo "Merged PR #$PR."
 
+          # A merge made with GITHUB_TOKEN raises no push event, so start the deploy explicitly.
           for attempt in 1 2 3; do
             if gh workflow run deploy.yml --repo "$REPO" --ref main; then
-              echo "Deploy dispatched on main (attempt $attempt)."
+              echo "Build & deploy dispatched on main."
               exit 0
             fi
             sleep 10
           done
-          echo "::error::PR #$number merged but dispatching deploy.yml failed. Run it manually on main."
+          echo "::error::PR #$PR merged but dispatching deploy.yml failed. Run it manually on main."
           exit 1
