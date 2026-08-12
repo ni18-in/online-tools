@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write # squash-merge + delete branch
   pull-requests: write # enable auto-merge
+  checks: read # read the PR's check runs
   actions: write # dispatch deploy.yml after the merge lands
 
 # One waiter per PR — a new push to the PR replaces the previous waiter.
@@ -31,24 +32,59 @@ jobs:
       PR: ${{ github.event.pull_request.number }}
       REPO: ${{ github.repository }}
       BASE: ${{ github.event.pull_request.base.ref }}
+      SELF: ${{ github.workflow }}
     steps:
-      # `--auto` needs "Allow auto-merge" enabled in repo settings and at least
-      # one required status check. If either is missing, fall back to a direct
-      # squash merge (which the branch protection rules still gate).
-      - name: Enable auto-merge (fall back to direct squash)
+      # Native auto-merge is the preferred path: GitHub holds the PR until every
+      # required check passes, with no runner sitting idle. It needs "Allow
+      # auto-merge" enabled in Settings → General.
+      - name: Enable native auto-merge
+        id: auto
         run: |
           set -uo pipefail
           if gh pr merge "$PR" --auto --squash --delete-branch --repo "$REPO"; then
-            echo "Auto-merge enabled for PR #$PR."
+            echo "mode=native" >>"$GITHUB_OUTPUT"
+            echo "Native auto-merge enabled for PR #$PR."
           else
-            echo "::warning::--auto was rejected (auto-merge disabled, or no required checks). Trying a direct squash merge."
-            gh pr merge "$PR" --squash --delete-branch --repo "$REPO"
+            echo "mode=manual" >>"$GITHUB_OUTPUT"
+            echo "::warning::Native auto-merge unavailable (enable it in Settings → General). Falling back to a checks-gated merge from this job."
           fi
+
+      # Fallback only. Waits for this PR's *other* checks to finish and never
+      # merges while anything is pending or failing, so the build + SEO/URL gate
+      # still holds. A plain `gh pr merge --squash` here would ship unverified.
+      - name: Wait for checks, then squash-merge
+        if: steps.auto.outputs.mode == 'manual'
+        run: |
+          set -uo pipefail
+          deadline=$(( $(date +%s) + 40 * 60 ))
+
+          while [ "$(date +%s)" -lt "$deadline" ]; do
+            # Exclude this workflow's own check run, or we would wait on ourselves.
+            buckets="$(gh pr checks "$PR" --repo "$REPO" --json bucket,workflow \
+              -q ".[] | select(.workflow != \"$SELF\") | .bucket" 2>/dev/null || true)"
+
+            if printf '%s\n' "$buckets" | grep -qxE 'fail|cancel'; then
+              echo "::error::PR #$PR has failing checks — refusing to merge."
+              exit 1
+            fi
+
+            if [ -n "$(printf '%s' "$buckets" | tr -d '[:space:]')" ] \
+              && ! printf '%s\n' "$buckets" | grep -qx 'pending'; then
+              echo "All checks green — squash-merging PR #$PR."
+              gh pr merge "$PR" --squash --delete-branch --repo "$REPO"
+              exit 0
+            fi
+
+            sleep 20
+          done
+
+          echo "::error::PR #$PR checks never completed within 40m — not merging."
+          exit 1
 
       # A merge performed with GITHUB_TOKEN does NOT create a push workflow run,
       # so deploy.yml never fires on main after an auto-merge. Wait for the merge
       # to land, then trigger the deploy explicitly — workflow_dispatch is the one
-      # event type that IS delivered when GITHUB_TOKEN is the actor.
+      # event type GitHub still delivers when GITHUB_TOKEN is the actor.
       - name: Wait for merge, then dispatch the Pages deploy
         if: env.BASE == 'main'
         run: |
@@ -83,7 +119,7 @@ jobs:
                   ;;
               esac
 
-              # Auto-merge will never fire while the PR is unmergeable.
+              # Auto-merge can never fire while the PR is unmergeable.
               if [ "$merge_state" = "DIRTY" ]; then
                 echo "::warning::PR #$PR has merge conflicts — auto-merge is parked until they are resolved."
                 exit 0
