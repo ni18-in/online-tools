@@ -360,6 +360,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'google-august-2026-core-update-text-compare',
+    title: 'Google August 2026 Core Update: Secure Text Compare Fix',
+    description: 'Google\'s August 2026 Core Update demands E-E-A-T. Review content changes privately. Use our 100% client-side text compare tool to avoid leaks.',
+    keywords: 'Google August 2026 Core Update, online text compare, client-side text analysis, content comparison tool, E-E-A-T content optimization, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/google-august-2026-core-update-text-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'actualizacion-core-google-agosto-2026-comparar-texto',
+        title: 'Actualización de Google de Agosto 2026: Comparar Texto',
+        description: 'La actualización de Google de agosto de 2026 exige E-E-A-T. Compara textos de forma 100% local y privada sin subir borradores a servidores externos.',
+        keywords: 'actualizacion core google agosto 2026, comparador de texto en linea, analisis de texto local, herramienta de comparacion, optimizacion contenido, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'mise-a-jour-core-google-aout-2026-comparer-texte',
+        title: 'Mise à jour Google d\'Août 2026 : Comparateur de Texte',
+        description: 'La mise à jour Google d\'août 2026 exige l\'E-E-A-T. Comparez vos textes 100% localement et en toute sécurité, sans aucun envoi vers un serveur externe.',
+        keywords: 'mise a jour core google aout 2026, comparateur de texte en ligne, analyse de texte locale, outil de comparaison, optimisation de contenu, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
