@@ -387,6 +387,33 @@ export const blogPosts: BlogPost[] = [
       }
     }
   },
+  {
+    slug: 'unix-epoch-timestamp-debugging-guide',
+    title: 'Debugging Microservice Epoch Timestamps in August 2026',
+    description: 'Diagnose millisecond vs nanosecond Unix timestamp drift across microservices. Convert and inspect timestamps 100% client-side with zero data leaks.',
+    keywords: 'unix epoch timestamp debugging, convert epoch to date, unix timestamp converter, microservice timestamp drift, epoch converter, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/unix-epoch-timestamp-debugging-guide-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'guia-depuracion-marcas-tiempo-epoch-unix',
+        title: 'Depuración de Marcas de Tiempo Epoch Unix en Microservicios',
+        description: 'Diagnostica desfases de marcas de tiempo Unix en milisegundos y nanosegundos en microservicios. Convierte e inspecciona fechas 100% en local.',
+        keywords: 'depuracion marca de tiempo epoch unix, convertir epoch a fecha, convertidor timestamp unix, desfase tiempo microservicios, convertidor epoch, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'guide-debogage-horodatage-epoch-unix',
+        title: 'Débogage des Horodatages Epoch Unix dans les Microservices',
+        description: 'Diagnostiquez les décalages d\'horodatage Unix en millisecondes et nanosecondes dans vos microservices. Convertissez vos dates 100% en local.',
+        keywords: 'debogage horodatage epoch unix, convertir epoch en date, convertisseur timestamp unix, decalage temps microservices, convertisseur epoch, ni18',
+        category: 'Développement'
+      }
+    }
+  },
   // ---- noindex posts (excluded from sitemap) ----
   {
     slug: 'ai-love-calculator',
