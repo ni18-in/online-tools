@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'web-performance-core-web-vitals-image-optimization-2026',
+    title: 'Core Web Vitals 2026 Update: Compress & Convert Images Free',
+    description: 'Chrome August 2026 Core Web Vitals updates demand faster LCP image loading. Compress and convert images 100% client-side with zero data uploads.',
+    keywords: 'core web vitals 2026, image optimization, LCP optimization, free online image utility tool, convert images browser, web performance, ni18',
+    category: 'Web Performance',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/web-performance-core-web-vitals-image-optimization-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'optimizacion-imagenes-core-web-vitals-rendimiento-web-2026',
+        title: 'Core Web Vitals 2026: Optimiza Imágenes Gratis en el Navegador',
+        description: 'La actualización de Core Web Vitals de agosto 2026 exige mayor velocidad LCP. Comprime y convierte imágenes 100% localmente sin subir archivos.',
+        keywords: 'core web vitals 2026, optimizacion de imagenes, optimizar LCP, herramienta de imagenes online, convertir imagenes navegador, rendimiento web, ni18',
+        category: 'Rendimiento Web'
+      },
+      fr: {
+        slug: 'optimisation-images-core-web-vitals-performance-web-2026',
+        title: 'Core Web Vitals 2026 : Optimiser vos Images Gratuitement',
+        description: 'La mise à jour Core Web Vitals d\'août 2026 exige un LCP ultrarapide. Compressez et convertissez vos images 100% en local dans votre navigateur.',
+        keywords: 'core web vitals 2026, optimisation images, optimiser LCP, outil image en ligne gratuit, convertir images navigateur, performance web, ni18',
+        category: 'Performance Web'
+      }
+    }
+  },
+  {
     slug: 'fastjson-vulnerability-json-security-guide',
     title: 'Fastjson RCE Bug CVE-2026-16723: Secure Your JSON Workflows Now',
     description: 'Learn about the critical Fastjson RCE vulnerability (CVE-2026-16723) in August 2026 and how to securely validate and diff JSON entirely client-side.',
