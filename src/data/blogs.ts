@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chatgpt-markdown-to-word-august-2026',
+    title: 'Convert ChatGPT Markdown to Word Free (August 2026 Guide)',
+    description: 'With August 2026 LLM and AI agent updates, converting ChatGPT Markdown to Microsoft Word .docx client-side protects data and saves time.',
+    keywords: 'chatgpt markdown to word, convert markdown to docx, ai markdown converter, client-side markdown to word, markdown converter online, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chatgpt-markdown-to-word-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-chatgpt-a-word-agosto-2026',
+        title: 'Convertir Markdown de ChatGPT a Word Gratis (Agosto 2026)',
+        description: 'Con las mejoras de IA de agosto 2026, convierte Markdown de ChatGPT a Word (.docx) 100% en local sin subir datos a la nube.',
+        keywords: 'convertir markdown a word, chatgpt a word, convertidor markdown docx, convertidor markdown cliente, herramientas ia, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-chatgpt-en-word-aout-2026',
+        title: 'Convertir Markdown ChatGPT en Word Gratuitement (Août 2026)',
+        description: 'Mises à jour IA d\'août 2026 : convertissez le Markdown ChatGPT en Word .docx 100% en local, sans envoi de données.',
+        keywords: 'convertir markdown en word, chatgpt en docx, convertisseur markdown gratuit, conversion markdown prive, outils ia, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'web-performance-core-web-vitals-image-optimization-2026',
     title: 'Core Web Vitals 2026 Update: Compress & Convert Images Free',
     description: 'Chrome August 2026 Core Web Vitals updates demand faster LCP image loading. Compress and convert images 100% client-side with zero data uploads.',
