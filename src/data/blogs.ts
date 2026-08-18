@@ -62,6 +62,33 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
+    slug: 'chrome-web-store-privacy-policy-basic-auth',
+    title: 'Chrome Web Store Privacy Policy 2026: Basic Auth Guide',
+    description: 'Chrome Web Store August 2026 privacy policy mandates strict data collection rules. Generate HTTP Basic Auth headers 100% client-side with zero uploads.',
+    keywords: 'chrome web store privacy policy 2026, basic authentication header generator, client-side basic auth, browser data privacy, API authentication, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-web-store-privacy-policy-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'politica-privacidad-chrome-web-store-autenticacion-basica',
+        title: 'Privacidad Chrome Web Store 2026: Guía Autenticación Básica',
+        description: 'La política de privacidad de agosto 2026 de Chrome Web Store exige rigor de datos. Genera encabezados Basic Auth 100% local sin subir credenciales.',
+        keywords: 'politica privacidad chrome web store 2026, generador encabezado autenticacion basica, basic auth cliente, privacidad navegador, autenticacion api, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'politique-confidentialite-chrome-web-store-authentification-base',
+        title: 'Confidentialité Chrome Web Store 2026 : Auth de Base',
+        description: 'La politique d\'août 2026 de Chrome Web Store exige la transparence des données. Générez vos en-têtes Basic Auth 100% en local sans téléversement.',
+        keywords: 'politique confidentialite chrome web store 2026, generateur entete authentification basique, basic auth cote client, confidentialite navigateur, authentification api, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'web-performance-core-web-vitals-image-optimization-2026',
     title: 'Core Web Vitals 2026 Update: Compress & Convert Images Free',
     description: 'Chrome August 2026 Core Web Vitals updates demand faster LCP image loading. Compress and convert images 100% client-side with zero data uploads.',
