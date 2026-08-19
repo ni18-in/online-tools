@@ -62,6 +62,33 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
+    slug: 'vtf-converter-webgl-august-2026',
+    title: 'Convert VTF Online Free: WebGL & CS2 Texture Guide (2026)',
+    description: 'Chrome August 2026 WebGL fixes demand secure gaming tools. Convert PNG/JPG to Valve VTF textures 100% client-side in your browser with zero uploads.',
+    keywords: 'vtf converter online, convert png to vtf, valve texture format, webgl security 2026, source engine modding, client-side vtf converter, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/vtf-converter-webgl-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertidor-vtf-webgl-agosto-2026',
+        title: 'Convertidor VTF Online Gratis: Texturas WebGL y CS2',
+        description: 'Las parches WebGL de agosto 2026 exigen seguridad. Convierte PNG/JPG a texturas VTF de Valve 100% localmente en tu navegador sin subir archivos.',
+        keywords: 'convertidor vtf online, convertir png a vtf, valve texture format, seguridad webgl 2026, modding source engine, convertidor vtf cliente, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'convertisseur-vtf-webgl-aout-2026',
+        title: 'Convertisseur VTF en Ligne Gratuit : Guide WebGL (2026)',
+        description: 'Mises à jour WebGL d\'août 2026 : convertissez vos PNG/JPG en textures VTF Valve 100% en local dans votre navigateur sans aucun téléversement.',
+        keywords: 'convertisseur vtf en ligne, convertir png en vtf, valve texture format, securite webgl 2026, modding source engine, convertisseur vtf prive, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'chrome-web-store-privacy-policy-basic-auth',
     title: 'Chrome Web Store Privacy Policy 2026: Basic Auth Guide',
     description: 'Chrome Web Store August 2026 privacy policy mandates strict data collection rules. Generate HTTP Basic Auth headers 100% client-side with zero uploads.',
