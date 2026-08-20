@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'next-gen-gst-reforms-august-2026',
+    title: 'GST 2.0 Reforms August 2026: Tax Slab Changes & Calculator',
+    description: 'India\'s GST 2.0 August 2026 reforms rationalized tax slabs to 5%, 18%, and 40%. Calculate updated GST rates instantly 100% client-side with zero data uploads.',
+    keywords: 'GST 2.0 reforms August 2026, next gen gst calculator, GST rate rationalization, GST tax slabs 2026, client side tax calculator, ni18',
+    category: 'Calculator',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/next-gen-gst-reforms-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'reformas-gst-2-0-guia-agosto-2026',
+        title: 'Reformas GST 2.0 Agosto 2026: Nuevos Tramos y Calculadora',
+        description: 'Las reformas GST 2.0 de agosto 2026 simplificaron los tramos al 5%, 18% y 40%. Calcula las nuevas tasas de forma 100% local y privada sin subir datos.',
+        keywords: 'reformas GST 2.0 agosto 2026, calculadora GST proxima generacion, tramos impuestos GST 2026, calculadora fiscal cliente, ni18',
+        category: 'Calculadoras'
+      },
+      fr: {
+        slug: 'reformes-tps-gst-2-0-guide-aout-2026',
+        title: 'Réformes TPS/GST 2.0 Août 2026 : Barèmes et Calculateur',
+        description: 'Les réformes GST 2.0 d\'août 2026 simplifient les tranches à 5%, 18% et 40%. Calculez vos taxes 100% en local et en toute confidentialité sans envoi.',
+        keywords: 'reformes GST 2.0 aout 2026, calculateur TPS nouvelle generation, baremes taxe GST 2026, calculateur fiscal prive, ni18',
+        category: 'Calculateurs'
+      }
+    }
+  },
+  {
     slug: 'chatgpt-markdown-to-word-august-2026',
     title: 'Convert ChatGPT Markdown to Word Free (August 2026 Guide)',
     description: 'With August 2026 LLM and AI agent updates, converting ChatGPT Markdown to Microsoft Word .docx client-side protects data and saves time.',
