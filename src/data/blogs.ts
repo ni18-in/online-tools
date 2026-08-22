@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'browser-privacy-api-basic-auth-2026',
+    title: 'Browser Privacy API Changes 2026: Basic Auth Header Guide',
+    description: 'Modern browser privacy updates in August 2026 affect HTTP Basic Auth. Learn how to generate secure headers 100% client-side with zero data uploads.',
+    keywords: 'browser privacy api 2026, basic authentication header generator, HTTP basic auth security, client-side header generator, privacy sandbox 2026, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/browser-privacy-api-basic-auth-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'api-privacidad-navegador-autenticacion-basica-2026',
+        title: 'Privacidad Navegadores 2026: Guía Encabezado Basic Auth',
+        description: 'Las reglas de privacidad de los navegadores en agosto 2026 cambian la autenticación. Genera encabezados Basic Auth 100% local sin subir datos.',
+        keywords: 'api privacidad navegador 2026, generador encabezado autenticacion basica, seguridad HTTP basic auth, encabezado cliente local, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'api-confidentialite-navigateur-authentification-base-2026',
+        title: 'Confidentialité Navigateurs 2026 : Guide Auth de Base',
+        description: 'Les mises à jour de confidentialité d\'août 2026 impactent l\'authentification. Générez vos en-têtes Basic Auth 100% en local sans téléversement.',
+        keywords: 'api confidentialite navigateur 2026, generateur entete authentification basique, securite HTTP basic auth, entete cote client, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'agentic-ai-code-analysis-privacy-2026',
     title: 'Agentic AI Code Analysis Privacy 2026: Secure Text Analyzer',
     description: 'With August 2026 agentic AI coding updates, analyzing generated code and output payloads client-side prevents data leaks. Try our free text analyzer.',
