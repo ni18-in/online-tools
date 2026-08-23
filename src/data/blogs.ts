@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'openai-agentic-ai-cyber-security-jwt-2026',
+    title: 'OpenAI Model Pause: Client-Side JWT Security in August 2026',
+    description: 'With OpenAI pausing frontier models over agentic cybersecurity threats, client-side JWT debugging keeps your auth tokens zero-risk and off distant servers.',
+    keywords: 'openai model pause 2026, agentic ai cyber security, jwt debugger pro, client-side jwt decoder, token security 2026, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/openai-agentic-ai-cyber-security-jwt-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-jwt-ia-agentica-openai-2026',
+        title: 'Pausa de Modelos OpenAI: Seguridad JWT Cliente en Agosto 2026',
+        description: 'Ante la pausa de modelos por amenazas cibernéticas de IA en agosto de 2026, depurar JWT de forma local protege tokens sin enviarlos a servidores.',
+        keywords: 'pausa modelos openai 2026, ciberseguridad ia agentica, depurador jwt cliente, decodificar jwt seguro, seguridad tokens 2026, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'securite-jwt-ia-agentique-openai-2026',
+        title: 'Pause Modèles OpenAI : Sécurité JWT Côté Client Août 2026',
+        description: 'Suite à la pause des modèles OpenAI face aux risques cyber des agents IA en août 2026, débugger vos JWT en local protège vos jetons d\'accès.',
+        keywords: 'pause meodeles openai 2026, cybersecurite ia agentique, debogueur jwt cote client, decodage jeton securise, securite token 2026, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'browser-privacy-api-basic-auth-2026',
     title: 'Browser Privacy API Changes 2026: Basic Auth Header Guide',
     description: 'Modern browser privacy updates in August 2026 affect HTTP Basic Auth. Learn how to generate secure headers 100% client-side with zero data uploads.',
