@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cloudflare-kitesurf-ai-agent-browser-2026',
+    title: 'Cloudflare Unveils Kitesurf: Audit AI Agent Code Diff Private',
+    description: 'Cloudflare unveiled Kitesurf on August 9, 2026 for AI agents. Compare and audit AI generated code and text diffs 100% client-side with zero data uploads.',
+    keywords: 'cloudflare kitesurf 2026, ai agent browser, online text compare, client-side diff tool, ai agent security, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/cloudflare-kitesurf-ai-agent-browser-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cloudflare-kitesurf-navegador-agentes-ia-2026',
+        title: 'Cloudflare Kitesurf: Audita Cambios de Texto IA en Privado',
+        description: 'Cloudflare presenta Kitesurf en agosto 2026. Compara y audita diferencias de código y texto generados por agentes IA 100% local sin subir datos.',
+        keywords: 'cloudflare kitesurf 2026, navegador agentes ia, comparador de texto online, herramienta diff local, seguridad ia, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'cloudflare-kitesurf-navigateur-agents-ia-2026',
+        title: 'Cloudflare Kitesurf : Comparez le Code des Agents IA Privé',
+        description: 'Cloudflare dévoile Kitesurf en août 2026. Comparez et vérifiez les différences de texte et de code des agents IA 100% en local sans aucun envoi.',
+        keywords: 'cloudflare kitesurf 2026, navigateur agents ia, comparateur de texte en ligne, outil diff prive, securite agent ia, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'openai-agentic-ai-cyber-security-jwt-2026',
     title: 'OpenAI Model Pause: Client-Side JWT Security in August 2026',
     description: 'With OpenAI pausing frontier models over agentic cybersecurity threats, client-side JWT debugging keeps your auth tokens zero-risk and off distant servers.',
