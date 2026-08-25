@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-agent-markdown-to-word-august-2026',
+    title: 'AI Agent Markdown to Word: Convert AI Reports Private (2026)',
+    description: 'In August 2026, autonomous AI agents produce massive Markdown reports. Convert AI Markdown to Microsoft Word .docx 100% client-side with zero data uploads.',
+    keywords: 'ai agent markdown to word, convert ai report to docx, chatgpt markdown converter 2026, client-side markdown to word, private markdown converter, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-agent-markdown-to-word-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'flujos-agentes-ia-markdown-a-word-local-agosto-2026',
+        title: 'Convertir Markdown de Agentes IA a Word Local (Agosto 2026)',
+        description: 'En agosto 2026, los agentes IA generan extensos informes Markdown. Convierte Markdown a Word (.docx) 100% en local y sin subir datos confidenciales.',
+        keywords: 'agentes ia markdown a word, convertir informe ia a docx, convertidor markdown cliente 2026, convertir markdown a word privado, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'flux-agents-ia-conversion-markdown-word-local-aout-2026',
+        title: 'Convertir le Markdown des Agents IA en Word (Août 2026)',
+        description: 'En août 2026, les agents IA produisent des rapports Markdown complexes. Convertissez le Markdown en Word (.docx) 100% en local sans aucun transfert.',
+        keywords: 'agents ia markdown en word, convertir rapport ia en docx, convertisseur markdown prive 2026, conversion markdown word locale, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'cloudflare-kitesurf-ai-agent-browser-2026',
     title: 'Cloudflare Unveils Kitesurf: Audit AI Agent Code Diff Private',
     description: 'Cloudflare unveiled Kitesurf on August 9, 2026 for AI agents. Compare and audit AI generated code and text diffs 100% client-side with zero data uploads.',
