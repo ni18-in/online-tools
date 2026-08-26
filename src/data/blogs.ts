@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'eu-ai-act-august-2026-json-diff',
+    title: 'EU AI Act August 2026: Compare AI JSON Payloads Private',
+    description: 'With EU AI Act Article 50 transparency active in August 2026, compare and audit AI JSON payloads 100% client-side with zero data uploads.',
+    keywords: 'EU AI Act August 2026 JSON compliance, json comparison tool, client-side json diff, ai transparency article 50, private json diff, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/eu-ai-act-august-2026-json-diff-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'eu-ai-act-agosto-2026-diferencia-json',
+        title: 'EU AI Act Agosto 2026: Compara JSON de IA en Privado',
+        description: 'Ante el Artículo 50 de la Ley de IA de la UE en agosto de 2026, compara y audita JSON de IA 100% local sin subir datos al servidor.',
+        keywords: 'EU AI Act agosto 2026 cumplimiento json, comparador de json online, diferencia json cliente, transparencia ia articulo 50, diff json privado, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'loi-ia-ue-aout-2026-comparateur-json',
+        title: 'Loi IA UE Août 2026 : Comparez vos JSON d\'IA en Privé',
+        description: 'En raison de l\'article 50 de la loi sur l\'IA de l\'UE en août 2026, comparez vos structures JSON 100% en local sans téléversement.',
+        keywords: 'loi ia ue aout 2026 conformite json, comparateur json en ligne, diff json cote client, transparence ia article 50, comparateur json prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'ai-agent-markdown-to-word-august-2026',
     title: 'AI Agent Markdown to Word: Convert AI Reports Private (2026)',
     description: 'In August 2026, autonomous AI agents produce massive Markdown reports. Convert AI Markdown to Microsoft Word .docx 100% client-side with zero data uploads.',
