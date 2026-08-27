@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'microsoft-edge-screen-capture-privacy-2026',
+    title: 'Microsoft Edge Screen Capture Rules 2026: Record Screen Privately',
+    description: 'With Microsoft Edge August 2026 screen capture policies, record browser tabs 100% client-side with zero cloud uploads or data leaks.',
+    keywords: 'Microsoft Edge screen capture privacy 2026, screen recorder pro, client-side screen recorder, zero upload screen recorder, browser screen capture security, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/microsoft-edge-screen-capture-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-captura-pantalla-microsoft-edge-2026',
+        title: 'Captura de Pantalla Microsoft Edge 2026: Grabación Privada',
+        description: 'Ante las normas de captura de Microsoft Edge en agosto de 2026, graba tu pantalla 100% local sin subir videos a servidores externos.',
+        keywords: 'privacidad captura pantalla microsoft edge 2026, grabador de pantalla pro, grabador pantalla cliente, grabador sin descargas, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-capture-ecran-microsoft-edge-2026',
+        title: 'Capture d\'Écran Microsoft Edge 2026 : Enregistrement Privé',
+        description: 'Avec les règles Edge d\'août 2026, enregistrez votre écran 100% côté client sans aucun téléversement de données.',
+        keywords: 'confidentialite capture ecran microsoft edge 2026, enregistreur d ecran pro, enregistreur ecran cote client, enregistrement ecran prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'eu-ai-act-august-2026-json-diff',
     title: 'EU AI Act August 2026: Compare AI JSON Payloads Private',
     description: 'With EU AI Act Article 50 transparency active in August 2026, compare and audit AI JSON payloads 100% client-side with zero data uploads.',
