@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'w3c-responsive-design-px-to-rem-2026',
+    title: 'W3C Responsive Design 2026: Convert PX to REM Online',
+    description: 'With W3C\'s August 2026 accessibility guidelines penalizing fixed pixels, convert PX to REM 100% client-side with zero data uploads.',
+    keywords: 'W3C responsive design 2026, convert px to rem, px to rem converter, css typography accessibility, fluid layout rem, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/w3c-responsive-design-px-to-rem-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'normas-diseno-responsivo-px-a-rem-2026',
+        title: 'Diseño Responsivo W3C 2026: Convierte PX a REM Gratis',
+        description: 'Ante las normas W3C de agosto 2026 sobre accesibilidad, convierte PX a REM 100% en local sin enviar datos a servidores externos.',
+        keywords: 'diseno responsivo W3C 2026, convertir px a rem, convertidor px a rem, accesibilidad tipografia css, unidades rem, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'normes-design-responsif-px-en-rem-2026',
+        title: 'Design Responsif W3C 2026 : Convertir PX en REM Privé',
+        description: 'Avec les normes W3C d\'août 2026 sur l\'accessibilité, convertissez PX en REM 100% en local sans aucun téléversement de données.',
+        keywords: 'design responsif W3C 2026, convertir px en rem, convertisseur px en rem, accessibilite typographie css, unites rem, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'microsoft-edge-screen-capture-privacy-2026',
     title: 'Microsoft Edge Screen Capture Rules 2026: Record Screen Privately',
     description: 'With Microsoft Edge August 2026 screen capture policies, record browser tabs 100% client-side with zero cloud uploads or data leaks.',
