@@ -62,6 +62,33 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
+    slug: 'openapi-4-json-schema-2026-visualizer',
+    title: 'OpenAPI 4.0 JSON Schema Release 2026: Visualizer Guide',
+    description: 'With OpenAPI 4.0 and JSON Schema 2026 released in August 2026, inspect, format, and validate modern JSON payloads 100% client-side with zero data leaks.',
+    keywords: 'OpenAPI 4.0 JSON schema 2026, json visualizer pro, client-side json validator, JSON schema 2026 guide, format json online, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/openapi-4-json-schema-2026-visualizer-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'openapi-4-esquema-json-2026-visualizador',
+        title: 'Lanzamiento OpenAPI 4.0 Esquema JSON 2026: Guía Visualizador',
+        description: 'Con OpenAPI 4.0 y Esquema JSON 2026 lanzados en agosto de 2026, inspecciona y valida payloads JSON 100% local sin subida de datos.',
+        keywords: 'OpenAPI 4.0 esquema JSON 2026, visualizador json pro, validador json cliente, guia esquema JSON 2026, formatear json online, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'openapi-4-schema-json-2026-visualiseur',
+        title: 'Lancement OpenAPI 4.0 Schema JSON 2026 : Guide Visualiseur',
+        description: 'Avec OpenAPI 4.0 et Schema JSON 2026 publiés en août 2026, inspectez et validez vos payloads JSON 100% en local sans fuite de données.',
+        keywords: 'OpenAPI 4.0 schema JSON 2026, visualiseur json pro, validateur json cote client, guide schema JSON 2026, formater json en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'microsoft-edge-screen-capture-privacy-2026',
     title: 'Microsoft Edge Screen Capture Rules 2026: Record Screen Privately',
     description: 'With Microsoft Edge August 2026 screen capture policies, record browser tabs 100% client-side with zero cloud uploads or data leaks.',
