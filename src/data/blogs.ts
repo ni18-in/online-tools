@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-privacy-sandbox-screen-recorder-2026',
+    title: 'Chrome 2026 Privacy Sandbox Rules: Record Screen Privately',
+    description: 'With Chrome\'s August 2026 Privacy Sandbox and storage partitioning updates, record browser tabs 100% client-side with zero data uploads.',
+    keywords: 'Chrome Privacy Sandbox 2026, screen recorder pro, client-side screen recorder, zero upload screen recorder, privacy screen capture, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-privacy-sandbox-screen-recorder-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-sandbox-chrome-grabador-pantalla-2026',
+        title: 'Privacy Sandbox Chrome 2026: Graba Pantalla Privado',
+        description: 'Ante las normas Privacy Sandbox de Chrome en agosto 2026, graba tu pantalla 100% local sin subir videos a servidores externos.',
+        keywords: 'privacy sandbox chrome 2026, grabador de pantalla pro, grabador pantalla cliente, grabador sin descargas, privacidad captura, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-sandbox-chrome-enregistreur-ecran-2026',
+        title: 'Privacy Sandbox Chrome 2026 : Enregistrement Privé',
+        description: 'Avec les règles Privacy Sandbox d\'août 2026 sur Chrome, enregistrez votre écran 100% côté client sans aucun téléversement.',
+        keywords: 'privacy sandbox chrome 2026, enregistreur d ecran pro, enregistreur ecran cote client, enregistrement ecran prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'w3c-responsive-design-px-to-rem-2026',
     title: 'W3C Responsive Design 2026: Convert PX to REM Online',
     description: 'With W3C\'s August 2026 accessibility guidelines penalizing fixed pixels, convert PX to REM 100% client-side with zero data uploads.',
