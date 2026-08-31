@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'heic-vtf-game-asset-pipeline-2026',
+    title: 'Convert HEIC to VTF Online: Game Asset Pipeline Guide (2026)',
+    description: 'Convert iPhone HEIC textures to Valve VTF for Source engine mods 100% client-side with zero uploads in August 2026.',
+    keywords: 'heic to vtf, convert heic to vtf, valve texture format 2026, source engine modding, client-side vtf converter, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/heic-vtf-game-asset-pipeline-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'heic-vtf-pipeline-texturas-juegos-2026',
+        title: 'Convertir HEIC a VTF Online: Texturas para Juegos 2026',
+        description: 'Convierte texturas HEIC de iPhone a VTF de Valve para mods de Source 100% en local sin subir archivos en agosto 2026.',
+        keywords: 'heic a vtf, convertir heic a vtf, valve texture format 2026, modding source engine, convertidor vtf cliente, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'heic-vtf-pipeline-textures-jeux-2026',
+        title: 'Convertir HEIC en VTF en Ligne : Guide Textures (2026)',
+        description: 'Convertissez des textures HEIC iPhone en VTF Valve pour mods Source 100% en local sans téléversement en août 2026.',
+        keywords: 'heic en vtf, convertir heic en vtf, valve texture format 2026, modding source engine, convertisseur vtf prive, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'chrome-privacy-sandbox-screen-recorder-2026',
     title: 'Chrome 2026 Privacy Sandbox Rules: Record Screen Privately',
     description: 'With Chrome\'s August 2026 Privacy Sandbox and storage partitioning updates, record browser tabs 100% client-side with zero data uploads.',
