@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-subtitle-drift-august-2026-resync-tool',
+    title: 'Fix AI Subtitle Timestamp Drift Free (August 2026 Guide)',
+    description: 'With August 2026 AI speech models causing SRT/VTT timecode drift, resync subtitles 100% client-side with zero data uploads.',
+    keywords: 'ai subtitle drift 2026, subtitle resync tool, fix srt timing online, client-side srt sync, vtt timecode repair, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-subtitle-drift-august-2026-resync-tool-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'desfase-subtitulos-ia-agosto-2026-resincronizador',
+        title: 'Corregir Desfase Subtítulos IA (Guía Agosto 2026)',
+        description: 'Ante los desajustes de tiempo de los modelos de IA en agosto 2026, resincroniza archivos SRT/VTT 100% local sin subir archivos.',
+        keywords: 'desfase subtitulos ia 2026, herramienta resincronizar subtitulos, reparar tiempo srt online, srt cliente local, corregir vtt, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'decalage-sous-titres-ia-aout-2026-resynchronisation',
+        title: 'Corriger Décalage Sous-Titres IA (Guide Août 2026)',
+        description: 'Mises à jour IA d\'août 2026 : resynchronisez vos fichiers SRT et VTT 100% en local dans votre navigateur, sans téléversement.',
+        keywords: 'decalage sous titres ia 2026, outil resynchroniser sous titres, corriger temps srt en ligne, srt cote client, reparation vtt, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'heic-vtf-game-asset-pipeline-2026',
     title: 'Convert HEIC to VTF Online: Game Asset Pipeline Guide (2026)',
     description: 'Convert iPhone HEIC textures to Valve VTF for Source engine mods 100% client-side with zero uploads in August 2026.',
