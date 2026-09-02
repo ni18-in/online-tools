@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'css-container-queries-rem-to-px-2026',
+    title: 'CSS Container Queries 2026: Convert REM to PX Online',
+    description: 'With August 2026 CSS container queries & fluid typography, converting REM to PX is crucial for Figma design systems. Try our free 100% client-side tool.',
+    keywords: 'css container queries 2026, rem to px converter, convert rem to px, fluid typography rem to px, design system rem converter, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/css-container-queries-rem-to-px-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'consultas-contenedor-css-rem-a-px-2026',
+        title: 'Consultas Contenedor CSS 2026: Convierte REM a PX Gratis',
+        description: 'Ante las consultas de contenedor CSS de agosto 2026, convierte REM a PX para sistemas Figma. Prueba nuestra herramienta 100% local y sin subir datos.',
+        keywords: 'consultas de contenedor css 2026, convertir rem a px, convertidor rem a px, tipografia fluida rem px, sistema de diseno rem, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'conteneurs-css-conversion-rem-en-px-2026',
+        title: 'Conteneurs CSS 2026 : Convertir REM en PX Gratuitement',
+        description: 'Avec les conteneurs CSS d\'août 2026, convertissez REM en PX pour vos design systems. Essayez notre outil 100% en local, sans aucun téléversement.',
+        keywords: 'conteneurs css 2026, convertir rem en px, convertisseur rem en px, typographie fluide rem px, design system rem, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'ai-subtitle-drift-august-2026-resync-tool',
     title: 'Fix AI Subtitle Timestamp Drift Free (August 2026 Guide)',
     description: 'With August 2026 AI speech models causing SRT/VTT timecode drift, resync subtitles 100% client-side with zero data uploads.',
