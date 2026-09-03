@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-homework-mit-2026-grade-calculator',
+    title: 'MIT AI Homework Report 2026: Universal Grade Calculator',
+    description: 'With MIT\'s August 2026 report revealing AI completes 90%+ homework, universities are shifting course weighting. Recalculate your grade 100% client-side.',
+    keywords: 'MIT AI homework report 2026, universal grade calculator, college grade calculator, weighted grade calculator, syllabus weight calculator, ni18',
+    category: 'Calculator',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-homework-mit-2026-grade-calculator-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'ia-tareas-mit-2026-calculadora-calificaciones',
+        title: 'Informe IA Tareas MIT 2026: Calculadora Calificaciones',
+        description: 'Ante el informe del MIT de agosto 2026 sobre IA en tareas, las universidades cambian la ponderación. Recalcula tus notas 100% local sin subir datos.',
+        keywords: 'informe ia tareas mit 2026, calculadora de calificaciones universal, calculadora notas universidad, calculadora promedio ponderado, ni18',
+        category: 'Calculadoras'
+      },
+      fr: {
+        slug: 'ia-devoirs-mit-2026-calculateur-notes',
+        title: 'Rapport IA Devoirs MIT 2026 : Calculateur de Notes',
+        description: 'Face au rapport du MIT d\'août 2026 sur l\'IA et les devoirs, recalculer ses notes pondérées devient crucial. Outil 100% local sans téléversement.',
+        keywords: 'rapport ia devoirs mit 2026, calculateur de notes universel, calculateur moyenne ponderee, calculateur note examen, ni18',
+        category: 'Calculateurs'
+      }
+    }
+  },
+  {
     slug: 'css-container-queries-rem-to-px-2026',
     title: 'CSS Container Queries 2026: Convert REM to PX Online',
     description: 'With August 2026 CSS container queries & fluid typography, converting REM to PX is crucial for Figma design systems. Try our free 100% client-side tool.',
