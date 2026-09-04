@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'safari-20-screen-capture-privacy-2026',
+    title: 'Safari 20 Screen Capture Rules 2026: Record Privately',
+    description: 'With Safari 20\'s August 2026 WebKit MediaCapture updates, record browser tabs 100% client-side with zero server uploads or leaks. Free and instant.',
+    keywords: 'Safari 20 WebKit screen capture 2026, screen recorder pro, client-side screen recorder, zero upload screen recorder, browser screen capture privacy, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/safari-20-screen-capture-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-captura-pantalla-safari-20-2026',
+        title: 'Privacidad Captura de Pantalla Safari 20: Grabación Privada',
+        description: 'Ante las normas MediaCapture de Safari 20 en agosto 2026, graba tu pantalla 100% local sin subir videos a servidores externos. Gratis y privado.',
+        keywords: 'privacidad captura pantalla safari 20 2026, grabador de pantalla pro, grabador pantalla cliente, grabador sin descargas, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-capture-ecran-safari-20-2026',
+        title: 'Safari 20 WebKit Capture d\'Écran 2026 : Enregistrement Privé',
+        description: 'Avec les règles MediaCapture de Safari 20 d\'août 2026, enregistrez votre écran 100% côté client sans aucun téléversement. Gratuit et privé.',
+        keywords: 'confidentialite capture ecran safari 20 2026, enregistreur d ecran pro, enregistreur ecran cote client, enregistrement ecran prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'ai-homework-mit-2026-grade-calculator',
     title: 'MIT AI Homework Report 2026: Universal Grade Calculator',
     description: 'With MIT\'s August 2026 report revealing AI completes 90%+ homework, universities are shifting course weighting. Recalculate your grade 100% client-side.',
