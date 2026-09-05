@@ -1,0 +1,167 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Normas OAuth 2.1 2026: Depura Tokens JWT en Privado
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Privacidad y Seguridad</span>
+      </p>
+      <img src="/assets/blog/oauth-2-1-jwt-security-privacy-2026-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Seguridad JWT OAuth 2.1 2026 e inspección local de tokens" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Not+Found';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>La consolidación de OAuth 2.1 finalizada en agosto de 2026 elimina la concesión implícita e impone PKCE obligatorio en todos los flujos de autorización.</li>
+        <li>Inspeccionar tokens de JSON Web (JWT) con herramientas en la nube expone credenciales y permisos confidenciales a servidores de terceros.</li>
+        <li>Nuestra herramienta gratuita <a href="/es/tools/jwt-debugger/" class="text-indigo-700 underline font-semibold">Depurador y Visor de JWT</a> decodifica y valida tokens 100% en local en la memoria de tu navegador sin subidas de datos.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Tras la publicación oficial de la especificación RFC OAuth 2.1 en agosto de 2026, los equipos de ciberseguridad y arquitectos de software están actualizando rápidamente los microservicios de autenticación para cumplir con parámetros estrictos de Zero Trust. OAuth 2.1 consolida las especificaciones básicas de autorización, formaliza el uso obligatorio de PKCE (Proof Key for Code Exchange) y exige la validación rigurosa de las notificaciones de los tokens.
+      </p>
+      <p>
+        Sin embargo, a medida que los desarrolladores adaptan sus pasarelas API para emitir tokens OAuth 2.1, ha surgido una importante vulnerabilidad de seguridad: el uso de depuradores JWT públicos en la nube. Al pegar tokens de acceso reales que contienen permisos de usuario o claves API en herramientas web remotas, estas credenciales pueden ser registradas, guardadas en caché o interceptadas por sistemas de telemetría de terceros.
+      </p>
+      <p>
+        Para inspeccionar tus tokens de acceso con total seguridad y sin enviar datos confidenciales a través de la red, nuestra utilidad basada en el navegador <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> procesa los encabezados, la carga útil y las firmas criptográficas 100% en el lado del cliente. Tus tokens de autorización nunca salen de tu dispositivo local.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">El Cambio de OAuth 2.1 en Agosto de 2026 y el Rigor de Tokens</h2>
+      <p>
+        La adopción formal de OAuth 2.1 en agosto de 2026 supone un hito fundamental para las aplicaciones web modernas y las infraestructuras de API. OAuth 2.1 elimina patrones obsoletos y vulnerables—destacando la eliminación de la concesión implícita de OAuth 2.0 y la concesión de credenciales de contraseña del propietario del recurso—al tiempo que convierte a PKCE en un requisito obligatorio para todos los flujos de código de autorización en aplicaciones web de una sola página (SPA), clientes móviles y microservicios.
+      </p>
+      <p>
+        Con estas normas más estrictas, los servidores de autorización OAuth 2.1 emiten tokens de acceso con cargas JSON estructuradas y detalladas. Estos tokens incluyen metadatos críticos como audiencias de recursos (<code>aud</code>), URI del emisor (<code>iss</code>), marcas de tiempo de expiración (<code>exp</code>), roles personalizados e identificadores de inquilino. Durante el proceso de desarrollo y depuración local, los ingenieros deben verificar que estas notificaciones cumplan con las reglas de validación exigidas por las pasarelas API modernas.
+      </p>
+
+      <div class="my-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+        <p class="font-semibold text-gray-900 mb-2">¿Por qué confiar en esta guía?</p>
+        <p class="text-gray-600">
+          En ni18, la seguridad web y la privacidad de los desarrolladores son nuestros principios de ingeniería fundamentales. Todo el procesamiento se realiza localmente en el navegador mediante WebAssembly y JavaScript. Nunca almacenamos, registramos ni transmitimos tus tokens de autenticación o datos de código.
+        </p>
+      </div>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">El Alto Riesgo de los Convertidores JWT en la Nube</h2>
+      <p>
+        Históricamente, los desarrolladores recurrían a decodificadores JWT en línea sin considerar a dónde viajaban sus cadenas de texto. En la era de la arquitectura Zero Trust, recurrir a depuradores remotos en el servidor introduce serios riesgos para la cadena de suministro:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Exposición de Credenciales y Tokens:</strong> Pegar tokens portadores activos en una herramienta remota transmite credenciales vivas a través de Internet, exponiéndolas a registros del servidor e inspecciones de proxy.</li>
+        <li><strong>Violaciones de Cumplimiento:</strong> Enviar tokens que contengan información de identificación personal (PII) o identificadores internos a servidores externos vulnera normativas como el RGPD y la Ley de IA de la UE.</li>
+        <li><strong>Secuestro de Sesión:</strong> Si un token portador activo queda registrado en historiales o registros de red, actores no autorizados pueden reutilizar el token para acceder a la API antes de su expiración.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Ventajas Clave de la Inspección JWT Local en el Cliente</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% del Lado del Cliente:</strong> El análisis del token, la decodificación Base64URL y el formateo de la carga útil ocurren íntegramente en la memoria de tu navegador. Cero peticiones de red.</li>
+        <li><strong>⚡ Decodificación Instantánea en Tiempo Real:</strong> Desglose inmediato de los componentes de Encabezado, Carga Útil y Firma a medida que escribes o pegas el token.</li>
+        <li><strong>🚀 Verificación de Firma e Inspección de Notificaciones:</strong> Formato claro para notificaciones como <code>nbf</code>, <code>iat</code> y <code>exp</code> mientras evalúas algoritmos criptográficos (RS256, ES256, HS256).</li>
+        <li><strong>🌐 Funciona sin Conexión:</strong> Funciona perfectamente en entornos de desarrollo aislados o sin acceso a Internet.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guía Paso a Paso: Cómo Inspeccionar Tokens OAuth 2.1 en Privado</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la página del <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> en tu navegador.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Pega tu token portador OAuth 2.1 codificado en el área de entrada.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Examina el <strong>Encabezado</strong> (algoritmo y clave) y la <strong>Carga Útil</strong> (notificaciones, permisos, fechas) formateados automáticamente en JSON.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Verifica el estado de expiración y la alineación de parámetros sin exponer credenciales a redes externas.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Consejos Profesionales y Flujos de Trabajo Avanzados</h2>
+      <p>
+        Al trabajar con microservicios complejos, combina la depuración de tokens con otras herramientas seguras del lado del cliente. Por ejemplo, si estás probando puntos de enlace que combinan tokens JWT con mecanismos de autenticación tradicionales, utiliza nuestro <a href="/es/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Generador de Encabezados de Autenticación Básica</a> local para construir encabezados HTTP seguros sin revelar contraseñas.
+      </p>
+      <p>
+        Asimismo, al comprobar marcas de tiempo en entornos distribuidos, recuerda que OAuth 2.1 exige precisión exacta en los campos <code>exp</code> y <code>nbf</code>. Analizar estos valores directamente en el navegador evita errores de conversión de zonas horarias.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusión y Optimización de tu Flujo de Trabajo</h2>
+      <p>
+        Las especificaciones OAuth 2.1 de agosto de 2026 establecen un estándar de seguridad más riguroso para la autorización web. Adoptar la filosofía Zero Trust implica proteger tus credenciales no solo en producción, sino también durante las fases de pruebas y desarrollo. Evita filtraciones no deseadas migrando hoy mismo a herramientas de análisis del lado del cliente.
+      </p>
+      <p class="mt-4">
+        <a href="/es/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Probar Depurador JWT Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Cuáles son los principales cambios en OAuth 2.1 respecto a OAuth 2.0?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">OAuth 2.1 consolida las especificaciones eliminando la concesión implícita y la concesión de contraseñas, haciendo obligatorio PKCE para todos los flujos de código de autorización y exigiendo un ajuste exacto en las URI de redirección.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Se envía mi token JWT a algún servidor al usar esta herramienta?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">No. El depurador JWT funciona 100% en el lado del cliente. La decodificación y el formateo JSON ocurren exclusivamente en la memoria de tu navegador local, garantizando privacidad absoluta.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Puedo decodificar tokens cifrados (JWE) con esta herramienta?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Esta herramienta está diseñada para tokens JWT firmados convencionales (JWS). Para tokens cifrados (JWE), la carga útil está protegida con una clave privada y requiere dicha clave para su lectura.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Por qué es obligatorio PKCE en OAuth 2.1?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">PKCE (Proof Key for Code Exchange) evita ataques de inyección e intercepción del código de autorización, haciendo que las aplicaciones cliente sean mucho más resistentes frente a posibles secuestros de sesión.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Qué ventaja tiene la inspección local frente a decodificadores en la nube?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La inspección local procesa los datos sin tráfico de red. Los decodificadores en la nube envían tus tokens por Internet, exponiendo credenciales activas a registros del servidor, intermediarios y posibles filtraciones de datos.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navegación de entradas">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

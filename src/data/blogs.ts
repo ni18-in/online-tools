@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'oauth-2-1-jwt-security-privacy-2026',
+    title: 'OAuth 2.1 Specs 2026: Debug JWT Tokens Privately',
+    description: 'With August 2026 OAuth 2.1 specs enforcing strict token validation and PKCE, debug JWT payloads 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'OAuth 2.1 JWT security 2026, jwt debugger pro, client-side jwt decoder, zero trust token inspection, oauth 2.1 compliance 2026, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/oauth-2-1-jwt-security-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-jwt-oauth-2-1-privacidad-2026',
+        title: 'Normas OAuth 2.1 2026: Depura Tokens JWT en Privado',
+        description: 'Ante las especificaciones OAuth 2.1 de agosto de 2026, depura cargas JWT 100% en local sin subir tokens a servidores externos. Gratis y seguro.',
+        keywords: 'seguridad jwt oauth 2 1 2026, depurador jwt pro, decodificador jwt cliente, inspeccion tokens zero trust, cumplimiento oauth 2 1 2026, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'securite-jwt-oauth-2-1-confidentialite-2026',
+        title: 'Spécifications OAuth 2.1 2026 : Déboguer vos JWT en Privé',
+        description: 'Avec la norme OAuth 2.1 d\'août 2026, décodez et inspectez vos jetons JWT 100% en local sans aucun téléversement. Outil gratuit et sécurisé.',
+        keywords: 'securite jwt oauth 2 1 2026, debogueur jwt pro, decodeur jwt cote client, inspection jeton zero trust, conformite oauth 2 1 2026, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'safari-20-screen-capture-privacy-2026',
     title: 'Safari 20 Screen Capture Rules 2026: Record Privately',
     description: 'With Safari 20\'s August 2026 WebKit MediaCapture updates, record browser tabs 100% client-side with zero server uploads or leaks. Free and instant.',
