@@ -62,6 +62,33 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
+    slug: 'ai-logo-redesign-trend-2026-guess-the-logo',
+    title: '2026 AI Logo Redesign Wave: Test Your Brand Quiz Skill',
+    description: 'With August 2026 AI vector tools triggering massive corporate logo rebrands, test your recognition skills with our free 100% client-side brand quiz game.',
+    keywords: 'AI logo redesign 2026, guess the logo, brand quiz game online, tech logo quiz, brand identity trends 2026, ni18',
+    category: 'Fun',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-logo-redesign-trend-2026-guess-the-logo-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'tendencia-rediseno-logos-ia-2026-adivina-el-logo',
+        title: 'Ola de Rediseño de Logos IA 2026: Pon a Prueba tus Marcas',
+        description: 'Ante la ola de rediseño de logos con IA en agosto de 2026, pon a prueba tu memoria visual con nuestro juego 100% local sin descargas.',
+        keywords: 'rediseno logos ia 2026, adivina el logo, juego trivia marcas online, quiz logos tecnologicos, tendencias identidad de marca, ni18',
+        category: 'Diversión'
+      },
+      fr: {
+        slug: 'tendance-redesign-logos-ia-2026-devine-le-logo',
+        title: 'Redesign de Logos par IA en 2026 : Testez vos Connaissances',
+        description: 'Face à la vague de redesigns de logos par IA en août 2026, testez vos compétences de reconnaissance avec notre jeu de quiz 100% en local.',
+        keywords: 'redesign logos ia 2026, devine le logo, jeu quiz marques en ligne, quiz logos tech, tendances identite visuelle 2026, ni18',
+        category: 'Divertissement'
+      }
+    }
+  },
+  {
     slug: 'safari-20-screen-capture-privacy-2026',
     title: 'Safari 20 Screen Capture Rules 2026: Record Privately',
     description: 'With Safari 20\'s August 2026 WebKit MediaCapture updates, record browser tabs 100% client-side with zero server uploads or leaks. Free and instant.',
