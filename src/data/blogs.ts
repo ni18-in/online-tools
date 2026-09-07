@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-content-readability-text-analyzer-2026',
+    title: 'Google August 2026 AI Update: Analyze Text Readability Free',
+    description: 'With Google\'s August 2026 AI content update, text readability and word count auditing is essential. Try our 100% client-side text analyzer tool.',
+    keywords: 'google august 2026 ai update, all-in-one text analyzer, client-side text analysis, text readability analyzer, word count calculator online, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-content-readability-text-analyzer-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'analisis-lecturabilidad-texto-ia-2026',
+        title: 'Actualización IA Google Agosto 2026: Analizar Texto Gratis',
+        description: 'Con la actualización de IA de Google de agosto 2026, analizar legibilidad y recuento de palabras es vital. Prueba nuestro analizador 100% local.',
+        keywords: 'actualizacion ia google agosto 2026, analizador de texto todo en uno, analisis de texto cliente, analizador de legibilidad, recuento de palabras online, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'analyse-lisibilite-texte-ia-2026',
+        title: 'Mise à Jour IA Google Août 2026 : Analyser votre Texte Gratuit',
+        description: 'Avec la mise à jour IA de Google d\'août 2026, évaluer la lisibilité et le nombre de mots est essentiel. Essayez notre analyseur 100% côté client.',
+        keywords: 'mise a jour ia google aout 2026, analyseur de texte tout en un, analyse de texte cote client, analyseur de lisibilite, calculateur nombre de mots, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'oauth-2-1-jwt-security-privacy-2026',
     title: 'OAuth 2.1 Specs 2026: Debug JWT Tokens Privately',
     description: 'With August 2026 OAuth 2.1 specs enforcing strict token validation and PKCE, debug JWT payloads 100% client-side with zero cloud uploads or leaks.',
