@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'mumbai-auto-taxi-tariff-2026-meter-calculator',
+    title: 'Mumbai Taxi & Auto Fare Rules August 2026: Calculate Fare Free',
+    description: 'With Mumbai\'s August 2026 transport tariff updates and new midnight surcharges, calculate exact auto and taxi fares 100% client-side with zero data tracking.',
+    keywords: 'mumbai taxi fare calculator august 2026, mh meter price, auto rickshaw meter card 2026, cool cab tariff mumbai, client-side fare calculator, ni18',
+    category: 'Calculator',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/mumbai-auto-taxi-tariff-2026-meter-calculator-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'tarifa-taxi-auto-mumbai-2026-calculadora-tarifa',
+        title: 'Tarifas Taxi y Auto Mumbai Agosto 2026: Calcula Gratis',
+        description: 'Con la actualización de tarifas de transporte en Mumbai en agosto 2026, calcula el importe exacto de taxi y auto 100% local sin compartir ubicación.',
+        keywords: 'calculadora tarifa taxi mumbai agosto 2026, precio metro mh, tarjeta tarifa auto rickshaw 2026, tarifa cool cab mumbai, calculadora local tarifa, ni18',
+        category: 'Calculadoras'
+      },
+      fr: {
+        slug: 'tarifs-taxi-auto-mumbai-2026-calculateur-prix',
+        title: 'Tarifs Taxi et Auto Mumbai Août 2026 : Calcul Gratuit',
+        description: 'Avec les réformes tarifaires de transport à Mumbai d\'août 2026, calculez le prix exact des taxis et autos 100% en local, sans suivi GPS ni inscription.',
+        keywords: 'calculateur tarif taxi mumbai aout 2026, prix compteur mh, carte tarif auto rickshaw 2026, tarif cool cab mumbai, calculateur local tarif, ni18',
+        category: 'Calculateurs'
+      }
+    }
+  },
+  {
     slug: 'ai-content-readability-text-analyzer-2026',
     title: 'Google August 2026 AI Update: Analyze Text Readability Free',
     description: 'With Google\'s August 2026 AI content update, text readability and word count auditing is essential. Try our 100% client-side text analyzer tool.',
