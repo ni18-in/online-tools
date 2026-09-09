@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'claude-3-7-markdown-to-word-2026',
+    title: 'Claude 3.7 Markdown to Word 2026: Convert AI Artifacts Free',
+    description: 'With Anthropic\'s August 2026 Claude 3.7 Markdown artifact updates, convert AI reports to Word .docx 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'claude 3.7 markdown to word, convert ai report to docx, anthropic artifacts converter 2026, client side markdown to word, private markdown converter, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/claude-3-7-markdown-to-word-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-claude-3-7-a-word-2026',
+        title: 'Claude 3.7 Markdown a Word 2026: Convierte Informes Gratis',
+        description: 'Con las actualizaciones de Claude 3.7 en agosto de 2026, convierte informes Markdown a Word (.docx) 100% local sin subir datos confidenciales a la nube.',
+        keywords: 'convertir markdown claude 3 7 a word, convertir informe ia a docx, convertidor markdown cliente 2026, convertir markdown a word privado, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-claude-3-7-en-word-2026',
+        title: 'Claude 3.7 Markdown en Word 2026 : Convertir Rapports Privé',
+        description: 'Avec les mises à jour Claude 3.7 d\'août 2026, convertissez vos rapports Markdown en Word .docx 100% en local dans votre navigateur sans téléversement.',
+        keywords: 'convertir markdown claude 3 7 en word, convertir rapport ia en docx, convertisseur markdown prive 2026, conversion markdown word locale, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'mumbai-auto-taxi-tariff-2026-meter-calculator',
     title: 'Mumbai Taxi & Auto Fare Rules August 2026: Calculate Fare Free',
     description: 'With Mumbai\'s August 2026 transport tariff updates and new midnight surcharges, calculate exact auto and taxi fares 100% client-side with zero data tracking.',
