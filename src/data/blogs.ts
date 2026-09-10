@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'post-quantum-jwt-security-august-2026-debugger',
+    title: 'Post-Quantum JWT Security 2026: Debug Hybrid Tokens',
+    description: 'With NIST\'s August 2026 post-quantum standards active, debug hybrid ML-DSA JWT tokens 100% client-side with zero cloud uploads or leaks. Try it free.',
+    keywords: 'post-quantum jwt security 2026, jwt debugger pro, ml-dsa token inspection, client-side jwt decoder, zero trust token debugging, oauth 2.1 pqc, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/post-quantum-jwt-security-august-2026-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-jwt-poscuantica-agosto-2026-depurador',
+        title: 'Seguridad JWT Poscuántica 2026: Depura Tokens Híbridos',
+        description: 'Con las normas poscuánticas NIST de agosto de 2026, depura tokens JWT ML-DSA 100% local sin subir datos a la nube. Prueba nuestra herramienta gratis.',
+        keywords: 'seguridad jwt poscuantica 2026, depurador jwt pro, inspeccion tokens ml-dsa, decodificador jwt cliente, depuracion tokens zero trust, oauth 2 1 pqc, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'securite-jwt-post-quantique-aout-2026-debogueur',
+        title: 'Sécurité JWT Post-Quantique 2026 : Déboguer vos Jetons',
+        description: 'Avec les normes post-quantiques NIST d\'août 2026, décodez vos JWT ML-DSA 100% en local dans votre navigateur sans téléversement. Outil gratuit.',
+        keywords: 'securite jwt post quantique 2026, debogueur jwt pro, inspection jeton ml-dsa, decodeur jwt cote client, debogage jeton zero trust, oauth 2 1 pqc, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'claude-3-7-markdown-to-word-2026',
     title: 'Claude 3.7 Markdown to Word 2026: Convert AI Artifacts Free',
     description: 'With Anthropic\'s August 2026 Claude 3.7 Markdown artifact updates, convert AI reports to Word .docx 100% client-side with zero cloud uploads or leaks.',
