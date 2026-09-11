@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-agent-system-prompt-drift-august-2026-text-compare',
+    title: 'AI Prompt Drift August 2026: Compare Prompts Free',
+    description: 'With August 2026 AI agent prompt drift impacting autonomous workflows, compare system prompts and JSON configs 100% client-side with zero cloud leaks.',
+    keywords: 'ai agent prompt drift august 2026, compare system prompts online, client side text diff tool, llm prompt comparison, ai prompt diffing, zero trust prompt auditor, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-agent-system-prompt-drift-august-2026-text-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'desfase-instrucciones-agentes-ia-agosto-2026-comparar-texto',
+        title: 'Desfase de Prompts IA Agosto 2026: Compara Textos',
+        description: 'Con el desfase de instrucciones de agentes IA en agosto 2026, compara prompts y configuraciones 100% local sin enviar datos a la nube. Prueba gratis.',
+        keywords: 'desfase de prompts ia agosto 2026, comparador de textos en linea, diferencia de prompts llm, auditoria de prompts local, comparador de texto privado, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'derive-instructions-agents-ia-aout-2026-comparer-texte',
+        title: 'Dérive des Prompts IA Août 2026 : Comparer Textes',
+        description: 'Face à la dérive des instructions des agents IA en août 2026, comparez vos prompts et fichiers 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'derive des prompts ia aout 2026, comparateur de texte en ligne, diff de prompts llm, comparaison instructions agents ia, outil diff prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'post-quantum-jwt-security-august-2026-debugger',
     title: 'Post-Quantum JWT Security 2026: Debug Hybrid Tokens',
     description: 'With NIST\'s August 2026 post-quantum standards active, debug hybrid ML-DSA JWT tokens 100% client-side with zero cloud uploads or leaks. Try it free.',
