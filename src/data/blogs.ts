@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'zero-trust-basic-auth-browser-privacy-2026',
+    title: 'Browser Privacy 2026: Zero-Trust Basic Auth Header Guide',
+    description: 'With August 2026 browser privacy updates impacting API credentials, generate HTTP Basic Auth headers 100% client-side with zero data uploads.',
+    keywords: 'browser privacy api 2026, zero trust basic auth, basic authentication header generator, HTTP basic auth security, client-side header generator, privacy sandbox 2026, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/zero-trust-basic-auth-browser-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-navegador-2026-guia-encabezado-basic-auth-zero-trust',
+        title: 'Privacidad Navegadores 2026: Encabezado Basic Auth Privado',
+        description: 'Con las normas de privacidad de agosto 2026, genera encabezados HTTP Basic Auth 100% en local sin subir credenciales a la nube. Prueba gratis.',
+        keywords: 'privacidad navegador 2026, generador encabezado autenticacion basica, basic auth zero trust, seguridad HTTP basic auth, encabezado cliente local, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-navigateurs-2026-guide-entete-basic-auth-zero-trust',
+        title: 'Confidentialité Navigateurs 2026 : En-tête Basic Auth Privé',
+        description: 'Mises à jour de confidentialité d\'août 2026 : générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement. Outil gratuit.',
+        keywords: 'confidentialite navigateurs 2026, generateur entete authentification basique, basic auth zero trust, securite HTTP basic auth, entete cote client, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'ai-agent-system-prompt-drift-august-2026-text-compare',
     title: 'AI Prompt Drift August 2026: Compare Prompts Free',
     description: 'With August 2026 AI agent prompt drift impacting autonomous workflows, compare system prompts and JSON configs 100% client-side with zero cloud leaks.',
