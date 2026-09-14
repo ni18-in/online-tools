@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'postman-cloud-privacy-json-visualizer-2026',
+    title: 'Postman Cloud Privacy Shift 2026: Format JSON Payloads Free',
+    description: "With Postman's August 2026 cloud sync rules, formatting JSON client-side is essential. Try our free browser tool—zero server uploads, instant results.",
+    keywords: 'postman cloud privacy shift 2026, client side json visualizer pro, format json online privately, json tree view validator, private json editor 2026, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/postman-cloud-privacy-json-visualizer-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cambio-privacidad-postman-nube-visualizador-json-2026',
+        title: 'Privacidad Postman Nube 2026: Formatea JSON en Privado Gratis',
+        description: 'Con el cambio de privacidad en la nube de Postman en agosto de 2026, formatear JSON en local es vital. Prueba nuestra herramienta sin subida de datos.',
+        keywords: 'cambio privacidad postman nube 2026, visualizador json pro cliente, formatear json online privado, validador arbol json, editor json privado, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'postman-confidentialite-nuage-visualiseur-json-2026',
+        title: 'Postman Confidentialité Nuage 2026 : Visualiseur JSON Privé',
+        description: 'Mises à jour de confidentialité Postman d\'août 2026 : formatez et validez vos JSON 100% en local dans votre navigateur sans téléversement. Gratuit.',
+        keywords: 'postman confidentialite nuage 2026, visualiseur json pro cote client, formater json en ligne prive, validateur arborescent json, editeur json prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'css-container-queries-rem-to-px-converter-2026',
     title: 'CSS Container Queries 2026: Convert REM to PX Online',
     description: 'With August 2026 CSS container queries & fluid typography, converting REM to PX is crucial for Figma design systems. Try our free 100% client-side tool.',
