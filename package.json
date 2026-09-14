@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.62.1",
-    "autoprefixer": "^10.5.4"
+    "@playwright/test": "^1.63.0",
+    "autoprefixer": "^10.5.6"
   }
 }
