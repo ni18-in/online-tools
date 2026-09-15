@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ios-20-heic-v2-compatibility-viewer-2026',
+    title: 'iOS 20 HEIC v2 Update 2026: Open & View HEIC Photos Free',
+    description: 'With iOS 20 and macOS Tahoe HEIC v2 updates in August 2026, view and convert HEIC photos 100% client-side with zero uploads. Try our free browser tool.',
+    keywords: 'ios 20 heic viewer online, heic v2 viewer 2026, open heic photo browser, convert heic to jpg private, apple heic photo fixer, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ios-20-heic-v2-compatibility-viewer-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'compatibilidad-heic-v2-ios-20-visor-2026',
+        title: 'Actualización HEIC v2 iOS 20: Ver Fotos HEIC Gratis',
+        description: 'Tras las actualizaciones de HEIC v2 en iOS 20 en agosto 2026, visualiza y convierte fotos HEIC 100% en local sin subir archivos. Prueba gratis.',
+        keywords: 'visor heic ios 20 online, visor heic v2 2026, abrir foto heic navegador, convertir heic a jpg privado, reparador fotos heic, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'compatibilite-heic-v2-ios-20-visualiseur-2026',
+        title: 'Mise à Jour HEIC v2 iOS 20 : Visualiser Photos HEIC',
+        description: 'Avec les mises à jour HEIC v2 d\'iOS 20 d\'août 2026, visualisez et convertissez vos photos HEIC 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'visualiseur heic ios 20 en ligne, visualiseur heic v2 2026, ouvrir photo heic navigateur, convertir heic en jpg prive, reparateur photo heic, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'postman-cloud-privacy-json-visualizer-2026',
     title: 'Postman Cloud Privacy Shift 2026: Format JSON Payloads Free',
     description: "With Postman's August 2026 cloud sync rules, formatting JSON client-side is essential. Try our free browser tool—zero server uploads, instant results.",
