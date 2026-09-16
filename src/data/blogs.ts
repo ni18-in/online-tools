@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'api-gateway-basic-auth-security-august-2026',
+    title: 'August 2026 API Gateway Security: Generate Basic Auth Headers',
+    description: 'With August 2026 API gateway security mandates requiring zero-cloud header encoding, generate HTTP Basic Auth headers 100% client-side. Try it free.',
+    keywords: 'API gateway basic auth security 2026, basic authentication header generator, zero trust basic auth, client side header generator, HTTP basic authentication, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/api-gateway-basic-auth-security-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-encabezado-autenticacion-basica-api-2026',
+        title: 'Seguridad Basic Auth Agosto 2026: Genera Encabezados Gratis',
+        description: 'Tras los mandatos de seguridad API de agosto 2026, genera encabezados HTTP Basic Auth 100% en local sin enviar credenciales a servidores. Prueba gratis.',
+        keywords: 'seguridad autenticacion basica api 2026, generador encabezado autenticacion basica, basic auth zero trust, encabezado cliente local, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'securite-entete-authentification-base-api-2026',
+        title: 'Sécurité Basic Auth API Août 2026 : En-têtes Privés Instant',
+        description: 'Avec les normes de sécurité API d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local dans votre navigateur sans téléversement. Gratuit.',
+        keywords: 'securite authentification basique api 2026, generateur entete authentification basique, basic auth zero trust, entete cote client, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'ios-20-heic-v2-compatibility-viewer-2026',
     title: 'iOS 20 HEIC v2 Update 2026: Open & View HEIC Photos Free',
     description: 'With iOS 20 and macOS Tahoe HEIC v2 updates in August 2026, view and convert HEIC photos 100% client-side with zero uploads. Try our free browser tool.',
