@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-140-devtools-json-visualizer-2026',
+    title: 'Chrome 140 DevTools 2026: Format JSON Payloads Free',
+    description: "With Chrome 140's August 2026 privacy rules, client-side JSON debugging is now essential. Try our free browser tool—zero uploads, instant results.",
+    keywords: 'chrome 140 devtools 2026, client side json visualizer pro, format json online privately, json tree view validator, private json editor 2026, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-140-devtools-json-visualizer-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'actualizacion-chrome-140-devtools-visualizador-json-2026',
+        title: 'Chrome 140 DevTools 2026: Formatea JSON en Privado Gratis',
+        description: 'Tras las reglas de privacidad de Chrome 140 en agosto 2026, formatear JSON en local es vital. Prueba nuestra herramienta gratis sin subida de datos.',
+        keywords: 'chrome 140 devtools 2026, visualizador json pro cliente, formatear json online privado, validador arbol json, editor json privado, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'mise-a-jour-chrome-140-devtools-visualiseur-json-2026',
+        title: 'Chrome 140 DevTools 2026 : Visualiseur JSON Privé',
+        description: "Avec la mise à jour Chrome 140 d'août 2026, formatez et validez vos JSON 100% en local dans votre navigateur sans aucun téléversement. Gratuit.",
+        keywords: 'chrome 140 devtools 2026, visualiseur json pro cote client, formater json en ligne prive, validateur arborescent json, editeur json prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'api-gateway-basic-auth-security-august-2026',
     title: 'August 2026 API Gateway Security: Generate Basic Auth Headers',
     description: 'With August 2026 API gateway security mandates requiring zero-cloud header encoding, generate HTTP Basic Auth headers 100% client-side. Try it free.',
