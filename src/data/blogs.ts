@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ai-agent-privacy-json-visualizer-2026',
+    title: 'AI Agent Data Leaks 2026: Format & Inspect JSON Payloads Privately',
+    description: 'With August 2026 AI agents generating unvetted JSON payloads, inspect and format structured data 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'ai agent privacy 2026, client side json visualizer pro, format json online privately, json tree view validator, private json editor 2026, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ai-agent-privacy-json-visualizer-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'fugas-datos-agentes-ia-2026-visualizador-json-privado',
+        title: 'Fugas de Datos de Agentes IA 2026: Formatea JSON en Privado Gratis',
+        description: 'Ante el auge de los agentes IA en agosto 2026, inspecciona y formatea respuestas JSON 100% local sin enviar datos a servidores. Prueba gratis.',
+        keywords: 'fugas datos agentes ia 2026, visualizador json pro cliente, formatear json online privado, validador arbol json, editor json privado, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'fuites-donnees-agents-ia-2026-visualiseur-json-prive',
+        title: 'Fuites de Données des Agents IA 2026 : Visualiseur JSON Privé',
+        description: 'Face aux risques d\'exfiltration d\'août 2026 avec les agents IA, formatez et inspectez vos JSON 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'fuites donnees agents ia 2026, visualiseur json pro cote client, formater json en ligne prive, validateur arborescent json, editeur json prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'chrome-140-devtools-json-visualizer-2026',
     title: 'Chrome 140 DevTools 2026: Format JSON Payloads Free',
     description: "With Chrome 140's August 2026 privacy rules, client-side JSON debugging is now essential. Try our free browser tool—zero uploads, instant results.",
