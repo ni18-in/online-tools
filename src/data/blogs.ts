@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'figma-design-tokens-px-to-rem-august-2026',
+    title: 'Figma Design Tokens August 2026: Convert PX to REM Free',
+    description: 'With Figma\'s August 2026 design token update enforcing fluid typography, convert PX to REM 100% client-side with zero data uploads. Try it free now.',
+    keywords: 'figma design tokens 2026, px to rem converter, convert px to rem, fluid typography css, responsive design system rem, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/figma-design-tokens-px-to-rem-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'tokens-diseno-figma-convertidor-px-a-rem-agosto-2026',
+        title: 'Tokens de Diseño Figma Agosto 2026: Convierte PX a REM',
+        description: 'Tras la actualización de tokens de diseño de Figma en agosto de 2026, convierte PX a REM 100% en local sin subir datos. Prueba nuestra herramienta gratis.',
+        keywords: 'tokens de diseno figma 2026, convertidor px a rem, convertir px a rem, tipografia fluida css, sistema de diseno rem, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'jetons-design-figma-convertisseur-px-en-rem-aout-2026',
+        title: 'Jetons de Design Figma Août 2026 : Convertir PX en REM Privé',
+        description: 'Avec la mise à jour des jetons de design Figma d\'août 2026, convertissez PX en REM 100% en local sans aucun téléversement. Outil gratuit et rapide.',
+        keywords: 'jetons de design figma 2026, convertisseur px en rem, convertir px en rem, typographie fluide css, design system rem, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'ai-agent-privacy-json-visualizer-2026',
     title: 'AI Agent Data Leaks 2026: Format & Inspect JSON Payloads Privately',
     description: 'With August 2026 AI agents generating unvetted JSON payloads, inspect and format structured data 100% client-side with zero cloud uploads or leaks.',
