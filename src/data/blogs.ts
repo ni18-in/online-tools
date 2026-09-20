@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-dbsc-session-tokens-jwt-debugger-2026',
+    title: 'Chrome DBSC Session Tokens 2026: Debug JWT Payloads Free',
+    description: 'With Chrome\'s August 2026 Device Bound Session Credentials (DBSC) rollout, debug bound JWT session tokens 100% client-side with zero cloud uploads.',
+    keywords: 'chrome dbsc 2026, device bound session credentials, jwt debugger pro, client-side jwt decoder, session hijacking protection, zero trust token inspection, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-dbsc-session-tokens-jwt-debugger-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'despliegue-chrome-dbsc-tokens-sesion-depurador-jwt-2026',
+        title: 'Despliegue Chrome DBSC 2026: Depura Tokens JWT en Privado',
+        description: 'Con el despliegue DBSC de Chrome en agosto de 2026, depura tokens de sesión JWT 100% en local sin enviar datos a la nube. Prueba nuestra herramienta.',
+        keywords: 'chrome dbsc 2026, credenciales sesion vinculadas dispositivo, depurador jwt pro, decodificador jwt cliente, proteccion robo sesion, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'deploiment-chrome-dbsc-jetons-session-debogueur-jwt-2026',
+        title: 'Déploiement Chrome DBSC 2026 : Déboguer les Jetons JWT',
+        description: 'Avec le déploiement DBSC de Chrome en août 2026, décodez vos jetons de session JWT 100% en local sans aucun téléversement. Outil gratuit et sécurisé.',
+        keywords: 'chrome dbsc 2026, identifiants session lies appareil, debogueur jwt pro, decodeur jwt cote client, protection vol de session, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'figma-design-tokens-px-to-rem-august-2026',
     title: 'Figma Design Tokens August 2026: Convert PX to REM Free',
     description: 'With Figma\'s August 2026 design token update enforcing fluid typography, convert PX to REM 100% client-side with zero data uploads. Try it free now.',
