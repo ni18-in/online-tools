@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-webgpu-image-processing-2026',
+    title: 'Chrome 2026 WebGPU Image Update: Free Online Image Utility Tool',
+    description: 'With Chrome\'s August 2026 WebGPU image processing update, compress and convert images 100% client-side with zero cloud uploads or leaks. Try it free.',
+    keywords: 'chrome webgpu image processing 2026, free online image utility tool, compress image browser, convert webp online, client side image editor 2026, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-webgpu-image-processing-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'procesamiento-imagenes-chrome-webgpu-2026',
+        title: 'Chrome WebGPU 2026: Editor y Convertidor de Imágenes Gratis',
+        description: 'Tras la actualización WebGPU de Chrome en agosto de 2026, comprime y convierte imágenes 100% local sin subir archivos a la nube. Pruébalo gratis.',
+        keywords: 'procesamiento imagenes chrome webgpu 2026, herramienta imagenes gratis online, comprimir imagenes navegador, convertir webp online, editor imagenes cliente, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'traitement-images-chrome-webgpu-2026',
+        title: 'Chrome WebGPU 2026 : Éditeur et Convertisseur d\'Images Gratuit',
+        description: 'Avec la mise à jour WebGPU de Chrome d\'août 2026, compressez et convertissez vos images 100% en local sans aucun téléversement. Gratuit et rapide.',
+        keywords: 'traitement images chrome webgpu 2026, outil image en ligne gratuit, compresser image navigateur, convertir webp en ligne, editeur image cote client, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'chrome-dbsc-session-tokens-jwt-debugger-2026',
     title: 'Chrome DBSC Session Tokens 2026: Debug JWT Payloads Free',
     description: 'With Chrome\'s August 2026 Device Bound Session Credentials (DBSC) rollout, debug bound JWT session tokens 100% client-side with zero cloud uploads.',
