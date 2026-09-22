@@ -1,0 +1,157 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Firefox 140 Privacidad 2026: Depura Tokens JWT Gratis
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Privacidad y Seguridad</span>
+      </p>
+      <img src="/assets/blog/firefox-140-privacy-jwt-debugger-2026-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Privacidad de Firefox 140 y depurador de tokens JWT del lado del cliente" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Imagen+No+Encontrada';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>El lanzamiento de Firefox 140 en agosto de 2026 introduce la partición total de estado, evitando fugas entre sitios.</li>
+        <li>Pegar tokens JWT de sesión confidenciales en decodificadores en la nube crea graves vulnerabilidades de seguridad.</li>
+        <li>Nuestra herramienta <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> decodifica tokens 100% en la memoria de tu navegador sin subir datos.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Tras el importante lanzamiento de Firefox 140 por parte de Mozilla en agosto de 2026, la protección de la privacidad en los motores WebKit y Gecko ha alcanzado un máximo histórico. Con particiones de red estrictas y almacenamiento de tokens aislado por sitio web, los desarrolladores y equipos de ciberseguridad se enfrentan a mandatos "zero-trust" más rigurosos al inspeccionar cargas de autenticación.
+      </p>
+      <p>
+        A medida que las reglas de seguridad se endurecen en agosto de 2026, copiar tokens de acceso OAuth 2.1 o JWT de sesión en herramientas web remotas expone credenciales de la organización a registros de servidor y filtraciones.
+      </p>
+      <p>
+        Para decodificar y analizar tokens de forma segura sin exponer datos confidenciales a servidores externos, nuestra utilidad gratuita <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> ejecuta todo el procesamiento en el navegador cliente, garantizando que tus archivos y credenciales nunca salgan de tu dispositivo.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Partición de Estado en Firefox 140 y Aislamiento de Tokens en Agosto de 2026</h2>
+      <p>
+        La actualización de agosto de 2026 de Firefox 140 impone el almacenamiento aislado por origen para todas las API web del cliente. Las aplicaciones web modernas que dependen de tokens JSON Web Tokens (JWT) para la gestión de sesiones deben adherirse a arquitecturas de cero confianza. Al depurar llamadas API, los tokens suelen contener identidades de usuario, permisos de autorización y fechas de expiración.
+      </p>
+      <p>
+        Si utilizas decodificadores tradicionales en la nube, cada JWT introducido se transmite por HTTP/S a servidores remotos. En una era donde escáneres automáticos monitorean registros en la nube en busca de firmas JWT expuestas, transmitir encabezados de autenticación activos representa un riesgo inaceptable.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Riesgos de Seguridad de los Decodificadores JWT Tradicionales</h2>
+      <p>
+        Los inspectores de tokens procesados en el servidor reciben tu token JWT en un servidor remoto antes de devolver el JSON analizado. Esta arquitectura genera tres amenazas principales:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Riesgo de Privacidad:</strong> Los registros del servidor pueden capturar tokens activos, permitiendo ataques de reutilización de sesión.</li>
+        <li><strong>Coste de Rendimiento:</strong> Las peticiones remotas introducen latencia al formatear encabezados y afirmaciones JSON complejas.</li>
+        <li><strong>Exfiltración de Credenciales:</strong> Servicios comprometidos en la nube pueden extraer claves privadas y secretos API incluidos en el JWT.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Ventajas Clave y Características</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% en el Cliente:</strong> Todo el procesamiento ocurre en la memoria de tu navegador. Sin subidas al servidor. Sin filtraciones de datos. Sin registros.</li>
+        <li><strong>⚡ Sin Instalación y Acceso Instantáneo:</strong> Abre la página y comienza a depurar inmediatamente sin registros ni extensiones.</li>
+        <li><strong>🚀 Alto Rendimiento:</strong> Desarrollado con análisis Base64URL nativo en JavaScript para una descomposición instantánea del token.</li>
+        <li><strong>🌐 Compatible con Todos los Navegadores:</strong> Verificado en Firefox 140, Chrome 140, Safari 20 y Edge.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guía Paso a Paso</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la página del <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> en tu navegador web.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Pega tu token JSON Web Token (JWT) codificado en Base64URL en el área de texto.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Inspecciona el resultado con colores resaltando el Encabezado (algoritmo y tipo), Carga útil (claims y metadatos) y Estado de la firma.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Copia la carga útil formateada o verifica fechas de expiración de forma segura sin transmitir datos por internet.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Consejos Pro y Casos de Uso Avanzados</h2>
+      <p>
+        Al depurar implementaciones OAuth 2.1 o OpenID Connect (OIDC), examina los campos de afirmación <code>exp</code> (expiración) y <code>nbf</code> (no antes de). Nuestra herramienta del lado del cliente convierte automáticamente las marcas de tiempo Unix a fechas locales legibles para detectar desajustes en tiempo real sin activar advertencias CORS.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusión y Empieza Ahora</h2>
+      <p>
+        Con las reglas de aislamiento estricto de Firefox 140 en agosto de 2026, proteger tus secretos de autenticación es más sencillo y vital que nunca. Deja de enviar tokens de sesión a herramientas en la nube no verificadas y mantén tus datos totalmente offline.
+      </p>
+      <p class="mt-4">
+        <a href="/es/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Probar Depurador JWT Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Cómo afecta el aislamiento de privacidad de Firefox 140 a la depuración JWT?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Firefox 140 aísla el estado del navegador por dominio. Utilizar una herramienta JWT 100% cliente asegura que tus tokens de autenticación permanezcan en la memoria local sin compartirse con terceros.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Se guardan o suben mis tokens JWT a algún servidor?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">No. Todo el procesamiento y la decodificación Base64URL ocurren localmente en tu navegador usando JavaScript. Ningún dato se envía a través de la red.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Puedo usar este depurador JWT sin conexión a internet?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">¡Sí! Una vez cargada la página en tu navegador, puedes desconectarte de internet y continuar depurando. Toda la lógica se ejecuta localmente.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Qué tipos de tokens JWT se pueden inspeccionar?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Puedes decodificar cualquier token JSON Web Token estándar de 3 partes (Encabezado.CargaÚtil.Firma), incluyendo tokens de acceso OAuth 2.1, tokens ID OIDC y bearer tokens de API.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Por qué elegir un depurador JWT cliente frente a herramientas en la nube?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Las herramientas en el cliente eliminan los riesgos de registros en servidores, protegen afirmaciones sensibles contra filtraciones y ofrecen decodificación instantánea en tiempo real sin latencia de red.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navegación de entradas">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>
