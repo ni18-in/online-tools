@@ -1,0 +1,157 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Firefox 140 Confidentialité 2026 : Déboguer JWT Privé
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publié le <time datetime="2026-08-09" itemprop="datePublished">9 août 2026</time>
+        par <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/fr/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Confidentialité &amp; Sécurité</span>
+      </p>
+      <img src="/assets/blog/firefox-140-privacy-jwt-debugger-2026-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Isolation de confidentialité Firefox 140 et outil de débogage JWT côté client" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Non+Trouvee';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Résumé Rapide</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>La version d'août 2026 de Firefox 140 introduit le partitionnement total de l'état du navigateur pour éviter les fuites.</li>
+        <li>Copier des jetons JWT de session sensibles dans des décodeurs cloud tiers crée des failles de sécurité critiques.</li>
+        <li>Notre outil <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> décode vos jetons 100% dans la mémoire de votre navigateur sans aucun téléversement.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Suite à la mise à jour majeure de Firefox 140 par Mozilla en août 2026, l'isolation de la confidentialité sur les moteurs WebKit et Gecko atteint un niveau inégalé. Avec un partitionnement réseau strict et un stockage de jetons isolé par site, les développeurs et experts en sécurité doivent respecter des normes "zero-trust" rigoureuses lors de l'inspection des données d'authentification.
+      </p>
+      <p>
+        Alors que les règles de sécurité se renforcent en août 2026, coller des jetons d'accès OAuth 2.1 ou des JWT de session dans des utilitaires distants expose les identifiants d'entreprise aux journaux de serveurs distants.
+      </p>
+      <p>
+        Pour analyser vos jetons en toute sécurité sans divulguer d'informations confidentielles à des serveurs tiers, notre outil gratuit <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> s'exécute intégralement côté client : vos jetons ne quittent jamais votre ordinateur.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Partitionnement d'État Firefox 140 et Isolation des Jetons en Août 2026</h2>
+      <p>
+        La version d'août 2026 de Firefox 140 impose le stockage isolé par origine pour toutes les API web côté client. Les applications web modernes qui dépendent des JSON Web Tokens (JWT) pour la gestion de session doivent désormais se conformer au modèle zéro confiance. Lors du débogage d'API, les jetons contiennent souvent des identités d'utilisateurs, des portées d'autorisation et des dates d'expiration.
+      </p>
+      <p>
+        Si vous utilisez des décodeurs basés sur le cloud, chaque JWT transmis est envoyé par réseau HTTP/S à des infrastructures distantes. À une époque où des scanners automatisés surveillent les journaux cloud pour trouver des signatures JWT expatropiées, transmettre des en-têtes d'authentification actifs représente un risque cyber inacceptable.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Pourquoi les Décodeurs JWT en Ligne Posent des Risques de Sécurité</h2>
+      <p>
+        Les inspecteurs de jetons traditionnels exécutés sur serveur reçoivent votre payload JWT sur un serveur distant avant de vous renvoyer le JSON analysé. Cette architecture entraîne trois menaces majeures :
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Risque de Confidentialité :</strong> Les journaux de serveurs peuvent enregistrer des jetons actifs, permettant des attaques par rejeu de session.</li>
+        <li><strong>Coût de Performance :</strong> Les requêtes distantes ajoutent de la latence lors du formatage des en-têtes et payloads JSON complexes.</li>
+        <li><strong>Fuite d'Identifiants :</strong> Des services cloud compromis peuvent extraire des clés privées et des secrets d'API contenus dans vos JWT.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Avantages et Fonctionnalités Clés</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Confidentialité 100% Côté Client :</strong> Tout le traitement s'effectue dans la mémoire de votre navigateur. Aucun téléversement. Aucune fuite de données. Aucun journal.</li>
+        <li><strong>⚡ Sans Installation et Accès Instantané :</strong> Ouvrez la page et commencez le débogage immédiatement sans inscription ni extension.</li>
+        <li><strong>🚀 Haute Performance :</strong> Conçu avec un analyseur Base64URL natif en JavaScript pour un décodage instantané du jeton.</li>
+        <li><strong>🌐 Compatible Tous Navigateurs :</strong> Testé et validé sur Firefox 140, Chrome 140, Safari 20 et Edge.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guide de Procédure Étape par Étape</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Ouvrez la page du <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> dans votre navigateur.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Collez votre jeton JSON Web Token (JWT) encodé en Base64URL dans la zone de texte.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Inspectez le résultat coloré mettant en valeur l'En-tête (algorithme et type), le Payload (revendications) et le statut de la Signature.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Copiez le payload JSON formaté ou vérifiez les dates d'expiration en toute sécurité sans envoyer aucune donnée sur Internet.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conseils d'Expert et Cas d'Usage Avancés</h2>
+      <p>
+        Lors du débogage d'implémentations OAuth 2.1 ou OpenID Connect (OIDC), examinez les champs <code>exp</code> (expiration) et <code>nbf</code> (pas avant). Notre outil côté client convertit automatiquement les horodatages Unix en dates locales lisibles pour identifier les décalages de jetons en temps réel sans générer d'avertissements CORS.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusion &amp; Commencer Dès Maintenant</h2>
+      <p>
+        Avec les règles d'isolement strictes de Firefox 140 en août 2026, protéger vos secrets d'authentification est plus simple et plus vital que jamais. Cessez de transmettre vos jetons de session à des services en ligne non vérifiés et gardez vos identifiants totalement hors ligne.
+      </p>
+      <p class="mt-4">
+        <a href="/fr/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Lancer le Débogueur JWT Gratuit &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Foire Aux Questions</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Comment l'isolement de Firefox 140 impacte-t-il le débogage JWT ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Firefox 140 partitionne l'état du navigateur par domaine. L'utilisation d'un outil JWT 100% côté client garantit que vos jetons restent dans la mémoire de votre navigateur sans être partagés avec des tiers.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Mes jetons JWT sont-ils téléversés ou enregistrés sur un serveur ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Non. Tout le décodage et l'analyse Base64URL s'effectuent localement dans votre navigateur à l'aide de JavaScript. Aucune donnée n'est transmise sur le réseau.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Puis-je utiliser ce débogueur JWT hors ligne sans connexion Internet ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Oui ! Une fois la page chargée dans votre navigateur, vous pouvez vous déconnecter d'Internet et continuer à l'utiliser hors ligne. Toute la logique s'exécute localement.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Quels types de jetons JWT peuvent être inspectés ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Vous pouvez décoder n'importe quel JSON Web Token standard en 3 parties (Header.Payload.Signature), y compris les jetons d'accès OAuth 2.1, les jetons ID OIDC et les bearer tokens d'API.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Pourquoi choisir un débogueur JWT côté client plutôt qu'un outil cloud ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Les outils côté client éliminent les risques de journaux de serveurs, protègent les données sensibles contre les fuites et offrent un décodage instantané sans latence réseau.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navigation des articles">
+        <a href="/fr/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Retour au Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

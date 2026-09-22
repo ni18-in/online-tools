@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'firefox-140-privacy-jwt-debugger-2026',
+    title: 'Firefox 140 Privacy 2026: Debug JWT Payloads Free',
+    description: "With Firefox 140's August 2026 privacy isolation updates, debug bound JWT tokens 100% client-side with zero cloud uploads or data leaks. Try it free.",
+    keywords: 'firefox 140 privacy 2026, jwt debugger pro, client-side jwt decoder, session token privacy, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/firefox-140-privacy-jwt-debugger-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'firefox-140-privacidad-depurador-jwt-2026',
+        title: 'Firefox 140 Privacidad 2026: Depura Tokens JWT Gratis',
+        description: 'Con la privacidad de Firefox 140 en agosto de 2026, depura tokens JWT 100% en local sin subida a la nube ni fugas de datos. Pruébalo gratis ahora.',
+        keywords: 'firefox 140 privacidad 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, depurar jwt navegador, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'firefox-140-confidentialite-debogueur-jwt-2026',
+        title: 'Firefox 140 Confidentialité 2026 : Déboguer JWT Privé',
+        description: "Avec l'isolation de Firefox 140 d'août 2026, décodez vos jetons JWT 100% en local sans aucun téléversement ni fuite de données. Essai gratuit.",
+        keywords: 'firefox 140 confidentialite 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, deboguer jwt navigateur, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'chrome-webgpu-image-processing-2026',
     title: 'Chrome 2026 WebGPU Image Update: Free Online Image Utility Tool',
     description: 'With Chrome\'s August 2026 WebGPU image processing update, compress and convert images 100% client-side with zero cloud uploads or leaks. Try it free.',
