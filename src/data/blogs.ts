@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'kubernetes-jwt-service-account-security-2026',
+    title: 'Kubernetes Service Account JWT Security 2026: Debug Tokens',
+    description: "With August 2026 Kubernetes 1.31 service account JWT token rotation updates, debug bound JWT payloads 100% client-side with zero cloud uploads.",
+    keywords: 'kubernetes jwt service account security 2026, jwt debugger pro, client-side jwt decoder, serviceaccount token rotation, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/kubernetes-jwt-service-account-security-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'seguridad-tokens-jwt-kubernetes-2026',
+        title: 'Seguridad Tokens JWT Kubernetes 2026: Depura en Privado',
+        description: 'Tras las actualizaciones de rotación de tokens JWT de Kubernetes en agosto 2026, depura tokens de cuenta de servicio 100% local sin subida a la nube.',
+        keywords: 'seguridad tokens jwt kubernetes 2026, depurador jwt pro, decodificador jwt cliente, rotacion tokens serviceaccount, inspeccion tokens zero trust, depurar jwt navegador, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'securite-jetons-jwt-kubernetes-2026',
+        title: 'Sécurité Jetons JWT Kubernetes 2026 : Déboguer en Privé',
+        description: "Avec la rotation des jetons JWT ServiceAccount Kubernetes d'août 2026, décodez vos jetons 100% en local sans aucun téléversement ni fuite de données.",
+        keywords: 'securite jetons jwt kubernetes 2026, debogueur jwt pro, decodeur jwt cote client, rotation jetons serviceaccount, inspection jeton zero trust, deboguer jwt navigateur, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'firefox-140-privacy-jwt-debugger-2026',
     title: 'Firefox 140 Privacy 2026: Debug JWT Payloads Free',
     description: "With Firefox 140's August 2026 privacy isolation updates, debug bound JWT tokens 100% client-side with zero cloud uploads or data leaks. Try it free.",
