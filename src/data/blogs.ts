@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'wasm-simd-image-processing-august-2026',
+    title: 'WASM SIMD 2026 Image Update: Compress & Convert Free',
+    description: 'With August 2026 WebAssembly SIMD browser updates, compress and convert images 100% client-side with zero cloud uploads or leaks. Try it free.',
+    keywords: 'wasm simd image processing 2026, free online image utility tool, compress image browser, convert webp online, client side image editor 2026, ni18',
+    category: 'Media',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/wasm-simd-image-processing-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'procesamiento-imagenes-wasm-simd-2026',
+        title: 'WASM SIMD 2026: Editor y Convertidor de Imágenes Gratis',
+        description: 'Tras la actualización WASM SIMD en agosto de 2026, comprime y convierte imágenes 100% local sin subir archivos a la nube. Pruébalo gratis.',
+        keywords: 'procesamiento imagenes wasm simd 2026, herramienta imagenes gratis online, comprimir imagenes navegador, convertir webp online, editor imagenes cliente, ni18',
+        category: 'Media'
+      },
+      fr: {
+        slug: 'traitement-images-wasm-simd-2026',
+        title: 'WASM SIMD 2026 : Éditeur et Convertisseur d\'Images Gratuit',
+        description: 'Avec la mise à jour WebAssembly SIMD d\'août 2026, compressez et convertissez vos images 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'traitement images wasm simd 2026, outil image en ligne gratuit, compresser image navigateur, convertir webp en ligne, editeur image cote client, ni18',
+        category: 'Média'
+      }
+    }
+  },
+  {
     slug: 'kubernetes-jwt-service-account-security-2026',
     title: 'Kubernetes Service Account JWT Security 2026: Debug Tokens',
     description: "With August 2026 Kubernetes 1.31 service account JWT token rotation updates, debug bound JWT payloads 100% client-side with zero cloud uploads.",
