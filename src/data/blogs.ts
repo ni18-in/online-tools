@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'aws-microsecond-epoch-timestamp-2026',
+    title: 'AWS CloudWatch Epoch Update 2026: Convert Timestamps Free',
+    description: 'With AWS CloudWatch\'s August 2026 shift to microsecond Epoch timestamps, convert and debug 16-digit timestamps 100% client-side with zero cloud data leaks.',
+    keywords: 'AWS CloudWatch epoch timestamp 2026, advance epoch converter, convert microsecond timestamp to date, unix epoch converter online, aws log timestamp converter, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/aws-microsecond-epoch-timestamp-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertidor-timestamp-epoch-microsegundos-aws-2026',
+        title: 'Actualización Epoch AWS 2026: Convierte Timestamps Gratis',
+        description: 'Tras la transición de AWS CloudWatch a marcas de tiempo de microsegundos en agosto de 2026, convierte e inspecciona timestamps 100% local sin subir datos.',
+        keywords: 'actualizacion epoch aws 2026, convertidor epoch avanzado, convertir timestamp microsegundos a fecha, convertidor epoch unix online, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'convertisseur-horodatage-epoch-microsecondes-aws-2026',
+        title: 'Mise à Jour Epoch AWS 2026 : Convertir Horodatages Privé',
+        description: 'Avec le passage d\'AWS CloudWatch aux horodatages en microsecondes en août 2026, convertissez vos timestamps 100% en local sans aucun téléversement.',
+        keywords: 'mise a jour epoch aws 2026, convertisseur epoch avance, convertir timestamp microsecondes en date, convertisseur epoch unix en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'wasm-simd-image-processing-august-2026',
     title: 'WASM SIMD 2026 Image Update: Compress & Convert Free',
     description: 'With August 2026 WebAssembly SIMD browser updates, compress and convert images 100% client-side with zero cloud uploads or leaks. Try it free.',
