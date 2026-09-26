@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'owasp-top-10-api-security-2026-basic-auth',
+    title: 'OWASP API Security 2026: Generate Basic Auth Headers',
+    description: "With OWASP's August 2026 API security guidelines targeting credential leaks, generate HTTP Basic Auth headers 100% client-side with zero cloud uploads.",
+    keywords: 'OWASP API Security 2026, basic authentication header generator, generate basic auth header, zero trust API credentials, HTTP basic auth, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/owasp-top-10-api-security-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'owasp-seguridad-api-2026-autenticacion-basica',
+        title: 'OWASP Seguridad API 2026: Genera Basic Auth Gratis',
+        description: 'Con las directrices OWASP de agosto 2026 sobre fugas de datos, genera encabezados Basic Auth 100% local y privado sin enviar credenciales a servidores.',
+        keywords: 'OWASP seguridad API 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales API zero trust, autenticacion basica HTTP, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'owasp-securite-api-2026-authentification-base',
+        title: 'Sécurité API OWASP 2026 : Générer En-tête Basic Auth',
+        description: "Avec les directives OWASP d'août 2026 sur les fuites de données, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement. Gratuit.",
+        keywords: 'securite API OWASP 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants API zero trust, authentification basique HTTP, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'aws-microsecond-epoch-timestamp-2026',
     title: 'AWS CloudWatch Epoch Update 2026: Convert Timestamps Free',
     description: 'With AWS CloudWatch\'s August 2026 shift to microsecond Epoch timestamps, convert and debug 16-digit timestamps 100% client-side with zero cloud data leaks.',
