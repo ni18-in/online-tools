@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-august-2026-privacy-api-jwt-debugger',
+    title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix",
+    description: "Chrome's August 2026 Privacy Sandbox API rollout breaks traditional token capture. Inspect and debug JWTs 100% client-side with zero cloud data uploads.",
+    keywords: 'chrome august 2026 privacy api, jwt debugger pro, client-side jwt decoder, session token privacy, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-august-2026-privacy-api-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'chrome-agosto-2026-api-privacidad-depurador-jwt',
+        title: 'API de Privacidad Chrome Agosto 2026: Depura JWT Gratis',
+        description: 'Con la API de privacidad de Chrome en agosto 2026, la depuración JWT en local es vital. Inspecciona y valida tokens 100% privado sin subir datos.',
+        keywords: 'api privacidad chrome agosto 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'chrome-aout-2026-api-confidentialite-debogueur-jwt',
+        title: 'API Confidentialité Chrome Août 2026 : Déboguer JWT Privé',
+        description: "Avec l'API de confidentialité Chrome d'août 2026, décodez et vérifiez vos jetons JWT 100% en local dans votre navigateur sans aucun téléversement.",
+        keywords: 'api confidentialite chrome aout 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'owasp-top-10-api-security-2026-basic-auth',
     title: 'OWASP API Security 2026: Generate Basic Auth Headers',
     description: "With OWASP's August 2026 API security guidelines targeting credential leaks, generate HTTP Basic Auth headers 100% client-side with zero cloud uploads.",
