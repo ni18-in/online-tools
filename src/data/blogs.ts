@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'microservice-api-drift-august-2026-json-compare',
+    title: 'Microservice API Drift 2026: Compare JSON Payloads Free',
+    description: 'With August 2026 microservice trends, API payload drift between environments is critical. Compare JSON objects 100% client-side with zero cloud uploads.',
+    keywords: 'microservice api drift august 2026, json comparison tool, compare json online privately, client side json diff tool, api payload diffing, zero trust json auditor, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/microservice-api-drift-august-2026-json-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'desfase-api-microservicios-agosto-2026-comparar-json',
+        title: 'Desfase API Microservicios 2026: Compara JSON Gratis',
+        description: 'Con el despliegue de microservicios de agosto 2026, comparar JSON en local evita fugas de datos. Compara y audita cargas JSON 100% local sin subida a la nube.',
+        keywords: 'desfase api microservicios agosto 2026, herramienta comparacion json, comparar json online privado, diff json cliente local, auditaria json zero trust, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'derive-api-microservices-aout-2026-comparer-json',
+        title: 'Dérive API Microservices 2026 : Comparer JSON Privé',
+        description: 'Face à la dérive des API de microservices en août 2026, comparez vos structures JSON 100% en local dans votre navigateur sans aucun téléversement. Gratuit.',
+        keywords: 'derive api microservices aout 2026, comparateur json en ligne, diff json cote client, comparaison payload json prive, audit json zero trust, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'chrome-august-2026-privacy-api-jwt-debugger',
     title: "Chrome's New Privacy API Broke My Workflow—Here's the Fix",
     description: "Chrome's August 2026 Privacy Sandbox API rollout breaks traditional token capture. Inspect and debug JWTs 100% client-side with zero cloud data uploads.",
