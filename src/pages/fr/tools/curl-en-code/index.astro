@@ -1,0 +1,384 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+
+const seo: SeoProps = {
+  title: 'Convertisseur cURL en Code – Fetch, Axios, Python, Go et PHP',
+  description:
+    'Outil gratuit pour convertir des requêtes cURL en code propre JavaScript (Fetch, Axios), Python (Requests, HTTPX), Go, PHP et Node.js côté client.',
+  keywords:
+    'curl en code, curl vers fetch, curl vers python, curl vers axios, convertir curl, curl vers go, curl vers php, generateur api curl',
+  canonical: `${SITE_URL}/fr/tools/curl-en-code/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/curl-to-code/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/curl-a-codigo/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/curl-en-code/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/curl-to-code/` },
+  ],
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/fr/tools/curl-en-code/`,
+    title: 'Convertisseur cURL en Code',
+    description: 'Convertissez instantanément des requêtes cURL en code JavaScript, Python, Go et PHP.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'fr_FR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/fr/tools/curl-en-code/`,
+    title: 'Convertisseur cURL en Code',
+    description: 'Convertissez instantanément des requêtes cURL en code JavaScript, Python, Go et PHP.',
+    image: DEFAULT_OG_IMAGE,
+  },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'Convertisseur cURL en Code',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'All',
+      url: `${SITE_URL}/fr/tools/curl-en-code/`,
+      description: 'Convertissez des requêtes cURL en code prêt pour la production dans votre navigateur.',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Mes jetons API ou données sensibles sont-ils sécurisés ?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Oui, à 100%. Tout le traitement s’exécute localement dans votre navigateur en JavaScript. Aucune information n’est envoyée à un serveur externe.',
+          },
+        },
+      ],
+    },
+  ],
+};
+
+const altLinks = {
+  en: `${SITE_URL}/tools/curl-to-code/`,
+  es: `${SITE_URL}/es/tools/curl-a-codigo/`,
+};
+---
+
+<ToolLayout seo={seo} lang="fr" altLinks={altLinks}>
+  <div class="tool-island" id="tool-curl-to-code">
+    <header class="tool-header">
+      <h1>Convertisseur cURL en Code</h1>
+      <p class="subtitle">Convertissez vos lignes de commande cURL en code propre pour 7 langages</p>
+    </header>
+
+    <div class="quick-actions">
+      <button type="button" class="action-btn" id="btn-sample-json">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Exemple POST (JSON)</span>
+      </button>
+      <button type="button" class="action-btn" id="btn-sample-auth">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Exemple GET (Jeton)</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-clear">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        <span>Effacer</span>
+      </button>
+    </div>
+
+    <div class="converter-grid">
+      <section class="pane input-pane" aria-labelledby="input-heading-fr">
+        <div class="pane-header">
+          <h2 id="input-heading-fr">Commande cURL</h2>
+          <div class="request-meta" id="request-meta">
+            <span class="method-tag tag-post" id="tag-method">POST</span>
+            <span class="url-preview" id="url-preview">https://api.example.com</span>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <textarea
+            id="curl-input"
+            class="code-textarea"
+            placeholder="Collez votre commande cURL ici..."
+            spellcheck="false"
+            aria-label="Entrée de commande cURL"
+          ></textarea>
+        </div>
+        <div id="parse-error" class="error-banner" style="display:none;" role="alert">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span id="error-message">Syntaxe de commande cURL invalide.</span>
+        </div>
+      </section>
+
+      <section class="pane output-pane" aria-labelledby="output-heading-fr">
+        <div class="pane-header">
+          <h2 id="output-heading-fr" class="sr-only">Code Généré</h2>
+          <div class="lang-tabs" role="tablist" aria-label="Langages cibles">
+            <button type="button" class="lang-tab active" data-lang="fetch" role="tab" aria-selected="true">JS Fetch</button>
+            <button type="button" class="lang-tab" data-lang="axios" role="tab" aria-selected="false">Axios</button>
+            <button type="button" class="lang-tab" data-lang="python-requests" role="tab" aria-selected="false">Python (Req)</button>
+            <button type="button" class="lang-tab" data-lang="python-httpx" role="tab" aria-selected="false">Python (HTTPX)</button>
+            <button type="button" class="lang-tab" data-lang="node" role="tab" aria-selected="false">Node.js</button>
+            <button type="button" class="lang-tab" data-lang="go" role="tab" aria-selected="false">Go</button>
+            <button type="button" class="lang-tab" data-lang="php" role="tab" aria-selected="false">PHP</button>
+          </div>
+          <button type="button" class="copy-btn" id="btn-copy-code" aria-label="Copier le code">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copier</span>
+          </button>
+        </div>
+        <div class="output-wrap">
+          <pre class="code-pre"><code id="code-output" class="code-content"></code></pre>
+        </div>
+      </section>
+    </div>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-curl-to-code { max-width: 1080px; margin: 0 auto; }
+  .tool-header { text-align: center; margin-bottom: 1.5rem; }
+  .tool-header h1 { font-size: 2.25rem; font-weight: 700; color: var(--md-sys-color-on-surface, #1c1b1f); margin: 0 0 0.5rem; }
+  .subtitle { color: var(--md-sys-color-on-surface-variant, #49454f); font-size: 1.05rem; margin: 0; }
+  .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 1.5rem; }
+  .action-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; font-size: 0.875rem; font-weight: 500; background: var(--md-sys-color-surface-container, #f3edf7); color: var(--md-sys-color-primary, #6750a4); border: 1px solid var(--md-sys-color-outline-variant, #cac4d0); cursor: pointer; transition: all 0.15s ease; }
+  .action-btn:hover { background: var(--md-sys-color-surface-container-high, #ece6f0); border-color: var(--md-sys-color-primary, #6750a4); }
+  .action-btn--secondary { color: var(--md-sys-color-on-surface-variant, #49454f); }
+  .converter-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  @media (min-width: 900px) { .converter-grid { grid-template-columns: 1fr 1fr; } }
+  .pane { background: var(--md-sys-color-surface-container-lowest, #ffffff); border: 1px solid var(--md-sys-color-outline-variant, #cac4d0); border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; }
+  .pane-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 0.85rem; min-height: 38px; }
+  .pane-header h2 { font-size: 1.1rem; font-weight: 600; color: var(--md-sys-color-on-surface, #1c1b1f); margin: 0; }
+  .request-meta { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+  .method-tag { padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: monospace; font-size: 0.75rem; background: #dcfce7; color: #166534; }
+  .url-preview { color: var(--md-sys-color-on-surface-variant, #49454f); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: monospace; }
+  .input-wrap, .output-wrap { flex: 1; display: flex; }
+  .code-textarea { width: 100%; min-height: 320px; font-family: monospace; font-size: 0.875rem; line-height: 1.5; padding: 12px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline-variant, #cac4d0); background: var(--md-sys-color-surface, #fdf8fd); color: var(--md-sys-color-on-surface, #1c1b1f); outline: none; }
+  .error-banner { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 8px 12px; border-radius: 8px; background: var(--md-sys-color-error-container, #ffdad6); color: var(--md-sys-color-on-error-container, #410002); font-size: 0.85rem; }
+  .lang-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+  .lang-tab { padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 500; border: none; background: transparent; color: var(--md-sys-color-on-surface-variant, #49454f); cursor: pointer; }
+  .lang-tab.active { background: var(--md-sys-color-primary, #6750a4); color: #fff; font-weight: 600; }
+  .copy-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 0.825rem; font-weight: 600; background: var(--md-sys-color-primary-container, #eaddff); color: var(--md-sys-color-on-primary-container, #21005d); border: none; cursor: pointer; }
+  .code-pre { width: 100%; min-height: 320px; margin: 0; padding: 12px; border-radius: 8px; background: #18181f; color: #e5e1e9; font-family: monospace; font-size: 0.85rem; line-height: 1.5; overflow-x: auto; }
+</style>
+
+<script is:inline>
+  (function () {
+    const curlInput = document.getElementById('curl-input');
+    const codeOutput = document.getElementById('code-output');
+    const tagMethod = document.getElementById('tag-method');
+    const urlPreview = document.getElementById('url-preview');
+    const parseError = document.getElementById('parse-error');
+    const btnCopy = document.getElementById('btn-copy-code');
+    const btnSampleJson = document.getElementById('btn-sample-json');
+    const btnSampleAuth = document.getElementById('btn-sample-auth');
+    const btnClear = document.getElementById('btn-clear');
+    const langTabs = document.querySelectorAll('.lang-tab');
+
+    let currentTarget = 'fetch';
+
+    const SAMPLE_JSON = `curl -X POST "https://api.example.com/v1/utilisateurs" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer mon_jeton_secret" \\
+  -d '{
+    "nom": "Jean Dupont",
+    "email": "jean@example.com"
+  }'`;
+
+    const SAMPLE_AUTH = `curl -X GET "https://api.github.com/user/repos" \\
+  -H "Authorization: token ghp_123456789" \\
+  -A "MonApp/1.0"`;
+
+    function parseCurlCommand(raw) {
+      if (!raw || !raw.trim()) return null;
+      let cmd = raw.trim();
+      if (cmd.startsWith('$')) cmd = cmd.slice(1).trim();
+      cmd = cmd.replace(/\\\r?\n/g, ' ').replace(/`\r?\n/g, ' ');
+
+      const tokens = [];
+      let current = '';
+      let inQuote = null;
+      let escape = false;
+
+      for (let i = 0; i < cmd.length; i++) {
+        const char = cmd[i];
+        if (escape) { current += char; escape = false; continue; }
+        if (char === '\\') { escape = true; continue; }
+        if (inQuote) {
+          if (char === inQuote) inQuote = null;
+          else current += char;
+        } else {
+          if (char === '"' || char === "'") inQuote = char;
+          else if (/\s/.test(char)) {
+            if (current) { tokens.push(current); current = ''; }
+          } else current += char;
+        }
+      }
+      if (current) tokens.push(current);
+      if (tokens.length === 0) return null;
+
+      const result = { url: '', method: 'GET', headers: {}, data: '', auth: null };
+      for (let i = 0; i < tokens.length; i++) {
+        const t = tokens[i];
+        if (t === '-X' || t === '--request') {
+          if (tokens[i + 1]) result.method = tokens[++i].toUpperCase();
+        } else if (t === '-H' || t === '--header') {
+          const h = tokens[++i] || '';
+          const sep = h.indexOf(':');
+          if (sep > -1) result.headers[h.slice(0, sep).trim()] = h.slice(sep + 1).trim();
+        } else if (t === '-d' || t === '--data' || t === '--data-raw' || t === '--data-binary') {
+          const d = tokens[++i] || '';
+          result.data = result.data ? result.data + '&' + d : d;
+          if (result.method === 'GET') result.method = 'POST';
+        } else if (t === '-u' || t === '--user') {
+          result.auth = tokens[++i] || '';
+        } else if (t === '-A' || t === '--user-agent') {
+          result.headers['User-Agent'] = tokens[++i] || '';
+        } else if (t === '-b' || t === '--cookie') {
+          result.headers['Cookie'] = tokens[++i] || '';
+        } else if (t === '--url') {
+          result.url = tokens[++i] || '';
+        } else if (!t.startsWith('-') && t !== 'curl' && !result.url) {
+          result.url = t;
+        }
+      }
+      if (result.auth) result.headers['Authorization'] = 'Basic ' + btoa(result.auth);
+      if (!result.url) result.url = 'https://api.example.com/endpoint';
+      return result;
+    }
+
+    function isJsonString(str) {
+      if (!str || typeof str !== 'string') return false;
+      const s = str.trim();
+      if (!((s.startsWith('{') && s.endsWith('}')) || (s.startsWith('[') && s.endsWith(']')))) return false;
+      try { JSON.parse(s); return true; } catch (e) { return false; }
+    }
+
+    function generateCode(parsed, target) {
+      if (!parsed) return '// Collez une commande cURL ci-dessus pour générer le code';
+      const url = parsed.url;
+      const method = parsed.method || 'GET';
+      const headers = parsed.headers || {};
+      const hasHeaders = Object.keys(headers).length > 0;
+      const hasBody = Boolean(parsed.data);
+      const isJson = isJsonString(parsed.data);
+
+      switch (target) {
+        case 'fetch': {
+          let opts = `{\n  method: '${method}'`;
+          if (hasHeaders) opts += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          if (hasBody) opts += isJson ? `,\n  body: JSON.stringify(${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')})` : `,\n  body: ${JSON.stringify(parsed.data)}`;
+          opts += '\n}';
+          return `const url = '${url}';\nconst options = ${opts};\n\ntry {\n  const response = await fetch(url, options);\n  const data = await response.json();\n  console.log(data);\n} catch (error) {\n  console.error('Erreur:', error);\n}`;
+        }
+        case 'axios': {
+          let code = `const axios = require('axios');\n\nconst config = {\n  method: '${method.toLowerCase()}',\n  url: '${url}'`;
+          if (hasHeaders) code += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          if (hasBody) code += isJson ? `,\n  data: ${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')}` : `,\n  data: ${JSON.stringify(parsed.data)}`;
+          code += '\n};\n\naxios(config)\n  .then(response => console.log(response.data))\n  .catch(error => console.error(error));';
+          return code;
+        }
+        case 'python-requests': {
+          let code = `import requests\n\nurl = "${url}"\n`;
+          let args = ['url'];
+          if (hasHeaders) { code += `headers = ${JSON.stringify(headers, null, 4)}\n`; args.push('headers=headers'); }
+          if (hasBody) {
+            code += isJson ? `payload = ${JSON.stringify(JSON.parse(parsed.data), null, 4)}\n` : `payload = ${JSON.stringify(parsed.data)}\n`;
+            args.push(isJson ? 'json=payload' : 'data=payload');
+          }
+          return code + `\nresponse = requests.${method.toLowerCase()}(${args.join(', ')})\nprint(response.status_code)\nprint(response.text)`;
+        }
+        case 'python-httpx': {
+          let code = `import httpx\n\nurl = "${url}"\n`;
+          let args = ['url'];
+          if (hasHeaders) { code += `headers = ${JSON.stringify(headers, null, 4)}\n`; args.push('headers=headers'); }
+          if (hasBody) {
+            code += isJson ? `payload = ${JSON.stringify(JSON.parse(parsed.data), null, 4)}\n` : `payload = ${JSON.stringify(parsed.data)}\n`;
+            args.push(isJson ? 'json=payload' : 'data=payload');
+          }
+          return code + `\nwith httpx.Client() as client:\n    response = client.${method.toLowerCase()}(${args.join(', ')})\n    print(response.status_code)\n    print(response.text)`;
+        }
+        case 'node': {
+          let opts = `{\n  method: '${method}'`;
+          if (hasHeaders) opts += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          if (hasBody) opts += isJson ? `,\n  body: JSON.stringify(${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')})` : `,\n  body: ${JSON.stringify(parsed.data)}`;
+          opts += '\n}';
+          return `const response = await fetch('${url}', ${opts});\nconst result = await response.json();\nconsole.log(result);`;
+        }
+        case 'go': {
+          let code = `package main\n\nimport (\n\t"fmt"\n\t"io"\n\t"net/http"\n`;
+          if (hasBody) code += `\t"strings"\n`;
+          code += `)\n\nfunc main() {\n\turl := "${url}"\n`;
+          if (hasBody) {
+            code += `\tpayload := strings.NewReader(${JSON.stringify(parsed.data)})\n\treq, err := http.NewRequest("${method}", url, payload)\n`;
+          } else {
+            code += `\treq, err := http.NewRequest("${method}", url, nil)\n`;
+          }
+          code += `\tif err != nil {\n\t\tpanic(err)\n\t}\n\n`;
+          for (const [k, v] of Object.entries(headers)) code += `\treq.Header.Set("${k}", "${v}")\n`;
+          code += `\n\tclient := &http.Client{}\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tdefer resp.Body.Close()\n\n\tbody, _ := io.ReadAll(resp.Body)\n\tfmt.Println(string(body))\n}`;
+          return code;
+        }
+        case 'php': {
+          let code = `<?php\n$curl = curl_init();\n\ncurl_setopt_array($curl, array(\n  CURLOPT_URL => '${url}',\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_CUSTOMREQUEST => '${method}',\n`;
+          if (hasBody) code += `  CURLOPT_POSTFIELDS => ${JSON.stringify(parsed.data)},\n`;
+          if (hasHeaders) {
+            const hList = Object.entries(headers).map(([k, v]) => `    '${k}: ${v}'`);
+            code += `  CURLOPT_HTTPHEADER => array(\n${hList.join(',\n')}\n  ),\n`;
+          }
+          code += `));\n\n$response = curl_exec($curl);\ncurl_close($curl);\necho $response;\n?>`;
+          return code;
+        }
+        default: return '// Langage non pris en charge';
+      }
+    }
+
+    function update() {
+      const raw = curlInput.value.trim();
+      if (!raw) {
+        tagMethod.textContent = 'POST';
+        urlPreview.textContent = 'https://api.example.com';
+        codeOutput.textContent = '// Collez une commande cURL ci-dessus pour générer le code';
+        parseError.style.display = 'none';
+        return;
+      }
+      try {
+        const parsed = parseCurlCommand(raw);
+        if (!parsed) throw new Error('Erreur d analyse');
+        tagMethod.textContent = parsed.method;
+        urlPreview.textContent = parsed.url;
+        parseError.style.display = 'none';
+        codeOutput.textContent = generateCode(parsed, currentTarget);
+      } catch (e) {
+        parseError.style.display = 'flex';
+      }
+    }
+
+    curlInput.addEventListener('input', update);
+    langTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        langTabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        currentTarget = tab.getAttribute('data-lang');
+        update();
+      });
+    });
+
+    btnSampleJson.addEventListener('click', () => { curlInput.value = SAMPLE_JSON; update(); });
+    btnSampleAuth.addEventListener('click', () => { curlInput.value = SAMPLE_AUTH; update(); });
+    btnClear.addEventListener('click', () => { curlInput.value = ''; update(); curlInput.focus(); });
+
+    btnCopy.addEventListener('click', () => {
+      const code = codeOutput.textContent;
+      if (!code || code.startsWith('// Collez')) return;
+      navigator.clipboard.writeText(code).then(() => {
+        if (window.showToast) window.showToast('Code copié dans le presse-papiers !');
+      });
+    });
+
+    curlInput.value = SAMPLE_JSON;
+    update();
+  })();
+</script>

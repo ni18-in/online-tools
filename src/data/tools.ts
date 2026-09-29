@@ -79,6 +79,36 @@ export const tools: Tool[] = [
     i18n: { es: 'json-comparison-tool', fr: 'json-comparison-tool' },
   },
   {
+    slug: 'curl-to-code',
+    name: 'cURL to Code Converter',
+    description: 'Convert cURL commands to JavaScript (Fetch, Axios), Python (Requests, HTTPX), Go, PHP, and Node.js code instantly in your browser.',
+    category: 'developer',
+    schemaType: 'WebApplication',
+    applicationCategory: 'DeveloperApplication',
+    rating: { value: 4.9, count: 32 },
+    i18n: { es: 'curl-a-codigo', fr: 'curl-en-code' },
+  },
+  {
+    slug: 'compound-interest-calculator',
+    name: 'Compound Interest & Investment Calculator',
+    description: 'Calculate compound interest, monthly investment growth (SIP), and future value with interactive growth charts and annual breakdown tables.',
+    category: 'calculator',
+    schemaType: 'WebApplication',
+    applicationCategory: 'FinanceApplication',
+    rating: { value: 4.9, count: 48 },
+    i18n: { es: 'calculadora-interes-compuesto', fr: 'calculateur-interet-compose' },
+  },
+  {
+    slug: 'pdf-merger-splitter',
+    name: 'PDF Merger & Splitter – Combine & Extract Pages',
+    description: 'Merge multiple PDF files into one or split PDF pages into separate documents. 100% private, local in-browser processing with zero server uploads.',
+    category: 'media',
+    schemaType: 'WebApplication',
+    applicationCategory: 'UtilitiesApplication',
+    rating: { value: 4.9, count: 56 },
+    i18n: { es: 'unir-dividir-pdf', fr: 'fusionner-diviser-pdf' },
+  },
+  {
     slug: 'ai-beauty-test',
     name: 'AI Beauty Test',
     description: 'Get a free AI beauty score based on facial features, find your celebrity look-alike, analyze face parts, and compare photos with the AI Beauty Test tool. Fun, interactive, and insightful!',
@@ -285,6 +315,9 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'next-gen-gst-reforms',
   'basic-authentication-header-generator',
   'jwt-debugger',
+  'curl-to-code',
+  'compound-interest-calculator',
+  'pdf-merger-splitter',
   {
     external: 'https://tools.ni18.in/p/majhi-ladki-bahin-yojana-kyc-status.html',
     name: 'Majhi Ladki Bahin Yojana - KYC Status Checker',
@@ -670,6 +703,36 @@ export const TOOL_TRANSLATIONS: Record<
     fr: {
       name: 'Visualisateur HEIC en Ligne',
       description: 'Visualiseur HEIC gratuit en ligne. Ouvrez vos photos HEIC d\'iPhone dans votre navigateur sous Windows. 100% privé, local et hors ligne.'
+    }
+  },
+  'curl-to-code': {
+    es: {
+      name: 'Convertidor cURL a Código',
+      description: 'Convierte comandos cURL a código JavaScript (Fetch, Axios), Python (Requests, HTTPX), Go, PHP y Node.js al instante en tu navegador.'
+    },
+    fr: {
+      name: 'Convertisseur cURL en Code',
+      description: 'Convertissez des commandes cURL en code JavaScript (Fetch, Axios), Python (Requests, HTTPX), Go, PHP et Node.js instantanément dans votre navigateur.'
+    }
+  },
+  'compound-interest-calculator': {
+    es: {
+      name: 'Calculadora de Interés Compuesto e Inversión',
+      description: 'Calcula el interés compuesto, aportaciones periódicas y el valor futuro con gráficos de crecimiento interactivos y desglose anual.'
+    },
+    fr: {
+      name: 'Calculateur d\'Intérêts Composés et d\'Investissement',
+      description: 'Calculez les intérêts composés, versements mensuels et la valeur future avec graphiques interactifs et tableau d\'amortissement annuel.'
+    }
+  },
+  'pdf-merger-splitter': {
+    es: {
+      name: 'Unir y Dividir PDF Online',
+      description: 'Une varios archivos PDF en uno solo o extrae páginas específicas. Procesamiento 100% privado en tu navegador, sin subir archivos a servidores.'
+    },
+    fr: {
+      name: 'Fusionner et Diviser PDF en Ligne',
+      description: 'Fusionnez plusieurs fichiers PDF ou extrayez des pages facilement. Traitement 100% privé et local dans votre navigateur, sans envoi sur serveur.'
     }
   }
 };

@@ -1,0 +1,878 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+
+const tool = getTool('curl-to-code')!;
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Convert cURL Commands to Code',
+  description: 'Easily convert cURL requests to JavaScript Fetch, Axios, Python Requests, Go, or PHP in seconds.',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Paste your cURL Command',
+      text: 'Copy the cURL command from your terminal, browser DevTools, or Postman and paste it into the input box.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Select Target Programming Language',
+      text: 'Click on your desired language tab (JavaScript Fetch, Axios, Python Requests, HTTPX, Go, PHP, or Node.js).',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Copy and Run Code',
+      text: 'Click the Copy Code button and paste the generated snippet directly into your codebase.',
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is my sensitive API data or token safe when using this tool?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, 100%. The conversion runs entirely client-side inside your browser via local JavaScript. No URLs, auth tokens, headers, or request payloads are ever sent to any remote server.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which cURL flags are supported?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The converter supports standard HTTP methods (-X, --request), headers (-H, --header), JSON and form payloads (-d, --data, --data-raw, --data-binary), basic authentication (-u, --user), cookies (-b, --cookie), and user-agents (-A, --user-agent).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I copy a cURL command from Chrome DevTools?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Open Chrome DevTools (F12), switch to the Network tab, right-click on any network request, select Copy, and click "Copy as cURL (bash)". Then paste it here.',
+      },
+    },
+  ],
+};
+
+const seo = toolSeo(tool, {
+  title: 'cURL to Code Converter – Fetch, Axios, Python, Go & PHP',
+  description:
+    'Convert cURL commands to JavaScript Fetch, Axios, Python Requests, HTTPX, Go, PHP, and Node.js instantly. 100% private, local in-browser converter.',
+  keywords:
+    'curl to code, curl to fetch, curl to python, curl to axios, curl converter, curl to go, curl to php, convert curl to javascript, api request generator',
+  author: 'ni18',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'cURL to Code Converter',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/tools/curl-to-code/`,
+    description:
+      'Instantly convert cURL command line requests into JavaScript, Python, Go, and PHP code with full header, body, and query parameter fidelity.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  extraJsonLd: [howToSchema, faqSchema],
+});
+
+const altLinks = {
+  es: `${SITE_URL}/es/tools/curl-a-codigo/`,
+  fr: `${SITE_URL}/fr/tools/curl-en-code/`,
+};
+---
+
+<ToolLayout seo={seo} lang="en" altLinks={altLinks}>
+  <div class="tool-island" id="tool-curl-to-code">
+    <header class="tool-header">
+      <h1>cURL to Code Converter</h1>
+      <p class="subtitle">Convert cURL command lines into clean, production-ready code in 7 languages</p>
+    </header>
+
+    <div class="quick-actions">
+      <button type="button" class="action-btn" id="btn-sample-json">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Sample POST (JSON API)</span>
+      </button>
+      <button type="button" class="action-btn" id="btn-sample-auth">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Sample GET (Bearer Auth)</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-clear">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        <span>Clear</span>
+      </button>
+    </div>
+
+    <div class="converter-grid">
+      <!-- Input Column -->
+      <section class="pane input-pane" aria-labelledby="input-heading">
+        <div class="pane-header">
+          <h2 id="input-heading">cURL Command</h2>
+          <div class="request-meta" id="request-meta">
+            <span class="method-tag tag-post" id="tag-method">POST</span>
+            <span class="url-preview" id="url-preview" title="Detected endpoint">https://api.example.com</span>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <textarea
+            id="curl-input"
+            class="code-textarea"
+            placeholder="Paste your curl command here... Example:&#10;curl -X POST https://api.example.com/items \&#10;  -H 'Content-Type: application/json' \&#10;  -d '{&quot;name&quot;: &quot;Widget&quot;, &quot;price&quot;: 29.99}'"
+            spellcheck="false"
+            aria-label="cURL Command Input"
+          ></textarea>
+        </div>
+        <div id="parse-error" class="error-banner" style="display:none;" role="alert">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span id="error-message">Invalid cURL command syntax.</span>
+        </div>
+      </section>
+
+      <!-- Output Column -->
+      <section class="pane output-pane" aria-labelledby="output-heading">
+        <div class="pane-header">
+          <h2 id="output-heading" class="sr-only">Generated Code</h2>
+          <div class="lang-tabs" role="tablist" aria-label="Target language options">
+            <button type="button" class="lang-tab active" data-lang="fetch" role="tab" aria-selected="true">JS Fetch</button>
+            <button type="button" class="lang-tab" data-lang="axios" role="tab" aria-selected="false">Axios</button>
+            <button type="button" class="lang-tab" data-lang="python-requests" role="tab" aria-selected="false">Python (Req)</button>
+            <button type="button" class="lang-tab" data-lang="python-httpx" role="tab" aria-selected="false">Python (HTTPX)</button>
+            <button type="button" class="lang-tab" data-lang="node" role="tab" aria-selected="false">Node.js</button>
+            <button type="button" class="lang-tab" data-lang="go" role="tab" aria-selected="false">Go</button>
+            <button type="button" class="lang-tab" data-lang="php" role="tab" aria-selected="false">PHP</button>
+          </div>
+          <button type="button" class="copy-btn" id="btn-copy-code" aria-label="Copy code to clipboard">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy Code</span>
+          </button>
+        </div>
+        <div class="output-wrap">
+          <pre class="code-pre"><code id="code-output" class="code-content"></code></pre>
+        </div>
+      </section>
+    </div>
+
+    <!-- SEO Content & Guide -->
+    <article class="guide-section">
+      <h2>How to Use the cURL to Code Converter</h2>
+      <p>
+        cURL is the universal command-line standard for executing HTTP API requests, but integrating those requests into
+        production code requires translating arguments into your language's native HTTP library. This tool parses your cURL
+        flags, extracts headers, authentication credentials, query parameters, and request bodies, and converts them into
+        idiomatic snippets.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>⚡ 100% Client-Side Privacy</h3>
+          <p>Your API keys, bearer tokens, passwords, and payloads stay private. Nothing is transmitted over the internet or logged to any server.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🎯 7 Frameworks & Languages</h3>
+          <p>Output ready-to-use code for modern JavaScript (Fetch API, Axios), Python (Requests, modern async HTTPX), Node.js, Go (net/http), and PHP cURL.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🛠️ Robust Flag Parsing</h3>
+          <p>Supports multiline shell scripts with backslashes, quoted strings, basic auth (<code>-u</code>), JSON bodies, form encodings, custom headers, and cookies.</p>
+        </div>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>How do I extract a cURL request from Chrome, Firefox, or Safari?</summary>
+          <p>Press <code>F12</code> to open DevTools, select the <strong>Network</strong> tab, interact with the website to make the API call, right-click the network entry in the list, navigate to <strong>Copy</strong>, and choose <strong>Copy as cURL</strong>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool support basic authentication and bearer tokens?</summary>
+          <p>Yes. If your cURL command contains <code>-u username:password</code>, it is converted into standard HTTP Basic Authorization. Bearer tokens supplied via <code>-H "Authorization: Bearer ..."</code> are preserved across all generated snippets.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can this tool parse multiline cURL commands copied from terminals?</summary>
+          <p>Yes. Commands formatted with shell line breaks (e.g. <code>\</code> at the end of each line) or Windows PowerShell backticks are automatically normalized and parsed.</p>
+        </details>
+      </div>
+    </article>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-curl-to-code {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .tool-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .tool-header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--md-sys-color-surface-container, #f3edf7);
+    color: var(--md-sys-color-primary, #6750a4);
+    border: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .action-btn:hover {
+    background: var(--md-sys-color-surface-container-high, #ece6f0);
+    border-color: var(--md-sys-color-primary, #6750a4);
+  }
+  .action-btn--secondary {
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+  }
+
+  .converter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (min-width: 900px) {
+    .converter-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pane {
+    background: var(--md-sys-color-surface-container-lowest, #ffffff);
+    border: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .pane-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 0.85rem;
+    min-height: 38px;
+  }
+  .pane-header h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    margin: 0;
+  }
+
+  .request-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+  }
+  .method-tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 0.75rem;
+    background: #e0e7ff;
+    color: #3730a3;
+  }
+  .tag-post { background: #dcfce7; color: #166534; }
+  .tag-get { background: #e0e7ff; color: #3730a3; }
+  .tag-put { background: #fef9c3; color: #854d0e; }
+  .tag-delete { background: #fee2e2; color: #991b1b; }
+  .tag-patch { background: #fae8ff; color: #86198f; }
+
+  .url-preview {
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: monospace;
+  }
+
+  .input-wrap, .output-wrap {
+    flex: 1;
+    display: flex;
+  }
+
+  .code-textarea {
+    width: 100%;
+    min-height: 320px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    background: var(--md-sys-color-surface, #fdf8fd);
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .code-textarea:focus {
+    border-color: var(--md-sys-color-primary, #6750a4);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--md-sys-color-primary, #6750a4) 20%, transparent);
+  }
+
+  .error-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--md-sys-color-error-container, #ffdad6);
+    color: var(--md-sys-color-on-error-container, #410002);
+    font-size: 0.85rem;
+  }
+
+  .lang-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .lang-tab {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .lang-tab:hover {
+    background: var(--md-sys-color-surface-container, #f3edf7);
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+  }
+  .lang-tab.active {
+    background: var(--md-sys-color-primary, #6750a4);
+    color: var(--md-sys-color-on-primary, #ffffff);
+    font-weight: 600;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.825rem;
+    font-weight: 600;
+    background: var(--md-sys-color-primary-container, #eaddff);
+    color: var(--md-sys-color-on-primary-container, #21005d);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover {
+    background: color-mix(in srgb, var(--md-sys-color-primary, #6750a4) 25%, var(--md-sys-color-primary-container, #eaddff));
+  }
+
+  .code-pre {
+    width: 100%;
+    min-height: 320px;
+    margin: 0;
+    padding: 12px;
+    border-radius: 8px;
+    background: #18181f;
+    color: #e5e1e9;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    border: 1px solid #2d2c35;
+  }
+  .code-content {
+    display: block;
+    white-space: pre;
+  }
+
+  .guide-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    padding-top: 2rem;
+  }
+  .guide-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    margin: 1.5rem 0 1rem;
+  }
+  .guide-section p {
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .feature-card {
+    background: var(--md-sys-color-surface-container, #f3edf7);
+    border: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .feature-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    margin: 0 0 0.5rem;
+  }
+  .feature-card p {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .faq-item {
+    background: var(--md-sys-color-surface-container-lowest, #ffffff);
+    border: 1px solid var(--md-sys-color-outline-variant, #cac4d0);
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+  .faq-item summary {
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1c1b1f);
+    font-size: 0.95rem;
+  }
+  .faq-item p {
+    margin: 10px 0 0;
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant, #49454f);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const curlInput = document.getElementById('curl-input');
+    const codeOutput = document.getElementById('code-output');
+    const tagMethod = document.getElementById('tag-method');
+    const urlPreview = document.getElementById('url-preview');
+    const parseError = document.getElementById('parse-error');
+    const btnCopy = document.getElementById('btn-copy-code');
+    const btnSampleJson = document.getElementById('btn-sample-json');
+    const btnSampleAuth = document.getElementById('btn-sample-auth');
+    const btnClear = document.getElementById('btn-clear');
+    const langTabs = document.querySelectorAll('.lang-tab');
+
+    let currentTarget = 'fetch';
+
+    const SAMPLE_JSON = `curl -X POST "https://api.example.com/v1/users" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer my_secret_token_123" \\
+  -d '{
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "role": "admin"
+  }'`;
+
+    const SAMPLE_AUTH = `curl -X GET "https://api.github.com/user/repos?type=owner&sort=updated" \\
+  -H "Accept: application/vnd.github.v3+json" \\
+  -H "Authorization: token ghp_99482194829148" \\
+  -A "MyApp/1.0"`;
+
+    function parseCurlCommand(raw) {
+      if (!raw || !raw.trim()) {
+        return null;
+      }
+      let cmd = raw.trim();
+      if (cmd.startsWith('$')) cmd = cmd.slice(1).trim();
+
+      // Normalize escaped linebreaks
+      cmd = cmd.replace(/\\\r?\n/g, ' ').replace(/`\r?\n/g, ' ');
+
+      const tokens = [];
+      let current = '';
+      let inQuote = null;
+      let escape = false;
+
+      for (let i = 0; i < cmd.length; i++) {
+        const char = cmd[i];
+        if (escape) {
+          current += char;
+          escape = false;
+          continue;
+        }
+        if (char === '\\') {
+          escape = true;
+          continue;
+        }
+        if (inQuote) {
+          if (char === inQuote) {
+            inQuote = null;
+          } else {
+            current += char;
+          }
+        } else {
+          if (char === '"' || char === "'") {
+            inQuote = char;
+          } else if (/\s/.test(char)) {
+            if (current) {
+              tokens.push(current);
+              current = '';
+            }
+          } else {
+            current += char;
+          }
+        }
+      }
+      if (current) tokens.push(current);
+
+      if (tokens.length === 0) return null;
+
+      const result = {
+        url: '',
+        method: 'GET',
+        headers: {},
+        data: '',
+        auth: null
+      };
+
+      for (let i = 0; i < tokens.length; i++) {
+        const t = tokens[i];
+        if (t === '-X' || t === '--request') {
+          if (tokens[i + 1]) result.method = tokens[++i].toUpperCase();
+        } else if (t === '-H' || t === '--header') {
+          const h = tokens[++i] || '';
+          const sep = h.indexOf(':');
+          if (sep > -1) {
+            const k = h.slice(0, sep).trim();
+            const v = h.slice(sep + 1).trim();
+            result.headers[k] = v;
+          }
+        } else if (t === '-d' || t === '--data' || t === '--data-raw' || t === '--data-binary') {
+          const d = tokens[++i] || '';
+          result.data = result.data ? result.data + '&' + d : d;
+          if (result.method === 'GET') result.method = 'POST';
+        } else if (t === '-u' || t === '--user') {
+          result.auth = tokens[++i] || '';
+        } else if (t === '-A' || t === '--user-agent') {
+          result.headers['User-Agent'] = tokens[++i] || '';
+        } else if (t === '-b' || t === '--cookie') {
+          result.headers['Cookie'] = tokens[++i] || '';
+        } else if (t === '--url') {
+          result.url = tokens[++i] || '';
+        } else if (!t.startsWith('-') && t !== 'curl' && !result.url) {
+          result.url = t;
+        }
+      }
+
+      if (result.auth) {
+        result.headers['Authorization'] = 'Basic ' + btoa(result.auth);
+      }
+
+      if (!result.url) {
+        result.url = 'https://api.example.com/endpoint';
+      }
+
+      return result;
+    }
+
+    function isJsonString(str) {
+      if (!str || typeof str !== 'string') return false;
+      const s = str.trim();
+      if (!((s.startsWith('{') && s.endsWith('}')) || (s.startsWith('[') && s.endsWith(']')))) return false;
+      try {
+        JSON.parse(s);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function generateCode(parsed, target) {
+      if (!parsed) return '// Paste a cURL command above to generate code';
+
+      const url = parsed.url;
+      const method = parsed.method || 'GET';
+      const headers = parsed.headers || {};
+      const hasHeaders = Object.keys(headers).length > 0;
+      const hasBody = Boolean(parsed.data);
+      const isJson = isJsonString(parsed.data);
+
+      switch (target) {
+        case 'fetch': {
+          let opts = `{\n  method: '${method}'`;
+          if (hasHeaders) {
+            opts += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          }
+          if (hasBody) {
+            if (isJson) {
+              opts += `,\n  body: JSON.stringify(${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')})`;
+            } else {
+              opts += `,\n  body: ${JSON.stringify(parsed.data)}`;
+            }
+          }
+          opts += '\n}';
+
+          return `const url = '${url}';\nconst options = ${opts};\n\ntry {\n  const response = await fetch(url, options);\n  const data = await response.json();\n  console.log(data);\n} catch (error) {\n  console.error('Fetch Error:', error);\n}`;
+        }
+
+        case 'axios': {
+          let code = `const axios = require('axios');\n\nconst config = {\n  method: '${method.toLowerCase()}',\n  url: '${url}'`;
+          if (hasHeaders) {
+            code += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          }
+          if (hasBody) {
+            if (isJson) {
+              code += `,\n  data: ${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')}`;
+            } else {
+              code += `,\n  data: ${JSON.stringify(parsed.data)}`;
+            }
+          }
+          code += '\n};\n\naxios(config)\n  .then(response => console.log(response.data))\n  .catch(error => console.error(error));';
+          return code;
+        }
+
+        case 'python-requests': {
+          let code = `import requests\n\nurl = "${url}"\n`;
+          let args = ['url'];
+
+          if (hasHeaders) {
+            code += `headers = ${JSON.stringify(headers, null, 4)}\n`;
+            args.push('headers=headers');
+          }
+          if (hasBody) {
+            if (isJson) {
+              code += `payload = ${JSON.stringify(JSON.parse(parsed.data), null, 4)}\n`;
+              args.push('json=payload');
+            } else {
+              code += `payload = ${JSON.stringify(parsed.data)}\n`;
+              args.push('data=payload');
+            }
+          }
+
+          code += `\nresponse = requests.${method.toLowerCase()}(${args.join(', ')})\nprint(response.status_code)\nprint(response.text)`;
+          return code;
+        }
+
+        case 'python-httpx': {
+          let code = `import httpx\n\nurl = "${url}"\n`;
+          let args = ['url'];
+
+          if (hasHeaders) {
+            code += `headers = ${JSON.stringify(headers, null, 4)}\n`;
+            args.push('headers=headers');
+          }
+          if (hasBody) {
+            if (isJson) {
+              code += `payload = ${JSON.stringify(JSON.parse(parsed.data), null, 4)}\n`;
+              args.push('json=payload');
+            } else {
+              code += `payload = ${JSON.stringify(parsed.data)}\n`;
+              args.push('data=payload');
+            }
+          }
+
+          code += `\nwith httpx.Client() as client:\n    response = client.${method.toLowerCase()}(${args.join(', ')})\n    print(response.status_code)\n    print(response.text)`;
+          return code;
+        }
+
+        case 'node': {
+          let opts = `{\n  method: '${method}'`;
+          if (hasHeaders) {
+            opts += `,\n  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, '\n  ')}`;
+          }
+          if (hasBody) {
+            if (isJson) {
+              opts += `,\n  body: JSON.stringify(${JSON.stringify(JSON.parse(parsed.data), null, 4).replace(/\n/g, '\n  ')})`;
+            } else {
+              opts += `,\n  body: ${JSON.stringify(parsed.data)}`;
+            }
+          }
+          opts += '\n}';
+
+          return `// Node.js 18+ native fetch\nconst response = await fetch('${url}', ${opts});\nconst result = await response.json();\nconsole.log(result);`;
+        }
+
+        case 'go': {
+          let code = `package main\n\nimport (\n\t"fmt"\n\t"io"\n\t"net/http"\n`;
+          if (hasBody) code += `\t"strings"\n`;
+          code += `)\n\nfunc main() {\n\turl := "${url}"\n`;
+
+          if (hasBody) {
+            code += `\tpayload := strings.NewReader(${JSON.stringify(parsed.data)})\n`;
+            code += `\treq, err := http.NewRequest("${method}", url, payload)\n`;
+          } else {
+            code += `\treq, err := http.NewRequest("${method}", url, nil)\n`;
+          }
+
+          code += `\tif err != nil {\n\t\tpanic(err)\n\t}\n\n`;
+
+          for (const [k, v] of Object.entries(headers)) {
+            code += `\treq.Header.Set("${k}", "${v}")\n`;
+          }
+
+          code += `\n\tclient := &http.Client{}\n\tresp, err := client.Do(req)\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tdefer resp.Body.Close()\n\n\tbody, _ := io.ReadAll(resp.Body)\n\tfmt.Println(string(body))\n}`;
+          return code;
+        }
+
+        case 'php': {
+          let code = `<?php\n$curl = curl_init();\n\ncurl_setopt_array($curl, array(\n  CURLOPT_URL => '${url}',\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => '',\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 0,\n  CURLOPT_FOLLOWLOCATION => true,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => '${method}',\n`;
+
+          if (hasBody) {
+            code += `  CURLOPT_POSTFIELDS => ${JSON.stringify(parsed.data)},\n`;
+          }
+
+          if (hasHeaders) {
+            const hList = Object.entries(headers).map(([k, v]) => `    '${k}: ${v}'`);
+            code += `  CURLOPT_HTTPHEADER => array(\n${hList.join(',\n')}\n  ),\n`;
+          }
+
+          code += `));\n\n$response = curl_exec($curl);\ncurl_close($curl);\necho $response;\n?>`;
+          return code;
+        }
+
+        default:
+          return '// Unsupported language target';
+      }
+    }
+
+    function update() {
+      const raw = curlInput.value.trim();
+      if (!raw) {
+        tagMethod.textContent = 'POST';
+        tagMethod.className = 'method-tag tag-post';
+        urlPreview.textContent = 'https://api.example.com';
+        codeOutput.textContent = '// Paste a cURL command above to generate code';
+        parseError.style.display = 'none';
+        return;
+      }
+
+      try {
+        const parsed = parseCurlCommand(raw);
+        if (!parsed) throw new Error('Could not parse cURL');
+
+        tagMethod.textContent = parsed.method;
+        tagMethod.className = `method-tag tag-${parsed.method.toLowerCase()}`;
+        urlPreview.textContent = parsed.url;
+        urlPreview.title = parsed.url;
+        parseError.style.display = 'none';
+
+        const code = generateCode(parsed, currentTarget);
+        codeOutput.textContent = code;
+
+        try {
+          localStorage.setItem('onlineTools_curlInput', raw);
+        } catch (e) {}
+      } catch (err) {
+        parseError.style.display = 'flex';
+      }
+    }
+
+    curlInput.addEventListener('input', update);
+
+    langTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        langTabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        currentTarget = tab.getAttribute('data-lang');
+        update();
+      });
+    });
+
+    btnSampleJson.addEventListener('click', () => {
+      curlInput.value = SAMPLE_JSON;
+      update();
+    });
+
+    btnSampleAuth.addEventListener('click', () => {
+      curlInput.value = SAMPLE_AUTH;
+      update();
+    });
+
+    btnClear.addEventListener('click', () => {
+      curlInput.value = '';
+      update();
+      curlInput.focus();
+    });
+
+    btnCopy.addEventListener('click', () => {
+      const code = codeOutput.textContent;
+      if (!code || code.startsWith('// Paste a cURL')) return;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          if (window.showToast) window.showToast('Copied code to clipboard!');
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (window.showToast) window.showToast('Copied code to clipboard!');
+      }
+    });
+
+    // Restore from localStorage or load sample
+    const saved = localStorage.getItem('onlineTools_curlInput');
+    if (saved) {
+      curlInput.value = saved;
+    } else {
+      curlInput.value = SAMPLE_JSON;
+    }
+    update();
+  })();
+</script>
