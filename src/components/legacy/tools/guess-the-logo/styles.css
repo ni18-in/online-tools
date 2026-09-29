@@ -48,30 +48,17 @@
         }
 
         #tool-guess-the-logo {
-            font-family: var(--font-body);
-            background: var(--bg-gradient);
+            font-family: var(--font-body, system-ui, sans-serif);
+            background: transparent;
             color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            padding: 1rem;
-        }
-
-        /* Animated Background Pattern */
-        #tool-guess-the-logo ::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
+            justify-content: flex-start;
             width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
-            z-index: -1;
-            pointer-events: none;
+            overflow-x: hidden;
+            padding: 0.5rem;
+            position: relative;
         }
 
         #tool-guess-the-logo .container {
@@ -659,23 +646,27 @@
         /* ===== MATERIAL DESIGN 3 OVERRIDES ===== */
         #tool-guess-the-logo {
             --bg-gradient: transparent !important;
-            --card-bg: var(--md-sys-color-surface-container-low) !important;
-            --card-border: 1px solid var(--md-sys-color-outline-variant) !important;
-            --text-primary: var(--md-sys-color-on-surface) !important;
-            --text-secondary: var(--md-sys-color-on-surface-variant) !important;
-            --brand-primary: var(--md-sys-color-primary) !important;
-            --brand-secondary: var(--md-sys-color-tertiary) !important;
+            --card-bg: var(--md-sys-color-surface-container-low, #f7f4fb) !important;
+            --card-border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            --text-primary: var(--md-sys-color-on-surface, #1b1b21) !important;
+            --text-secondary: var(--md-sys-color-on-surface-variant, #46464f) !important;
+            --brand-primary: var(--md-sys-color-primary, #4f46e5) !important;
+            --brand-secondary: #ec4899 !important;
             background: transparent !important;
+            justify-content: flex-start !important;
+            min-height: auto !important;
         }
 
+        [data-theme="dark"] #tool-guess-the-logo,
+        .dark #tool-guess-the-logo,
         .dark-mode #tool-guess-the-logo {
             --bg-gradient: transparent !important;
-            --card-bg: var(--md-sys-color-surface-container-low) !important;
-            --card-border: 1px solid var(--md-sys-color-outline-variant) !important;
-            --text-primary: var(--md-sys-color-on-surface) !important;
-            --text-secondary: var(--md-sys-color-on-surface-variant) !important;
-            --brand-primary: var(--md-sys-color-primary) !important;
-            --brand-secondary: var(--md-sys-color-tertiary) !important;
+            --card-bg: var(--md-sys-color-surface-container-low, #1b1b21) !important;
+            --card-border: 1px solid var(--md-sys-color-outline-variant, #46464f) !important;
+            --text-primary: var(--md-sys-color-on-surface, #e5e1e9) !important;
+            --text-secondary: var(--md-sys-color-on-surface-variant, #c7c5d0) !important;
+            --brand-primary: var(--md-sys-color-primary, #c0c1ff) !important;
+            --brand-secondary: #f472b6 !important;
         }
 
         #tool-guess-the-logo #darkModeToggle {
@@ -683,13 +674,25 @@
         }
 
         #tool-guess-the-logo .container {
-            background: var(--md-sys-color-surface-container-low) !important;
-            color: var(--md-sys-color-on-surface) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            background: var(--md-sys-color-surface-container-low, #f7f4fb) !important;
+            color: var(--md-sys-color-on-surface, #1b1b21) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
             border-radius: 28px !important;
-            box-shadow: none !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08) !important;
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
+            max-width: 680px !important;
+            margin: 0 auto !important;
+            position: relative !important;
+        }
+
+        [data-theme="dark"] #tool-guess-the-logo .container,
+        .dark #tool-guess-the-logo .container,
+        .dark-mode #tool-guess-the-logo .container {
+            background: var(--md-sys-color-surface-container-low, #1b1b21) !important;
+            color: var(--md-sys-color-on-surface, #e5e1e9) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4) !important;
         }
 
         #tool-guess-the-logo .container::after {
@@ -697,78 +700,138 @@
         }
 
         #tool-guess-the-logo h1 {
-            background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary)) !important;
+            background: linear-gradient(135deg, var(--brand-primary, #4f46e5), #ec4899) !important;
             -webkit-background-clip: text !important;
             background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
+            color: var(--brand-primary, #4f46e5) !important;
+            font-size: clamp(2rem, 5vw, 2.75rem) !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.03em !important;
+        }
+
+        #tool-guess-the-logo .subtitle {
+            color: var(--text-secondary) !important;
+            font-size: 1.05rem !important;
+            margin-bottom: 1.5rem !important;
         }
 
         /* Buttons */
         #tool-guess-the-logo .btn-primary {
-            background: var(--md-sys-color-primary) !important;
-            color: var(--md-sys-color-on-primary) !important;
+            background: var(--brand-primary, #4f46e5) !important;
+            color: #ffffff !important;
             border-radius: 999px !important;
             font-weight: 700 !important;
-            box-shadow: none !important;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3) !important;
             border: none !important;
             height: auto !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
         }
         #tool-guess-the-logo .btn-primary:hover {
-            background: color-mix(in srgb, var(--md-sys-color-primary) 90%, black) !important;
-            box-shadow: none !important;
-            transform: translateY(-1px) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4) !important;
+            filter: brightness(1.08) !important;
+        }
+        #tool-guess-the-logo .btn-primary:active {
+            transform: translateY(0) !important;
         }
 
         #tool-guess-the-logo .btn-secondary {
-            background: var(--md-sys-color-secondary-container) !important;
-            color: var(--md-sys-color-on-secondary-container) !important;
+            background: var(--md-sys-color-secondary-container, #dfe0f9) !important;
+            color: var(--md-sys-color-on-secondary-container, #171a2c) !important;
             border-radius: 999px !important;
             font-weight: 700 !important;
             border: none !important;
             height: auto !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
         }
         #tool-guess-the-logo .btn-secondary:hover {
-            background: color-mix(in srgb, var(--md-sys-color-secondary-container) 90%, black) !important;
-        }
-
-        #tool-guess-the-logo .btn-info {
-            background: var(--md-sys-color-surface-container-high) !important;
-            color: var(--md-sys-color-on-surface) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
-            border-radius: 999px !important;
-            font-weight: 500 !important;
-            padding: 8px 16px !important;
-            height: auto !important;
-        }
-        #tool-guess-the-logo .btn-info:hover {
-            background: var(--md-sys-color-surface-container-highest) !important;
-        }
-
-        #tool-guess-the-logo .btn-option {
-            background: var(--md-sys-color-surface-container-high) !important;
-            color: var(--md-sys-color-on-surface) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
-            border-radius: 12px !important;
-            box-shadow: none !important;
-        }
-        .dark-mode #tool-guess-the-logo .btn-option {
-            background: var(--md-sys-color-surface-container-high) !important;
-            color: var(--md-sys-color-on-surface) !important;
-        }
-        #tool-guess-the-logo .btn-option:hover:not(:disabled) {
-            background: var(--md-sys-color-primary-container) !important;
-            color: var(--md-sys-color-on-primary-container) !important;
-            border-color: var(--md-sys-color-primary) !important;
+            filter: brightness(0.95) !important;
             transform: translateY(-1px) !important;
         }
 
+        #tool-guess-the-logo .btn-info {
+            background: var(--md-sys-color-surface-container-high, #ebe9f0) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            border-radius: 999px !important;
+            font-weight: 600 !important;
+            padding: 8px 18px !important;
+            height: auto !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+        #tool-guess-the-logo .btn-info:hover {
+            background: var(--md-sys-color-surface-container-highest, #e5e3ea) !important;
+            border-color: var(--brand-primary) !important;
+        }
+
+        /* Option Guess Buttons */
+        #tool-guess-the-logo .btn-option {
+            background: var(--md-sys-color-surface-container-high, #ebe9f0) !important;
+            color: var(--text-primary) !important;
+            border: 1.5px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+            font-size: 1.05rem !important;
+            font-weight: 700 !important;
+            padding: 1rem 1.25rem !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo .btn-option,
+        .dark #tool-guess-the-logo .btn-option,
+        .dark-mode #tool-guess-the-logo .btn-option {
+            background: var(--md-sys-color-surface-container-high, #292931) !important;
+            color: var(--text-primary) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        #tool-guess-the-logo .btn-option:hover:not(:disabled) {
+            background: var(--md-sys-color-primary-container, #e1e0ff) !important;
+            color: var(--md-sys-color-on-primary-container, #11118b) !important;
+            border-color: var(--brand-primary) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.2) !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo .btn-option:hover:not(:disabled),
+        .dark #tool-guess-the-logo .btn-option:hover:not(:disabled),
+        .dark-mode #tool-guess-the-logo .btn-option:hover:not(:disabled) {
+            background: #3736aa !important;
+            color: #ffffff !important;
+            border-color: #c0c1ff !important;
+        }
+        #tool-guess-the-logo .btn-option:active:not(:disabled) {
+            transform: translateY(0) scale(0.98) !important;
+        }
+        #tool-guess-the-logo .btn-option.correct {
+            background: #10b981 !important;
+            border-color: #059669 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4) !important;
+        }
+        #tool-guess-the-logo .btn-option.incorrect {
+            background: #ef4444 !important;
+            border-color: #dc2626 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4) !important;
+        }
+
         /* Radio group */
+        #tool-guess-the-logo .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            margin-top: 0.5rem;
+        }
         #tool-guess-the-logo input[type="radio"] {
             appearance: none !important;
             -webkit-appearance: none !important;
             width: 20px !important;
             height: 20px !important;
-            border: 2px solid var(--md-sys-color-outline) !important;
+            border: 2px solid var(--md-sys-color-outline, #6b6a74) !important;
             border-radius: 50% !important;
             outline: none !important;
             margin: 0 6px 0 0 !important;
@@ -785,79 +848,142 @@
             border-radius: 50% !important;
             transform: scale(0) !important;
             transition: 120ms transform ease-in-out !important;
-            background-color: var(--md-sys-color-primary) !important;
+            background-color: var(--brand-primary, #4f46e5) !important;
         }
         #tool-guess-the-logo input[type="radio"]:checked {
-            border-color: var(--md-sys-color-primary) !important;
+            border-color: var(--brand-primary, #4f46e5) !important;
         }
         #tool-guess-the-logo input[type="radio"]:checked::before {
             transform: scale(1) !important;
         }
         #tool-guess-the-logo .radio-group label {
-            margin-right: 16px !important;
+            margin-right: 12px !important;
             cursor: pointer !important;
             font-weight: 500 !important;
-            color: var(--md-sys-color-on-surface) !important;
+            color: var(--text-primary) !important;
         }
 
         /* Number and Select */
         #tool-guess-the-logo select,
         #tool-guess-the-logo input[type="number"] {
-            background-color: var(--md-sys-color-surface-container-lowest) !important;
-            color: var(--md-sys-color-on-surface) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
-            border-radius: 8px !important;
-            padding: 8px 12px !important;
+            background-color: var(--md-sys-color-surface-container-lowest, #ffffff) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            border-radius: 10px !important;
+            padding: 10px 14px !important;
             font-family: inherit !important;
-            font-weight: 500 !important;
+            font-weight: 600 !important;
             width: 100% !important;
+            margin-top: 0.25rem !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo select,
+        [data-theme="dark"] #tool-guess-the-logo input[type="number"],
+        .dark #tool-guess-the-logo select,
+        .dark #tool-guess-the-logo input[type="number"],
+        .dark-mode #tool-guess-the-logo select,
+        .dark-mode #tool-guess-the-logo input[type="number"] {
+            background-color: #121218 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
         }
         #tool-guess-the-logo select:focus,
         #tool-guess-the-logo input[type="number"]:focus {
-            border-color: var(--md-sys-color-primary) !important;
+            border-color: var(--brand-primary, #4f46e5) !important;
+            outline: none !important;
         }
 
         #tool-guess-the-logo input[type="checkbox"] {
-            accent-color: var(--md-sys-color-primary) !important;
-            width: 16px !important;
-            height: 16px !important;
+            accent-color: var(--brand-primary, #4f46e5) !important;
+            width: 18px !important;
+            height: 18px !important;
+            vertical-align: middle !important;
+            cursor: pointer !important;
         }
 
+        /* Showcase Logo Container: Pure crisp high-contrast white card */
         #tool-guess-the-logo .logo-container {
-            background: var(--md-sys-color-surface-container-lowest) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
-            border-radius: 16px !important;
+            background: #ffffff !important;
+            border: 1.5px solid var(--md-sys-color-outline-variant, #e2e8f0) !important;
+            border-radius: 20px !important;
+            padding: 1.75rem 1.25rem !important;
+            min-height: 220px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+            margin-bottom: 1.5rem !important;
         }
+        [data-theme="dark"] #tool-guess-the-logo .logo-container,
+        .dark #tool-guess-the-logo .logo-container,
         .dark-mode #tool-guess-the-logo .logo-container {
-            background: var(--md-sys-color-surface-container-lowest) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            background: #ffffff !important; /* Keep white card for logos so black marks (Nike, Apple) stay 100% visible */
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+        }
+        #tool-guess-the-logo .logo-container img {
+            max-width: 100% !important;
+            max-height: 175px !important;
+            object-fit: contain !important;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08)) !important;
+        }
+
+        #tool-guess-the-logo .game-info {
+            background: var(--md-sys-color-surface-container-high, #ebe9f0) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            border-radius: 999px !important;
+            padding: 0.75rem 1.5rem !important;
+            font-size: 1.05rem !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo .game-info,
+        .dark #tool-guess-the-logo .game-info,
+        .dark-mode #tool-guess-the-logo .game-info {
+            background: var(--md-sys-color-surface-container-high, #292931) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
         }
 
         #tool-guess-the-logo .modal-content {
-            background-color: var(--md-sys-color-surface-container-high) !important;
-            color: var(--md-sys-color-on-surface) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            background-color: var(--md-sys-color-surface-container-high, #ebe9f0) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
             border-radius: 28px !important;
         }
+        [data-theme="dark"] #tool-guess-the-logo .modal-content,
+        .dark #tool-guess-the-logo .modal-content,
+        .dark-mode #tool-guess-the-logo .modal-content {
+            background-color: #24242e !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
         #tool-guess-the-logo .modal-content h3 {
-            color: var(--md-sys-color-primary) !important;
+            color: var(--brand-primary, #4f46e5) !important;
         }
         #tool-guess-the-logo .modal-content p,
         #tool-guess-the-logo .modal-content ul {
-            color: var(--md-sys-color-on-surface-variant) !important;
+            color: var(--text-secondary) !important;
         }
         #tool-guess-the-logo .close-btn {
-            color: var(--md-sys-color-on-surface-variant) !important;
+            color: var(--text-secondary) !important;
         }
-        #tool-guess-the-logo .game-info {
-            background: var(--md-sys-color-surface-container-high) !important;
-            color: var(--md-sys-color-on-surface) !important;
-        }
+
         #tool-guess-the-logo #highscore-list {
-            background-color: var(--md-sys-color-surface-container-lowest) !important;
-            border: 1px solid var(--md-sys-color-outline-variant) !important;
+            background-color: var(--md-sys-color-surface-container-lowest, #ffffff) !important;
+            border: 1px solid var(--md-sys-color-outline-variant, #c7c5d0) !important;
+            border-radius: 16px !important;
+            padding: 0.5rem 1rem !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo #highscore-list,
+        .dark #tool-guess-the-logo #highscore-list,
+        .dark-mode #tool-guess-the-logo #highscore-list {
+            background-color: #121218 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
         }
         #tool-guess-the-logo #highscore-list li {
-            border-bottom: 1px solid var(--md-sys-color-outline-variant) !important;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant, rgba(0,0,0,0.08)) !important;
+            padding: 0.75rem 0.5rem !important;
+            font-weight: 600 !important;
+        }
+        [data-theme="dark"] #tool-guess-the-logo #highscore-list li,
+        .dark #tool-guess-the-logo #highscore-list li,
+        .dark-mode #tool-guess-the-logo #highscore-list li {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 

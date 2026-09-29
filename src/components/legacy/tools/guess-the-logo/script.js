@@ -30,6 +30,7 @@
         const streamingTimerInput = document.getElementById('streamingTimer');
         const currentModeLabel = document.getElementById('currentModeLabel');
         const modeInstruction = document.getElementById('modeInstruction');
+        const streakDisplay = document.getElementById('streakDisplay');
 
         // Modal elements
         const aboutModal = document.getElementById('aboutModal');
@@ -45,6 +46,7 @@
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
+        let streak = 0;
         let totalRounds = 10;
         let gameMode = 'single';
         let difficulty = 'easy';
@@ -177,32 +179,123 @@
             }
         }
 
+        function getResolvedLogoUrl(path) {
+            if (!path) return '';
+            const filename = path.split('/').pop();
+            return '/tools/guess-the-logo/logo/' + filename;
+        }
+
+        function scrollToTop() {
+            const el = document.getElementById('tool-guess-the-logo');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            canvas.style.display = 'block';
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            const particles = [];
+            const colors = ['#4f46e5', '#ec4899', '#10b981', '#f59e0b', '#3b82f6', '#8b5cf6'];
+            for (let i = 0; i < 70; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * (canvas.height * 0.3),
+                    r: Math.random() * 5 + 4,
+                    d: Math.random() * 50,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * 10 - 10,
+                    tiltAngleIncremental: (Math.random() * 0.07) + 0.05,
+                    tiltAngle: 0
+                });
+            }
+
+            let animationId;
+            let step = 0;
+            function draw() {
+                step++;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.tiltAngle += p.tiltAngleIncremental;
+                    p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                    p.x += Math.sin(p.d);
+                    p.tilt = Math.sin(p.tiltAngle) * 12;
+
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r / 2;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
+                    ctx.stroke();
+                });
+
+                if (step < 160) {
+                    animationId = requestAnimationFrame(draw);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'none';
+                    cancelAnimationFrame(animationId);
+                }
+            }
+            draw();
+        }
+
         function playSound(type) {
             if (!soundEffectsEnabled || !audioCtx) return;
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-
-            oscillator.start(audioCtx.currentTime);
-
-            let duration = 0.1;
-            if (type === 'correct') {
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-                duration = 0.3;
-            } else if (type === 'incorrect') {
-                oscillator.type = 'square';
-                oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
-                duration = 0.4;
-            } else if (type === 'click') {
-                oscillator.type = 'triangle';
-                oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-                duration = 0.1;
+            if (type === 'victory') {
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    setTimeout(() => {
+                        if (!audioCtx) return;
+                        try {
+                            const osc = audioCtx.createOscillator();
+                            const gn = audioCtx.createGain();
+                            osc.connect(gn);
+                            gn.connect(audioCtx.destination);
+                            osc.type = 'triangle';
+                            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                            gn.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                            gn.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+                            osc.start(audioCtx.currentTime);
+                            osc.stop(audioCtx.currentTime + 0.35);
+                        } catch (e) {}
+                    }, i * 110);
+                });
+                return;
             }
-            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-            oscillator.stop(audioCtx.currentTime + duration);
+            try {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+                oscillator.start(audioCtx.currentTime);
+
+                let duration = 0.1;
+                if (type === 'correct') {
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+                    duration = 0.3;
+                } else if (type === 'incorrect') {
+                    oscillator.type = 'square';
+                    oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
+                    duration = 0.35;
+                } else if (type === 'click') {
+                    oscillator.type = 'triangle';
+                    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    duration = 0.08;
+                }
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
         }
 
         // --- MODAL HANDLING ---
@@ -311,7 +404,10 @@
             partyTimerDuration = parseInt(partyTimerInput.value) || 15;
             streamingRevealDuration = parseInt(streamingTimerInput.value) || 7;
 
-            let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
+            let questionsByDifficulty = difficulty === 'all'
+                ? [...allQuestions]
+                : allQuestions.filter(q => q.difficulty === difficulty);
+
             if (questionsByDifficulty.length === 0) {
                 showMessage(`No questions available for ${difficulty} difficulty. Try another.`, 'warning');
                 return;
@@ -334,13 +430,10 @@
                     return;
                 }
 
-                // For Party Mode, we want infinite loop, but totalRounds acts as batch size
-                // We don't need to limit if user wants more, but usually we slice for Single
                 if (gameMode === 'single') {
                     if (totalRounds > currentQuestions.length) totalRounds = currentQuestions.length;
                     currentQuestions = currentQuestions.slice(0, totalRounds);
                 } else if (gameMode === 'party') {
-                    // Ensure batch size isn't larger than available questions (repeats handled by reshuffle later)
                     if (totalRounds > currentQuestions.length) totalRounds = currentQuestions.length;
                     currentQuestions = currentQuestions.slice(0, totalRounds);
                 }
@@ -350,11 +443,14 @@
             preloadImages(currentQuestions);
 
             score = 0;
+            streak = 0;
+            if (streakDisplay) streakDisplay.textContent = '';
             currentQuestionIndex = 0;
             updateScoreDisplay();
 
             showScreen('gameScreen');
             updateSettingsUI();
+            scrollToTop();
             loadQuestion();
         });
 
@@ -371,11 +467,8 @@
                     currentQuestionIndex = 0;
                 }
             } else if (currentQuestionIndex >= currentQuestions.length || (gameMode !== 'challenge' && gameMode !== 'party' && currentQuestionIndex >= totalRounds)) {
-                // Check if Party Mode ended batch is handled in revealAnswer, but here we can catch boundary
                 if (gameMode === 'party') {
-                    // Should have been handled by revealAnswer or needs restart
-                    // But if we fall through here, safe to End or Restart?
-                    // Let's assume revealAnswer handles the loop.
+                    // Loop party mode
                 } else {
                     endGame();
                     return;
@@ -384,16 +477,19 @@
 
             const question = currentQuestions[currentQuestionIndex];
             if (!question) {
-                // If we are in party mode and question is missing (maybe index OOB), try to restart batch
                 if (gameMode === 'party') {
-                    // Fail-safe: restart batch
                     restartPartyBatch();
                     return;
                 }
                 endGame();
                 return;
             }
-            logoImg.src = question.logoUrl;
+
+            logoImg.onerror = function() {
+                this.onerror = null;
+                this.src = question.logoUrl;
+            };
+            logoImg.src = getResolvedLogoUrl(question.logoUrl);
             feedbackMessage.style.display = 'none';
             feedbackMessage.className = 'feedback-message';
             nextQuestionBtn.style.display = 'none';
@@ -432,7 +528,9 @@
 
         function restartPartyBatch() {
             showMessage("Loading more logos...", "success", 1000);
-            let questionsByDifficulty = allQuestions.filter(q => q.difficulty === difficulty);
+            let questionsByDifficulty = difficulty === 'all'
+                ? [...allQuestions]
+                : allQuestions.filter(q => q.difficulty === difficulty);
             currentQuestions = shuffleArray([...questionsByDifficulty]);
             let batchSize = parseInt(numRoundsInput.value) || 10;
             if (batchSize > questionsByDifficulty.length) batchSize = questionsByDifficulty.length;
@@ -553,6 +651,8 @@
 
         function handleTimeout() {
             if (!currentQuestions[currentQuestionIndex]) return; // Safety check
+            streak = 0;
+            if (streakDisplay) streakDisplay.textContent = '';
             feedbackMessage.textContent = "Time's up! The correct answer was: " + currentQuestions[currentQuestionIndex].brandName;
             feedbackMessage.className = 'feedback-message info';
             feedbackMessage.style.display = 'block';
@@ -569,10 +669,16 @@
 
             if (selectedOption === correctAnswer) {
                 score++;
+                streak++;
+                if (streakDisplay) {
+                    streakDisplay.textContent = streak > 1 ? `🔥 ${streak} in a row!` : '';
+                }
                 feedbackMessage.textContent = 'Correct!';
                 feedbackMessage.className = 'feedback-message correct';
                 playSound('correct');
             } else {
+                streak = 0;
+                if (streakDisplay) streakDisplay.textContent = '';
                 feedbackMessage.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
                 feedbackMessage.className = 'feedback-message incorrect';
                 playSound('incorrect');
@@ -635,6 +741,7 @@
 
         nextQuestionBtn.addEventListener('click', () => {
             playSound('click');
+            scrollToTop();
             currentQuestionIndex++;
             if (currentQuestionIndex >= totalRounds && gameMode !== 'challenge') {
                 endGame();
@@ -646,6 +753,7 @@
         function endGame() {
             clearAllTimers();
             showScreen('gameOverScreen');
+            scrollToTop();
 
             if (gameMode === 'streaming') {
                 finalScoreDisplay.textContent = "Streaming session ended. Select 'Play Again' to return to settings.";
@@ -661,6 +769,12 @@
                 finalScoreDisplay.textContent = resultText;
                 saveHighScore(score, gameMode, difficulty, gameMode === 'challenge' ? currentQuestionIndex : totalRounds);
                 displayHighScores();
+
+                const totalAttempted = (gameMode !== 'challenge' ? totalRounds : (currentQuestionIndex > 0 ? currentQuestionIndex : 1));
+                if (totalAttempted > 0 && (score / totalAttempted) >= 0.7) {
+                    playSound('victory');
+                    launchConfetti();
+                }
             }
         }
 
@@ -707,6 +821,8 @@
 
         playAgainBtn.addEventListener('click', () => {
             playSound('click');
+            streak = 0;
+            if (streakDisplay) streakDisplay.textContent = '';
             scoreDisplay.style.display = 'flex';
             roundDisplay.style.display = 'inline';
             optionsContainer.style.display = 'grid';
@@ -717,6 +833,7 @@
             showScreen('settingsScreen');
             document.getElementById('modeSingle').checked = true;
             updateSettingsUI();
+            scrollToTop();
         });
 
         shareScoreBtn.addEventListener('click', () => {
