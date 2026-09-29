@@ -235,3 +235,109 @@ test('image utility: icons render, single landmark, target-size compression work
   expect(result.bytes).toBeLessThanOrEqual(40 * 1024);
   expect(errors).toEqual([]);
 });
+
+test('curl-to-code converts commands to multiple target languages', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/curl-to-code/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify initial sample code generates JS fetch
+  const codeOutput = page.locator('#code-output');
+  await expect(codeOutput).toContainText('fetch(');
+
+  // Switch to Python Requests
+  await page.click('button[data-lang="python-requests"]');
+  await expect(codeOutput).toContainText('import requests');
+  await expect(codeOutput).toContainText('requests.post');
+
+  // Switch to Go
+  await page.click('button[data-lang="go"]');
+  await expect(codeOutput).toContainText('package main');
+  await expect(codeOutput).toContainText('http.NewRequest');
+
+  // Test custom cURL input
+  await page.fill(
+    '#curl-input',
+    'curl -X PUT "https://api.example.com/items/42" -H "X-API-Key: secret123" -d \'{"status":"active"}\''
+  );
+  await page.click('button[data-lang="fetch"]');
+  await expect(codeOutput).toContainText("method: 'PUT'");
+  await expect(codeOutput).toContainText('"X-API-Key": "secret123"');
+  await expect(codeOutput).toContainText('"status": "active"');
+
+  expect(errors).toEqual([]);
+});
+
+test('compound-interest-calculator calculates future wealth and updates chart/table', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/compound-interest-calculator/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify initial calculation renders
+  const futureVal = page.locator('#res-future-value');
+  await expect(futureVal).toBeVisible();
+  const initialText = await futureVal.innerText();
+  expect(initialText).toContain('$');
+
+  // Verify schedule table has 25 rows initially
+  await expect(page.locator('#table-body tr')).toHaveCount(25);
+
+  // Switch to HYSA preset
+  await page.click('button[data-preset="hysa"]');
+  await expect(page.locator('#rate-display')).toHaveText('4.5%');
+  await expect(page.locator('#years-display')).toHaveText('5 Years');
+  await expect(page.locator('#table-body tr')).toHaveCount(5);
+
+  // Test custom input calculation
+  await page.fill('#initial-principal', '20000');
+  await page.fill('#monthly-contribution', '500');
+  await page.fill('#investment-years', '10');
+  await page.dispatchEvent('#investment-years', 'input');
+
+  await expect(page.locator('#table-body tr')).toHaveCount(10);
+  const updatedText = await futureVal.innerText();
+  expect(updatedText).not.toBe(initialText);
+
+  // Verify SVG chart path is rendered
+  const balancePath = page.locator('#chart-line-balance');
+  const pathD = await balancePath.getAttribute('d');
+  expect(pathD?.length).toBeGreaterThan(10);
+
+  expect(errors).toEqual([]);
+});
+
+test('pdf-merger-splitter loads sample files, reorders, and splits client-side', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/pdf-merger-splitter/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Click sample demo PDFs button
+  await page.click('#btn-demo-pdfs');
+  await page.waitForTimeout(500);
+
+  // Verify merge list rendered with 2 documents
+  const items = page.locator('#merge-file-items .file-item');
+  await expect(items).toHaveCount(2);
+  await expect(page.locator('#merge-file-count')).toHaveText('2');
+  await expect(page.locator('#merge-total-pages')).toHaveText('3');
+
+  // Reorder documents (move down first doc)
+  await page.click('#merge-file-items .btn-move-down >> nth=0');
+  const firstDocName = await page.locator('#merge-file-items .file-meta-name >> nth=0').innerText();
+  expect(firstDocName).toContain('Sample-Report-Part-2.pdf');
+
+  // Switch to Split tab
+  await page.click('#tab-split');
+  await expect(page.locator('#split-card-container')).toBeVisible();
+  await expect(page.locator('#split-doc-name')).toContainText('Sample-Report-Part-1.pdf');
+  await expect(page.locator('#split-doc-pages')).toHaveText('2');
+
+  // Verify toast appears on test split download trigger
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.click('#btn-split-action'),
+  ]);
+  expect(download.suggestedFilename()).toContain('.pdf');
+
+  expect(errors).toEqual([]);
+});

@@ -1,0 +1,1091 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../../../../data/site';
+import type { Props as SeoProps } from '../../../../components/Seo.astro';
+
+const seo: SeoProps = {
+  title: 'Unir y Dividir PDF Online Gratis – Combinar y Extraer Páginas',
+  description:
+    'Une varios archivos PDF en uno solo o extrae páginas específicas al instante. 100% privado en tu navegador, sin subir archivos a ningún servidor.',
+  keywords:
+    'unir pdf, dividir pdf, juntar pdf gratis, combinar pdf online, extraer paginas pdf, pdf privado local, unir documentos pdf',
+  author: 'ni18',
+  canonical: `${SITE_URL}/es/tools/unir-dividir-pdf/`,
+  hreflang: [
+    { hreflang: 'en', href: `${SITE_URL}/tools/pdf-merger-splitter/` },
+    { hreflang: 'es', href: `${SITE_URL}/es/tools/unir-dividir-pdf/` },
+    { hreflang: 'fr', href: `${SITE_URL}/fr/tools/fusionner-diviser-pdf/` },
+    { hreflang: 'x-default', href: `${SITE_URL}/tools/pdf-merger-splitter/` },
+  ],
+  og: {
+    type: 'website',
+    url: `${SITE_URL}/es/tools/unir-dividir-pdf/`,
+    title: 'Unir y Dividir PDF Online Gratis',
+    description: 'Une varios archivos PDF o extrae páginas específicas con total privacidad y sin subir archivos.',
+    image: DEFAULT_OG_IMAGE,
+    locale: 'es_ES',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    url: `${SITE_URL}/es/tools/unir-dividir-pdf/`,
+    title: 'Unir y Dividir PDF Online Gratis',
+    description: 'Une varios archivos PDF o extrae páginas específicas con total privacidad y sin subir archivos.',
+    image: DEFAULT_OG_IMAGE,
+  },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'Unir y Dividir PDF Online',
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'All',
+      url: `${SITE_URL}/es/tools/unir-dividir-pdf/`,
+      description: 'Herramienta online para unir y dividir archivos PDF directamente en el navegador con procesamiento local y privado.',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '¿Se suben mis archivos PDF a algún servidor?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'No. Todo el procesamiento de unión y división se realiza localmente en tu navegador web. Tus archivos confidenciales nunca salen de tu ordenador ni móvil.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿Cómo elijo las páginas a extraer en el modo dividir?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Indica los números de página separados por comas o guiones (por ejemplo, 1-3, 5). El archivo generado contendrá únicamente las páginas seleccionadas.',
+          },
+        },
+      ],
+    },
+  ],
+};
+
+const altLinks = {
+  en: `${SITE_URL}/tools/pdf-merger-splitter/`,
+  fr: `${SITE_URL}/fr/tools/fusionner-diviser-pdf/`,
+};
+
+const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
+---
+
+<ToolLayout seo={seo} lang="es" altLinks={altLinks} headRaw={headRaw}>
+  <div class="tool-island" id="tool-unir-dividir-pdf">
+    <header class="tool-header">
+      <h1>Unir y Dividir PDF Online</h1>
+      <p class="subtitle">Combina, reordena y divide documentos PDF de forma local en tu navegador. 100% privado y sin límites.</p>
+    </header>
+
+    <!-- Privacy Banner -->
+    <div class="privacy-banner" role="status">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span><strong>Privacidad Total sin Subidas:</strong> Tus archivos se procesan en la memoria local de tu dispositivo. Ningún documento se envía a la nube.</span>
+    </div>
+
+    <!-- Mode Selector & Quick Actions -->
+    <div class="mode-bar">
+      <div class="mode-tabs" role="tablist" aria-label="Modo de operación">
+        <button type="button" class="mode-tab active" id="tab-merge" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="2" width="13" height="15" rx="2"/><path d="M4 6H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span>Unir PDFs</span>
+        </button>
+        <button type="button" class="mode-tab" id="tab-split" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+          <span>Dividir PDF</span>
+        </button>
+      </div>
+
+      <div class="quick-helpers">
+        <button type="button" class="btn-demo" id="btn-demo-pdfs">
+          <span>⚡ Probar con Ejemplos</span>
+        </button>
+        <button type="button" class="btn-clear" id="btn-clear-all">
+          <span>Limpiar Todo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MERGE VIEW -->
+    <div id="view-merge" class="tool-view active">
+      <div class="drop-zone" id="merge-drop-zone">
+        <input type="file" id="merge-file-input" accept="application/pdf" multiple class="file-input-hidden" aria-label="Seleccionar PDFs a unir"/>
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="drop-icon" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg>
+        <p class="drop-primary">Arrastra varios archivos PDF aquí, o <label for="merge-file-input" class="browse-link">selecciona archivos</label></p>
+        <p class="drop-hint">Añade 2 o más archivos para ordenarlos y combinarlos en un único documento.</p>
+      </div>
+
+      <!-- File List -->
+      <div class="file-list-card" id="merge-list-container" style="display:none;">
+        <div class="list-header">
+          <h2 class="list-title">PDFs a Unir (<span id="merge-file-count">0</span> archivos, <span id="merge-total-pages">0</span> páginas en total)</h2>
+          <label for="merge-add-more" class="btn-add-more">
+            <input type="file" id="merge-add-more" accept="application/pdf" multiple class="file-input-hidden"/>
+            + Añadir más PDFs
+          </label>
+        </div>
+
+        <ul class="file-items" id="merge-file-items" aria-label="Lista de archivos PDF a unir"></ul>
+
+        <!-- Merge Options -->
+        <div class="options-bar">
+          <div class="filename-group">
+            <label for="merge-output-name">Nombre del archivo resultante:</label>
+            <input type="text" id="merge-output-name" class="form-input" value="documento-unido.pdf" aria-label="Nombre del archivo PDF resultante"/>
+          </div>
+          <button type="button" class="btn-primary" id="btn-merge-action">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="btn-merge-label">Unir PDFs y Descargar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPLIT VIEW -->
+    <div id="view-split" class="tool-view" style="display:none;">
+      <div class="drop-zone" id="split-drop-zone">
+        <input type="file" id="split-file-input" accept="application/pdf" class="file-input-hidden" aria-label="Seleccionar PDF a dividir"/>
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="drop-icon" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+        <p class="drop-primary">Arrastra un archivo PDF aquí, o <label for="split-file-input" class="browse-link">selecciona archivo</label></p>
+        <p class="drop-hint">Extrae rangos de páginas específicos o crea documentos independientes por página.</p>
+      </div>
+
+      <div class="split-card" id="split-card-container" style="display:none;">
+        <div class="doc-summary">
+          <div class="doc-icon">📄</div>
+          <div class="doc-info">
+            <h2 class="doc-name" id="split-doc-name">documento.pdf</h2>
+            <p class="doc-meta"><span id="split-doc-pages">0</span> páginas · <span id="split-doc-size">0 KB</span></p>
+          </div>
+          <button type="button" class="btn-clear" id="btn-change-split-file">Cambiar Archivo</button>
+        </div>
+
+        <div class="split-controls">
+          <h3 class="controls-title">Método de Extracción</h3>
+
+          <div class="radio-option">
+            <label class="radio-label">
+              <input type="radio" name="split-mode" value="range" checked/>
+              <strong>Extraer Rango de Páginas</strong>
+            </label>
+            <div class="sub-input-wrap">
+              <input
+                type="text"
+                id="split-range-input"
+                class="form-input"
+                placeholder="ej. 1-3, 5, 7"
+                value="1"
+                aria-label="Páginas a extraer"
+              />
+              <span class="input-helper">Números o rangos separados por comas (ej. <code>1-3, 5</code>)</span>
+            </div>
+          </div>
+
+          <div class="radio-option">
+            <label class="radio-label">
+              <input type="radio" name="split-mode" value="all"/>
+              <strong>Extraer Cada Página en un PDF Independiente</strong>
+            </label>
+            <p class="input-helper radio-desc">Genera y descarga cada página como un archivo PDF por separado.</p>
+          </div>
+        </div>
+
+        <div class="options-bar">
+          <div class="filename-group">
+            <label for="split-output-name">Prefijo del archivo:</label>
+            <input type="text" id="split-output-name" class="form-input" value="paginas-extraidas.pdf" aria-label="Nombre del archivo extraído"/>
+          </div>
+          <button type="button" class="btn-primary" id="btn-split-action">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="btn-split-label">Extraer y Descargar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Toast -->
+    <div id="status-toast" class="status-toast" style="display:none;" role="status">
+      <span id="status-message">Procesando...</span>
+    </div>
+
+    <!-- Spanish SEO Article -->
+    <article class="guide-section">
+      <h2>Ventajas de Unir y Dividir PDFs en Local</h2>
+      <p>
+        La mayoría de servicios online exigen subir tus documentos a sus servidores, exponiendo contratos, nóminas, facturas
+        o historiales médicos a brechas de seguridad. Con nuestra tecnología 100% basada en navegador, tus documentos se procesan
+        de manera local mediante JavaScript, garantizando la total privacidad de tus datos.
+      </p>
+    </article>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-unir-dividir-pdf {
+    padding: 1.5rem;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    font-family: inherit;
+  }
+
+  .tool-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .tool-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin: 0;
+  }
+
+  .privacy-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #E8F5E9;
+    color: #1B5E20;
+    border: 1px solid #A5D6A7;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.9rem;
+  }
+
+  :global([data-theme='dark']) .privacy-banner,
+  :global(.dark) .privacy-banner {
+    background: #1B5E20;
+    color: #E8F5E9;
+    border-color: #2E7D32;
+  }
+
+  .mode-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mode-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    padding: 0.35rem;
+    border-radius: 12px;
+  }
+
+  .mode-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .mode-tab:hover {
+    background: var(--md-sys-color-surface-container-high, #ECE6F0);
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .mode-tab.active {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    color: var(--md-sys-color-primary, #6750A4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .quick-helpers {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .btn-demo,
+  .btn-clear {
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-demo {
+    background: var(--md-sys-color-primary-container, #EADDFF);
+    color: var(--md-sys-color-on-primary-container, #21005D);
+    border: 1px solid var(--md-sys-color-primary, #6750A4);
+  }
+
+  .btn-clear {
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+  }
+
+  .drop-zone {
+    border: 2px dashed var(--md-sys-color-outline, #79747E);
+    border-radius: 16px;
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1.5rem;
+  }
+
+  .drop-zone.dragover {
+    border-color: var(--md-sys-color-primary, #6750A4);
+    background: var(--md-sys-color-surface-container-highest, #E6E0E9);
+  }
+
+  .drop-icon {
+    color: var(--md-sys-color-primary, #6750A4);
+    margin-bottom: 0.75rem;
+  }
+
+  .drop-primary {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem 0;
+  }
+
+  .browse-link {
+    color: var(--md-sys-color-primary, #6750A4);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .drop-hint {
+    font-size: 0.88rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin: 0;
+  }
+
+  .file-input-hidden {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .file-list-card,
+  .split-card {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .list-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .btn-add-more {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary, #6750A4);
+    cursor: pointer;
+    border: 1px dashed var(--md-sys-color-primary, #6750A4);
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+  }
+
+  .file-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 10px;
+    gap: 1rem;
+  }
+
+  .file-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .file-num {
+    font-weight: 700;
+    color: var(--md-sys-color-primary, #6750A4);
+    font-size: 0.85rem;
+    width: 20px;
+  }
+
+  .file-meta-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .file-meta-details {
+    font-size: 0.78rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+  }
+
+  .file-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .btn-icon-action {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    transition: background 0.15s ease;
+  }
+
+  .btn-icon-action:hover {
+    background: var(--md-sys-color-surface-container-high, #ECE6F0);
+  }
+
+  .btn-icon-action--del:hover {
+    color: #B3261E;
+    border-color: #B3261E;
+  }
+
+  .options-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+  }
+
+  .filename-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .filename-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .form-input {
+    flex: 1;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.92rem;
+    font-family: inherit;
+    border: 1px solid var(--md-sys-color-outline, #79747E);
+    border-radius: 8px;
+    background: var(--md-sys-color-surface, #FFFFFF);
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    background: var(--md-sys-color-primary, #6750A4);
+    color: var(--md-sys-color-on-primary, #FFFFFF);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .doc-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .doc-icon {
+    font-size: 2rem;
+  }
+
+  .doc-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-name {
+    margin: 0 0 0.2rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .doc-meta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+  }
+
+  .split-controls {
+    margin-bottom: 1.5rem;
+  }
+
+  .controls-title {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .radio-option {
+    margin-bottom: 1.25rem;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 0.4rem;
+  }
+
+  .sub-input-wrap {
+    margin-left: 1.75rem;
+  }
+
+  .sub-input-wrap .form-input {
+    max-width: 320px;
+    margin-bottom: 0.3rem;
+  }
+
+  .input-helper {
+    font-size: 0.82rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    display: block;
+  }
+
+  .radio-desc {
+    margin-left: 1.75rem;
+  }
+
+  .status-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--md-sys-color-inverse-surface, #313033);
+    color: var(--md-sys-color-inverse-on-surface, #F4EFF4);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+  }
+
+  .guide-section {
+    border-top: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+
+  .guide-section h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem 0;
+  }
+
+  .guide-section p {
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    let mergeFiles = [];
+    let splitFile = null;
+
+    const tabMerge = document.getElementById('tab-merge');
+    const tabSplit = document.getElementById('tab-split');
+    const viewMerge = document.getElementById('view-merge');
+    const viewSplit = document.getElementById('view-split');
+
+    const btnDemo = document.getElementById('btn-demo-pdfs');
+    const btnClearAll = document.getElementById('btn-clear-all');
+    const statusToast = document.getElementById('status-toast');
+    const statusMessage = document.getElementById('status-message');
+
+    const mergeDropZone = document.getElementById('merge-drop-zone');
+    const mergeFileInput = document.getElementById('merge-file-input');
+    const mergeAddMore = document.getElementById('merge-add-more');
+    const mergeListContainer = document.getElementById('merge-list-container');
+    const mergeFileItems = document.getElementById('merge-file-items');
+    const mergeFileCount = document.getElementById('merge-file-count');
+    const mergeTotalPages = document.getElementById('merge-total-pages');
+    const mergeOutputName = document.getElementById('merge-output-name');
+    const btnMergeAction = document.getElementById('btn-merge-action');
+    const btnMergeLabel = document.getElementById('btn-merge-label');
+
+    const splitDropZone = document.getElementById('split-drop-zone');
+    const splitFileInput = document.getElementById('split-file-input');
+    const splitCardContainer = document.getElementById('split-card-container');
+    const splitDocName = document.getElementById('split-doc-name');
+    const splitDocPages = document.getElementById('split-doc-pages');
+    const splitDocSize = document.getElementById('split-doc-size');
+    const btnChangeSplitFile = document.getElementById('btn-change-split-file');
+    const splitRangeInput = document.getElementById('split-range-input');
+    const splitOutputName = document.getElementById('split-output-name');
+    const btnSplitAction = document.getElementById('btn-split-action');
+    const btnSplitLabel = document.getElementById('btn-split-label');
+
+    function showToast(msg, duration = 3000) {
+      statusMessage.textContent = msg;
+      statusToast.style.display = 'block';
+      if (duration > 0) {
+        setTimeout(() => {
+          statusToast.style.display = 'none';
+        }, duration);
+      }
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    tabMerge.addEventListener('click', () => {
+      tabMerge.classList.add('active');
+      tabMerge.setAttribute('aria-selected', 'true');
+      tabSplit.classList.remove('active');
+      tabSplit.setAttribute('aria-selected', 'false');
+      viewMerge.style.display = 'block';
+      viewSplit.style.display = 'none';
+    });
+
+    tabSplit.addEventListener('click', () => {
+      tabSplit.classList.add('active');
+      tabSplit.setAttribute('aria-selected', 'true');
+      tabMerge.classList.remove('active');
+      tabMerge.setAttribute('aria-selected', 'false');
+      viewSplit.style.display = 'block';
+      viewMerge.style.display = 'none';
+    });
+
+    btnClearAll.addEventListener('click', () => {
+      mergeFiles = [];
+      splitFile = null;
+      renderMergeList();
+      mergeListContainer.style.display = 'none';
+      mergeDropZone.style.display = 'block';
+      splitCardContainer.style.display = 'none';
+      splitDropZone.style.display = 'block';
+      showToast('Se ha limpiado todo');
+    });
+
+    btnDemo.addEventListener('click', async () => {
+      if (typeof PDFLib === 'undefined') {
+        showToast('Cargando motor PDF...');
+        return;
+      }
+      showToast('Generando PDFs de prueba...', 0);
+      try {
+        const doc1 = await PDFLib.PDFDocument.create();
+        const page1 = doc1.addPage([500, 400]);
+        page1.drawText('Documento de Ejemplo 1', { x: 50, y: 300, size: 20 });
+        const bytes1 = await doc1.save();
+
+        const doc2 = await PDFLib.PDFDocument.create();
+        const page2 = doc2.addPage([500, 400]);
+        page2.drawText('Documento de Ejemplo 2', { x: 50, y: 300, size: 20 });
+        const bytes2 = await doc2.save();
+
+        mergeFiles = [
+          { id: '1', name: 'Documento-Ejemplo-1.pdf', size: bytes1.byteLength, pageCount: 1, bytes: bytes1 },
+          { id: '2', name: 'Documento-Ejemplo-2.pdf', size: bytes2.byteLength, pageCount: 1, bytes: bytes2 },
+        ];
+
+        renderMergeList();
+        mergeListContainer.style.display = 'block';
+        mergeDropZone.style.display = 'none';
+
+        splitFile = {
+          name: 'Documento-Ejemplo-1.pdf',
+          size: bytes1.byteLength,
+          pageCount: 1,
+          bytes: bytes1,
+          pdfDoc: doc1,
+        };
+        splitDocName.textContent = splitFile.name;
+        splitDocPages.textContent = splitFile.pageCount;
+        splitDocSize.textContent = formatBytes(splitFile.size);
+        splitRangeInput.value = '1';
+        splitCardContainer.style.display = 'block';
+        splitDropZone.style.display = 'none';
+
+        showToast('Archivos de ejemplo cargados!');
+      } catch (err) {
+        console.error(err);
+        showToast('Error al crear ejemplos');
+      }
+    });
+
+    function setupDropZone(dropZone, fileInput, onFilesSelected) {
+      ['dragenter', 'dragover'].forEach((eventName) => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.add('dragover');
+        });
+      });
+      ['dragleave', 'drop'].forEach((eventName) => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove('dragover');
+        });
+      });
+      dropZone.addEventListener('drop', (e) => {
+        const files = Array.from(e.dataTransfer.files).filter((f) => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
+        if (files.length) onFilesSelected(files);
+      });
+      fileInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length) onFilesSelected(files);
+      });
+    }
+
+    async function handleMergeFiles(files) {
+      if (typeof PDFLib === 'undefined') {
+        showToast('Cargando librería...');
+        return;
+      }
+      showToast(`Cargando ${files.length} archivo(s)...`, 0);
+
+      for (const file of files) {
+        try {
+          const buffer = await file.arrayBuffer();
+          const doc = await PDFLib.PDFDocument.load(buffer, { ignoreEncryption: true });
+          const pages = doc.getPageCount();
+          mergeFiles.push({
+            id: String(Date.now() + Math.random()),
+            name: file.name,
+            size: file.size,
+            pageCount: pages,
+            bytes: new Uint8Array(buffer),
+          });
+        } catch (err) {
+          console.error(err);
+          showToast(`Error al leer ${file.name}`);
+        }
+      }
+
+      renderMergeList();
+      if (mergeFiles.length > 0) {
+        mergeListContainer.style.display = 'block';
+        mergeDropZone.style.display = 'none';
+        showToast(`${mergeFiles.length} PDF(s) listos`);
+      }
+    }
+
+    setupDropZone(mergeDropZone, mergeFileInput, handleMergeFiles);
+    mergeAddMore.addEventListener('change', (e) => {
+      handleMergeFiles(Array.from(e.target.files));
+    });
+
+    function renderMergeList() {
+      mergeFileCount.textContent = mergeFiles.length;
+      const totalPages = mergeFiles.reduce((acc, f) => acc + f.pageCount, 0);
+      mergeTotalPages.textContent = totalPages;
+
+      mergeFileItems.innerHTML = mergeFiles
+        .map(
+          (file, idx) => `
+        <li class="file-item" data-id="${file.id}">
+          <div class="file-left">
+            <span class="file-num">${idx + 1}</span>
+            <div>
+              <div class="file-meta-name" title="${file.name}">${file.name}</div>
+              <div class="file-meta-details">${file.pageCount} pág(s) · ${formatBytes(file.size)}</div>
+            </div>
+          </div>
+          <div class="file-actions">
+            <button type="button" class="btn-icon-action btn-move-up" data-idx="${idx}" title="Subir" ${idx === 0 ? 'disabled' : ''}>▲</button>
+            <button type="button" class="btn-icon-action btn-move-down" data-idx="${idx}" title="Bajar" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>▼</button>
+            <button type="button" class="btn-icon-action btn-icon-action--del btn-delete" data-idx="${idx}" title="Eliminar">✕</button>
+          </div>
+        </li>
+      `
+        )
+        .join('');
+
+      mergeFileItems.querySelectorAll('.btn-move-up').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.idx);
+          if (idx > 0) {
+            const temp = mergeFiles[idx];
+            mergeFiles[idx] = mergeFiles[idx - 1];
+            mergeFiles[idx - 1] = temp;
+            renderMergeList();
+          }
+        });
+      });
+
+      mergeFileItems.querySelectorAll('.btn-move-down').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.idx);
+          if (idx < mergeFiles.length - 1) {
+            const temp = mergeFiles[idx];
+            mergeFiles[idx] = mergeFiles[idx + 1];
+            mergeFiles[idx + 1] = temp;
+            renderMergeList();
+          }
+        });
+      });
+
+      mergeFileItems.querySelectorAll('.btn-delete').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.idx);
+          mergeFiles.splice(idx, 1);
+          renderMergeList();
+          if (mergeFiles.length === 0) {
+            mergeListContainer.style.display = 'none';
+            mergeDropZone.style.display = 'block';
+          }
+        });
+      });
+    }
+
+    btnMergeAction.addEventListener('click', async () => {
+      if (mergeFiles.length < 2) {
+        showToast('Añade al menos 2 archivos PDF para unir.');
+        return;
+      }
+      btnMergeAction.disabled = true;
+      btnMergeLabel.textContent = 'Uniendo...';
+
+      try {
+        const mergedDoc = await PDFLib.PDFDocument.create();
+
+        for (const file of mergeFiles) {
+          const doc = await PDFLib.PDFDocument.load(file.bytes);
+          const copiedPages = await mergedDoc.copyPages(doc, doc.getPageIndices());
+          copiedPages.forEach((page) => mergedDoc.addPage(page));
+        }
+
+        const mergedBytes = await mergedDoc.save();
+        const blob = new Blob([mergedBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const filename = (mergeOutputName.value || 'documento-unido').trim().replace(/(\.pdf)?$/i, '.pdf');
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('✓ PDFs unidos con éxito!');
+      } catch (err) {
+        console.error(err);
+        showToast('Error al unir los documentos');
+      } finally {
+        btnMergeAction.disabled = false;
+        btnMergeLabel.textContent = 'Unir PDFs y Descargar';
+      }
+    });
+
+    async function handleSplitFile(files) {
+      if (!files.length) return;
+      const file = files[0];
+      showToast(`Cargando ${file.name}...`, 0);
+
+      try {
+        const buffer = await file.arrayBuffer();
+        const doc = await PDFLib.PDFDocument.load(buffer, { ignoreEncryption: true });
+        const pages = doc.getPageCount();
+
+        splitFile = {
+          name: file.name,
+          size: file.size,
+          pageCount: pages,
+          bytes: new Uint8Array(buffer),
+          pdfDoc: doc,
+        };
+
+        splitDocName.textContent = splitFile.name;
+        splitDocPages.textContent = splitFile.pageCount;
+        splitDocSize.textContent = formatBytes(splitFile.size);
+        splitRangeInput.value = pages > 1 ? `1-${Math.min(pages, 3)}` : '1';
+        splitOutputName.value = splitFile.name.replace(/(\.pdf)?$/i, '-extraido.pdf');
+
+        splitDropZone.style.display = 'none';
+        splitCardContainer.style.display = 'block';
+        showToast('PDF listo para dividir.');
+      } catch (err) {
+        console.error(err);
+        showToast('Error al abrir el PDF');
+      }
+    }
+
+    setupDropZone(splitDropZone, splitFileInput, handleSplitFile);
+    btnChangeSplitFile.addEventListener('click', () => {
+      splitCardContainer.style.display = 'none';
+      splitDropZone.style.display = 'block';
+    });
+
+    function parsePageRange(rangeStr, maxPages) {
+      const pageIndices = new Set();
+      const parts = rangeStr.split(',');
+
+      for (const part of parts) {
+        const trimmed = part.trim();
+        if (!trimmed) continue;
+
+        if (trimmed.includes('-')) {
+          const [startStr, endStr] = trimmed.split('-');
+          const start = Math.max(1, parseInt(startStr) || 1);
+          const end = Math.min(maxPages, parseInt(endStr) || maxPages);
+          for (let p = start; p <= end; p++) {
+            pageIndices.add(p - 1);
+          }
+        } else {
+          const p = parseInt(trimmed);
+          if (p >= 1 && p <= maxPages) {
+            pageIndices.add(p - 1);
+          }
+        }
+      }
+
+      return Array.from(pageIndices).sort((a, b) => a - b);
+    }
+
+    btnSplitAction.addEventListener('click', async () => {
+      if (!splitFile) {
+        showToast('Selecciona un archivo PDF.');
+        return;
+      }
+
+      const mode = document.querySelector('input[name="split-mode"]:checked').value;
+      btnSplitAction.disabled = true;
+      btnSplitLabel.textContent = 'Extrayendo...';
+
+      try {
+        if (mode === 'range') {
+          const indices = parsePageRange(splitRangeInput.value, splitFile.pageCount);
+          if (!indices.length) {
+            showToast('Rango de páginas no válido.');
+            btnSplitAction.disabled = false;
+            btnSplitLabel.textContent = 'Extraer y Descargar';
+            return;
+          }
+
+          const newDoc = await PDFLib.PDFDocument.create();
+          const copied = await newDoc.copyPages(splitFile.pdfDoc, indices);
+          copied.forEach((p) => newDoc.addPage(p));
+
+          const bytes = await newDoc.save();
+          const blob = new Blob([bytes], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          const filename = (splitOutputName.value || 'paginas-extraidas.pdf').trim().replace(/(\.pdf)?$/i, '.pdf');
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          showToast(`✓ Extraídas ${indices.length} página(s)!`);
+        } else {
+          for (let i = 0; i < splitFile.pageCount; i++) {
+            const singleDoc = await PDFLib.PDFDocument.create();
+            const [copied] = await singleDoc.copyPages(splitFile.pdfDoc, [i]);
+            singleDoc.addPage(copied);
+            const bytes = await singleDoc.save();
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `pagina-${i + 1}-${splitFile.name}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          }
+          showToast(`✓ Descargadas ${splitFile.pageCount} páginas.`);
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Error al extraer páginas');
+      } finally {
+        btnSplitAction.disabled = false;
+        btnSplitLabel.textContent = 'Extraer y Descargar';
+      }
+    });
+  })();
+</script>

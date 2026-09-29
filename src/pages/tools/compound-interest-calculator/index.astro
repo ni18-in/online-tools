@@ -1,0 +1,1386 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+
+const tool = getTool('compound-interest-calculator')!;
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Calculate Compound Interest and Investment Growth',
+  description: 'Learn how to calculate compound interest and future investment returns using starting principal, monthly deposits, and interest rates.',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Enter Initial Principal',
+      text: 'Input the initial sum of money you are investing or depositing upfront.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Set Monthly Contribution (Optional)',
+      text: 'Add any recurring monthly deposits or SIP contributions you plan to invest regularly.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Select Annual Interest Rate and Time Horizon',
+      text: 'Enter the estimated annual rate of return (e.g., 7%–10% for stock index funds) and duration in years.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Choose Compounding Frequency and Review Amortization',
+      text: 'Select monthly or annual compounding to instantly view your future balance, growth chart, and year-by-year schedule.',
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is compound interest and how does it work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Compound interest is interest calculated on the initial principal and also on the accumulated interest from previous periods. Over long time horizons, this creates an exponential growth curve often termed the eighth wonder of the world.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the formula for compound interest with regular contributions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The future balance combines principal compounding A = P(1 + r/n)^(nt) with the future value of a series of contributions PMT * (((1 + r/n)^(nt) - 1) / (r/n)).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How often does interest compound in high-yield savings accounts vs index funds?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'High-yield savings accounts and CDs typically compound daily or monthly. Stock market index funds (like S&P 500 ETFs) reinvest dividends quarterly or annually, with capital appreciation compounding continuously.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is my financial data kept private?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. All calculations, amortization schedules, and growth graphs are processed 100% locally in your web browser. No financial data is ever transmitted to a server.',
+      },
+    },
+  ],
+};
+
+const seo = toolSeo(tool, {
+  title: 'Compound Interest & Investment Calculator – SIP & Growth Chart',
+  description:
+    'Calculate compound interest, monthly investments (SIP), and future value with interactive growth charts and year-by-year amortization schedules.',
+  keywords:
+    'compound interest calculator, investment calculator, sip calculator, interest growth chart, future value calculator, savings calculator, retirement calculator',
+  author: 'ni18',
+  schemaType: 'WebApplication',
+  extraJsonLd: [howToSchema, faqSchema],
+});
+
+const altLinks = {
+  es: `${SITE_URL}/es/tools/calculadora-interes-compuesto/`,
+  fr: `${SITE_URL}/fr/tools/calculateur-interet-compose/`,
+};
+---
+
+<ToolLayout seo={seo} lang="en" altLinks={altLinks}>
+  <div class="tool-island" id="tool-compound-interest-calculator">
+    <header class="tool-header">
+      <h1>Compound Interest & Investment Calculator</h1>
+      <p class="subtitle">Simulate future wealth, compound growth, and regular monthly contributions with visual charts</p>
+    </header>
+
+    <!-- Quick Presets -->
+    <div class="quick-presets" aria-label="Preset investment scenarios">
+      <span class="preset-label">Quick Scenarios:</span>
+      <button type="button" class="preset-btn active" data-preset="sp500">
+        <span>📈 S&P 500 Index ($500/mo @ 8%, 25y)</span>
+      </button>
+      <button type="button" class="preset-btn" data-preset="hysa">
+        <span>🏦 High-Yield Savings ($10k @ 4.5%, 5y)</span>
+      </button>
+      <button type="button" class="preset-btn" data-preset="millionaire">
+        <span>🚀 Millionaire Path ($1,000/mo @ 10%, 20y)</span>
+      </button>
+      <button type="button" class="preset-btn" data-preset="college">
+        <span>🎓 College Fund ($250/mo @ 7%, 18y)</span>
+      </button>
+    </div>
+
+    <div class="calc-grid">
+      <!-- Input Controls Section -->
+      <section class="calc-card inputs-card" aria-labelledby="heading-inputs">
+        <h2 id="heading-inputs" class="card-title">Investment Parameters</h2>
+
+        <div class="form-group">
+          <label for="initial-principal">
+            <span>Initial Deposit / Principal ($)</span>
+            <span class="tooltip-icon" title="The upfront amount you invest today">ℹ️</span>
+          </label>
+          <div class="input-currency">
+            <span class="currency-symbol">$</span>
+            <input
+              type="number"
+              id="initial-principal"
+              class="form-input"
+              value="5000"
+              min="0"
+              max="10000000"
+              step="100"
+              aria-label="Initial Principal Amount"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="monthly-contribution">
+            <span>Monthly Contribution / SIP ($)</span>
+            <span class="tooltip-icon" title="Amount added to your investment every month">ℹ️</span>
+          </label>
+          <div class="input-currency">
+            <span class="currency-symbol">$</span>
+            <input
+              type="number"
+              id="monthly-contribution"
+              class="form-input"
+              value="500"
+              min="0"
+              max="500000"
+              step="50"
+              aria-label="Monthly Contribution"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-with-val">
+            <label for="interest-rate">Estimated Annual Interest Rate (%)</label>
+            <span class="slider-val" id="rate-display">8.0%</span>
+          </div>
+          <div class="slider-wrap">
+            <input
+              type="range"
+              id="interest-rate-slider"
+              min="0.1"
+              max="25"
+              step="0.1"
+              value="8.0"
+              class="range-slider"
+              aria-label="Interest rate slider"
+            />
+            <input
+              type="number"
+              id="interest-rate"
+              class="form-input form-input--compact"
+              value="8.0"
+              min="0.1"
+              max="50"
+              step="0.1"
+              aria-label="Annual Interest Rate percentage"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-with-val">
+            <label for="investment-years">Investment Time Horizon</label>
+            <span class="slider-val" id="years-display">25 Years</span>
+          </div>
+          <div class="slider-wrap">
+            <input
+              type="range"
+              id="investment-years-slider"
+              min="1"
+              max="50"
+              step="1"
+              value="25"
+              class="range-slider"
+              aria-label="Investment duration in years slider"
+            />
+            <input
+              type="number"
+              id="investment-years"
+              class="form-input form-input--compact"
+              value="25"
+              min="1"
+              max="60"
+              step="1"
+              aria-label="Investment duration in years"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half-group">
+            <label for="compound-frequency">Compounding Frequency</label>
+            <select id="compound-frequency" class="form-select" aria-label="Compounding Frequency">
+              <option value="12" selected>Monthly (12x/yr)</option>
+              <option value="1">Annually (1x/yr)</option>
+              <option value="2">Semi-Annually (2x/yr)</option>
+              <option value="4">Quarterly (4x/yr)</option>
+              <option value="365">Daily (365x/yr)</option>
+            </select>
+          </div>
+
+          <div class="form-group half-group">
+            <label for="currency-select">Display Currency</label>
+            <select id="currency-select" class="form-select" aria-label="Display Currency">
+              <option value="USD" selected>USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="CAD">CAD ($)</option>
+              <option value="AUD">AUD ($)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results & Breakdown Section -->
+      <section class="calc-card results-card" aria-labelledby="heading-results">
+        <h2 id="heading-results" class="card-title">Investment Summary</h2>
+
+        <!-- Big Highlight Stat -->
+        <div class="highlight-stat">
+          <span class="stat-caption">Projected Future Value</span>
+          <div class="stat-number" id="res-future-value">$478,574</div>
+          <div class="stat-badge" id="res-total-gain">+208.8% Total Return</div>
+        </div>
+
+        <!-- 3-Column Metrics Breakdown -->
+        <div class="summary-stats-grid">
+          <div class="stat-box">
+            <span class="box-label">Initial Deposit</span>
+            <span class="box-value" id="res-initial-principal">$5,000</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-label">Total Monthly Added</span>
+            <span class="box-value" id="res-total-contributions">$150,000</span>
+          </div>
+          <div class="stat-box stat-box--accent">
+            <span class="box-label">Total Interest Earned</span>
+            <span class="box-value" id="res-total-interest">$323,574</span>
+          </div>
+        </div>
+
+        <!-- Ratio Visual Bar -->
+        <div class="ratio-container">
+          <div class="ratio-labels">
+            <span class="label-principal" id="label-principal-pct">Invested Principal: 32.4%</span>
+            <span class="label-interest" id="label-interest-pct">Interest Earned: 67.6%</span>
+          </div>
+          <div class="ratio-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar-segment bar-segment--principal" id="bar-principal" style="width: 32.4%;"></div>
+            <div class="bar-segment bar-segment--interest" id="bar-interest" style="width: 67.6%;"></div>
+          </div>
+        </div>
+
+        <!-- Interactive SVG Growth Chart -->
+        <div class="chart-container">
+          <div class="chart-header">
+            <h3>Growth Projection Over Time</h3>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-color legend-color--balance"></span> Total Balance</span>
+              <span class="legend-item"><span class="legend-color legend-color--principal"></span> Total Invested</span>
+            </div>
+          </div>
+          <div class="svg-chart-wrap" id="chart-wrap">
+            <svg id="growth-chart" viewBox="0 0 600 240" preserveAspectRatio="none" aria-label="Compound Growth Chart">
+              <defs>
+                <linearGradient id="balanceGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--md-sys-color-primary, #6750A4)" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="var(--md-sys-color-primary, #6750A4)" stop-opacity="0.0"/>
+                </linearGradient>
+                <linearGradient id="investedGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--md-sys-color-outline, #79747E)" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="var(--md-sys-color-outline, #79747E)" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <g id="chart-grid" stroke="var(--md-sys-color-outline-variant, #CAC4D0)" stroke-dasharray="3,3" stroke-width="1"></g>
+              <path id="chart-area-invested" fill="url(#investedGrad)" d=""/>
+              <path id="chart-area-balance" fill="url(#balanceGrad)" d=""/>
+              <path id="chart-line-invested" fill="none" stroke="var(--md-sys-color-outline, #79747E)" stroke-width="2" stroke-dasharray="4,4" d=""/>
+              <path id="chart-line-balance" fill="none" stroke="var(--md-sys-color-primary, #6750A4)" stroke-width="3" d=""/>
+              <g id="chart-points"></g>
+            </svg>
+            <div id="chart-tooltip" class="chart-tooltip" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Annual Breakdown Amortization Table -->
+    <section class="table-card" aria-labelledby="heading-schedule">
+      <div class="table-header">
+        <div>
+          <h2 id="heading-schedule">Year-by-Year Growth Schedule</h2>
+          <p class="table-sub">Detailed breakdown of principal deposits, yearly interest, and year-end wealth</p>
+        </div>
+        <div class="table-actions">
+          <button type="button" class="btn-secondary" id="btn-export-csv">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Export CSV</span>
+          </button>
+          <button type="button" class="btn-secondary" id="btn-copy-table">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy Table</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="schedule-table" id="schedule-table">
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Starting Balance</th>
+              <th scope="col">Annual Deposits</th>
+              <th scope="col">Interest Earned</th>
+              <th scope="col">Total Interest To Date</th>
+              <th scope="col">Ending Balance</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Comprehensive Financial Guide & SEO Content -->
+    <article class="guide-section">
+      <h2>Understanding the Power of Compound Interest</h2>
+      <p>
+        Compound interest is often called the <em>snowball effect of money</em>. When you invest money, you earn interest on your
+        original deposit. In the subsequent year, you earn interest not only on your deposit, but also on the interest you earned the year
+        before. As time goes on, the interest component dramatically overtakes the money you deposited from your own pocket.
+      </p>
+
+      <div class="formula-box">
+        <h3>The Mathematics of Compounding</h3>
+        <p class="math-formula">
+          <code>A = P(1 + r/n)<sup>nt</sup> + PMT × [ ((1 + r/n)<sup>nt</sup> - 1) / (r/n) ]</code>
+        </p>
+        <ul class="formula-legend">
+          <li><strong>A</strong> = Final accumulated future value</li>
+          <li><strong>P</strong> = Initial principal balance</li>
+          <li><strong>r</strong> = Nominal annual interest rate (as a decimal)</li>
+          <li><strong>n</strong> = Compounding frequency per year (e.g. 12 for monthly, 365 for daily)</li>
+          <li><strong>t</strong> = Number of years the money is invested</li>
+          <li><strong>PMT</strong> = Monthly recurring contribution amount</li>
+        </ul>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-card">
+          <h3>⏱️ The Rule of 72</h3>
+          <p>
+            A quick mental shortcut: divide 72 by your expected annual interest rate to find roughly how many years it takes your
+            money to double. At an 8% return, your wealth doubles approximately every 9 years (<code>72 / 8 = 9</code>).
+          </p>
+        </div>
+        <div class="insight-card">
+          <h3>💰 The Importance of Starting Early</h3>
+          <p>
+            Starting at age 25 with $300/month at 8% results in over <strong>$1,050,000</strong> at age 65 (40 years). Waiting until age
+            35 cuts the final sum in half to roughly $440,000, despite saving for 30 full years. Time is the most powerful variable in compounding.
+          </p>
+        </div>
+        <div class="insight-card">
+          <h3>📊 Compounding Frequency Impact</h3>
+          <p>
+            More frequent compounding (monthly or daily vs annual) yields slightly higher returns due to faster reinvestment of
+            interest payments, maximizing your effective annual percentage yield (APY).
+          </p>
+        </div>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>What is a realistic annual rate of return to assume?</summary>
+          <p>
+            Historically, broad stock market index funds like the S&P 500 have generated an average nominal return of 9%–10% per year
+            over 30-year spans (around 7% after inflation). High-yield savings accounts typically range from 3% to 5%, while conservative bond
+            funds typically yield 4% to 5%.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this calculator factor in inflation and taxes?</summary>
+          <p>
+            This calculator computes nominal values. To simulate inflation-adjusted returns, simply reduce your entered interest rate
+            by estimated inflation (for instance, use 7% instead of 10% to represent purchasing power in today's dollars).
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>How does compounding frequency affect my returns?</summary>
+          <p>
+            The more frequently interest is calculated and added to the principal, the faster your money grows. While the difference between
+            monthly and daily compounding is modest on smaller accounts, on large retirement portfolios over decades, it can result in
+            thousands of dollars in additional wealth.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Are my financial figures stored or tracked?</summary>
+          <p>
+            No. All computations, graphs, and table exports are performed 100% locally inside your web browser. Nothing is sent to any server.
+          </p>
+        </details>
+      </div>
+    </article>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-compound-interest-calculator {
+    padding: 1.5rem;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    font-family: inherit;
+  }
+
+  .tool-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .tool-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin: 0;
+  }
+
+  /* Quick Presets */
+  .quick-presets {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+  }
+
+  .preset-label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+  }
+
+  .preset-btn {
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    background: var(--md-sys-color-surface, #FFFFFF);
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    padding: 0.45rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .preset-btn:hover {
+    background: var(--md-sys-color-surface-container-high, #ECE6F0);
+    border-color: var(--md-sys-color-primary, #6750A4);
+  }
+
+  .preset-btn.active {
+    background: var(--md-sys-color-primary, #6750A4);
+    color: var(--md-sys-color-on-primary, #FFFFFF);
+    border-color: var(--md-sys-color-primary, #6750A4);
+  }
+
+  /* 2-Column Grid Layout */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 900px) {
+    .calc-grid {
+      grid-template-columns: 380px 1fr;
+    }
+  }
+
+  .calc-card {
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1.25rem 0;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Form Controls */
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .tooltip-icon {
+    font-size: 0.85rem;
+    cursor: help;
+    opacity: 0.7;
+  }
+
+  .input-currency {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .currency-symbol {
+    position: absolute;
+    left: 1rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    pointer-events: none;
+  }
+
+  .input-currency .form-input {
+    padding-left: 2rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    border: 1px solid var(--md-sys-color-outline, #79747E);
+    border-radius: 8px;
+    background: var(--md-sys-color-surface, #FFFFFF);
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary, #6750A4);
+    box-shadow: 0 0 0 3px rgba(103, 80, 164, 0.2);
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .half-group {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .label-with-val {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .slider-val {
+    font-weight: 700;
+    color: var(--md-sys-color-primary, #6750A4);
+    font-size: 0.92rem;
+  }
+
+  .slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .range-slider {
+    flex: 1;
+    accent-color: var(--md-sys-color-primary, #6750A4);
+    cursor: pointer;
+  }
+
+  .form-input--compact {
+    width: 75px;
+    padding: 0.45rem 0.5rem;
+    text-align: right;
+    font-weight: 600;
+  }
+
+  /* Results Card Styling */
+  .highlight-stat {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-caption {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--md-sys-color-primary, #6750A4);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .stat-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  :global([data-theme='dark']) .stat-badge,
+  :global(.dark) .stat-badge {
+    background: #1B5E20;
+    color: #C8E6C9;
+  }
+
+  .summary-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .summary-stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stat-box {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-box--accent {
+    border-color: var(--md-sys-color-primary, #6750A4);
+    background: rgba(103, 80, 164, 0.04);
+  }
+
+  .box-label {
+    font-size: 0.78rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+  }
+
+  .box-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .stat-box--accent .box-value {
+    color: var(--md-sys-color-primary, #6750A4);
+  }
+
+  /* Ratio Bar */
+  .ratio-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .ratio-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .label-principal {
+    color: var(--md-sys-color-outline, #79747E);
+  }
+
+  .label-interest {
+    color: var(--md-sys-color-primary, #6750A4);
+  }
+
+  .ratio-bar {
+    height: 12px;
+    border-radius: 6px;
+    background: var(--md-sys-color-surface-container-highest, #E6E0E9);
+    display: flex;
+    overflow: hidden;
+  }
+
+  .bar-segment--principal {
+    background: var(--md-sys-color-outline, #79747E);
+    transition: width 0.3s ease;
+  }
+
+  .bar-segment--interest {
+    background: var(--md-sys-color-primary, #6750A4);
+    transition: width 0.3s ease;
+  }
+
+  /* Chart Styles */
+  .chart-container {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chart-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.82rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .legend-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .legend-color--balance {
+    background: var(--md-sys-color-primary, #6750A4);
+  }
+
+  .legend-color--principal {
+    background: var(--md-sys-color-outline, #79747E);
+  }
+
+  .svg-chart-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+  }
+
+  #growth-chart {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .chart-tooltip {
+    position: absolute;
+    background: var(--md-sys-color-inverse-surface, #313033);
+    color: var(--md-sys-color-inverse-on-surface, #F4EFF4);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    pointer-events: none;
+    transform: translate(-50%, -120%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  /* Table Section */
+  .table-card {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .table-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .table-sub {
+    font-size: 0.88rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin: 0;
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    transition: background 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--md-sys-color-surface-container-high, #ECE6F0);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    max-height: 480px;
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 8px;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+  }
+
+  .schedule-table th {
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .schedule-table th:first-child,
+  .schedule-table td:first-child {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .schedule-table tbody tr:hover {
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+  }
+
+  /* Guide and SEO Articles */
+  .guide-section {
+    border-top: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    padding-top: 2rem;
+  }
+
+  .guide-section h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem 0;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .guide-section p {
+    line-height: 1.6;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+    margin-bottom: 1rem;
+  }
+
+  .formula-box {
+    background: var(--md-sys-color-surface-container, #F3EDF7);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .formula-box h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.05rem;
+  }
+
+  .math-formula {
+    background: var(--md-sys-color-surface, #FFFFFF);
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 1.05rem;
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    margin-bottom: 0.75rem;
+  }
+
+  .formula-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--md-sys-color-on-surface-variant, #49454F);
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0 2rem 0;
+  }
+
+  .insight-card {
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .insight-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.05rem;
+  }
+
+  .insight-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .faq-item {
+    background: var(--md-sys-color-surface-container-low, #F7F2FA);
+    border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
+    border-radius: 10px;
+    padding: 0.85rem 1.15rem;
+  }
+
+  .faq-item summary {
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.98rem;
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+  }
+
+  .faq-item p {
+    margin: 0.75rem 0 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    // DOM Elements
+    const principalInput = document.getElementById('initial-principal');
+    const monthlyInput = document.getElementById('monthly-contribution');
+    const rateSlider = document.getElementById('interest-rate-slider');
+    const rateInput = document.getElementById('interest-rate');
+    const rateDisplay = document.getElementById('rate-display');
+    const yearsSlider = document.getElementById('investment-years-slider');
+    const yearsInput = document.getElementById('investment-years');
+    const yearsDisplay = document.getElementById('years-display');
+    const freqSelect = document.getElementById('compound-frequency');
+    const currencySelect = document.getElementById('currency-select');
+
+    // Outputs
+    const resFutureValue = document.getElementById('res-future-value');
+    const resTotalGain = document.getElementById('res-total-gain');
+    const resInitialPrincipal = document.getElementById('res-initial-principal');
+    const resTotalContributions = document.getElementById('res-total-contributions');
+    const resTotalInterest = document.getElementById('res-total-interest');
+    const labelPrincipalPct = document.getElementById('label-principal-pct');
+    const labelInterestPct = document.getElementById('label-interest-pct');
+    const barPrincipal = document.getElementById('bar-principal');
+    const barInterest = document.getElementById('bar-interest');
+    const tableBody = document.getElementById('table-body');
+
+    // Chart SVG
+    const chartLineBalance = document.getElementById('chart-line-balance');
+    const chartAreaBalance = document.getElementById('chart-area-balance');
+    const chartLineInvested = document.getElementById('chart-line-invested');
+    const chartAreaInvested = document.getElementById('chart-area-invested');
+    const chartGrid = document.getElementById('chart-grid');
+    const chartPoints = document.getElementById('chart-points');
+    const chartTooltip = document.getElementById('chart-tooltip');
+    const chartWrap = document.getElementById('chart-wrap');
+
+    // Presets and export
+    const presetButtons = document.querySelectorAll('.preset-btn');
+    const btnExportCsv = document.getElementById('btn-export-csv');
+    const btnCopyTable = document.getElementById('btn-copy-table');
+
+    let cachedSchedule = [];
+
+    const currencySymbols = {
+      USD: '$',
+      EUR: '€',
+      GBP: '£',
+      INR: '₹',
+      CAD: '$',
+      AUD: '$',
+    };
+
+    function getCurrencySymbol() {
+      return currencySymbols[currencySelect.value] || '$';
+    }
+
+    function formatMoney(amount) {
+      const sym = getCurrencySymbol();
+      return sym + Number(amount).toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+    }
+
+    // Sync Sliders and Inputs
+    rateSlider.addEventListener('input', (e) => {
+      rateInput.value = e.target.value;
+      rateDisplay.textContent = `${Number(e.target.value).toFixed(1)}%`;
+      calculate();
+    });
+
+    rateInput.addEventListener('input', (e) => {
+      const val = Math.min(Math.max(Number(e.target.value) || 0, 0), 50);
+      rateSlider.value = val;
+      rateDisplay.textContent = `${val.toFixed(1)}%`;
+      calculate();
+    });
+
+    yearsSlider.addEventListener('input', (e) => {
+      yearsInput.value = e.target.value;
+      yearsDisplay.textContent = `${e.target.value} Years`;
+      calculate();
+    });
+
+    yearsInput.addEventListener('input', (e) => {
+      const val = Math.min(Math.max(Number(e.target.value) || 1, 1), 60);
+      yearsSlider.value = val;
+      yearsDisplay.textContent = `${val} Years`;
+      calculate();
+    });
+
+    [principalInput, monthlyInput, freqSelect, currencySelect].forEach((el) => {
+      el.addEventListener('input', calculate);
+    });
+
+    // Presets
+    const PRESETS = {
+      sp500: { principal: 5000, monthly: 500, rate: 8.0, years: 25, freq: '12' },
+      hysa: { principal: 10000, monthly: 0, rate: 4.5, years: 5, freq: '365' },
+      millionaire: { principal: 1000, monthly: 1000, rate: 10.0, years: 20, freq: '12' },
+      college: { principal: 2500, monthly: 250, rate: 7.0, years: 18, freq: '12' },
+    };
+
+    presetButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        presetButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const p = PRESETS[btn.dataset.preset];
+        if (p) {
+          principalInput.value = p.principal;
+          monthlyInput.value = p.monthly;
+          rateSlider.value = p.rate;
+          rateInput.value = p.rate;
+          rateDisplay.textContent = `${p.rate.toFixed(1)}%`;
+          yearsSlider.value = p.years;
+          yearsInput.value = p.years;
+          yearsDisplay.textContent = `${p.years} Years`;
+          freqSelect.value = p.freq;
+          calculate();
+        }
+      });
+    });
+
+    function calculate() {
+      const principal = Math.max(0, parseFloat(principalInput.value) || 0);
+      const monthly = Math.max(0, parseFloat(monthlyInput.value) || 0);
+      const rate = Math.max(0, parseFloat(rateInput.value) || 0) / 100;
+      const years = Math.max(1, parseInt(yearsInput.value) || 1);
+      const freq = parseInt(freqSelect.value) || 12;
+
+      // Month-by-month compound simulation
+      let currentBalance = principal;
+      let totalInvested = principal;
+      let cumulativeInterest = 0;
+      const schedule = [];
+
+      for (let y = 1; y <= years; y++) {
+        const startBalance = currentBalance;
+        let yearlyContribution = 0;
+        let yearlyInterest = 0;
+
+        for (let m = 1; m <= 12; m++) {
+          currentBalance += monthly;
+          yearlyContribution += monthly;
+          totalInvested += monthly;
+
+          // Monthly compounding rate = (1 + r/n)^(n/12) - 1
+          const monthlyEffectiveRate = Math.pow(1 + rate / freq, freq / 12) - 1;
+          const monthInterest = currentBalance * monthlyEffectiveRate;
+          currentBalance += monthInterest;
+          yearlyInterest += monthInterest;
+        }
+
+        cumulativeInterest += yearlyInterest;
+
+        schedule.push({
+          year: y,
+          startBalance,
+          yearlyContribution,
+          yearlyInterest,
+          cumulativeInterest,
+          endBalance: currentBalance,
+          totalInvested,
+        });
+      }
+
+      cachedSchedule = schedule;
+
+      // Update Summary Cards
+      const finalBalance = currentBalance;
+      const totalContributions = monthly * 12 * years;
+      const totalInterest = cumulativeInterest;
+      const totalGainPct = totalInvested > 0 ? ((totalInterest / totalInvested) * 100).toFixed(1) : '0';
+
+      resFutureValue.textContent = formatMoney(finalBalance);
+      resTotalGain.textContent = `+${totalGainPct}% Total Return`;
+      resInitialPrincipal.textContent = formatMoney(principal);
+      resTotalContributions.textContent = formatMoney(totalContributions);
+      resTotalInterest.textContent = formatMoney(totalInterest);
+
+      // Ratio Bar
+      const total = totalInvested + totalInterest;
+      const investedPct = total > 0 ? ((totalInvested / total) * 100).toFixed(1) : '50';
+      const interestPct = total > 0 ? ((totalInterest / total) * 100).toFixed(1) : '50';
+
+      labelPrincipalPct.textContent = `Invested Principal: ${investedPct}%`;
+      labelInterestPct.textContent = `Interest Earned: ${interestPct}%`;
+      barPrincipal.style.width = `${investedPct}%`;
+      barInterest.style.width = `${interestPct}%`;
+
+      // Render Schedule Table
+      renderTable(schedule);
+
+      // Render SVG Chart
+      renderChart(schedule, principal);
+    }
+
+    function renderTable(schedule) {
+      tableBody.innerHTML = schedule
+        .map(
+          (row) => `
+        <tr>
+          <td><strong>${row.year}</strong></td>
+          <td>${formatMoney(row.startBalance)}</td>
+          <td>${formatMoney(row.yearlyContribution)}</td>
+          <td style="color: var(--md-sys-color-primary, #6750A4); font-weight: 500;">+${formatMoney(row.yearlyInterest)}</td>
+          <td>${formatMoney(row.cumulativeInterest)}</td>
+          <td><strong>${formatMoney(row.endBalance)}</strong></td>
+        </tr>
+      `
+        )
+        .join('');
+    }
+
+    function renderChart(schedule, initialPrincipal) {
+      if (!schedule.length) return;
+
+      const width = 600;
+      const height = 240;
+      const paddingLeft = 10;
+      const paddingRight = 10;
+      const paddingTop = 20;
+      const paddingBottom = 20;
+
+      const plotW = width - paddingLeft - paddingRight;
+      const plotH = height - paddingTop - paddingBottom;
+
+      const maxVal = schedule[schedule.length - 1].endBalance * 1.05 || 1000;
+      const yearsCount = schedule.length;
+
+      // Build coordinates
+      const balancePoints = [{ x: paddingLeft, y: height - paddingBottom - (initialPrincipal / maxVal) * plotH, year: 0, balance: initialPrincipal, invested: initialPrincipal }];
+      const investedPoints = [{ x: paddingLeft, y: height - paddingBottom - (initialPrincipal / maxVal) * plotH }];
+
+      schedule.forEach((row, i) => {
+        const x = paddingLeft + ((i + 1) / yearsCount) * plotW;
+        const yBal = height - paddingBottom - (row.endBalance / maxVal) * plotH;
+        const yInv = height - paddingBottom - (row.totalInvested / maxVal) * plotH;
+
+        balancePoints.push({ x, y: yBal, year: row.year, balance: row.endBalance, invested: row.totalInvested });
+        investedPoints.push({ x, y: yInv });
+      });
+
+      // SVG Paths
+      const lineBalD = balancePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+      const lineInvD = investedPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+
+      const areaBalD = `${lineBalD} L ${width - paddingRight},${height - paddingBottom} L ${paddingLeft},${height - paddingBottom} Z`;
+      const areaInvD = `${lineInvD} L ${width - paddingRight},${height - paddingBottom} L ${paddingLeft},${height - paddingBottom} Z`;
+
+      chartLineBalance.setAttribute('d', lineBalD);
+      chartAreaBalance.setAttribute('d', areaBalD);
+      chartLineInvested.setAttribute('d', lineInvD);
+      chartAreaInvested.setAttribute('d', areaInvD);
+
+      // Grid lines (4 horizontal)
+      let gridHtml = '';
+      for (let g = 1; g <= 3; g++) {
+        const y = height - paddingBottom - (g / 4) * plotH;
+        gridHtml += `<line x1="${paddingLeft}" y1="${y}" x2="${width - paddingRight}" y2="${y}"/>`;
+      }
+      chartGrid.innerHTML = gridHtml;
+
+      // Interactive hover dots
+      chartPoints.innerHTML = balancePoints
+        .filter((_, idx) => idx % Math.max(1, Math.floor(yearsCount / 10)) === 0 || idx === balancePoints.length - 1)
+        .map(
+          (p) => `
+        <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="var(--md-sys-color-primary, #6750A4)" stroke="#FFFFFF" stroke-width="2" style="cursor: pointer;" data-year="${p.year}" data-bal="${Math.round(p.balance)}" data-inv="${Math.round(p.invested)}"/>
+      `
+        )
+        .join('');
+
+      // Attach tooltip listeners
+      chartPoints.querySelectorAll('circle').forEach((dot) => {
+        dot.addEventListener('mouseenter', (e) => {
+          const year = e.target.dataset.year;
+          const bal = formatMoney(e.target.dataset.bal);
+          const inv = formatMoney(e.target.dataset.inv);
+          chartTooltip.innerHTML = `<strong>Year ${year}</strong><br/>Total: ${bal}<br/>Invested: ${inv}`;
+          chartTooltip.style.display = 'block';
+
+          const rect = chartWrap.getBoundingClientRect();
+          const dotRect = e.target.getBoundingClientRect();
+          chartTooltip.style.left = `${dotRect.left - rect.left + dotRect.width / 2}px`;
+          chartTooltip.style.top = `${dotRect.top - rect.top}px`;
+        });
+
+        dot.addEventListener('mouseleave', () => {
+          chartTooltip.style.display = 'none';
+        });
+      });
+    }
+
+    // CSV Export
+    btnExportCsv.addEventListener('click', () => {
+      if (!cachedSchedule.length) return;
+      const headers = ['Year', 'Starting Balance', 'Annual Deposit', 'Interest Earned', 'Total Interest', 'Ending Balance'];
+      const rows = cachedSchedule.map((r) => [
+        r.year,
+        r.startBalance.toFixed(2),
+        r.yearlyContribution.toFixed(2),
+        r.yearlyInterest.toFixed(2),
+        r.cumulativeInterest.toFixed(2),
+        r.endBalance.toFixed(2),
+      ]);
+      const csvContent = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `compound-interest-schedule-${cachedSchedule.length}years.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+
+    // Copy Table to Clipboard
+    btnCopyTable.addEventListener('click', async () => {
+      if (!cachedSchedule.length) return;
+      const headers = ['Year\tStarting Balance\tAnnual Deposit\tInterest Earned\tEnding Balance'];
+      const rows = cachedSchedule.map(
+        (r) => `${r.year}\t${formatMoney(r.startBalance)}\t${formatMoney(r.yearlyContribution)}\t${formatMoney(r.yearlyInterest)}\t${formatMoney(r.endBalance)}`
+      );
+      const text = [headers, ...rows].join('\n');
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = btnCopyTable.innerHTML;
+        btnCopyTable.innerHTML = '<span>✓ Copied!</span>';
+        setTimeout(() => {
+          btnCopyTable.innerHTML = originalText;
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy table: ', err);
+      }
+    });
+
+    // Initial calculation
+    calculate();
+  })();
+</script>
