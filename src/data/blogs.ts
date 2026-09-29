@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'webcodecs-av1-screen-recorder-august-2026',
+    title: 'WebCodecs AV1 Update August 2026: Record Screen Free',
+    description: "With August 2026 WebCodecs AV1 hardware acceleration updates, record browser tabs in 4K 100% client-side with zero cloud uploads or leaks.",
+    keywords: 'webcodecs av1 2026, screen recorder pro, client-side screen recorder, zero upload screen recorder, browser screen recording privacy, webm av1 capture, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/webcodecs-av1-screen-recorder-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'grabador-pantalla-webcodecs-av1-agosto-2026',
+        title: 'WebCodecs AV1 Agosto 2026: Graba Pantalla en Privado',
+        description: 'Con la aceleración WebCodecs AV1 de agosto 2026, graba tu pantalla en alta definición 100% local sin subir videos a la nube. Pruébalo gratis.',
+        keywords: 'webcodecs av1 2026, grabador de pantalla pro, grabador pantalla cliente, grabador sin descargas, privacidad captura pantalla, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'enregistreur-ecran-webcodecs-av1-aout-2026',
+        title: 'WebCodecs AV1 Août 2026 : Enregistrement Écran Privé',
+        description: "Avec la mise à jour WebCodecs AV1 d'août 2026, enregistrez votre écran 100% côté client sans aucun téléversement. Outil gratuit et rapide.",
+        keywords: 'webcodecs av1 2026, enregistreur d ecran pro, enregistreur ecran cote client, enregistrement ecran prive, capture video navigateur, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'microservice-api-drift-august-2026-json-compare',
     title: 'Microservice API Drift 2026: Compare JSON Payloads Free',
     description: 'With August 2026 microservice trends, API payload drift between environments is critical. Compare JSON objects 100% client-side with zero cloud uploads.',
