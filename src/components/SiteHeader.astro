@@ -50,6 +50,8 @@ const langTargets = LOCALES.map((loc) => ({
       <label class="lang-wrap">
         <span class="sr-only">Language</span>
         <select
+          id="site-lang-select"
+          name="language"
           class="lang-select"
           aria-label="Language selector"
           onchange="if(this.value){window.location.href=this.value}"

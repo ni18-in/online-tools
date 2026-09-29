@@ -87,6 +87,15 @@ test('mh-meter computes a fare', async ({ page }) => {
   await expect(page.locator('body')).toContainText('Total Pay');
 });
 
+test('online-text-compare computes diff and renders highlighted spans', async ({ page }) => {
+  await page.goto('/tools/online-text-compare/');
+  await page.fill('#text1', 'Line 1\nLine 2 original\nLine 3');
+  await page.fill('#text2', 'Line 1\nLine 2 modified\nLine 3');
+  await page.click('#compareButton');
+  await expect(page.locator('#diffOutput1 .removed')).toContainText('Line 2 original');
+  await expect(page.locator('#diffOutput2 .added')).toContainText('Line 2 modified');
+});
+
 test('homepage search filters tool cards', async ({ page }) => {
   await page.goto('/');
   const total = await page.locator('.tool-card').count();
