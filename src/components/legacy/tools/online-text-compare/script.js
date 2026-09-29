@@ -272,9 +272,14 @@
             diffOutput2.innerHTML = '';
 
             if (text1Value === "" && text2Value === "") {
+                 diffOutput1.classList.add('placeholder-active');
+                 diffOutput2.classList.add('placeholder-active');
                  applyLocalization(); 
                  return;
             }
+
+            diffOutput1.classList.remove('placeholder-active');
+            diffOutput2.classList.remove('placeholder-active');
 
             diff.forEach(part => {
                 const span = document.createElement('span');
@@ -611,7 +616,7 @@
         // --- Service Worker Registration ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js') 
+                navigator.serviceWorker.register('/sw.js') 
                     .then(registration => {
                         console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
