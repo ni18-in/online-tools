@@ -306,7 +306,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'ai-agent-privacy-json-visualizer-2026',
-    title: 'AI Agent Data Leaks 2026: Format & Inspect JSON Payloads Privately',
+    title: 'AI Agent Data Leaks: Format & Inspect JSON Payloads Privately',
     description: 'With August 2026 AI agents generating unvetted JSON payloads, inspect and format structured data 100% client-side with zero cloud uploads or leaks.',
     keywords: 'ai agent privacy 2026, client side json visualizer pro, format json online privately, json tree view validator, private json editor 2026, ni18',
     category: 'Developer',
@@ -317,7 +317,7 @@ export const blogPosts: BlogPost[] = [
     i18n: {
       es: {
         slug: 'fugas-datos-agentes-ia-2026-visualizador-json-privado',
-        title: 'Fugas de Datos de Agentes IA 2026: Formatea JSON en Privado Gratis',
+        title: 'Fugas de Datos Agentes IA 2026: Formatea JSON en Privado Gratis',
         description: 'Ante el auge de los agentes IA en agosto 2026, inspecciona y formatea respuestas JSON 100% local sin enviar datos a servidores. Prueba gratis.',
         keywords: 'fugas datos agentes ia 2026, visualizador json pro cliente, formatear json online privado, validador arbol json, editor json privado, ni18',
         category: 'Programación'

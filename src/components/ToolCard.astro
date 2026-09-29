@@ -17,9 +17,42 @@ export interface Props {
 const { href, name, description, headingId, category, external = false, cta = 'Use Tool' } = Astro.props;
 const rel = external ? 'noopener' : undefined;
 const target = external ? '_blank' : undefined;
+
+const CATEGORY_META: Record<string, { label: string; icon: string }> = {
+  developer: {
+    label: 'Developer',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />',
+  },
+  text: {
+    label: 'Text',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />',
+  },
+  media: {
+    label: 'Media',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />',
+  },
+  calculator: {
+    label: 'Calculator',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+  },
+  fun: {
+    label: 'Fun & Games',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  },
+};
+
+const catMeta = category ? CATEGORY_META[category] : undefined;
 ---
 <article class="tool-card" aria-labelledby={headingId} data-category={category}>
   <div class="body">
+    {catMeta && (
+      <div class="card-meta">
+        <span class:list={['cat-badge', `cat-${category}`]}>
+          <svg class="cat-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" aria-hidden="true" set:html={catMeta.icon} />
+          <span>{catMeta.label}</span>
+        </span>
+      </div>
+    )}
     <h3 id={headingId} class="title">
       <a href={href} class="stretched-link" rel={rel} target={target}>{name}</a>
     </h3>
@@ -51,7 +84,70 @@ const target = external ? '_blank' : undefined;
     transform: translateY(-2px);
     border-color: var(--md-sys-color-primary);
   }
-  .body { padding: 24px; flex: 1 1 auto; }
+  .body { padding: 20px 24px 24px; flex: 1 1 auto; }
+  .card-meta { margin-bottom: 12px; }
+  .cat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    border: 1px solid transparent;
+  }
+  .cat-developer {
+    background: rgba(79, 70, 229, 0.08);
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.2);
+  }
+  .cat-text {
+    background: rgba(13, 148, 136, 0.08);
+    color: #0d9488;
+    border-color: rgba(13, 148, 136, 0.2);
+  }
+  .cat-media {
+    background: rgba(147, 51, 234, 0.08);
+    color: #9333ea;
+    border-color: rgba(147, 51, 234, 0.2);
+  }
+  .cat-calculator {
+    background: rgba(217, 119, 6, 0.08);
+    color: #d97706;
+    border-color: rgba(217, 119, 6, 0.2);
+  }
+  .cat-fun {
+    background: rgba(225, 29, 72, 0.08);
+    color: #e11d48;
+    border-color: rgba(225, 29, 72, 0.2);
+  }
+
+  :global(:root[data-theme='dark']) .cat-developer {
+    background: rgba(192, 193, 255, 0.12);
+    color: #c0c1ff;
+    border-color: rgba(192, 193, 255, 0.25);
+  }
+  :global(:root[data-theme='dark']) .cat-text {
+    background: rgba(45, 212, 191, 0.12);
+    color: #2dd4bf;
+    border-color: rgba(45, 212, 191, 0.25);
+  }
+  :global(:root[data-theme='dark']) .cat-media {
+    background: rgba(216, 180, 254, 0.12);
+    color: #d8b4fe;
+    border-color: rgba(216, 180, 254, 0.25);
+  }
+  :global(:root[data-theme='dark']) .cat-calculator {
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.25);
+  }
+  :global(:root[data-theme='dark']) .cat-fun {
+    background: rgba(251, 113, 133, 0.12);
+    color: #fb7185;
+    border-color: rgba(251, 113, 133, 0.25);
+  }
   .title { margin: 0 0 8px; font-size: 1.25rem; font-weight: 600; color: var(--md-sys-color-on-surface); }
   .title a { color: inherit; text-decoration: none; }
   .desc { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 0.9375rem; line-height: 1.55; }

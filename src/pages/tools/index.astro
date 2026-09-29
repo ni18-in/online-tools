@@ -77,7 +77,12 @@ let cardIndex = 0;
 
   <section aria-label="Search" class="search">
     <label for="tool-search-input" class="sr-only">Search for tools</label>
-    <input type="search" id="tool-search-input" placeholder="Search tools by name or description..." autocomplete="off" />
+    <div class="search-input-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" id="tool-search-input" placeholder="Search tools by name or description... (Press /)" autocomplete="off" />
+      <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display:none">&times;</button>
+      <div class="shortcut-hint" aria-hidden="true"><kbd>/</kbd></div>
+    </div>
   </section>
 
   <div class="category-pills" role="tablist" aria-label="Filter tools by category">
@@ -94,7 +99,14 @@ let cardIndex = 0;
     ))}
   </div>
 
-  <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">No tools found matching your search.</p>
+  <div id="no-results-message" class="no-results-card" style="display:none" aria-live="polite">
+    <div class="no-results-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+    <h3>No tools found</h3>
+    <p>No tools matching your search criteria were found.</p>
+    <button type="button" id="reset-search-btn" class="reset-search-btn">View All Tools</button>
+  </div>
 
   {grouped.map((g) => (
     <section class="cat" data-cat-section={g.cat} aria-labelledby={`cat-${g.cat}`}>
@@ -123,6 +135,8 @@ let cardIndex = 0;
       var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
       var sections = Array.prototype.slice.call(document.querySelectorAll('.cat'));
       var noResults = document.getElementById('no-results-message');
+      var clearBtn = document.getElementById('clear-search-btn');
+      var resetBtn = document.getElementById('reset-search-btn');
       if (!cards.length) return;
 
       var activeCat = 'all';
@@ -130,6 +144,7 @@ let cardIndex = 0;
       function filterTools() {
         var q = input ? input.value.toLowerCase().trim() : '';
         var found = 0;
+        if (clearBtn) clearBtn.style.display = q ? 'inline-flex' : 'none';
 
         cards.forEach(function (card) {
           var a = card.querySelector('h3 a');
@@ -158,7 +173,34 @@ let cardIndex = 0;
         if (noResults) noResults.style.display = found === 0 ? 'block' : 'none';
       }
 
+      function resetSearch() {
+        if (input) input.value = '';
+        activeCat = 'all';
+        pills.forEach(function (p, idx) {
+          p.classList.toggle('active', idx === 0);
+          p.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+        });
+        filterTools();
+        if (input) input.focus();
+      }
+
       if (input) input.addEventListener('input', filterTools);
+      if (clearBtn) clearBtn.addEventListener('click', resetSearch);
+      if (resetBtn) resetBtn.addEventListener('click', resetSearch);
+
+      // Keyboard shortcut: '/' or 'Ctrl+K'
+      document.addEventListener('keydown', function(e) {
+        if ((e.key === '/' || (e.key === 'k' && (e.ctrlKey || e.metaKey))) && document.activeElement !== input) {
+          var tag = document.activeElement ? document.activeElement.tagName : '';
+          if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+            e.preventDefault();
+            if (input) {
+              input.focus();
+              input.select();
+            }
+          }
+        }
+      });
 
       pills.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -181,12 +223,64 @@ let cardIndex = 0;
   .listing-head h1 { font-size: 2.25rem; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
   .listing-head p { margin: 0 auto; max-width: 38rem; color: var(--md-sys-color-on-surface-variant); }
   .search { max-width: 42rem; margin: 24px auto 12px; }
-  #tool-search-input {
-    width: 100%; padding: 14px 20px; font-size: 1rem;
-    border: 1px solid var(--md-sys-color-outline); border-radius: 999px;
-    background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);
+  .search-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
   }
-  #tool-search-input:focus { outline: 2px solid var(--md-sys-color-primary); border-color: transparent; }
+  .search-icon {
+    position: absolute;
+    left: 18px;
+    color: var(--md-sys-color-on-surface-variant);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  #tool-search-input {
+    width: 100%;
+    padding: 14px 76px 14px 48px;
+    font-size: 1rem;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 999px;
+    background: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  #tool-search-input:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--md-sys-color-primary) 20%, transparent);
+  }
+  .clear-search-btn {
+    position: absolute;
+    right: 44px;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+    line-height: 1;
+  }
+  .clear-search-btn:hover { color: var(--md-sys-color-on-surface); }
+  .shortcut-hint {
+    position: absolute;
+    right: 16px;
+    pointer-events: none;
+  }
+  .shortcut-hint kbd {
+    display: inline-block;
+    padding: 2px 7px;
+    font-size: 0.75rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+    background: var(--md-sys-color-surface-container-high);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 6px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  }
   .category-pills {
     display: flex;
     flex-wrap: wrap;
@@ -217,7 +311,49 @@ let cardIndex = 0;
     border-color: var(--md-sys-color-primary);
     box-shadow: var(--md-sys-elevation-1);
   }
-  .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 24px 0; }
+  .no-results-card {
+    text-align: center;
+    background: var(--md-sys-color-surface-container-lowest);
+    border: 1px dashed var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 48px 24px;
+    margin: 20px 0 32px;
+  }
+  .no-results-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 16px;
+  }
+  .no-results-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    color: var(--md-sys-color-on-surface);
+  }
+  .no-results-card p {
+    margin: 0 0 20px;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.9375rem;
+  }
+  .reset-search-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .reset-search-btn:hover { opacity: 0.9; }
   .cat { margin: 32px 0; }
   .cat-title {
     font-size: 1.375rem; margin: 0 0 16px; padding-bottom: 8px;

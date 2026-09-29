@@ -30,6 +30,9 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
     <header class="tool-header">
       <h1>REM to PX Converter</h1>
       <p class="subtitle">A developer tool with Material Design</p>
+      <div class="swap-wrap">
+        <a href="/tools/px-to-rem-converter/" class="swap-link">⇄ Switch to PX to REM Converter</a>
+      </div>
     </header>
 
     <section id="converter" aria-labelledby="converter-heading">
@@ -58,6 +61,10 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
         <div id="result-container" aria-live="polite">
           Equivalent Pixel Value
           <span id="result-value">16px</span>
+          <button type="button" id="copy-result-btn" class="copy-btn">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy</span>
+          </button>
         </div>
       </div>
     </section>
@@ -112,6 +119,20 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
 
     remInput.addEventListener('input', convertRemToPx);
     baseFontSizeSelect.addEventListener('change', convertRemToPx);
+
+    const copyBtn = document.getElementById('copy-result-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = resultValue.textContent;
+        if (!text || text === 'Invalid') return;
+        navigator.clipboard.writeText(text).then(() => {
+          if (window.showToast) {
+            window.showToast(`Copied ${text} to clipboard!`);
+          }
+        });
+      });
+    }
+
     populateConversionTable();
     convertRemToPx();
   });
@@ -139,6 +160,23 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
   .tool-header { text-align: center; padding-bottom: 1.5rem; margin-bottom: 1rem; }
   .tool-header h1 { font-size: 2.25rem; font-weight: 500; color: var(--md-primary-color); margin: 0 0 0.5rem; }
   .subtitle { color: var(--md-text-secondary-color); margin: 0; }
+  .swap-wrap { margin-top: 12px; }
+  .swap-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--md-primary-color);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--md-primary-color) 8%, transparent);
+    transition: background-color .15s;
+  }
+  .swap-link:hover {
+    background: color-mix(in srgb, var(--md-primary-color) 16%, transparent);
+  }
 
   h2 { font-weight: 500; font-size: 1.5rem; color: var(--md-text-primary-color); margin: 3rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--md-border-color); }
   .table-subtitle { font-size: 0.9rem; color: var(--md-text-secondary-color); margin-top: -1rem; margin-bottom: 1.5rem; }
@@ -172,7 +210,26 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
     margin-top: 2rem; padding: 1.5rem; background-color: var(--md-background-color);
     border-radius: 12px; text-align: center; font-size: 1.25rem; color: var(--md-text-secondary-color);
   }
-  #result-value { display: block; font-size: 2.5rem; font-weight: 500; color: var(--md-primary-color); margin-top: 0.5rem; }
+  #result-value { display: block; font-size: 2.5rem; font-weight: 500; color: var(--md-primary-color); margin: 0.5rem 0; }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--md-surface-color);
+    color: var(--md-primary-color);
+    border: 1px solid var(--md-border-color);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .copy-btn:hover {
+    background: color-mix(in srgb, var(--md-primary-color) 8%, var(--md-surface-color));
+    border-color: var(--md-primary-color);
+  }
 
   .table-container { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
