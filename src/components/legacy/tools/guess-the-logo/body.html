@@ -34,6 +34,7 @@
                     <input type="radio" id="diffMedium" name="difficulty" value="medium"><label
                         for="diffMedium">Medium</label>
                     <input type="radio" id="diffHard" name="difficulty" value="hard"><label for="diffHard">Hard</label>
+                    <input type="radio" id="diffAll" name="difficulty" value="all"><label for="diffAll">All (60 Logos)</label>
                 </div>
             </div>
             <div class="settings-group" id="roundsGroup">
@@ -79,12 +80,13 @@
             </div>
             <div class="game-info">
                 <span id="scoreDisplay">Score: 0</span>
+                <span id="streakDisplay" style="display:none; color: #f59e0b; font-weight: 700;">🔥 0</span>
                 <span id="roundDisplay">Round: 1/10</span>
             </div>
             <div id="timerDisplay" style="margin-bottom: 1rem;"></div>
             <div class="logo-container">
-                <img id="logoImg" src="" alt="Logo"
-                    onerror="this.onerror=null; this.src='https://placehold.co/300x150/EFEFEF/AAAAAA&text=Logo+Error';">
+                <img id="logoImg" src="" alt="Brand Logo to Guess" width="280" height="150"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'150\' viewBox=\'0 0 300 150\'><rect width=\'300\' height=\'150\' fill=\'%23f1f5f9\' rx=\'16\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%2394a3b8\' font-family=\'sans-serif\' font-size=\'16\' font-weight=\'600\'>Logo Image</text></svg>';">
             </div>
             <div id="optionsContainer" class="options-container">
             </div>
@@ -104,6 +106,7 @@
             <button id="playAgainBtn" class="btn btn-primary" style="margin-right: 0.5rem;">Play Again</button>
             <button id="shareScoreBtn" class="btn btn-secondary">Share Score</button>
         </div>
+        <canvas id="confettiCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99;display:none;"></canvas>
     </div>
 
     <div id="aboutModal" class="modal">

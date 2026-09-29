@@ -341,3 +341,29 @@ test('pdf-merger-splitter loads sample files, reorders, and splits client-side',
 
   expect(errors).toEqual([]);
 });
+
+test('guess-the-logo gameplay, streak display, and all difficulty mode work cleanly', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/guess-the-logo/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Select 'all' difficulty
+  await page.click('#diffAll');
+  await page.click('#startGameBtn');
+
+  // Verify game screen is active and logo image loaded
+  await expect(page.locator('#gameScreen')).toHaveClass(/active/);
+  const logo = page.locator('#logoImg');
+  await expect(logo).toBeVisible();
+
+  // Verify options are rendered
+  const options = page.locator('#optionsContainer .btn-option');
+  await expect(options).toHaveCount(4);
+
+  // Click an option button
+  await options.first().click();
+  await expect(page.locator('#feedbackMessage')).toBeVisible();
+
+  expect(errors).toEqual([]);
+});
+
