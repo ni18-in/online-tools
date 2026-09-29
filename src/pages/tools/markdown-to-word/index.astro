@@ -46,9 +46,9 @@ const seo = toolSeo(tool, {
   },
 });
 const headRaw = [
-  '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>',
-  '<script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>',
-  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>',
+  '<script src="/vendor/marked/marked.min.js"></script>',
+  '<script src="/vendor/docx/docx.min.js"></script>',
+  '<script src="/vendor/filesaver/FileSaver.min.js"></script>',
 ].join('\n');
 ---
 <ToolLayout seo={seo} lang="en" headRaw={headRaw}>

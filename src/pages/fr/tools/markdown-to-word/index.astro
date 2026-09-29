@@ -33,9 +33,9 @@ const seo: SeoProps = {
   },
 };
 const headRaw = [
-  '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>',
-  '<script src="https://unpkg.com/docx@7.1.0/build/index.js"><\/script>',
-  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"><\/script>',
+  '<script src="/vendor/marked/marked.min.js"><\/script>',
+  '<script src="/vendor/docx/docx.min.js"><\/script>',
+  '<script src="/vendor/filesaver/FileSaver.min.js"><\/script>',
 ].join('\n');
 ---
 <ToolLayout seo={seo} lang="fr" headRaw={headRaw} altLinks={{ en: `${SITE_URL}/tools/markdown-to-word/`, es: `${SITE_URL}/es/tools/markdown-to-word/` }}>

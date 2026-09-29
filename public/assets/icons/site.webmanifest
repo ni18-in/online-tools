@@ -8,6 +8,7 @@
   "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
+  "categories": ["utilities", "developer", "productivity"],
   "icons": [
     {
       "src": "/assets/icons/android-chrome-192x192.png",
@@ -25,6 +26,36 @@
       "src": "/assets/icons/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "JSON Visualizer Pro",
+      "short_name": "JSON Visualizer",
+      "description": "Format, validate, and inspect JSON documents",
+      "url": "/tools/json-visualizer-pro/",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Text Compare",
+      "short_name": "Diff Checker",
+      "description": "Compare texts and find differences side-by-side",
+      "url": "/tools/online-text-compare/",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "PX to REM Converter",
+      "short_name": "PX to REM",
+      "description": "Convert CSS pixels to rem with live table",
+      "url": "/tools/px-to-rem-converter/",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "HEIC Viewer",
+      "short_name": "HEIC Viewer",
+      "description": "View and convert iPhone HEIC photos directly in browser",
+      "url": "/tools/heic-viewer/",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

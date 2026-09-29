@@ -114,10 +114,16 @@ const langTargets = LOCALES.map((loc) => ({
     }
     var themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
+      var updateThemeAria = function () {
+        var isDark = document.documentElement.dataset.theme === 'dark';
+        themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      };
+      updateThemeAria();
       themeBtn.addEventListener('click', function () {
         var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;
         try { localStorage.setItem('theme', next); } catch (e) {}
+        updateThemeAria();
       });
     }
   })();
@@ -165,14 +171,23 @@ const langTargets = LOCALES.map((loc) => ({
   .actions { display: flex; align-items: center; gap: 4px; }
   .lang-select {
     appearance: none;
-    background: transparent;
+    -webkit-appearance: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6a74' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 10px center;
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: 999px;
-    padding: 6px 12px;
+    padding: 6px 28px 6px 12px;
     font: inherit;
     font-size: 0.875rem;
     color: var(--md-sys-color-on-surface);
     cursor: pointer;
+    transition: border-color .15s, background-color .15s;
+  }
+  .lang-select:hover {
+    border-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface-container-high);
+  }
+  :global(:root[data-theme='dark']) .lang-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d6d4dd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   }
   .theme-toggle { --md-icon-button-icon-color: var(--md-sys-color-on-surface-variant); }
   .theme-toggle .i-moon { display: none; }

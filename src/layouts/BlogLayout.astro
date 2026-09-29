@@ -29,12 +29,31 @@ const { seo, lang = 'en', altLinks = {}, headRaw, ad = true } = Astro.props;
 <style>
   .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; box-sizing: border-box; }
   .blog-ad { margin: 32px auto; max-width: min(728px, 100%); }
-  /* Blog articles render on a clean light reading surface regardless of shell theme. */
+  /* Blog articles adapt to the theme surface */
   :global(.blog-island.legacy-tw) {
-    background: #ffffff;
-    color: #1f2430;
+    background: var(--md-sys-color-surface-container-lowest);
+    color: var(--md-sys-color-on-surface);
     border-radius: var(--md-sys-shape-corner-large);
+    border: 1px solid var(--md-sys-color-outline-variant);
     overflow: hidden;
+  }
+  :global(:root[data-theme='dark'] .blog-island h1),
+  :global(:root[data-theme='dark'] .blog-island h2),
+  :global(:root[data-theme='dark'] .blog-island h3),
+  :global(:root[data-theme='dark'] .blog-island strong) {
+    color: var(--md-sys-color-on-surface);
+  }
+  :global(:root[data-theme='dark'] .blog-island p),
+  :global(:root[data-theme='dark'] .blog-island li) {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+  :global(:root[data-theme='dark'] .blog-island a) {
+    color: var(--md-sys-color-primary);
+  }
+  :global(:root[data-theme='dark'] .blog-island pre),
+  :global(:root[data-theme='dark'] .blog-island code) {
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
   }
   :global(.blog-island img) { max-width: 100%; height: auto; }
 </style>

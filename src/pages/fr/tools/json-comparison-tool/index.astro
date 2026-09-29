@@ -43,7 +43,7 @@ const seo: SeoProps = {
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
   }],
 };
-const headRaw = "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.4.1/jsondiffpatch.umd.min.js\" defer></script>";
+const headRaw = "<script src=\"/vendor/jsondiffpatch/jsondiffpatch.umd.min.js\" defer></script>";
 ---
 <ToolLayout seo={seo} lang="fr" altLinks={{ en: 'https://online-tools.ni18.in/tools/json-comparison-tool/', es: 'https://online-tools.ni18.in/es/tools/json-comparison-tool/' }} headRaw={headRaw} adMinHeight={120}>
   <div class="tool-island legacy-tw" id="tool-json-comparison-tool" set:html={body} />
