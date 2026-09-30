@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'github-secret-scanning-august-2026-basic-auth',
+    title: 'GitHub Secret Scanning 2026: Generate Basic Auth Headers',
+    description: 'With GitHub expanding secret scanning in August 2026, generate HTTP Basic Auth headers 100% client-side with zero cloud uploads or credential leaks.',
+    keywords: 'github secret scanning august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/github-secret-scanning-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'escaneo-secretos-github-agosto-2026-autenticacion-basica',
+        title: 'Escaneo de Secretos GitHub 2026: Encabezado Basic Auth',
+        description: 'Tras el escaneo de secretos de GitHub de agosto 2026, genera encabezados HTTP Basic Auth 100% local sin enviar credenciales a servidores.',
+        keywords: 'escaneo secretos github agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'analyse-secrets-github-aout-2026-authentification-base',
+        title: 'Détection de Secrets GitHub 2026 : En-tête Basic Auth',
+        description: 'Avec l\'analyse de secrets GitHub d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'analyse secrets github aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'webcodecs-av1-screen-recorder-august-2026',
     title: 'WebCodecs AV1 Update August 2026: Record Screen Free',
     description: "With August 2026 WebCodecs AV1 hardware acceleration updates, record browser tabs in 4K 100% client-side with zero cloud uploads or leaks.",
