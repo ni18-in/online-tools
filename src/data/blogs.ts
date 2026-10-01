@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'graphql-rest-payload-shift-august-2026-json-compare',
+    title: 'GraphQL vs REST Payload Shift 2026: Compare JSON Free',
+    description: 'With August 2026 API architecture shifts causing silent payload breaking changes between GraphQL and REST, compare JSON 100% client-side with zero cloud uploads.',
+    keywords: 'graphql vs rest payload shift 2026, json comparison tool, compare json online free, client side json diff tool, api payload diffing, zero trust json auditor, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/graphql-rest-payload-shift-august-2026-json-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cambio-carga-graphql-rest-agosto-2026-comparar-json',
+        title: 'Cambio de Carga GraphQL vs REST 2026: Compara JSON Gratis',
+        description: 'Tras los cambios de arquitectura de API en agosto de 2026, compara estructuras JSON 100% local sin enviar datos a la nube. Audita respuestas gratis.',
+        keywords: 'cambio carga graphql rest agosto 2026, herramienta comparacion json, comparar json online gratis, diff json cliente local, auditoria json zero trust, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'shift-payload-graphql-rest-aout-2026-comparer-json',
+        title: 'Évolution Payload GraphQL vs REST 2026 : Comparer JSON Privé',
+        description: 'Face aux évolutions des API en août 2026, comparez vos payloads JSON 100% en local dans votre navigateur sans aucun téléversement. Outil gratuit.',
+        keywords: 'shift payload graphql rest aout 2026, comparateur json en ligne, diff json cote client, comparaison payload json prive, audit json zero trust, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'github-secret-scanning-august-2026-basic-auth',
     title: 'GitHub Secret Scanning 2026: Generate Basic Auth Headers',
     description: 'With GitHub expanding secret scanning in August 2026, generate HTTP Basic Auth headers 100% client-side with zero cloud uploads or credential leaks.',
