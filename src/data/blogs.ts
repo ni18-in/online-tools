@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cloudflare-kitesurf-jwt-security-2026-debugger',
+    title: 'Cloudflare Kitesurf Launch 2026: Debug JWT Tokens Free',
+    description: "Cloudflare's August 2026 Kitesurf platform launch shifts AI agent security. Inspect and debug JWT session tokens 100% client-side with zero cloud uploads.",
+    keywords: 'cloudflare kitesurf 2026, jwt debugger pro, client-side jwt decoder, session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/cloudflare-kitesurf-jwt-security-2026-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cloudflare-kitesurf-seguridad-jwt-2026-depurador',
+        title: 'Lanzamiento Cloudflare Kitesurf 2026: Depura JWT Gratis',
+        description: 'Ante el lanzamiento de Cloudflare Kitesurf en agosto 2026, la depuración JWT en local es clave. Inspecciona y valida tokens 100% privado sin subir datos.',
+        keywords: 'cloudflare kitesurf 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'cloudflare-kitesurf-securite-jwt-2026-debogueur',
+        title: 'Lancement Cloudflare Kitesurf 2026 : Déboguer JWT Privé',
+        description: "Avec le lancement de Cloudflare Kitesurf en août 2026, décodez et vérifiez vos jetons JWT 100% en local dans votre navigateur sans aucun téléversement.",
+        keywords: 'cloudflare kitesurf 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'graphql-rest-payload-shift-august-2026-json-compare',
     title: 'GraphQL vs REST Payload Shift 2026: Compare JSON Free',
     description: 'With August 2026 API architecture shifts causing silent payload breaking changes between GraphQL and REST, compare JSON 100% client-side with zero cloud uploads.',
