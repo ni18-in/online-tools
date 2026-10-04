@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'postman-api-migration-curl-to-code-2026',
+    title: 'Postman API Migration August 2026: Convert cURL to Code Free',
+    description: "Postman's August 2026 API collection migration forces teams off desktop client setups. Convert cURL commands 100% client-side with zero cloud uploads.",
+    keywords: 'postman api migration 2026, curl to code converter, convert curl to javascript fetch, convert curl to python requests, client side curl converter, zero trust api client, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/postman-api-migration-curl-to-code-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'migracion-api-postman-agosto-2026-curl-a-codigo',
+        title: 'Migración API Postman Agosto 2026: Convierte cURL a Código',
+        description: 'Ante la migración de colecciones API de Postman en agosto de 2026, convierte comandos cURL a código 100% local sin subir credenciales a la nube.',
+        keywords: 'migracion api postman agosto 2026, convertidor curl a codigo, convertir curl a javascript fetch, convertir curl a python requests, convertidor curl cliente, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'migration-api-postman-aout-2026-curl-en-code',
+        title: 'Migration API Postman Août 2026 : Convertir cURL en Code',
+        description: "Suite à la migration des collections API de Postman en août 2026, convertissez vos commandes cURL 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'migration api postman aout 2026, convertisseur curl en code, convertir curl en javascript fetch, convertir curl en python requests, convertisseur curl prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'cloudflare-kitesurf-jwt-security-2026-debugger',
     title: 'Cloudflare Kitesurf Launch 2026: Debug JWT Tokens Free',
     description: "Cloudflare's August 2026 Kitesurf platform launch shifts AI agent security. Inspect and debug JWT session tokens 100% client-side with zero cloud uploads.",
