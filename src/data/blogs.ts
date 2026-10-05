@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'claude-3-7-artifact-markdown-to-word-2026',
+    title: 'Claude 3.7 Artifacts 2026: Convert Markdown to Word Free',
+    description: "Anthropic's August 2026 Claude 3.7 update introduces enhanced Markdown artifacts. Convert AI reports to Word .docx 100% client-side with zero cloud uploads.",
+    keywords: 'claude 3.7 artifacts, markdown to word, convert claude markdown to docx, ai artifact converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/claude-3-7-artifact-markdown-to-word-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-artefactos-claude-3-7-a-word-2026',
+        title: 'Artefactos Claude 3.7 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras la actualización de Claude 3.7 de agosto 2026, convierte artefactos e informes Markdown a Word (.docx) 100% en local sin subir datos a la nube.',
+        keywords: 'artefactos claude 3 7, markdown a word, convertir markdown claude a docx, convertidor artefactos ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-artefacts-claude-3-7-en-word-2026',
+        title: 'Artefacts Claude 3.7 Août 2026 : Convertir Markdown en Word',
+        description: "Avec la mise à jour Claude 3.7 d'août 2026, convertissez vos rapports et artefacts Markdown en Word .docx 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'artefacts claude 3 7, markdown en word, convertir markdown claude en docx, convertisseur artefact ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'postman-api-migration-curl-to-code-2026',
     title: 'Postman API Migration August 2026: Convert cURL to Code Free',
     description: "Postman's August 2026 API collection migration forces teams off desktop client setups. Convert cURL commands 100% client-side with zero cloud uploads.",
