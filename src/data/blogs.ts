@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'deepseek-r1-markdown-to-word-august-2026',
+    title: 'DeepSeek-R1 Artifacts August 2026: Convert Markdown to Word Free',
+    description: "DeepSeek-R1's August 2026 open-weights AI agent updates produce massive Markdown reports. Convert AI outputs to Word .docx 100% client-side with zero cloud uploads.",
+    keywords: 'deepseek-r1 artifacts, markdown to word, convert deepseek markdown to docx, ai agent report converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/deepseek-r1-markdown-to-word-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-deepseek-r1-a-word-agosto-2026',
+        title: 'Artefactos DeepSeek-R1 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras la actualización de DeepSeek-R1 en agosto de 2026, convierte informes Markdown de IA a Word (.docx) 100% en local sin subir datos confidenciales a la nube.',
+        keywords: 'artefactos deepseek-r1, markdown a word, convertir markdown deepseek a docx, convertidor informes ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-deepseek-r1-en-word-aout-2026',
+        title: 'Artefacts DeepSeek-R1 Août 2026 : Convertir Markdown en Word',
+        description: "Avec les mises à jour DeepSeek-R1 d'août 2026, convertissez vos rapports Markdown d'IA en Word .docx 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'artefacts deepseek-r1, markdown en word, convertir markdown deepseek en docx, convertisseur rapport ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'claude-3-7-artifact-markdown-to-word-2026',
     title: 'Claude 3.7 Artifacts 2026: Convert Markdown to Word Free',
     description: "Anthropic's August 2026 Claude 3.7 update introduces enhanced Markdown artifacts. Convert AI reports to Word .docx 100% client-side with zero cloud uploads.",
