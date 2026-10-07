@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'brave-browser-privacy-screen-recorder-2026',
+    title: 'Brave Browser August 2026 Update: Record Screen Privately Free',
+    description: "With Brave Browser's August 2026 Shields & Ephemeral Storage update, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.",
+    keywords: 'brave browser screen recorder 2026, record screen brave browser, client side screen recorder, privacy screen capture, zero upload screen recorder, screen recorder pro, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/brave-browser-privacy-screen-recorder-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-grabador-pantalla-brave-browser-2026',
+        title: 'Brave Browser Agosto 2026: Graba Pantalla en Privado Gratis',
+        description: 'Con la actualización de Brave Browser de agosto 2026, graba pestañas 100% en local sin subir archivos a la nube. Herramienta gratuita y privada.',
+        keywords: 'grabador pantalla brave browser 2026, grabar pantalla brave browser, grabador pantalla cliente local, privacidad captura pantalla, grabador sin descargas, screen recorder pro, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-enregistreur-ecran-brave-browser-2026',
+        title: 'Brave Browser Août 2026 : Enregistrement Écran Privé Gratuit',
+        description: "Avec la mise à jour Brave Browser d'août 2026, enregistrez vos onglets 100% en local sans téléversement. Outil gratuit et sans fuite de données.",
+        keywords: 'enregistreur ecran brave browser 2026, enregistrer ecran brave browser, enregistreur ecran cote client, confidentialite capture ecran, enregistrement ecran prive, screen recorder pro, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'deepseek-r1-markdown-to-word-august-2026',
     title: 'DeepSeek-R1 Artifacts August 2026: Convert Markdown to Word Free',
     description: "DeepSeek-R1's August 2026 open-weights AI agent updates produce massive Markdown reports. Convert AI outputs to Word .docx 100% client-side with zero cloud uploads.",
