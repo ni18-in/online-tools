@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'openai-api-august-2026-curl-to-code',
+    title: 'OpenAI API August 2026 Update: Convert cURL to Code Free',
+    description: 'With OpenAI\'s August 2026 Structured Outputs & SDK updates, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
+    keywords: 'openai api august 2026, convert curl to code, curl to javascript fetch, curl to python requests, client side curl converter, zero trust api client, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/openai-api-august-2026-curl-to-code-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'actualizacion-api-openai-agosto-2026-curl-a-codigo',
+        title: 'Actualización API OpenAI Agosto 2026: Convierte cURL a Código',
+        description: 'Tras las novedades de la API de OpenAI en agosto 2026, convierte comandos cURL a código 100% local sin exponer tus claves API. Pruébalo gratis.',
+        keywords: 'actualizacion api openai agosto 2026, convertidor curl a codigo, convertir curl a javascript fetch, convertir curl a python requests, convertidor curl cliente, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'mise-a-jour-api-openai-aout-2026-curl-en-code',
+        title: 'Mise à Jour API OpenAI Août 2026 : Convertir cURL en Code',
+        description: 'Avec les mises à jour OpenAI d\'août 2026, convertissez vos commandes cURL en code 100% en local sans risquer de fuite de clés API. Gratuit.',
+        keywords: 'mise a jour api openai aout 2026, convertisseur curl en code, convertir curl en javascript fetch, convertir curl en python requests, convertisseur curl prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'brave-browser-privacy-screen-recorder-2026',
     title: 'Brave Browser August 2026 Update: Record Screen Privately Free',
     description: "With Brave Browser's August 2026 Shields & Ephemeral Storage update, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.",
