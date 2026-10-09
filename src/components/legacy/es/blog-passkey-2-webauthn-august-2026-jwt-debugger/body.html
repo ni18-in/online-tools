@@ -1,0 +1,167 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        WebAuthn Passkey 2.0 Agosto 2026: Depura Tokens JWT Gratis
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Privacidad y Seguridad</span>
+      </p>
+      <img src="/assets/blog/passkey-2-webauthn-august-2026-jwt-debugger-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="WebAuthn Passkey 2.0 Agosto 2026 y Depurador de JWT en el Navegador" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Not+Found';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>El despliegue global de la especificación WebAuthn Passkey 2.0 en agosto de 2026 introduce tokens de sesión encapsulados en estructuras JWT.</li>
+        <li>Depurar tokens de sesión de Passkey mediante convertidores en la nube implica el riesgo de filtrar credenciales de acceso a servidores externos.</li>
+        <li>Nuestra herramienta gratuita <a href="/es/tools/jwt-debugger/" class="text-indigo-700 underline font-semibold">Depurador y Visor de JWT</a> decodifica e inspecciona claims 100% en local en el navegador sin subir datos a la nube.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Tras el despliegue global del estándar WebAuthn Passkey 2.0 por parte del W3C y la FIDO Alliance en agosto de 2026, los proveedores de identidad de Google, Apple y Microsoft están migrando sus flujos de autenticación a credenciales basadas en hardware. A medida que las aplicaciones web sustituyen las contraseñas tradicionales por Passkeys multidispositivo, los servidores de autenticación emiten tokens de sesión JSON Web Token (JWT) firmados para mantener el estado entre API.
+      </p>
+      <p>
+        A pesar de que Passkey 2.0 mejora significativamente la seguridad del inicio de sesión, la inspección de estos tokens de sesión durante el desarrollo de API plantea nuevos retos de privacidad. Los desarrolladores que auditan parámetros de claims (como niveles de atestación de hardware o identificadores de clave pública) a menudo pegan tokens activos en herramientas en línea, exponiendo accidentalmente credenciales confidenciales.
+      </p>
+      <p>
+        Para inspeccionar y validar tus tokens de sesión WebAuthn sin exponer credenciales a servidores remotos, nuestra utilidad gratuita <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> procesa encabezados y cargas útiles 100% localmente en tu navegador: tus datos nunca abandonan tu dispositivo.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Seguridad de Tokens de Sesión con WebAuthn Passkey 2.0 en 2026</h2>
+      <p>
+        La adopción masiva de Passkey 2.0 en agosto de 2026 representa un avance histórico hacia una web sin contraseñas. Mediante el uso de módulos de seguridad por hardware (HSM) y biometría, las llaves de acceso eliminan los ataques de phishing. Una vez finalizado el saludo FIDO2, los servidores de autorización OAuth 2.1 emiten tokens JWT firmados con parámetros avanzados de sesión.
+      </p>
+      <p>
+        Estos tokens incorporan claims extendidos para reflejar el estado de verificación del dispositivo y las firmas de vinculación. Al solucionar problemas en microservicios que gestionan sesiones WebAuthn, los desarrolladores necesitan un decodificador privado e instantáneo que formatee estructuras JSON sin latencia ni riesgos de filtración.
+      </p>
+
+      <div class="my-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+        <p class="font-semibold text-gray-900 mb-2">¿Por qué Confiar en esta Guía?</p>
+        <p class="text-gray-600">
+          En ni18, la privacidad basada en arquitectura Zero-Trust es nuestro principio fundamental. Toda la decodificación Base64URL y el formateo JSON ocurren de manera exclusiva en la memoria de tu navegador. Jamás almacenamos, registramos ni enviamos tus tokens de sesión o claves API a la nube.
+        </p>
+      </div>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Riesgos de las Herramientas JWT Basadas en la Nube</h2>
+      <p>
+        A pesar de los principios de seguridad de Passkey 2.0, los desarrolladores a menudo comprometen la privacidad pegando tokens activos en convertidores de terceros. El procesamiento en servidores externos conlleva riesgos graves:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Fuga de Credenciales y Sesiones:</strong> Enviar tokens de autorización por Internet los expone a registros de servidores web remotos, proxies y herramientas de analítica.</li>
+        <li><strong>Incumplimiento Normativo:</strong> Transmitir tokens con identificadores de usuario o datos sensibles viola las normativas del RGPD y de la Ley de IA de la UE sobre soberanía de datos.</li>
+        <li><strong>Ataques de Secuestro de Sesión:</strong> Si un token de sesión no expirado queda registrado en servidores externos, actores maliciosos podrían secuestrar sesiones activas.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Ventajas de la Depuración JWT en el Lado del Cliente</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% en Lado del Cliente:</strong> La decodificación Base64URL y el formateo JSON ocurren completamente en la memoria de tu navegador. Sin subidas a servidores. Sin fugas de datos. Sin registros.</li>
+        <li><strong>⚡ Acceso Instantáneo sin Instalación:</strong> Abre la página y comienza a depurar de inmediato. Sin extensiones, registros ni software adicional.</li>
+        <li><strong>🚀 Inspección en Tiempo Real:</strong> Visualiza al instante claims de Passkey 2.0, algoritmos de firma (RS256, ES256, EdDSA) y parámetros de sesión.</li>
+        <li><strong>🌐 Compatible con Entornos Offline:</strong> Funciona sin conexión a Internet en entornos de desarrollo aislados, redes VPN corporativas y contenedores locales.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guía Paso a Paso: Cómo Depurar Tokens JWT de Passkey en Privado</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la herramienta <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador y Visor de JWT</a> en cualquier navegador moderno.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Pega tu token de sesión codificado en el panel de entrada.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Inspecciona el panel del <strong>Encabezado</strong> para verificar los parámetros del algoritmo (p. ej. <code>alg</code>: "ES256") e identificadores de clave.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Revisa la <strong>Carga Útil</strong> para confirmar marcas de tiempo de expiración (<code>exp</code>) y claims de atestación 100% en local.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Consejos Pro y Flujos de Trabajo Avanzados</h2>
+      <p>
+        Al construir flujos de autenticación WebAuthn en agosto de 2026, combina la inspección de tokens con otras utilidades locales. Si tu servicio requiere probar comandos cURL, utiliza nuestro <a href="/es/tools/curl-a-codigo/" class="text-indigo-600 hover:underline font-semibold">Convertidor cURL a Código</a> para transformar peticiones en código JavaScript o Python sin compartir credenciales.
+      </p>
+      <p>
+        Asimismo, si necesitas validar endpoints de autenticación básica HTTP en entornos de prueba, utiliza nuestro <a href="/es/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Generador de Encabezados de Autenticación Básica</a> de forma privada en el navegador.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusión y Comienza Ahora</h2>
+      <p>
+        El estándar WebAuthn Passkey 2.0 de agosto de 2026 marca el comienzo de una nueva era en la seguridad digital. Llevar los principios de Zero-Trust a tu flujo de trabajo diario garantiza que tus credenciales de sesión se mantengan privadas. Protege tus tokens decodificándolos y validándolos enteramente en tu navegador.
+      </p>
+      <p class="mt-4">
+        <a href="/es/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Abrir Depurador de JWT Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Qué es WebAuthn Passkey 2.0 en agosto de 2026?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">WebAuthn Passkey 2.0 es el estándar actualizado del W3C y FIDO Alliance que permite autenticación biométrica multidispositivo sin contraseñas respaldada por claves de hardware.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Se envían mis tokens de sesión a servidores externos?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">No. El depurador JWT opera 100% en el lado del cliente. Toda la decodificación y el formateo ocurren en la memoria local de tu navegador sin peticiones de red.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Qué algoritmos de firma JWT admite la herramienta?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La herramienta admite la decodificación de todos los algoritmos estándar, incluidos RS256, RS512, ES256, ES384, EdDSA y HS256.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Por qué es más segura la depuración cliente que las herramientas SaaS?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La depuración en el navegador elimina el envío de datos por la red, evitando la filtración de tokens en registros de servidores, cachés o sistemas analíticos de terceros.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Funciona la herramienta sin conexión a Internet?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Sí. Una vez cargada la página, la aplicación funciona de forma totalmente aislada en entornos de red seguros y sin acceso a Internet.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Post navigation">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

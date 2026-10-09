@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'passkey-2-webauthn-august-2026-jwt-debugger',
+    title: 'WebAuthn Passkey 2.0 August 2026: Debug JWT Session Tokens Free',
+    description: 'With August 2026 WebAuthn Passkey 2.0 cross-device authentication shifts, inspect and debug JWT session tokens 100% client-side with zero data uploads.',
+    keywords: 'webauthn passkey 2 2026, jwt debugger pro, client-side jwt decoder, passkey session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/passkey-2-webauthn-august-2026-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'webauthn-passkey-2-agosto-2026-depurador-jwt',
+        title: 'WebAuthn Passkey 2.0 Agosto 2026: Depura Tokens JWT Gratis',
+        description: 'Tras el despliegue de WebAuthn Passkey 2.0 en agosto 2026, depura tokens de sesión JWT 100% en local sin subir datos a la nube. Prueba gratis.',
+        keywords: 'webauthn passkey 2 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion passkey, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'webauthn-passkey-2-aout-2026-debogueur-jwt',
+        title: 'WebAuthn Passkey 2.0 Août 2026 : Déboguer les Jetons JWT',
+        description: 'Avec le déploiement de WebAuthn Passkey 2.0 en août 2026, décodez vos jetons de session JWT 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'webauthn passkey 2 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session passkey, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'openai-api-august-2026-curl-to-code',
     title: 'OpenAI API August 2026 Update: Convert cURL to Code Free',
     description: 'With OpenAI\'s August 2026 Structured Outputs & SDK updates, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
