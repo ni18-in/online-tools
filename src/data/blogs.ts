@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'zero-trust-pdf-privacy-august-2026-merger-splitter',
+    title: 'Zero-Trust PDF Privacy 2026: Merge & Split PDFs Free',
+    description: 'With August 2026 enterprise DLP mandates, client-side PDF processing is critical. Merge & split PDFs 100% in-browser with zero cloud uploads or leaks.',
+    keywords: 'zero trust pdf privacy 2026, pdf merger and splitter, merge pdf privately online, split pdf in browser, client side pdf tool, zero upload pdf editor, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/zero-trust-pdf-privacy-august-2026-merger-splitter-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-pdf-zero-trust-agosto-2026-unir-dividir',
+        title: 'Privacidad PDF Zero-Trust 2026: Une y Divide PDF Gratis',
+        description: 'Tras las normas de privacidad DLP de agosto 2026, une y divide PDFs 100% en local sin subir archivos a la nube. Prueba nuestra herramienta gratuita.',
+        keywords: 'privacidad pdf zero trust 2026, unir y dividir pdf gratis, combinar pdf navegador, separar paginas pdf local, herramienta pdf sin subida, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-pdf-zero-trust-aout-2026-fusionner-diviser',
+        title: 'Confidentialité PDF Zero-Trust 2026 : Fusionner PDF Privé',
+        description: "Avec les directives DLP d'août 2026, fusionnez et divisez vos fichiers PDF 100% en local dans votre navigateur sans téléversement. Outil gratuit.",
+        keywords: 'confidentialite pdf zero trust 2026, fusionner et diviser pdf gratuit, combiner pdf navigateur, extraire pages pdf local, outil pdf prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'passkey-2-webauthn-august-2026-jwt-debugger',
     title: 'WebAuthn Passkey 2.0 August 2026: Debug JWT Session Tokens Free',
     description: 'With August 2026 WebAuthn Passkey 2.0 cross-device authentication shifts, inspect and debug JWT session tokens 100% client-side with zero data uploads.',
