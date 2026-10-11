@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'github-pat-v2-august-2026-basic-auth',
+    title: 'GitHub PAT v2 August 2026: Basic Auth Header Guide',
+    description: 'With GitHub enforcing fine-grained PAT v2 credentials in August 2026, generate secure HTTP Basic Auth headers 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'github pat v2 august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/github-pat-v2-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'mandato-github-pat-v2-agosto-2026-autenticacion-basica',
+        title: 'Mandato GitHub PAT v2 Agosto 2026: Genera Encabezado Basic Auth',
+        description: 'Tras la obligatoriedad de GitHub PAT v2 en agosto 2026, genera encabezados HTTP Basic Auth 100% local sin enviar credenciales a servidores.',
+        keywords: 'mandato github pat v2 agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'mandat-github-pat-v2-aout-2026-authentification-base',
+        title: 'Mandat GitHub PAT v2 Août 2026 : En-tête Basic Auth Privé',
+        description: 'Avec le mandat GitHub PAT v2 d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'mandat github pat v2 aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'zero-trust-pdf-privacy-august-2026-merger-splitter',
     title: 'Zero-Trust PDF Privacy 2026: Merge & Split PDFs Free',
     description: 'With August 2026 enterprise DLP mandates, client-side PDF processing is critical. Merge & split PDFs 100% in-browser with zero cloud uploads or leaks.',
