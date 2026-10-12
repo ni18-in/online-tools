@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'iso-pdf-2-0-august-2026-merger-splitter',
+    title: 'ISO PDF 2.0 August 2026 Update: Merge & Split PDFs Free',
+    description: 'With August 2026 ISO 32000-2 PDF 2.0 encryption standards, client-side PDF editing is essential. Merge & split PDFs 100% in-browser with zero uploads.',
+    keywords: 'iso pdf 2 0 august 2026, pdf merger and splitter, merge pdf privately online, split pdf in browser, client side pdf tool, zero upload pdf editor, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/iso-pdf-2-0-august-2026-merger-splitter-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'norma-iso-pdf-2-0-agosto-2026-unir-dividir-pdf',
+        title: 'Norma ISO PDF 2.0 Agosto 2026: Une y Divide PDF Gratis',
+        description: 'Tras la actualización ISO PDF 2.0 de agosto 2026, une y divide PDFs 100% en local sin subir archivos a la nube. Prueba nuestra herramienta gratuita.',
+        keywords: 'norma iso pdf 2 0 agosto 2026, unir y dividir pdf gratis, combinar pdf navegador, separar paginas pdf local, herramienta pdf sin subida, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'norme-iso-pdf-2-0-aout-2026-fusionner-diviser-pdf',
+        title: 'Norme ISO PDF 2.0 Août 2026 : Fusionner PDF Privé',
+        description: "Avec la mise à jour ISO PDF 2.0 d'août 2026, fusionnez et divisez vos fichiers PDF 100% en local dans votre navigateur sans téléversement. Outil gratuit.",
+        keywords: 'norme iso pdf 2 0 aout 2026, fusionner et diviser pdf gratuit, combiner pdf navegador, extraire pages pdf local, outil pdf prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'github-pat-v2-august-2026-basic-auth',
     title: 'GitHub PAT v2 August 2026: Basic Auth Header Guide',
     description: 'With GitHub enforcing fine-grained PAT v2 credentials in August 2026, generate secure HTTP Basic Auth headers 100% client-side with zero cloud uploads or leaks.',
