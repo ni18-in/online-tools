@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'zero-trust-devsecops-august-2026-basic-auth',
+    title: 'Zero-Trust DevSecOps August 2026: Generate Basic Auth Headers',
+    description: 'With August 2026 DevSecOps zero-trust mandates prohibiting cloud API key encoding, generate HTTP Basic Auth headers 100% client-side with zero leaks.',
+    keywords: 'zero trust devsecops august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/zero-trust-devsecops-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'devsecops-zero-trust-agosto-2026-autenticacion-basica',
+        title: 'DevSecOps Zero-Trust Agosto 2026: Encabezado Basic Auth',
+        description: 'Ante las directivas DevSecOps Zero-Trust de agosto de 2026, genera encabezados HTTP Basic Auth 100% en local sin enviar credenciales a la nube.',
+        keywords: 'devsecops zero trust agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'devsecops-zero-trust-aout-2026-authentification-base',
+        title: 'DevSecOps Zero-Trust Août 2026 : En-tête Basic Auth Privé',
+        description: 'Avec les directives DevSecOps Zero-Trust d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'devsecops zero trust aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'iso-pdf-2-0-august-2026-merger-splitter',
     title: 'ISO PDF 2.0 August 2026 Update: Merge & Split PDFs Free',
     description: 'With August 2026 ISO 32000-2 PDF 2.0 encryption standards, client-side PDF editing is essential. Merge & split PDFs 100% in-browser with zero uploads.',
