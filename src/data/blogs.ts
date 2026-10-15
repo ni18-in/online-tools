@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chromium-141-screen-recorder-privacy-2026',
+    title: 'Chromium 141 Screen Capture 2026: Record Screen Privately',
+    description: 'With Chromium 141 August 2026 screen capture privacy isolation, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.',
+    keywords: 'chromium 141 screen recorder, record screen browser privacy 2026, client side screen recorder pro, webcapture isolation privacy, screen recording zero upload, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chromium-141-screen-recorder-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'chromium-141-grabador-pantalla-privacidad-2026',
+        title: 'Chromium 141 Captura de Pantalla 2026: Graba en Privado',
+        description: 'Ante el aislamiento de captura de pantalla de Chromium 141 en agosto de 2026, graba tus pestañas 100% local sin subir archivos a la nube. Gratis.',
+        keywords: 'chromium 141 grabador pantalla, grabar pantalla navegador privacidad 2026, grabador pantalla cliente pro, aislamiento webcapture privacidad, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'chromium-141-enregistreur-ecran-confidentialite-2026',
+        title: 'Chromium 141 Capture Écran 2026 : Enregistrement Privé',
+        description: 'Avec l\'isolation de capture écran Chromium 141 d\'août 2026, enregistrez vos onglets 100% en local sans aucun téléversement. Outil gratuit.',
+        keywords: 'chromium 141 enregistreur ecran, enregistrer ecran navigateur 2026, enregistreur ecran cote client, isolation webcapture confidentialite, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'zero-trust-devsecops-august-2026-basic-auth',
     title: 'Zero-Trust DevSecOps August 2026: Generate Basic Auth Headers',
     description: 'With August 2026 DevSecOps zero-trust mandates prohibiting cloud API key encoding, generate HTTP Basic Auth headers 100% client-side with zero leaks.',
