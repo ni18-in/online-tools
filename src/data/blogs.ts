@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'chrome-141-jwt-debugger-privacy-2026',
+    title: 'Chrome 141 Privacy Sandbox 2026: Debug JWT Tokens Free',
+    description: 'With Chrome 141 August 2026 zero-knowledge browser isolation rules, inspect and debug JWT session tokens 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'chrome 141 privacy sandbox 2026, jwt debugger pro, client-side jwt decoder, session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-141-jwt-debugger-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'chrome-141-depurador-jwt-privacidad-2026',
+        title: 'Chrome 141 Sandbox Privacidad 2026: Depura JWT Gratis',
+        description: 'Ante la el aislamiento de navegador de Chrome 141 en agosto de 2026, depura tokens de sesión JWT 100% en local sin enviar datos a la nube. Prueba gratis.',
+        keywords: 'chrome 141 sandbox privacidad 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'chrome-141-debogueur-jwt-confidentialite-2026',
+        title: 'Chrome 141 Sandbox Confidentialité 2026 : Déboguer JWT',
+        description: 'Avec l\'isolation de navigateur Chrome 141 d\'août 2026, décodez vos jetons de session JWT 100% en local dans votre navigateur sans téléversement. Gratuit.',
+        keywords: 'chrome 141 sandbox confidentialite 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'chromium-141-screen-recorder-privacy-2026',
     title: 'Chromium 141 Screen Capture 2026: Record Screen Privately',
     description: 'With Chromium 141 August 2026 screen capture privacy isolation, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.',
