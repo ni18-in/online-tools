@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'gemini-2-5-code-diff-august-2026-text-compare',
+    title: 'Gemini 2.5 Code Diff August 2026: Compare Prompts Free',
+    description: "With Google's August 2026 Gemini 2.5 rollout, compare AI system prompts & code diffs 100% client-side with zero cloud data uploads.",
+    keywords: 'gemini 2 5 code diff august 2026, online text compare, compare ai code diffs, gemini prompt output comparison, client side text diff tool, zero trust code compare, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/gemini-2-5-code-diff-august-2026-text-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'gemini-2-5-diferencia-codigo-agosto-2026-comparar-texto',
+        title: 'Gemini 2.5 Diferencia Código Agosto 2026: Compara Textos',
+        description: 'Con el lanzamiento de Gemini 2.5 en agosto 2026, compara prompts y diferencias de código 100% local sin subir datos a la nube. Prueba gratis.',
+        keywords: 'gemini 2 5 diferencia codigo agosto 2026, comparador de texto online, comparar diffs codigo ia, comparacion prompts gemini, herramienta diff local, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'gemini-2-5-diff-code-aout-2026-comparer-texte',
+        title: 'Gemini 2.5 Diff Code Août 2026 : Comparer Textes Privé',
+        description: 'Avec le lancement de Gemini 2.5 en août 2026, comparez vos prompts et diffs de code 100% en local dans votre navigateur sans téléversement.',
+        keywords: 'gemini 2 5 diff code aout 2026, comparateur de texte en ligne, comparer diffs code ia, comparaison prompts gemini, outil diff cote client, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'chrome-141-jwt-debugger-privacy-2026',
     title: 'Chrome 141 Privacy Sandbox 2026: Debug JWT Tokens Free',
     description: 'With Chrome 141 August 2026 zero-knowledge browser isolation rules, inspect and debug JWT session tokens 100% client-side with zero cloud uploads or leaks.',
