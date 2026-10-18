@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'gpt-5-artifacts-august-2026-markdown-to-word',
+    title: 'GPT-5 Artifacts August 2026: Convert Markdown to Word Free',
+    description: "With OpenAI's August 2026 GPT-5 Artifacts launch, convert multi-file AI Markdown to Word .docx 100% client-side with zero cloud data uploads.",
+    keywords: 'gpt-5 artifacts august 2026, markdown to word, convert gpt-5 markdown to docx, ai artifacts converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/gpt-5-artifacts-august-2026-markdown-to-word-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'artefactos-gpt-5-agosto-2026-convertir-markdown-a-word',
+        title: 'Artefactos GPT-5 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras el lanzamiento de GPT-5 y sus artefactos en agosto de 2026, convierte Markdown de IA a Word (.docx) 100% local sin subir datos a la nube.',
+        keywords: 'artefactos gpt 5 agosto 2026, markdown a word, convertir markdown gpt 5 a docx, convertidor artefactos ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'artefacts-gpt-5-aout-2026-convertir-markdown-en-word',
+        title: 'Artefacts GPT-5 Août 2026 : Convertir Markdown en Word',
+        description: "Avec le lancement des artefacts GPT-5 d'août 2026, convertissez vos rapports Markdown d'IA en Word .docx 100% en local dans votre navigateur.",
+        keywords: 'artefacts gpt 5 aout 2026, markdown en word, convertir markdown gpt 5 en docx, convertisseur artefact ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'gemini-2-5-code-diff-august-2026-text-compare',
     title: 'Gemini 2.5 Code Diff August 2026: Compare Prompts Free',
     description: "With Google's August 2026 Gemini 2.5 rollout, compare AI system prompts & code diffs 100% client-side with zero cloud data uploads.",
