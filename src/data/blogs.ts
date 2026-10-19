@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cisa-zero-trust-august-2026-jwt-debugger',
+    title: 'CISA Zero-Trust August 2026 Mandate: Debug JWTs Privately',
+    description: "With CISA's August 2026 Zero-Trust guidelines prohibiting cloud token leaks, inspect and debug JWTs 100% client-side with zero server uploads.",
+    keywords: 'cisa zero trust august 2026, jwt debugger pro, client-side jwt decoder, zero trust token inspection, debug jwt browser, session token privacy, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/cisa-zero-trust-august-2026-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cisa-zero-trust-agosto-2026-depurador-jwt',
+        title: 'Directiva CISA Zero-Trust Agosto 2026: Depura JWTs Gratis',
+        description: 'Tras las normas CISA Zero-Trust de agosto 2026, depura tokens JWT 100% en local sin enviar credenciales a servidores. Prueba nuestra herramienta.',
+        keywords: 'cisa zero trust agosto 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, depurar jwt navegador, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'cisa-zero-trust-aout-2026-debogueur-jwt',
+        title: 'Directive CISA Zero-Trust Août 2026 : Déboguer JWT Privé',
+        description: "Avec la directive CISA Zero-Trust d'août 2026, décodez et vérifiez vos jetons JWT 100% en local dans votre navigateur sans aucun téléversement.",
+        keywords: 'cisa zero trust aout 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, deboguer jwt navigateur, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'gpt-5-artifacts-august-2026-markdown-to-word',
     title: 'GPT-5 Artifacts August 2026: Convert Markdown to Word Free',
     description: "With OpenAI's August 2026 GPT-5 Artifacts launch, convert multi-file AI Markdown to Word .docx 100% client-side with zero cloud data uploads.",
