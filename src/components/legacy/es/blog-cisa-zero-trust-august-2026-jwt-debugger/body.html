@@ -1,0 +1,162 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Directiva CISA Zero-Trust Agosto 2026: Depura Tokens de Sesión JWT en Privado
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+        &bull; <span class="text-indigo-500 font-semibold">Privacidad y Seguridad</span>
+      </p>
+      <img src="/assets/blog/cisa-zero-trust-august-2026-jwt-debugger-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Directiva CISA Zero Trust Agosto 2026 Depurador JWT Seguridad" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Not+Found';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>La directiva de Arquitectura Zero-Trust de CISA de agosto de 2026 prohíbe la depuración de tokens en la nube por riesgo crítico de fugas de credenciales.</li>
+        <li>Inspeccionar tokens de autorización en servidores de terceros expone involuntariamente datos confidenciales, claves de sesión internas y roles administrativos.</li>
+        <li>Nuestra herramienta gratuita <a href="/es/tools/jwt-debugger/" class="underline font-semibold">Depurador JWT</a> funciona 100% local en la memoria de tu navegador, garantizando cero subidas, cero registros y pleno cumplimiento normativo en 2026.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        El 9 de agosto de 2026, la Agencia de Seguridad de Infraestructura y Ciberseguridad (CISA) emitió una directiva operativa urgente de Arquitectura Zero-Trust para desarrolladores y contratistas gubernamentales. El mandato prohíbe explícitamente copiar y pegar tokens JSON Web Tokens (JWT) de producción o tokens de acceso OAuth en plataformas de depuración alojadas en la nube.
+      </p>
+      <p>
+        Durante años, los ingenieros recurrieron a decodificadores web para inspeccionar reclamos de carga útil, comprobar tiempos de expiración y verificar firmas criptográficas. Sin embargo, auditorías recientes revelaron que muchas herramientas obsoletas registraban encabezados de autorización en servidores remotos de analítica, exponiendo secretos de sesión a terceros no autorizados.
+      </p>
+      <p>
+        Para cumplir con las estrictas directrices Zero-Trust de 2026 sin ralentizar el desarrollo, nuestra utilidad gratuita <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador JWT</a> inspecciona y valida tokens 100% en el cliente, asegurando que tus claves y datos jamás abandonen la memoria de tu navegador.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">LA DIRECTIVA CISA DE AGOSTO DE 2026: POR QUÉ LAS FUGAS DE TOKENS IMPORTAN AHORA</h2>
+      <p>
+        La transición hacia microservicios distribuidos, Passkeys WebAuthn y OAuth 2.1 en agosto de 2026 ha situado a los JWT en el centro de la identidad digital. Un solo token contiene permisos de autorización, identificadores de usuario UUID, datos de inquilinos y firmas criptográficas (RS256, ES256 o firmas poscuánticas ML-DSA).
+      </p>
+      <p>
+        Cuando un desarrollador pega un token portador en un decodificador tradicional alojado en servidor, esas credenciales viajan por redes públicas. Si dicho servidor sufre una filtración o error de configuración, atacantes pueden interceptar y reutilizar esos tokens activos para suplantar usuarios autenticados antes de su caducidad.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">EL RIESGO DE LOS DECODIFICADORES TRADICIONALES EN LA NUBE</h2>
+      <p>
+        Las herramientas heredadas suelen comprometer la privacidad manteniendo registros remotos y analíticas que vulneran la postura de seguridad:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Riesgo de Exfiltración de Credenciales:</strong> Los decodificadores en la nube procesan tokens en servidores remotos, almacenando datos en registros de acceso.</li>
+        <li><strong>Ataques de Reorganización/Reanimación (Replay):</strong> Tokens interceptados permiten a actores maliciosos suplantar identidades hasta que el token expire.</li>
+        <li><strong>Incumplimiento Normativo:</strong> Exponer JWTs viola las directivas CISA Zero-Trust, así como los estándares SOC 2, HIPAA y el Artículo 32 del RGPD de la UE.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">VENTAJAS DE LA DEPURACIÓN JWT 100% LOCAL Y ZERO-TRUST</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% en el Cliente:</strong> La decodificación Base64, el formateo JSON y la verificación de firmas se ejecutan exclusivamente en tu navegador. Cero peticiones de red.</li>
+        <li><strong>⚡ Acceso Instantáneo sin Instalación:</strong> Abre la herramienta y comienza a depurar al instante sin descargar binarios pesados ni extensiones.</li>
+        <li><strong>🚀 Inspección Completa de Reclamos y Firmas:</strong> Examina encabezados, cuerpo (sub, iss, exp, nbf, iat, aud) y algoritmos con resaltado de sintaxis claro.</li>
+        <li><strong>🌐 Funcionamiento Offline:</strong> Carga al instante y funciona perfectamente sin conexión o en redes corporativas con aislamiento total (air-gap).</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">GUÍA PASO A PASO DEL FLUJO DE TRABAJO</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la utilidad <a href="/es/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Depurador JWT</a> en cualquier navegador moderno.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Pega tu token JWT codificado (cadena Encabezado.CargaÚtil.Firma) en el panel de entrada.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Visualiza al instante la estructura JSON decodificada con resaltado de sintaxis por colores y conversión automática de marcas de tiempo Unix para los campos <code>exp</code> y <code>nbf</code>.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Opcionalmente, ingresa tu clave secreta o clave pública para validar la autenticidad de la firma localmente sin exponer credenciales a ningún servidor.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">CONSEJOS PRO Y CASOS DE USO AVANZADOS</h2>
+      <p>
+        Al depurar tokens portadores OAuth 2.1 o estados de sesión Passkey en aplicaciones modernas, aprovecha estas estrategias:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Valida Marcas de Tiempo Unix:</strong> Comprueba el campo <code>exp</code> contra el tiempo epoch del sistema para detectar desajustes de zonas horarias en nodos distribuidos. Usa nuestro <a href="/es/tools/advance-epoch-converter/" class="text-indigo-600 hover:underline">Convertidor de Época Unix Avanzado</a>.</li>
+        <li><strong>Compara Desfases en Microservicios:</strong> Al actualizar middleware de autorización, compara dos cargas de token lado a lado usando nuestro <a href="/es/tools/json-comparison-tool/" class="text-indigo-600 hover:underline">Comparador JSON Online</a>.</li>
+        <li><strong>Audita Estructuras de Reclamos Personalizados:</strong> Asegúrate de que las matrices de roles de usuario cumplan con el esquema JSON correcto utilizando <a href="/es/tools/json-visualizer-pro/" class="text-indigo-600 hover:underline font-semibold">JSON Visualizer Pro</a>.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">CONCLUSIÓN Y CÓMO EMPEZAR</h2>
+      <p>
+        El mandato Zero-Trust de CISA de agosto de 2026 resalta una verdad fundamental: las credenciales de autenticación confidenciales deben permanecer bajo tu control exclusivo. Al adoptar herramientas de desarrollo en el cliente en <a href="/es/about/" class="text-indigo-600 hover:underline font-semibold">ni18</a>, los equipos de software eliminan por completo los riesgos de filtración mientras mantienen flujos de trabajo ágiles.
+      </p>
+      <p class="mt-4">
+        <a href="/es/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Abrir Depurador JWT Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿En qué consiste la directiva CISA Zero-Trust de agosto de 2026 para tokens JWT?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La directiva exige que los tokens de autenticación de producción y pruebas nunca se envíen a servidores externos en la nube para depuración, previniendo filtraciones de credenciales y ataques de suplantación.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Es seguro inspeccionar tokens JWT activos en mi navegador web?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Sí, siempre que la herramienta funcione 100% en el cliente. Nuestro Depurador JWT procesa los datos únicamente en la memoria local de JavaScript sin realizar llamadas a APIs externas.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Puedo verificar firmas JWT sin compartir mi clave secreta?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Absolutamente. Dado que la verificación de firmas se ejecuta dentro de tu motor de navegador, tus claves HMAC o públicas RSA/ECDSA nunca se transmiten ni exponen a terceros.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Qué algoritmos JWT admite este depurador local?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Admite todos los algoritmos estándar, incluidos HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512 y firmas poscuánticas ML-DSA.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Cómo se compara la depuración local con utilidades CLI como jq o jwt-cli?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Aunque las herramientas CLI son seguras, nuestra utilidad de navegador ofrece formateo visual instantáneo, explicaciones de campos interactivas y conversión de fechas sin requerir instalación por línea de comandos.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navegación de publicaciones">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>
