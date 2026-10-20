@@ -7,4 +7,4 @@ Disallow: /.gemini/
 Disallow: /.git/
 
 # Specify the location of your sitemap
-Sitemap: https://online-tools.ni18.in/sitemap.xml 
+Sitemap: https://online-tools.ni18.in/sitemap.xml

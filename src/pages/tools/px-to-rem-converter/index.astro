@@ -1,9 +1,56 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 
 const tool = getTool('px-to-rem-converter')!;
+
+const steps = [
+  {
+    title: 'Enter Pixel Value',
+    description: 'Type the desired pixel (px) value you wish to convert into the input field.',
+  },
+  {
+    title: 'Select Base Font Size',
+    description: 'Choose your project base font size (standard default is 16px, or 10px for rem resets).',
+  },
+  {
+    title: 'Instant REM Calculation',
+    description: 'The REM equivalent is automatically calculated and displayed with zero delay.',
+  },
+  {
+    title: 'Copy REM Code',
+    description: 'Click Copy to paste the calculated REM value directly into your CSS or Tailwind stylesheet.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the difference between PX and REM units in CSS?',
+    answer: 'PX (pixels) is an absolute unit of measurement that does not change with user browser settings. REM (root em) is a relative unit relative to the root html element font size (usually 16px by default).',
+  },
+  {
+    question: 'Why should web developers use REM instead of PX?',
+    answer: 'Using REM improves accessibility. When users with visual impairments increase their browser default font size, REM-based layouts scale proportionally, whereas PX-based layouts stay fixed and may become unreadable.',
+  },
+  {
+    question: 'What is the formula to convert PX to REM?',
+    answer: 'The formula is: REM = Pixels / Base Font Size. For example, with a 16px base font size, 24px is 24 / 16 = 1.5rem.',
+  },
+  {
+    question: 'What is the standard base font size in modern browsers?',
+    answer: 'The default root font size in all modern browsers (Chrome, Firefox, Safari, Edge) is 16 pixels unless modified by the user or root CSS.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Convert Pixels (PX) to REM Units Online',
+  'Convert pixel values to accessible CSS REM units with customizable base font size.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'PX to REM Converter – Free Online Tool',
   description:
@@ -13,6 +60,7 @@ const seo = toolSeo(tool, {
   author: 'ni18',
   ogDescription: 'A simple, free online tool to convert pixel (px) values to REM units effortlessly.',
   ogImageAlt: 'A promotional image for the PX to REM Converter tool.',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -92,6 +140,18 @@ const altLinks = { es: `${SITE_URL}/es/tools/px-a-rem-convertidor/` };
           </thead>
           <tbody id="conversion-table-body"></tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="faq" class="how-to" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      <div class="card">
+        {faqs.map((faq) => (
+          <details class="faq-details" style="margin-bottom: 1rem; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--md-sys-color-on-surface, #1c1b1f);">{faq.question}</summary>
+            <p style="margin: 0.5rem 0 0; color: var(--md-sys-color-on-surface-variant, #49454f); font-size: 0.95rem; line-height: 1.5;">{faq.answer}</p>
+          </details>
+        ))}
       </div>
     </section>
   </div>

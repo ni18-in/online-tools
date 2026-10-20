@@ -1,17 +1,89 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/basic-authentication-header-generator/body.html?raw';
 import css from '../../../components/legacy/tools/basic-authentication-header-generator/styles.css?raw';
 import js from '../../../components/legacy/tools/basic-authentication-header-generator/script.js?raw';
 
 const tool = getTool('basic-authentication-header-generator')!;
+
+const steps = [
+  {
+    title: 'Enter Username or API Key',
+    description: 'Type or paste your service username, client ID, or API key into the username field.',
+  },
+  {
+    title: 'Enter Password or Token',
+    description: 'Enter your password, API secret, or Personal Access Token (PAT) into the password field.',
+  },
+  {
+    title: 'Generate Base64 Header',
+    description: 'Click "Generate Header" to combine credentials (username:password) and compute the Base64 encoding.',
+  },
+  {
+    title: 'Copy for cURL or Postman',
+    description: 'Click "Copy Header" to paste into request headers, or copy the raw Base64 token for custom scripts.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Encoding is executed entirely in your local browser using window.btoa(). Your credentials are never sent to any server.',
+  },
+  {
+    icon: '⚡',
+    title: 'Instant Header Generation',
+    description: 'Instantly constructs the standard "Authorization: Basic <base64>" header for API calls and microservices.',
+  },
+  {
+    icon: '📋',
+    title: 'Dual Copy Controls',
+    description: 'Easily copy either the complete HTTP header or the isolated Base64 string depending on your API client requirements.',
+  },
+  {
+    icon: '🛠️',
+    title: 'RFC 7617 Compliant',
+    description: 'Strict adherence to standard HTTP Basic Authentication specifications for seamless interoperability with Nginx, Apache, and API gateways.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How does HTTP Basic Authentication encode credentials?',
+    answer: 'According to RFC 7617, the username and password are joined with a single colon delimiter (username:password). The combined string is then encoded using standard Base64 and prefixed with the word "Basic " in the HTTP Authorization header.',
+  },
+  {
+    question: 'Is Base64 encoding considered encryption?',
+    answer: 'No. Base64 is an encoding format designed for transmitting binary data across text-based protocols, not an encryption method. Anyone can decode a Base64 string. Therefore, Basic Auth must always be served over encrypted HTTPS (TLS) connections.',
+  },
+  {
+    question: 'Are my username and password sent to any server when using this tool?',
+    answer: 'Never. All encoding is performed locally inside your browser memory using JavaScript. No telemetry, analytics, or server logs capture your credentials.',
+  },
+  {
+    question: 'How do I use this generated header in a cURL command?',
+    answer: 'You can pass the header directly using the -H flag: curl -H "Authorization: Basic <your-base64-string>" https://api.example.com or use curl -u "username:password" https://api.example.com.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Generate HTTP Basic Authentication Headers Online',
+  'Step-by-step instructions for converting username and password credentials into standard Base64 HTTP Authorization headers.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
-  title: 'Basic Authentication Header Generator',
+  title: 'Basic Authentication Header Generator – Free Online Tool',
   description:
-    'A free, secure, client-side tool to generate Basic Authentication headers for HTTP requests. No username or password data is ever stored or sent to a server.',
-  keywords: 'basic authentication, auth header, base64 encode, http authorization, developer tool, security, client-side',
+    'Free client-side Basic Authentication header generator. Convert username and password to Base64 HTTP Authorization headers 100% privately in your browser.',
+  keywords: 'basic authentication, auth header, base64 encode, http authorization, developer tool, security, client-side, basic auth generator',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -26,11 +98,20 @@ const seo = toolSeo(tool, {
   },
 });
 ---
+
 <ToolLayout seo={seo} lang="en" adMinHeight={120}>
   <div
     class="tool-island legacy-tw bg-gray-900 text-gray-200 p-4 sm:p-6 lg:p-8"
     id="tool-basic-authentication-header-generator"
     set:html={body}
+  />
+
+  <ToolContentSection
+    guideTitle="In-Depth Guide to HTTP Basic Authentication & Base64 Headers"
+    guideIntro="HTTP Basic Authentication is one of the simplest and most widespread authentication schemes for REST APIs, webhooks, and internal services. Our zero-upload, client-side generator lets you encode credentials securely without risk of password leaks or server logs."
+    steps={steps}
+    features={features}
+    faqs={faqs}
   />
 </ToolLayout>
 

@@ -1,17 +1,65 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 
 const tool = getTool('rem-to-px-converter')!;
+
+const steps = [
+  {
+    title: 'Enter REM Value',
+    description: 'Type the REM value you want to convert into the input box (e.g., 1.5 or 0.875).',
+  },
+  {
+    title: 'Select Base Font Size',
+    description: 'Select your root element base font size (default is 16px for standard browser settings).',
+  },
+  {
+    title: 'Instant Pixel Calculation',
+    description: 'The exact pixel (px) value is automatically calculated and shown in real time.',
+  },
+  {
+    title: 'Copy Pixel Value',
+    description: 'Click Copy to copy the pixel value for use in design files, Figma, or CSS.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How do I convert REM to Pixels?',
+    answer: 'Multiply the REM value by your base font size: Pixels = REM × Base Font Size. With a standard 16px base, 2rem = 2 × 16 = 32px.',
+  },
+  {
+    question: 'What is the default base font size?',
+    answer: 'Standard browser defaults set the root HTML element font size to 16px, meaning 1rem equals 16px unless changed by user settings or CSS.',
+  },
+  {
+    question: 'Why convert REM back to PX?',
+    answer: 'Designers in tools like Figma or Sketch often work in pixels, while developers write CSS in REM for responsive typography. Converting REM to PX allows developers and designers to verify pixel-accurate design specifications.',
+  },
+  {
+    question: 'Is 0.5rem always 8px?',
+    answer: 'Only if the root font size is 16px (0.5 × 16 = 8px). If your project uses a 10px root font reset (62.5%), 0.5rem equals 5px.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Convert REM to Pixels (PX) Online',
+  'Convert CSS REM units back to pixel (px) values instantly using any base font size.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'REM to PX Converter – Free Online Tool',
   description:
     'A simple, free online REM to PX converter for developers and designers. Instantly convert REM units to pixel values with a customizable base font size.',
   keywords: 'rem to px, rem to pixel, converter, css, web development, responsive design, frontend tool, accessibility',
-  author: 'ni18-in',
+  author: 'ni18',
   ogDescription: 'A simple, free online tool to convert REM units to pixel (px) values effortlessly.',
   ogImageAlt: 'A promotional image for the REM to PX Converter tool.',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -21,6 +69,7 @@ const seo = toolSeo(tool, {
     url: `${SITE_URL}/tools/rem-to-px-converter/`,
     description: 'A simple, free online REM to PX converter tool for developers and designers.',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@type': 'Person', name: 'ni18', url: `${SITE_URL}/about/` },
   },
 });
 const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
@@ -82,6 +131,30 @@ const altLinks = { es: `${SITE_URL}/es/tools/rem-to-px-converter/` };
           </thead>
           <tbody id="conversion-table-body"></tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="how-to" class="how-to" aria-labelledby="how-to-heading">
+      <h2 id="how-to-heading">How to Convert REM to Pixels</h2>
+      <div class="card">
+        <ol>
+          <li>Enter the REM unit value into the REM Value input field (e.g. 1.25 or 2.5).</li>
+          <li>Ensure the Base Font Size matches your project root size (16px is standard browser default).</li>
+          <li>The pixel equivalent is instantly calculated and displayed in the result badge.</li>
+          <li>Click the Copy button to quickly copy the calculated pixel value.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="faq" class="how-to" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      <div class="card">
+        {faqs.map((faq) => (
+          <details class="faq-details" style="margin-bottom: 1rem; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--md-sys-color-on-surface, #1c1b1f);">{faq.question}</summary>
+            <p style="margin: 0.5rem 0 0; color: var(--md-sys-color-on-surface-variant, #49454f); font-size: 0.95rem; line-height: 1.5;">{faq.answer}</p>
+          </details>
+        ))}
       </div>
     </section>
   </div>

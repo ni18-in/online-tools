@@ -1,17 +1,89 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/grade-calculator/body.html?raw';
 import css from '../../../components/legacy/tools/grade-calculator/styles.css?raw';
 import js from '../../../components/legacy/tools/grade-calculator/script.js?raw';
 
 const tool = getTool('grade-calculator')!;
+
+const steps = [
+  {
+    title: 'Define Weighted Categories',
+    description: 'Enter each course grading category (e.g. Homework 20%, Midterms 30%, Final Exam 50%) and add them to your course.',
+  },
+  {
+    title: 'Input Assignment Scores',
+    description: 'Add your individual scores and total possible points for each homework, quiz, lab, or exam.',
+  },
+  {
+    title: 'Inspect Real-Time Course Grade',
+    description: 'Watch your overall letter grade and percentage recalculate in real time as each assignment is entered.',
+  },
+  {
+    title: 'Backup & Save Locally',
+    description: 'Grades persist automatically in local storage, and can be exported as a backup JSON file at any time.',
+  },
+];
+
+const features = [
+  {
+    icon: '⚖️',
+    title: 'Weighted Category Support',
+    description: 'Accurately calculates grades when categories have different weight percentages toward your final GPA.',
+  },
+  {
+    icon: '💾',
+    title: 'Auto-Save in Browser',
+    description: 'Never lose your grades. All inputs are saved automatically in your browser local storage for future visits.',
+  },
+  {
+    icon: '🎯',
+    title: 'Target Grade Forecasting',
+    description: 'Determine exactly what score you need on your upcoming final exam to maintain an A or pass the class.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Student Privacy',
+    description: 'No accounts, no email signups, and zero data uploads. Your academic records stay on your personal device.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How do you calculate a weighted grade?',
+    answer: 'To calculate a weighted grade, multiply each category average by its assigned percentage weight (e.g., Homework score * 20% + Exams score * 80%). Sum the resulting weighted points to find your overall grade percentage.',
+  },
+  {
+    question: 'What happens if my category weights do not add up to 100%?',
+    answer: 'The calculator automatically normalizes the weights by dividing the accumulated weighted points by the sum of weights entered, giving an accurate running grade throughout the semester.',
+  },
+  {
+    question: 'Are my grades saved if I close or refresh my browser?',
+    answer: 'Yes. All course categories, assignments, and scores are automatically saved to your browser localStorage. You can also click Export to download a JSON backup.',
+  },
+  {
+    question: 'Can I track multiple classes or semesters?',
+    answer: 'You can export your current class data as a JSON file, clear the calculator to start a new subject, and import previous class files whenever you want to review them.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Calculate Your Weighted Class Grade',
+  'Step-by-step instructions for calculating weighted course grades and predicting final exam requirements.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'Universal Grade Calculator - Weighted & Easy',
   description:
-    'The fastest universal weighted grade calculator. Define categories, add assignments, and get your real-time course grade. Built for students and teachers.',
-  keywords: 'grade calculator, gpa calculator, student tool, school grades',
+    'Free universal weighted grade calculator. Calculate course grades, assignment weights, GPA, and final exam targets. Auto-saves locally in your browser.',
+  keywords: 'grade calculator, weighted grade calculator, gpa calculator, final grade calculator, student grade tool, course grade calculator',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -29,11 +101,20 @@ const seo = toolSeo(tool, {
   },
 });
 ---
+
 <ToolLayout seo={seo} lang="en">
   <div
     class="tool-island legacy-tw"
     id="tool-grade-calculator"
     set:html={body}
+  />
+
+  <ToolContentSection
+    guideTitle="How to Calculate Weighted Course Grades & Target Scores"
+    guideIntro="Syllabus grading criteria can be confusing when professors assign different percentage weights to homework, pop quizzes, midterm exams, and final projects. Our free Universal Grade Calculator handles the math for you, calculating your current standing and showing exactly what you need on upcoming tests."
+    steps={steps}
+    features={features}
+    faqs={faqs}
   />
 </ToolLayout>
 

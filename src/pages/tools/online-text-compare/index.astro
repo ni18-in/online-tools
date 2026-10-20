@@ -1,17 +1,99 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/online-text-compare/body.html?raw';
 import css from '../../../components/legacy/tools/online-text-compare/styles.css?raw';
 import js from '../../../components/legacy/tools/online-text-compare/script.js?raw';
 
 const tool = getTool('online-text-compare')!;
+
+const steps = [
+  {
+    title: 'Enter Text 1 & Text 2',
+    description: 'Paste your original text in the left panel and the revised or updated text in the right panel.',
+  },
+  {
+    title: 'Click Compare',
+    description: 'Click the Compare button in the header toolbar to immediately compute the exact differences.',
+  },
+  {
+    title: 'Review Highlighted Changes',
+    description: 'Added text is clearly highlighted in green, while deleted or replaced words are highlighted in red.',
+  },
+  {
+    title: 'Copy or Download Results',
+    description: 'Use the toolbar buttons to copy the formatted comparison or download the diff summary directly.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔍',
+    title: 'Precise Character & Word Diff',
+    description: 'Pinpoints single character edits, word deletions, and full paragraph restructurings accurately.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Compare sensitive legal contracts, non-disclosure agreements, and private code with zero server uploads.',
+  },
+  {
+    icon: '🔄',
+    title: 'One-Click Text Swapping',
+    description: 'Reverse the comparison direction in one click with the dedicated Swap Texts button.',
+  },
+  {
+    icon: '🖨️',
+    title: 'Print & Export Ready',
+    description: 'Export diff outputs or print clean side-by-side comparison sheets directly from your browser.',
+  },
+  {
+    icon: '🌙',
+    title: 'Dark Mode Support',
+    description: 'Easy-on-the-eyes dark mode theme optimized for long code review sessions and low-light environments.',
+  },
+  {
+    icon: '⚡',
+    title: 'High-Speed Processing',
+    description: 'Engineered with jsdiff for sub-second comparison performance even on long-form manuscripts.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Can I use this diff tool to compare programming source code?',
+    answer: 'Yes. Online Text Compare works with programming languages (JavaScript, Python, C++, Go), HTML/CSS, SQL queries, and configuration files like YAML and INI.',
+  },
+  {
+    question: 'Is my confidential text uploaded or logged on your servers?',
+    answer: 'No. The diff computation executes 100% inside your browser using client-side JavaScript. Your text is never sent over the internet.',
+  },
+  {
+    question: 'How do the colors indicate changes in the text diff?',
+    answer: 'Green highlights indicate text that was added in Text 2. Red highlights indicate text from Text 1 that was removed or modified.',
+  },
+  {
+    question: 'Is there a limit to how much text I can compare?',
+    answer: 'There are no artificial word or character limits. The tool comfortably handles tens of thousands of words in a single comparison.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Compare Two Texts Online and Find Differences',
+  'Step-by-step instructions for comparing two pieces of text and highlighting additions, deletions, and modifications.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
-  title: 'Online Text Compare - Diff Checker',
+  title: 'Online Text Compare - Diff Checker Tool Free',
   description:
-    'Online Text Compare tool to find differences between two texts. Supports multiple languages, dark mode, and highlights added, removed, and common lines.',
-  keywords: 'text compare, diff tool, online text comparison, compare text files',
+    'Free online text compare and diff checker tool. Compare two texts side-by-side and highlight additions, deletions, and differences 100% privately in-browser.',
+  keywords: 'text compare, diff tool, online text comparison, compare text files, diff checker, text difference checker, compare strings online',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -27,11 +109,21 @@ const seo = toolSeo(tool, {
     keywords: 'text compare, diff checker, compare text, text difference, online diff tool, file compare, compare strings',
   },
 });
+
 const headRaw =
   '<script src="/vendor/jsdiff/diff.min.js" defer></script>';
 ---
+
 <ToolLayout seo={seo} lang="en" headRaw={headRaw} materialIcons>
   <div class="tool-island" id="tool-online-text-compare" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="How to Compare Texts and Highlight Differences Online"
+    guideIntro="Proofreading revisions between drafts, verifying copy changes before publishing, and reviewing code diffs shouldn't require installing bulky desktop software. Our private, in-browser Online Text Compare tool highlights additions, deletions, and common lines side-by-side with zero data leaving your machine."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

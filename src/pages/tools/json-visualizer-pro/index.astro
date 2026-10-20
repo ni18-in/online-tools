@@ -1,16 +1,97 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/json-visualizer-pro/body.html?raw';
 import css from '../../../components/legacy/tools/json-visualizer-pro/styles.css?raw';
 import js from '../../../components/legacy/tools/json-visualizer-pro/script.js?raw';
 
 const tool = getTool('json-visualizer-pro')!; // robots = 'index, follow' (set in tools.ts)
+
+const steps = [
+  {
+    title: 'Paste or Type JSON',
+    description: 'Enter your raw JSON string into the left input panel, or edit the default example structure.',
+  },
+  {
+    title: 'Validate & Check Syntax',
+    description: 'Real-time syntax validation immediately detects misplaced commas, unclosed quotes, and bracket errors with precise feedback.',
+  },
+  {
+    title: 'Format or Minify',
+    description: 'Click "Format" to beautify JSON with standard 2-space indentation or "Minify" to strip whitespace for compact API payloads.',
+  },
+  {
+    title: 'Inspect Interactive Tree View',
+    description: 'Click "Visualize / Update" to explore your JSON hierarchy with collapsible nodes, color-coded types, and nested object navigation.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Your JSON payloads (including confidential user records and production database dumps) never leave your browser memory.',
+  },
+  {
+    icon: '🌳',
+    title: 'Interactive Tree Visualization',
+    description: 'Navigate deeply nested JSON objects and arrays effortlessly with clean collapsible hierarchy nodes.',
+  },
+  {
+    icon: '⚡',
+    title: 'Instant Syntax Validation',
+    description: 'Instantly catch syntax errors and invalid JSON formatting with descriptive error messages before deploying.',
+  },
+  {
+    icon: '⏪',
+    title: 'Undo & Redo History',
+    description: 'Safely edit and experiment with dedicated Undo (Ctrl+Z) and Redo (Ctrl+Y) state controls.',
+  },
+  {
+    icon: '🧹',
+    title: 'Format & Minify in 1-Click',
+    description: 'Beautify unformatted minified strings into readable code, or compress large JSON into a single compact line.',
+  },
+  {
+    icon: '📋',
+    title: 'One-Click Copy & Clear',
+    description: 'Quickly copy the processed JSON directly to your clipboard or reset the editor to start fresh.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is my confidential JSON data uploaded to an external server?',
+    answer: 'No. JSON Visualizer Pro parses, formats, and validates your data 100% locally in your web browser. Nothing is ever sent across the network or saved to any database.',
+  },
+  {
+    question: 'What is the benefit of the interactive tree view?',
+    answer: 'The tree view transforms complex, deeply nested JSON into an expandable visual hierarchy. You can collapse objects or arrays, inspect data types (string, number, boolean, null), and read complex schemas easily.',
+  },
+  {
+    question: 'What is the difference between Format and Minify?',
+    answer: 'Formatting adds indentation and line breaks to make JSON human-readable. Minifying removes all extra spaces and line breaks to minimize payload size for efficient HTTP API transport.',
+  },
+  {
+    question: 'Can this tool validate JSON schema errors?',
+    answer: 'Yes. If your JSON contains a missing comma, unquoted key, trailing comma, or mismatched bracket, the error bar immediately flags the issue.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to View, Format, and Validate JSON Online',
+  'Learn how to inspect, beautify, and validate JSON data in real time with an interactive tree visualizer.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'JSON Visualizer Pro - View, Format & Edit JSON Online',
   description:
-    'An easy-to-use online tool to visualize, format, minify, copy, and validate JSON data. Features include a tree view, undo/redo, and error checking.',
+    'Free online JSON viewer, formatter, and validator. Inspect complex JSON with an interactive tree view, format with indentation, and minify 100% privately.',
   keywords:
     'json visualizer, json viewer, json formatter, json editor, online json tool, json tree view, format json, minify json, validate json, json schema',
   author: 'JSON Visualizer Pro',
@@ -19,6 +100,7 @@ const seo = toolSeo(tool, {
   ogImage: `${SITE_URL}/blogs/images/json-visualizer-pro-banner.jpeg`,
   ogImageAlt: 'JSON Visualizer Pro Tool Interface Preview',
   twitterDomain: 'online-tools.ni18.in',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -36,10 +118,20 @@ const seo = toolSeo(tool, {
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/json-visualizer-pro/` },
   },
 });
+
 const headRaw = '<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">';
 ---
+
 <ToolLayout h1="JSON Visualizer Pro" seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-json-visualizer-pro" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="How to View, Format, and Debug JSON with JSON Visualizer Pro"
+    guideIntro="Working with massive API responses or complex configuration files can be cumbersome in raw text. JSON Visualizer Pro combines a fast code editor with an interactive collapsible tree view, real-time syntax error reporting, and one-click beautify/minify controls—running entirely in your browser."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

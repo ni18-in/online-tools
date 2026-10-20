@@ -1,18 +1,101 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/all-in-one-text-analyzer/body.html?raw';
 import css from '../../../components/legacy/tools/all-in-one-text-analyzer/styles.css?raw';
 import js from '../../../components/legacy/tools/all-in-one-text-analyzer/script.js?raw';
 
 const tool = getTool('all-in-one-text-analyzer')!;
+
+const steps = [
+  {
+    title: 'Paste or Type Content',
+    description: 'Enter your article, social media post, academic essay, or code documentation directly into the text editor.',
+  },
+  {
+    title: 'View Instant Counts',
+    description: 'Real-time counters instantly show total words, characters (with and without spaces), sentences, and paragraphs.',
+  },
+  {
+    title: 'Review Reading & Speaking Time',
+    description: 'Check estimated reading time (standard 200 WPM) and speech delivery duration to pace presentations and podcasts.',
+  },
+  {
+    title: 'Analyze Keyword Frequency',
+    description: 'Inspect the top repeated keywords and density percentages to refine SEO copywriting and remove repetitive phrasing.',
+  },
+];
+
+const features = [
+  {
+    icon: '📊',
+    title: 'Instant Real-Time Counts',
+    description: 'Live counting for words, characters with/without spaces, sentences, lines, and paragraphs with zero delay.',
+  },
+  {
+    icon: '⏱️',
+    title: 'Reading & Speech Estimator',
+    description: 'Accurate reading and speaking time projections to ensure speeches and articles fit exact time slots.',
+  },
+  {
+    icon: '🔍',
+    title: 'Keyword Density Analysis',
+    description: 'Automatically calculates frequency percentages for key terms to assist content writers with SEO optimization.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Your confidential drafts, client emails, and unpublished manuscripts are processed in browser memory and never uploaded.',
+  },
+  {
+    icon: '📱',
+    title: 'Social Media Limits',
+    description: 'Track exact character limits for Twitter/X (280 chars), LinkedIn, Instagram captions, and Google meta descriptions.',
+  },
+  {
+    icon: '⚡',
+    title: 'No Word Limits',
+    description: 'Easily handle large manuscripts, long-form blog posts, and multi-chapter books without browser freezing.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is reading time calculated in this word counter?',
+    answer: 'Reading time is calculated using the standard adult silent reading rate of 200 words per minute (WPM), while speech duration is calculated at 130 WPM.',
+  },
+  {
+    question: 'Does this tool count spaces and punctuation towards character count?',
+    answer: 'The analyzer reports both: Characters with spaces (essential for social media and character limits) and Characters without spaces.',
+  },
+  {
+    question: 'Are my unpublished essays or articles saved to any server?',
+    answer: 'No. The text analyzer runs entirely in your local browser environment. No text is transmitted, stored, or indexed on any remote server.',
+  },
+  {
+    question: 'Can I analyze text in languages other than English?',
+    answer: 'Yes. The analyzer supports Unicode characters, accurately counting words, characters, and spaces across Spanish, French, German, Hindi, and other languages.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Count Words and Analyze Text Online',
+  'Step-by-step instructions for calculating word count, character count, reading time, and keyword frequency.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
-  title: 'All-in-One Text Analyzer - Professional Layout',
+  title: 'Word Counter & Text Analyzer | Character Count & Reading Time',
   description:
-    'Professional text analyzer: word count, character count, sentence and paragraph count, reading time, readability score, and keyword frequency.',
+    'Free online word counter and text analyzer. Calculate words, characters, sentences, reading time, keyword density, and readability score in real time.',
   keywords:
     'text analyzer, word counter, character counter, sentence counter, paragraph counter, reading time calculator, keyword density, readability score, online tool, free text analysis, professional text tool',
+  author: 'ni18',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -33,10 +116,20 @@ const seo = toolSeo(tool, {
     },
   },
 });
+
 const headRaw = '<script src="/vendor/lucide/lucide.min.js"></script>';
 ---
+
 <ToolLayout h1="All-in-One Text Analyzer" seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-all-in-one-text-analyzer" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="In-Depth Guide to Text Analysis, Word Counts & Reading Metrics"
+    guideIntro="Whether you are writing academic essays, crafting social media campaigns within strict character limits, or optimizing blog posts for search engines, having accurate word counts, readability metrics, and keyword frequency data is indispensable. Our private, in-browser Text Analyzer provides instant analysis without transmitting your words across the web."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

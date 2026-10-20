@@ -1,17 +1,99 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/advance-epoch-converter/body.html?raw';
 import css from '../../../components/legacy/tools/advance-epoch-converter/styles.css?raw';
 import js from '../../../components/legacy/tools/advance-epoch-converter/script.js?raw';
 
 const tool = getTool('advance-epoch-converter')!;
+
+const steps = [
+  {
+    title: 'Monitor Live Epoch',
+    description: 'View the live ticking Unix timestamp counter in seconds and milliseconds, with pause and resume controls.',
+  },
+  {
+    title: 'Convert Timestamp to Date',
+    description: 'Paste any numeric timestamp (seconds, milliseconds, microseconds, or nanoseconds) to convert into human-readable UTC and local time.',
+  },
+  {
+    title: 'Convert Date to Timestamp',
+    description: 'Select year, month, date, hour, minute, and second values to compute the exact Unix epoch value in seconds or milliseconds.',
+  },
+  {
+    title: 'Copy Formatted Output',
+    description: 'Instantly copy standard ISO 8601 strings, RFC 2822 dates, or raw epoch integers for backend API and database queries.',
+  },
+];
+
+const features = [
+  {
+    icon: '⏱️',
+    title: 'Live Real-Time Clock',
+    description: 'Real-time live clock displays the current Unix timestamp in seconds, milliseconds, and formatted UTC/local time.',
+  },
+  {
+    icon: '🔢',
+    title: 'Auto-Detect Timestamp Scale',
+    description: 'Intelligently detects seconds (10 digits), milliseconds (13 digits), microseconds (16 digits), and nanoseconds (19 digits).',
+  },
+  {
+    icon: '🌐',
+    title: 'UTC & Local Timezones',
+    description: 'Avoid timezone confusion with simultaneous side-by-side rendering of UTC/GMT, local system time, and ISO 8601 timestamps.',
+  },
+  {
+    icon: '🔄',
+    title: 'Two-Way Conversion',
+    description: 'Convert from Epoch timestamp to human date, or from a human calendar date back into Unix timestamp seconds.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Client-Side Precision',
+    description: 'Runs directly in your browser without communicating with any external API, ensuring instantaneous results and privacy.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Year 2038 Compliant',
+    description: 'Built on modern 64-bit JavaScript Date engines, eliminating the 32-bit integer overflow limit.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is a Unix Epoch timestamp?',
+    answer: 'A Unix Epoch timestamp is the total number of seconds (or milliseconds) elapsed since 00:00:00 UTC on January 1, 1970, excluding leap seconds. It is the universal standard for recording timestamps across databases, operating systems, and APIs.',
+  },
+  {
+    question: 'How can I tell if my timestamp is in seconds or milliseconds?',
+    answer: 'Count the digits: a 10-digit number (e.g., 1776500000) is in seconds (standard in Unix/Linux and Python), while a 13-digit number (e.g., 1776500000000) is in milliseconds (standard in JavaScript Date.now() and Java). This tool automatically detects both scales.',
+  },
+  {
+    question: 'What is the Year 2038 (Y2038) problem?',
+    answer: 'Systems using 32-bit signed integers to store Unix time will overflow on January 19, 2038. This converter utilizes modern 64-bit floating-point numbers, ensuring accurate date calculations thousands of years into the future.',
+  },
+  {
+    question: 'How do I convert a date string like ISO 8601 to an Epoch timestamp?',
+    answer: 'Use the "Date to Epoch" section below the live clock, enter the date and time, and click Convert to instantly retrieve the timestamp in both seconds and milliseconds.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Convert Unix Epoch Timestamps to Human Dates',
+  'Learn how to convert Unix timestamps to readable UTC and local dates, and convert calendar dates back to Epoch seconds.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'Advance Epoch & Unix Timestamp Converter',
   description:
-    'Convert Unix timestamps to human-readable dates and vice versa. Supports seconds, milliseconds, microseconds, nanoseconds, and timezones.',
-  keywords: 'epoch converter, unix timestamp, timestamp converter, epoch time, unix time, developer tool',
+    'Free online Unix timestamp converter and Epoch to date calculator. Convert seconds and milliseconds to human-readable UTC and local time in real time.',
+  keywords: 'epoch converter, unix timestamp, timestamp converter, epoch time, unix time, epoch to date, convert unix timestamp online, developer tool',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -26,8 +108,17 @@ const seo = toolSeo(tool, {
   },
 });
 ---
+
 <ToolLayout seo={seo} lang="en">
   <div class="tool-island" id="tool-advance-epoch-converter" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="Complete Guide to Unix Epoch Timestamps & Date Conversions"
+    guideIntro="Unix timestamps are the backbone of time synchronization across modern operating systems, cloud databases, and REST APIs. Whether you are debugging microservice log files, verifying token expirations, or scheduling database queries, our online Epoch Converter provides instant bidirectional translation between machine timestamps and human-readable time."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

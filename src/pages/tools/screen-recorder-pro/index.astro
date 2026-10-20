@@ -1,18 +1,100 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/screen-recorder-pro/body.html?raw';
 import css from '../../../components/legacy/tools/screen-recorder-pro/styles.css?raw';
 import js from '../../../components/legacy/tools/screen-recorder-pro/script.js?raw';
 
 const tool = getTool('screen-recorder-pro')!;
+
+const steps = [
+  {
+    title: 'Choose Capture Source',
+    description: 'Select whether to record your entire monitor display, a specific application window, or a single browser tab.',
+  },
+  {
+    title: 'Configure Audio Settings',
+    description: 'Toggle microphone voiceover and system audio to capture meeting audio, software sound, or tutorial commentary.',
+  },
+  {
+    title: 'Start Recording',
+    description: 'Click "Start Recording" and grant browser permission to capture your screen with no software installation.',
+  },
+  {
+    title: 'Preview & Download',
+    description: 'When finished, click "Stop Recording" to immediately preview your video and download the high-definition WebM file.',
+  },
+];
+
+const features = [
+  {
+    icon: '🚫',
+    title: 'Zero Watermarks',
+    description: 'Create clean, professional videos without forced branding, logos, or trial banners on your screen recordings.',
+  },
+  {
+    icon: '🔒',
+    title: '100% In-Browser Privacy',
+    description: 'Media streams are captured directly into browser memory using the HTML5 MediaRecorder API. Zero cloud uploads.',
+  },
+  {
+    icon: '🎙️',
+    title: 'Microphone & System Audio',
+    description: 'Seamlessly capture clear voice commentary along with system sounds, video calls, or YouTube playback.',
+  },
+  {
+    icon: '💻',
+    title: 'Tab, Window, or Full Screen',
+    description: 'Only record what you want to share—keep your desktop background and private notifications hidden.',
+  },
+  {
+    icon: '⚡',
+    title: 'No Software Install',
+    description: 'No extensions, no executable downloads, and no sign-ups required. Works instantly in modern desktop browsers.',
+  },
+  {
+    icon: '⏱️',
+    title: 'No Artificial Time Limits',
+    description: 'Record quick 30-second bug demos or hour-long lectures without countdown timers or paywalls.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Are my screen recordings uploaded to any cloud storage or server?',
+    answer: 'No. Screen Recorder Pro processes the video stream 100% locally on your machine via the native browser MediaRecorder API. When you stop recording, the video file is generated in local RAM and saved straight to your downloads folder.',
+  },
+  {
+    question: 'Can I record internal system sound as well as my microphone?',
+    answer: 'Yes. When your browser displays the screen-sharing prompt, check the "Share audio" checkbox to include system sound, and ensure the microphone toggle is enabled in the recording controls.',
+  },
+  {
+    question: 'Is there a limit on how long I can record my screen?',
+    answer: 'There are no artificial limits imposed by the app. You can record as long as your computer has available memory and disk space.',
+  },
+  {
+    question: 'What video format is saved and how do I open it?',
+    answer: 'Recordings are saved as standard WebM video files (VP8/VP9 codec). WebM files can be played in VLC, Google Chrome, QuickTime, or uploaded directly to YouTube, Google Drive, and video editors like Premiere Pro and DaVinci Resolve.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Record Your Screen Online for Free Without Watermark',
+  'Record your computer screen, browser tabs, or application windows with audio directly in the browser.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
-  title: 'Screen Recorder Pro - Free Online Screen Recording',
+  title: 'Free Online Screen Recorder with Audio – No Watermark',
   description:
-    'Screen Recorder Pro is a free, client-side web app to record your screen, window, or tab with audio. Easy to use, no uploads, and respects your privacy.',
+    'Free in-browser screen recorder with audio. Record full screen, window, or tab with no watermarks, no time limits, and 100% privacy. Zero software installation.',
   keywords:
-    'screen recorder, screen recording, online screen recorder, free screen recorder, video recording, capture screen, browser recorder, client-side recorder, privacy, webm recorder',
+    'screen recorder, screen recording, online screen recorder, free screen recorder, video recording, capture screen, browser recorder, client-side recorder, privacy, webm recorder, no watermark screen recorder',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -30,8 +112,17 @@ const seo = toolSeo(tool, {
   },
 });
 ---
+
 <ToolLayout seo={seo} lang="en" materialIcons>
   <div class="tool-island legacy-tw" id="tool-screen-recorder-pro" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="In-Browser Screen Recording: Clean, Fast & Completely Private"
+    guideIntro="Recording software demos, bug reports, and educational presentations should not require heavy desktop software, invasive browser extensions, or subscription paywalls with annoying watermarks. Screen Recorder Pro leverages HTML5 Web APIs to capture high-definition video directly on your computer."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>
