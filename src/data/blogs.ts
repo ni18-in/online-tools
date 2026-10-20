@@ -35,34 +35,6 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'css-anchor-positioning-rem-to-px-2026',
-    title: 'CSS Anchor Positioning 2026: Convert REM to PX Online Free',
-    description: 'With 2026 W3C CSS Anchor Positioning rules, converting REM to PX is vital for UI fallbacks. Try our free 100% client-side tool—zero uploads, instant results.',
-    keywords: 'css anchor positioning 2026, rem to px converter, convert rem to px online, fluid design system rem, css units conversion, ni18',
-    category: 'Developer',
-    datePublished: '2026-08-09T12:00:00+05:30',
-    dateModified: '2026-08-09T12:00:00+05:30',
-    image: `${SITE_URL}/assets/blog/css-anchor-positioning-rem-to-px-2026-banner.webp`,
-    author: 'ni18',
-    noindex: true,
-    i18n: {
-      es: {
-        slug: 'posicionamiento-ancla-css-convertidor-rem-a-px-2026',
-        title: 'Posicionamiento Ancla CSS 2026: Convierte REM a PX Gratis',
-        description: 'Con las reglas CSS Anchor Positioning de 2026, convertir REM a PX es vital. Prueba nuestra herramienta 100% local en tu navegador sin subir datos.',
-        keywords: 'posicionamiento ancla css 2026, convertidor rem a px, convertir rem a px gratis, unidades css tipografia, diseno adaptativo rem px, ni18',
-        category: 'Programación'
-      },
-      fr: {
-        slug: 'positionnement-ancre-css-convertisseur-rem-en-px-2026',
-        title: 'Positionnement Ancre CSS 2026 : Convertir REM en PX Privé',
-        description: 'Avec les règles CSS Anchor Positioning 2026, convertir REM en PX est vital. Essayez notre outil 100% côté client sans aucun téléversement.',
-        keywords: 'positionnement ancre css 2026, convertisseur rem en px, convertir rem en px gratuit, unites css typographie, design adaptatif rem px, ni18',
-        category: 'Développement'
-      }
-    }
-  },
-  {
     slug: 'nodejs-22-fetch-typescript-5-8-curl-to-code',
     title: 'Node.js 22 & TS 5.8 API Migration: Convert cURL to Code Free',
     description: 'With Node.js 22 LTS and TypeScript 5.8 enforcing native fetch APIs, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
