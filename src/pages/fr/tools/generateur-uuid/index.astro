@@ -1,0 +1,601 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../../data/tools';
+import { SITE_URL } from '../../../../data/site';
+
+const tool = getTool('uuid-generator')!;
+
+const steps = [
+  {
+    title: 'Sélectionner le Type d\'Identifiant et la Quantité',
+    description: 'Choisissez entre UUID v4 (aléatoire), UUID v7 (trié par horodatage), ULID (triable lexicographiquement) ou NanoID. Définissez votre lot de 1 à 500 IDs.',
+  },
+  {
+    title: 'Personnaliser le Format de Sortie',
+    description: 'Activez majuscules ou minuscules, incluez ou excluez les tirets, ou entourez vos identifiants de guillemets selon vos besoins.',
+  },
+  {
+    title: 'Inspecter et Décoder les Horodatages',
+    description: 'Collez n\'importe quel UUID v7 ou ULID dans le panneau Inspecteur pour extraire instantanément son horodatage en millisecondes et sa date de création.',
+  },
+  {
+    title: 'Copier ou Télécharger les Résultats',
+    description: 'Copiez les identifiants générés dans le presse-papiers ou exportez-les sous forme de fichiers texte .txt ou de tableaux JSON structurés.',
+  },
+];
+
+const faqSchema = makeFaqSchema([
+  {
+    question: 'Mes identifiants UUID et NanoID sont-ils privés et sécurisés ?',
+    answer: 'Oui, 100%. Toute la génération, le formatage et l\'analyse s\'exécutent entièrement dans la mémoire locale de votre navigateur via l\'API Web Crypto. Aucune donnée n\'est transmise sur un serveur distant.',
+  },
+  {
+    question: 'Quelle est la différence principale entre UUID v4 et UUID v7 ?',
+    answer: 'L\'UUID v4 est totalement aléatoire avec 122 bits d\'entropie. L\'UUID v7 intègre un horodatage en millisecondes sur 48 bits au début, garantissant un tri chronologique efficace dans les bases de données.',
+  },
+  {
+    question: 'En quoi ULID diffère-t-il de NanoID ?',
+    answer: 'ULID est un identifiant de 128 bits codé en 26 caractères Base32 de Crockford incluant un horodatage. NanoID est une chaîne compacte et personnalisable (21 caractères par défaut) optimisée pour les URLs.',
+  },
+  {
+    question: 'Puis-je extraire la date de création de n\'importe quel UUID ?',
+    answer: 'Vous pouvez extraire l\'horodatage des formats temporels comme UUID v1, v6, v7 et ULID. Les formats aléatoires comme UUID v4 ne stockent pas de métadonnées temporelles.',
+  },
+]);
+
+const howToSchema = makeHowToSchema(
+  'Comment Générer et Inspecter des UUID, ULID et NanoID en Ligne',
+  'Guide étape par étape pour générer des chaînes sécurisées UUID v4, UUID v7, ULID et NanoID avec décodage d\'horodatage.',
+  steps
+);
+
+const seo = toolSeo(tool, {
+  title: 'Générateur UUID et NanoID – UUID v4, v7, ULID en Lot',
+  description:
+    'Générez des UUID v4, v7, ULID et NanoID sécurisés en lot. Inspectez les horodatages et formatez vos identifiants avec confidentialité 100% locale.',
+  keywords:
+    'generateur uuid, generateur uuid v7, generateur nanoid, generateur ulid, inspecteur uuid, generateur uuid en lot, uuid trie par horodatage, outil uuid en ligne',
+  author: 'ni18',
+  ogTitle: 'Générateur UUID et NanoID – UUID v4, v7, ULID en Lot',
+  ogDescription:
+    'Générez des UUID v4, v7, ULID et NanoID sécurisés en lot. Inspectez les horodatages et formatez vos identifiants avec confidentialité 100% locale.',
+  twitterDomain: 'online-tools.ni18.in',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Générateur et Inspecteur UUID et NanoID',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/fr/tools/generateur-uuid/`,
+    description:
+      'Générez des chaînes sécurisées UUID v4, v7, ULID et NanoID. Inspectez les horodatages sans aucun transfert vers un serveur.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  extraJsonLd: [howToSchema, faqSchema],
+});
+seo.canonical = `${SITE_URL}/fr/tools/generateur-uuid/`;
+seo.og!.url = seo.canonical;
+seo.twitter!.url = seo.canonical;
+
+const altLinks = {
+  en: `${SITE_URL}/tools/uuid-generator/`,
+  es: `${SITE_URL}/es/tools/generador-uuid/`,
+};
+---
+
+<ToolLayout seo={seo} lang="fr" altLinks={altLinks}>
+  <div class="tool-island" id="tool-uuid-generator">
+    <header class="tool-header">
+      <h1>Générateur et Inspecteur UUID et NanoID</h1>
+      <p class="subtitle">Génération en lot sécurisée d'UUID v4, UUID v7, ULID et NanoID avec inspection d'horodatage</p>
+    </header>
+
+    <!-- Barre d'Actions Rapides -->
+    <div class="quick-actions">
+      <button type="button" class="action-btn" id="btn-generate">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span>Générer Nouveau Lot</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-sample">
+        <span>Charger Exemple</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-clear">
+        <span>Effacer</span>
+      </button>
+    </div>
+
+    <!-- Espace de Travail Principal -->
+    <div class="workspace-grid">
+      <!-- Configuration et Générateur -->
+      <section class="pane input-pane" aria-labelledby="controls-heading-fr">
+        <div class="pane-header">
+          <h2 id="controls-heading-fr">Configuration et Générateur</h2>
+        </div>
+
+        <div class="control-group">
+          <label for="id-type">Format d'Identifiant</label>
+          <select id="id-type" class="form-select">
+            <option value="v4" selected>UUID v4 (Aléatoire - RFC 4122)</option>
+            <option value="v7">UUID v7 (Trié par horodatage - RFC 9562)</option>
+            <option value="ulid">ULID (Triable lexicographiquement)</option>
+            <option value="nanoid">NanoID (Compact pour URLs)</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group half">
+            <label for="id-count">Quantité (1 - 500)</label>
+            <input type="number" id="id-count" value="10" min="1" max="500" class="form-input" />
+          </div>
+          <div class="control-group half" id="nanoid-length-wrap" style="display:none;">
+            <label for="nanoid-length">Longueur NanoID</label>
+            <input type="number" id="nanoid-length" value="21" min="6" max="64" class="form-input" />
+          </div>
+        </div>
+
+        <div class="options-grid">
+          <label class="checkbox-label">
+            <input type="checkbox" id="opt-uppercase" />
+            <span>Majuscules</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="opt-hyphens" checked />
+            <span>Tirets (UUID)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="opt-quotes" />
+            <span>Entourer de guillemets</span>
+          </label>
+        </div>
+
+        <div class="pane-header sub-header margin-top">
+          <h2>Inspecteur UUID / ULID et Décodeur</h2>
+        </div>
+        <div class="control-group">
+          <input type="text" id="inspect-input" class="form-input" placeholder="Collez un UUID v7 ou ULID pour extraire la date..." spellcheck="false" />
+        </div>
+        <div id="inspect-result" class="inspect-box">
+          <div class="inspect-row"><span class="inspect-label">Format Détecté:</span> <span id="insp-format" class="badge">Aucun</span></div>
+          <div class="inspect-row"><span class="inspect-label">Horodatage (UTC):</span> <span id="insp-date" class="inspect-val">-</span></div>
+          <div class="inspect-row"><span class="inspect-label">Époque Unix:</span> <span id="insp-epoch" class="inspect-val">-</span></div>
+        </div>
+
+        <div id="status-error" class="error-banner" style="display:none;" role="alert">
+          <span id="error-message">Configuration ou format d'ID invalide.</span>
+        </div>
+      </section>
+
+      <!-- Section de Sortie -->
+      <section class="pane output-pane" aria-labelledby="output-heading-fr">
+        <div class="pane-header">
+          <h2 id="output-heading-fr">Résultats Générés</h2>
+          <div class="output-actions">
+            <button type="button" class="copy-btn" id="btn-copy"><span>Copier Tout</span></button>
+            <button type="button" class="copy-btn action-btn--secondary" id="btn-download-txt"><span>.TXT</span></button>
+            <button type="button" class="copy-btn action-btn--secondary" id="btn-download-json"><span>.JSON</span></button>
+          </div>
+        </div>
+        <div class="output-wrap">
+          <textarea id="output-text" class="output-textarea" readonly spellcheck="false"></textarea>
+        </div>
+        <div class="output-meta">
+          <span id="output-count-badge" class="count-badge">0 IDs générés</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Guide Éducatif et FAQ -->
+    <article class="guide-section">
+      <h2>Comment Utiliser le Générateur UUID et NanoID</h2>
+      <p>Que vous conceviez des schémas de base de données, configuriez des API ou génériez des jetons de session, le choix de l'identifiant est essentiel. Cet outil génère des IDs sécurisés et inspecte les horodatages directement dans votre navigateur.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>⚡ Confidentialité Web Crypto 100% Locale</h3>
+          <p>Utilise l'API native <code>crypto.getRandomValues</code> pour une entropie maximale. Aucune donnée n'est envoyée vers un serveur externe.</p>
+        </div>
+        <div class="feature-card">
+          <h3>⏱️ Extraction d'Horodatage UUID v7 et ULID</h3>
+          <p>Décodez les horodatages précis en millisecondes depuis les identifiants triables (UUID v7 et ULID) pour vérifier la date exacte de création.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📦 Exportation en Lot et Options</h3>
+          <p>Générez jusqu'à 500 identifiants simultanément. Personnalisez la casse, les tirets ou guillemets et exportez au format .TXT ou .JSON.</p>
+        </div>
+      </div>
+
+      <h2>Instructions Étape par Étape</h2>
+      <ol class="steps-list">
+        <li><strong>Étape 1 : Choisissez le Format :</strong> Sélectionnez UUID v4 pour des identifiants aléatoires, UUID v7 ou ULID pour des clés chronologiques, ou NanoID pour des URLs compactes.</li>
+        <li><strong>Étape 2 : Configurez les Options :</strong> Définissez la quantité souhaitée et activez les majuscules, tirets ou guillemets selon vos préférences.</li>
+        <li><strong>Étape 3 : Copiez ou Exportez :</strong> Copiez les résultats ou téléchargez des fichiers au format .TXT ou .JSON.</li>
+        <li><strong>Étape 4 : Inspectez les Identifiants :</strong> Collez un UUID v7 ou ULID dans l'inspecteur pour afficher sa date de création en UTC.</li>
+      </ol>
+
+      <h2>Analyse Technique : UUID v4 vs UUID v7 vs ULID</h2>
+      <p>Traditionnellement, <strong>UUID v4</strong> (RFC 4122) est le standard par défaut. Cependant, son absence d'ordre chronologique entraîne une fragmentation des index B-tree dans les bases de données lors d'insertions massives.</p>
+
+      <p><strong>UUID v7</strong> (RFC 9562) résout ce problème en intégrant un horodatage Unix de 48 bits, garantissant un tri séquentiel fluide qui préserve les performances d'écriture.</p>
+
+      <p>De même, <strong>ULID</strong> utilise 128 bits codés en Base32 de Crockford avec horodatage, tandis que <strong>NanoID</strong> offre des chaînes plus courtes adaptées aux URLs avec une résistance élevée aux collisions.</p>
+
+      <h2>Foire Aux Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Mes données générées sont-elles confidentielles ?</summary>
+          <p>Oui, 100%. Tout le traitement s'effectue dans la mémoire locale de votre navigateur. Aucun réseau ni serveur n'est sollicité.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quand utiliser UUID v7 plutôt que UUID v4 ?</summary>
+          <p>Utilisez UUID v7 pour les clés primaires de bases de données relationnelles afin d'éviter la fragmentation des index.</p>
+        </details>
+        <details class="faq-item">
+          <summary>NanoID peut-il remplacer UUID v4 ?</summary>
+          <p>Oui. NanoID produit des chaînes plus courtes (21 caractères contre 36) très adaptées aux URLs tout en maintenant une excellente entropie.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment fonctionne le décodage d'horodatage en UUID v7 ?</summary>
+          <p>Les 48 premiers bits représentent l'horodatage Unix en millisecondes. L'inspecteur extrait ces bits et les convertit en une date UTC lisible.</p>
+        </details>
+      </div>
+    </article>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-uuid-generator { max-width: 1080px; margin: 0 auto; }
+  .tool-header { text-align: center; margin-bottom: 24px; }
+  .tool-header h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .subtitle { font-size: 1rem; color: var(--md-sys-color-on-surface-variant); margin: 0; }
+
+  .quick-actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+  .action-btn, .copy-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+    border-radius: var(--md-sys-shape-corner-small, 8px); font-size: 0.875rem; font-weight: 500;
+    cursor: pointer; border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .action-btn:hover, .copy-btn:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); }
+  .action-btn--secondary { background: var(--md-sys-color-surface-container-low); }
+
+  .workspace-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 36px; }
+  .pane { background: var(--md-sys-color-surface-container-lowest); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
+  .pane-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .pane-header h2 { font-size: 1.1rem; font-weight: 600; margin: 0; color: var(--md-sys-color-on-surface); }
+  .sub-header { border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 16px; }
+  .margin-top { margin-top: 20px; }
+
+  .control-group { margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .control-group label { font-size: 0.85rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant); }
+  .control-row { display: flex; gap: 12px; }
+  .control-row .half { flex: 1; }
+
+  .form-select, .form-input {
+    width: 100%; padding: 10px 12px; border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface);
+    font-size: 0.9rem; box-sizing: border-box;
+  }
+
+  .options-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; margin-bottom: 8px; }
+  .checkbox-label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; cursor: pointer; color: var(--md-sys-color-on-surface); }
+
+  .inspect-box { background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; }
+  .inspect-row { display: flex; justify-content: space-between; align-items: center; }
+  .inspect-label { font-weight: 600; color: var(--md-sys-color-on-surface-variant); }
+  .inspect-val { font-family: monospace; font-size: 0.85rem; color: var(--md-sys-color-on-surface); }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+
+  .output-actions { display: flex; gap: 6px; }
+  .output-wrap { flex: 1; display: flex; }
+  .output-textarea {
+    width: 100%; min-height: 360px; font-family: monospace; font-size: 0.875rem; line-height: 1.5;
+    padding: 12px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface-container-low); color: var(--md-sys-color-on-surface);
+    resize: vertical; box-sizing: border-box;
+  }
+  .output-meta { margin-top: 10px; display: flex; justify-content: flex-end; }
+  .count-badge { font-size: 0.8rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant); }
+
+  .error-banner { margin-top: 12px; padding: 10px 14px; border-radius: 8px; background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); font-size: 0.85rem; }
+
+  .guide-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--md-sys-color-outline-variant); }
+  .guide-section h2 { font-size: 1.5rem; font-weight: 700; margin: 28px 0 12px; color: var(--md-sys-color-on-surface); }
+  .guide-section p { font-size: 0.95rem; line-height: 1.6; color: var(--md-sys-color-on-surface-variant); margin-bottom: 16px; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+  .feature-card { padding: 16px; background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; margin: 0 0 8px; color: var(--md-sys-color-primary); }
+  .feature-card p { font-size: 0.875rem; margin: 0; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
+
+  .steps-list { margin: 16px 0 24px; padding-left: 20px; line-height: 1.8; color: var(--md-sys-color-on-surface-variant); }
+
+  .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  .faq-item { background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; padding: 12px 16px; }
+  .faq-item summary { font-weight: 600; cursor: pointer; color: var(--md-sys-color-on-surface); }
+  .faq-item p { margin: 8px 0 0; font-size: 0.9rem; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
+</style>
+
+<script is:inline>
+  (function () {
+    const idTypeSelect = document.getElementById('id-type');
+    const idCountInput = document.getElementById('id-count');
+    const nanoidWrap = document.getElementById('nanoid-length-wrap');
+    const nanoidLengthInput = document.getElementById('nanoid-length');
+    const optUppercase = document.getElementById('opt-uppercase');
+    const optHyphens = document.getElementById('opt-hyphens');
+    const optQuotes = document.getElementById('opt-quotes');
+    const btnGenerate = document.getElementById('btn-generate');
+    const btnSample = document.getElementById('btn-sample');
+    const btnClear = document.getElementById('btn-clear');
+    const btnCopy = document.getElementById('btn-copy');
+    const btnDownloadTxt = document.getElementById('btn-download-txt');
+    const btnDownloadJson = document.getElementById('btn-download-json');
+    const outputText = document.getElementById('output-text');
+    const outputCountBadge = document.getElementById('output-count-badge');
+    const inspectInput = document.getElementById('inspect-input');
+    const inspFormat = document.getElementById('insp-format');
+    const inspDate = document.getElementById('insp-date');
+    const inspEpoch = document.getElementById('insp-epoch');
+    const statusError = document.getElementById('status-error');
+
+    const STORAGE_KEY = 'onlineTools_uuidGeneratorInput';
+
+    const CROCKFORD_32 = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+    const NANOID_ALPHABET = 'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_ghz4182';
+
+    function getRandomBytes(size) {
+      const bytes = new Uint8Array(size);
+      window.crypto.getRandomValues(bytes);
+      return bytes;
+    }
+
+    function generateUUIDv4() {
+      if (typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+      }
+      const bytes = getRandomBytes(16);
+      bytes[6] = (bytes[6] & 0x0f) | 0x40;
+      bytes[8] = (bytes[8] & 0x3f) | 0x80;
+      return bytesToHexUUID(bytes);
+    }
+
+    function generateUUIDv7() {
+      const bytes = getRandomBytes(16);
+      const now = Date.now();
+      const hexTime = now.toString(16).padStart(12, '0');
+      for (let i = 0; i < 6; i++) {
+        bytes[i] = parseInt(hexTime.slice(i * 2, i * 2 + 2), 16);
+      }
+      bytes[6] = (bytes[6] & 0x0f) | 0x70;
+      bytes[8] = (bytes[8] & 0x3f) | 0x80;
+      return bytesToHexUUID(bytes);
+    }
+
+    function bytesToHexUUID(bytes) {
+      const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+      return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+    }
+
+    function generateULID() {
+      const now = Date.now();
+      let timeStr = '';
+      let timeVal = now;
+      for (let i = 9; i >= 0; i--) {
+        const mod = timeVal % 32;
+        timeStr = CROCKFORD_32[mod] + timeStr;
+        timeVal = Math.floor(timeVal / 32);
+      }
+      const randBytes = getRandomBytes(10);
+      let randStr = '';
+      for (let i = 0; i < 16; i++) {
+        const randIndex = randBytes[i % 10] % 32;
+        randStr += CROCKFORD_32[randIndex];
+      }
+      return timeStr + randStr;
+    }
+
+    function generateNanoID(len = 21) {
+      const bytes = getRandomBytes(len);
+      let id = '';
+      for (let i = 0; i < len; i++) {
+        id += NANOID_ALPHABET[bytes[i] % NANOID_ALPHABET.length];
+      }
+      return id;
+    }
+
+    function generateBatch() {
+      try {
+        statusError.style.display = 'none';
+        const type = idTypeSelect.value;
+        const count = Math.min(Math.max(parseInt(idCountInput.value, 10) || 1, 1), 500);
+        const nanoidLen = Math.min(Math.max(parseInt(nanoidLengthInput.value, 10) || 21, 6), 64);
+        const isUpper = optUppercase.checked;
+        const keepHyphens = optHyphens.checked;
+        const isQuotes = optQuotes.checked;
+
+        const results = [];
+        for (let i = 0; i < count; i++) {
+          let id = '';
+          if (type === 'v4') id = generateUUIDv4();
+          else if (type === 'v7') id = generateUUIDv7();
+          else if (type === 'ulid') id = generateULID();
+          else if (type === 'nanoid') id = generateNanoID(nanoidLen);
+
+          if ((type === 'v4' || type === 'v7') && !keepHyphens) {
+            id = id.replace(/-/g, '');
+          }
+          if (isUpper) id = id.toUpperCase();
+          else if (type !== 'nanoid' && type !== 'ulid') id = id.toLowerCase();
+
+          if (isQuotes) id = `"${id}"`;
+          results.push(id);
+        }
+
+        outputText.value = results.join('\n');
+        outputCountBadge.textContent = `${results.length} ID${results.length > 1 ? 's' : ''} générés`;
+        saveState();
+      } catch (e) {
+        statusError.style.display = 'block';
+      }
+    }
+
+    function parseUUIDv7Timestamp(uuidStr) {
+      const clean = uuidStr.replace(/-/g, '').trim();
+      if (clean.length !== 32 || clean[12] !== '7') return null;
+      const timeHex = clean.slice(0, 12);
+      const epochMs = parseInt(timeHex, 16);
+      if (isNaN(epochMs)) return null;
+      return epochMs;
+    }
+
+    function parseULIDTimestamp(ulidStr) {
+      const clean = ulidStr.trim().toUpperCase();
+      if (clean.length !== 26) return null;
+      const timePart = clean.slice(0, 10);
+      let epochMs = 0;
+      for (let i = 0; i < timePart.length; i++) {
+        const char = timePart[i];
+        const idx = CROCKFORD_32.indexOf(char);
+        if (idx === -1) return null;
+        epochMs = epochMs * 32 + idx;
+      }
+      return epochMs;
+    }
+
+    function inspectID() {
+      const val = inspectInput.value.trim();
+      if (!val) {
+        inspFormat.textContent = 'Aucun';
+        inspDate.textContent = '-';
+        inspEpoch.textContent = '-';
+        return;
+      }
+
+      let epoch = parseUUIDv7Timestamp(val);
+      if (epoch !== null) {
+        inspFormat.textContent = 'UUID v7';
+        inspEpoch.textContent = `${epoch} ms`;
+        inspDate.textContent = new Date(epoch).toUTCString();
+        return;
+      }
+
+      epoch = parseULIDTimestamp(val);
+      if (epoch !== null) {
+        inspFormat.textContent = 'ULID';
+        inspEpoch.textContent = `${epoch} ms`;
+        inspDate.textContent = new Date(epoch).toUTCString();
+        return;
+      }
+
+      if (/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(val)) {
+        inspFormat.textContent = 'UUID v4 (Aléatoire - Sans date)';
+        inspEpoch.textContent = 'N/A';
+        inspDate.textContent = 'N/A';
+        return;
+      }
+
+      inspFormat.textContent = 'Inconnu / Invalide';
+      inspEpoch.textContent = '-';
+      inspDate.textContent = '-';
+    }
+
+    function saveState() {
+      const state = {
+        type: idTypeSelect.value,
+        count: idCountInput.value,
+        nanoidLen: nanoidLengthInput.value,
+        upper: optUppercase.checked,
+        hyphens: optHyphens.checked,
+        quotes: optQuotes.checked,
+      };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const state = JSON.parse(raw);
+        if (state.type) idTypeSelect.value = state.type;
+        if (state.count) idCountInput.value = state.count;
+        if (state.nanoidLen) nanoidLengthInput.value = state.nanoidLen;
+        if (typeof state.upper === 'boolean') optUppercase.checked = state.upper;
+        if (typeof state.hyphens === 'boolean') optHyphens.checked = state.hyphens;
+        if (typeof state.quotes === 'boolean') optQuotes.checked = state.quotes;
+      } catch (e) {}
+    }
+
+    idTypeSelect.addEventListener('change', () => {
+      nanoidWrap.style.display = idTypeSelect.value === 'nanoid' ? 'block' : 'none';
+      generateBatch();
+    });
+
+    idCountInput.addEventListener('input', generateBatch);
+    nanoidLengthInput.addEventListener('input', generateBatch);
+    optUppercase.addEventListener('change', generateBatch);
+    optHyphens.addEventListener('change', generateBatch);
+    optQuotes.addEventListener('change', generateBatch);
+    btnGenerate.addEventListener('click', generateBatch);
+
+    btnSample.addEventListener('click', () => {
+      idTypeSelect.value = 'v7';
+      nanoidWrap.style.display = 'none';
+      idCountInput.value = '5';
+      optUppercase.checked = false;
+      optHyphens.checked = true;
+      optQuotes.checked = false;
+      generateBatch();
+      if (outputText.value) {
+        inspectInput.value = outputText.value.split('\n')[0];
+        inspectID();
+      }
+    });
+
+    btnClear.addEventListener('click', () => {
+      outputText.value = '';
+      inspectInput.value = '';
+      outputCountBadge.textContent = '0 IDs générés';
+      inspectID();
+    });
+
+    btnCopy.addEventListener('click', () => {
+      if (!outputText.value) return;
+      navigator.clipboard.writeText(outputText.value).then(() => {
+        if (window.showToast) window.showToast('Copié dans le presse-papiers !');
+      });
+    });
+
+    btnDownloadTxt.addEventListener('click', () => {
+      if (!outputText.value) return;
+      const blob = new Blob([outputText.value], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ids-${idTypeSelect.value}-${Date.now()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    btnDownloadJson.addEventListener('click', () => {
+      if (!outputText.value) return;
+      const list = outputText.value.split('\n').filter(Boolean);
+      const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ids-${idTypeSelect.value}-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    inspectInput.addEventListener('input', inspectID);
+
+    loadState();
+    nanoidWrap.style.display = idTypeSelect.value === 'nanoid' ? 'block' : 'none';
+    generateBatch();
+  })();
+</script>
