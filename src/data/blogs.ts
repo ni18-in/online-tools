@@ -44,6 +44,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/cisa-zero-trust-august-2026-jwt-debugger-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cisa-zero-trust-agosto-2026-depurador-jwt',
@@ -71,6 +72,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/gpt-5-artifacts-august-2026-markdown-to-word-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'artefactos-gpt-5-agosto-2026-convertir-markdown-a-word',
@@ -98,6 +100,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/gemini-2-5-code-diff-august-2026-text-compare-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'gemini-2-5-diferencia-codigo-agosto-2026-comparar-texto',
@@ -125,6 +128,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-141-jwt-debugger-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'chrome-141-depurador-jwt-privacidad-2026',
@@ -152,6 +156,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chromium-141-screen-recorder-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'chromium-141-grabador-pantalla-privacidad-2026',
@@ -179,6 +184,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/zero-trust-devsecops-august-2026-basic-auth-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'devsecops-zero-trust-agosto-2026-autenticacion-basica',
@@ -206,6 +212,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/iso-pdf-2-0-august-2026-merger-splitter-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'norma-iso-pdf-2-0-agosto-2026-unir-dividir-pdf',
@@ -233,6 +240,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/github-pat-v2-august-2026-basic-auth-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'mandato-github-pat-v2-agosto-2026-autenticacion-basica',
@@ -260,6 +268,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/zero-trust-pdf-privacy-august-2026-merger-splitter-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-pdf-zero-trust-agosto-2026-unir-dividir',
@@ -287,6 +296,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/passkey-2-webauthn-august-2026-jwt-debugger-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'webauthn-passkey-2-agosto-2026-depurador-jwt',
@@ -314,6 +324,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/openai-api-august-2026-curl-to-code-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'actualizacion-api-openai-agosto-2026-curl-a-codigo',
@@ -341,6 +352,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/brave-browser-privacy-screen-recorder-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-grabador-pantalla-brave-browser-2026',
@@ -368,6 +380,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/deepseek-r1-markdown-to-word-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertir-markdown-deepseek-r1-a-word-agosto-2026',
@@ -395,6 +408,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/claude-3-7-artifact-markdown-to-word-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertir-markdown-artefactos-claude-3-7-a-word-2026',
@@ -422,6 +436,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/postman-api-migration-curl-to-code-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'migracion-api-postman-agosto-2026-curl-a-codigo',
@@ -449,6 +464,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/cloudflare-kitesurf-jwt-security-2026-debugger-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cloudflare-kitesurf-seguridad-jwt-2026-depurador',
@@ -476,6 +492,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/graphql-rest-payload-shift-august-2026-json-compare-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cambio-carga-graphql-rest-agosto-2026-comparar-json',
@@ -503,6 +520,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/github-secret-scanning-august-2026-basic-auth-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'escaneo-secretos-github-agosto-2026-autenticacion-basica',
@@ -530,6 +548,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/webcodecs-av1-screen-recorder-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'grabador-pantalla-webcodecs-av1-agosto-2026',
@@ -557,6 +576,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/microservice-api-drift-august-2026-json-compare-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'desfase-api-microservicios-agosto-2026-comparar-json',
@@ -584,6 +604,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-august-2026-privacy-api-jwt-debugger-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'chrome-agosto-2026-api-privacidad-depurador-jwt',
@@ -611,6 +632,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/owasp-top-10-api-security-2026-basic-auth-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'owasp-seguridad-api-2026-autenticacion-basica',
@@ -638,6 +660,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/aws-microsecond-epoch-timestamp-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertidor-timestamp-epoch-microsegundos-aws-2026',
@@ -665,6 +688,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/wasm-simd-image-processing-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'procesamiento-imagenes-wasm-simd-2026',
@@ -692,6 +716,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/kubernetes-jwt-service-account-security-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-tokens-jwt-kubernetes-2026',
@@ -719,6 +744,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/firefox-140-privacy-jwt-debugger-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'firefox-140-privacidad-depurador-jwt-2026',
@@ -746,6 +772,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-webgpu-image-processing-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'procesamiento-imagenes-chrome-webgpu-2026',
@@ -773,6 +800,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-dbsc-session-tokens-jwt-debugger-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'despliegue-chrome-dbsc-tokens-sesion-depurador-jwt-2026',
@@ -800,6 +828,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/figma-design-tokens-px-to-rem-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'tokens-diseno-figma-convertidor-px-a-rem-agosto-2026',
@@ -827,6 +856,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-agent-privacy-json-visualizer-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'fugas-datos-agentes-ia-2026-visualizador-json-privado',
@@ -854,6 +884,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-140-devtools-json-visualizer-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'actualizacion-chrome-140-devtools-visualizador-json-2026',
@@ -881,6 +912,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/api-gateway-basic-auth-security-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-encabezado-autenticacion-basica-api-2026',
@@ -908,6 +940,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ios-20-heic-v2-compatibility-viewer-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'compatibilidad-heic-v2-ios-20-visor-2026',
@@ -935,6 +968,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/postman-cloud-privacy-json-visualizer-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cambio-privacidad-postman-nube-visualizador-json-2026',
@@ -962,6 +996,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/css-container-queries-rem-to-px-converter-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'consultas-contenedor-css-convertidor-rem-a-px-2026',
@@ -989,6 +1024,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/zero-trust-basic-auth-browser-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-navegador-2026-guia-encabezado-basic-auth-zero-trust',
@@ -1016,6 +1052,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-agent-system-prompt-drift-august-2026-text-compare-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'desfase-instrucciones-agentes-ia-agosto-2026-comparar-texto',
@@ -1043,6 +1080,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/post-quantum-jwt-security-august-2026-debugger-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-jwt-poscuantica-agosto-2026-depurador',
@@ -1070,6 +1108,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/claude-3-7-markdown-to-word-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertir-markdown-claude-3-7-a-word-2026',
@@ -1097,6 +1136,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/mumbai-auto-taxi-tariff-2026-meter-calculator-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'tarifa-taxi-auto-mumbai-2026-calculadora-tarifa',
@@ -1124,6 +1164,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-content-readability-text-analyzer-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'analisis-lecturabilidad-texto-ia-2026',
@@ -1151,6 +1192,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/oauth-2-1-jwt-security-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-jwt-oauth-2-1-privacidad-2026',
@@ -1178,6 +1220,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-logo-redesign-trend-2026-guess-the-logo-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'tendencia-rediseno-logos-ia-2026-adivina-el-logo',
@@ -1205,6 +1248,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/safari-20-screen-capture-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-captura-pantalla-safari-20-2026',
@@ -1232,6 +1276,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-homework-mit-2026-grade-calculator-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'ia-tareas-mit-2026-calculadora-calificaciones',
@@ -1259,6 +1304,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-subtitle-drift-august-2026-resync-tool-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'desfase-subtitulos-ia-agosto-2026-resincronizador',
@@ -1286,6 +1332,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/heic-vtf-game-asset-pipeline-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'heic-vtf-pipeline-texturas-juegos-2026',
@@ -1313,6 +1360,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-privacy-sandbox-screen-recorder-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-sandbox-chrome-grabador-pantalla-2026',
@@ -1340,6 +1388,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/w3c-responsive-design-px-to-rem-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'normas-diseno-responsivo-px-a-rem-2026',
@@ -1367,6 +1416,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/openapi-4-json-schema-2026-visualizer-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'openapi-4-esquema-json-2026-visualizador',
@@ -1394,6 +1444,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/microsoft-edge-screen-capture-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-captura-pantalla-microsoft-edge-2026',
@@ -1421,6 +1472,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/eu-ai-act-august-2026-json-diff-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'eu-ai-act-agosto-2026-diferencia-json',
@@ -1448,6 +1500,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-agent-markdown-to-word-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'flujos-agentes-ia-markdown-a-word-local-agosto-2026',
@@ -1475,6 +1528,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/cloudflare-kitesurf-ai-agent-browser-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cloudflare-kitesurf-navegador-agentes-ia-2026',
@@ -1502,6 +1556,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/openai-agentic-ai-cyber-security-jwt-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-jwt-ia-agentica-openai-2026',
@@ -1529,6 +1584,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/browser-privacy-api-basic-auth-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'api-privacidad-navegador-autenticacion-basica-2026',
@@ -1556,6 +1612,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/agentic-ai-code-analysis-privacy-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'analisis-codigo-ia-agente-privacidad-2026',
@@ -1583,6 +1640,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/next-gen-gst-reforms-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'reformas-gst-2-0-guia-agosto-2026',
@@ -1610,6 +1668,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chatgpt-markdown-to-word-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertir-markdown-chatgpt-a-word-agosto-2026',
@@ -1637,6 +1696,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/vtf-converter-webgl-august-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'convertidor-vtf-webgl-agosto-2026',
@@ -1664,6 +1724,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-web-store-privacy-policy-basic-auth-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'politica-privacidad-chrome-web-store-autenticacion-basica',
@@ -1691,6 +1752,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/web-performance-core-web-vitals-image-optimization-2026-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'optimizacion-imagenes-core-web-vitals-rendimiento-web-2026',
@@ -1719,6 +1781,7 @@ export const blogPosts: BlogPost[] = [
     // No bespoke banner for this post; reuse the on-topic JSON tooling banner.
     image: `${SITE_URL}/assets/blog/json-visualizer-pro-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'guia-seguridad-json-vulnerabilidad-fastjson',
@@ -1746,6 +1809,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: '/assets/blog/screen-recorder-pro-guide-banner.jpg',
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'guia-screen-recorder-pro',
@@ -1962,6 +2026,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/chrome-privacy-shift-jwt-debugger-banner.jpg`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'cambio-privacidad-chrome-depurador-jwt',
@@ -1989,6 +2054,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.jpg`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-encabezado-autenticacion-basica',
@@ -2017,6 +2083,7 @@ export const blogPosts: BlogPost[] = [
     // No bespoke banner for this post; reuse the on-topic iPhone/HEIC photo banner.
     image: `${SITE_URL}/assets/blog/iphone-photo-fixer-guide-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'guia-visor-heic-chrome-firefox',
@@ -2044,6 +2111,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/google-august-2026-core-update-text-compare-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'actualizacion-core-google-agosto-2026-comparar-texto',
@@ -2071,6 +2139,7 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/unix-epoch-timestamp-debugging-guide-banner.webp`,
     author: 'ni18',
+    noindex: true,
     i18n: {
       es: {
         slug: 'guia-depuracion-marcas-tiempo-epoch-unix',
