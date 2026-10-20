@@ -468,6 +468,40 @@ export function toolSeo(tool: Tool, opts: ToolSeoOpts): SeoProps {
   };
 }
 
+export function makeFaqSchema(faqs: { question: string; answer: string }[]): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+}
+
+export function makeHowToSchema(
+  title: string,
+  description: string,
+  steps: { title: string; description: string }[]
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: title,
+    description,
+    step: steps.map((s, idx) => ({
+      '@type': 'HowToStep',
+      position: idx + 1,
+      name: s.title,
+      text: s.description,
+    })),
+  };
+}
+
 export const TOOL_TRANSLATIONS: Record<
   string,
   {

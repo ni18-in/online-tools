@@ -1,17 +1,99 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/free-online-image-utility-tool/body.html?raw';
 import css from '../../../components/legacy/tools/free-online-image-utility-tool/styles.css?raw';
 import js from '../../../components/legacy/tools/free-online-image-utility-tool/script.js?raw';
 
 const tool = getTool('free-online-image-utility-tool')!;
+
+const steps = [
+  {
+    title: 'Upload Image',
+    description: 'Drag and drop or select any JPG, PNG, WebP, GIF, or AVIF image directly from your device or paste from clipboard (Ctrl+V).',
+  },
+  {
+    title: 'Crop, Resize & Rotate',
+    description: 'Use the interactive canvas to crop dimensions, lock aspect ratio, adjust pixel width/height, or rotate and flip.',
+  },
+  {
+    title: 'Set Target File Size (Optional)',
+    description: 'Need an image under 50KB, 100KB, or 200KB for an online portal? Check "Compress to target size" to calculate optimal quality automatically.',
+  },
+  {
+    title: 'Convert Format & Download',
+    description: 'Select your preferred output format (PNG, JPG, or WebP) and click Download Image to save your optimized file immediately.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Your images are processed purely in your browser memory using HTML5 Canvas. Zero uploads, zero server storage, complete privacy.',
+  },
+  {
+    icon: '🎯',
+    title: 'Compress to Target KB',
+    description: 'Hit strict file-size limits for government, job, or school applications with automated binary-search quality optimization.',
+  },
+  {
+    icon: '🔄',
+    title: 'Multi-Format Conversion',
+    description: 'Easily convert between PNG (lossless), JPG, and next-gen WebP with customizable lossy and lossless compression settings.',
+  },
+  {
+    icon: '📐',
+    title: 'Smart Resizing & Aspect Lock',
+    description: 'Resize by custom pixels or percentage scale while automatically maintaining proper aspect ratio without distortion.',
+  },
+  {
+    icon: '✂️',
+    title: 'Precise Cropping & Rotation',
+    description: 'Crop images freehand or to standard aspect ratios, rotate 90 degrees clockwise or counterclockwise, and flip horizontally/vertically.',
+  },
+  {
+    icon: '⚡',
+    title: 'Instant No-Lag Performance',
+    description: 'Because everything runs locally without network bottlenecks, edits and downloads are instant even with large photos.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Are my private photos uploaded to any external server?',
+    answer: 'No, never. The entire image editing, compression, and conversion pipeline runs 100% client-side in your web browser. No image data is ever uploaded to our servers or third parties.',
+  },
+  {
+    question: 'How do I compress an image to a specific KB target size?',
+    answer: 'Under the export options in the right-hand panel, check the "Compress to target size" box, input your target in KB (e.g., 200 KB), and click "Find best quality for this size". Our algorithm finds the highest image quality that stays within your limit.',
+  },
+  {
+    question: 'What image formats can I upload and download?',
+    answer: 'You can upload JPG, JPEG, PNG, WebP, GIF, and AVIF images. You can export and download your finished image as high-resolution PNG, JPG, or modern WebP format.',
+  },
+  {
+    question: 'Will resizing or converting reduce my image clarity?',
+    answer: 'You have full control. For maximum quality, export as PNG or Lossless WebP. For smaller web file sizes, you can preview the estimated size before downloading to achieve the perfect balance of visual clarity and file size.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Resize, Compress, and Convert Images Online',
+  'Follow these simple steps to resize, compress to specific file sizes, and convert image formats online for free.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'Image Utility | Resize, Compress & Convert Images Free',
   description:
-    'Use our free online image utility tool to quickly resize, compress, convert, and optimize images. No downloads required. Fast, secure, and browser-based.',
-  keywords: 'image utility, image resizer, image compressor, image converter',
+    'Free online image resizer, compressor, and converter. Resize images, compress to target KB, crop, and convert JPG, PNG, and WebP 100% privately in-browser.',
+  keywords: 'image utility, image resizer, image compressor, image converter, compress image to 100kb, convert png to webp, resize photo online free',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -24,11 +106,21 @@ const seo = toolSeo(tool, {
     description: 'A browser-based image tool that allows you to resize, compress, convert, and optimize images online for free.',
   },
 });
+
 const headRaw =
   '<script src="/vendor/cropperjs/cropper.min.js"></script><link href="/vendor/cropperjs/cropper.min.css" rel="stylesheet">';
 ---
+
 <ToolLayout h1="Free Online Image Utility: Resize, Compress & Convert" seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-free-online-image-utility-tool" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="Complete Guide to In-Browser Image Editing, Resizing & Compression"
+    guideIntro="Whether you need to shrink photo file sizes for website upload, resize photos to meet government portal dimensions, or convert transparent PNGs to lightweight WebP files, our client-side Image Utility handles it all without exposing your private images to the cloud."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

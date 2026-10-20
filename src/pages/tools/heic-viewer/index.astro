@@ -1,18 +1,95 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/heic-viewer/body.html?raw';
 import css from '../../../components/legacy/tools/heic-viewer/styles.css?raw';
 import js from '../../../components/legacy/tools/heic-viewer/script.js?raw';
 
 const tool = getTool('heic-viewer')!;
+
+const steps = [
+  {
+    title: 'Drop or Browse HEIC Photo',
+    description: 'Drag and drop any .heic or .heif file taken on an iPhone or iPad, or click to browse files from your computer.',
+  },
+  {
+    title: 'Instant Local Decoding',
+    description: 'The in-browser engine decodes the Apple High Efficiency format directly in your RAM without cloud uploads.',
+  },
+  {
+    title: 'Pan, Zoom & Inspect',
+    description: 'Inspect full-resolution details with smooth zooming, 90-degree rotation, and panning controls.',
+  },
+  {
+    title: 'Export to JPG or PNG',
+    description: 'Click "Download JPG" to convert the image into a universal format compatible with Windows, Android, and web apps.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Your private family photos, receipts, and personal documents are never transmitted over the internet.',
+  },
+  {
+    icon: '💻',
+    title: 'No Paid Codecs on Windows',
+    description: 'Bypass the paid Microsoft Store HEVC extension and open iPhone photos immediately in your web browser.',
+  },
+  {
+    icon: '🔄',
+    title: 'Convert to Universal JPG',
+    description: 'One-click conversion to standard JPEG or PNG for seamless sharing with colleagues and non-Apple devices.',
+  },
+  {
+    icon: '🔍',
+    title: 'Deep Zoom & Pan Viewport',
+    description: 'Examine 48MP iPhone Pro photos at 100% pixel sharpness with interactive viewport navigation.',
+  },
+  {
+    icon: '⚡',
+    title: 'Zero Software Install',
+    description: 'Works instantly on Google Chrome, Microsoft Edge, and Mozilla Firefox on Windows, Mac, and Linux.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Why does Windows refuse to open my iPhone HEIC photos?',
+    answer: 'HEIC (High Efficiency Image Container) is Apple’s default image format since iOS 11. Windows does not include the HEVC/HEIC codec out of the box and often prompts users to buy a codec from the Microsoft Store. This free online tool decodes HEIC photos directly in your browser without purchasing anything.',
+  },
+  {
+    question: 'Are my private photos uploaded to any external server?',
+    answer: 'No. The HEIC decoding process runs 100% locally inside your browser memory using the client-side heic2any library. Your photos never leave your device.',
+  },
+  {
+    question: 'Can I convert my HEIC photo to JPG or PNG?',
+    answer: 'Yes. Once your HEIC image is rendered on the canvas, you can download it as a standard JPG or PNG file that opens on any device, printer, or photo editor.',
+  },
+  {
+    question: 'What is the difference between .heic and .heif?',
+    answer: 'HEIF (High Efficiency Image File Format) is the general container standard, while HEIC is the specific variant used by Apple encoded with HEVC (H.265) video compression. This tool supports both .heic and .heif extensions.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Open and View iPhone HEIC Photos on Windows Online',
+  'Step-by-step instructions for viewing and converting Apple iPhone HEIC and HEIF photos in your web browser for free.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'HEIC Viewer Online | Open & View iPhone Photos on Windows Free',
   description:
     'Free online HEIC viewer. Open, view, and inspect Apple iPhone HEIC/HEIF photos directly in your browser on Windows. 100% private, local and offline.',
   keywords:
     'heic viewer online, open heic files on windows, view iphone photo pc, free offline heic reader, heic to jpg, heic properties checker',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -24,13 +101,23 @@ const seo = toolSeo(tool, {
     url: `${SITE_URL}/tools/heic-viewer/`,
   },
 });
+
 const headRaw = [
   '<script src="/vendor/heic2any/heic2any.min.js"></script>',
   '<script src="/vendor/filesaver/FileSaver.min.js"></script>',
 ].join('\n');
 ---
+
 <ToolLayout seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island" id="tool-heic-viewer" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="How to Open, Inspect & Convert iPhone HEIC Photos on PC"
+    guideIntro="Apple's High Efficiency Image Container (HEIC) format cuts photo file sizes in half while preserving stunning HDR image quality, but opening .heic files on Windows, Linux, or Android can be a frustrating roadblock. Our 100% client-side HEIC Viewer opens and converts your iPhone photos immediately in your browser—without sending your personal memories to the cloud."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

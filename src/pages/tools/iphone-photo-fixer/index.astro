@@ -1,18 +1,66 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/iphone-photo-fixer/body.html?raw';
 import css from '../../../components/legacy/tools/iphone-photo-fixer/styles.css?raw';
 import js from '../../../components/legacy/tools/iphone-photo-fixer/script.js?raw';
 
 const tool = getTool('iphone-photo-fixer')!;
+
+const steps = [
+  {
+    title: 'Select or Drop HEIC Photos',
+    description: 'Drag and drop your iPhone HEIC photos into the dropzone or click to select multiple images from your PC.',
+  },
+  {
+    title: 'Choose Output Format',
+    description: 'Select JPG for standard photo sharing or PNG for lossless image fidelity.',
+  },
+  {
+    title: 'Convert Locally in Browser',
+    description: 'Click Start Conversion to process all HEIC photos directly in your browser without uploading to external servers.',
+  },
+  {
+    title: 'Download Images or ZIP Archive',
+    description: 'Save converted images individually or click Download All (ZIP) to extract the entire album at once.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is it safe to use this tool with private iPhone photos?',
+    answer: 'Yes, absolutely. Unlike cloud-based converters, iPhone Photo Fixer processes every photo 100% locally on your device via JavaScript. Your photos are never sent to any server.',
+  },
+  {
+    question: 'Can I batch convert multiple HEIC files at once?',
+    answer: 'Yes, you can upload and batch convert dozens of HEIC files simultaneously. The tool compiles them into a convenient ZIP download.',
+  },
+  {
+    question: 'Does this tool work on Windows 10 and Windows 11?',
+    answer: 'Yes, this tool works seamlessly on Windows 10, Windows 11, macOS, and Linux through any modern web browser without installing additional codecs.',
+  },
+  {
+    question: 'Why does my PC show HEIC instead of JPG?',
+    answer: 'Apple iOS uses HEIC (High Efficiency Image Container) by default to save storage space, but many Windows PCs and legacy photo viewers lack native HEIC support out of the box.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Convert iPhone HEIC Photos to JPG on Windows',
+  'Convert iPhone HEIC photos to JPG or PNG in bulk 100% offline in your browser.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'iPhone Photo Fixer | HEIC to JPG Converter, Offline',
   description:
     'Convert HEIC images to JPG or PNG instantly on Windows, Mac, or Android. Free batch converter, runs 100% offline in your browser. No upload required.',
   keywords:
     'Convert HEIC to JPG PC free, Batch heic converter no upload, Open iPhone photos on Windows online, Offline HEIC to PNG, iPhone photo converter for Windows',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',

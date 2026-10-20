@@ -1,16 +1,64 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import body from '../../../components/legacy/tools/vtf-converter/body.html?raw';
 import css from '../../../components/legacy/tools/vtf-converter/styles.css?raw';
 import js from '../../../components/legacy/tools/vtf-converter/script.js?raw';
 
 const tool = getTool('vtf-converter')!;
+
+const steps = [
+  {
+    title: 'Drop or Upload Image',
+    description: 'Select or drag your PNG, JPG, or WEBP image into the converter dropzone.',
+  },
+  {
+    title: 'Select Resizing Mode',
+    description: 'Choose Nearest Power of 2 (recommended for Source games) or stretch to 512x512.',
+  },
+  {
+    title: 'Convert to VTF',
+    description: 'Click Convert to VTF to encode the image into Valve Texture Format 7.2 locally in your browser.',
+  },
+  {
+    title: 'Download Texture',
+    description: 'Save the generated .vtf file directly into your game mod directory (materials/models/...).',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Why does the converter resize my image?',
+    answer: 'The Valve Source Engine (VTF format) strictly requires textures to have dimensions that are powers of 2 (e.g., 128x128, 256x256, 512x512, 1024x1024). The tool automates this so textures do not crash in-game.',
+  },
+  {
+    question: 'Is PNG alpha transparency preserved in the VTF?',
+    answer: 'Yes! If your input image has transparent pixels, they are fully preserved in the output VTF using the 32-bit RGBA8888 color format.',
+  },
+  {
+    question: 'Which Source engine games are supported?',
+    answer: 'All games powered by Valve Source Engine are supported, including Team Fortress 2 (TF2), Counter-Strike: Global Offensive (CS:GO), Left 4 Dead 2, Portal 2, and Garry\'s Mod (GMod).',
+  },
+  {
+    question: 'Are my texture images uploaded to a remote server?',
+    answer: 'No. The conversion runs 100% locally on your computer inside your web browser. No textures or images are uploaded to any server.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Convert Images to Valve Texture Format (VTF)',
+  'Convert PNG and JPG images to Valve VTF format for Source Engine games right in your browser.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'VTF Converter - Online Image to VTF Tool',
   description:
     'Convert images (PNG, JPG) to VTF (Valve Texture Format) online for free. Client-side, secure, and fast. Perfect for Source engine modding (CS:GO, TF2, L4D2).',
   keywords: 'vtf converter, image to vtf, valve texture format, source engine',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',

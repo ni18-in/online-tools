@@ -1,17 +1,89 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import body from '../../../components/legacy/tools/guess-the-logo/body.html?raw';
 import css from '../../../components/legacy/tools/guess-the-logo/styles.css?raw';
 import js from '../../../components/legacy/tools/guess-the-logo/script.js?raw';
 
 const tool = getTool('guess-the-logo')!;
+
+const steps = [
+  {
+    title: 'Select Game Mode',
+    description: 'Choose between Single Player (relax and beat personal bests), Party Mode (timed group fun), Challenge Mode (beat the clock), or Streaming Mode.',
+  },
+  {
+    title: 'Configure Difficulty & Rounds',
+    description: 'Pick Easy, Medium, Hard, or All 60 logos, and specify the number of rounds or session duration.',
+  },
+  {
+    title: 'Guess the Brand',
+    description: 'Inspect each logo image and select the matching brand name using mouse clicks, touch screen, or keyboard number/letter keys (1-4 / A-D).',
+  },
+  {
+    title: 'Track Streaks & High Scores',
+    description: 'Build streaks for score multipliers and log your high scores locally on the persistent leaderboard.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How many brand logos are included in the quiz?',
+    answer: 'The game contains 60 popular global brand logos categorized into Easy, Medium, and Hard tiers spanning technology, automotive, fashion, food, and entertainment.',
+  },
+  {
+    question: 'Can I play Guess the Logo with friends?',
+    answer: 'Yes! Party Mode introduces a configurable round timer (5–60 seconds per question) and automated question advancement, making it ideal for group trivia nights or party screens.',
+  },
+  {
+    question: 'Are keyboard shortcuts supported for faster answering?',
+    answer: 'Yes, press keys 1, 2, 3, 4 or A, B, C, D on your keyboard to instantly select the corresponding option. Press Enter or Space to progress to the next round.',
+  },
+  {
+    question: 'Is any personal data or score sent to an external server?',
+    answer: 'No. All gameplay, quiz mechanics, high score tables, and brand graphics execute 100% locally in your web browser. No telemetry or user information is collected.',
+  },
+];
+
+const features = [
+  {
+    icon: '🎮',
+    title: '4 Distinct Game Modes',
+    description: 'Play Solo, test group friends in Party Mode, race the clock in Challenge Mode, or study brands in Streaming Mode.',
+  },
+  {
+    icon: '⚡',
+    title: 'Keyboard-Driven Speedrun',
+    description: 'Fast numeric (1–4) and alphabetical (A–D) key bindings let trivia masters answer at lightning speed.',
+  },
+  {
+    icon: '🏆',
+    title: 'Local High Score Tracking',
+    description: 'Persistent browser storage saves your personal bests, longest win streaks, and difficulty achievements.',
+  },
+  {
+    icon: '📱',
+    title: 'Zero Ads & Offline Ready',
+    description: 'Lightweight HTML5 and pure JavaScript design ensures instant loading and smooth play across desktop, tablet, and mobile.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Play the Guess the Logo Brand Quiz Game',
+  'Master brand trivia across single-player, party, and challenge modes with keyboard shortcuts.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
-  title: 'Guess the Logo - Fun Brand Quiz Game',
+  title: 'Guess the Logo - Free Online Brand Quiz Game',
   description:
-    'Test your brand knowledge with Guess the Logo — a fun quiz game with multiple modes, difficulty levels, and endless logo challenges. Play in your browser.',
+    'Test your brand knowledge with Guess the Logo! Play solo, party mode with friends, or timed challenges with 60 global logos and keyboard shortcuts.',
   keywords:
     'guess the logo, logo quiz, brand game, trivia game, online game, browser game, party game, challenge game, html game, javascript game',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
@@ -38,6 +110,13 @@ const seo = toolSeo(tool, {
 ---
 <ToolLayout seo={seo} lang="en">
   <div class="tool-island" id="tool-guess-the-logo" set:html={body} />
+  <ToolContentSection
+    guideTitle="How to Play Guess the Logo & Brand Trivia Guide"
+    guideIntro="Guess the Logo is an interactive browser game testing your visual recall of global brands. Whether playing solo to beat personal records or hosting trivia night in Party Mode, here is everything you need to know."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

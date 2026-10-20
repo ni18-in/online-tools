@@ -855,20 +855,21 @@
         });
 
         // --- DARK MODE ---
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('guessLogoDarkMode', isDarkMode);
-            darkModeToggle.textContent = isDarkMode ? '☀️' : '�';
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('guessLogoDarkMode', isDarkMode);
+                darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
 
-            // CSS variables should handle the theme changes via :root and .dark-mode
-            // Explicitly setting body styles here might be redundant but kept for safety
-            document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
-            document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
-            playSound('click');
-        });
+                document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
+                document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+                playSound('click');
+            });
+        }
 
         function loadDarkModePreference() {
+            if (!darkModeToggle) return;
             const isDarkMode = localStorage.getItem('guessLogoDarkMode') === 'true';
             if (isDarkMode) {
                 document.body.classList.add('dark-mode');

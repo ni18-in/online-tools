@@ -1,18 +1,100 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/json-comparison-tool/body.html?raw';
 import css from '../../../components/legacy/tools/json-comparison-tool/styles.css?raw';
 import js from '../../../components/legacy/tools/json-comparison-tool/script.js?raw';
 
 const tool = getTool('json-comparison-tool')!;
+
+const steps = [
+  {
+    title: 'Input Left & Right Data',
+    description: 'Paste your original and modified JSON or text into the left and right editor panes, or use the file upload icon.',
+  },
+  {
+    title: 'Beautify JSON (Optional)',
+    description: 'Click the Beautify button (Ctrl+B) on either pane to format unaligned JSON with proper indentation before comparing.',
+  },
+  {
+    title: 'Set Comparison Rules',
+    description: 'Enable "Ignore Array Order" if element sequence in lists does not matter for your schema validation.',
+  },
+  {
+    title: 'Compare & Review Diffs',
+    description: 'Click Compare (Ctrl+Enter) to see additions highlighted in green, deletions in red, and modified values in blue.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Compare confidential production schemas, user credentials, or API responses without ever transmitting data to cloud servers.',
+  },
+  {
+    icon: '🔍',
+    title: 'Structural JSON Diffing',
+    description: 'Understands JSON semantics, key-value relationships, and nested arrays rather than just treating files as dumb text lines.',
+  },
+  {
+    icon: '🔀',
+    title: 'Ignore Array Ordering',
+    description: 'Avoid false alarms when database queries or microservice responses return list items in different random sequences.',
+  },
+  {
+    icon: '🔢',
+    title: 'Integrated Line Numbers',
+    description: 'Both editor panels feature synchronized line numbering to quickly correlate differences with your source code.',
+  },
+  {
+    icon: '📁',
+    title: 'File Upload & Drag-and-Drop',
+    description: 'Directly upload .json or .txt files from your filesystem to compare large configuration files in seconds.',
+  },
+  {
+    icon: '💾',
+    title: 'Copy & Export Diff Reports',
+    description: 'Export raw delta differences or copy formatted comparison results to your clipboard for pull request reviews.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How does JSON diffing differ from standard text diffing?',
+    answer: 'Traditional text diff compares text strictly line-by-line, causing spurious differences if key order changes. Structural JSON diffing parses the underlying data hierarchy, accurately isolating added, deleted, or changed properties regardless of whitespace.',
+  },
+  {
+    question: 'What happens when I enable "Ignore Array Order"?',
+    answer: 'When checked, arrays containing identical elements in different positions (e.g. ["apple", "banana"] vs ["banana", "apple"]) are marked as equal, preventing false positive warnings in unordered datasets.',
+  },
+  {
+    question: 'Are my JSON files uploaded to a remote server for diff calculation?',
+    answer: 'No. The diff engine (jsondiffpatch) executes 100% locally in your browser. No files, text, or tokens are ever sent over the network.',
+  },
+  {
+    question: 'Can I compare plain text or code snippets as well?',
+    answer: 'Yes. If one or both inputs are not valid JSON, the tool automatically falls back to a visual side-by-side text difference viewer.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Diff and Compare JSON Objects Online',
+  'Compare two JSON objects or files side-by-side to visualize added, modified, and deleted properties.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'JSON Comparison Online - Diff Tool with Line Numbers',
   description:
     'Free online tool to compare, diff, and beautify two JSON objects side-by-side with line numbers and clear color highlighting. No server-side processing.',
   keywords:
     'json compare, text compare, json diff, text diff, json comparison, text comparison, json validator, json beautifier, online tool, developer tools, diff tool, compare json online, compare text online, line numbers, diff viewer',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -38,14 +120,24 @@ const seo = toolSeo(tool, {
     ],
   },
 });
+
 const headRaw =
   '<script src="/vendor/jsondiffpatch/jsondiffpatch.umd.min.js" defer></script>';
 ---
+
 <ToolLayout seo={seo} lang="en" headRaw={headRaw}>
   <div
     class="tool-island legacy-tw antialiased"
     id="tool-json-comparison-tool"
     set:html={body}
+  />
+
+  <ToolContentSection
+    guideTitle="Complete Guide to In-Browser JSON Diffing & Semantic Comparison"
+    guideIntro="Comparing API payloads, config files, and database migrations is a daily necessity for engineers. Our client-side JSON Comparison Tool highlights additions, removals, and structural modifications side-by-side with line numbers and optional array-order neutrality."
+    steps={steps}
+    features={features}
+    faqs={faqs}
   />
 </ToolLayout>
 

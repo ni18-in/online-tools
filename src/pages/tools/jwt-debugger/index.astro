@@ -1,22 +1,104 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/jwt-debugger/body.html?raw';
 import css from '../../../components/legacy/tools/jwt-debugger/styles.css?raw';
 import js from '../../../components/legacy/tools/jwt-debugger/script.js?raw';
 
 const tool = getTool('jwt-debugger')!;
+
+const steps = [
+  {
+    title: 'Paste Encoded JWT',
+    description: 'Paste your raw base64url-encoded JSON Web Token (format: header.payload.signature) or click "Load Sample" to test.',
+  },
+  {
+    title: 'Inspect Header & Algorithm',
+    description: 'Review the signing algorithm (e.g., HS256, RS256, ES256) and token type defined in the decoded JOSE header.',
+  },
+  {
+    title: 'Verify Payload Claims & Expiration',
+    description: 'Inspect issuer (iss), subject (sub), audience (aud), and human-formatted expiration (exp) and issued-at (iat) timestamps.',
+  },
+  {
+    title: 'Verify Signature (Optional)',
+    description: 'Enter your HMAC secret or public key to verify that the token has not been tampered with or modified in transit.',
+  },
+];
+
+const features = [
+  {
+    icon: '🔒',
+    title: '100% In-Browser Privacy',
+    description: 'Zero server uploads. Your production tokens, authorization headers, and secrets remain securely in local browser memory.',
+  },
+  {
+    icon: '🎨',
+    title: 'Color-Coded Token Structure',
+    description: 'Clearly visualizes the three token segments: Header (red), Payload (purple), and Cryptographic Signature (cyan).',
+  },
+  {
+    icon: '⏰',
+    title: 'Live Expiration Detection',
+    description: 'Automatically converts numeric Unix exp and nbf timestamps into human-readable dates and alerts you if the token is expired.',
+  },
+  {
+    icon: '🔑',
+    title: 'Client-Side Signature Check',
+    description: 'Verify HMAC-SHA256 signatures locally using the native browser Web Cryptography API without exposing secrets to third parties.',
+  },
+  {
+    icon: '📋',
+    title: 'RFC 7519 Standard Compliance',
+    description: 'Full support for standard registered claims and custom application metadata across OAuth 2.0 and OpenID Connect flows.',
+  },
+  {
+    icon: '⚡',
+    title: 'Instant Decoding & Validation',
+    description: 'Zero latency: tokens are parsed instantaneously as you type or paste, with clear syntax error notifications.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is it safe to paste live production JWTs into this tool?',
+    answer: 'Yes, 100%. Traditional web token decoders often send tokens to remote web servers where they can be logged or breached. This JWT Debugger executes entirely in your browser using local JavaScript, ensuring zero network transmission of credentials.',
+  },
+  {
+    question: 'How is a JSON Web Token structured?',
+    answer: 'A standard JWT consists of three parts separated by periods (.): the Header (specifying token type and signing algorithm), the Payload (containing user permissions, tenant ID, and expiration claims), and the Signature (used to verify authenticity).',
+  },
+  {
+    question: 'What does the "exp" claim represent?',
+    answer: 'The "exp" (expiration time) claim identifies the exact expiration timestamp on or after which the JWT must not be accepted. It is expressed as a Unix epoch timestamp in seconds.',
+  },
+  {
+    question: 'How do I test token verification without a production token?',
+    answer: 'Click the "Load Sample" button at the top of the tool. It populates an example token with standard claims and a preconfigured HMAC secret so you can observe live signature validation.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Decode, Inspect, and Verify JWT Tokens Online',
+  'Step-by-step instructions for decoding JSON Web Tokens (JWT), viewing payload claims, and verifying signatures client-side.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'JWT Debugger & Inspect Tool - Decode JSON Web Tokens Online',
   description:
-    'An easy-to-use online tool to decode, inspect, and verify JSON Web Tokens (JWT) client-side. View header, payload claims, and verify signatures instantly.',
+    'Free online JWT debugger and decoder. Inspect headers, payload claims, and verify signatures client-side with 100% in-browser privacy and zero server uploads.',
   keywords:
     'jwt debugger, jwt decoder, jwt viewer, decode jwt, verify jwt, json web token, jwt signature verify, hs256 verification, token claims, online jwt tool',
   author: 'JWT Debugger',
   ogTitle: 'JWT Debugger & Inspect Tool - Decode JSON Web Tokens Online',
   ogDescription: 'Decode, inspect, and verify JSON Web Tokens (JWT) client-side instantly and securely.',
   twitterDomain: 'online-tools.ni18.in',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -33,10 +115,20 @@ const seo = toolSeo(tool, {
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/tools/jwt-debugger/` },
   },
 });
+
 const headRaw = '<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">';
 ---
+
 <ToolLayout h1="JWT Debugger & Inspector" seo={seo} lang="en" headRaw={headRaw}>
   <div class="tool-island legacy-tw" id="tool-jwt-debugger" set:html={body} />
+
+  <ToolContentSection
+    guideTitle="In-Depth Guide to JWT Debugging & Token Security"
+    guideIntro="JSON Web Tokens (JWTs) are the standard for stateless authentication in modern cloud microservices, single-page applications, and mobile apps. Our 100% private in-browser JWT Debugger lets you inspect payload claims, check expiration dates, and verify HMAC signatures without exposing sensitive access tokens to third-party logging servers."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

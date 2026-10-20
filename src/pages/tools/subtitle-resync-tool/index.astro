@@ -1,23 +1,95 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import { SITE_URL } from '../../../data/site';
 import body from '../../../components/legacy/tools/subtitle-resync-tool/body.html?raw';
 import css from '../../../components/legacy/tools/subtitle-resync-tool/styles.css?raw';
 import js from '../../../components/legacy/tools/subtitle-resync-tool/script.js?raw';
 
 const tool = getTool('subtitle-resync-tool')!;
+
+const steps = [
+  {
+    title: 'Upload SRT Subtitle File',
+    description: 'Select or drag-and-drop your .srt subtitle file into the upload area.',
+  },
+  {
+    title: 'Load Video for Real-Time Preview (Optional)',
+    description: 'Attach your local video file to visually verify that subtitle lines match the spoken dialogue.',
+  },
+  {
+    title: 'Adjust Timing Offset',
+    description: 'Use the quick shift buttons (±0.1s, ±0.5s, ±1.0s) or type an exact millisecond offset until the subtitles sync with audio.',
+  },
+  {
+    title: 'Download Resynced .SRT File',
+    description: 'Click Download Resynced SRT to export your permanently corrected subtitle file ready for VLC, Plex, or TV players.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How do I know whether to shift forward (+) or backward (-)?',
+    answer: 'If subtitles appear before the actor speaks, add a positive delay (+ seconds). If subtitles appear after dialogue has already occurred, add a negative offset (- seconds).',
+  },
+  {
+    question: 'Are my videos or subtitles uploaded to a server?',
+    answer: 'No. Everything runs 100% locally in your web browser via HTML5 File and Blob APIs. No video or subtitle file is ever transferred across the internet.',
+  },
+  {
+    question: 'Can I resync subtitles without uploading a video?',
+    answer: 'Yes! If you already know the offset from a media player like VLC (e.g. +1.2 seconds), upload just the SRT file, enter 1.2 in manual adjustment, and download the updated file.',
+  },
+  {
+    question: 'Will this permanently fix the subtitles for smart TVs and media players?',
+    answer: 'Yes. The downloaded .srt file contains permanently rewritten timestamps (00:00:00,000) that work on smart TVs, Plex, Kodi, Netflix players, and all mobile devices without needing runtime adjustments.',
+  },
+];
+
+const features = [
+  {
+    icon: '⚡',
+    title: 'Live Video Preview',
+    description: 'Play your video with active captions in the browser to confirm synchronization before saving.',
+  },
+  {
+    icon: '🎯',
+    title: 'Precision Micro-Adjustments',
+    description: 'Adjust timestamps in 100ms, 500ms, or exact second increments for frame-perfect alignment.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Private & In-Browser',
+    description: 'No file size limits and zero cloud uploads. Your movies and private video files remain completely on your machine.',
+  },
+  {
+    icon: '📺',
+    title: 'Universal Player Compatibility',
+    description: 'Exported SubRip (.srt) files comply with standard formatting for smart TVs, VLC, MPC-HC, and streaming servers.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Resync Out-of-Sync SRT Subtitles Online',
+  'Fix audio and dialogue delay in subtitle files permanently with live video preview in your browser.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'Subtitle Resync Tool - Fix Out of Sync Subtitles Online',
   description:
     'Fix out of sync subtitles easily. Upload your SRT and Video, adjust timing with a click, and download the permanently fixed subtitle file.',
   keywords:
     'Subtitle shifter online, Fix out of sync subtitles srt, Resync srt file permanent, Delay subtitles online tool, srt time shifter',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: 'Subtitle Resync Tool',
-    description: 'Fix audio sync issues in SRT subtitle files online.',
+    description: 'Fix audio sync issues in SRT subtitle files online with in-browser video preview.',
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web',
     offers: { '@type': 'Offer', price: '0.00', priceCurrency: 'USD' },
@@ -27,6 +99,13 @@ const seo = toolSeo(tool, {
 ---
 <ToolLayout seo={seo} lang="en">
   <div class="tool-island" id="tool-subtitle-resync-tool" set:html={body} />
+  <ToolContentSection
+    guideTitle="How to Resync Subtitles & Alignment Guide"
+    guideIntro="Out-of-sync subtitles can ruin any movie or video. This free tool lets you adjust timing offsets and preview captions directly against your video before downloading the fixed SRT."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>

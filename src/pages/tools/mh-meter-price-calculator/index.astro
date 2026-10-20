@@ -1,19 +1,91 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { getTool, toolSeo } from '../../../data/tools';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
 import body from '../../../components/legacy/tools/mh-meter-price-calculator/body.html?raw';
 import css from '../../../components/legacy/tools/mh-meter-price-calculator/styles.css?raw';
 import js from '../../../components/legacy/tools/mh-meter-price-calculator/script.js?raw';
 
 const tool = getTool('mh-meter-price-calculator')!;
+
+const steps = [
+  {
+    title: 'Select Vehicle Type',
+    description: 'Choose between Auto Rickshaw, Black & Yellow Taxi (Kaali Peeli), or Cool Cab (AC Taxi).',
+  },
+  {
+    title: 'Enter Trip Distance',
+    description: 'Input the distance in kilometers from your vehicle electronic meter or navigation map.',
+  },
+  {
+    title: 'Apply Modifiers (Night, AC, Luggage)',
+    description: 'Check Midnight for rides between 12:00 AM and 5:00 AM (+25%), AC usage (+10%), waiting minutes, and large luggage pieces.',
+  },
+  {
+    title: 'Calculate Exact Legal Fare',
+    description: 'Click Calculate Fare to view the transparent itemized cost rounded as per official MMRTA rules.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the minimum auto rickshaw fare in Mumbai?',
+    answer: 'Under the official MMRTA tariff, the minimum auto rickshaw fare is ₹23 for the first 1.5 kilometers, and ₹15.33 per additional kilometer thereafter.',
+  },
+  {
+    question: 'What is the base fare for Black and Yellow (Kaali Peeli) taxis?',
+    answer: 'The minimum fare for Black & Yellow taxis in the Mumbai Metropolitan Region is ₹28 for the first 1.5 kilometers, and ₹18.66 per subsequent kilometer.',
+  },
+  {
+    question: 'When does the 25% midnight surcharge apply?',
+    answer: 'The 25% night charge is legally applicable on all auto rickshaw and taxi rides commenced between 12:00 AM (midnight) and 5:00 AM.',
+  },
+  {
+    question: 'How are waiting and luggage charges calculated?',
+    answer: 'Waiting charges apply after the first free grace period during traffic delays, and large luggage pieces exceeding 60x40 cm cost ₹6 per bag under Maharashtra transport rules.',
+  },
+];
+
+const features = [
+  {
+    icon: '🛺',
+    title: 'Official MMRTA Tariff Rates',
+    description: 'Up to date with the latest 2025 government tariff cards for Mumbai, Thane, Navi Mumbai, and Pune.',
+  },
+  {
+    icon: '🌙',
+    title: 'Automated Midnight & AC Math',
+    description: 'Calculates the +25% night surcharge and +10% AC surcharge transparently without hidden margins.',
+  },
+  {
+    icon: '💼',
+    title: 'Luggage & Waiting Itemization',
+    description: 'Itemizes large bag surcharges (₹6/piece) and traffic waiting minutes so you pay only legal amounts.',
+  },
+  {
+    icon: '📱',
+    title: 'Works Offline on Mobile',
+    description: 'Save as a bookmark or home-screen shortcut and calculate fares even without mobile data during travel.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Calculate Mumbai Auto and Taxi Fare Online',
+  'Calculate legal auto rickshaw and taxi fares in Mumbai and Maharashtra using official MMRTA tariff cards.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
 const seo = toolSeo(tool, {
   title: 'MH Meter Price Calculator | Pune & Mumbai Taxi Fare',
   description:
     'Calculate Auto Rickshaw, Black & Yellow Taxi, and Cool Cab fares in Mumbai & Maharashtra. Official 2025 Tariff rates (MMRTA). Offline capable.',
   keywords: 'Mumbai Taxi Fare Calculator, Auto Rickshaw Meter Card 2025, MH Meter Price, Cool Cab Tariff, Mumbai Auto Fare',
-  author: 'MH Meter Price Calculator',
+  author: 'ni18',
   ogTitle: 'MH Meter Price Calculator',
   ogDescription: 'Check the correct fair price for Auto and Taxis in Maharashtra based on the latest MMRTA rules.',
+  extraJsonLd: [howToSchema, faqSchema],
   appSchema: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -28,6 +100,13 @@ const seo = toolSeo(tool, {
 ---
 <ToolLayout seo={seo} lang="en">
   <div class="tool-island" id="tool-mh-meter-price-calculator" set:html={body} />
+  <ToolContentSection
+    guideTitle="Mumbai Auto Rickshaw & Taxi Fare Calculation Guide"
+    guideIntro="Avoid overpaying for taxis and auto rickshaws in Maharashtra. This tool computes fares strictly adhering to the Maharashtra Motor Vehicles Department (MMRTA) tariff schedule."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
 </ToolLayout>
 
 <style is:global set:html={css}></style>
