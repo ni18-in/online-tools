@@ -1,0 +1,160 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Escaneo de Secretos GitHub 2026: Genera Encabezados Basic Auth en Privado
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publicado el <time datetime="2026-08-09" itemprop="datePublished">9 de agosto de 2026</time>
+        por <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/es/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Privacidad y Seguridad</span>
+      </p>
+      <img src="/assets/blog/github-secret-scanning-august-2026-basic-auth-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Escaneo de Secretos GitHub 2026 Generar Encabezados Basic Auth" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Not+Found';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Resumen Rápido</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li><strong>Ampliación de Políticas de GitHub en Agosto 2026:</strong> La red de socios de escaneo de secretos de GitHub analiza activamente commits, registros de PR y flujos de IA para detectar credenciales HTTP Basic Auth expuestas.</li>
+        <li><strong>Riesgo de Seguridad:</strong> Los generadores en línea que envían nombres de usuario y contraseñas a servidores en la nube exponen credenciales de API a filtraciones e intercepciones de red.</li>
+        <li><strong>Solución Zero-Trust:</strong> Utiliza el <a href="/es/tools/basic-authentication-header-generator/" class="text-indigo-700 underline font-medium">Generador de Encabezados de Autenticación Básica</a> para codificar encabezados de autorización Base64 100% en local sin subida de datos a la nube.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Tras las directivas de seguridad de GitHub de agosto de 2026 que amplían el escaneo automatizado de secretos mediante IA en repositorios públicos y privados, los desarrolladores deben eliminar de inmediato cualquier fuga de credenciales en texto plano.
+      </p>
+      <p>
+        La autenticación básica HTTP (HTTP Basic Authentication) sigue siendo un pilar fundamental para asegurar microservicios internos, entornos de pruebas, endpoints de webhooks y pasarelas de API. Sin embargo, al generar encabezados `Authorization: Basic <credenciales>` usando herramientas web basadas en servidores, muchos desarrolladores envían involuntariamente claves secretas y contraseñas a servidores remotos.
+      </p>
+      <p>
+        Para generar encabezados de autenticación básica HTTP válidos e instantáneos sin arriesgar tus credenciales ni almacenar registros en la nube, nuestra herramienta gratuita <a href="/es/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Generador de Encabezados de Autenticación Básica</a> se ejecuta 100% en la memoria de tu navegador cliente.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Por qué el Escaneo de Secretos de GitHub Exige Credenciales Zero-Trust</h2>
+      <p>
+        En agosto de 2026, GitHub amplió su infraestructura de escaneo automatizado de secretos para inspeccionar diferencias de código en pull requests, registros de integración continua (CI/CD) y códigos generados por agentes de IA en busca de cadenas en Base64 y credenciales en texto plano. Cuando se detecta un token expuesto, los proveedores en la nube asociados revocan automáticamente las claves afectadas en cuestión de segundos.
+      </p>
+      <p>
+        El formato de autenticación básica HTTP une combinaciones `usuario:contraseña` codificadas en Base64. Debido a que la codificación Base64 es reversible, asumir que una cadena en Base64 es "segura" sin controles estrictos de privacidad es un peligroso error. Procesar credenciales a través de servidores de terceros rompe las políticas Zero-Trust y expone a los equipos a ataques de suplantación y de cadena de suministro.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Los Riesgos de los Generadores Tradicionales en la Nube</h2>
+      <p>
+        Recurrir a utilidades de conversión de encabezados basadas en servidores remotos introduce vulnerabilidades graves de seguridad:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Intercepción de Credenciales:</strong> Las aplicaciones web de servidor suelen almacenar datos de formularios en registros de sistema, cachés de proxies inversos o bases de datos de errores.</li>
+        <li><strong>Exfiltración por Terceros:</strong> Herramientas web no auditadas pueden incluir scripts de análisis que capturan las credenciales del usuario y las transmiten a dominios externos.</li>
+        <li><strong>Inclemencias de Cumplimiento:</strong> Enviar credenciales de producción a través de la red viola normativas de seguridad como SOC 2, ISO 27001 y el RGPD.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Principales Ventajas del Generador de Encabezados de Autenticación Básica</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Privacidad 100% en el Cliente:</strong> Toda la codificación Base64 se realiza exclusivamente dentro del motor JavaScript local de tu navegador. Sin subidas a servidores, sin peticiones de red y sin registros.</li>
+        <li><strong>⚡ Sin Instalación y de Acceso Instantáneo:</strong> Genera encabezados `Authorization: Basic ...` válidos de inmediato sin necesidad de registro, extensiones ni instalación de software.</li>
+        <li><strong>🚀 Alto Rendimiento:</strong> Aprovecha las API nativas del navegador para generar encabezados en tiempo real sin latencia de red.</li>
+        <li><strong>🌐 Compatible con Múltiples Navegadores:</strong> Funciona sin problemas en Google Chrome, Mozilla Firefox, Apple Safari y Microsoft Edge.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guía Paso a Paso del Flujo de Trabajo</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Abre la página del <a href="/es/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Generador de Encabezados de Autenticación Básica</a> en tu navegador.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Introduce tu nombre de usuario de API (o ID de servicio) y la contraseña en los campos correspondientes.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Observa la cadena del encabezado `Authorization: Basic <base64>` generada instantáneamente en la memoria local.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Haz clic en el botón de copiar para transferir el encabezado HTTP formateado directamente a Postman, cURL o tus archivos de configuración.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Consejos Pro y Casos de Uso Avanzados</h2>
+      <p>
+        <strong>1. Ejecución Local sin Conexión (Air-Gapped):</strong> Una vez que la página carga en tu navegador, puedes desconectarte de internet. El generador seguirá funcionando perfectamente sin conexión porque no realiza peticiones a servidores.
+      </p>
+      <p>
+        <strong>2. Configuración Segura en Canalizaciones CI/CD:</strong> Al configurar variables de entorno en GitHub Actions o GitLab CI, genera los encabezados localmente y guarda la cadena Base64 resultante directamente en tu gestor de secretos.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusión y Empieza Ahora</h2>
+      <p>
+        A medida que los algoritmos de escaneo de secretos de GitHub se vuelven más estrictos en 2026, proteger la privacidad de tus credenciales en el desarrollo diario de API es indispensable. Elimina los riesgos de fuga mediante herramientas nativas del navegador sin subida de datos.
+      </p>
+      <p class="mt-4">
+        <a href="/es/tools/basic-authentication-header-generator/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Abrir Generador de Encabezados Basic Auth Gratis &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Preguntas Frecuentes</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Se envían mis usuarios o contraseñas a algún servidor externo?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">No. El 100% de la codificación Base64 se realiza localmente en tu navegador web. Las credenciales nunca salen de la memoria de tu dispositivo.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Por qué el escaneo de secretos de GitHub detecta encabezados HTTP Basic Auth en 2026?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La codificación Base64 no es cifrado y se puede decodificar al instante. GitHub marca los encabezados expuestos para evitar la filtración accidental de credenciales en repositorios compartidos.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Puedo usar este generador de encabezados Basic Auth sin conexión a internet?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Sí. Tras abrir la página en tu navegador, puedes desconectarte de internet y generar encabezados de forma 100% privada sin conexión.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Cómo da formato a las credenciales la autenticación básica HTTP?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">La autenticación básica combina usuario y contraseña separados por dos puntos (`usuario:contraseña`), codifica el resultado en Base64 y le antepone `Authorization: Basic `.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">¿Es gratuita esta herramienta para proyectos de software comerciales?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Sí, la herramienta es 100% gratuita, sin límites de uso, sin registros ni tarifas ocultas.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Navegación de publicaciones">
+        <a href="/es/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Volver al Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

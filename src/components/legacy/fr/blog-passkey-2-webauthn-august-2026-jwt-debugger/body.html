@@ -1,0 +1,167 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        WebAuthn Passkey 2.0 Août 2026 : Déboguer les Jetons JWT
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publié le <time datetime="2026-08-09" itemprop="datePublished">9 août 2026</time>
+        par <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/fr/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Confidentialité &amp; Sécurité</span>
+      </p>
+      <img src="/assets/blog/passkey-2-webauthn-august-2026-jwt-debugger-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="WebAuthn Passkey 2.0 Août 2026 et Débogueur JWT Côté Client" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+Not+Found';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ Résumé Rapide</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>Le déploiement mondial de la norme WebAuthn Passkey 2.0 en août 2026 généralise les jetons de session encapsulés dans des charges utiles JWT.</li>
+        <li>Déboguer des jetons de session via des outils cloud tiers risque d'exfiltrer des identifiants d'accès vers des serveurs Distants.</li>
+        <li>Notre outil gratuit <a href="/fr/tools/jwt-debugger/" class="text-indigo-700 underline font-semibold">Débogueur et Inspecteur JWT</a> décodes et vérifie vos jetons 100% en local dans votre navigateur sans téléversement.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Suite au déploiement mondial du standard WebAuthn Passkey 2.0 par le W3C et la FIDO Alliance en août 2026, les fournisseurs d'identité comme Google, Apple et Microsoft basculent leurs flux d'authentification vers des passkeys matériels. Lorsque les applications web remplacent les mots de passe traditionnels par des identifiants WebAuthn, les serveurs encapsulent ces assertions dans des jetons JSON Web Tokens (JWT) signés.
+      </p>
+      <p>
+        Bien que Passkey 2.0 renforce considérablement la sécurité des connexions, l'inspection de ces jetons de session pendant le développement d'API pose de nouveaux défis de confidentialité. Les développeurs qui analysent les paramètres de claims (tels que les niveaux d'attestation ou les identifiants de clés) collent fréquemment des jetons actifs dans des outils en ligne, risquant ainsi de faire fuiter des identifiants sensibles.
+      </p>
+      <p>
+        Pour inspecter vos jetons de session WebAuthn Passkey 2.0 sans exposer vos données à des serveurs distants, notre utilitaire gratuit <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> traite chaque en-tête et charge utile 100% en local dans votre navigateur : vos données ne quittent jamais votre appareil.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Sécurité des Jetons de Session WebAuthn Passkey 2.0 en 2026</h2>
+      <p>
+        L'adoption globale de Passkey 2.0 en août 2026 marque une étape clé vers un Web sans mot de passe. Grâce à l'utilisation de modules de sécurité matériels et à la biométrie, les Passkeys éliminent les attaques par hameçonnage. Une fois l'échange FIDO2 effectué, les serveurs d'autorisation OAuth 2.1 émettent des jetons de session JWT signés.
+      </p>
+      <p>
+        Ces jetons intègrent des structures de claims étendues reflétant l'état de vérification du périphérique et les signatures de liaison. Lors du débogage de microservices gérant des sessions WebAuthn, les développeurs ont besoin d'un décodeur privé et instantané capable de formater les objets JSON sans latence ni risque de fuite.
+      </p>
+
+      <div class="my-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+        <p class="font-semibold text-gray-900 mb-2">Pourquoi Faire Confiance à ce Guide ?</p>
+        <p class="text-gray-600">
+          Chez ni18, la confidentialité zéro-trust est notre priorité absolue. L'ensemble du décodage Base64URL et du formatage JSON s'effectue exclusivement dans la mémoire locale de votre navigateur. Nous ne stockons, n'enregistrons et ne téléversons jamais vos jetons ou vos clés API.
+        </p>
+      </div>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Les Risques des Convertisseurs JWT Basés sur le Cloud</h2>
+      <p>
+        Malgré les garanties de sécurité apportées par Passkey 2.0, de nombreux développeurs compromettent la sécurité en collant des jetons actifs dans des outils en ligne tiers. L'utilisation de services cloud entraîne des risques majeurs :
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Exfiltration d'Identifiants :</strong> L'envoi de jetons d'accès sur Internet expose vos en-têtes d'autorisation aux journaux de serveurs distants et aux outils d'analyse.</li>
+        <li><strong>Non-Conformité Réglementaire :</strong> Transmettre des jetons contenant des identifiants d'utilisateurs enfreint le RGPD et les règles de souveraineté des données de la loi IA de l'UE.</li>
+        <li><strong>Attaques par Replay de Session :</strong> Si un jeton de session non expiré est conservé dans un serveur distant, des tiers malveillants peuvent détourner la session active.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Avantages du Débogage JWT Côté Client</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Confidentialité 100% Côté Client :</strong> Le décodage Base64URL et le formatage JSON sont effectués entièrement dans la mémoire de votre navigateur. Aucun téléversement. Aucune fuite. Aucun journal.</li>
+        <li><strong>⚡ Accès Instantané Sans Installation :</strong> Ouvrez la page dans n'importe quel navigateur et commencez immédiatement. Sans inscription ni logiciel à installer.</li>
+        <li><strong>🚀 Inspection des Claims en Temps Réel :</strong> Visualisez instantanément les paramètres Passkey 2.0 et les algorithmes de signature (RS256, ES256, EdDSA).</li>
+        <li><strong>🌐 Fonctionne Hors Ligne :</strong> Totalement fonctionnel dans des environnements de développement sécurisés, isolés du réseau ou sous VPN d'entreprise.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guide Étape par Étape : Déboguer vos Jetons Passkey en Privé</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Ouvrez l'outil <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> dans votre navigateur.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Collez votre jeton de session Passkey 2.0 encodé dans la zone de saisie.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Examinez le panneau <strong>En-tête</strong> pour vérifier l'algorithme (ex: <code>alg</code>: "ES256") et l'identifiant de clé.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Vérifiez la <strong>Charge Utile</strong> pour contrôler la date d'expiration (<code>exp</code>) et les claims d'attestation 100% en local.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conseils Avancés pour Développeurs</h2>
+      <p>
+        Pour vos flux de travail d'authentification WebAuthn en août 2026, associez l'inspection de jetons à d'autres outils privés. Si vos tests nécessitent des commandes cURL, utilisez notre <a href="/fr/tools/curl-en-code/" class="text-indigo-600 hover:underline font-semibold">Convertisseur cURL en Code</a> pour générer du code JavaScript ou Python sans partager de secrets.
+      </p>
+      <p>
+        De plus, pour valider des en-têtes d'authentification HTTP basique, utilisez notre <a href="/fr/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Générateur d'En-têtes d'Authentification Basic</a> directement dans votre navigateur.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusion &amp; Commencer</h2>
+      <p>
+        La norme WebAuthn Passkey 2.0 d'août 2026 transforme la sécurité des accès Web. Appliquer le principe du zéro-trust à votre processus de développement garantit que vos identifiants de session restent confidentiels. Protégez vos jetons en les décodant et en les vérifiant directement dans votre navigateur.
+      </p>
+      <p class="mt-4">
+        <a href="/fr/tools/jwt-debugger/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Lancer le Débogueur JWT Gratuit &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Foire Aux Questions</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Qu'est-ce que WebAuthn Passkey 2.0 en août 2026 ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">WebAuthn Passkey 2.0 est la norme W3C/FIDO mise à jour permettant une authentification biométrique sans mot de passe et multi-appareils sécurisée par du matériel.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Mes jetons de session sont-ils envoyés à des serveurs distants ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Non. Le Débogueur JWT s'exécute à 100% côté client. Le décodage et le formatage s'effectuent exclusivement dans la mémoire locale de votre navigateur.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Quels algorithmes de signature JWT sont pris en charge ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">L'outil prend en charge le décodage de tous les algorithmes standards, notamment RS256, RS512, ES256, ES384, EdDSA et HS256.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Pourquoi le débogage côté client est-il plus sûr que les outils SaaS ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Le débogage local élimine tout transfert réseau, empêchant la fuite de jetons dans des journaux de serveurs distants ou des systèmes d'analyse tiers.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">L'outil fonctionne-t-il hors ligne dans un réseau sécurisé ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Oui. Une fois la page chargée, l'application fonctionne de manière totalement isolée dans des réseaux d'entreprise sécurisés ou sans connexion Internet.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Post navigation">
+        <a href="/fr/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Retour au Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

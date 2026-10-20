@@ -1,0 +1,167 @@
+<main id="main-content" role="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="post-full bg-white shadow-xl rounded-xl p-6 sm:p-8 md:p-10 lg:p-12 max-w-3xl mx-auto" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-full-header mb-8 text-center">
+      <h1 class="post-full-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4" itemprop="headline">
+        Mandat GitHub PAT v2 Août 2026 : En-tête Basic Auth Privé
+      </h1>
+      <p class="post-meta text-sm text-gray-500">
+        Publié le <time datetime="2026-08-09" itemprop="datePublished">9 août 2026</time>
+        par <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="/fr/about/" itemprop="url" class="text-indigo-600 hover:underline"><span itemprop="name">ni18</span></a></span>
+         &bull; <span class="text-indigo-500 font-semibold">Confidentialité &amp; Sécurité</span>
+      </p>
+      <img src="/assets/blog/github-pat-v2-august-2026-basic-auth-banner.webp" loading="lazy" decoding="async" width="1200" height="630" alt="Mandat GitHub PAT v2 Août 2026 et Génération d'En-tête Basic Auth Côté Client" class="w-full h-auto rounded-lg shadow-md mt-6 mb-8 object-cover max-h-96" itemprop="image" onerror="this.onerror=null;this.src='https://placehold.co/1200x630/cccccc/333333?text=Image+non+trouvee';">
+    </header>
+
+    <!-- KEY TAKEAWAY BOX (For AI Snippet Capture) -->
+    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-8 rounded-r-lg">
+      <p class="font-semibold text-indigo-900 mb-2">⚡ En Bref</p>
+      <ul class="list-disc pl-5 text-sm text-indigo-800 space-y-1">
+        <li>Le passage obligatoire de GitHub en août 2026 aux jetons d'accès personnels affinés (PAT v2) perturbe les anciennes configurations dans les scripts automatisés et pipelines CI/CD.</li>
+        <li>Générer des en-têtes HTTP Basic Auth via des convertisseurs en ligne expose des jetons PAT sensibles et des identifiants dans les journaux de serveurs tiers.</li>
+        <li>Notre <a href="/fr/tools/basic-authentication-header-generator/" class="text-indigo-700 underline font-semibold">Générateur d'En-têtes d'Authentification Basic</a> gratuit encode les en-têtes RFC 7617 100% en local sans aucun téléversement.</li>
+      </ul>
+    </div>
+
+    <section class="post-full-content prose prose-indigo lg:prose-lg max-w-none" itemprop="articleBody">
+
+      <!-- INTRO: Hook with real news -->
+      <p class="lead text-lg text-gray-700 mb-4">
+        Suite au mandat de GitHub d'août 2026 imposant l'utilisation de jetons d'accès personnels affinés (PAT v2) sur l'ensemble des API REST et flux d'automatisation Git, les équipes de développement mettent rapidement à jour leurs pipelines d'authentification. Selon le protocole de sécurité mis à jour par GitHub, les jetons d'accès personnels classiques aux autorisations étendues sont officiellement dépréciés au profit de jetons PAT v2 restreints par dépôt et à durée limitée.
+      </p>
+      <p>
+        Cette évolution majeure pose un défi immédiat aux développeurs testant des requêtes Git via HTTPS, des scripts cURL ou des intégrations de webhooks. Bien que les jetons GitHub PAT v2 offrent une isolation renforcée des dépôts, les formater en en-têtes HTTP <code>Authorization: Basic &lt;identifiants&gt;</code> à l'aide de convertisseurs tiers risque d'exposer vos nouveaux secrets dans des journaux de serveurs distants, des caches CDN ou de la télémétrie cloud.
+      </p>
+      <p>
+        Afin de respecter les normes de sécurité zero-trust et les exigences de GitHub, notre outil web gratuit <a href="/fr/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Générateur d'En-têtes d'Authentification Basic</a> traite vos identifiants 100% côté client—garantissant que vos jetons d'accès personnels et clés API ne quittent jamais votre navigateur.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Mandat GitHub PAT v2 &amp; Sécurité des Identifiants Zero-Trust</h2>
+      <p>
+        L'application du mandat GitHub PAT v2 en août 2026 constitue une étape clé dans la sécurisation des chaînes logicielles. Les jetons affinés restreignent l'accès à des dépôts spécifiques, des permissions d'organisation et des fenêtres d'expiration. Néanmoins, lors des appels HTTP vers les API REST de GitHub ou des passerelles internes, les développeurs doivent toujours encoder ces jetons avec leur nom d'utilisateur au format Base64.
+      </p>
+      <p>
+        Conformément à la norme RFC 7617, l'authentification HTTP Basic nécessite de combiner un nom d'utilisateur (ou identifiant de jeton) et le jeton secret avec deux-points (<code>nom_utilisateur:jeton_pat_v2</code>) et de convertir cette chaîne UTF-8 en Base64. Utiliser un générateurs distant pour cette opération compromet le modèle de sécurité de GitHub en transférant des secrets non chiffrés sur des réseaux tiers.
+      </p>
+
+      <div class="my-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-sm">
+        <p class="font-semibold text-gray-900 mb-2">Pourquoi faire confiance à ce guide ?</p>
+        <p class="text-gray-600">
+          Chez ni18, la confidentialité locale zero-trust est notre principe fondamental. L'encodage Base64 et le formatage des en-têtes s'exécutent exclusivement dans le moteur JavaScript de votre navigateur. Nous ne stockons, ne transmettons et n'enregistrons jamais vos jetons GitHub PAT v2 ni vos clés API.
+        </p>
+      </div>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Les Risques des Convertisseurs d'En-têtes sur Serveur Distant</h2>
+      <p>
+        S'en remettre à des convertisseurs web distants pour générer vos en-têtes HTTP introduit de sérieux risques dans votre cycle de développement :
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>Risque d'Exfiltration d'Identifiants :</strong> Transmettre des secrets en clair vers un serveur tiers les expose aux journaux d'accès NGINX, aux proxys CDN et aux scripts de suivi.</li>
+        <li><strong>Non-Respect des Conformités :</strong> Coller des clés API de production ou des jetons GitHub dans des outils cloud enfreint les politiques de sécurité entreprise SOC 2 et ISO 27001.</li>
+        <li><strong>Vulnérabilité de Rejeu de Jetons :</strong> Les en-têtes Base64 interceptés dans des journaux externes peuvent être facilement décodés, compromettant l'accès à vos dépôts.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Avantages Majeurs de la Génération Côté Client</h2>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>🔒 Confidentialité 100% Côté Client :</strong> La concaténation et la conversion Base64 sont réalisées dans la mémoire locale de votre navigateur. Aucun envoi sur serveur distant.</li>
+        <li><strong>⚡ Formatage Instantané :</strong> Génère des en-têtes conformes RFC 7617 <code>Authorization: Basic ...</code> en temps réel au fil de votre saisie.</li>
+        <li><strong>🚀 Extraits Prêts pour cURL :</strong> Crée des drapeaux cURL formatés, des chaînes Base64 brutes et des en-têtes HTTP prêts à être copiés en un clic.</li>
+        <li><strong>🌐 Compatibilité Hors Ligne :</strong> Fonctionne parfaitement sans connexion internet dans des environnements sécurisés, des VPN d'entreprise et des conteneurs isolés.</li>
+      </ul>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Guide Étape par Étape : Générer un En-tête Basic Auth en Privé</h2>
+      <ol class="list-decimal pl-6 space-y-3 text-gray-700" itemscope itemtype="http://schema.org/HowTo">
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Ouvrez le <a href="/fr/tools/basic-authentication-header-generator/" class="text-indigo-600 hover:underline font-semibold">Générateur d'En-têtes d'Authentification Basic</a> dans votre navigateur.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Saisissez votre nom d'utilisateur GitHub ou identifiant de compte de service dans le champ Nom d'utilisateur.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Collez votre jeton affiné GitHub PAT v2 dans le champ Mot de passe.</span>
+        </li>
+        <li itemprop="step" itemscope itemtype="http://schema.org/HowToStep">
+          <span itemprop="text">Copiez l'en-tête généré <code>Authorization: Basic ...</code> ou la chaîne Base64 directement dans votre presse-papiers pour cURL ou Postman.</span>
+        </li>
+      </ol>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conseils Avancés pour Développeurs</h2>
+      <p>
+        Lors du développement d'intégrations API complexes ou de proxys de microservices, les développeurs manipulent divers mécanismes d'authentification. Pour les points de terminaison OAuth 2.1 ou basés sur des jetons JWT, inspectez vos jetons de session en toute sécurité avec notre <a href="/fr/tools/jwt-debugger/" class="text-indigo-600 hover:underline font-semibold">Débogueur et Inspecteur JWT</a> côté client.
+      </p>
+      <p>
+        De plus, lors de la configuration de variables d'environnement dans vos workflows CI/CD, enregistrez vos chaînes encodées Base64 dans des coffres de secrets chiffrés plutôt que dans les fichiers de code source.
+      </p>
+
+      <hr class="my-8 border-gray-200">
+
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Conclusion &amp; Sécurisez vos Workflows API</h2>
+      <p>
+        Respecter le mandat de sécurité GitHub PAT v2 d'août 2026 exige de protéger vos identifiants à chaque étape. En générant vos en-têtes HTTP Basic Auth 100% en local dans votre navigateur, vous éliminez tout risque d'exposition d'identifiants chez un tiers et garantissez la conformité de vos projets.
+      </p>
+      <p class="mt-4">
+        <a href="/fr/tools/basic-authentication-header-generator/" class="inline-block bg-indigo-600 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition-colors">
+          Lancer le Générateur Basic Auth Gratuit &rarr;
+        </a>
+      </p>
+
+      <!-- FAQ SCHEMA SECTION -->
+      <hr class="my-8 border-gray-200">
+      <h2 class="text-2xl sm:text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 text-gray-900">Foire Aux Questions</h2>
+      <div class="space-y-4" itemscope itemtype="http://schema.org/FAQPage">
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Qu'est-ce que le mandat GitHub PAT v2 d'août 2026 ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">GitHub PAT v2 (jetons d'accès personnels affinés) introduit des autorisations à l'échelle du dépôt et une expiration obligatoire afin de remplacer les anciens jetons classiques et d'éviter les accès étendus non autorisés.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Comment l'outil formate-t-il les jetons GitHub PAT v2 ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">L'outil associe votre nom d'utilisateur et votre jeton PAT v2 avec deux-points (<code>nom_utilisateur:jeton_pat_v2</code>), encode la chaîne en Base64 localement dans le navigateur et préfixe le schéma <code>Basic </code>.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Mes jetons GitHub ou mots de passe sont-ils transmis à un serveur ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Non. Le générateur fonctionne entièrement dans la mémoire JavaScript locale de votre navigateur. Aucune requête réseau ni téléversement n'est effectué.</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">L'encodage Base64 est-il équivalent à du chiffrement ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Non. Le Base64 est un format d'encodage et non un chiffrement. Les en-têtes d'authentification Basic HTTP doivent donc toujours être transmis via des connexions sécurisées HTTPS (TLS).</p>
+          </div>
+        </div>
+        <div itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+          <h3 class="font-semibold text-gray-900" itemprop="name">Puis-je utiliser cet outil hors ligne ou sur un VPN d'entreprise ?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
+            <p class="text-gray-700 mt-1" itemprop="text">Oui. Une fois la page chargée, l'outil s'exécute hors ligne sans nécessiter de connexion internet, ce qui le rend idéal pour les postes sécurisés et réseaux d'entreprise.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="post-full-footer mt-12 pt-8 border-t border-gray-200">
+      <nav class="post-navigation flex justify-between items-center" aria-label="Post navigation">
+        <a href="/fr/blogs/" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-150 ease-in-out group text-sm font-medium">
+          <svg class="mr-2 h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          Retour au Blog
+        </a>
+      </nav>
+    </footer>
+  </article>
+</main>

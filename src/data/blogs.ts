@@ -35,6 +35,492 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cisa-zero-trust-august-2026-jwt-debugger',
+    title: 'CISA Zero-Trust August 2026 Mandate: Debug JWTs Privately',
+    description: "With CISA's August 2026 Zero-Trust guidelines prohibiting cloud token leaks, inspect and debug JWTs 100% client-side with zero server uploads.",
+    keywords: 'cisa zero trust august 2026, jwt debugger pro, client-side jwt decoder, zero trust token inspection, debug jwt browser, session token privacy, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/cisa-zero-trust-august-2026-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cisa-zero-trust-agosto-2026-depurador-jwt',
+        title: 'Directiva CISA Zero-Trust Agosto 2026: Depura JWTs Gratis',
+        description: 'Tras las normas CISA Zero-Trust de agosto 2026, depura tokens JWT 100% en local sin enviar credenciales a servidores. Prueba nuestra herramienta.',
+        keywords: 'cisa zero trust agosto 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, depurar jwt navegador, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'cisa-zero-trust-aout-2026-debogueur-jwt',
+        title: 'Directive CISA Zero-Trust Août 2026 : Déboguer JWT Privé',
+        description: "Avec la directive CISA Zero-Trust d'août 2026, décodez et vérifiez vos jetons JWT 100% en local dans votre navigateur sans aucun téléversement.",
+        keywords: 'cisa zero trust aout 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, deboguer jwt navigateur, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'gpt-5-artifacts-august-2026-markdown-to-word',
+    title: 'GPT-5 Artifacts August 2026: Convert Markdown to Word Free',
+    description: "With OpenAI's August 2026 GPT-5 Artifacts launch, convert multi-file AI Markdown to Word .docx 100% client-side with zero cloud data uploads.",
+    keywords: 'gpt-5 artifacts august 2026, markdown to word, convert gpt-5 markdown to docx, ai artifacts converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/gpt-5-artifacts-august-2026-markdown-to-word-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'artefactos-gpt-5-agosto-2026-convertir-markdown-a-word',
+        title: 'Artefactos GPT-5 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras el lanzamiento de GPT-5 y sus artefactos en agosto de 2026, convierte Markdown de IA a Word (.docx) 100% local sin subir datos a la nube.',
+        keywords: 'artefactos gpt 5 agosto 2026, markdown a word, convertir markdown gpt 5 a docx, convertidor artefactos ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'artefacts-gpt-5-aout-2026-convertir-markdown-en-word',
+        title: 'Artefacts GPT-5 Août 2026 : Convertir Markdown en Word',
+        description: "Avec le lancement des artefacts GPT-5 d'août 2026, convertissez vos rapports Markdown d'IA en Word .docx 100% en local dans votre navigateur.",
+        keywords: 'artefacts gpt 5 aout 2026, markdown en word, convertir markdown gpt 5 en docx, convertisseur artefact ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
+    slug: 'gemini-2-5-code-diff-august-2026-text-compare',
+    title: 'Gemini 2.5 Code Diff August 2026: Compare Prompts Free',
+    description: "With Google's August 2026 Gemini 2.5 rollout, compare AI system prompts & code diffs 100% client-side with zero cloud data uploads.",
+    keywords: 'gemini 2 5 code diff august 2026, online text compare, compare ai code diffs, gemini prompt output comparison, client side text diff tool, zero trust code compare, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/gemini-2-5-code-diff-august-2026-text-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'gemini-2-5-diferencia-codigo-agosto-2026-comparar-texto',
+        title: 'Gemini 2.5 Diferencia Código Agosto 2026: Compara Textos',
+        description: 'Con el lanzamiento de Gemini 2.5 en agosto 2026, compara prompts y diferencias de código 100% local sin subir datos a la nube. Prueba gratis.',
+        keywords: 'gemini 2 5 diferencia codigo agosto 2026, comparador de texto online, comparar diffs codigo ia, comparacion prompts gemini, herramienta diff local, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'gemini-2-5-diff-code-aout-2026-comparer-texte',
+        title: 'Gemini 2.5 Diff Code Août 2026 : Comparer Textes Privé',
+        description: 'Avec le lancement de Gemini 2.5 en août 2026, comparez vos prompts et diffs de code 100% en local dans votre navigateur sans téléversement.',
+        keywords: 'gemini 2 5 diff code aout 2026, comparateur de texte en ligne, comparer diffs code ia, comparaison prompts gemini, outil diff cote client, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
+    slug: 'chrome-141-jwt-debugger-privacy-2026',
+    title: 'Chrome 141 Privacy Sandbox 2026: Debug JWT Tokens Free',
+    description: 'With Chrome 141 August 2026 zero-knowledge browser isolation rules, inspect and debug JWT session tokens 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'chrome 141 privacy sandbox 2026, jwt debugger pro, client-side jwt decoder, session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chrome-141-jwt-debugger-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'chrome-141-depurador-jwt-privacidad-2026',
+        title: 'Chrome 141 Sandbox Privacidad 2026: Depura JWT Gratis',
+        description: 'Ante la el aislamiento de navegador de Chrome 141 en agosto de 2026, depura tokens de sesión JWT 100% en local sin enviar datos a la nube. Prueba gratis.',
+        keywords: 'chrome 141 sandbox privacidad 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'chrome-141-debogueur-jwt-confidentialite-2026',
+        title: 'Chrome 141 Sandbox Confidentialité 2026 : Déboguer JWT',
+        description: 'Avec l\'isolation de navigateur Chrome 141 d\'août 2026, décodez vos jetons de session JWT 100% en local dans votre navigateur sans téléversement. Gratuit.',
+        keywords: 'chrome 141 sandbox confidentialite 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'chromium-141-screen-recorder-privacy-2026',
+    title: 'Chromium 141 Screen Capture 2026: Record Screen Privately',
+    description: 'With Chromium 141 August 2026 screen capture privacy isolation, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.',
+    keywords: 'chromium 141 screen recorder, record screen browser privacy 2026, client side screen recorder pro, webcapture isolation privacy, screen recording zero upload, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/chromium-141-screen-recorder-privacy-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'chromium-141-grabador-pantalla-privacidad-2026',
+        title: 'Chromium 141 Captura de Pantalla 2026: Graba en Privado',
+        description: 'Ante el aislamiento de captura de pantalla de Chromium 141 en agosto de 2026, graba tus pestañas 100% local sin subir archivos a la nube. Gratis.',
+        keywords: 'chromium 141 grabador pantalla, grabar pantalla navegador privacidad 2026, grabador pantalla cliente pro, aislamiento webcapture privacidad, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'chromium-141-enregistreur-ecran-confidentialite-2026',
+        title: 'Chromium 141 Capture Écran 2026 : Enregistrement Privé',
+        description: 'Avec l\'isolation de capture écran Chromium 141 d\'août 2026, enregistrez vos onglets 100% en local sans aucun téléversement. Outil gratuit.',
+        keywords: 'chromium 141 enregistreur ecran, enregistrer ecran navigateur 2026, enregistreur ecran cote client, isolation webcapture confidentialite, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'zero-trust-devsecops-august-2026-basic-auth',
+    title: 'Zero-Trust DevSecOps August 2026: Generate Basic Auth Headers',
+    description: 'With August 2026 DevSecOps zero-trust mandates prohibiting cloud API key encoding, generate HTTP Basic Auth headers 100% client-side with zero leaks.',
+    keywords: 'zero trust devsecops august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/zero-trust-devsecops-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'devsecops-zero-trust-agosto-2026-autenticacion-basica',
+        title: 'DevSecOps Zero-Trust Agosto 2026: Encabezado Basic Auth',
+        description: 'Ante las directivas DevSecOps Zero-Trust de agosto de 2026, genera encabezados HTTP Basic Auth 100% en local sin enviar credenciales a la nube.',
+        keywords: 'devsecops zero trust agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'devsecops-zero-trust-aout-2026-authentification-base',
+        title: 'DevSecOps Zero-Trust Août 2026 : En-tête Basic Auth Privé',
+        description: 'Avec les directives DevSecOps Zero-Trust d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'devsecops zero trust aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'iso-pdf-2-0-august-2026-merger-splitter',
+    title: 'ISO PDF 2.0 August 2026 Update: Merge & Split PDFs Free',
+    description: 'With August 2026 ISO 32000-2 PDF 2.0 encryption standards, client-side PDF editing is essential. Merge & split PDFs 100% in-browser with zero uploads.',
+    keywords: 'iso pdf 2 0 august 2026, pdf merger and splitter, merge pdf privately online, split pdf in browser, client side pdf tool, zero upload pdf editor, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/iso-pdf-2-0-august-2026-merger-splitter-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'norma-iso-pdf-2-0-agosto-2026-unir-dividir-pdf',
+        title: 'Norma ISO PDF 2.0 Agosto 2026: Une y Divide PDF Gratis',
+        description: 'Tras la actualización ISO PDF 2.0 de agosto 2026, une y divide PDFs 100% en local sin subir archivos a la nube. Prueba nuestra herramienta gratuita.',
+        keywords: 'norma iso pdf 2 0 agosto 2026, unir y dividir pdf gratis, combinar pdf navegador, separar paginas pdf local, herramienta pdf sin subida, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'norme-iso-pdf-2-0-aout-2026-fusionner-diviser-pdf',
+        title: 'Norme ISO PDF 2.0 Août 2026 : Fusionner PDF Privé',
+        description: "Avec la mise à jour ISO PDF 2.0 d'août 2026, fusionnez et divisez vos fichiers PDF 100% en local dans votre navigateur sans téléversement. Outil gratuit.",
+        keywords: 'norme iso pdf 2 0 aout 2026, fusionner et diviser pdf gratuit, combiner pdf navegador, extraire pages pdf local, outil pdf prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'github-pat-v2-august-2026-basic-auth',
+    title: 'GitHub PAT v2 August 2026: Basic Auth Header Guide',
+    description: 'With GitHub enforcing fine-grained PAT v2 credentials in August 2026, generate secure HTTP Basic Auth headers 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'github pat v2 august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/github-pat-v2-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'mandato-github-pat-v2-agosto-2026-autenticacion-basica',
+        title: 'Mandato GitHub PAT v2 Agosto 2026: Genera Encabezado Basic Auth',
+        description: 'Tras la obligatoriedad de GitHub PAT v2 en agosto 2026, genera encabezados HTTP Basic Auth 100% local sin enviar credenciales a servidores.',
+        keywords: 'mandato github pat v2 agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'mandat-github-pat-v2-aout-2026-authentification-base',
+        title: 'Mandat GitHub PAT v2 Août 2026 : En-tête Basic Auth Privé',
+        description: 'Avec le mandat GitHub PAT v2 d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'mandat github pat v2 aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'zero-trust-pdf-privacy-august-2026-merger-splitter',
+    title: 'Zero-Trust PDF Privacy 2026: Merge & Split PDFs Free',
+    description: 'With August 2026 enterprise DLP mandates, client-side PDF processing is critical. Merge & split PDFs 100% in-browser with zero cloud uploads or leaks.',
+    keywords: 'zero trust pdf privacy 2026, pdf merger and splitter, merge pdf privately online, split pdf in browser, client side pdf tool, zero upload pdf editor, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/zero-trust-pdf-privacy-august-2026-merger-splitter-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-pdf-zero-trust-agosto-2026-unir-dividir',
+        title: 'Privacidad PDF Zero-Trust 2026: Une y Divide PDF Gratis',
+        description: 'Tras las normas de privacidad DLP de agosto 2026, une y divide PDFs 100% en local sin subir archivos a la nube. Prueba nuestra herramienta gratuita.',
+        keywords: 'privacidad pdf zero trust 2026, unir y dividir pdf gratis, combinar pdf navegador, separar paginas pdf local, herramienta pdf sin subida, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-pdf-zero-trust-aout-2026-fusionner-diviser',
+        title: 'Confidentialité PDF Zero-Trust 2026 : Fusionner PDF Privé',
+        description: "Avec les directives DLP d'août 2026, fusionnez et divisez vos fichiers PDF 100% en local dans votre navigateur sans téléversement. Outil gratuit.",
+        keywords: 'confidentialite pdf zero trust 2026, fusionner et diviser pdf gratuit, combiner pdf navigateur, extraire pages pdf local, outil pdf prive, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'passkey-2-webauthn-august-2026-jwt-debugger',
+    title: 'WebAuthn Passkey 2.0 August 2026: Debug JWT Session Tokens Free',
+    description: 'With August 2026 WebAuthn Passkey 2.0 cross-device authentication shifts, inspect and debug JWT session tokens 100% client-side with zero data uploads.',
+    keywords: 'webauthn passkey 2 2026, jwt debugger pro, client-side jwt decoder, passkey session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/passkey-2-webauthn-august-2026-jwt-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'webauthn-passkey-2-agosto-2026-depurador-jwt',
+        title: 'WebAuthn Passkey 2.0 Agosto 2026: Depura Tokens JWT Gratis',
+        description: 'Tras el despliegue de WebAuthn Passkey 2.0 en agosto 2026, depura tokens de sesión JWT 100% en local sin subir datos a la nube. Prueba gratis.',
+        keywords: 'webauthn passkey 2 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion passkey, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'webauthn-passkey-2-aout-2026-debogueur-jwt',
+        title: 'WebAuthn Passkey 2.0 Août 2026 : Déboguer les Jetons JWT',
+        description: 'Avec le déploiement de WebAuthn Passkey 2.0 en août 2026, décodez vos jetons de session JWT 100% en local sans aucun téléversement. Gratuit.',
+        keywords: 'webauthn passkey 2 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session passkey, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'openai-api-august-2026-curl-to-code',
+    title: 'OpenAI API August 2026 Update: Convert cURL to Code Free',
+    description: 'With OpenAI\'s August 2026 Structured Outputs & SDK updates, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
+    keywords: 'openai api august 2026, convert curl to code, curl to javascript fetch, curl to python requests, client side curl converter, zero trust api client, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/openai-api-august-2026-curl-to-code-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'actualizacion-api-openai-agosto-2026-curl-a-codigo',
+        title: 'Actualización API OpenAI Agosto 2026: Convierte cURL a Código',
+        description: 'Tras las novedades de la API de OpenAI en agosto 2026, convierte comandos cURL a código 100% local sin exponer tus claves API. Pruébalo gratis.',
+        keywords: 'actualizacion api openai agosto 2026, convertidor curl a codigo, convertir curl a javascript fetch, convertir curl a python requests, convertidor curl cliente, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'mise-a-jour-api-openai-aout-2026-curl-en-code',
+        title: 'Mise à Jour API OpenAI Août 2026 : Convertir cURL en Code',
+        description: 'Avec les mises à jour OpenAI d\'août 2026, convertissez vos commandes cURL en code 100% en local sans risquer de fuite de clés API. Gratuit.',
+        keywords: 'mise a jour api openai aout 2026, convertisseur curl en code, convertir curl en javascript fetch, convertir curl en python requests, convertisseur curl prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
+    slug: 'brave-browser-privacy-screen-recorder-2026',
+    title: 'Brave Browser August 2026 Update: Record Screen Privately Free',
+    description: "With Brave Browser's August 2026 Shields & Ephemeral Storage update, record browser tabs 100% client-side with zero cloud uploads or leaks. Free tool.",
+    keywords: 'brave browser screen recorder 2026, record screen brave browser, client side screen recorder, privacy screen capture, zero upload screen recorder, screen recorder pro, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/brave-browser-privacy-screen-recorder-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'privacidad-grabador-pantalla-brave-browser-2026',
+        title: 'Brave Browser Agosto 2026: Graba Pantalla en Privado Gratis',
+        description: 'Con la actualización de Brave Browser de agosto 2026, graba pestañas 100% en local sin subir archivos a la nube. Herramienta gratuita y privada.',
+        keywords: 'grabador pantalla brave browser 2026, grabar pantalla brave browser, grabador pantalla cliente local, privacidad captura pantalla, grabador sin descargas, screen recorder pro, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'confidentialite-enregistreur-ecran-brave-browser-2026',
+        title: 'Brave Browser Août 2026 : Enregistrement Écran Privé Gratuit',
+        description: "Avec la mise à jour Brave Browser d'août 2026, enregistrez vos onglets 100% en local sans téléversement. Outil gratuit et sans fuite de données.",
+        keywords: 'enregistreur ecran brave browser 2026, enregistrer ecran brave browser, enregistreur ecran cote client, confidentialite capture ecran, enregistrement ecran prive, screen recorder pro, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'deepseek-r1-markdown-to-word-august-2026',
+    title: 'DeepSeek-R1 Artifacts August 2026: Convert Markdown to Word Free',
+    description: "DeepSeek-R1's August 2026 open-weights AI agent updates produce massive Markdown reports. Convert AI outputs to Word .docx 100% client-side with zero cloud uploads.",
+    keywords: 'deepseek-r1 artifacts, markdown to word, convert deepseek markdown to docx, ai agent report converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/deepseek-r1-markdown-to-word-august-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-deepseek-r1-a-word-agosto-2026',
+        title: 'Artefactos DeepSeek-R1 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras la actualización de DeepSeek-R1 en agosto de 2026, convierte informes Markdown de IA a Word (.docx) 100% en local sin subir datos confidenciales a la nube.',
+        keywords: 'artefactos deepseek-r1, markdown a word, convertir markdown deepseek a docx, convertidor informes ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-deepseek-r1-en-word-aout-2026',
+        title: 'Artefacts DeepSeek-R1 Août 2026 : Convertir Markdown en Word',
+        description: "Avec les mises à jour DeepSeek-R1 d'août 2026, convertissez vos rapports Markdown d'IA en Word .docx 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'artefacts deepseek-r1, markdown en word, convertir markdown deepseek en docx, convertisseur rapport ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
+    slug: 'claude-3-7-artifact-markdown-to-word-2026',
+    title: 'Claude 3.7 Artifacts 2026: Convert Markdown to Word Free',
+    description: "Anthropic's August 2026 Claude 3.7 update introduces enhanced Markdown artifacts. Convert AI reports to Word .docx 100% client-side with zero cloud uploads.",
+    keywords: 'claude 3.7 artifacts, markdown to word, convert claude markdown to docx, ai artifact converter, client side markdown converter, zero trust ai tools, ni18',
+    category: 'Productivity',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/claude-3-7-artifact-markdown-to-word-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'convertir-markdown-artefactos-claude-3-7-a-word-2026',
+        title: 'Artefactos Claude 3.7 Agosto 2026: Convierte Markdown a Word',
+        description: 'Tras la actualización de Claude 3.7 de agosto 2026, convierte artefactos e informes Markdown a Word (.docx) 100% en local sin subir datos a la nube.',
+        keywords: 'artefactos claude 3 7, markdown a word, convertir markdown claude a docx, convertidor artefactos ia, convertidor markdown cliente, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'convertir-markdown-artefacts-claude-3-7-en-word-2026',
+        title: 'Artefacts Claude 3.7 Août 2026 : Convertir Markdown en Word',
+        description: "Avec la mise à jour Claude 3.7 d'août 2026, convertissez vos rapports et artefacts Markdown en Word .docx 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'artefacts claude 3 7, markdown en word, convertir markdown claude en docx, convertisseur artefact ia, convertisseur markdown prive, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
+    slug: 'postman-api-migration-curl-to-code-2026',
+    title: 'Postman API Migration August 2026: Convert cURL to Code Free',
+    description: "Postman's August 2026 API collection migration forces teams off desktop client setups. Convert cURL commands 100% client-side with zero cloud uploads.",
+    keywords: 'postman api migration 2026, curl to code converter, convert curl to javascript fetch, convert curl to python requests, client side curl converter, zero trust api client, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/postman-api-migration-curl-to-code-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'migracion-api-postman-agosto-2026-curl-a-codigo',
+        title: 'Migración API Postman Agosto 2026: Convierte cURL a Código',
+        description: 'Ante la migración de colecciones API de Postman en agosto de 2026, convierte comandos cURL a código 100% local sin subir credenciales a la nube.',
+        keywords: 'migracion api postman agosto 2026, convertidor curl a codigo, convertir curl a javascript fetch, convertir curl a python requests, convertidor curl cliente, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'migration-api-postman-aout-2026-curl-en-code',
+        title: 'Migration API Postman Août 2026 : Convertir cURL en Code',
+        description: "Suite à la migration des collections API de Postman en août 2026, convertissez vos commandes cURL 100% en local dans votre navigateur sans téléversement.",
+        keywords: 'migration api postman aout 2026, convertisseur curl en code, convertir curl en javascript fetch, convertir curl en python requests, convertisseur curl prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
+    slug: 'cloudflare-kitesurf-jwt-security-2026-debugger',
+    title: 'Cloudflare Kitesurf Launch 2026: Debug JWT Tokens Free',
+    description: "Cloudflare's August 2026 Kitesurf platform launch shifts AI agent security. Inspect and debug JWT session tokens 100% client-side with zero cloud uploads.",
+    keywords: 'cloudflare kitesurf 2026, jwt debugger pro, client-side jwt decoder, session token security, zero trust token inspection, debug jwt browser, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/cloudflare-kitesurf-jwt-security-2026-debugger-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cloudflare-kitesurf-seguridad-jwt-2026-depurador',
+        title: 'Lanzamiento Cloudflare Kitesurf 2026: Depura JWT Gratis',
+        description: 'Ante el lanzamiento de Cloudflare Kitesurf en agosto 2026, la depuración JWT en local es clave. Inspecciona y valida tokens 100% privado sin subir datos.',
+        keywords: 'cloudflare kitesurf 2026, depurador jwt pro, decodificador jwt cliente, privacidad tokens sesion, inspeccion tokens zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'cloudflare-kitesurf-securite-jwt-2026-debogueur',
+        title: 'Lancement Cloudflare Kitesurf 2026 : Déboguer JWT Privé',
+        description: "Avec le lancement de Cloudflare Kitesurf en août 2026, décodez et vérifiez vos jetons JWT 100% en local dans votre navigateur sans aucun téléversement.",
+        keywords: 'cloudflare kitesurf 2026, debogueur jwt pro, decodeur jwt cote client, confidentialite jetons session, inspection jeton zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
+    slug: 'graphql-rest-payload-shift-august-2026-json-compare',
+    title: 'GraphQL vs REST Payload Shift 2026: Compare JSON Free',
+    description: 'With August 2026 API architecture shifts causing silent payload breaking changes between GraphQL and REST, compare JSON 100% client-side with zero cloud uploads.',
+    keywords: 'graphql vs rest payload shift 2026, json comparison tool, compare json online free, client side json diff tool, api payload diffing, zero trust json auditor, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/graphql-rest-payload-shift-august-2026-json-compare-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'cambio-carga-graphql-rest-agosto-2026-comparar-json',
+        title: 'Cambio de Carga GraphQL vs REST 2026: Compara JSON Gratis',
+        description: 'Tras los cambios de arquitectura de API en agosto de 2026, compara estructuras JSON 100% local sin enviar datos a la nube. Audita respuestas gratis.',
+        keywords: 'cambio carga graphql rest agosto 2026, herramienta comparacion json, comparar json online gratis, diff json cliente local, auditoria json zero trust, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'shift-payload-graphql-rest-aout-2026-comparer-json',
+        title: 'Évolution Payload GraphQL vs REST 2026 : Comparer JSON Privé',
+        description: 'Face aux évolutions des API en août 2026, comparez vos payloads JSON 100% en local dans votre navigateur sans aucun téléversement. Outil gratuit.',
+        keywords: 'shift payload graphql rest aout 2026, comparateur json en ligne, diff json cote client, comparaison payload json prive, audit json zero trust, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
+    slug: 'github-secret-scanning-august-2026-basic-auth',
+    title: 'GitHub Secret Scanning 2026: Generate Basic Auth Headers',
+    description: 'With GitHub expanding secret scanning in August 2026, generate HTTP Basic Auth headers 100% client-side with zero cloud uploads or credential leaks.',
+    keywords: 'github secret scanning august 2026, basic authentication header generator, generate basic auth header, zero trust api credentials, http basic auth, ni18',
+    category: 'Privacy & Security',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/github-secret-scanning-august-2026-basic-auth-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'escaneo-secretos-github-agosto-2026-autenticacion-basica',
+        title: 'Escaneo de Secretos GitHub 2026: Encabezado Basic Auth',
+        description: 'Tras el escaneo de secretos de GitHub de agosto 2026, genera encabezados HTTP Basic Auth 100% local sin enviar credenciales a servidores.',
+        keywords: 'escaneo secretos github agosto 2026, generador encabezado autenticacion basica, generar basic auth online, credenciales api zero trust, ni18',
+        category: 'Privacidad y Seguridad'
+      },
+      fr: {
+        slug: 'analyse-secrets-github-aout-2026-authentification-base',
+        title: 'Détection de Secrets GitHub 2026 : En-tête Basic Auth',
+        description: 'Avec l\'analyse de secrets GitHub d\'août 2026, générez vos en-têtes HTTP Basic Auth 100% en local sans aucun téléversement de données. Gratuit.',
+        keywords: 'analyse secrets github aout 2026, generateur entete authentification basique, generer basic auth en ligne, identifiants api zero trust, ni18',
+        category: 'Confidentialité & Sécurité'
+      }
+    }
+  },
+  {
     slug: 'webcodecs-av1-screen-recorder-august-2026',
     title: 'WebCodecs AV1 Update August 2026: Record Screen Free',
     description: "With August 2026 WebCodecs AV1 hardware acceleration updates, record browser tabs in 4K 100% client-side with zero cloud uploads or leaks.",
