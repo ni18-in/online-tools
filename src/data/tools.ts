@@ -292,6 +292,16 @@ export const tools: Tool[] = [
     rating: { value: 4.8, count: 12 },
     i18n: { es: 'jwt-debugger', fr: 'jwt-debugger' },
   },
+  {
+    slug: 'uuid-generator',
+    name: 'UUID & NanoID Generator / Inspector',
+    description: 'Generate bulk UUID v4, v7, ULID, and NanoID online. Inspect and extract timestamps from UUID v7 and ULID with 100% client-side privacy.',
+    category: 'developer',
+    schemaType: 'WebApplication',
+    applicationCategory: 'DeveloperApplication',
+    rating: { value: 4.9, count: 28 },
+    i18n: { es: 'generador-uuid', fr: 'generateur-uuid' },
+  },
 ];
 
 export interface ExternalCard {
@@ -330,6 +340,7 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'subtitle-resync-tool',
   'iphone-photo-fixer',
   'heic-viewer',
+  'uuid-generator',
 ];
 
 // Order of tools shown in the homepage CollectionPage > ItemList JSON-LD (the curated 10).
@@ -767,6 +778,16 @@ export const TOOL_TRANSLATIONS: Record<
     fr: {
       name: 'Fusionner et Diviser PDF en Ligne',
       description: 'Fusionnez plusieurs fichiers PDF ou extrayez des pages facilement. Traitement 100% privé et local dans votre navigateur, sans envoi sur serveur.'
+    }
+  },
+  'uuid-generator': {
+    es: {
+      name: 'Generador e Inspector de UUID y NanoID',
+      description: 'Genera UUID v4, v7, ULID y NanoID en lote. Inspecciona y extrae marcas de tiempo de UUID v7 y ULID con privacidad 100% en el navegador.'
+    },
+    fr: {
+      name: 'Générateur et Inspecteur UUID et NanoID',
+      description: 'Générez des UUID v4, v7, ULID et NanoID en lot. Inspectez et extrayez les horodatages des UUID v7 et ULID avec confidentialité 100% locale.'
     }
   }
 };
