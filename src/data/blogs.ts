@@ -63,6 +63,34 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
+    slug: 'nodejs-22-fetch-typescript-5-8-curl-to-code',
+    title: 'Node.js 22 & TS 5.8 API Migration: Convert cURL to Code Free',
+    description: 'With Node.js 22 LTS and TypeScript 5.8 enforcing native fetch APIs, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
+    keywords: 'nodejs 22 fetch typescript 5.8, convert curl to code, curl to javascript fetch, curl to python requests, client side curl converter, zero trust api client, ni18',
+    category: 'Developer',
+    datePublished: '2026-08-09T12:00:00+05:30',
+    dateModified: '2026-08-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/nodejs-22-fetch-typescript-5-8-curl-to-code-banner.webp`,
+    author: 'ni18',
+    noindex: true,
+    i18n: {
+      es: {
+        slug: 'nodejs-22-fetch-typescript-5-8-convertir-curl-a-codigo',
+        title: 'Node.js 22 y TS 5.8: Convierte cURL a Código Gratis',
+        description: 'Ante el despliegue de Node.js 22 y TypeScript 5.8 con API fetch nativa, convierte comandos cURL a código 100% local sin exponer tus claves API.',
+        keywords: 'nodejs 22 fetch typescript 5.8, convertidor curl a codigo, convertir curl a javascript fetch, convertir curl a python requests, convertidor curl cliente, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'nodejs-22-fetch-typescript-5-8-convertir-curl-en-code',
+        title: 'Node.js 22 & TS 5.8 API : Convertir cURL en Code Privé',
+        description: "Avec Node.js 22 LTS et TypeScript 5.8 imposant l'API fetch native, convertissez vos commandes cURL en code 100% en local sans risquer de fuite de clés API.",
+        keywords: 'nodejs 22 fetch typescript 5.8, convertisseur curl en code, convertir curl en javascript fetch, convertir curl en python requests, convertisseur curl prive, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'cisa-zero-trust-august-2026-jwt-debugger',
     title: 'CISA Zero-Trust August 2026 Mandate: Debug JWTs Privately',
     description: "With CISA's August 2026 Zero-Trust guidelines prohibiting cloud token leaks, inspect and debug JWTs 100% client-side with zero server uploads.",
