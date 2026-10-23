@@ -152,6 +152,32 @@ test('blog lists load and alternates redirect correctly', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('cron-expression-builder parses expressions, updates visual controls and predicts next executions', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/cron-expression-builder/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify default cron expression explanation
+  const cronInput = page.locator('#cron-input');
+  await expect(cronInput).toHaveValue('0 0 * * *');
+  await expect(page.locator('#explanation-text')).toContainText('Runs at minute 0, at 00:00.');
+
+  // Click preset "Workdays at 9 AM"
+  await page.click('#btn-preset-workdays');
+  await expect(cronInput).toHaveValue('0 9 * * 1-5');
+  await expect(page.locator('#explanation-text')).toContainText('on workdays');
+
+  // Verify next 5 executions list rendered
+  const nextRuns = page.locator('#next-runs-list li');
+  await expect(nextRuns).toHaveCount(5);
+
+  // Test custom input
+  await page.fill('#cron-input', '*/15 * * * *');
+  await expect(page.locator('#explanation-text')).toContainText('every 15 minutes');
+
+  expect(errors).toEqual([]);
+});
+
 test('uuid-generator generates batch IDs and inspects UUID v7 timestamp', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('/tools/uuid-generator/');
