@@ -302,6 +302,16 @@ export const tools: Tool[] = [
     rating: { value: 4.9, count: 28 },
     i18n: { es: 'generador-uuid', fr: 'generateur-uuid' },
   },
+  {
+    slug: 'cron-expression-builder',
+    name: 'Cron Expression Builder & Explainer',
+    description: 'Build, parse, and explain cron expression schedules visually in your browser. Get next execution timestamps with 100% client-side privacy.',
+    category: 'developer',
+    schemaType: 'WebApplication',
+    applicationCategory: 'DeveloperApplication',
+    rating: { value: 4.9, count: 18 },
+    i18n: { es: 'generador-expresiones-cron', fr: 'generateur-expressions-cron' },
+  },
 ];
 
 export interface ExternalCard {
@@ -341,6 +351,7 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'iphone-photo-fixer',
   'heic-viewer',
   'uuid-generator',
+  'cron-expression-builder',
 ];
 
 // Order of tools shown in the homepage CollectionPage > ItemList JSON-LD (the curated 10).
@@ -788,6 +799,16 @@ export const TOOL_TRANSLATIONS: Record<
     fr: {
       name: 'Générateur et Inspecteur UUID et NanoID',
       description: 'Générez des UUID v4, v7, ULID et NanoID en lot. Inspectez et extrayez les horodatages des UUID v7 et ULID avec confidentialité 100% locale.'
+    }
+  },
+  'cron-expression-builder': {
+    es: {
+      name: 'Generador de Expresiones Cron',
+      description: 'Crea, analiza y explica expresiones cron de forma visual en tu navegador. Obtén próximas ejecuciones con privacidad 100% del lado del cliente.'
+    },
+    fr: {
+      name: 'Générateur d\'Expressions Cron',
+      description: 'Créez, analysez et expliquez les expressions cron visuellement. Obtenez les prochaines exécutions avec une confidentialité 100% côté client.'
     }
   }
 };
