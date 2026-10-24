@@ -312,6 +312,15 @@ export const tools: Tool[] = [
     rating: { value: 4.9, count: 18 },
     i18n: { es: 'generador-expresiones-cron', fr: 'generateur-expressions-cron' },
   },
+  {
+    slug: 'jee-mains-mock-test-free-online',
+    name: 'JEE Mains Mock Test Free Online',
+    description: 'Take a free JEE Mains mock test online without registration. NTA CBT pattern with Physics, Chemistry & Math, timer, instant score & full solutions.',
+    category: 'calculator',
+    schemaType: 'WebApplication',
+    applicationCategory: 'EducationalApplication',
+    rating: { value: 4.9, count: 96 },
+  },
 ];
 
 export interface ExternalCard {
