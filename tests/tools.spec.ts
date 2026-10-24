@@ -152,6 +152,58 @@ test('blog lists load and alternates redirect correctly', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('cron-expression-builder parses expressions, updates visual controls and predicts next executions', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/cron-expression-builder/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify default cron expression explanation
+  const cronInput = page.locator('#cron-input');
+  await expect(cronInput).toHaveValue('0 0 * * *');
+  await expect(page.locator('#explanation-text')).toContainText('Runs at minute 0, at 00:00.');
+
+  // Click preset "Workdays at 9 AM"
+  await page.click('#btn-preset-workdays');
+  await expect(cronInput).toHaveValue('0 9 * * 1-5');
+  await expect(page.locator('#explanation-text')).toContainText('on workdays');
+
+  // Verify next 5 executions list rendered
+  const nextRuns = page.locator('#next-runs-list li');
+  await expect(nextRuns).toHaveCount(5);
+
+  // Test custom input
+  await page.fill('#cron-input', '*/15 * * * *');
+  await expect(page.locator('#explanation-text')).toContainText('every 15 minutes');
+
+  expect(errors).toEqual([]);
+});
+
+test('uuid-generator generates batch IDs and inspects UUID v7 timestamp', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/uuid-generator/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify default v4 batch generation
+  const output = page.locator('#output-text');
+  await expect(output).not.toBeEmpty();
+  const text = await output.inputValue();
+  const lines = text.trim().split('\n');
+  expect(lines.length).toBe(10);
+
+  // Switch to UUID v7
+  await page.selectOption('#id-type', 'v7');
+  await page.click('#btn-generate');
+  const v7Text = await output.inputValue();
+  const v7First = v7Text.trim().split('\n')[0];
+
+  // Inspect the generated UUID v7
+  await page.fill('#inspect-input', v7First);
+  await expect(page.locator('#insp-format')).toHaveText('UUID v7');
+  await expect(page.locator('#insp-date')).not.toHaveText('-');
+
+  expect(errors).toEqual([]);
+});
+
 
 
 // ---- image utility: the pieces that regressed or were newly added ----
