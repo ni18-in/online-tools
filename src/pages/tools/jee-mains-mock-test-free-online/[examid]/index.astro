@@ -1,0 +1,1428 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { SITE_URL } from '../../../../data/site';
+import paperData from '../../../../data/jee-mains-paper-1.json';
+import manifestData from '../../../../data/jee-manifest.json';
+
+export async function getStaticPaths() {
+  return [
+    { params: { examid: '2024_mains_jan_27_s1' } },
+  ];
+}
+
+const { examid } = Astro.params;
+
+const paperMeta = manifestData.papers.find((p) => p.id === examid) || {
+  id: '2024_mains_jan_27_s1',
+  title: 'JEE Mains 2024 - 27 Jan Morning Shift',
+  year: 2024,
+  description: 'JEE Mains Question Paper 27 January 2024 Morning Shift.',
+};
+
+// Flatten all questions in canonical order: Physics (1-30), Chemistry (31-60), Mathematics (61-90)
+const sectionOrder = ['physics', 'chem', 'math'];
+const sortedSections = [...paperData.sections].sort(
+  (a, b) => sectionOrder.indexOf(a.id) - sectionOrder.indexOf(b.id)
+);
+
+interface QuestionItem {
+  num: number;
+  subjectIndex: number;
+  subjectId: string;
+  subjectName: string;
+  sectionId: string;
+  sectionName: string;
+  question: any;
+}
+
+const allQuestions: QuestionItem[] = [];
+sortedSections.forEach((s) => {
+  let subIdx = 0;
+  s.subsections.forEach((sub) => {
+    sub.questions.forEach((q) => {
+      subIdx++;
+      allQuestions.push({
+        num: allQuestions.length + 1,
+        subjectIndex: subIdx,
+        subjectId: s.id,
+        subjectName: s.name,
+        sectionId: sub.id,
+        sectionName: sub.name,
+        question: q,
+      });
+    });
+  });
+});
+
+const pageCanonical = `${SITE_URL}/tools/jee-mains-mock-test-free-online/${examid}/`;
+const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni18.jeemocktest';
+const IMG_BASE_URL = 'https://ni18-in.github.io/backend-jee-mock-test/jee_mains_27_jan_2024_shift_1/';
+
+// Schema 1: BreadcrumbList
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${SITE_URL}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Tools',
+      item: `${SITE_URL}/tools/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'JEE Mains Mock Test Free Online',
+      item: `${SITE_URL}/tools/jee-mains-mock-test-free-online/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: 'JEE Mains 2024 27 Jan Shift 1 Solutions',
+      item: pageCanonical,
+    },
+  ],
+};
+
+// Schema 2: FAQPage for Google rich search results
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: allQuestions.slice(0, 15).map((item) => {
+    const q = item.question;
+    const correctOpt = q.type === 'single_correct' ? (q.options || []).find((o: any) => o.isCorrect) : null;
+    const ansText = correctOpt ? correctOpt.text : String(q.answer || '');
+    return {
+      '@type': 'Question',
+      name: `JEE Main 2024 Q${item.num} (${item.subjectName}): ${q.questionText.replace(/[$]/g, '').slice(0, 120)}`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Correct Answer: ${ansText.replace(/[$]/g, '')}. Explanation: ${q.explanation ? q.explanation.replace(/[$]/g, '') : 'Official solution available on Online Tools.'}`,
+      },
+    };
+  }),
+};
+
+// Schema 3: TechArticle
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'JEE Mains 2024 Question Paper with Solutions (27 Jan Morning Shift 1)',
+  description: 'Full official question paper with answer keys, numerical solutions, and step-by-step LaTeX explanations for Physics, Chemistry, and Mathematics.',
+  url: pageCanonical,
+  inLanguage: 'en',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Online Tools',
+    url: SITE_URL,
+  },
+};
+
+const seo = {
+  title: 'JEE Mains 2024 27 Jan Shift 1 Question Paper & Solutions',
+  description: 'Full JEE Mains 2024 27 Jan Morning Shift question paper with answer keys, numerical solutions & step-by-step explanations for Physics, Chemistry & Math.',
+  canonical: pageCanonical,
+  keywords: 'jee mains 2024 27 jan shift 1 question paper, jee mains 27 jan morning shift solutions, jee mains mock test free online, jee mains answer key 2024, jee mains question paper with solutions',
+  jsonLd: [breadcrumbSchema, faqSchema, articleSchema],
+};
+
+const letters = ['A', 'B', 'C', 'D'];
+---
+
+<BaseLayout
+  seo={seo}
+  lang="en"
+  current="tools"
+  headRaw={`
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  `}
+>
+  <main id="main-content" class="jee-sol-page">
+    <!-- Breadcrumb Navigation -->
+    <nav class="jee-breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li class="crumb-sep" aria-hidden="true">/</li>
+        <li><a href="/tools/">Tools</a></li>
+        <li class="crumb-sep" aria-hidden="true">/</li>
+        <li><a href="/tools/jee-mains-mock-test-free-online/">JEE Mains Mock Test</a></li>
+        <li class="crumb-sep" aria-hidden="true">/</li>
+        <li class="crumb-current" aria-current="page">27 Jan 2024 Shift 1 Solutions</li>
+      </ol>
+    </nav>
+
+    <!-- Header Hero -->
+    <header class="jee-sol-hero">
+      <div class="jee-badge-row">
+        <span class="jee-badge jee-badge--primary">Official NTA Question Paper</span>
+        <span class="jee-badge">27 January 2024 • Shift 1 (Morning)</span>
+        <span class="jee-badge jee-badge--success">Complete Answer Keys &amp; Solutions</span>
+      </div>
+      <h1 class="jee-sol-title">JEE Mains 2024 27 Jan Shift 1 Question Paper &amp; Solutions</h1>
+      <p class="jee-sol-subtitle">
+        Official National Testing Agency (NTA) exam paper with verified answer keys, detailed step-by-step mathematical derivations, and formulas for all 90 questions across Physics, Chemistry, and Mathematics.
+      </p>
+
+      <!-- Exam Specs Banner -->
+      <div class="jee-sol-specs">
+        <div class="jee-spec-chip">
+          <span class="jee-spec-chip__label">Total Questions</span>
+          <span class="jee-spec-chip__val">90 Qs</span>
+        </div>
+        <div class="jee-spec-chip">
+          <span class="jee-spec-chip__label">Subjects</span>
+          <span class="jee-spec-chip__val">Physics • Chem • Math</span>
+        </div>
+        <div class="jee-spec-chip">
+          <span class="jee-spec-chip__label">Maximum Marks</span>
+          <span class="jee-spec-chip__val">300 Marks</span>
+        </div>
+        <div class="jee-spec-chip">
+          <span class="jee-spec-chip__label">Marking Scheme</span>
+          <span class="jee-spec-chip__val">+4 Correct / -1 Wrong</span>
+        </div>
+      </div>
+
+      <!-- Action Row -->
+      <div class="jee-sol-actions">
+        <a href="/tools/jee-mains-mock-test-free-online/" class="jee-btn jee-btn--primary jee-btn--lg">
+          <span>⚡ Take as Timed CBT Mock Test (Free)</span>
+          <span class="jee-btn-arrow">&rarr;</span>
+        </a>
+        <a
+          href={APP_PLAY_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="jee-btn jee-btn--app"
+        >
+          <svg class="jee-play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M3.609 1.814L13.793 12 3.61 22.186a2.38 2.38 0 0 1-.61-.914c-.16-.44-.16-.94-.16-1.572V4.3c0-.632 0-1.132.16-1.572.13-.356.34-.67.61-.914zm11.602 11.602l2.368 2.368-12.11 6.993 9.742-9.361zm2.368-2.832l-2.368 2.368L5.47 3.591l12.11 6.993zm1.184 1.184l3.193 1.843c1.077.621 1.077 1.637 0 2.259l-3.193 1.843-2.368-2.973 2.368-2.972z"/>
+          </svg>
+          <span>Get 24+ More Papers on Android App</span>
+        </a>
+        <button type="button" class="jee-btn jee-btn--secondary" id="btn-print-solutions">
+          <span>🖨️ Print / Save PDF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Interactive Navigation & Filter Controls -->
+    <section class="jee-sol-controls" aria-label="Question filters">
+      <div class="jee-filter-row">
+        <!-- Subject & Type Filters -->
+        <div class="jee-filter-tabs" role="tablist">
+          <button type="button" class="jee-filter-tab active" data-filter="all">All (90)</button>
+          <button type="button" class="jee-filter-tab" data-filter="physics">Physics (Q1-30)</button>
+          <button type="button" class="jee-filter-tab" data-filter="chem">Chemistry (Q31-60)</button>
+          <button type="button" class="jee-filter-tab" data-filter="math">Math (Q61-90)</button>
+          <button type="button" class="jee-filter-tab" data-filter="mcq">Section-A (MCQs)</button>
+          <button type="button" class="jee-filter-tab" data-filter="numerical">Section-B (Numerical)</button>
+        </div>
+
+        <!-- Realtime Search Box -->
+        <div class="jee-search-box">
+          <input
+            type="search"
+            id="sol-search-input"
+            class="jee-search-input"
+            placeholder="Search topic or formula (e.g. diode, integral, friction)..."
+            aria-label="Search questions by keyword"
+          />
+        </div>
+      </div>
+
+      <!-- Quick Jump Palette Accordion / Grid -->
+      <details class="jee-jump-drawer" open>
+        <summary class="jee-jump-summary">
+          <span>⚡ Quick Jump to Question (1 - 90)</span>
+          <span class="jee-jump-badge" id="visible-count-badge">Showing 90 of 90 Questions</span>
+        </summary>
+        <div class="jee-jump-grid" id="jee-jump-grid">
+          {allQuestions.map((item) => (
+            <button
+              type="button"
+              class={`jee-jump-btn jee-jump-btn--${item.subjectId}`}
+              data-target={`q-card-${item.num}`}
+              data-subject={item.subjectId}
+              data-type={item.question.type}
+              title={`Jump to Question ${item.num} (${item.subjectName})`}
+            >
+              {item.num}
+            </button>
+          ))}
+        </div>
+      </details>
+    </section>
+
+    <!-- Main Question Cards Container -->
+    <section class="jee-questions-container" id="jee-questions-list">
+      {allQuestions.map((item) => {
+        const q = item.question;
+        const isMcq = q.type === 'single_correct';
+        const subjectColorClass = `jee-card--${item.subjectId}`;
+
+        return (
+          <article
+            class={`jee-q-card ${subjectColorClass}`}
+            id={`q-card-${item.num}`}
+            data-subject={item.subjectId}
+            data-type={isMcq ? 'mcq' : 'numerical'}
+            data-qnum={item.num}
+          >
+            <!-- Card Header -->
+            <div class="jee-q-card__header">
+              <div class="jee-q-card__title-wrap">
+                <span class="jee-q-badge">Question {item.num}</span>
+                <span class="jee-subj-tag">{item.subjectName}</span>
+                <span class="jee-sec-tag">{item.sectionName}</span>
+                <span class="jee-type-tag">{isMcq ? 'Single Choice (MCQ)' : 'Numerical Value'}</span>
+              </div>
+              <div class="jee-q-card__marks">
+                <span class="jee-mark-pill jee-mark-pill--pos">+{q.marks || 4} Marks</span>
+                <span class="jee-mark-pill jee-mark-pill--neg">{q.negativeMarks !== undefined ? q.negativeMarks : -1} Negative</span>
+              </div>
+            </div>
+
+            <!-- Question Statement -->
+            <div class="jee-q-statement">
+              {q.questionText}
+            </div>
+
+            <!-- Diagram Image if Present -->
+            {q.hasImage && q.imageName && (
+              <div class="jee-q-diagram-wrap">
+                <img
+                  src={`${IMG_BASE_URL}${q.imageName}`}
+                  alt={`Diagram for ${item.subjectName} Question ${item.num}`}
+                  class="jee-q-diagram-img"
+                  loading="lazy"
+                />
+              </div>
+            )}
+
+            <!-- Options or Numerical Answer -->
+            {isMcq ? (
+              <div class="jee-sol-options-grid">
+                {(q.options || []).map((opt: any, optIdx: number) => {
+                  const isCorrect = opt.isCorrect === true;
+                  return (
+                    <div class={`jee-sol-opt-row ${isCorrect ? 'is-correct' : ''}`}>
+                      <div class="jee-sol-opt-main">
+                        <span class={`jee-sol-opt-letter ${isCorrect ? 'is-correct' : ''}`}>
+                          {letters[optIdx] || optIdx + 1}
+                        </span>
+                        <div class="jee-sol-opt-text">
+                          {opt.text}
+                        </div>
+                      </div>
+                      {isCorrect && (
+                        <span class="jee-correct-badge" title="Verified correct answer">
+                          ✓ Correct Option
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div class="jee-numerical-sol-box">
+                <span class="jee-num-sol-label">Official NTA Answer:</span>
+                <span class="jee-num-sol-val">{q.answer}</span>
+                <span class="jee-num-sol-hint">(Integer or Decimal value)</span>
+              </div>
+            )}
+
+            <!-- Step-by-Step Pedagogical Explanation -->
+            <div class="jee-explanation-card">
+              <div class="jee-explanation-card__head">
+                <span class="jee-exp-icon">💡</span>
+                <h2 class="jee-exp-heading">Step-by-Step Explanation &amp; Solution</h2>
+              </div>
+              <div class="jee-explanation-card__body">
+                {q.explanation || 'Detailed step-by-step mathematical explanation is verified by subject experts.'}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+
+    <!-- Bottom Action & App Download Banner -->
+    <section class="jee-card jee-sol-bottom-banner">
+      <div class="jee-sol-bottom-banner__content">
+        <span class="jee-badge jee-badge--accent">Online Practice</span>
+        <h2 class="jee-bottom-title">Take This Complete Exam as a Timed CBT Mock Test</h2>
+        <p class="jee-bottom-desc">
+          Ready to test your real-time speed, accuracy, and exam temperament? Attempt this 27 January 2024 Morning Shift with a live 180-minute countdown clock, NTA-style palette, instant negative marking calculation, and subject analysis.
+        </p>
+        <div class="jee-bottom-actions">
+          <a href="/tools/jee-mains-mock-test-free-online/" class="jee-btn jee-btn--primary jee-btn--lg">
+            <span>🚀 Start Timed Mock Test Online (Free)</span>
+            <span class="jee-btn-arrow">&rarr;</span>
+          </a>
+          <a
+            href={APP_PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="jee-btn jee-btn--app"
+          >
+            <span>Download Android App for 24+ Shift Papers</span>
+            <span class="jee-btn-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ==================== STYLES FOR QUESTION PAPER & SOLUTIONS ==================== */
+  :root {
+    --jee-primary: var(--md-sys-color-primary, #1e40af);
+    --jee-primary-container: var(--md-sys-color-primary-container, #dbeafe);
+    --jee-on-primary: var(--md-sys-color-on-primary, #ffffff);
+    --jee-surface: #ffffff;
+    --jee-on-surface: #1e293b;
+    --jee-surface-variant: #f8fafc;
+    --jee-outline: #cbd5e1;
+    --jee-green: #16a34a;
+    --jee-green-bg: #dcfce7;
+    --jee-red: #dc2626;
+    --jee-red-bg: #fee2e2;
+    --jee-purple: #7c3aed;
+    --jee-purple-bg: #ede9fe;
+    --jee-gray: #64748b;
+    --jee-num-bg: #ffffff;
+    --jee-num-text: #15803d;
+  }
+
+  :global([data-theme='dark']),
+  :global(html[data-theme='dark']),
+  :global(.dark) {
+    --jee-primary: #60a5fa;
+    --jee-primary-container: rgba(37, 99, 235, 0.28);
+    --jee-on-primary: #ffffff;
+    --jee-surface: #1e293b;
+    --jee-on-surface: #f1f5f9;
+    --jee-surface-variant: #0f172a;
+    --jee-outline: #334155;
+    --jee-green: #4ade80;
+    --jee-green-bg: rgba(34, 197, 94, 0.2);
+    --jee-red: #f87171;
+    --jee-red-bg: rgba(239, 68, 68, 0.2);
+    --jee-purple: #c084fc;
+    --jee-purple-bg: rgba(124, 58, 237, 0.25);
+    --jee-gray: #94a3b8;
+    --jee-num-bg: #0f172a;
+    --jee-num-text: #4ade80;
+  }
+
+  /* Global KaTeX text color & math scroll preservation */
+  :global(.katex),
+  :global(.katex-html) {
+    color: inherit;
+  }
+
+  :global(.katex-display) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .jee-sol-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+    color: var(--jee-on-surface);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Breadcrumbs */
+  .jee-breadcrumbs {
+    font-size: 0.85rem;
+    color: var(--jee-gray);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+
+  .jee-breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .jee-breadcrumbs a {
+    color: var(--jee-primary);
+    text-decoration: none;
+  }
+
+  .jee-breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .crumb-sep {
+    color: var(--jee-outline);
+  }
+
+  .crumb-current {
+    color: var(--jee-on-surface);
+    font-weight: 600;
+  }
+
+  /* Hero */
+  .jee-sol-hero {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    color: var(--jee-on-surface);
+  }
+
+  .jee-badge-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .jee-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--jee-surface-variant);
+    color: var(--jee-gray);
+    border: 1px solid var(--jee-outline);
+  }
+
+  .jee-badge--primary {
+    background: var(--jee-primary-container);
+    color: var(--jee-primary);
+    border-color: transparent;
+  }
+
+  .jee-badge--success {
+    background: var(--jee-green-bg);
+    color: var(--jee-green);
+    border-color: transparent;
+  }
+
+  .jee-badge--accent {
+    background: #fef08a;
+    color: #854d0e;
+    border-color: #fde047;
+  }
+
+  :global([data-theme='dark']) .jee-badge--accent,
+  :global(html[data-theme='dark']) .jee-badge--accent,
+  :global(.dark) .jee-badge--accent {
+    background: rgba(234, 179, 8, 0.2);
+    color: #fde047;
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+
+  .jee-sol-title {
+    font-size: clamp(1.45rem, 3.5vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-sol-subtitle {
+    font-size: 1.02rem;
+    color: var(--jee-gray);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+    max-width: 860px;
+  }
+
+  .jee-sol-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .jee-spec-chip {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .jee-spec-chip__label {
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .jee-spec-chip__val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--jee-primary);
+  }
+
+  .jee-sol-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .jee-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .jee-btn--lg {
+    padding: 0.85rem 1.75rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .jee-btn--primary {
+    background: var(--jee-primary);
+    color: #ffffff;
+  }
+
+  .jee-btn--primary:hover {
+    filter: brightness(1.1);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .jee-btn--app {
+    background: #047857;
+    color: #ffffff;
+  }
+
+  .jee-btn--app:hover {
+    background: #065f46;
+    color: #ffffff;
+  }
+
+  .jee-btn--secondary {
+    background: var(--jee-surface-variant);
+    color: var(--jee-on-surface);
+    border-color: var(--jee-outline);
+  }
+
+  .jee-btn--secondary:hover {
+    background: var(--jee-outline);
+  }
+
+  /* Filter Controls */
+  .jee-sol-controls {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    color: var(--jee-on-surface);
+  }
+
+  .jee-filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .jee-filter-tabs {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .jee-filter-tab {
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    color: var(--jee-on-surface);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .jee-filter-tab.active {
+    background: var(--jee-primary);
+    color: #ffffff;
+    border-color: var(--jee-primary);
+  }
+
+  .jee-search-box {
+    flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+  }
+
+  .jee-search-input {
+    width: 100%;
+    padding: 0.6rem 0.95rem;
+    border: 1.5px solid var(--jee-outline);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--jee-surface-variant);
+    color: var(--jee-on-surface);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+
+  .jee-search-input:focus {
+    outline: none;
+    border-color: var(--jee-primary);
+  }
+
+  /* Quick Jump Drawer */
+  .jee-jump-drawer {
+    border-top: 1px solid var(--jee-outline);
+    padding-top: 0.85rem;
+  }
+
+  .jee-jump-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--jee-primary);
+    user-select: none;
+    margin-bottom: 0.75rem;
+  }
+
+  .jee-jump-badge {
+    font-size: 0.8rem;
+    color: var(--jee-gray);
+    font-weight: 500;
+  }
+
+  .jee-jump-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+    gap: 0.35rem;
+    max-height: 180px;
+    overflow-y: auto;
+    padding: 0.25rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .jee-jump-btn {
+    height: 36px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid var(--jee-outline);
+    background: var(--jee-surface-variant);
+    color: var(--jee-on-surface);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .jee-jump-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--jee-primary);
+    background: var(--jee-primary-container);
+  }
+
+  .jee-jump-btn--physics {
+    border-left: 3px solid #2563eb;
+  }
+
+  .jee-jump-btn--chem {
+    border-left: 3px solid #059669;
+  }
+
+  .jee-jump-btn--math {
+    border-left: 3px solid #7c3aed;
+  }
+
+  /* Question Cards */
+  .jee-questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .jee-q-card {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    color: var(--jee-on-surface);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .jee-q-card.highlight {
+    box-shadow: 0 0 0 3px var(--jee-primary);
+    border-color: var(--jee-primary);
+  }
+
+  .jee-q-card.is-hidden {
+    display: none !important;
+  }
+
+  .jee-q-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--jee-outline);
+    flex-wrap: wrap;
+  }
+
+  .jee-q-card__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .jee-q-badge {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--jee-primary);
+  }
+
+  .jee-subj-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    color: var(--jee-on-surface);
+  }
+
+  .jee-sec-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--jee-gray);
+  }
+
+  .jee-type-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: var(--jee-surface-variant);
+    color: var(--jee-gray);
+    border: 1px solid var(--jee-outline);
+  }
+
+  .jee-q-card__marks {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .jee-mark-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  .jee-mark-pill--pos {
+    background: var(--jee-green-bg);
+    color: var(--jee-green);
+  }
+
+  .jee-mark-pill--neg {
+    background: var(--jee-red-bg);
+    color: var(--jee-red);
+  }
+
+  .jee-q-statement {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    color: var(--jee-on-surface);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .jee-q-diagram-wrap {
+    text-align: center;
+    margin: 1rem 0 1.5rem;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .jee-q-diagram-img {
+    max-width: 100%;
+    max-height: 360px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* MCQ Options Grid */
+  .jee-sol-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .jee-sol-opt-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--jee-outline);
+    border-radius: 10px;
+    background: var(--jee-surface-variant);
+    transition: all 0.15s ease;
+    flex-wrap: wrap;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-sol-opt-row.is-correct {
+    border-color: var(--jee-green);
+    background: var(--jee-green-bg);
+    box-shadow: 0 0 0 1px var(--jee-green);
+  }
+
+  .jee-sol-opt-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex: 1 1 240px;
+    min-width: 0;
+  }
+
+  .jee-sol-opt-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    color: var(--jee-on-surface);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .jee-sol-opt-letter.is-correct {
+    background: var(--jee-green);
+    color: #ffffff;
+    border-color: var(--jee-green);
+  }
+
+  .jee-sol-opt-text {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--jee-on-surface);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .jee-correct-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--jee-green);
+    background: var(--jee-green-bg);
+    border: 1px solid var(--jee-green);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-left: auto;
+  }
+
+  /* Numerical Sol Box */
+  .jee-numerical-sol-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--jee-green);
+    background: var(--jee-green-bg);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-num-sol-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--jee-green);
+  }
+
+  .jee-num-sol-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--jee-num-text);
+    background: var(--jee-num-bg);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    border: 1.5px solid var(--jee-green);
+  }
+
+  .jee-num-sol-hint {
+    font-size: 0.85rem;
+    color: var(--jee-gray);
+  }
+
+  /* Explanation Card */
+  .jee-explanation-card {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    padding: 1.25rem;
+    border-left: 4px solid var(--jee-primary);
+    color: var(--jee-on-surface);
+  }
+
+  .jee-explanation-card__head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .jee-exp-icon {
+    font-size: 1.25rem;
+  }
+
+  .jee-exp-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-explanation-card__body {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--jee-on-surface);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Bottom Hero */
+  .jee-sol-bottom-banner {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 16px;
+    padding: 2.25rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-bottom-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0.75rem 0 0.5rem;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-bottom-desc {
+    font-size: 1rem;
+    color: var(--jee-gray);
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .jee-bottom-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Mobile Responsive Optimizations */
+  @media (max-width: 768px) {
+    .jee-sol-page {
+      padding: 0.75rem 0.5rem 3rem;
+    }
+
+    .jee-sol-hero {
+      padding: 1.25rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .jee-sol-title {
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    .jee-sol-subtitle {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      margin-bottom: 1.15rem;
+    }
+
+    .jee-sol-specs {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .jee-spec-chip {
+      padding: 0.55rem 0.7rem;
+    }
+
+    .jee-spec-chip__val {
+      font-size: 1.05rem;
+    }
+
+    .jee-sol-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.65rem;
+    }
+
+    .jee-btn {
+      width: 100%;
+      min-height: 48px;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+
+    .jee-sol-controls {
+      padding: 1rem 0.85rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .jee-filter-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    .jee-search-box {
+      width: 100%;
+      max-width: 100%;
+      order: -1;
+    }
+
+    .jee-search-input {
+      height: 44px;
+      font-size: 0.95rem;
+    }
+
+    .jee-filter-tabs {
+      overflow-x: auto;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+      padding-bottom: 0.4rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .jee-filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .jee-filter-tab {
+      flex-shrink: 0;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    .jee-jump-grid {
+      grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+      gap: 0.35rem;
+      max-height: 160px;
+    }
+
+    .jee-jump-btn {
+      width: 100%;
+      height: 38px;
+      font-size: 0.825rem;
+    }
+
+    .jee-q-card {
+      padding: 1.15rem 0.95rem;
+      border-radius: 12px;
+    }
+
+    .jee-q-card__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .jee-q-card__title-wrap {
+      gap: 0.4rem;
+    }
+
+    .jee-q-badge {
+      font-size: 1.05rem;
+    }
+
+    .jee-q-statement {
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .jee-sol-opt-row {
+      padding: 0.75rem 0.85rem;
+      gap: 0.65rem;
+    }
+
+    .jee-sol-opt-letter {
+      width: 26px;
+      height: 26px;
+      font-size: 0.8rem;
+    }
+
+    .jee-sol-opt-text {
+      font-size: 0.95rem;
+    }
+
+    .jee-correct-badge {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.5rem;
+      margin-left: auto;
+    }
+
+    .jee-numerical-sol-box {
+      padding: 0.85rem;
+      gap: 0.5rem;
+    }
+
+    .jee-num-sol-val {
+      font-size: 1.2rem;
+    }
+
+    .jee-explanation-card {
+      padding: 0.9rem 0.8rem;
+    }
+
+    .jee-exp-heading {
+      font-size: 0.95rem;
+    }
+
+    .jee-explanation-card__body {
+      font-size: 0.925rem;
+      line-height: 1.6;
+    }
+
+    .jee-sol-bottom-banner {
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+      border-radius: 12px;
+    }
+
+    .jee-bottom-title {
+      font-size: 1.35rem;
+    }
+
+    .jee-bottom-desc {
+      font-size: 0.92rem;
+    }
+
+    .jee-bottom-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.65rem;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .jee-breadcrumbs,
+    .jee-sol-controls,
+    .jee-sol-actions,
+    .jee-sol-bottom-banner {
+      display: none !important;
+    }
+
+    .jee-q-card {
+      break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid #000000;
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    // KaTeX Math Rendering
+    function renderMath() {
+      if (window.renderMathInElement) {
+        try {
+          window.renderMathInElement(document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true },
+            ],
+            throwOnError: false,
+          });
+        } catch (e) {
+          console.warn('KaTeX render note:', e);
+        }
+      }
+    }
+
+    // Filter Logic
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    const filterTabs = document.querySelectorAll('.jee-filter-tab');
+    const searchInput = document.getElementById('sol-search-input');
+    const questionCards = document.querySelectorAll('.jee-q-card');
+    const jumpBtns = document.querySelectorAll('.jee-jump-btn');
+    const countBadge = document.getElementById('visible-count-badge');
+
+    function applyFilters() {
+      let visible = 0;
+      const q = searchQuery.toLowerCase().trim();
+
+      questionCards.forEach((card) => {
+        const sub = card.getAttribute('data-subject');
+        const type = card.getAttribute('data-type');
+        const text = card.textContent.toLowerCase();
+
+        let matchesTab = true;
+        if (activeFilter === 'physics' && sub !== 'physics') matchesTab = false;
+        else if (activeFilter === 'chem' && sub !== 'chem') matchesTab = false;
+        else if (activeFilter === 'math' && sub !== 'math') matchesTab = false;
+        else if (activeFilter === 'mcq' && type !== 'mcq') matchesTab = false;
+        else if (activeFilter === 'numerical' && type !== 'numerical') matchesTab = false;
+
+        let matchesSearch = true;
+        if (q.length > 0 && !text.includes(q)) {
+          matchesSearch = false;
+        }
+
+        const isShown = matchesTab && matchesSearch;
+        card.classList.toggle('is-hidden', !isShown);
+        if (isShown) visible++;
+
+        // Sync Jump Button state
+        const qNum = card.getAttribute('data-qnum');
+        const jumpBtn = document.querySelector(`.jee-jump-btn[data-target="q-card-${qNum}"]`);
+        if (jumpBtn) {
+          jumpBtn.style.display = isShown ? 'flex' : 'none';
+        }
+      });
+
+      if (countBadge) {
+        countBadge.textContent = `Showing ${visible} of 90 Questions`;
+      }
+    }
+
+    filterTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeFilter = tab.getAttribute('data-filter') || 'all';
+        applyFilters();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        applyFilters();
+      });
+    }
+
+    // Jump Buttons
+    jumpBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetEl.classList.add('highlight');
+          setTimeout(() => targetEl.classList.remove('highlight'), 2000);
+        }
+      });
+    });
+
+    // Print Button
+    const btnPrint = document.getElementById('btn-print-solutions');
+    if (btnPrint) {
+      btnPrint.addEventListener('click', () => window.print());
+    }
+
+    // Initial Math Render
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderMath);
+    } else {
+      renderMath();
+    }
+    window.addEventListener('load', renderMath);
+  })();
+</script>

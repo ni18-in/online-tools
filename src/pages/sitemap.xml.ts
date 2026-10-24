@@ -64,6 +64,11 @@ sitemapTools().forEach((t) => {
   }
 });
 
+// Dedicated exam solutions page
+toolEntries.push({
+  loc: U('/tools/jee-mains-mock-test-free-online/2024_mains_jan_27_s1/'),
+});
+
 // Blog posts: dynamically generated with correct reciprocal alternates.
 const blogEntries: Entry[] = indexedPosts().map((p) => ({
   loc: blogUrl(p.slug, 'en'),

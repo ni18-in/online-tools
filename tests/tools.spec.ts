@@ -419,14 +419,16 @@ test('guess-the-logo gameplay, streak display, and all difficulty mode work clea
   expect(errors).toEqual([]);
 });
 
-test('jee-mains-mock-test launches exam, handles CBT interactions, submits and renders solutions', async ({ page }) => {
+test('jee-mains-mock-test launches exam, handles CBT option selection, submits and renders solutions', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('/tools/jee-mains-mock-test-free-online/');
   await expect(page.locator('.site-header')).toBeVisible();
 
-  // Verify start screen is visible
+  // Verify start screen is visible and solutions page link exists
   const startCard = page.locator('#jee-view-start');
   await expect(startCard).toBeVisible();
+  const solLink = page.locator('a[href="/tools/jee-mains-mock-test-free-online/2024_mains_jan_27_s1/"]');
+  await expect(solLink.first()).toBeVisible();
 
   // Verify Android app link is present
   const appLinks = page.locator('a[href="https://play.google.com/store/apps/details?id=in.ni18.jeemocktest"]');
@@ -437,10 +439,29 @@ test('jee-mains-mock-test launches exam, handles CBT interactions, submits and r
   await expect(page.locator('#jee-view-exam')).toBeVisible();
   await expect(page.locator('#current-q-label')).toContainText('Question 1');
 
-  // Select an option
-  const option = page.locator('.jee-option-row').first();
-  await option.click();
-  await expect(option).toHaveClass(/selected/);
+  // Verify option row has radio button input
+  const firstOption = page.locator('.jee-option-row').first();
+  const radioInput = firstOption.locator('input[type="radio"]');
+  await expect(radioInput).toBeAttached();
+  expect(await radioInput.isChecked()).toBe(false);
+
+  // Select an option and check that radio becomes checked and row has .selected
+  await firstOption.click();
+  await expect(firstOption).toHaveClass(/selected/);
+  expect(await radioInput.isChecked()).toBe(true);
+
+  // Palette button for Q1 should now show answered (green)
+  const q1PaletteBtn = page.locator('#jee-palette-grid .jee-q-btn').first();
+  await expect(q1PaletteBtn).toHaveClass(/jee-p-badge--ans/);
+
+  // Test Clear Response
+  await page.click('#btn-clear-response');
+  await expect(firstOption).not.toHaveClass(/selected/);
+  expect(await radioInput.isChecked()).toBe(false);
+
+  // Re-select option
+  await firstOption.click();
+  await expect(firstOption).toHaveClass(/selected/);
 
   // Click Save & Next
   await page.click('#btn-save-next');
@@ -463,6 +484,51 @@ test('jee-mains-mock-test launches exam, handles CBT interactions, submits and r
   await expect(page.locator('#jee-view-result')).toBeVisible();
   await expect(page.locator('#res-total-score')).toBeVisible();
   await expect(page.locator('.jee-solution-card')).toHaveCount(90);
+
+  expect(errors).toEqual([]);
+});
+
+test('jee-mains-solutions page loads all 90 questions with KaTeX, filters, and CTAs', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/jee-mains-mock-test-free-online/2024_mains_jan_27_s1/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify h1 and breadcrumbs
+  await expect(page.locator('h1')).toContainText('JEE Mains 2024 27 Jan Shift 1 Question Paper & Solutions');
+  await expect(page.locator('.jee-breadcrumbs')).toBeVisible();
+
+  // Verify all 90 question cards exist
+  const cards = page.locator('.jee-q-card');
+  await expect(cards).toHaveCount(90);
+
+  // Verify correct answers and explanations exist
+  const correctBadges = page.locator('.jee-correct-badge, .jee-num-sol-val');
+  expect(await correctBadges.count()).toBeGreaterThanOrEqual(90);
+
+  // Test subject filter (Physics -> 30)
+  await page.click('.jee-filter-tab[data-filter="physics"]');
+  const visiblePhysics = page.locator('.jee-q-card:not(.is-hidden)');
+  await expect(visiblePhysics).toHaveCount(30);
+
+  // Test reset filter
+  await page.click('.jee-filter-tab[data-filter="all"]');
+  await expect(page.locator('.jee-q-card:not(.is-hidden)')).toHaveCount(90);
+
+  // Test real-time search
+  await page.fill('#sol-search-input', 'circuit');
+  const visibleSearch = await page.locator('.jee-q-card:not(.is-hidden)').count();
+  expect(visibleSearch).toBeGreaterThan(0);
+  expect(visibleSearch).toBeLessThan(90);
+
+  // Clear search
+  await page.fill('#sol-search-input', '');
+
+  // Verify links to CBT test and Android app
+  const cbtLink = page.locator('a[href="/tools/jee-mains-mock-test-free-online/"]');
+  expect(await cbtLink.count()).toBeGreaterThanOrEqual(2);
+
+  const playStoreLink = page.locator('a[href="https://play.google.com/store/apps/details?id=in.ni18.jeemocktest"]');
+  expect(await playStoreLink.count()).toBeGreaterThanOrEqual(2);
 
   expect(errors).toEqual([]);
 });
