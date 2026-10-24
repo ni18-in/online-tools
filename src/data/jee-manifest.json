@@ -1,0 +1,196 @@
+{
+  "papers": [
+    {
+      "id": "2024_mains_jan_27_s1",
+      "title": "JEE Mains 2024 - 27 Jan Morning Shift",
+      "year": 2024,
+      "filename": "jee_mains_27_jan_2024_shift_1/jee_mains_27_jan_2024_shift_1.json",
+      "description": "JEE Mains Question Paper 27 January 2024 Morning Shift.",
+      "version": 2
+    },
+    {
+      "id": "2023_p2",
+      "title": "JEE Advanced 2023 - Paper 2",
+      "year": 2023,
+      "filename": "2023_paper_2/2023_paper_2.json",
+      "description": "Full syllabus mock test based on 2023 pattern.",
+      "version": 1
+    },
+    {
+      "id": "2024_p2",
+      "title": "JEE Advanced 2024 - Paper 2",
+      "year": 2024,
+      "filename": "2024_paper_2/2024_paper_2.json",
+      "description": "Full syllabus mock test based on 2024 pattern.",
+      "version": 1
+    },
+    {
+      "id": "2022_mains_jun_24_s1",
+      "title": "JEE Mains 2022 - 24 June Shift 1",
+      "year": 2022,
+      "filename": "jee_mains_24_jun_2022_shift_1/jee_mains_24_jun_2022_shift_1.json",
+      "description": "JEE Main 2022 24 June Morning Shift.",
+      "version": 2
+    },
+    {
+      "id": "2022_mains_jun_24_s2",
+      "title": "JEE Main 2022 - 24 June Shift 2",
+      "year": 2022,
+      "filename": "jee_mains_24_jun_2022_shift_2/jee_mains_24_jun_2022_shift_2.json",
+      "description": "JEE Main 2022 24 June Evening Shift.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_apr_02_s1",
+      "title": "JEE Main 2025 Session-2 - 2 April Shift 1",
+      "year": 2025,
+      "filename": "jee_mains_02_apr_2025_shift_1/jee_mains_02_apr_2025_shift_1.json",
+      "description": "JEE Main 2025 Session-2 2 April Shift 1.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_apr_02_s2",
+      "title": "JEE Main 2025 Session-2 - 2 April Shift 2",
+      "year": 2025,
+      "filename": "jee_mains_02_apr_2025_shift_2/jee_mains_02_apr_2025_shift_2.json",
+      "description": "JEE Main 2025 Session-2 2 April Shift 2.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_apr_03_s2",
+      "title": "JEE Main 2025 Session-2 - 3 April Shift 2",
+      "year": 2025,
+      "filename": "jee_mains_03_apr_2025_shift_2/jee_mains_03_apr_2025_shift_2.json",
+      "description": "JEE Main 2025 Session-2 3 April Shift 2.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_apr_04_s1",
+      "title": "JEE Main 2025 Session-2 - 4 April Shift 1",
+      "year": 2025,
+      "filename": "jee_mains_04_apr_2025_shift_1/jee_mains_04_apr_2025_shift_1.json",
+      "description": "JEE Main 2025 Session-2 4 April Shift 1.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_apr_04_s2",
+      "title": "JEE Main 2025 Session-2 - 4 April Shift 2",
+      "year": 2025,
+      "filename": "jee_mains_04_apr_2025_shift_2/jee_mains_04_apr_2025_shift_2.json",
+      "description": "JEE Main 2025 Session-2 4 April Shift 2.",
+      "version": 1
+    },
+    {
+      "id": "2024_mains_jan_29_s1",
+      "title": "JEE Mains 2024 - 29 Jan Morning Shift",
+      "year": 2024,
+      "filename": "jee_mains_29_jan_2024_shift_1/jee_mains_29_jan_2024_shift_1.json",
+      "description": "JEE Mains Question Paper 29 January 2024 Morning Shift.",
+      "version": 2
+    },
+    {
+      "id": "2025_mains_jan_22_s1",
+      "title": "JEE Mains 2025 - 22 Jan Morning Shift",
+      "year": 2025,
+      "filename": "jee_mains_22_jan_2025_shift_1/jee_mains_22_jan_2025_shift_1.json",
+      "description": "JEE Mains 2025 22 January Morning Shift.",
+      "version": 1
+    },
+    {
+      "id": "2025_mains_jan_22_s2",
+      "title": "JEE Mains 2025 - 22 Jan Evening Shift",
+      "year": 2025,
+      "filename": "jee_mains_22_jan_2025_shift_2/jee_mains_22_jan_2025_shift_2.json",
+      "description": "JEE Mains 2025 22 January Evening Shift.",
+      "version": 1
+    },
+    {
+      "id": "2025_p1",
+      "title": "JEE Advanced 2025 - Paper 1",
+      "year": 2025,
+      "filename": "2025_paper_1/2025_paper_1.json",
+      "description": "Mock test based on 2025 pattern.",
+      "version": 1
+    },
+    {
+      "id": "2024_p1",
+      "title": "JEE Advanced 2024 - Paper 1",
+      "year": 2024,
+      "filename": "2024_paper_1/2024_paper_1.json",
+      "description": "Full syllabus mock test based on 2024 pattern.",
+      "version": 2
+    },
+    {
+      "id": "2023_p1",
+      "title": "JEE Advanced 2023 - Paper 1",
+      "year": 2023,
+      "filename": "2023_paper_1/2023_paper_1.json",
+      "description": "Full syllabus mock test based on 2023 pattern.",
+      "version": 1
+    },
+    {
+      "id": "2023_mains_apr_15_s1",
+      "title": "JEE Main 2023 Phase-2 - 15 April Morning Shift",
+      "year": 2023,
+      "filename": "jee_mains_15_apr_2023_shift_1/jee_mains_15_apr_2023_shift_1.json",
+      "description": "JEE Main 2023 Phase-2 15 April Morning Shift.",
+      "version": 1
+    },
+    {
+      "id": "2007_p2",
+      "title": "IIT JEE 2007 - Paper 2",
+      "year": 2007,
+      "filename": "jee2007_paper2/jee2007_paper2.json",
+      "description": "IIT JEE 2007 Paper 2.",
+      "version": 2
+    },
+    {
+      "id": "2022_p1",
+      "title": "JEE Advanced 2022 - Paper 1",
+      "year": 2022,
+      "description": "Full syllabus paper based on JEE Advanced 2022 pattern.",
+      "filename": "2022_paper_1/2022_paper_1.json",
+      "version": 1
+    },
+    {
+      "id": "2022_p2",
+      "title": "JEE Advanced 2022 - Paper 2",
+      "year": 2022,
+      "description": "Full syllabus paper based on JEE Advanced 2022 pattern.",
+      "filename": "2022_paper_2/2022_paper_2.json",
+      "version": 1
+    },
+    {
+      "id": "2021_p1",
+      "title": "JEE Advanced 2021 - Paper 1",
+      "year": 2021,
+      "description": "Full syllabus paper based on JEE Advanced 2021 pattern.",
+      "filename": "2021_paper_1/2021_paper_1.json",
+      "version": 1
+    },
+    {
+      "id": "2021_p2",
+      "title": "JEE Advanced 2021 - Paper 2",
+      "year": 2021,
+      "description": "Full syllabus paper based on JEE Advanced 2021 pattern.",
+      "filename": "2021_paper_2/2021_paper_2.json",
+      "version": 1
+    },
+    {
+      "id": "2021_mains_feb_24_s1",
+      "title": "JEE Main 2021 - 24 February Morning Shift",
+      "year": 2021,
+      "filename": "jee_mains_24_feb_2021_shift_1/jee_mains_24_feb_2021_shift_1.json",
+      "description": "JEE Main 2021 24 February Morning Shift.",
+      "version": 1
+    },
+    {
+      "id": "2020_p1",
+      "title": "JEE Advanced 2020 - Paper 1",
+      "year": 2020,
+      "description": "Full syllabus paper based on JEE Advanced 2020 pattern.",
+      "filename": "2020_paper_1/2020_paper_1.json",
+      "version": 1
+    }
+  ]
+}

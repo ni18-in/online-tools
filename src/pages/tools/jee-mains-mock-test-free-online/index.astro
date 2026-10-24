@@ -1,0 +1,2749 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+import ToolContentSection from '../../../components/ToolContentSection.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../data/tools';
+import { SITE_URL } from '../../../data/site';
+import paperData from '../../../data/jee-mains-paper-1.json';
+import manifestData from '../../../data/jee-manifest.json';
+
+const tool = getTool('jee-mains-mock-test-free-online')!;
+
+const steps = [
+  {
+    title: 'Start Instant Exam Without Registration',
+    description: 'Launch the full 3-hour, 90-question Computer Based Test (CBT) immediately. No email, login, or mobile verification required.',
+  },
+  {
+    title: 'Switch Subjects & Question Sections',
+    description: 'Freely navigate between Physics, Chemistry, and Mathematics tabs. Toggle between Section A (MCQs) and Section B (Numerical value questions).',
+  },
+  {
+    title: 'Answer Single Choice & Numerical Questions',
+    description: 'Select MCQ options or type your decimal/integer answer in the numerical input box using either your physical keyboard or the on-screen CBT keypad.',
+  },
+  {
+    title: 'Track Time & Question Palette Status',
+    description: 'Monitor the 180-minute countdown timer and use the official NTA color-coded palette to flag questions for review or track answered questions.',
+  },
+  {
+    title: 'Submit & Get Instant Performance Analytics',
+    description: 'Submit your test to instantly calculate your total score out of 300, accuracy percentage, subject-wise breakdown, and negative marking penalty.',
+  },
+  {
+    title: 'Study Step-by-Step Step Solutions & Explanations',
+    description: 'Review every question with KaTeX-rendered mathematical equations, correct answers, and thorough pedagogical explanations.',
+  },
+];
+
+const features = [
+  {
+    icon: '⚡',
+    title: '100% Free & No Sign-Up',
+    description: 'Jump straight into practice without registration, passwords, phone numbers, or credit cards. Completely hassle-free.',
+  },
+  {
+    icon: '🖥️',
+    title: 'Authentic NTA CBT Interface',
+    description: 'Simulates the real NTA JEE Mains computer-based exam environment with official palette colors, sections, timer, and question review status.',
+  },
+  {
+    icon: '📐',
+    title: 'Precise Math & Circuit Diagrams',
+    description: 'All mathematical formulas, integrals, matrices, chemical equations, and physics circuits render crisply using high-precision LaTeX.',
+  },
+  {
+    icon: '📊',
+    title: 'Detailed Scoring & Solutions',
+    description: 'Instant evaluation (+4 for correct, -1 for incorrect, 0 for unattempted) paired with comprehensive step-by-step solutions for all 90 questions.',
+  },
+  {
+    icon: '📱',
+    title: '24+ More Papers on Android App',
+    description: 'Looking for more shifts? Access 24+ additional JEE Mains & JEE Advanced past papers and mock tests for free on our official Android app.',
+  },
+  {
+    icon: '🔒',
+    title: '100% Client-Side Privacy',
+    description: 'Your answers and scores are evaluated directly in your browser. No exam data is harvested or transmitted to external servers.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is this JEE Mains mock test completely free without registration?',
+    answer: 'Yes! You can take the entire 90-question JEE Mains mock test online without creating an account, registering an email, or entering any personal information. Click "Start Mock Test" to begin immediately.',
+  },
+  {
+    question: 'Which question paper is included in this free online mock test?',
+    answer: 'This test features the complete JEE Mains 2024 (27 January Morning Shift) examination, containing 90 questions (30 Physics, 30 Chemistry, and 30 Mathematics) formatted strictly as per the National Testing Agency (NTA) standard.',
+  },
+  {
+    question: 'How is the score calculated in this mock test?',
+    answer: 'Scoring follows the official JEE Mains pattern: +4 marks for each correct response, -1 mark penalty for each incorrect response, and 0 marks for unattempted questions across both MCQs (Section A) and Numerical questions (Section B).',
+  },
+  {
+    question: 'How do I answer Section B Numerical Value questions?',
+    answer: 'For Section B questions, enter your calculated numeric value (integer or decimal) into the provided answer box. You can type using your device keyboard or use the on-screen CBT calculator-style keypad.',
+  },
+  {
+    question: 'Can I review explanations and correct answers after submitting?',
+    answer: 'Yes! Upon submitting your test, you receive a detailed performance scorecard with subject-wise scores and full step-by-step explanations rendered with mathematical formulas for every question.',
+  },
+  {
+    question: 'How do I access more JEE Mains & Advanced mock test papers?',
+    answer: 'You can practice 24+ additional JEE Mains shift papers and JEE Advanced mock tests (including 2025, 2024, 2023, 2022, and 2021 papers) completely free on our official JEE Mock Test Android App on Google Play.',
+  },
+];
+
+const howToSchema = makeHowToSchema(
+  'How to Take a Free JEE Mains Mock Test Online Without Registration',
+  'Follow these simple steps to attempt a full-length 90-question JEE Mains CBT mock exam online with instant scoring and detailed step-by-step solutions.',
+  steps
+);
+
+const faqSchema = makeFaqSchema(faqs);
+
+const seo = toolSeo(tool, {
+  title: 'JEE Mains Mock Test Free Online Without Registration',
+  description:
+    'Take a free JEE Mains mock test online without registration. NTA CBT pattern with Physics, Chemistry & Math, timer, instant score & full solutions.',
+  keywords:
+    'jee mains mock test free online, jee mains mock test free online without registration, free jee mock test, jee mains online test series free, nta jee mock test, jee mains 2024 question paper online',
+  extraJsonLd: [howToSchema, faqSchema],
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'JEE Mains Mock Test Free Online Without Registration',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/tools/jee-mains-mock-test-free-online/`,
+    description:
+      'Practice full-length JEE Mains mock exams online without registration. Real NTA CBT interface, 90 questions in Physics, Chemistry, and Math, countdown timer, instant score evaluation, and complete LaTeX solutions.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+});
+
+const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni18.jeemocktest';
+---
+
+<ToolLayout
+  seo={seo}
+  lang="en"
+  headRaw={`
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  `}
+>
+  <div class="tool-island" id="tool-jee-mains-mock-test-free-online">
+    <!-- Embedded Data for Instant Zero-Latency Loading -->
+    <script id="jee-paper-data" type="application/json" set:html={JSON.stringify(paperData)}></script>
+    <script id="jee-manifest-data" type="application/json" set:html={JSON.stringify(manifestData)}></script>
+
+    <!-- Header Section -->
+    <header class="jee-header">
+      <div class="jee-badge-row">
+        <span class="jee-badge jee-badge--primary">NTA Exam Pattern</span>
+        <span class="jee-badge">No Registration Required</span>
+        <span class="jee-badge">100% Free Online</span>
+      </div>
+      <h1 class="jee-title">JEE Mains Mock Test Free Online Without Registration</h1>
+      <p class="jee-subtitle">
+        Full 3-Hour NTA CBT practice exam with Physics, Chemistry &amp; Mathematics, instant negative-marking scorecard, and step-by-step LaTeX solutions.
+      </p>
+    </header>
+
+    <!-- App Promo Bar -->
+    <div class="jee-app-banner">
+      <div class="jee-app-banner__info">
+        <span class="jee-app-banner__icon">📱</span>
+        <div>
+          <strong>Want more papers? Practice 24+ more JEE Mains &amp; Advanced mock tests</strong>
+          <p>Get full shift-wise papers, offline mode &amp; analytics on our free Android App.</p>
+        </div>
+      </div>
+      <a
+        href={APP_PLAY_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="jee-btn jee-btn--app"
+        id="btn-app-banner"
+      >
+        <svg class="jee-play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+          <path d="M3.609 1.814L13.793 12 3.61 22.186a2.38 2.38 0 0 1-.61-.914c-.16-.44-.16-.94-.16-1.572V4.3c0-.632 0-1.132.16-1.572.13-.356.34-.67.61-.914zm11.602 11.602l2.368 2.368-12.11 6.993 9.742-9.361zm2.368-2.832l-2.368 2.368L5.47 3.591l12.11 6.993zm1.184 1.184l3.193 1.843c1.077.621 1.077 1.637 0 2.259l-3.193 1.843-2.368-2.973 2.368-2.972z"/>
+        </svg>
+        <span>Get on Google Play (Free)</span>
+      </a>
+    </div>
+
+    <!-- ==================== VIEW 1: PRE-EXAM START SCREEN ==================== -->
+    <div id="jee-view-start" class="jee-view">
+      <div class="jee-card jee-start-card">
+        <div class="jee-start-card__header">
+          <div>
+            <h2 class="jee-card-title">JEE Mains 2024 - 27 January Morning Shift</h2>
+            <p class="jee-card-sub">Full syllabus official computer-based mock examination</p>
+          </div>
+          <span class="jee-tag">Paper #1 of 24</span>
+        </div>
+
+        <div class="jee-specs-grid">
+          <div class="jee-spec-box">
+            <span class="jee-spec-label">Duration</span>
+            <span class="jee-spec-value">180 Mins</span>
+            <span class="jee-spec-hint">3 Hours Timer</span>
+          </div>
+          <div class="jee-spec-box">
+            <span class="jee-spec-label">Total Questions</span>
+            <span class="jee-spec-value">90 Qs</span>
+            <span class="jee-spec-hint">30 Phy • 30 Chem • 30 Math</span>
+          </div>
+          <div class="jee-spec-box">
+            <span class="jee-spec-label">Maximum Marks</span>
+            <span class="jee-spec-value">300 Marks</span>
+            <span class="jee-spec-hint">100 Marks per subject</span>
+          </div>
+          <div class="jee-spec-box">
+            <span class="jee-spec-label">Marking Scheme</span>
+            <span class="jee-spec-value">+4 / -1</span>
+            <span class="jee-spec-hint">-1 for wrong, 0 unattempted</span>
+          </div>
+        </div>
+
+        <div class="jee-rules-box">
+          <h3>Exam Guidelines &amp; Instructions:</h3>
+          <ul>
+            <li><strong>Subjects:</strong> Physics, Chemistry, and Mathematics (30 questions each).</li>
+            <li><strong>Section A:</strong> 20 Multiple Choice Questions (Single Correct).</li>
+            <li><strong>Section B:</strong> 10 Numerical Value Questions with direct numerical input.</li>
+            <li><strong>Color Legend:</strong> Green = Answered, Orange = Not Answered, Purple = Marked for Review, Gray = Not Visited.</li>
+            <li><strong>Save Your Answer:</strong> Click "Save &amp; Next" to record your response and proceed to the next question.</li>
+            <li><strong>No Sign-Up:</strong> Results, detailed scorecards, and step-by-step explanations are presented immediately upon submission.</li>
+          </ul>
+        </div>
+
+        <div class="jee-start-actions">
+          <button type="button" class="jee-btn jee-btn--primary jee-btn--lg" id="btn-start-exam">
+            <span>Start Free Mock Test Now</span>
+            <span class="jee-btn-arrow">&rarr;</span>
+          </button>
+          <button type="button" class="jee-btn jee-btn--secondary" id="btn-browse-papers">
+            <span>Browse All 24+ Test Papers</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VIEW 2: LIVE CBT EXAM SCREEN ==================== -->
+    <div id="jee-view-exam" class="jee-view jee-hidden">
+      <!-- Exam Control Bar -->
+      <div class="jee-cbt-bar">
+        <!-- Subject Tabs -->
+        <div class="jee-subject-tabs" role="tablist">
+          <button type="button" class="jee-tab active" data-subject="physics" id="tab-physics">
+            <span>Physics</span>
+            <span class="jee-tab-count" id="count-physics">0/30</span>
+          </button>
+          <button type="button" class="jee-tab" data-subject="chem" id="tab-chem">
+            <span>Chemistry</span>
+            <span class="jee-tab-count" id="count-chem">0/30</span>
+          </button>
+          <button type="button" class="jee-tab" data-subject="math" id="tab-math">
+            <span>Mathematics</span>
+            <span class="jee-tab-count" id="count-math">0/30</span>
+          </button>
+        </div>
+
+        <!-- Timer & Submit -->
+        <div class="jee-cbt-bar__right">
+          <div class="jee-timer" id="jee-timer-display" title="Time remaining">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="timer-text">03:00:00</span>
+          </div>
+          <button type="button" class="jee-btn jee-btn--submit" id="btn-submit-exam-top">
+            <span>Submit Exam</span>
+          </button>
+          <button type="button" class="jee-btn jee-btn--palette-toggle" id="btn-toggle-palette">
+            <span>Palette</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CBT Body: Left Question Area + Right Palette Area -->
+      <div class="jee-cbt-layout">
+        <!-- Question Pane -->
+        <div class="jee-question-pane">
+          <div class="jee-question-meta">
+            <div class="jee-question-meta__left">
+              <span class="jee-q-num" id="current-q-label">Question 1</span>
+              <span class="jee-q-section" id="current-q-section">Section-A (MCQ)</span>
+            </div>
+            <div class="jee-question-meta__right">
+              <span class="jee-marks-tag">+4 Correct</span>
+              <span class="jee-marks-tag jee-marks-tag--neg">-1 Incorrect</span>
+            </div>
+          </div>
+
+          <!-- Question Content Area -->
+          <div class="jee-question-content" id="question-render-area">
+            <div class="jee-q-text" id="current-q-text">Loading question...</div>
+            <div class="jee-q-image-wrap jee-hidden" id="current-q-image-container">
+              <img id="current-q-image" src="" alt="Question Diagram" loading="lazy" />
+            </div>
+
+            <!-- Single Correct Options -->
+            <div class="jee-options-container" id="current-q-options">
+              <!-- Dynamically populated options -->
+            </div>
+
+            <!-- Numerical Answer Input -->
+            <div class="jee-numerical-container jee-hidden" id="current-q-numerical">
+              <label for="numerical-input" class="jee-num-label">Enter your numeric answer:</label>
+              <div class="jee-num-input-wrap">
+                <input
+                  type="text"
+                  inputmode="decimal"
+                  id="numerical-input"
+                  class="jee-num-input"
+                  placeholder="Type integer or decimal (e.g. 5, -12, 0.5)"
+                  autocomplete="off"
+                />
+              </div>
+
+              <!-- Virtual Keypad for CBT Realism -->
+              <div class="jee-keypad">
+                <button type="button" class="jee-key" data-key="1">1</button>
+                <button type="button" class="jee-key" data-key="2">2</button>
+                <button type="button" class="jee-key" data-key="3">3</button>
+                <button type="button" class="jee-key" data-key="4">4</button>
+                <button type="button" class="jee-key" data-key="5">5</button>
+                <button type="button" class="jee-key" data-key="6">6</button>
+                <button type="button" class="jee-key" data-key="7">7</button>
+                <button type="button" class="jee-key" data-key="8">8</button>
+                <button type="button" class="jee-key" data-key="9">9</button>
+                <button type="button" class="jee-key" data-key="0">0</button>
+                <button type="button" class="jee-key" data-key=".">.</button>
+                <button type="button" class="jee-key" data-key="-">&minus;</button>
+                <button type="button" class="jee-key jee-key--action" data-key="backspace">&#x232B; Del</button>
+                <button type="button" class="jee-key jee-key--action" data-key="clear">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div class="jee-question-actions">
+            <div class="jee-actions-left">
+              <button type="button" class="jee-btn jee-btn--outline" id="btn-clear-response">
+                <span>Clear Response</span>
+              </button>
+              <button type="button" class="jee-btn jee-btn--purple" id="btn-mark-review">
+                <span>Mark for Review &amp; Next</span>
+              </button>
+            </div>
+            <div class="jee-actions-right">
+              <button type="button" class="jee-btn jee-btn--outline" id="btn-prev-q">
+                <span>&larr; Previous</span>
+              </button>
+              <button type="button" class="jee-btn jee-btn--primary" id="btn-save-next">
+                <span>Save &amp; Next &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Palette Pane -->
+        <aside class="jee-palette-pane" id="jee-palette-drawer">
+          <div class="jee-candidate-card">
+            <div class="jee-candidate-avatar">👤</div>
+            <div class="jee-candidate-info">
+              <span class="jee-candidate-name">Online Candidate</span>
+              <span class="jee-candidate-roll">Roll: JEE-2024-DEMO</span>
+            </div>
+          </div>
+
+          <!-- Palette Legend -->
+          <div class="jee-palette-legend">
+            <div class="jee-legend-item">
+              <span class="jee-p-badge jee-p-badge--ans">1</span>
+              <span>Answered</span>
+            </div>
+            <div class="jee-legend-item">
+              <span class="jee-p-badge jee-p-badge--not-ans">2</span>
+              <span>Not Answered</span>
+            </div>
+            <div class="jee-legend-item">
+              <span class="jee-p-badge jee-p-badge--not-vis">3</span>
+              <span>Not Visited</span>
+            </div>
+            <div class="jee-legend-item">
+              <span class="jee-p-badge jee-p-badge--review">4</span>
+              <span>Review</span>
+            </div>
+            <div class="jee-legend-item">
+              <span class="jee-p-badge jee-p-badge--ans-review">5</span>
+              <span>Ans &amp; Review</span>
+            </div>
+          </div>
+
+          <!-- Section Navigation in Palette -->
+          <div class="jee-palette-section-title">
+            <span id="palette-sec-title">Physics (Questions 1 - 30)</span>
+          </div>
+
+          <!-- Question Grid -->
+          <div class="jee-palette-grid" id="jee-palette-grid">
+            <!-- 30 question number buttons populated by JS -->
+          </div>
+
+          <div class="jee-palette-footer">
+            <button type="button" class="jee-btn jee-btn--submit jee-btn--block" id="btn-submit-exam-side">
+              <span>Submit Test</span>
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ==================== VIEW 3: RESULT & SOLUTIONS SCREEN ==================== -->
+    <div id="jee-view-result" class="jee-view jee-hidden">
+      <!-- Scorecard Hero -->
+      <div class="jee-card jee-result-hero">
+        <div class="jee-result-hero__top">
+          <div>
+            <span class="jee-tag jee-tag--success">Test Completed</span>
+            <h2 class="jee-result-title">Your JEE Mains Performance Scorecard</h2>
+            <p class="jee-result-sub" id="result-paper-title">JEE Mains 2024 - 27 Jan Morning Shift</p>
+          </div>
+          <div class="jee-score-badge">
+            <span class="jee-score-num" id="res-total-score">0</span>
+            <span class="jee-score-denom">/ 300 Marks</span>
+          </div>
+        </div>
+
+        <div class="jee-result-stats-grid">
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val" id="res-accuracy">0%</span>
+            <span class="jee-stat-tile__label">Accuracy</span>
+          </div>
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val" id="res-attempted">0 / 90</span>
+            <span class="jee-stat-tile__label">Attempted</span>
+          </div>
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val jee-text--success" id="res-correct">0</span>
+            <span class="jee-stat-tile__label">Correct (+4 each)</span>
+          </div>
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val jee-text--danger" id="res-incorrect">0</span>
+            <span class="jee-stat-tile__label">Incorrect (-1 each)</span>
+          </div>
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val" id="res-unattempted">0</span>
+            <span class="jee-stat-tile__label">Unattempted (0)</span>
+          </div>
+          <div class="jee-stat-tile">
+            <span class="jee-stat-tile__val" id="res-time-taken">--:--</span>
+            <span class="jee-stat-tile__label">Time Taken</span>
+          </div>
+        </div>
+
+        <!-- Subject Breakdown -->
+        <h3 class="jee-section-heading">Subject-Wise Breakdown</h3>
+        <div class="jee-subject-cards-grid">
+          <div class="jee-subject-card" id="res-card-physics">
+            <div class="jee-subject-card__head">
+              <span class="jee-subject-name">Physics</span>
+              <span class="jee-subject-score" id="res-physics-score">0 / 100</span>
+            </div>
+            <div class="jee-subject-metrics">
+              <span class="jee-sub-metric jee-text--success" id="res-physics-correct">Correct: 0</span>
+              <span class="jee-sub-metric jee-text--danger" id="res-physics-incorrect">Incorrect: 0</span>
+              <span class="jee-sub-metric" id="res-physics-skipped">Skipped: 0</span>
+            </div>
+          </div>
+          <div class="jee-subject-card" id="res-card-chem">
+            <div class="jee-subject-card__head">
+              <span class="jee-subject-name">Chemistry</span>
+              <span class="jee-subject-score" id="res-chem-score">0 / 100</span>
+            </div>
+            <div class="jee-subject-metrics">
+              <span class="jee-sub-metric jee-text--success" id="res-chem-correct">Correct: 0</span>
+              <span class="jee-sub-metric jee-text--danger" id="res-chem-incorrect">Incorrect: 0</span>
+              <span class="jee-sub-metric" id="res-chem-skipped">Skipped: 0</span>
+            </div>
+          </div>
+          <div class="jee-subject-card" id="res-card-math">
+            <div class="jee-subject-card__head">
+              <span class="jee-subject-name">Mathematics</span>
+              <span class="jee-subject-score" id="res-math-score">0 / 100</span>
+            </div>
+            <div class="jee-subject-metrics">
+              <span class="jee-sub-metric jee-text--success" id="res-math-correct">Correct: 0</span>
+              <span class="jee-sub-metric jee-text--danger" id="res-math-incorrect">Incorrect: 0</span>
+              <span class="jee-sub-metric" id="res-math-skipped">Skipped: 0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="jee-result-actions">
+          <button type="button" class="jee-btn jee-btn--primary" id="btn-scroll-solutions">
+            <span>Review Step-by-Step Solutions &darr;</span>
+          </button>
+          <button type="button" class="jee-btn jee-btn--outline" id="btn-retake-exam">
+            <span>Retake This Mock Test</span>
+          </button>
+          <button type="button" class="jee-btn jee-btn--secondary" id="btn-print-result">
+            <span>Print / Save Scorecard</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- App Download Featured Promo Banner in Results -->
+      <div class="jee-card jee-app-feature-card">
+        <div class="jee-app-feature-card__content">
+          <span class="jee-badge jee-badge--accent">24+ Additional Test Papers</span>
+          <h3 class="jee-app-feature-title">Boost Your Rank: Practice All JEE Mains &amp; Advanced Shifts on Android</h3>
+          <p class="jee-app-feature-desc">
+            Take official shift papers from 2025, 2024, 2023, 2022, 2021, and JEE Advanced Paper 1 &amp; 2 with offline testing, percentile predictors, and topic-wise weak area analysis.
+          </p>
+          <div class="jee-app-pills">
+            <span class="jee-app-pill">✓ 24+ Full Mock Tests</span>
+            <span class="jee-app-pill">✓ 100% Free Forever</span>
+            <span class="jee-app-pill">✓ Works Offline</span>
+            <span class="jee-app-pill">✓ Instant Solutions</span>
+          </div>
+          <a
+            href={APP_PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="jee-btn jee-btn--app-large"
+          >
+            <svg class="jee-play-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d="M3.609 1.814L13.793 12 3.61 22.186a2.38 2.38 0 0 1-.61-.914c-.16-.44-.16-.94-.16-1.572V4.3c0-.632 0-1.132.16-1.572.13-.356.34-.67.61-.914zm11.602 11.602l2.368 2.368-12.11 6.993 9.742-9.361zm2.368-2.832l-2.368 2.368L5.47 3.591l12.11 6.993zm1.184 1.184l3.193 1.843c1.077.621 1.077 1.637 0 2.259l-3.193 1.843-2.368-2.973 2.368-2.972z"/>
+            </svg>
+            <div>
+              <span class="jee-app-btn-sub">GET IT ON</span>
+              <span class="jee-app-btn-main">Google Play (Free)</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Solutions Review Area -->
+      <div class="jee-solutions-wrap" id="jee-solutions-section">
+        <div class="jee-solutions-header">
+          <h3 class="jee-card-title">Comprehensive Question Solutions &amp; Explanations</h3>
+          <p class="jee-card-sub">Review step-by-step mathematical reasoning and answer keys</p>
+
+          <!-- Solution Filters -->
+          <div class="jee-filter-pills" role="toolbar" aria-label="Filter solutions">
+            <button type="button" class="jee-filter-btn active" data-filter="all">All (90)</button>
+            <button type="button" class="jee-filter-btn" data-filter="correct">Correct</button>
+            <button type="button" class="jee-filter-btn" data-filter="incorrect">Incorrect</button>
+            <button type="button" class="jee-filter-btn" data-filter="unattempted">Unattempted</button>
+            <button type="button" class="jee-filter-btn" data-filter="physics">Physics</button>
+            <button type="button" class="jee-filter-btn" data-filter="chem">Chemistry</button>
+            <button type="button" class="jee-filter-btn" data-filter="math">Math</button>
+          </div>
+        </div>
+
+        <div class="jee-solutions-list" id="jee-solutions-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: SUBMISSION CONFIRMATION ==================== -->
+    <div id="jee-modal-submit" class="jee-modal jee-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-submit-title">
+      <div class="jee-modal__backdrop" id="modal-submit-backdrop"></div>
+      <div class="jee-modal__dialog">
+        <h3 id="modal-submit-title" class="jee-modal-title">Submit Exam Confirmation</h3>
+        <p class="jee-modal-desc">Are you sure you want to end and submit your mock test?</p>
+
+        <table class="jee-summary-table">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Total</th>
+              <th>Answered</th>
+              <th>Not Answered</th>
+              <th>Review</th>
+            </tr>
+          </thead>
+          <tbody id="submit-summary-tbody">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+
+        <div class="jee-modal-actions">
+          <button type="button" class="jee-btn jee-btn--outline" id="btn-cancel-submit">
+            <span>Resume Test</span>
+          </button>
+          <button type="button" class="jee-btn jee-btn--primary" id="btn-confirm-submit">
+            <span>Yes, Submit &amp; View Result</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: ALL PAPERS / ANDROID PROMO ==================== -->
+    <div id="jee-modal-papers" class="jee-modal jee-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-papers-title">
+      <div class="jee-modal__backdrop" id="modal-papers-backdrop"></div>
+      <div class="jee-modal__dialog jee-modal__dialog--lg">
+        <div class="jee-modal-head-row">
+          <div>
+            <h3 id="modal-papers-title" class="jee-modal-title">All 24+ Available JEE Mock Test Papers</h3>
+            <p class="jee-modal-desc">
+              Test #1 is available directly online. All remaining official shift papers are available on our free Android App!
+            </p>
+          </div>
+          <button type="button" class="jee-btn-close" id="btn-close-papers-modal" aria-label="Close dialog">&times;</button>
+        </div>
+
+        <div class="jee-papers-list" id="jee-manifest-papers-list">
+          <!-- Populated from manifest JSON -->
+        </div>
+
+        <div class="jee-modal-footer-promo">
+          <a
+            href={APP_PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="jee-btn jee-btn--app jee-btn--block"
+          >
+            <span>Download All Papers on Free Android App</span>
+            <span class="jee-btn-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO Content Guide -->
+  <ToolContentSection
+    guideTitle="Free JEE Mains Mock Test Online Without Registration — Full NTA Pattern"
+    guideIntro="Preparing for the Joint Entrance Examination (JEE Mains) requires rigorous, time-bound testing that mirrors the official National Testing Agency (NTA) computer-based test (CBT) environment. Our free online JEE Mains mock test platform lets students practice full-length 90-question papers across Physics, Chemistry, and Mathematics with zero registration, zero phone number prompts, and zero fees. Track your progress with instant negative marking calculations and master difficult concepts with step-by-step LaTeX explanations."
+    steps={steps}
+    features={features}
+    faqs={faqs}
+  />
+</ToolLayout>
+
+<style>
+  /* ==================== STYLES FOR JEE MOCK TEST ==================== */
+  :root {
+    --jee-primary: var(--md-sys-color-primary, #1e40af);
+    --jee-primary-container: var(--md-sys-color-primary-container, #dbeafe);
+    --jee-on-primary: var(--md-sys-color-on-primary, #ffffff);
+    --jee-surface: var(--md-sys-color-surface, #ffffff);
+    --jee-on-surface: var(--md-sys-color-on-surface, #1e293b);
+    --jee-surface-variant: var(--md-sys-color-surface-variant, #f8fafc);
+    --jee-outline: var(--md-sys-color-outline-variant, #cbd5e1);
+    --jee-border: var(--md-sys-color-outline, #e2e8f0);
+    --jee-green: #16a34a;
+    --jee-green-bg: #dcfce7;
+    --jee-red: #dc2626;
+    --jee-red-bg: #fee2e2;
+    --jee-orange: #ea580c;
+    --jee-orange-bg: #ffedd5;
+    --jee-purple: #7c3aed;
+    --jee-purple-bg: #ede9fe;
+    --jee-gray: #64748b;
+    --jee-gray-bg: #f1f5f9;
+  }
+
+  [data-theme='dark'] {
+    --jee-surface: #0f172a;
+    --jee-on-surface: #f1f5f9;
+    --jee-surface-variant: #1e293b;
+    --jee-outline: #334155;
+    --jee-border: #1e293b;
+    --jee-gray-bg: #1e293b;
+    --jee-green-bg: rgba(22, 163, 74, 0.2);
+    --jee-red-bg: rgba(220, 38, 38, 0.2);
+    --jee-orange-bg: rgba(234, 88, 12, 0.2);
+    --jee-purple-bg: rgba(124, 58, 237, 0.2);
+  }
+
+  #tool-jee-mains-mock-test-free-online {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    color: var(--jee-on-surface);
+    font-family: inherit;
+  }
+
+  .jee-hidden {
+    display: none !important;
+  }
+
+  /* Header */
+  .jee-header {
+    text-align: center;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .jee-badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .jee-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    background: var(--jee-surface-variant);
+    color: var(--jee-gray);
+    border: 1px solid var(--jee-outline);
+  }
+
+  .jee-badge--primary {
+    background: var(--jee-primary-container);
+    color: var(--jee-primary);
+    border-color: transparent;
+  }
+
+  .jee-badge--accent {
+    background: #fef08a;
+    color: #854d0e;
+    border-color: #fde047;
+  }
+
+  .jee-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+    line-height: 1.25;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-subtitle {
+    font-size: 1rem;
+    color: var(--jee-gray);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* App Promo Bar */
+  .jee-app-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.08), rgba(124, 58, 237, 0.08));
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 0.85rem 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .jee-app-banner__info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .jee-app-banner__info strong {
+    display: block;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-app-banner__info p {
+    margin: 0;
+    color: var(--jee-gray);
+    font-size: 0.825rem;
+  }
+
+  .jee-app-banner__icon {
+    font-size: 1.75rem;
+  }
+
+  /* General Cards */
+  .jee-card {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  .jee-card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+  }
+
+  .jee-card-sub {
+    font-size: 0.875rem;
+    color: var(--jee-gray);
+    margin: 0;
+  }
+
+  .jee-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: var(--jee-primary-container);
+    color: var(--jee-primary);
+  }
+
+  .jee-tag--success {
+    background: var(--jee-green-bg);
+    color: var(--jee-green);
+  }
+
+  /* Start View */
+  .jee-start-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--jee-outline);
+    padding-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .jee-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .jee-spec-box {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .jee-spec-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--jee-gray);
+  }
+
+  .jee-spec-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--jee-primary);
+  }
+
+  .jee-spec-hint {
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+  }
+
+  .jee-rules-box {
+    background: var(--jee-surface-variant);
+    border-left: 4px solid var(--jee-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .jee-rules-box h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .jee-rules-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-start-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* CBT Top Bar */
+  .jee-cbt-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 0.65rem 1rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 60px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .jee-subject-tabs {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .jee-tab {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--jee-gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+  }
+
+  .jee-tab.active {
+    background: var(--jee-primary);
+    color: #ffffff;
+    border-color: var(--jee-primary);
+  }
+
+  .jee-tab-count {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+  }
+
+  .jee-tab.active .jee-tab-count {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .jee-cbt-bar__right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .jee-timer {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 8px;
+    padding: 0.45rem 0.75rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: monospace, monospace;
+    color: var(--jee-primary);
+  }
+
+  .jee-timer.warning {
+    color: var(--jee-orange);
+    border-color: var(--jee-orange);
+    background: var(--jee-orange-bg);
+  }
+
+  .jee-timer.danger {
+    color: var(--jee-red);
+    border-color: var(--jee-red);
+    background: var(--jee-red-bg);
+    animation: jee-pulse 1s infinite alternate;
+  }
+
+  @keyframes jee-pulse {
+    from { opacity: 0.75; }
+    to { opacity: 1; }
+  }
+
+  /* CBT Main Layout */
+  .jee-cbt-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .jee-cbt-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Question Pane */
+  .jee-question-pane {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+  }
+
+  .jee-question-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--jee-outline);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .jee-q-num {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--jee-primary);
+    margin-right: 0.5rem;
+  }
+
+  .jee-q-section {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    background: var(--jee-surface-variant);
+    border-radius: 6px;
+    color: var(--jee-gray);
+  }
+
+  .jee-marks-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: var(--jee-green-bg);
+    color: var(--jee-green);
+    margin-left: 0.25rem;
+  }
+
+  .jee-marks-tag--neg {
+    background: var(--jee-red-bg);
+    color: var(--jee-red);
+  }
+
+  /* Question Render Content */
+  .jee-question-content {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .jee-q-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-q-image-wrap {
+    text-align: center;
+    margin: 1rem 0;
+    background: #ffffff;
+    padding: 12px;
+    border: 1px solid var(--jee-outline);
+    border-radius: 8px;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .jee-q-image-wrap img {
+    max-width: 100%;
+    max-height: 340px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Options list */
+  .jee-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .jee-option-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--jee-outline);
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--jee-surface);
+    transition: all 0.2s ease;
+  }
+
+  .jee-option-row:hover {
+    border-color: var(--jee-primary);
+    background: var(--jee-surface-variant);
+  }
+
+  .jee-option-row.selected {
+    border-color: var(--jee-primary);
+    background: var(--jee-primary-container);
+    color: var(--jee-on-surface);
+  }
+
+  .jee-option-letter {
+    font-weight: 700;
+    font-size: 0.9rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    flex-shrink: 0;
+  }
+
+  .jee-option-row.selected .jee-option-letter {
+    background: var(--jee-primary);
+    color: #ffffff;
+    border-color: var(--jee-primary);
+  }
+
+  .jee-option-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Numerical Input Area */
+  .jee-numerical-container {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: var(--jee-surface-variant);
+    border-radius: 10px;
+    border: 1px solid var(--jee-outline);
+    max-width: 420px;
+  }
+
+  .jee-num-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--jee-gray);
+  }
+
+  .jee-num-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 2px solid var(--jee-outline);
+    background: var(--jee-surface);
+    color: var(--jee-on-surface);
+    text-align: center;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .jee-num-input:focus {
+    outline: none;
+    border-color: var(--jee-primary);
+  }
+
+  .jee-keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+
+  .jee-key {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 6px;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--jee-on-surface);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .jee-key:hover {
+    background: var(--jee-primary-container);
+    color: var(--jee-primary);
+  }
+
+  .jee-key--action {
+    grid-column: span 2;
+    background: var(--jee-surface-variant);
+    font-size: 0.85rem;
+  }
+
+  /* Bottom Actions Bar */
+  .jee-question-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--jee-outline);
+    flex-wrap: wrap;
+  }
+
+  .jee-actions-left,
+  .jee-actions-right {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Question Palette Sidebar */
+  .jee-palette-pane {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .jee-candidate-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--jee-outline);
+  }
+
+  .jee-candidate-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--jee-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border: 1px solid var(--jee-outline);
+  }
+
+  .jee-candidate-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jee-candidate-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .jee-candidate-roll {
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+  }
+
+  .jee-palette-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+  }
+
+  .jee-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .jee-p-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .jee-p-badge--ans {
+    background: var(--jee-green);
+    color: #ffffff;
+  }
+
+  .jee-p-badge--not-ans {
+    background: var(--jee-orange);
+    color: #ffffff;
+  }
+
+  .jee-p-badge--not-vis {
+    background: var(--jee-gray-bg);
+    color: var(--jee-gray);
+    border: 1px solid var(--jee-outline);
+  }
+
+  .jee-p-badge--review {
+    background: var(--jee-purple);
+    color: #ffffff;
+  }
+
+  .jee-p-badge--ans-review {
+    background: var(--jee-purple);
+    color: #ffffff;
+    position: relative;
+  }
+
+  .jee-p-badge--ans-review::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+  }
+
+  .jee-palette-section-title {
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: var(--jee-primary);
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--jee-outline);
+  }
+
+  .jee-palette-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+  }
+
+  .jee-q-btn {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid var(--jee-outline);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jee-q-btn.current {
+    box-shadow: 0 0 0 2px var(--jee-primary);
+  }
+
+  .jee-btn--palette-toggle {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .jee-btn--palette-toggle {
+      display: inline-flex;
+    }
+
+    .jee-palette-pane {
+      display: none;
+    }
+
+    .jee-palette-pane.open {
+      display: flex;
+      position: fixed;
+      top: 110px;
+      right: 16px;
+      left: 16px;
+      z-index: 50;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Buttons */
+  .jee-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.15rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .jee-btn--primary {
+    background: var(--jee-primary);
+    color: #ffffff;
+  }
+
+  .jee-btn--primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .jee-btn--secondary {
+    background: var(--jee-surface-variant);
+    color: var(--jee-on-surface);
+    border-color: var(--jee-outline);
+  }
+
+  .jee-btn--secondary:hover {
+    background: var(--jee-outline);
+  }
+
+  .jee-btn--outline {
+    background: transparent;
+    color: var(--jee-on-surface);
+    border-color: var(--jee-outline);
+  }
+
+  .jee-btn--outline:hover {
+    background: var(--jee-surface-variant);
+  }
+
+  .jee-btn--purple {
+    background: var(--jee-purple-bg);
+    color: var(--jee-purple);
+    border-color: var(--jee-purple);
+  }
+
+  .jee-btn--purple:hover {
+    background: var(--jee-purple);
+    color: #ffffff;
+  }
+
+  .jee-btn--submit {
+    background: var(--jee-green);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .jee-btn--submit:hover {
+    filter: brightness(1.1);
+  }
+
+  .jee-btn--block {
+    width: 100%;
+  }
+
+  .jee-btn--lg {
+    padding: 0.85rem 1.75rem;
+    font-size: 1.05rem;
+  }
+
+  .jee-btn--app {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #333333;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .jee-btn--app:hover {
+    background: #1e293b;
+    color: #ffffff;
+  }
+
+  .jee-play-icon {
+    flex-shrink: 0;
+  }
+
+  /* Result View */
+  .jee-result-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .jee-result-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--jee-outline);
+    padding-bottom: 1.25rem;
+  }
+
+  .jee-result-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0.35rem 0 0.25rem;
+  }
+
+  .jee-result-sub {
+    color: var(--jee-gray);
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .jee-score-badge {
+    background: var(--jee-primary-container);
+    border: 2px solid var(--jee-primary);
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+  }
+
+  .jee-score-num {
+    display: block;
+    font-size: 2.25rem;
+    font-weight: 900;
+    color: var(--jee-primary);
+    line-height: 1;
+  }
+
+  .jee-score-denom {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--jee-gray);
+  }
+
+  .jee-result-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .jee-stat-tile {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    padding: 0.85rem;
+    text-align: center;
+  }
+
+  .jee-stat-tile__val {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-stat-tile__label {
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+    font-weight: 600;
+  }
+
+  .jee-text--success { color: var(--jee-green); }
+  .jee-text--danger { color: var(--jee-red); }
+
+  .jee-section-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0;
+  }
+
+  .jee-subject-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .jee-subject-card {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .jee-subject-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .jee-subject-name {
+    font-size: 1rem;
+    color: var(--jee-on-surface);
+  }
+
+  .jee-subject-score {
+    font-size: 1.1rem;
+    color: var(--jee-primary);
+  }
+
+  .jee-subject-metrics {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .jee-result-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--jee-outline);
+    padding-top: 1.25rem;
+  }
+
+  /* App Feature Card in Results */
+  .jee-app-feature-card {
+    background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 100%);
+    color: #ffffff;
+    border-color: #3b82f6;
+    padding: 1.75rem;
+  }
+
+  .jee-app-feature-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin: 0.65rem 0 0.5rem;
+    color: #ffffff;
+  }
+
+  .jee-app-feature-desc {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .jee-app-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .jee-app-pill {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .jee-btn--app-large {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .jee-btn--app-large:hover {
+    background: #111827;
+    transform: translateY(-2px);
+    color: #ffffff;
+  }
+
+  .jee-app-btn-sub {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+  }
+
+  .jee-app-btn-main {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  /* Solutions List */
+  .jee-solutions-wrap {
+    margin-top: 1.5rem;
+  }
+
+  .jee-solutions-header {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .jee-filter-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.85rem;
+  }
+
+  .jee-filter-btn {
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 9999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--jee-gray);
+    cursor: pointer;
+  }
+
+  .jee-filter-btn.active {
+    background: var(--jee-primary);
+    color: #ffffff;
+    border-color: var(--jee-primary);
+  }
+
+  .jee-solutions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .jee-solution-card {
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .jee-solution-card.correct { border-left: 5px solid var(--jee-green); }
+  .jee-solution-card.incorrect { border-left: 5px solid var(--jee-red); }
+  .jee-solution-card.unattempted { border-left: 5px solid var(--jee-gray); }
+
+  .jee-sol-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--jee-outline);
+  }
+
+  .jee-sol-status {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+  }
+
+  .jee-sol-status.correct {
+    background: var(--jee-green-bg);
+    color: var(--jee-green);
+  }
+
+  .jee-sol-status.incorrect {
+    background: var(--jee-red-bg);
+    color: var(--jee-red);
+  }
+
+  .jee-sol-status.unattempted {
+    background: var(--jee-gray-bg);
+    color: var(--jee-gray);
+  }
+
+  .jee-sol-answers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    background: var(--jee-surface-variant);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .jee-explanation-box {
+    background: var(--jee-surface-variant);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    border-left: 3px solid var(--jee-primary);
+  }
+
+  .jee-explanation-box h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--jee-primary);
+  }
+
+  .jee-explanation-content {
+    font-size: 0.925rem;
+    line-height: 1.65;
+  }
+
+  /* Modals */
+  .jee-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .jee-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+  }
+
+  .jee-modal__dialog {
+    position: relative;
+    background: var(--jee-surface);
+    border: 1px solid var(--jee-outline);
+    border-radius: 14px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .jee-modal__dialog--lg {
+    max-width: 720px;
+  }
+
+  .jee-modal-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0 0 0.35rem;
+  }
+
+  .jee-modal-desc {
+    font-size: 0.875rem;
+    color: var(--jee-gray);
+    margin: 0 0 1rem;
+  }
+
+  .jee-modal-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .jee-btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    color: var(--jee-gray);
+    line-height: 1;
+  }
+
+  .jee-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .jee-summary-table th,
+  .jee-summary-table td {
+    padding: 0.6rem 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid var(--jee-outline);
+  }
+
+  .jee-summary-table th {
+    background: var(--jee-surface-variant);
+    font-weight: 700;
+  }
+
+  .jee-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  /* Paper List in Modal */
+  .jee-papers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+  }
+
+  .jee-paper-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--jee-surface-variant);
+    border: 1px solid var(--jee-outline);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+  }
+
+  .jee-paper-item.active-paper {
+    border-color: var(--jee-primary);
+    background: var(--jee-primary-container);
+  }
+
+  .jee-paper-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .jee-paper-desc {
+    font-size: 0.75rem;
+    color: var(--jee-gray);
+  }
+
+  .jee-modal-footer-promo {
+    border-top: 1px solid var(--jee-outline);
+    padding-top: 1rem;
+  }
+</style>
+
+<script is:inline>
+  // ==================== CLIENT LOGIC FOR JEE MOCK TEST ====================
+  (function () {
+    const APP_URL = 'https://play.google.com/store/apps/details?id=in.ni18.jeemocktest';
+    const IMG_BASE_URL = 'https://ni18-in.github.io/backend-jee-mock-test/jee_mains_27_jan_2024_shift_1/';
+
+    let paper = null;
+    let manifest = null;
+
+    try {
+      const pRaw = document.getElementById('jee-paper-data');
+      if (pRaw) paper = JSON.parse(pRaw.textContent);
+      const mRaw = document.getElementById('jee-manifest-data');
+      if (mRaw) manifest = JSON.parse(mRaw.textContent);
+    } catch (e) {
+      console.error('Failed to parse embedded exam data:', e);
+    }
+
+    // Flat questions catalog
+    // [{ globalIndex, id, subjectId, subjectName, sectionName, question, marks, negativeMarks }]
+    const allQuestions = [];
+    const questionsBySubject = { physics: [], chem: [], math: [] };
+
+    if (paper && paper.sections) {
+      // Sort sections so Physics is first, then Chemistry, then Mathematics
+      const sectionOrder = ['physics', 'chem', 'math'];
+      const sortedSections = [...paper.sections].sort(
+        (a, b) => sectionOrder.indexOf(a.id) - sectionOrder.indexOf(b.id)
+      );
+      sortedSections.forEach((s) => {
+        const sId = s.id; // 'physics', 'chem', 'math'
+        s.subsections.forEach((sub) => {
+          sub.questions.forEach((q) => {
+            const item = {
+              globalIndex: allQuestions.length,
+              subjectIndex: questionsBySubject[sId] ? questionsBySubject[sId].length : 0,
+              subjectId: sId,
+              subjectName: s.name,
+              sectionName: sub.name,
+              question: q,
+              marks: q.marks || 4,
+              negativeMarks: q.negativeMarks !== undefined ? q.negativeMarks : -1,
+            };
+            allQuestions.push(item);
+            if (questionsBySubject[sId]) {
+              questionsBySubject[sId].push(item);
+            }
+          });
+        });
+      });
+    }
+
+    // Candidate State:
+    // answers[qId] = { selectedOptionId: '1'|'2'|..., numericalValue: '5', isAnswered: bool, isMarkedForReview: bool, isVisited: bool }
+    const userState = {};
+    allQuestions.forEach((item) => {
+      userState[item.question.id] = {
+        selectedOptionId: null,
+        numericalValue: '',
+        isAnswered: false,
+        isMarkedForReview: false,
+        isVisited: false,
+      };
+    });
+
+    let activeSubject = 'physics';
+    let activeQuestionIndex = 0; // global index
+    let timerInterval = null;
+    let timeRemainingSeconds = 180 * 60; // 3 hours
+    let testStarted = false;
+    let testSubmitted = false;
+
+    // DOM Elements
+    const viewStart = document.getElementById('jee-view-start');
+    const viewExam = document.getElementById('jee-view-exam');
+    const viewResult = document.getElementById('jee-view-result');
+    const modalSubmit = document.getElementById('jee-modal-submit');
+    const modalPapers = document.getElementById('jee-modal-papers');
+
+    const tabPhysics = document.getElementById('tab-physics');
+    const tabChem = document.getElementById('tab-chem');
+    const tabMath = document.getElementById('tab-math');
+
+    const timerText = document.getElementById('timer-text');
+    const timerDisplay = document.getElementById('jee-timer-display');
+
+    const currentQLabel = document.getElementById('current-q-label');
+    const currentQSection = document.getElementById('current-q-section');
+    const currentQText = document.getElementById('current-q-text');
+    const currentQImageContainer = document.getElementById('current-q-image-container');
+    const currentQImage = document.getElementById('current-q-image');
+    const currentQOptions = document.getElementById('current-q-options');
+    const currentQNumerical = document.getElementById('current-q-numerical');
+    const numericalInput = document.getElementById('numerical-input');
+
+    const paletteGrid = document.getElementById('jee-palette-grid');
+    const paletteSecTitle = document.getElementById('palette-sec-title');
+
+    function renderMath(target) {
+      if (window.renderMathInElement) {
+        try {
+          window.renderMathInElement(target || document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true },
+            ],
+            throwOnError: false,
+          });
+        } catch (err) {
+          console.warn('LaTeX rendering notice:', err);
+        }
+      }
+    }
+
+    // Format Seconds to HH:MM:SS
+    function formatTime(sec) {
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      const hh = h < 10 ? '0' + h : h;
+      const mm = m < 10 ? '0' + m : m;
+      const ss = s < 10 ? '0' + s : s;
+      return `${hh}:${mm}:${ss}`;
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeRemainingSeconds--;
+        if (timerText) timerText.textContent = formatTime(timeRemainingSeconds);
+
+        if (timeRemainingSeconds <= 900 && timerDisplay) {
+          timerDisplay.classList.add('warning');
+        }
+        if (timeRemainingSeconds <= 300 && timerDisplay) {
+          timerDisplay.classList.add('danger');
+        }
+
+        if (timeRemainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          alert('Time is up! Your exam is being submitted.');
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    function switchSubject(subjectId) {
+      activeSubject = subjectId;
+      [tabPhysics, tabChem, tabMath].forEach((t) => {
+        if (t) t.classList.toggle('active', t.getAttribute('data-subject') === subjectId);
+      });
+
+      const firstOfSubject = (questionsBySubject[subjectId] || [])[0];
+      if (firstOfSubject) {
+        loadQuestion(firstOfSubject.globalIndex);
+      }
+    }
+
+    function loadQuestion(globalIdx) {
+      if (globalIdx < 0 || globalIdx >= allQuestions.length) return;
+      activeQuestionIndex = globalIdx;
+      const item = allQuestions[globalIdx];
+      const q = item.question;
+      const state = userState[q.id];
+
+      state.isVisited = true;
+
+      // Update active tab if subject changed
+      if (item.subjectId !== activeSubject) {
+        activeSubject = item.subjectId;
+        [tabPhysics, tabChem, tabMath].forEach((t) => {
+          if (t) t.classList.toggle('active', t.getAttribute('data-subject') === activeSubject);
+        });
+      }
+
+      // Meta labels
+      if (currentQLabel) currentQLabel.textContent = `Question ${item.subjectIndex + 1} of 30`;
+      if (currentQSection) currentQSection.textContent = `${item.subjectName} • ${item.sectionName}`;
+
+      // Text
+      if (currentQText) currentQText.textContent = q.questionText || '';
+
+      // Image
+      if (q.hasImage && q.imageName) {
+        currentQImage.src = IMG_BASE_URL + q.imageName;
+        currentQImage.alt = `Question ${item.subjectIndex + 1} Diagram`;
+        currentQImageContainer.classList.remove('jee-hidden');
+      } else {
+        currentQImage.src = '';
+        currentQImageContainer.classList.add('jee-hidden');
+      }
+
+      // Options or Numerical
+      if (q.type === 'single_correct') {
+        currentQNumerical.classList.add('jee-hidden');
+        currentQOptions.classList.remove('jee-hidden');
+        currentQOptions.innerHTML = '';
+
+        const letters = ['A', 'B', 'C', 'D'];
+        (q.options || []).forEach((opt, idx) => {
+          const row = document.createElement('div');
+          row.className = 'jee-option-row' + (state.selectedOptionId === opt.id ? ' selected' : '');
+          row.setAttribute('data-opt-id', opt.id);
+
+          row.innerHTML = `
+            <span class="jee-option-letter">${letters[idx] || idx + 1}</span>
+            <span class="jee-option-text">${opt.text || ''}</span>
+          `;
+
+          row.addEventListener('click', () => {
+            currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => r.classList.remove('selected'));
+            row.classList.add('selected');
+            state.selectedOptionId = opt.id;
+            state.isAnswered = true;
+            updateCounters();
+            renderPalette();
+          });
+
+          currentQOptions.appendChild(row);
+        });
+      } else {
+        // Numerical Question
+        currentQOptions.classList.add('jee-hidden');
+        currentQNumerical.classList.remove('jee-hidden');
+        if (numericalInput) {
+          numericalInput.value = state.numericalValue || '';
+        }
+      }
+
+      // Render Math formulas in Question & Options
+      renderMath(currentQText);
+      renderMath(currentQOptions);
+
+      updateCounters();
+      renderPalette();
+    }
+
+    function renderPalette() {
+      if (!paletteGrid) return;
+      paletteGrid.innerHTML = '';
+
+      const currentSubjectList = questionsBySubject[activeSubject] || [];
+      const subName = activeSubject === 'physics' ? 'Physics' : activeSubject === 'chem' ? 'Chemistry' : 'Mathematics';
+      if (paletteSecTitle) paletteSecTitle.textContent = `${subName} (Questions 1 - 30)`;
+
+      currentSubjectList.forEach((item) => {
+        const state = userState[item.question.id];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'jee-q-btn';
+        btn.textContent = String(item.subjectIndex + 1);
+
+        if (item.globalIndex === activeQuestionIndex) {
+          btn.classList.add('current');
+        }
+
+        // Palette Status Colors
+        if (state.isAnswered && state.isMarkedForReview) {
+          btn.classList.add('jee-p-badge--ans-review');
+        } else if (state.isMarkedForReview) {
+          btn.classList.add('jee-p-badge--review');
+        } else if (state.isAnswered) {
+          btn.classList.add('jee-p-badge--ans');
+        } else if (state.isVisited) {
+          btn.classList.add('jee-p-badge--not-ans');
+        } else {
+          btn.classList.add('jee-p-badge--not-vis');
+        }
+
+        btn.addEventListener('click', () => {
+          loadQuestion(item.globalIndex);
+          const drawer = document.getElementById('jee-palette-drawer');
+          if (drawer && drawer.classList.contains('open')) {
+            drawer.classList.remove('open');
+          }
+        });
+
+        paletteGrid.appendChild(btn);
+      });
+    }
+
+    function updateCounters() {
+      ['physics', 'chem', 'math'].forEach((sId) => {
+        const list = questionsBySubject[sId] || [];
+        const ans = list.filter((item) => userState[item.question.id].isAnswered).length;
+        const el = document.getElementById(`count-${sId}`);
+        if (el) el.textContent = `${ans}/30`;
+      });
+    }
+
+    // Save & Next Action
+    function handleSaveAndNext() {
+      const item = allQuestions[activeQuestionIndex];
+      const state = userState[item.question.id];
+
+      if (item.question.type === 'numerical' && numericalInput) {
+        const val = numericalInput.value.trim();
+        state.numericalValue = val;
+        state.isAnswered = val.length > 0;
+      }
+
+      state.isVisited = true;
+      state.isMarkedForReview = false;
+
+      // Advance
+      if (activeQuestionIndex < allQuestions.length - 1) {
+        loadQuestion(activeQuestionIndex + 1);
+      } else {
+        openSubmitModal();
+      }
+    }
+
+    // Mark For Review & Next Action
+    function handleMarkForReview() {
+      const item = allQuestions[activeQuestionIndex];
+      const state = userState[item.question.id];
+
+      if (item.question.type === 'numerical' && numericalInput) {
+        const val = numericalInput.value.trim();
+        state.numericalValue = val;
+        state.isAnswered = val.length > 0;
+      }
+
+      state.isVisited = true;
+      state.isMarkedForReview = true;
+
+      if (activeQuestionIndex < allQuestions.length - 1) {
+        loadQuestion(activeQuestionIndex + 1);
+      } else {
+        openSubmitModal();
+      }
+    }
+
+    // Clear Response Action
+    function handleClearResponse() {
+      const item = allQuestions[activeQuestionIndex];
+      const state = userState[item.question.id];
+      state.selectedOptionId = null;
+      state.numericalValue = '';
+      state.isAnswered = false;
+      state.isMarkedForReview = false;
+
+      if (item.question.type === 'single_correct') {
+        currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => r.classList.remove('selected'));
+      } else if (numericalInput) {
+        numericalInput.value = '';
+      }
+
+      updateCounters();
+      renderPalette();
+    }
+
+    // Open Submit Summary Modal
+    function openSubmitModal() {
+      if (!modalSubmit) return;
+      const tbody = document.getElementById('submit-summary-tbody');
+      if (tbody) {
+        tbody.innerHTML = '';
+        const subjects = [
+          { id: 'physics', name: 'Physics' },
+          { id: 'chem', name: 'Chemistry' },
+          { id: 'math', name: 'Mathematics' },
+        ];
+
+        subjects.forEach((s) => {
+          const list = questionsBySubject[s.id] || [];
+          let ans = 0,
+            notAns = 0,
+            review = 0;
+          list.forEach((item) => {
+            const st = userState[item.question.id];
+            if (st.isAnswered) ans++;
+            else if (st.isVisited) notAns++;
+            if (st.isMarkedForReview) review++;
+          });
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><strong>${s.name}</strong></td>
+            <td>${list.length}</td>
+            <td style="color:var(--jee-green);font-weight:700">${ans}</td>
+            <td style="color:var(--jee-orange);font-weight:700">${notAns}</td>
+            <td style="color:var(--jee-purple);font-weight:700">${review}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+      modalSubmit.classList.remove('jee-hidden');
+    }
+
+    function closeSubmitModal() {
+      if (modalSubmit) modalSubmit.classList.add('jee-hidden');
+    }
+
+    // Submit Exam & Calculate Scores
+    function submitExam() {
+      if (timerInterval) clearInterval(timerInterval);
+      testSubmitted = true;
+      closeSubmitModal();
+
+      let totalScore = 0;
+      let totalAttempted = 0;
+      let totalCorrect = 0;
+      let totalIncorrect = 0;
+
+      const subjectStats = {
+        physics: { score: 0, correct: 0, incorrect: 0, skipped: 0 },
+        chem: { score: 0, correct: 0, incorrect: 0, skipped: 0 },
+        math: { score: 0, correct: 0, incorrect: 0, skipped: 0 },
+      };
+
+      allQuestions.forEach((item) => {
+        const q = item.question;
+        const st = userState[q.id];
+        const sId = item.subjectId;
+        let isCorrect = false;
+
+        if (q.type === 'single_correct') {
+          if (st.selectedOptionId) {
+            totalAttempted++;
+            const chosen = (q.options || []).find((o) => o.id === st.selectedOptionId);
+            if (chosen && chosen.isCorrect) {
+              isCorrect = true;
+              totalCorrect++;
+              totalScore += item.marks;
+              subjectStats[sId].correct++;
+              subjectStats[sId].score += item.marks;
+            } else {
+              totalIncorrect++;
+              totalScore += item.negativeMarks;
+              subjectStats[sId].incorrect++;
+              subjectStats[sId].score += item.negativeMarks;
+            }
+          } else {
+            subjectStats[sId].skipped++;
+          }
+        } else {
+          // Numerical
+          const numStr = String(st.numericalValue ?? '').trim();
+          const userVal = parseFloat(numStr);
+          if (!isNaN(userVal) && numStr.length > 0) {
+            totalAttempted++;
+            const correctVal = parseFloat(q.answer);
+            // Allow small epsilon tolerance for float answers
+            if (Math.abs(userVal - correctVal) < 0.01) {
+              isCorrect = true;
+              totalCorrect++;
+              totalScore += item.marks;
+              subjectStats[sId].correct++;
+              subjectStats[sId].score += item.marks;
+            } else {
+              totalIncorrect++;
+              totalScore += item.negativeMarks;
+              subjectStats[sId].incorrect++;
+              subjectStats[sId].score += item.negativeMarks;
+            }
+          } else {
+            subjectStats[sId].skipped++;
+          }
+        }
+
+        item.userResult = {
+          isAttempted: st.isAnswered,
+          isCorrect: isCorrect,
+          userOptionId: st.selectedOptionId,
+          userNumVal: st.numericalValue,
+        };
+      });
+
+      // Show Result View
+      viewExam.classList.add('jee-hidden');
+      viewResult.classList.remove('jee-hidden');
+
+      // Populate Result Stats
+      const resScoreEl = document.getElementById('res-total-score');
+      if (resScoreEl) resScoreEl.textContent = String(totalScore);
+
+      const acc = totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0;
+      const resAccEl = document.getElementById('res-accuracy');
+      if (resAccEl) resAccEl.textContent = `${acc}%`;
+
+      const resAttEl = document.getElementById('res-attempted');
+      if (resAttEl) resAttEl.textContent = `${totalAttempted} / 90`;
+
+      const resCorEl = document.getElementById('res-correct');
+      if (resCorEl) resCorEl.textContent = String(totalCorrect);
+
+      const resIncEl = document.getElementById('res-incorrect');
+      if (resIncEl) resIncEl.textContent = String(totalIncorrect);
+
+      const resUnEl = document.getElementById('res-unattempted');
+      if (resUnEl) resUnEl.textContent = String(90 - totalAttempted);
+
+      const timeTakenSec = 180 * 60 - timeRemainingSeconds;
+      const resTimeEl = document.getElementById('res-time-taken');
+      if (resTimeEl) resTimeEl.textContent = formatTime(timeTakenSec);
+
+      // Subject stats
+      ['physics', 'chem', 'math'].forEach((sId) => {
+        const sc = subjectStats[sId];
+        const sEl = document.getElementById(`res-${sId}-score`);
+        if (sEl) sEl.textContent = `${sc.score} / 100`;
+        const cEl = document.getElementById(`res-${sId}-correct`);
+        if (cEl) cEl.textContent = `Correct: ${sc.correct}`;
+        const iEl = document.getElementById(`res-${sId}-incorrect`);
+        if (iEl) iEl.textContent = `Incorrect: ${sc.incorrect}`;
+        const kEl = document.getElementById(`res-${sId}-skipped`);
+        if (kEl) kEl.textContent = `Skipped: ${sc.skipped}`;
+      });
+
+      // Render Solutions
+      renderSolutions('all');
+
+      window.scrollTo({ top: viewResult.offsetTop - 50, behavior: 'smooth' });
+    }
+
+    // Render Detailed Solutions
+    function renderSolutions(filter) {
+      const listContainer = document.getElementById('jee-solutions-list');
+      if (!listContainer) return;
+      listContainer.innerHTML = '';
+
+      allQuestions.forEach((item, idx) => {
+        const q = item.question;
+        const res = item.userResult;
+
+        let statusClass = 'unattempted';
+        let statusText = 'Not Attempted (0 Marks)';
+        if (res.isAttempted) {
+          if (res.isCorrect) {
+            statusClass = 'correct';
+            statusText = `Correct (+${item.marks} Marks)`;
+          } else {
+            statusClass = 'incorrect';
+            statusText = `Incorrect (${item.negativeMarks} Mark)`;
+          }
+        }
+
+        // Apply filters
+        if (filter === 'correct' && statusClass !== 'correct') return;
+        if (filter === 'incorrect' && statusClass !== 'incorrect') return;
+        if (filter === 'unattempted' && statusClass !== 'unattempted') return;
+        if (filter === 'physics' && item.subjectId !== 'physics') return;
+        if (filter === 'chem' && item.subjectId !== 'chem') return;
+        if (filter === 'math' && item.subjectId !== 'math') return;
+
+        const card = document.createElement('div');
+        card.className = `jee-solution-card ${statusClass}`;
+
+        let imgHtml = '';
+        if (q.hasImage && q.imageName) {
+          imgHtml = `
+            <div class="jee-q-image-wrap">
+              <img src="${IMG_BASE_URL + q.imageName}" alt="Solution diagram for Question ${idx + 1}" loading="lazy" />
+            </div>
+          `;
+        }
+
+        let answersHtml = '';
+        if (q.type === 'single_correct') {
+          const chosenOpt = (q.options || []).find((o) => o.id === res.userOptionId);
+          const correctOpt = (q.options || []).find((o) => o.isCorrect);
+
+          answersHtml = `
+            <div class="jee-sol-answers-grid">
+              <div>
+                <strong>Your Answer:</strong> ${chosenOpt ? chosenOpt.text : '<span style="color:var(--jee-gray)">Not Attempted</span>'}
+              </div>
+              <div>
+                <strong style="color:var(--jee-green)">Correct Answer:</strong> ${correctOpt ? correctOpt.text : 'N/A'}
+              </div>
+            </div>
+          `;
+        } else {
+          answersHtml = `
+            <div class="jee-sol-answers-grid">
+              <div>
+                <strong>Your Answer:</strong> ${String(res.userNumVal ?? '').trim() ? String(res.userNumVal) : '<span style="color:var(--jee-gray)">Not Attempted</span>'}
+              </div>
+              <div>
+                <strong style="color:var(--jee-green)">Correct Numerical Answer:</strong> ${q.answer}
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="jee-sol-head">
+            <div>
+              <strong>Q${idx + 1}.</strong> <span>${item.subjectName} • ${item.sectionName}</span>
+            </div>
+            <span class="jee-sol-status ${statusClass}">${statusText}</span>
+          </div>
+          <div class="jee-q-text">${q.questionText || ''}</div>
+          ${imgHtml}
+          ${answersHtml}
+          <div class="jee-explanation-box">
+            <h4>Step-by-Step Explanation &amp; Solution:</h4>
+            <div class="jee-explanation-content">${q.explanation || 'Detailed explanation not available.'}</div>
+          </div>
+        `;
+
+        listContainer.appendChild(card);
+      });
+
+      renderMath(listContainer);
+    }
+
+    // Modal Papers List (24 papers)
+    function populatePapersModal() {
+      const container = document.getElementById('jee-manifest-papers-list');
+      if (!container || !manifest || !manifest.papers) return;
+      container.innerHTML = '';
+
+      manifest.papers.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'jee-paper-item' + (idx === 0 ? ' active-paper' : '');
+
+        item.innerHTML = `
+          <div>
+            <span class="jee-paper-title">${p.title || 'JEE Mock Test'}</span>
+            <span class="jee-paper-desc">${p.description || `Year: ${p.year}`}</span>
+          </div>
+          <div>
+            ${
+              idx === 0
+                ? `<span class="jee-badge jee-badge--primary">Active Online Now</span>`
+                : `<a href="${APP_URL}" target="_blank" rel="noopener noreferrer" class="jee-btn jee-btn--app" style="font-size:0.75rem;padding:0.4rem 0.8rem">
+                    <span>Take on App</span>
+                  </a>`
+            }
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // Wire Up Event Listeners
+    function initEvents() {
+      // Start Exam Button
+      const btnStart = document.getElementById('btn-start-exam');
+      if (btnStart) {
+        btnStart.addEventListener('click', () => {
+          viewStart.classList.add('jee-hidden');
+          viewExam.classList.remove('jee-hidden');
+          testStarted = true;
+          loadQuestion(0);
+          startTimer();
+          window.scrollTo({ top: viewExam.offsetTop - 50, behavior: 'smooth' });
+        });
+      }
+
+      // Subject Tabs
+      if (tabPhysics) tabPhysics.addEventListener('click', () => switchSubject('physics'));
+      if (tabChem) tabChem.addEventListener('click', () => switchSubject('chem'));
+      if (tabMath) tabMath.addEventListener('click', () => switchSubject('math'));
+
+      // Navigation & Save Actions
+      const btnPrev = document.getElementById('btn-prev-q');
+      if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+          if (activeQuestionIndex > 0) loadQuestion(activeQuestionIndex - 1);
+        });
+      }
+
+      const btnSaveNext = document.getElementById('btn-save-next');
+      if (btnSaveNext) btnSaveNext.addEventListener('click', handleSaveAndNext);
+
+      const btnMarkReview = document.getElementById('btn-mark-review');
+      if (btnMarkReview) btnMarkReview.addEventListener('click', handleMarkForReview);
+
+      const btnClear = document.getElementById('btn-clear-response');
+      if (btnClear) btnClear.addEventListener('click', handleClearResponse);
+
+      // Virtual Keypad
+      document.querySelectorAll('.jee-key').forEach((key) => {
+        key.addEventListener('click', () => {
+          if (!numericalInput) return;
+          const k = key.getAttribute('data-key');
+          if (k === 'backspace') {
+            numericalInput.value = numericalInput.value.slice(0, -1);
+          } else if (k === 'clear') {
+            numericalInput.value = '';
+          } else {
+            numericalInput.value += k;
+          }
+          const item = allQuestions[activeQuestionIndex];
+          userState[item.question.id].numericalValue = numericalInput.value;
+          userState[item.question.id].isAnswered = numericalInput.value.trim().length > 0;
+          updateCounters();
+          renderPalette();
+        });
+      });
+
+      if (numericalInput) {
+        numericalInput.addEventListener('input', () => {
+          const item = allQuestions[activeQuestionIndex];
+          userState[item.question.id].numericalValue = numericalInput.value;
+          userState[item.question.id].isAnswered = numericalInput.value.trim().length > 0;
+          updateCounters();
+          renderPalette();
+        });
+      }
+
+      // Submit Modals
+      const btnSubmitTop = document.getElementById('btn-submit-exam-top');
+      if (btnSubmitTop) btnSubmitTop.addEventListener('click', openSubmitModal);
+
+      const btnSubmitSide = document.getElementById('btn-submit-exam-side');
+      if (btnSubmitSide) btnSubmitSide.addEventListener('click', openSubmitModal);
+
+      const btnCancelSubmit = document.getElementById('btn-cancel-submit');
+      if (btnCancelSubmit) btnCancelSubmit.addEventListener('click', closeSubmitModal);
+
+      const backdropSubmit = document.getElementById('modal-submit-backdrop');
+      if (backdropSubmit) backdropSubmit.addEventListener('click', closeSubmitModal);
+
+      const btnConfirmSubmit = document.getElementById('btn-confirm-submit');
+      if (btnConfirmSubmit) btnConfirmSubmit.addEventListener('click', submitExam);
+
+      // Toggle Palette on Mobile
+      const btnTogglePalette = document.getElementById('btn-toggle-palette');
+      const paletteDrawer = document.getElementById('jee-palette-drawer');
+      if (btnTogglePalette && paletteDrawer) {
+        btnTogglePalette.addEventListener('click', () => {
+          paletteDrawer.classList.toggle('open');
+        });
+      }
+
+      // Solutions Filters
+      document.querySelectorAll('.jee-filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.jee-filter-btn').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.getAttribute('data-filter');
+          renderSolutions(filter);
+        });
+      });
+
+      // Retake Test
+      const btnRetake = document.getElementById('btn-retake-exam');
+      if (btnRetake) {
+        btnRetake.addEventListener('click', () => {
+          if (confirm('Are you sure you want to retake the test? Your previous answers will be reset.')) {
+            allQuestions.forEach((item) => {
+              userState[item.question.id] = {
+                selectedOptionId: null,
+                numericalValue: '',
+                isAnswered: false,
+                isMarkedForReview: false,
+                isVisited: false,
+              };
+            });
+            timeRemainingSeconds = 180 * 60;
+            if (timerDisplay) timerDisplay.classList.remove('warning', 'danger');
+            viewResult.classList.add('jee-hidden');
+            viewExam.classList.remove('jee-hidden');
+            loadQuestion(0);
+            startTimer();
+            window.scrollTo({ top: viewExam.offsetTop - 50, behavior: 'smooth' });
+          }
+        });
+      }
+
+      // Scroll to Solutions
+      const btnScrollSol = document.getElementById('btn-scroll-solutions');
+      const solSection = document.getElementById('jee-solutions-section');
+      if (btnScrollSol && solSection) {
+        btnScrollSol.addEventListener('click', () => {
+          solSection.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // Print Scorecard
+      const btnPrint = document.getElementById('btn-print-result');
+      if (btnPrint) {
+        btnPrint.addEventListener('click', () => window.print());
+      }
+
+      // Papers Modal
+      const btnBrowsePapers = document.getElementById('btn-browse-papers');
+      const btnClosePapers = document.getElementById('btn-close-papers-modal');
+      const backdropPapers = document.getElementById('modal-papers-backdrop');
+
+      if (btnBrowsePapers && modalPapers) {
+        btnBrowsePapers.addEventListener('click', () => {
+          populatePapersModal();
+          modalPapers.classList.remove('jee-hidden');
+        });
+      }
+
+      if (btnClosePapers && modalPapers) {
+        btnClosePapers.addEventListener('click', () => modalPapers.classList.add('jee-hidden'));
+      }
+
+      if (backdropPapers && modalPapers) {
+        backdropPapers.addEventListener('click', () => modalPapers.classList.add('jee-hidden'));
+      }
+    }
+
+    // Initial Execution
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initEvents();
+        renderMath();
+      });
+    } else {
+      initEvents();
+      renderMath();
+    }
+
+    // Retry KaTeX render once window completes full load (in case CDN script finished later)
+    window.addEventListener('load', () => {
+      renderMath();
+    });
+  })();
+</script>

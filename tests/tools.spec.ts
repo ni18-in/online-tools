@@ -419,3 +419,51 @@ test('guess-the-logo gameplay, streak display, and all difficulty mode work clea
   expect(errors).toEqual([]);
 });
 
+test('jee-mains-mock-test launches exam, handles CBT interactions, submits and renders solutions', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/jee-mains-mock-test-free-online/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify start screen is visible
+  const startCard = page.locator('#jee-view-start');
+  await expect(startCard).toBeVisible();
+
+  // Verify Android app link is present
+  const appLinks = page.locator('a[href="https://play.google.com/store/apps/details?id=in.ni18.jeemocktest"]');
+  expect(await appLinks.count()).toBeGreaterThan(0);
+
+  // Click start exam
+  await page.click('#btn-start-exam');
+  await expect(page.locator('#jee-view-exam')).toBeVisible();
+  await expect(page.locator('#current-q-label')).toContainText('Question 1');
+
+  // Select an option
+  const option = page.locator('.jee-option-row').first();
+  await option.click();
+  await expect(option).toHaveClass(/selected/);
+
+  // Click Save & Next
+  await page.click('#btn-save-next');
+  await expect(page.locator('#current-q-label')).toContainText('Question 2');
+
+  // Switch to Chemistry tab
+  await page.click('#tab-chem');
+  await expect(page.locator('#current-q-section')).toContainText('Chemistry');
+
+  // Switch to Mathematics tab
+  await page.click('#tab-math');
+  await expect(page.locator('#current-q-section')).toContainText('Mathematics');
+
+  // Open Submit modal and confirm submit
+  await page.click('#btn-submit-exam-top');
+  await expect(page.locator('#jee-modal-submit')).toBeVisible();
+  await page.click('#btn-confirm-submit');
+
+  // Verify result view, scorecard and solutions rendered
+  await expect(page.locator('#jee-view-result')).toBeVisible();
+  await expect(page.locator('#res-total-score')).toBeVisible();
+  await expect(page.locator('.jee-solution-card')).toHaveCount(90);
+
+  expect(errors).toEqual([]);
+});
+

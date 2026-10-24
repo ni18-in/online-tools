@@ -1,0 +1,2235 @@
+{
+    "examTitle": "JEE Mains 2024 - 27 January Morning Shift",
+    "examDate": "27th January 2024",
+    "duration": "9:00 AM to 12:00 Noon",
+    "durationMinutes": 180,
+    "totalMarks": 300,
+    "sections": [
+        {
+            "id": "math",
+            "name": "Mathematics",
+            "subsections": [
+                {
+                    "id": "math_sec_a",
+                    "name": "Section-A",
+                    "questions": [
+                        {
+                            "id": "math_q1",
+                            "type": "single_correct",
+                            "questionText": "$\\binom{n-1}{r} = (k^2 - 8) \\binom{n}{r+1}$ if and only if :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$2\\sqrt{2} < k \\le 3$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$2\\sqrt{3} < k \\le 3\\sqrt{2}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$2\\sqrt{3} < k < 3\\sqrt{3}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$2\\sqrt{2} < k < 2\\sqrt{3}$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "We are given $\\binom{n-1}{r} = (k^2 - 8) \\binom{n}{r+1} \\implies k^2 - 8 = \\frac{\\binom{n-1}{r}}{\\binom{n}{r+1}} = \\frac{r+1}{n}$. Since $0 \\le r \\le n-1$, we have $0 < \\frac{r+1}{n} \\le 1$. Thus $0 < k^2 - 8 \\le 1 \\implies 8 < k^2 \\le 9 \\implies 2\\sqrt{2} < k \\le 3$ (considering $k > 0$).",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q2",
+                            "type": "single_correct",
+                            "questionText": "The distance of the point $(7, -2, 11)$ from the line $\\frac{x-6}{1} = \\frac{y-4}{0} = \\frac{z-8}{3}$ along the line $\\frac{x-5}{2} = \\frac{y-1}{-3} = \\frac{z-5}{6}$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "12",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "14",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "18",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "21",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "The line through $A(7, -2, 11)$ parallel to the second line is $\\frac{x-7}{2} = \\frac{y+2}{-3} = \\frac{z-11}{6} = \\lambda$. Any point on it is $B(2\\lambda + 7, -3\\lambda - 2, 6\\lambda + 11)$. Point $B$ lies on $\\frac{x-6}{1} = \\frac{y-4}{0} = \\frac{z-8}{3}$, so $-3\\lambda - 2 = 4 \\implies \\lambda = -2$. Thus $B = (3, 4, -1)$. The distance $AB = \\sqrt{(7-3)^2 + (-2-4)^2 + (11 - (-1))^2} = \\sqrt{16 + 36 + 144} = \\sqrt{196} = 14$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q3",
+                            "type": "single_correct",
+                            "questionText": "Let $x = x(t)$ and $y = y(t)$ be solutions of the differential equations $\\frac{dx}{dt} + ax = 0$ and $\\frac{dy}{dt} + by = 0$ respectively, $a, b \\in \\mathbb{R}$. Given that $x(0) = 2$, $y(0) = 1$ and $3y(1) = 2x(1)$, the value of $t$, for which $x(t) = y(t)$, is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\log_{\\frac{2}{3}} 2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\log_4 3$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\log_3 4$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\log_{\\frac{4}{3}} 2$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Integrating $\\frac{dx}{x} = -a\\,dt \\implies x(t) = 2e^{-at}$, and $\\frac{dy}{y} = -b\\,dt \\implies y(t) = e^{-bt}$. Given $3y(1) = 2x(1) \\implies 3e^{-b} = 2(2e^{-a}) \\implies e^{a-b} = \\frac{4}{3}$. For $x(t) = y(t)$, $2e^{-at} = e^{-bt} \\implies e^{(a-b)t} = 2 \\implies \\left(\\frac{4}{3}\\right)^t = 2 \\implies t = \\log_{\\frac{4}{3}} 2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q4",
+                            "type": "single_correct",
+                            "questionText": "If $(a, b)$ be the orthocentre of the triangle whose vertices are $(1, 2)$, $(2, 3)$ and $(3, 1)$, and $I_1 = \\int_a^b x \\sin(4x - x^2)\\,dx$, $I_2 = \\int_a^b \\sin(4x - x^2)\\,dx$, then $36\\,\\frac{I_1}{I_2}$ is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "72",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "88",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "80",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "66",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "The altitude from $(3, 1)$ to the side joining $(1, 2)$ and $(2, 3)$ (slope 1) has slope $-1$: $y - 1 = -(x - 3) \\implies x + y = 4$. Thus the orthocentre $(a, b)$ lies on $x + y = 4$, so $a + b = 4$. By King's rule: $I_1 = \\int_a^b (4-x)\\sin(4x - x^2)\\,dx = 4I_2 - I_1 \\implies 2I_1 = 4I_2 \\implies I_1 = 2I_2$. Hence $36\\,\\frac{I_1}{I_2} = 36(2) = 72$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q5",
+                            "type": "single_correct",
+                            "questionText": "If $A$ denotes the sum of all the coefficients in the expansion of $(1 - 3x + 10x^2)^n$ and $B$ denotes the sum of all the coefficients in the expansion of $(1 + x^2)^n$, then :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$A = B^3$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$3A = B$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$B = A^3$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$A = 3B$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "The sum of coefficients is obtained by setting $x = 1$. For $(1 - 3x + 10x^2)^n$, $A = (1 - 3 + 10)^n = 8^n = (2^3)^n = (2^n)^3$. For $(1 + x^2)^n$, $B = (1 + 1)^n = 2^n$. Therefore, $A = B^3$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q6",
+                            "type": "single_correct",
+                            "questionText": "The number of common terms in the progressions $4, 9, 14, 19, \\ldots$ up to 25th term and $3, 6, 9, 12, \\ldots$ up to 37th term is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "9",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "5",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "7",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "8",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "First AP: $a_1 = 4, d_1 = 5, T_{25} = 4 + 24(5) = 124$. Second AP: $a_2 = 3, d_2 = 3, T_{37} = 3 + 36(3) = 111$. First common term is 9. The common difference of common terms is $\\text{LCM}(5, 3) = 15$. The common terms are of the form $9 + 15k \\le 111 \\implies 15k \\le 102 \\implies k \\in \\{0, 1, 2, 3, 4, 5, 6\\}$. Thus there are 7 common terms.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q7",
+                            "type": "single_correct",
+                            "questionText": "If the shortest distance of the parabola $y^2 = 4x$ from the centre of the circle $x^2 + y^2 - 4x - 16y + 64 = 0$ is $d$, then $d^2$ is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "16",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "24",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "20",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "36",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Centre of the circle is $C(2, 8)$. The normal to the parabola $y^2 = 4x$ ($a=1$) has equation $y = mx - 2m - m^3$. Since it passes through $(2, 8)$: $8 = 2m - 2m - m^3 \\implies m^3 = -8 \\implies m = -2$. The point on the parabola is $P(am^2, -2am) = (4, 4)$. The distance $CP = \\sqrt{(4-2)^2 + (4-8)^2} = \\sqrt{4 + 16} = \\sqrt{20}$. Hence $d^2 = 20$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q8",
+                            "type": "single_correct",
+                            "questionText": "If the shortest distance between the lines $\\frac{x-4}{1} = \\frac{y+1}{2} = \\frac{z}{-3}$ and $\\frac{x-\\lambda}{2} = \\frac{y+1}{4} = \\frac{z-2}{-5}$ is $\\frac{6}{\\sqrt{5}}$, then the sum of all possible values of $\\lambda$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "5",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "8",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "7",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "10",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "$\\vec{a}_1 = (4, -1, 0)$, $\\vec{a}_2 = (\\lambda, -1, 2)$, $\\vec{b}_1 = (1, 2, -3)$, $\\vec{b}_2 = (2, 4, -5)$. $\\vec{b}_1 \\times \\vec{b}_2 = (2, -1, 0)$, $|\\vec{b}_1 \\times \\vec{b}_2| = \\sqrt{5}$. $(\\vec{a}_2 - \\vec{a}_1) \\cdot (\\vec{b}_1 \\times \\vec{b}_2) = 2(\\lambda - 4)$. Shortest distance $d = \\frac{|2(\\lambda - 4)|}{\\sqrt{5}} = \\frac{6}{\\sqrt{5}} \\implies |\\lambda - 4| = 3 \\implies \\lambda = 7$ or $\\lambda = 1$. Sum = $7 + 1 = 8$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q9",
+                            "type": "single_correct",
+                            "questionText": "If $\\int_0^1 \\frac{1}{\\sqrt{3+x} + \\sqrt{1+x}}\\,dx = a + b\\sqrt{2} + c\\sqrt{3}$, where $a, b, c$ are rational numbers, then $2a + 3b - 4c$ is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "4",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "10",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "7",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "8",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Rationalising the denominator: $\\int_0^1 \\frac{\\sqrt{3+x} - \\sqrt{1+x}}{2}\\,dx = \\frac{1}{3} \\left[ (3+x)^{3/2} - (1+x)^{3/2} \\right]_0^1 = \\frac{1}{3} \\left[ (8 - 2\\sqrt{2}) - (3\\sqrt{3} - 1) \\right] = 3 - \\frac{2\\sqrt{2}}{3} - \\sqrt{3}$. Comparing with $a + b\\sqrt{2} + c\\sqrt{3}$: $a = 3$, $b = -\\frac{2}{3}$, $c = -1$. Then $2a + 3b - 4c = 2(3) + 3(-2/3) - 4(-1) = 6 - 2 + 4 = 8$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q10",
+                            "type": "single_correct",
+                            "questionText": "Let $S = \\{1, 2, 3, \\ldots, 10\\}$. Suppose $M$ is the set of all the subsets of $S$, then the relation $R = \\{(A, B) : A \\cap B \\neq \\emptyset;\\, A, B \\in M\\}$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "symmetric and reflexive only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "reflexive only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "symmetric and transitive only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "symmetric only",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Since $\\emptyset \\in M$ and $\\emptyset \\cap \\emptyset = \\emptyset$, $(\\emptyset, \\emptyset) \\notin R$, so $R$ is not reflexive. If $A \\cap B \\neq \\emptyset \\implies B \\cap A \\neq \\emptyset$, so $R$ is symmetric. For transitivity: taking $A = \\{1\\}, B = \\{1, 2\\}, C = \\{2\\}$, we have $A \\cap B \\neq \\emptyset$ and $B \\cap C \\neq \\emptyset$, but $A \\cap C = \\emptyset$, so $R$ is not transitive. Hence $R$ is symmetric only.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q11",
+                            "type": "single_correct",
+                            "questionText": "If $S = \\{z \\in \\mathbb{C} : |z - i| = |z + i| = |z - 1|\\}$, then $n(S)$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "1",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "0",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "3",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "2",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "$|z - i| = |z + i| = |z - 1|$ means $z$ is equidistant from the three non-collinear points $A(0, 1)$, $B(0, -1)$, and $C(1, 0)$. In the Euclidean plane, there is exactly one point equidistant from three non-collinear points, which is the circumcentre of triangle $ABC$. Thus $n(S) = 1$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q12",
+                            "type": "single_correct",
+                            "questionText": "Four distinct points $(2k, 3k)$, $(1, 0)$, $(0, 1)$ and $(0, 0)$ lie on a circle for $k$ equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\frac{2}{13}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{3}{13}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\frac{5}{13}$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\frac{1}{13}$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "The circle passing through $(0, 0)$, $(1, 0)$, and $(0, 1)$ is $x(x-1) + y(y-1) = 0 \\implies x^2 + y^2 - x - y = 0$. Substituting $(2k, 3k)$: $(2k)^2 + (3k)^2 - 2k - 3k = 0 \\implies 13k^2 - 5k = 0$. Since the points are distinct, $k \\neq 0$, so $k = \\frac{5}{13}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q13",
+                            "type": "single_correct",
+                            "questionText": "Consider the function $f(x) = \\begin{cases} \\frac{a(7x - 12 - x^2)}{b|x^2 - 7x + 12|}, & x < 3 \\\\ 2^{\\frac{\\sin(x-3)}{x - [x]}}, & x > 3 \\\\ b, & x = 3 \\end{cases}$ where $[x]$ denotes the greatest integer less than or equal to $x$. If $S$ denotes the set of all ordered pairs $(a, b)$ such that $f(x)$ is continuous at $x = 3$, then the number of elements in $S$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "2",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Infinitely many",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "4",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "1",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "For $x < 3$: $x^2 - 7x + 12 = (x-3)(x-4) > 0$, so $|x^2 - 7x + 12| = x^2 - 7x + 12 = -(7x - 12 - x^2)$. Thus $\\lim_{x \\to 3^-} f(x) = -\\frac{a}{b}$. For $x > 3$: near 3, $[x] = 3$, so $\\lim_{x \\to 3^+} f(x) = 2^{\\lim_{x \\to 3} \\frac{\\sin(x-3)}{x-3}} = 2^1 = 2$. For continuity, $f(3) = b = 2$ and $-\\frac{a}{b} = 2 \\implies a = -4$. Hence $(a, b) = (-4, 2)$ is the unique pair, so $n(S) = 1$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q14",
+                            "type": "single_correct",
+                            "questionText": "Let $a_1, a_2, \\ldots, a_{10}$ be 10 observations such that $\\sum_{k=1}^{10} a_k = 50$ and $\\sum_{j < k} a_j a_k = 1100$. Then the standard deviation of $a_1, a_2, \\ldots, a_{10}$ is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "5",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\sqrt{5}$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "10",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\sqrt{115}$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "$\\left(\\sum_{k=1}^{10} a_k\\right)^2 = \\sum a_k^2 + 2 \\sum_{j<k} a_j a_k \\implies 50^2 = \\sum a_k^2 + 2(1100) \\implies \\sum a_k^2 = 2500 - 2200 = 300$. The variance is $\\sigma^2 = \\frac{\\sum a_k^2}{10} - \\left(\\frac{\\sum a_k}{10}\\right)^2 = \\frac{300}{10} - \\left(\\frac{50}{10}\\right)^2 = 30 - 25 = 5$. Thus standard deviation $\\sigma = \\sqrt{5}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q15",
+                            "type": "single_correct",
+                            "questionText": "The length of the chord of the ellipse $\\frac{x^2}{25} + \\frac{y^2}{16} = 1$, whose mid point is $\\left(1, \\frac{2}{5}\\right)$, is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\frac{\\sqrt{1691}}{5}$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{\\sqrt{2009}}{5}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\frac{\\sqrt{1741}}{5}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\frac{\\sqrt{1541}}{5}$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Equation of chord with midpoint $(1, 2/5)$ is $T = S_1 \\implies \\frac{x(1)}{25} + \\frac{y(2/5)}{16} = \\frac{1}{25} + \\frac{(2/5)^2}{16} \\implies \\frac{x}{25} + \\frac{y}{40} = \\frac{1}{20} \\implies 8x + 5y = 10 \\implies y = \\frac{10-8x}{5}$. Substituting into ellipse yields $4x^2 - 8x - 15 = 0$, giving $x = 1 \\pm \\frac{\\sqrt{19}}{2}$. Length $L = |x_2 - x_1|\\sqrt{1 + m^2} = \\sqrt{19}\\sqrt{1 + \\frac{64}{25}} = \\frac{\\sqrt{19 \\times 89}}{5} = \\frac{\\sqrt{1691}}{5}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q16",
+                            "type": "single_correct",
+                            "questionText": "The portion of the line $4x + 5y = 20$ in the first quadrant is trisected by the lines $L_1$ and $L_2$ passing through the origin. The tangent of an angle between the lines $L_1$ and $L_2$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\frac{8}{5}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{25}{41}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\frac{2}{5}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\frac{30}{41}$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Intercepts of $4x + 5y = 20$ are $(5, 0)$ and $(0, 4)$. Points of trisection are $A(10/3, 4/3)$ and $B(5/3, 8/3)$. Slopes of $OA$ and $OB$ are $m_1 = \\frac{4/3}{10/3} = \\frac{2}{5}$ and $m_2 = \\frac{8/3}{5/3} = \\frac{8}{5}$. Then $\\tan\\theta = \\left|\\frac{m_2 - m_1}{1 + m_1 m_2}\\right| = \\frac{8/5 - 2/5}{1 + 16/25} = \\frac{6/5}{41/25} = \\frac{30}{41}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q17",
+                            "type": "single_correct",
+                            "questionText": "Let $\\vec{a} = \\hat{i} + 2\\hat{j} + \\hat{k}$, $\\vec{b} = 3(\\hat{i} - \\hat{j} + \\hat{k})$. Let $\\vec{c}$ be the vector such that $\\vec{a} \\times \\vec{c} = \\vec{b}$ and $\\vec{a} \\cdot \\vec{c} = 3$. Then $\\vec{a} \\cdot ((\\vec{c} \\times \\vec{b}) - \\vec{b} - \\vec{c})$ is equal to :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "32",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "24",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "20",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "36",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Expanding the expression: $\\vec{a} \\cdot (\\vec{c} \\times \\vec{b}) - \\vec{a} \\cdot \\vec{b} - \\vec{a} \\cdot \\vec{c} = [\\vec{a}\\ \\vec{c}\\ \\vec{b}] - (\\vec{a} \\cdot \\vec{b}) - (\\vec{a} \\cdot \\vec{c})$. Since $\\vec{a} \\times \\vec{c} = \\vec{b}$, we have $[\\vec{a}\\ \\vec{c}\\ \\vec{b}] = (\\vec{a} \\times \\vec{c}) \\cdot \\vec{b} = |\\vec{b}|^2 = 9(1+1+1) = 27$. Also $\\vec{a} \\cdot \\vec{b} = 3 - 6 + 3 = 0$, and $\\vec{a} \\cdot \\vec{c} = 3$. Thus the value is $27 - 0 - 3 = 24$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q18",
+                            "type": "single_correct",
+                            "questionText": "If $a = \\lim_{x \\to 0} \\frac{\\sqrt[4]{1 + \\sqrt{1 + x^4}} - \\sqrt{2}}{x^4}$ and $b = \\lim_{x \\to 0} \\frac{\\sin^2 x}{\\sqrt{2} - \\sqrt{1 + \\cos x}}$, then the value of $ab^3$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "36",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "32",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "25",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "30",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Let $t = x^4$. $a = \\lim_{t \\to 0} \\frac{(1 + \\sqrt{1+t})^{1/4} - 2^{1/4}}{t} = \\frac{d}{dt}\\left[(1+\\sqrt{1+t})^{1/4}\\right]_{t=0} = \\frac{1}{4}(2)^{-3/4} \\cdot \\frac{1}{2} = \\frac{1}{8 \\cdot 2^{3/4}}$. For $b$: rationalising gives $\\lim_{x \\to 0} \\frac{\\sin^2 x (\\sqrt{2} + \\sqrt{1+\\cos x})}{1 - \\cos x} = \\lim_{x \\to 0} (1 + \\cos x)(\\sqrt{2} + \\sqrt{1+\\cos x}) = (2)(2\\sqrt{2}) = 4\\sqrt{2} = 2^{5/2}$. Then $ab^3 = \\frac{1}{2^{15/4}} \\times (2^{5/2})^3 = \\frac{2^{15/2}}{2^{15/4}} = 32$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q19",
+                            "type": "single_correct",
+                            "questionText": "Consider the matrix $f(x) = \\begin{bmatrix} \\cos x & -\\sin x & 0 \\\\ \\sin x & \\cos x & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$. Given below are two statements :\nStatement I: $f(-x)$ is the inverse of the matrix $f(x)$.\nStatement II: $f(x) f(y) = f(x + y)$.\nIn the light of the above statements, choose the correct answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Statement I is false but Statement II is true",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Both Statement I and Statement II are false",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Statement I is true but Statement II is false",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Both Statement I and Statement II are true",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "By matrix multiplication of rotation matrices: $f(x)f(y) = \\begin{bmatrix} \\cos x\\cos y - \\sin x\\sin y & -(\\sin x\\cos y + \\cos x\\sin y) & 0 \\\\ \\sin x\\cos y + \\cos x\\sin y & \\cos x\\cos y - \\sin x\\sin y & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} = f(x+y)$, so Statement II is true. Therefore $f(x)f(-x) = f(0) = I$, meaning $f(-x) = [f(x)]^{-1}$, so Statement I is also true.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q20",
+                            "type": "single_correct",
+                            "questionText": "The function $f : \\mathbb{N} \\setminus \\{1\\} \\to \\mathbb{N}$; defined by $f(n) = \\text{the highest prime factor of } n$, is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "both one-one and onto",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "one-one only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "onto only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "neither one-one nor onto",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Since $f(2) = 2$ and $f(4) = 2$, $f$ is not one-one. Also, the image of $f$ consists only of prime numbers, so composite numbers like 4 or 6 are never attained, hence $f$ is not onto. Therefore, $f$ is neither one-one nor onto.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                },
+                {
+                    "id": "math_sec_b",
+                    "name": "Section-B",
+                    "questions": [
+                        {
+                            "id": "math_q21",
+                            "type": "numerical",
+                            "questionText": "The least positive integral value of $\\alpha$, for which the angle between the vectors $\\alpha\\hat{i} - 2\\hat{j} + 2\\hat{k}$ and $\\alpha\\hat{i} + 2\\alpha\\hat{j} - 2\\hat{k}$ is acute, is _____.",
+                            "hasImage": false,
+                            "answer": 5,
+                            "explanation": "For the angle to be acute, the dot product must be positive: $(\\alpha\\hat{i} - 2\\hat{j} + 2\\hat{k}) \\cdot (\\alpha\\hat{i} + 2\\alpha\\hat{j} - 2\\hat{k}) > 0 \\implies \\alpha^2 - 4\\alpha - 4 > 0 \\implies (\\alpha - 2)^2 > 8 \\implies \\alpha > 2 + 2\\sqrt{2} \\approx 4.828$ (or $\\alpha < 2 - 2\\sqrt{2}$). The least positive integer is 5.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q22",
+                            "type": "numerical",
+                            "questionText": "Let for a differentiable function $f : (0, \\infty) \\to \\mathbb{R}$, $f(x) - f(y) \\ge \\log_e\\left(\\frac{x}{y}\\right) + x - y$, $\\forall x, y \\in (0, \\infty)$. Then $\\sum_{n=1}^{20} f'\\left(\\frac{1}{n^2}\\right)$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 2890,
+                            "explanation": "Rewriting: $\\frac{f(x)-f(y)}{x-y} \\ge \\frac{\\ln x - \\ln y}{x-y} + 1$ for $x > y$ and $\\le$ for $x < y$. Taking the limit as $y \\to x$ gives $f'(x) = \\frac{1}{x} + 1$. Thus $f'\\left(\\frac{1}{n^2}\\right) = n^2 + 1$. The sum is $\\sum_{n=1}^{20} (n^2 + 1) = \\frac{20 \\times 21 \\times 41}{6} + 20 = 2870 + 20 = 2890$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q23",
+                            "type": "numerical",
+                            "questionText": "If the solution of the differential equation $(2x + 3y - 2)\\,dx + (4x + 6y - 7)\\,dy = 0$, $y(0) = 3$, is $\\alpha x + \\beta y + 3 \\log_e |2x + 3y - \\gamma| = 6$, then $\\alpha + 2\\beta + 3\\gamma$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 29,
+                            "explanation": "Let $2x + 3y - 2 = t \\implies 2 + 3\\frac{dy}{dx} = \\frac{dt}{dx}$. Then $\\frac{dy}{dx} = -\\frac{t}{2t - 3} \\implies \\frac{dt}{dx} = 2 - \\frac{3t}{2t-3} = \\frac{t-6}{2t-3}$. Integrating $\\frac{2t-3}{t-6}\\,dt = dx \\implies 2t + 9\\ln|t-6| = x + C$. Substituting $t = 2x + 3y - 2$ gives $3x + 6y + 9\\ln|2x + 3y - 8| = C + 4$. Dividing by 3: $x + 2y + 3\\ln|2x + 3y - 8| = \\frac{C+4}{3}$. Using $y(0) = 3$ gives $\\frac{C+4}{3} = 6$. Comparing with $\\alpha x + \\beta y + 3\\ln|2x + 3y - \\gamma| = 6$: $\\alpha = 1, \\beta = 2, \\gamma = 8$. Thus $\\alpha + 2\\beta + 3\\gamma = 1 + 2(2) + 3(8) = 29$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q24",
+                            "type": "numerical",
+                            "questionText": "Let the area of the region $\\{(x, y) : x - 2y + 4 \\ge 0,\\, x + 2y^2 > 0,\\, x + 4y^2 \\le 8,\\, y \\ge 0\\}$ be $\\frac{m}{n}$, where $m$ and $n$ are coprime numbers. Then $m + n$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 119,
+                            "explanation": "Integrating with respect to $y$: For $0 \\le y \\le 1$, curves are $x = -2y^2$ to $x = 8 - 4y^2$, giving area $\\int_0^1 (8 - 2y^2)\\,dy = 8 - 2/3 = 22/3$. For $1 \\le y \\le 3/2$, curves are $x = 2y - 4$ to $x = 8 - 4y^2$, giving area $\\int_1^{3/2} (12 - 2y - 4y^2)\\,dy = 19/12$. Total area $= \\frac{22}{3} + \\frac{19}{12} = \\frac{107}{12}$. Since $\\gcd(107, 12) = 1$, $m + n = 107 + 12 = 119$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q25",
+                            "type": "numerical",
+                            "questionText": "If $8 = 3 + \\frac{1}{4}(3 + p) + \\frac{1}{4^2}(3 + 2p) + \\frac{1}{4^3}(3 + 3p) + \\ldots$, then the value of $p$ is _____.",
+                            "hasImage": false,
+                            "answer": 9,
+                            "explanation": "Sum of an infinite AGP with $a = 3$, $d = p$, $r = 1/4$ is $S = \\frac{a}{1-r} + \\frac{dr}{(1-r)^2} = \\frac{3}{3/4} + \\frac{p/4}{(3/4)^2} = 4 + \\frac{4p}{9}$. Setting $4 + \\frac{4p}{9} = 8 \\implies \\frac{4p}{9} = 4 \\implies p = 9$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q26",
+                            "type": "numerical",
+                            "questionText": "A fair die is tossed repeatedly until a six is obtained. Let $X$ denote the number of tosses required and let $a = P(X = 3)$, $b = P(X \\ge 3)$ and $c = P(X \\ge 6 \\mid X > 3)$. Then $\\frac{b + c}{a}$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 12,
+                            "explanation": "$X \\sim \\text{Geometric}(1/6)$. $a = P(X = 3) = (5/6)^2 (1/6) = \\frac{25}{216}$. $b = P(X \\ge 3) = (5/6)^2 = \\frac{25}{36}$. By memorylessness, $c = P(X \\ge 6 \\mid X > 3) = P(X \\ge 3) = \\frac{25}{36}$. Then $b + c = \\frac{50}{36} = \\frac{25}{18}$. Hence $\\frac{b + c}{a} = \\frac{25/18}{25/216} = \\frac{216}{18} = 12$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q27",
+                            "type": "numerical",
+                            "questionText": "Let the set of all $a \\in \\mathbb{R}$ such that the equation $\\cos 2x + a\\sin x = 2a - 7$ has a solution be $[p, q]$ and $r = \\tan 9^\\circ - \\tan 27^\\circ - \\cot 63^\\circ + \\tan 81^\\circ$, then $pqr$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 48,
+                            "explanation": "Equation: $1 - 2\\sin^2 x + a\\sin x = 2a - 7 \\implies 2\\sin^2 x - a\\sin x + 2a - 8 = 0 \\implies (\\sin x - 2)(2\\sin x - a + 4) = 0$. Since $\\sin x \\le 1$, $\\sin x = \\frac{a-4}{2} \\implies -1 \\le \\frac{a-4}{2} \\le 1 \\implies 2 \\le a \\le 6$. Thus $p = 2, q = 6$. For $r$: $\\tan 81^\\circ = \\cot 9^\\circ$ and $\\cot 63^\\circ = \\tan 27^\\circ$. $r = (\\tan 9^\\circ + \\cot 9^\\circ) - (\\tan 27^\\circ + \\cot 27^\\circ) = \\frac{2}{\\sin 18^\\circ} - \\frac{2}{\\sin 54^\\circ} = 4$. Then $pqr = 2 \\times 6 \\times 4 = 48$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q28",
+                            "type": "numerical",
+                            "questionText": "Let $f(x) = x^3 + x^2 f'(1) + x f''(2) + f'''(3)$, $x \\in \\mathbb{R}$. Then $f'(10)$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 202,
+                            "explanation": "$f'(x) = 3x^2 + 2x f'(1) + f''(2)$, $f''(x) = 6x + 2f'(1)$, $f'''(x) = 6$. Thus $f'''(3) = 6$. At $x = 2$, $f''(2) = 12 + 2f'(1)$. At $x = 1$, $f'(1) = 3 + 2f'(1) + f''(2) = 15 + 4f'(1) \\implies f'(1) = -5$. Then $f''(2) = 12 + 2(-5) = 2$. Thus $f'(x) = 3x^2 - 10x + 2$. At $x = 10$: $f'(10) = 3(100) - 10(10) + 2 = 202$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q29",
+                            "type": "numerical",
+                            "questionText": "Let $A = \\begin{bmatrix} 2 & 0 & 1 \\\\ 1 & 1 & 0 \\\\ 1 & 0 & 1 \\end{bmatrix}$, $B = [B_1\\; B_2\\; B_3]$, where $B_1, B_2, B_3$ are column matrices, and $AB_1 = \\begin{bmatrix} 1 \\\\ 0 \\\\ 0 \\end{bmatrix}$, $AB_2 = \\begin{bmatrix} 2 \\\\ 3 \\\\ 0 \\end{bmatrix}$, $AB_3 = \\begin{bmatrix} 3 \\\\ 2 \\\\ 1 \\end{bmatrix}$. If $\\alpha = |B|$ and $\\beta$ is the sum of all the diagonal elements of $B$, then $\\alpha^3 + \\beta^3$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 28,
+                            "explanation": "$AB = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 3 & 2 \\\\ 0 & 0 & 1 \\end{bmatrix}$. Taking determinant: $|A||B| = 3$. Determinant $|A| = 2(1) - 0 + 1(-1) = 1$, so $|B| = \\alpha = 3$. Inverting $A$: $A^{-1} = \\begin{bmatrix} 1 & 0 & -1 \\\\ -1 & 1 & 1 \\\\ -1 & 0 & 2 \\end{bmatrix}$. Then $B = A^{-1}(AB) = \\begin{bmatrix} 1 & 2 & 2 \\\\ -1 & 1 & 0 \\\\ -1 & -2 & -1 \\end{bmatrix}$. The diagonal elements are $1, 1, -1$, so $\\beta = 1$. Thus $\\alpha^3 + \\beta^3 = 3^3 + 1^3 = 28$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "math_q30",
+                            "type": "numerical",
+                            "questionText": "If $\\alpha$ satisfies the equation $x^2 + x + 1 = 0$ and $(1 + \\alpha)^7 = A + B\\alpha + C\\alpha^2$, $A, B, C \\ge 0$, then $5(3A - 2B - C)$ is equal to _____.",
+                            "hasImage": false,
+                            "answer": 5,
+                            "explanation": "Roots of $x^2 + x + 1 = 0$ are $\\omega, \\omega^2$. Let $\\alpha = \\omega$. Then $1 + \\alpha = 1 + \\omega = -\\omega^2$. $(1 + \\alpha)^7 = (-\\omega^2)^7 = -\\omega^{14} = -\\omega^2 = 1 + \\omega = 1 + \\alpha$. Thus $A = 1, B = 1, C = 0$. Then $5(3A - 2B - C) = 5(3(1) - 2(1) - 0) = 5(1) = 5$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "physics",
+            "name": "Physics",
+            "subsections": [
+                {
+                    "id": "phys_sec_a",
+                    "name": "Section-A",
+                    "questions": [
+                        {
+                            "id": "phys_q1",
+                            "type": "single_correct",
+                            "questionText": "Position of an ant ($S$ in metres) moving in Y-Z plane is given by $S = 2t^2\\hat{j} + 5\\hat{k}$ (where $t$ is in second). The magnitude and direction of velocity of the ant at $t = 1$ s will be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "16 m/s in y-direction",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "4 m/s in x-direction",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "9 m/s in z-direction",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "4 m/s in y-direction",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Velocity is $\\vec{v} = \\frac{d\\vec{S}}{dt} = \\frac{d}{dt}(2t^2\\hat{j} + 5\\hat{k}) = 4t\\hat{j}$. At $t = 1$ s, $\\vec{v} = 4\\hat{j}$ m/s. The magnitude is 4 m/s and the direction is along the y-direction.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q2",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements :\nStatement (I) : Viscosity of gases is greater than that of liquids.\nStatement (II) : Surface tension of a liquid decreases due to the presence of insoluble impurities.\nIn the light of the above statements, choose the most appropriate answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Statement I is correct but Statement II is incorrect",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Statement I is incorrect but Statement II is correct",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Both Statement I and Statement II are incorrect",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Both Statement I and Statement II are correct",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Statement I is incorrect because liquids have significantly higher viscosity than gases due to strong cohesive forces. Statement II is correct because impurities, especially insoluble or sparingly soluble substances (like oil or detergent), decrease surface tension.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q3",
+                            "type": "single_correct",
+                            "questionText": "If the refractive index of the material of a prism is $\\cot\\left(\\frac{A}{2}\\right)$, where $A$ is the angle of prism, then the angle of minimum deviation will be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\pi - 2A$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{\\pi}{2} - 2A$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\pi - A$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\frac{\\pi}{2} - A$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Refractive index $\\mu = \\frac{\\sin\\left(\\frac{A + \\delta_m}{2}\\right)}{\\sin(A/2)} = \\cot(A/2) = \\frac{\\cos(A/2)}{\\sin(A/2)} = \\frac{\\sin(\\pi/2 - A/2)}{\\sin(A/2)}$. Equating arguments: $\\frac{A + \\delta_m}{2} = \\frac{\\pi}{2} - \\frac{A}{2} \\implies A + \\delta_m = \\pi - A \\implies \\delta_m = \\pi - 2A$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q4",
+                            "type": "single_correct",
+                            "questionText": "A proton moving with a constant velocity passes through a region of space without any change in its velocity. If $\\vec{E}$ and $\\vec{B}$ represent the electric and magnetic fields respectively, then the region of space may have :\n(A) $E = 0, B = 0$\n(B) $E = 0, B \\neq 0$\n(C) $E \\neq 0, B = 0$\n(D) $E \\neq 0, B \\neq 0$\nChoose the most appropriate answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "(A), (B) and (C) only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "(A), (C) and (D) only",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "(A), (B) and (D) only",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "(B), (C) and (D) only",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Lorentz force is $\\vec{F} = q(\\vec{E} + \\vec{v} \\times \\vec{B}) = 0$. (A) If $E=0, B=0$, $\\vec{F}=0$. (B) If $E=0, B \\neq 0$, if $\\vec{v}$ is parallel to $\\vec{B}$, then $\\vec{v} \\times \\vec{B} = 0$, so $\\vec{F}=0$. (C) If $E \\neq 0, B = 0$, $\\vec{F} = q\\vec{E} \\neq 0$, impossible. (D) If $E \\neq 0, B \\neq 0$, the electric and magnetic forces can balance ($q\\vec{E} = -q(\\vec{v} \\times \\vec{B})$). Thus (A), (B), and (D) are possible.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q5",
+                            "type": "single_correct",
+                            "questionText": "The acceleration due to gravity on the surface of earth is $g$. If the diameter of earth reduces to half of its original value and mass remains constant, then acceleration due to gravity on the surface of earth would be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$g/4$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$2g$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$g/2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$4g$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "$g = \\frac{GM}{R^2}$. If the diameter reduces to half, radius becomes $R/2$. Then $g' = \\frac{GM}{(R/2)^2} = 4\\frac{GM}{R^2} = 4g$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q6",
+                            "type": "single_correct",
+                            "questionText": "A train is moving with a speed of 12 m/s on rails which are 1.5 m apart. To negotiate a curve radius 400 m, the height by which the outer rail should be raised with respect to the inner rail is (Given, $g = 10\\ \\text{m/s}^2$) :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "6.0 cm",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "5.4 cm",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "4.8 cm",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "4.2 cm",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Banking angle: $\\tan\\theta = \\frac{v^2}{Rg} = \\frac{12^2}{400 \\times 10} = \\frac{144}{4000} = 0.036$. Also $\\tan\\theta \\approx \\sin\\theta = \\frac{h}{l} = \\frac{h}{1.5}$. Thus $h = 1.5 \\times 0.036 = 0.054\\ \\text{m} = 5.4\\ \\text{cm}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q7",
+                            "type": "single_correct",
+                            "questionText": "Which of the following circuits is reverse - biased ?",
+                            "hasImage": true,
+                            "imageName": "img/phys_q7.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Circuit (1)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Circuit (2)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Circuit (3)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Circuit (4)",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "A p-n junction diode is reverse-biased when the p-side is at a lower electric potential than the n-side. In circuit (4), the p-side is connected to $-10\\ \\text{V}$ and the n-side is connected to ground ($0\\ \\text{V}$), so $V_p < V_n$, making it reverse-biased.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q8",
+                            "type": "single_correct",
+                            "questionText": "Identify the physical quantity that cannot be measured using spherometer :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Radius of curvature of concave surface",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Specific rotation of liquids",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Thickness of thin plates",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Radius of curvature of convex surface",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "A spherometer is used to measure the radius of curvature of spherical surfaces (both concave and convex) and the thickness of thin plates/sheets. Specific rotation of liquids is an optical property measured using a polarimeter.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q9",
+                            "type": "single_correct",
+                            "questionText": "Two bodies of mass 4 g and 25 g are moving with equal kinetic energies. The ratio of magnitude of their linear momentum is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "3 : 5",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "5 : 4",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "2 : 5",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "4 : 5",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "$K = \\frac{p^2}{2m} \\implies p = \\sqrt{2mK}$. Since kinetic energies are equal, $\\frac{p_1}{p_2} = \\sqrt{\\frac{m_1}{m_2}} = \\sqrt{\\frac{4}{25}} = \\frac{2}{5}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q10",
+                            "type": "single_correct",
+                            "questionText": "0.08 kg air is heated at constant volume through 5°C. The specific heat of air at constant volume is $0.17\\ \\text{kcal/kg}^\\circ\\text{C}$ and $J = 4.18\\ \\text{joule/cal}$. The change in its internal energy is approximately :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "318 J",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "298 J",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "284 J",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "142 J",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "At constant volume, $W = 0$, so $\\Delta U = Q = m c_v \\Delta T = 0.08 \\times (0.17 \\times 10^3 \\times 4.18) \\times 5 = 0.08 \\times 710.6 \\times 5 \\approx 284\\ \\text{J}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q11",
+                            "type": "single_correct",
+                            "questionText": "The radius of third stationary orbit of electron for Bohr's atom is $R$. The radius of fourth stationary orbit will be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\frac{4}{3}R$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{16}{9}R$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\frac{3}{4}R$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\frac{9}{16}R$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Bohr radius $r_n \\propto n^2$. Thus $\\frac{r_4}{r_3} = \\frac{4^2}{3^2} = \\frac{16}{9} \\implies r_4 = \\frac{16}{9}R$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q12",
+                            "type": "single_correct",
+                            "questionText": "A rectangular loop of length 2.5 m and width 2 m is placed at 60° to a magnetic field of 4 T. The loop is removed from the field in 10 sec. The average emf induced in the loop during this time is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "– 2V",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "+ 2V",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "+ 1V",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "– 1V",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Initial flux $\\Phi_i = B A \\cos(90^\\circ - 60^\\circ)$ or $B A \\cos 60^\\circ = 4 \\times (2.5 \\times 2) \\times \\cos 60^\\circ = 4 \\times 5 \\times 0.5 = 10\\ \\text{Wb}$. Final flux $\\Phi_f = 0$. Magnitude of average emf $= -\\frac{\\Delta\\Phi}{\\Delta t} = -\\frac{0 - 10}{10} = +1\\ \\text{V}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q13",
+                            "type": "single_correct",
+                            "questionText": "An electric charge $10^{-6}\\ \\mu\\text{C}$ is placed at origin $(0, 0)$ m of X-Y co-ordinate system. Two points $P$ and $Q$ are situated at $(\\sqrt{3}, \\sqrt{3})$ m and $(\\sqrt{6}, 0)$ m respectively. The potential difference between the points $P$ and $Q$ will be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "3V",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "6V",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "0 V",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\sqrt{3}$ V",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Distance of $P$ from origin: $r_P = \\sqrt{(\\sqrt{3})^2 + (\\sqrt{3})^2} = \\sqrt{3 + 3} = \\sqrt{6}$ m. Distance of $Q$ from origin: $r_Q = \\sqrt{(\\sqrt{6})^2 + 0^2} = \\sqrt{6}$ m. Since $r_P = r_Q$, the potentials $V_P = \\frac{kq}{r_P} = \\frac{kq}{r_Q} = V_Q$. Therefore, the potential difference $V_P - V_Q = 0$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q14",
+                            "type": "single_correct",
+                            "questionText": "A convex lens of focal length 40 cm forms an image of an extended source of light on a photo-electric cell. A current $I$ is produced. The lens is replaced by another convex lens having the same diameter but focal length 20 cm. The photoelectric current now is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$I/2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$4I$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$2I$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$I$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Photoelectric current depends on the total luminous energy incident per second on the photosensitive surface. Since the aperture (diameter) of the lens is unchanged, the total light energy collected and focused onto the photocell remains constant. Thus, the photoelectric current remains $I$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q15",
+                            "type": "single_correct",
+                            "questionText": "A body of mass 1000 kg is moving horizontally with a velocity 6 m/s. If 200 kg extra mass is added, the final velocity (in m/s) is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "6",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "2",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "3",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "5",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "By conservation of linear momentum: $m_1 v_1 = (m_1 + m_2) v_2 \\implies 1000 \\times 6 = (1000 + 200) \\times v_2 \\implies 6000 = 1200 v_2 \\implies v_2 = 5\\ \\text{m/s}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q16",
+                            "type": "single_correct",
+                            "questionText": "A plane electromagnetic wave propagating in x-direction is described by $E_y = (200\\ \\text{V m}^{-1}) \\sin[1.5 \\times 10^7 t - 0.05 x]$. The intensity of the wave is : (Use $\\varepsilon_0 = 8.85 \\times 10^{-12}\\ \\text{C}^2\\text{N}^{-1}\\text{m}^{-2}$)",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$35.4\\ \\text{W m}^{-2}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$53.1\\ \\text{W m}^{-2}$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$26.6\\ \\text{W m}^{-2}$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$106.2\\ \\text{W m}^{-2}$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Wave speed $c = \\frac{\\omega}{k} = \\frac{1.5 \\times 10^7}{0.05} = 3 \\times 10^8\\ \\text{m/s}$. Intensity $I = \\frac{1}{2} \\varepsilon_0 E_0^2 c = \\frac{1}{2} (8.85 \\times 10^{-12}) \\times (200)^2 \\times (3 \\times 10^8) = \\frac{1}{2} (8.85 \\times 10^{-12}) \\times (4 \\times 10^4) \\times (3 \\times 10^8) = 53.1\\ \\text{W/m}^2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q17",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements :\nStatement (I) : Planck's constant and angular momentum have same dimensions.\nStatement (II) : Linear momentum and moment of force have same dimensions.\nIn the light of the above statements, choose the correct answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Statement I is true but Statement II is false",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Both Statement I and Statement II are false",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Both Statement I and Statement II are true",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Statement I is false but Statement II is true",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Dimensions of Planck's constant $h$: $[E/\\nu] = [\\text{M L}^2 \\text{T}^{-1}]$. Dimensions of angular momentum $L = mvr$: $[\\text{M L}^2 \\text{T}^{-1}]$. So Statement I is true. Dimensions of linear momentum: $[\\text{M L T}^{-1}]$. Dimensions of moment of force (torque): $[\\text{M L}^2 \\text{T}^{-2}]$. They are not equal, so Statement II is false.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q18",
+                            "type": "single_correct",
+                            "questionText": "A wire of length 10 cm and radius $\\sqrt{7} \\times 10^{-4}\\ \\text{m}$ connected across the right gap of a meter bridge. When a resistance of $4.5\\ \\Omega$ is connected on the left gap by using a resistance box, the balance length is found to be at 60 cm from the left end. If the resistivity of the wire is $R \\times 10^{-7}\\ \\Omega\\text{m}$, then value of $R$ is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "63",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "70",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "66",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "35",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "By meter bridge principle: $\\frac{4.5}{X} = \\frac{60}{40} = \\frac{3}{2} \\implies X = 3.0\\ \\Omega$. Resistance $X = \\frac{\\rho l}{A} = \\frac{\\rho l}{\\pi r^2} \\implies \\rho = \\frac{X \\pi r^2}{l} = \\frac{3.0 \\times \\frac{22}{7} \\times (7 \\times 10^{-8})}{0.1} = \\frac{3.0 \\times 22 \\times 10^{-8}}{0.1} = 66 \\times 10^{-7}\\ \\Omega\\text{m}$. Hence $R = 66$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q19",
+                            "type": "single_correct",
+                            "questionText": "A wire of resistance $R$ and length $L$ is cut into 5 equal parts. If these parts are joined parallely, then resultant resistance will be :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\frac{1}{25}R$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\frac{1}{5}R$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "25 R",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "5 R",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Resistance of each part is $R' = R/5$. When 5 such resistors are connected in parallel, $R_p = \\frac{R'}{5} = \\frac{R/5}{5} = \\frac{R}{25}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q20",
+                            "type": "single_correct",
+                            "questionText": "The average kinetic energy of a monatomic molecule is 0.414 eV at temperature : (Use $k_B = 1.38 \\times 10^{-23}\\ \\text{J/K}$)",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "3000 K",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "3200 K",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "1600 K",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "1500 K",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "For a monatomic molecule with 3 degrees of freedom: $E_k = \\frac{3}{2} k_B T \\implies T = \\frac{2 E_k}{3 k_B} = \\frac{2 \\times (0.414 \\times 1.6 \\times 10^{-19})}{3 \\times 1.38 \\times 10^{-23}} = \\frac{1.3248 \\times 10^{-19}}{4.14 \\times 10^{-23}} = 3200\\ \\text{K}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                },
+                {
+                    "id": "phys_sec_b",
+                    "name": "Section-B",
+                    "questions": [
+                        {
+                            "id": "phys_q21",
+                            "type": "numerical",
+                            "questionText": "A particle starts from origin at $t = 0$ with a velocity $5\\hat{i}\\ \\text{m/s}$ and moves in x-y plane under action of a force which produces a constant acceleration of $(3\\hat{i} + 2\\hat{j})\\ \\text{m/s}^2$. If the x-coordinate of the particle at that instant is 84 m, then the speed of the particle at this time is $\\sqrt{\\alpha}\\ \\text{m/s}$. The value of $\\alpha$ is _____.",
+                            "hasImage": false,
+                            "answer": 673,
+                            "explanation": "$x = u_x t + \\frac{1}{2} a_x t^2 \\implies 84 = 5t + \\frac{3}{2}t^2 \\implies 3t^2 + 10t - 168 = 0 \\implies (3t + 28)(t - 6) = 0 \\implies t = 6\\ \\text{s}$. Velocity components at $t = 6\\ \\text{s}$: $v_x = u_x + a_x t = 5 + 3(6) = 23\\ \\text{m/s}$, $v_y = u_y + a_y t = 0 + 2(6) = 12\\ \\text{m/s}$. Speed $v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{23^2 + 12^2} = \\sqrt{529 + 144} = \\sqrt{673}\\ \\text{m/s}$. Thus $\\alpha = 673$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q22",
+                            "type": "numerical",
+                            "questionText": "A thin metallic wire having cross sectional area of $10^{-4}\\ \\text{m}^2$ is used to make a ring of radius 30 cm. A positive charge of $2\\pi\\ \\text{C}$ is uniformly distributed over the ring, while another positive charge of $30\\ \\text{pC}$ is kept at the centre of the ring. The tension in the ring is ______ N ; provided that the ring does not get deformed (neglect the influence of gravity). (given, $\\frac{1}{4\\pi\\varepsilon_0} = 9 \\times 10^9\\ \\text{SI units}$)",
+                            "hasImage": false,
+                            "answer": 3,
+                            "explanation": "Consider a small element subtending angle $d\\theta$ at centre. Charge on element $dq = \\frac{Q}{2\\pi R} R\\,d\\theta = \\frac{Q}{2\\pi}\\,d\\theta = \\frac{2\\pi}{2\\pi}\\,d\\theta = d\\theta$. Radial electrostatic repulsion $dF = \\frac{k q_0 dq}{R^2} = \\frac{(9 \\times 10^9)(30 \\times 10^{-12}) d\\theta}{(0.3)^2} = \\frac{0.27}{0.09} d\\theta = 3\\,d\\theta$. This force is balanced by tension components: $2T \\sin(d\\theta / 2) \\approx T\\,d\\theta = dF = 3\\,d\\theta \\implies T = 3\\ \\text{N}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q23",
+                            "type": "numerical",
+                            "questionText": "Two coils have mutual inductance 0.002 H. The current changes in the first coil according to the relation $i = i_0 \\sin \\omega t$, where $i_0 = 5\\ \\text{A}$ and $\\omega = 50\\pi\\ \\text{rad/s}$. The maximum value of emf in the second coil is $\\frac{\\pi}{\\alpha}\\ \\text{V}$. The value of $\\alpha$ is _____.",
+                            "hasImage": false,
+                            "answer": 2,
+                            "explanation": "$\\varepsilon = -M \\frac{di}{dt} = -M i_0 \\omega \\cos \\omega t$. Maximum emf $\\varepsilon_{\\max} = M i_0 \\omega = (0.002) \\times 5 \\times 50\\pi = 0.5\\pi = \\frac{\\pi}{2}\\ \\text{V}$. Therefore, $\\alpha = 2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q24",
+                            "type": "numerical",
+                            "questionText": "Two immiscible liquids of refractive indices $\\frac{8}{5}$ and $\\frac{3}{2}$ respectively are put in a beaker as shown in the figure. The height of each column is 6 cm. A coin is placed at the bottom of the beaker. For near normal vision, the apparent depth of the coin is $\\frac{\\alpha}{4}\\ \\text{cm}$. The value of $\\alpha$ is _____.",
+                            "hasImage": true,
+                            "imageName": "img/phys_q24.png",
+                            "answer": 31,
+                            "explanation": "Apparent depth $d_{\\text{app}} = \\frac{h_1}{\\mu_1} + \\frac{h_2}{\\mu_2} = \\frac{6}{3/2} + \\frac{6}{8/5} = 4 + \\frac{30}{8} = 4 + \\frac{15}{4} = \\frac{31}{4}\\ \\text{cm}$. Therefore, $\\alpha = 31$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q25",
+                            "type": "numerical",
+                            "questionText": "In a nuclear fission process, a high mass nuclide ($A \\approx 236$) with binding energy 7.6 MeV/Nucleon dissociated into middle mass nuclides ($A \\approx 118$), having binding energy of 8.6 MeV/Nucleon. The energy released in the process would be ____ MeV.",
+                            "hasImage": false,
+                            "answer": 236,
+                            "explanation": "$Q = \\text{BE}_{\\text{products}} - \\text{BE}_{\\text{reactants}} = [2 \\times 118 \\times 8.6] - [236 \\times 7.6] = 236 \\times (8.6 - 7.6) = 236 \\times 1.0 = 236\\ \\text{MeV}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q26",
+                            "type": "numerical",
+                            "questionText": "Four particles each of mass 1 kg are placed at four corners of a square of side 2 m. Moment of inertia of system about an axis perpendicular to its plane and passing through one of its vertex is _____ $\\text{kg m}^2$.",
+                            "hasImage": true,
+                            "imageName": "img/phys_q26.png",
+                            "answer": 16,
+                            "explanation": "Let the axis pass through vertex $A$. Distance of particle at $A$ is 0. Distances of adjacent particles at $B$ and $D$ are $a$. Distance of opposite particle at $C$ is $\\sqrt{2}a$. Moment of inertia $I = m(0)^2 + m(a)^2 + m(a)^2 + m(\\sqrt{2}a)^2 = 4ma^2 = 4 \\times 1 \\times (2)^2 = 16\\ \\text{kg m}^2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q27",
+                            "type": "numerical",
+                            "questionText": "A particle executes simple harmonic motion with an amplitude of 4 cm. At the mean position, velocity of the particle is 10 cm/s. The distance of the particle from the mean position when its speed becomes 5 cm/s is $\\sqrt{\\alpha}\\ \\text{cm}$, where $\\alpha$ = _____.",
+                            "hasImage": false,
+                            "answer": 12,
+                            "explanation": "At mean position: $v_{\\max} = A\\omega \\implies 10 = 4\\omega \\implies \\omega = 2.5\\ \\text{rad/s}$. At displacement $x$: $v = \\omega\\sqrt{A^2 - x^2} \\implies 5 = 2.5\\sqrt{16 - x^2} \\implies 2 = \\sqrt{16 - x^2} \\implies 4 = 16 - x^2 \\implies x^2 = 12 \\implies x = \\sqrt{12}\\ \\text{cm}$. Thus $\\alpha = 12$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q28",
+                            "type": "numerical",
+                            "questionText": "Two long, straight wires carry equal currents of 10 A in opposite directions as shown in figure. The separation between the wires is 5.0 cm. The magnitude of the magnetic field at a point $P$ midway between the wires is ____ $\\mu\\text{T}$. (Given : $\\mu_0 = 4\\pi \\times 10^{-7}\\ \\text{T m A}^{-1}$)",
+                            "hasImage": true,
+                            "imageName": "img/phys_q28.png",
+                            "answer": 160,
+                            "explanation": "At midway point $P$, $d = 2.5\\ \\text{cm} = 2.5 \\times 10^{-2}\\ \\text{m}$. By right-hand grip rule, both opposite currents produce magnetic fields in the same direction at $P$. Total magnetic field $B = 2 \\times \\frac{\\mu_0 i}{2\\pi d} = \\frac{\\mu_0 i}{\\pi d} = \\frac{(4\\pi \\times 10^{-7}) \\times 10}{\\pi \\times (2.5 \\times 10^{-2})} = 160 \\times 10^{-6}\\ \\text{T} = 160\\ \\mu\\text{T}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q29",
+                            "type": "numerical",
+                            "questionText": "The charge accumulated on the capacitor connected in the following circuit is ____ $\\mu\\text{C}$ (Given $C = 150\\ \\mu\\text{F}$).",
+                            "hasImage": true,
+                            "imageName": "img/phys_q29.png",
+                            "answer": 400,
+                            "explanation": "In steady state, no current passes through the capacitor branch. Potential difference across capacitor nodes $A$ and $B$: $V_A - V_B = \\frac{8}{3}\\ \\text{V}$. The charge accumulated $Q = C(V_A - V_B) = 150\\ \\mu\\text{F} \\times \\frac{8}{3}\\ \\text{V} = 400\\ \\mu\\text{C}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "phys_q30",
+                            "type": "numerical",
+                            "questionText": "If average depth of an ocean is 4000 m and the bulk modulus of water is $2 \\times 10^9\\ \\text{N m}^{-2}$, then fractional compression $\\frac{\\Delta V}{V}$ of water at the bottom of ocean is $\\alpha \\times 10^{-2}$. The value of $\\alpha$ is _____ (Given, $g = 10\\ \\text{m s}^{-2}$, $\\rho = 1000\\ \\text{kg m}^{-3}$).",
+                            "hasImage": false,
+                            "answer": 2,
+                            "explanation": "Pressure at depth $h$: $\\Delta P = \\rho g h = 1000 \\times 10 \\times 4000 = 4 \\times 10^7\\ \\text{N/m}^2$. Bulk modulus $B = \\frac{\\Delta P}{\\Delta V / V} \\implies \\frac{\\Delta V}{V} = \\frac{\\Delta P}{B} = \\frac{4 \\times 10^7}{2 \\times 10^9} = 2 \\times 10^{-2}$. Hence $\\alpha = 2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "chem",
+            "name": "Chemistry",
+            "subsections": [
+                {
+                    "id": "chem_sec_a",
+                    "name": "Section-A",
+                    "questions": [
+                        {
+                            "id": "chem_q1",
+                            "type": "single_correct",
+                            "questionText": "Two nucleotides are joined together by a linkage known as :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Phosphodiester linkage",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Glycosidic linkage",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Disulphide linkage",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Peptide linkage",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Nucleotides in nucleic acids (DNA and RNA) are linked together by 3', 5'-phosphodiester linkages between the phosphate group of one nucleotide and the 3'-OH group of the pentose sugar of another.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q2",
+                            "type": "single_correct",
+                            "questionText": "Highest enol content will be shown by :",
+                            "hasImage": true,
+                            "imageName": "img/chem_q2.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Compound (1)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Compound (2)",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Compound (3)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Compound (4)",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Compound (2) upon enolisation forms an aromatic system (phenol-like aromatic enol) with strong resonance stabilization and intramolecular hydrogen bonding, leading to nearly 100% enol content.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q3",
+                            "type": "single_correct",
+                            "questionText": "Element not showing variable oxidation state is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Bromine",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Iodine",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Chlorine",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Fluorine",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Fluorine is the most electronegative element and lacks vacant d-orbitals in its valence shell, so it exhibits only a -1 oxidation state (and 0 in $F_2$) and does not exhibit variable positive oxidation states.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q4",
+                            "type": "single_correct",
+                            "questionText": "Which of the following is strongest Bronsted base?",
+                            "hasImage": true,
+                            "imageName": "img/chem_q4.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Compound (1)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Compound (2)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Compound (3)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Compound (4)",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "In compound (4), the nitrogen is $sp^3$ hybridized with a localized lone pair not involved in resonance with any aromatic ring or carbonyl group, making it the most available for protonation and hence the strongest Bronsted base.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q5",
+                            "type": "single_correct",
+                            "questionText": "Which of the following electronic configuration would be associated with the highest magnetic moment ?",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "[Ar] $3d^7$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "[Ar] $3d^8$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "[Ar] $3d^3$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "[Ar] $3d^6$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Number of unpaired electrons ($n$): for $3d^7$, $n = 3$; for $3d^8$, $n = 2$; for $3d^3$, $n = 3$; for $3d^6$, $n = 4$. Spin-only magnetic moment $\\mu = \\sqrt{n(n+2)}\\ \\text{BM}$. Highest $n = 4$ for $3d^6$, giving $\\mu = \\sqrt{24}\\ \\text{BM}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q6",
+                            "type": "single_correct",
+                            "questionText": "Which of the following has highly acidic hydrogen?",
+                            "hasImage": true,
+                            "imageName": "img/chem_q6.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Compound (1)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Compound (2)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Compound (3)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Compound (4)",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Compound (4) contains an active methylene group flanked by two electron-withdrawing carbonyl groups ($\\beta$-dicarbonyl). Deprotonation produces a carbanion whose negative charge is delocalized over both carbonyl oxygens by resonance.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q7",
+                            "type": "single_correct",
+                            "questionText": "A solution of two miscible liquids showing negative deviation from Raoult's law will have :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "increased vapour pressure, increased boiling point",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "increased vapour pressure, decreased boiling point",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "decreased vapour pressure, decreased boiling point",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "decreased vapour pressure, increased boiling point",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "In negative deviation, intermolecular attractive forces between components ($A-B$) are stronger than $A-A$ and $B-B$. This results in a decreased vapour pressure. Since boiling occurs when vapour pressure equals atmospheric pressure, a lower vapour pressure leads to an increased boiling point.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q8",
+                            "type": "single_correct",
+                            "questionText": "Consider the following complex ions:\n$P = [\\text{FeF}_6]^{3-}$\n$Q = [\\text{V}(\\text{H}_2\\text{O})_6]^{2+}$\n$R = [\\text{Fe}(\\text{H}_2\\text{O})_6]^{2+}$\nThe correct order of the complex ions, according to their spin only magnetic moment values (in B.M.) is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$R < Q < P$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$R < P < Q$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$Q < R < P$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$Q < P < R$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "For $P = [\\text{FeF}_6]^{3-}$: $\\text{Fe}^{3+}$ ($3d^5$), weak ligand $F^-$, $n = 5$ unpaired electrons ($\\mu = \\sqrt{35}\\ \\text{BM}$). For $Q = [\\text{V}(\\text{H}_2\\text{O})_6]^{2+}$: $\\text{V}^{2+}$ ($3d^3$), $n = 3$ unpaired electrons ($\\mu = \\sqrt{15}\\ \\text{BM}$). For $R = [\\text{Fe}(\\text{H}_2\\text{O})_6]^{2+}$: $\\text{Fe}^{2+}$ ($3d^6$), weak ligand $\\text{H}_2\\text{O}$, $n = 4$ unpaired electrons ($\\mu = \\sqrt{24}\\ \\text{BM}$). Hence $Q < R < P$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q9",
+                            "type": "single_correct",
+                            "questionText": "Choose the polar molecule from the following :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\text{CCl}_4$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\text{CO}_2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\text{CH}_2 = \\text{CH}_2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\text{CHCl}_3$",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "$\\text{CCl}_4$ is symmetrical tetrahedral ($\\mu = 0$). $\\text{CO}_2$ is linear ($\\mu = 0$). $\\text{C}_2\\text{H}_4$ is planar symmetrical ($\\mu = 0$). $\\text{CHCl}_3$ has a net dipole moment due to unequal bond dipole vectors ($\\mu \\neq 0$).",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q10",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements :\nStatement (I) : The 4f and 5f - series of elements are placed separately in the Periodic table to preserve the principle of classification.\nStatement (II) : S-block elements can be found in pure form in nature.\nIn the light of the above statements, choose the most appropriate answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Statement I is false but Statement II is true",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Both Statement I and Statement II are true",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Statement I is true but Statement II is false",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Both Statement I and Statement II are false",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Statement I is true: lanthanides (4f) and actinides (5f) are placed at the bottom to maintain symmetry and avoid disrupting the periodic table layout. Statement II is false: s-block elements (alkali and alkaline earth metals) are highly reactive and never occur in free/pure form in nature.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q11",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements :\nStatement (I) : p-nitrophenol is more acidic than m-nitrophenol and o-nitrophenol.\nStatement (II) : Ethanol will give immediate turbidity with Lucas reagent.\nIn the light of the above statements, choose the correct answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Statement I is true but Statement II is false",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Both Statement I and Statement II are true",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Both Statement I and Statement II are false",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Statement I is false but Statement II is true",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Statement I is true: p-nitrophenol has strong -M and -I effects stabilizing the phenoxide ion, and o-nitrophenol has intramolecular hydrogen bonding which reduces acidity compared to p-nitrophenol. Statement II is false: Lucas reagent reacts immediately with tertiary alcohols, while primary alcohols like ethanol do not show turbidity at room temperature.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q12",
+                            "type": "single_correct",
+                            "questionText": "The ascending order of acidity of $-\\text{OH}$ group in the following compounds is :",
+                            "hasImage": true,
+                            "imageName": "img/chem_q12.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "(A) < (D) < (C) < (B) < (E)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "(C) < (A) < (D) < (B) < (E)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "(C) < (D) < (B) < (A) < (E)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "(A) < (C) < (D) < (B) < (E)",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Aliphatic alcohol (A: BuOH) is least acidic. In phenols, electron-donating groups decrease acidity while electron-withdrawing groups increase acidity: (C) with electron-donating alkyl/methoxy is less acidic than phenol (D), which is less acidic than chlorophenol (B), which is less acidic than nitrophenol (E). Hence (A) < (C) < (D) < (B) < (E).",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q13",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements : one is labelled as Assertion (A) and the other is labelled as Reason (R).\nAssertion (A) : Melting point of Boron (2453 K) is unusually high in group 13 elements.\nReason (R) : Solid Boron has very strong crystalline lattice.\nIn the light of the above statements, choose the most appropriate answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Both (A) and (R) are correct but (R) is not the correct explanation of (A)",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Both (A) and (R) are correct and (R) is the correct explanation of (A)",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "(A) is correct but (R) is not correct",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "(A) is not correct but (R) is correct",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Boron has an unusually high melting point because of its very strong covalent polymeric crystalline lattice consisting of $B_{12}$ icosahedral units. Thus Assertion and Reason are both true and Reason is the correct explanation.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q14",
+                            "type": "single_correct",
+                            "questionText": "Cyclohexene is _________ type of an organic compound.",
+                            "hasImage": true,
+                            "imageName": "img/chem_q14.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Benzenoid aromatic",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Benzenoid non-aromatic",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Acyclic",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Alicyclic",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "Cyclohexene is a cyclic hydrocarbon containing a ring of carbon atoms with aliphatic (non-aromatic) characteristics, making it an alicyclic compound.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q15",
+                            "type": "single_correct",
+                            "questionText": "Yellow compound of lead chromate gets dissolved on treatment with hot NaOH solution. The product of lead formed is a :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Tetraanionic complex with coordination number six",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Neutral complex with coordination number four",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Dianionic complex with coordination number six",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Dianionic complex with coordination number four",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "$\\text{PbCrO}_4 + 4\\text{NaOH} \\to \\text{Na}_2[\\text{Pb}(\\text{OH})_4] + \\text{Na}_2\\text{CrO}_4$. The tetrahydroxoplumbate(II) ion $[\\text{Pb}(\\text{OH})_4]^{2-}$ is a dianionic complex with coordination number 4.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q16",
+                            "type": "single_correct",
+                            "questionText": "Given below are two statements :\nStatement (I) : Aqueous solution of ammonium carbonate is basic.\nStatement (II) : Acidic/basic nature of salt solution of a salt of weak acid and weak base depends on $K_a$ and $K_b$ value of acid and the base forming it.\nIn the light of the above statements, choose the most appropriate answer from the options given below :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Both Statement I and Statement II are correct",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Statement I is correct but Statement II is incorrect",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Both Statement I and Statement II are incorrect",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Statement I is incorrect but Statement II is correct",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "For a salt of weak acid and weak base, $\\text{pH} = 7 + \\frac{1}{2}(pK_a - pK_b)$. Since $K_b(\\text{NH}_4\\text{OH}) = 1.8 \\times 10^{-5}$ is greater than $K_{a1}(\\text{H}_2\\text{CO}_3) = 4.3 \\times 10^{-7}$, $pK_a > pK_b$, making the solution basic ($\\text{pH} > 7$). Thus both statements are correct.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q17",
+                            "type": "single_correct",
+                            "questionText": "IUPAC name of following compound (P) is :",
+                            "hasImage": true,
+                            "imageName": "img/chem_q17.png",
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "1-Ethyl-5,5-dimethylcyclohexane",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "3-Ethyl-1,1-dimethylcyclohexane",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "1-Ethyl-3,3-dimethylcyclohexane",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "1,1-Dimethyl-3-ethylcyclohexane",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Numbering starts at the carbon with two methyl substituents to give the lowest locant set $(1, 1, 3)$ rather than $(1, 3, 3)$. Alphabetical priority puts 'ethyl' before 'methyl', giving 3-ethyl-1,1-dimethylcyclohexane.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q18",
+                            "type": "single_correct",
+                            "questionText": "$\\text{NaCl}$ reacts with conc. $\\text{H}_2\\text{SO}_4$ and $\\text{K}_2\\text{Cr}_2\\text{O}_7$ to give reddish fumes (B), which react with $\\text{NaOH}$ to give yellow solution (C). (B) and (C) respectively are :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "$\\text{CrO}_2\\text{Cl}_2$, $\\text{Na}_2\\text{CrO}_4$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "$\\text{Na}_2\\text{CrO}_4$, $\\text{CrO}_2\\text{Cl}_2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "$\\text{CrO}_2\\text{Cl}_2$, $\\text{KHSO}_4$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "$\\text{CrO}_2\\text{Cl}_2$, $\\text{Na}_2\\text{Cr}_2\\text{O}_7$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "In the chromyl chloride test: $4\\text{NaCl} + \\text{K}_2\\text{Cr}_2\\text{O}_7 + 6\\text{H}_2\\text{SO}_4 \\to 2\\text{CrO}_2\\text{Cl}_2\\text{ (red-brown vapours B)} + 2\\text{KHSO}_4 + 4\\text{NaHSO}_4 + 3\\text{H}_2\\text{O}$. Then $\\text{CrO}_2\\text{Cl}_2 + 4\\text{NaOH} \\to \\text{Na}_2\\text{CrO}_4\\text{ (yellow solution C)} + 2\\text{NaCl} + 2\\text{H}_2\\text{O}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q19",
+                            "type": "single_correct",
+                            "questionText": "The correct statement regarding nucleophilic substitution reaction in a chiral alkyl halide is :",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "Retention occurs in $\\text{S}_\\text{N}1$ reaction and inversion occurs in $\\text{S}_\\text{N}2$ reaction.",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "Racemisation occurs in $\\text{S}_\\text{N}1$ reaction and retention occurs in $\\text{S}_\\text{N}2$ reaction.",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "Racemisation occurs in both $\\text{S}_\\text{N}1$ and $\\text{S}_\\text{N}2$ reactions.",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "Racemisation occurs in $\\text{S}_\\text{N}1$ reaction and inversion occurs in $\\text{S}_\\text{N}2$ reaction.",
+                                    "isCorrect": true
+                                }
+                            ],
+                            "explanation": "$\\text{S}_\\text{N}1$ proceeds via a planar carbocation intermediate attacked from either face with equal probability, leading to racemisation. $\\text{S}_\\text{N}2$ involves backside attack in a concerted mechanism, leading to complete inversion of configuration (Walden inversion).",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q20",
+                            "type": "single_correct",
+                            "questionText": "The electronic configuration for Neodymium is : [Atomic Number for Neodymium 60]",
+                            "hasImage": false,
+                            "options": [
+                                {
+                                    "id": "1",
+                                    "text": "[Xe] $4f^4 6s^2$",
+                                    "isCorrect": true
+                                },
+                                {
+                                    "id": "2",
+                                    "text": "[Xe] $5f^4 7s^2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "3",
+                                    "text": "[Xe] $4f^6 6s^2$",
+                                    "isCorrect": false
+                                },
+                                {
+                                    "id": "4",
+                                    "text": "[Xe] $4f^1 5d^1 6s^2$",
+                                    "isCorrect": false
+                                }
+                            ],
+                            "explanation": "Neodymium ($Z = 60$) has ground state electronic configuration $[\\text{Xe}]\\ 4f^4 6s^2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                },
+                {
+                    "id": "chem_sec_b",
+                    "name": "Section-B",
+                    "questions": [
+                        {
+                            "id": "chem_q21",
+                            "type": "numerical",
+                            "questionText": "The mass of silver (Molar mass of Ag : $108\\ \\text{g mol}^{-1}$) displaced by a quantity of electricity which displaces 5600 mL of $\\text{O}_2$ at S.T.P. will be _____ g.",
+                            "hasImage": false,
+                            "answer": 107,
+                            "explanation": "Equivalents of $\\text{Ag}$ = Equivalents of $\\text{O}_2$. Moles of $\\text{O}_2 = \\frac{5.6}{22.7} \\approx 0.2467\\ \\text{mol}$ (or $\\frac{5.6}{22.4} = 0.25\\ \\text{mol}$). Since $n$-factor of $\\text{O}_2$ is 4, equivalents of $\\text{O}_2 = 4 \\times \\frac{5.6}{22.7} \\approx 0.9868$. Mass of $\\text{Ag} = 0.9868 \\times 108 \\approx 106.6 \\approx 107\\ \\text{g}$ (or 108 g using 22.4 L).",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q22",
+                            "type": "numerical",
+                            "questionText": "Consider the following data for the given reaction $2\\text{HI}(g) \\to \\text{H}_2(g) + \\text{I}_2(g)$ :\nExperiment 1: $[\\text{HI}] = 0.005\\ \\text{mol L}^{-1}$, Rate $= 7.5 \\times 10^{-4}\\ \\text{mol L}^{-1}\\text{s}^{-1}$\nExperiment 2: $[\\text{HI}] = 0.01\\ \\text{mol L}^{-1}$, Rate $= 3.0 \\times 10^{-3}\\ \\text{mol L}^{-1}\\text{s}^{-1}$\nExperiment 3: $[\\text{HI}] = 0.02\\ \\text{mol L}^{-1}$, Rate $= 1.2 \\times 10^{-2}\\ \\text{mol L}^{-1}\\text{s}^{-1}$\nThe order of the reaction is _____.",
+                            "hasImage": false,
+                            "answer": 2,
+                            "explanation": "Rate equation $R = k[\\text{HI}]^n$. Comparing experiment 2 and 1: $\\frac{3.0 \\times 10^{-3}}{7.5 \\times 10^{-4}} = \\left(\\frac{0.01}{0.005}\\right)^n \\implies 4 = 2^n \\implies n = 2$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q23",
+                            "type": "numerical",
+                            "questionText": "Mass of methane required to produce 22 g of $\\text{CO}_2$ after complete combustion is ______g. (Given Molar mass in $\\text{g mol}^{-1}$: $\\text{C} = 12.0, \\text{H} = 1.0, \\text{O} = 16.0$)",
+                            "hasImage": false,
+                            "answer": 8,
+                            "explanation": "Combustion equation: $\\text{CH}_4 + 2\\text{O}_2 \\to \\text{CO}_2 + 2\\text{H}_2\\text{O}$. Moles of $\\text{CO}_2 = \\frac{22}{44} = 0.5\\ \\text{mol}$. 1 mole $\\text{CH}_4$ produces 1 mole $\\text{CO}_2$, so required moles of $\\text{CH}_4 = 0.5\\ \\text{mol}$. Mass $= 0.5 \\times 16 = 8\\ \\text{g}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q24",
+                            "type": "numerical",
+                            "questionText": "If three moles of an ideal gas at 300 K expand isothermally from $30\\ \\text{dm}^3$ to $45\\ \\text{dm}^3$ against a constant opposing pressure of 80 kPa, then the amount of heat transferred is _______ J.",
+                            "hasImage": false,
+                            "answer": 1200,
+                            "explanation": "For an isothermal process of an ideal gas, $\\Delta U = 0$, so $q = -w$. Work done against constant external pressure is $w = -P_{\\text{ext}}\\Delta V = -(80 \\times 10^3\\ \\text{Pa}) \\times (45 - 30) \\times 10^{-3}\\ \\text{m}^3 = -1200\\ \\text{J}$. Thus $q = +1200\\ \\text{J}$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q25",
+                            "type": "numerical",
+                            "questionText": "3-Methylhex-2-ene on reaction with HBr in presence of peroxide forms an addition product (A). The number of possible stereoisomers for 'A' is _____.",
+                            "hasImage": false,
+                            "answer": 4,
+                            "explanation": "Anti-Markovnikov addition of HBr across 3-methylhex-2-ene in presence of peroxide yields 2-bromo-3-methylhexane: $\\text{CH}_3-\\text{CH(Br)}-\\text{CH(CH}_3)-\\text{CH}_2-\\text{CH}_2-\\text{CH}_3$. This molecule has 2 non-identical chiral centres (C2 and C3). Number of stereoisomers $= 2^2 = 4$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q26",
+                            "type": "numerical",
+                            "questionText": "Among the given organic compounds, the total number of aromatic compounds is _____.",
+                            "hasImage": true,
+                            "imageName": "img/chem_q26.png",
+                            "answer": 3,
+                            "explanation": "Applying Huckel's rule ($(4n+2)\\pi$ electrons in a planar conjugated ring): B, C, and D are aromatic with $6\\pi$ or $2\\pi$ delocalized electrons, whereas A is non-aromatic/anti-aromatic. Total number of aromatic compounds = 3.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q27",
+                            "type": "numerical",
+                            "questionText": "Among the following, total number of meta directing functional groups is _____:\n$-\\text{OCH}_3,\\; -\\text{NO}_2,\\; -\\text{CN},\\; -\\text{CH}_3,\\; -\\text{NHCOCH}_3,\\; -\\text{COR},\\; -\\text{OH},\\; -\\text{COOH},\\; -\\text{Cl}$",
+                            "hasImage": false,
+                            "answer": 4,
+                            "explanation": "Meta-directing groups are electron-withdrawing groups via -M/-I effects: $-\\text{NO}_2$, $-\\text{CN}$, $-\\text{COR}$, and $-\\text{COOH}$. The others ($-\\text{OCH}_3$, $-\\text{CH}_3$, $-\\text{NHCOCH}_3$, $-\\text{OH}$, $-\\text{Cl}$) are ortho/para directing. Total = 4.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q28",
+                            "type": "numerical",
+                            "questionText": "The number of electrons present in all the completely filled subshells having $n = 4$ and $s = +\\frac{1}{2}$ is _____ (Where $n$ = principal quantum number and $s$ = spin quantum number).",
+                            "hasImage": false,
+                            "answer": 16,
+                            "explanation": "For $n = 4$, the subshells are 4s (2 electrons), 4p (6 electrons), 4d (10 electrons), and 4f (14 electrons). Total number of electrons $= 2 + 6 + 10 + 14 = 32$. In completely filled subshells, exactly half of the electrons have $s = +\\frac{1}{2}$, so number of electrons $= 32 / 2 = 16$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q29",
+                            "type": "numerical",
+                            "questionText": "Sum of bond order of $\\text{CO}$ and $\\text{NO}^+$ is _____.",
+                            "hasImage": false,
+                            "answer": 6,
+                            "explanation": "Both $\\text{CO}$ (14 electrons) and $\\text{NO}^+$ (14 electrons) are isoelectronic with $\\text{N}_2$. According to Molecular Orbital Theory, each has a bond order of 3. Sum of bond orders $= 3 + 3 = 6$.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        },
+                        {
+                            "id": "chem_q30",
+                            "type": "numerical",
+                            "questionText": "From the given list, the number of compounds with +4 oxidation state of Sulphur is _____:\n$\\text{SO}_3,\\; \\text{H}_2\\text{SO}_3,\\; \\text{SOCl}_2,\\; \\text{SF}_4,\\; \\text{BaSO}_4,\\; \\text{H}_2\\text{S}_2\\text{O}_7$",
+                            "hasImage": false,
+                            "answer": 3,
+                            "explanation": "Oxidation state of Sulphur:\n$\\text{SO}_3$: +6\n$\\text{H}_2\\text{SO}_3$: +4\n$\\text{SOCl}_2$: +4\n$\\text{SF}_4$: +4\n$\\text{BaSO}_4$: +6\n$\\text{H}_2\\text{S}_2\\text{O}_7$: +6\nCompounds with +4 oxidation state are $\\text{H}_2\\text{SO}_3$, $\\text{SOCl}_2$, and $\\text{SF}_4$. Total = 3.",
+                            "marks": 4,
+                            "negativeMarks": -1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
