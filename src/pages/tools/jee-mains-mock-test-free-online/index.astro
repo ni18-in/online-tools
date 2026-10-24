@@ -227,6 +227,9 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
             <span>Start Free Mock Test Now</span>
             <span class="jee-btn-arrow">&rarr;</span>
           </button>
+          <a href="/tools/jee-mains-mock-test-free-online/2024_mains_jan_27_s1/" class="jee-btn jee-btn--solutions" id="btn-view-paper-solutions">
+            <span>📖 View Question Paper &amp; Solutions</span>
+          </a>
           <button type="button" class="jee-btn jee-btn--secondary" id="btn-browse-papers">
             <span>Browse All 24+ Test Papers</span>
           </button>
@@ -492,6 +495,9 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
           <button type="button" class="jee-btn jee-btn--primary" id="btn-scroll-solutions">
             <span>Review Step-by-Step Solutions &darr;</span>
           </button>
+          <a href="/tools/jee-mains-mock-test-free-online/2024_mains_jan_27_s1/" class="jee-btn jee-btn--outline" id="btn-permalink-solutions">
+            <span>Permanent Solutions Page &rarr;</span>
+          </a>
           <button type="button" class="jee-btn jee-btn--outline" id="btn-retake-exam">
             <span>Retake This Mock Test</span>
           </button>
@@ -1083,16 +1089,37 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     margin-top: 1rem;
   }
 
+  .jee-btn--solutions {
+    background: #0284c7;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .jee-btn--solutions:hover {
+    background: #0369a1;
+    color: #ffffff;
+  }
+
   .jee-option-row {
     display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.85rem 1rem;
-    border: 1.5px solid var(--jee-outline);
-    border-radius: 10px;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 1.15rem;
+    border: 2px solid var(--jee-outline);
+    border-radius: 12px;
     cursor: pointer;
     background: var(--jee-surface);
-    transition: all 0.2s ease;
+    transition: all 0.15s ease-in-out;
+    min-height: 54px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    position: relative;
   }
 
   .jee-option-row:hover {
@@ -1103,14 +1130,68 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
   .jee-option-row.selected {
     border-color: var(--jee-primary);
     background: var(--jee-primary-container);
-    color: var(--jee-on-surface);
+    box-shadow: 0 0 0 1px var(--jee-primary);
+  }
+
+  .jee-radio-indicator {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+
+  .jee-option-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .jee-radio-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--jee-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: var(--jee-surface);
+  }
+
+  .jee-option-row:hover .jee-radio-circle {
+    border-color: var(--jee-primary);
+  }
+
+  .jee-option-row.selected .jee-radio-circle {
+    border-color: var(--jee-primary);
+    border-width: 2px;
+  }
+
+  .jee-radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: transparent;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0);
+  }
+
+  .jee-option-row.selected .jee-radio-dot {
+    background: var(--jee-primary);
+    transform: scale(1);
   }
 
   .jee-option-letter {
     font-weight: 700;
     font-size: 0.9rem;
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1118,6 +1199,8 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     background: var(--jee-surface-variant);
     border: 1px solid var(--jee-outline);
     flex-shrink: 0;
+    color: var(--jee-on-surface);
+    transition: all 0.15s ease;
   }
 
   .jee-option-row.selected .jee-option-letter {
@@ -1128,8 +1211,10 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
 
   .jee-option-text {
     flex: 1;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
+    color: var(--jee-on-surface);
+    word-break: break-word;
   }
 
   /* Numerical Input Area */
@@ -2131,22 +2216,53 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
 
         const letters = ['A', 'B', 'C', 'D'];
         (q.options || []).forEach((opt, idx) => {
-          const row = document.createElement('div');
-          row.className = 'jee-option-row' + (state.selectedOptionId === opt.id ? ' selected' : '');
-          row.setAttribute('data-opt-id', opt.id);
+          const isSelected = String(state.selectedOptionId) === String(opt.id);
+          const row = document.createElement('label');
+          row.className = 'jee-option-row' + (isSelected ? ' selected' : '');
+          row.htmlFor = `jee-opt-${opt.id}`;
+          row.setAttribute('data-opt-id', String(opt.id));
 
           row.innerHTML = `
+            <span class="jee-radio-indicator">
+              <input
+                type="radio"
+                id="jee-opt-${opt.id}"
+                name="jee-cbt-option"
+                value="${opt.id}"
+                class="jee-option-radio"
+                ${isSelected ? 'checked' : ''}
+              />
+              <span class="jee-radio-circle" aria-hidden="true">
+                <span class="jee-radio-dot"></span>
+              </span>
+            </span>
             <span class="jee-option-letter">${letters[idx] || idx + 1}</span>
             <span class="jee-option-text">${opt.text || ''}</span>
           `;
 
-          row.addEventListener('click', () => {
-            currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => r.classList.remove('selected'));
-            row.classList.add('selected');
-            state.selectedOptionId = opt.id;
+          const selectThisOption = () => {
+            state.selectedOptionId = String(opt.id);
             state.isAnswered = true;
+
+            currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => {
+              const matches = r.getAttribute('data-opt-id') === String(opt.id);
+              r.classList.toggle('selected', matches);
+              const radio = r.querySelector('input[type="radio"]');
+              if (radio) radio.checked = matches;
+            });
+
             updateCounters();
             renderPalette();
+          };
+
+          const radioInput = row.querySelector('input[type="radio"]');
+          if (radioInput) {
+            radioInput.addEventListener('change', selectThisOption);
+          }
+          row.addEventListener('click', (e) => {
+            if (e.target !== radioInput) {
+              selectThisOption();
+            }
           });
 
           currentQOptions.appendChild(row);
@@ -2274,7 +2390,11 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
       state.isMarkedForReview = false;
 
       if (item.question.type === 'single_correct') {
-        currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => r.classList.remove('selected'));
+        currentQOptions.querySelectorAll('.jee-option-row').forEach((r) => {
+          r.classList.remove('selected');
+          const radio = r.querySelector('input[type="radio"]');
+          if (radio) radio.checked = false;
+        });
       } else if (numericalInput) {
         numericalInput.value = '';
       }
