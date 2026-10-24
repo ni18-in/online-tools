@@ -661,17 +661,26 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     --jee-gray-bg: #f1f5f9;
   }
 
-  [data-theme='dark'] {
-    --jee-surface: #0f172a;
+  :global([data-theme='dark']),
+  :global(html[data-theme='dark']),
+  :global(.dark) {
+    --jee-primary: #60a5fa;
+    --jee-primary-container: rgba(37, 99, 235, 0.25);
+    --jee-surface: #1e293b;
     --jee-on-surface: #f1f5f9;
-    --jee-surface-variant: #1e293b;
+    --jee-surface-variant: #0f172a;
     --jee-outline: #334155;
-    --jee-border: #1e293b;
+    --jee-border: #334155;
     --jee-gray-bg: #1e293b;
     --jee-green-bg: rgba(22, 163, 74, 0.2);
     --jee-red-bg: rgba(220, 38, 38, 0.2);
     --jee-orange-bg: rgba(234, 88, 12, 0.2);
     --jee-purple-bg: rgba(124, 58, 237, 0.2);
+  }
+
+  :global(.katex),
+  :global(.katex-html) {
+    color: inherit;
   }
 
   #tool-jee-mains-mock-test-free-online {
