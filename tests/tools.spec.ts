@@ -178,6 +178,40 @@ test('cron-expression-builder parses expressions, updates visual controls and pr
   expect(errors).toEqual([]);
 });
 
+test('regex-tester matches patterns, handles flag toggles, sample presets and replacements', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/regex-tester/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify default email sample loaded
+  const patternInput = page.locator('#regex-pattern');
+  await expect(patternInput).not.toBeEmpty();
+  await expect(page.locator('#stat-count')).not.toHaveText('Matches: 0');
+
+  // Load URL Preset
+  await page.click('#btn-preset-url');
+  await expect(page.locator('#stat-count')).toContainText('Matches: 2');
+  await expect(page.locator('#replacement-output')).toContainText('[URL:');
+
+  // Test custom pattern & replacement
+  await page.fill('#regex-pattern', '(\\w+)@(\\w+\\.\\w+)');
+  await page.fill('#test-string', 'contact user@example.com for help');
+  await page.fill('#replace-string', '$1 AT $2');
+  await expect(page.locator('#replacement-output')).toContainText('user AT example.com');
+
+  // Verify capture groups table rendered $1 and $2
+  const groupsTable = page.locator('#groups-table-body tr');
+  await expect(groupsTable).toHaveCount(1);
+  await expect(groupsTable.first()).toContainText('$1: user');
+  await expect(groupsTable.first()).toContainText('$2: example.com');
+
+  // Test invalid regex error state
+  await page.fill('#regex-pattern', '([a-z');
+  await expect(page.locator('#status-error')).toBeVisible();
+
+  expect(errors).toEqual([]);
+});
+
 test('uuid-generator generates batch IDs and inspects UUID v7 timestamp', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('/tools/uuid-generator/');
