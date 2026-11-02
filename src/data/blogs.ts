@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'ecmascript-v-flag-regex-testing-2026',
+    title: 'ECMAScript v-Flag Regex 2026: Test & Visualizer Free',
+    description: 'With ECMAScript 2026 v-flag set notation and unicode string properties, test and debug modern regex patterns 100% client-side with zero data leaks.',
+    keywords: 'ECMAScript v-flag regex 2026, regex tester and visualizer, javascript regex set notation, redos prevention, client side regex tool, test regex online free, ni18',
+    category: 'Developer',
+    datePublished: '2026-11-02T12:00:00+05:30',
+    dateModified: '2026-11-02T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ecmascript-v-flag-regex-testing-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'ecmascript-v-flag-expresiones-regulares-2026',
+        title: 'Regex v-Flag ECMAScript 2026: Prueba y Visualiza Gratis',
+        description: 'Ante la notación de conjuntos v-flag de ECMAScript 2026, prueba y depura expresiones regulares 100% local en tu navegador sin subir datos. Herramienta gratis.',
+        keywords: 'regex v-flag ecmascript 2026, probador expresiones regulares, notacion conjuntos regex, prevencion redos, herramienta regex cliente, probar regex online, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'ecmascript-v-flag-expressions-regulieres-2026',
+        title: 'Regex v-Flag ECMAScript 2026 : Testeur et Visualiseur',
+        description: 'Avec la notation d\'ensembles v-flag d\'ECMAScript 2026, testez et déboguez vos regex 100% en local dans votre navigateur sans téléversement. Outil gratuit.',
+        keywords: 'regex v-flag ecmascript 2026, testeur expressions regulieres, notation ensembles regex, prevention redos, outil regex cote client, tester regex en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'nodejs-22-fetch-typescript-5-8-curl-to-code',
     title: 'Node.js 22 & TS 5.8 API Migration: Convert cURL to Code Free',
     description: 'With Node.js 22 LTS and TypeScript 5.8 enforcing native fetch APIs, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
