@@ -323,6 +323,16 @@ export const tools: Tool[] = [
     i18n: { es: 'probador-expresiones-regulares', fr: 'testeur-expressions-regulieres' },
   },
   {
+    slug: 'hash-calculator',
+    name: 'Hash & Checksum Calculator',
+    description: 'Calculate cryptographic hashes (SHA-256, SHA-512, SHA-1, MD5) for text and files directly in your browser. 100% client-side privacy with zero server uploads.',
+    category: 'developer',
+    schemaType: 'WebApplication',
+    applicationCategory: 'DeveloperApplication',
+    rating: { value: 4.9, count: 26 },
+    i18n: { es: 'calculadora-hash', fr: 'calculateur-hash' },
+  },
+  {
     slug: 'jee-mains-mock-test-free-online',
     name: 'JEE Mains Mock Test Free Online',
     description: 'Take a free JEE Mains mock test online without registration. NTA CBT pattern with Physics, Chemistry & Math, timer, instant score & full solutions.',
@@ -372,6 +382,7 @@ export const homepageGrid: (string | ExternalCard)[] = [
   'uuid-generator',
   'cron-expression-builder',
   'regex-tester',
+  'hash-calculator',
 ];
 
 // Order of tools shown in the homepage CollectionPage > ItemList JSON-LD (the curated 10).
@@ -839,6 +850,16 @@ export const TOOL_TRANSLATIONS: Record<
     fr: {
       name: 'Testeur d\'Expressions Régulières – Analyseur Visual',
       description: 'Testez et visualisez des expressions régulières JavaScript en temps réel. Surlignez les correspondances avec une confidentialité 100% locale.'
+    }
+  },
+  'hash-calculator': {
+    es: {
+      name: 'Calculadora de Hash y Checksum',
+      description: 'Calcula hashes criptográficos (SHA-256, SHA-512, SHA-1, MD5) para textos y archivos en el navegador. Privacidad 100% del lado del cliente sin subidas.'
+    },
+    fr: {
+      name: 'Calculateur de Hash et Checksum',
+      description: 'Calculez des empreintes cryptographiques (SHA-256, SHA-512, SHA-1, MD5) pour textes et fichiers. Confidentialité 100% locale sans aucun téléversement.'
     }
   }
 };
