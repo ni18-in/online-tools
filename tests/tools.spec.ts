@@ -152,6 +152,42 @@ test('blog lists load and alternates redirect correctly', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('hash-calculator computes hashes, HMAC, and validates checksum match', async ({ page }) => {
+  const errors = trackErrors(page);
+  await page.goto('/tools/hash-calculator/');
+  await expect(page.locator('.site-header')).toBeVisible();
+
+  // Verify sample data calculation
+  await page.click('#btn-sample');
+  await expect(page.locator('#hash-sha256')).toHaveText('d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592');
+  await expect(page.locator('#hash-md5')).toHaveText('9e107d9d372bb6826bd81d3542a419d6');
+
+  // Verify checksum match status
+  await expect(page.locator('#verify-status')).toBeVisible();
+  await expect(page.locator('#verify-badge')).toHaveText('MATCH');
+
+  // Test custom input string
+  await page.fill('#hash-input-text', 'hello world');
+  await expect(page.locator('#hash-sha256')).toHaveText('b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9');
+  await expect(page.locator('#hash-md5')).toHaveText('5eb63bbbe01eeed093cb22bb8f5acdc3');
+
+  // Test format toggles (Hex Upper -> Base64 -> Hex Lower)
+  await page.click('#btn-toggle-format');
+  await expect(page.locator('#hash-sha256')).toHaveText('B94D27B9934D3E08A52E52D7DA7DABFAC484EFE37A5380EE9088F7ACE2EFCDE9');
+  await page.click('#btn-toggle-format');
+  await expect(page.locator('#hash-sha256')).toHaveText('uU0nuZNNPgilLlLX2n2r+sSE7+N6U4DukIj3rOLvzek=');
+
+  // Switch back to Lowercase Hex
+  await page.click('#btn-toggle-format');
+
+  // Test HMAC calculation
+  await page.check('#enable-hmac');
+  await page.fill('#hmac-key', 'secret');
+  await expect(page.locator('#hash-sha256')).not.toHaveText('b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9');
+
+  expect(errors).toEqual([]);
+});
+
 test('cron-expression-builder parses expressions, updates visual controls and predicts next executions', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('/tools/cron-expression-builder/');
