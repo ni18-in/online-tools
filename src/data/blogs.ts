@@ -35,6 +35,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'commonmark-spec-2026-markdown-to-word',
+    title: 'CommonMark Spec 2026: Convert Technical Markdown to Word Free',
+    description: 'With CommonMark 2026 standards expanding in tech docs, convert tables, math, and syntax to Word .docx 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'commonmark spec 2026, markdown to word, convert markdown to docx, technical documentation converter, client side markdown converter, zero trust docx, ni18',
+    category: 'Productivity',
+    datePublished: '2026-11-09T12:00:00+05:30',
+    dateModified: '2026-11-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/commonmark-spec-2026-markdown-to-word-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'especificacion-commonmark-2026-markdown-a-word',
+        title: 'CommonMark 2026: Convierte Documentación Markdown a Word',
+        description: 'Con el estándar CommonMark 2026 para documentación técnica, convierte tablas y sintaxis a Word (.docx) 100% en local sin subir archivos a la nube.',
+        keywords: 'especificacion commonmark 2026, markdown a word, convertir markdown a docx, convertidor documentacion tecnica, markdown cliente local, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'specification-commonmark-2026-markdown-en-word',
+        title: 'CommonMark 2026 : Convertir Markdown Technique en Word Privé',
+        description: 'Avec le standard CommonMark 2026 pour la documentation technique, convertissez tableaux et syntaxe en Word .docx 100% en local sans aucun téléversement.',
+        keywords: 'specification commonmark 2026, markdown en word, convertir markdown en docx, convertisseur documentation technique, markdown prive cote client, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
     slug: 'ecmascript-v-flag-regex-testing-2026',
     title: 'ECMAScript v-Flag Regex 2026: Test & Visualizer Free',
     description: 'With ECMAScript 2026 v-flag set notation and unicode string properties, test and debug modern regex patterns 100% client-side with zero data leaks.',
