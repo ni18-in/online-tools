@@ -27,7 +27,7 @@ const css = pick(styles, post.slug, 'styles.css');
 const js = pick(scripts, post.slug, 'script.js');
 ---
 <BlogLayout seo={seo} lang="en" postSlug={post.slug}>
-  <article class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
+  <div class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
 </BlogLayout>
 
 <style is:global set:html={css}></style>

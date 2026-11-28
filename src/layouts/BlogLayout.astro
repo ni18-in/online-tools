@@ -9,7 +9,7 @@ import AdSlot from '../components/AdSlot.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
 import { type Locale, LOCALE_BASE, NAV_LABELS } from '../data/i18n';
 import { getTool, TOOL_TRANSLATIONS } from '../data/tools';
-import { relatedToolSlugForBlog } from '../data/blogs';
+import { relatedToolSlugForBlog, relatedPostsForBlog, readingTimeMinutes } from '../data/blogs';
 import '../styles/tw-preflight-scoped.css';
 
 export interface Props {
@@ -24,7 +24,12 @@ const { seo, lang = 'en', altLinks = {}, headRaw, ad = true, postSlug } = Astro.
 const base = LOCALE_BASE[lang];
 const labels = NAV_LABELS[lang];
 const breadcrumbLabel = lang === 'es' ? 'Migas de pan' : lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb';
+const tocLabel = lang === 'es' ? 'Tabla de contenidos' : lang === 'fr' ? 'Sommaire' : 'In this article';
+const readLabel = lang === 'es' ? 'min de lectura' : lang === 'fr' ? 'min de lecture' : 'min read';
+const relatedHeading = lang === 'es' ? 'Guías Relacionadas' : lang === 'fr' ? 'Articles Similaires' : 'Related Guides';
 const articleTitle = seo.title.split('–')[0].split('|')[0].trim();
+const readingMins = postSlug ? readingTimeMinutes(postSlug) : undefined;
+const relatedPosts = postSlug ? relatedPostsForBlog(postSlug, lang, 3) : [];
 
 const matchedToolSlug = postSlug ? relatedToolSlugForBlog(postSlug) : undefined;
 const matchedTool = matchedToolSlug ? getTool(matchedToolSlug) : undefined;
@@ -38,17 +43,27 @@ const toolDesc = toolTrans?.description || matchedTool?.description;
 const ctaLabel = lang === 'es' ? 'Abrir Herramienta Gratis' : lang === 'fr' ? "Ouvrir l'Outil Gratuit" : 'Try the Free Tool Now';
 ---
 <BaseLayout seo={seo} lang={lang} current="blogs" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
-  <div class="blog-shell">
-    <nav class="blog-breadcrumbs" aria-label={breadcrumbLabel}>
-      <ol>
-        <li><a href={base}>{labels.home}</a></li>
-        <li class="crumb-sep" aria-hidden="true">/</li>
-        <li><a href={`${base}blogs/`}>{labels.blogs}</a></li>
-        <li class="crumb-sep" aria-hidden="true">/</li>
-        <li class="crumb-current" aria-current="page">{articleTitle}</li>
-      </ol>
-    </nav>
+  <main class="blog-shell">
+    <div class="blog-top-bar">
+      <nav class="blog-breadcrumbs" aria-label={breadcrumbLabel}>
+        <ol>
+          <li><a href={base}>{labels.home}</a></li>
+          <li class="crumb-sep" aria-hidden="true">/</li>
+          <li><a href={`${base}blogs/`}>{labels.blogs}</a></li>
+          <li class="crumb-sep" aria-hidden="true">/</li>
+          <li class="crumb-current" aria-current="page">{articleTitle}</li>
+        </ol>
+      </nav>
+      {readingMins && <span class="reading-pill">{readingMins} {readLabel}</span>}
+    </div>
+
+    <details id="blog-toc" class="blog-toc" hidden>
+      <summary class="blog-toc__summary">{tocLabel}</summary>
+      <ol id="blog-toc-list" class="blog-toc__list"></ol>
+    </details>
+
     <slot />
+
     {matchedTool && toolHref && (
       <aside class="blog-tool-cta" aria-label={ctaLabel}>
         <div class="blog-tool-cta__body">
@@ -59,18 +74,96 @@ const ctaLabel = lang === 'es' ? 'Abrir Herramienta Gratis' : lang === 'fr' ? "O
         <a href={toolHref} class="blog-tool-cta__btn">{ctaLabel} &rarr;</a>
       </aside>
     )}
+
+    {relatedPosts.length > 0 && (
+      <section class="blog-related" aria-labelledby="blog-related-heading">
+        <h2 id="blog-related-heading" class="blog-related__heading">{relatedHeading}</h2>
+        <div class="blog-related__grid">
+          {relatedPosts.map((rp) => (
+            <a href={rp.href} class="blog-related__card">
+              <span class="blog-related__meta">{rp.category} &bull; {rp.minutes} {readLabel}</span>
+              <h3>{rp.title}</h3>
+              <p>{rp.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     {ad && <AdSlot placement="below-content" minHeight={250} class="blog-ad" />}
-  </div>
+  </main>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const toc = document.getElementById('blog-toc');
+    const list = document.getElementById('blog-toc-list');
+    const headings = Array.from(document.querySelectorAll('.blog-island .post-full-content h2'));
+    if (!toc || !list || headings.length < 2) return;
+    const seen = new Set();
+    for (const h of headings) {
+      const text = (h.textContent || '').trim();
+      if (!text) continue;
+      if (!h.id) {
+        let baseId = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 56) || 'section';
+        let id = baseId;
+        let i = 2;
+        while (seen.has(id) || document.getElementById(id)) id = `${baseId}-${i++}`;
+        h.id = id;
+      }
+      seen.add(h.id);
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${h.id}`;
+      a.textContent = text;
+      li.appendChild(a);
+      list.appendChild(li);
+    }
+    if (list.children.length >= 2) toc.hidden = false;
+  })();
+</script>
 
 <style>
   .blog-shell { max-width: 920px; margin: 0 auto; padding: 16px 16px 0; box-sizing: border-box; }
-  .blog-breadcrumbs { margin: 0 0 16px; font-size: 0.875rem; color: var(--md-sys-color-on-surface-variant); }
+  .blog-top-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin: 0 0 14px; }
+  .blog-breadcrumbs { margin: 0; font-size: 0.875rem; color: var(--md-sys-color-on-surface-variant); }
   .blog-breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; margin: 0; list-style: none; }
   .blog-breadcrumbs a { color: var(--md-sys-color-primary); text-decoration: none; }
   .blog-breadcrumbs a:hover { text-decoration: underline; }
   .crumb-sep { opacity: 0.5; }
   .crumb-current { font-weight: 500; color: var(--md-sys-color-on-surface); max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .reading-pill {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    white-space: nowrap;
+  }
+  .blog-toc {
+    margin: 0 0 18px;
+    padding: 12px 18px;
+    border-radius: var(--md-sys-shape-corner-medium);
+    background: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .blog-toc__summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--md-sys-color-on-surface);
+  }
+  .blog-toc__list {
+    margin: 10px 0 0;
+    padding-left: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 6px 20px;
+    font-size: 0.88rem;
+  }
+  .blog-toc__list a { color: var(--md-sys-color-primary); text-decoration: none; }
+  .blog-toc__list a:hover { text-decoration: underline; }
   .blog-tool-cta {
     margin: 28px 0 0;
     padding: 20px 24px;
@@ -100,6 +193,24 @@ const ctaLabel = lang === 'es' ? 'Abrir Herramienta Gratis' : lang === 'fr' ? "O
     white-space: nowrap;
   }
   .blog-tool-cta__btn:hover { opacity: 0.92; }
+  .blog-related { margin-top: 32px; }
+  .blog-related__heading { font-size: 1.25rem; font-weight: 700; margin: 0 0 14px; color: var(--md-sys-color-on-surface); }
+  .blog-related__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .blog-related__card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: var(--md-sys-shape-corner-medium);
+    background: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .blog-related__card:hover { border-color: var(--md-sys-color-primary); transform: translateY(-2px); }
+  .blog-related__meta { font-size: 0.75rem; font-weight: 600; color: var(--md-sys-color-primary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .blog-related__card h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--md-sys-color-on-surface); line-height: 1.35; }
+  .blog-related__card p { margin: 0; font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .blog-ad { margin: 32px auto; max-width: min(728px, 100%); }
   /* Blog articles adapt to the theme surface */
   :global(.blog-island.legacy-tw) {
@@ -109,17 +220,24 @@ const ctaLabel = lang === 'es' ? 'Abrir Herramienta Gratis' : lang === 'fr' ? "O
     border: 1px solid var(--md-sys-color-outline-variant);
     overflow: hidden;
   }
-  :global(:root[data-theme='dark'] .blog-island h1),
-  :global(:root[data-theme='dark'] .blog-island h2),
-  :global(:root[data-theme='dark'] .blog-island h3),
-  :global(:root[data-theme='dark'] .blog-island strong) {
+  :global(.blog-island .post-full-content :is(h2, h3)) { scroll-margin-top: 84px; }
+  :global(:root[data-theme='dark'] .blog-island .bg-white) {
+    background-color: var(--md-sys-color-surface-container-lowest);
+  }
+  :global(:root[data-theme='dark'] .blog-island :is(.bg-indigo-50, .bg-blue-50, .bg-slate-50, .bg-gray-50)) {
+    background-color: var(--md-sys-color-surface-container);
+    border-color: var(--md-sys-color-primary);
+  }
+  :global(:root[data-theme='dark'] .blog-island :is(.border-gray-200, .border-gray-100, .border-slate-200, hr)) {
+    border-color: var(--md-sys-color-outline-variant);
+  }
+  :global(:root[data-theme='dark'] .blog-island :is(h1, h2, h3, strong, th, .text-gray-900, .text-gray-800, .text-indigo-900)) {
     color: var(--md-sys-color-on-surface);
   }
-  :global(:root[data-theme='dark'] .blog-island p),
-  :global(:root[data-theme='dark'] .blog-island li) {
+  :global(:root[data-theme='dark'] .blog-island :is(p, li, td, blockquote, .text-gray-700, .text-gray-600, .text-gray-500, .text-indigo-800)) {
     color: var(--md-sys-color-on-surface-variant);
   }
-  :global(:root[data-theme='dark'] .blog-island a) {
+  :global(:root[data-theme='dark'] .blog-island :is(a, .text-indigo-600, .text-indigo-500)) {
     color: var(--md-sys-color-primary);
   }
   :global(:root[data-theme='dark'] .blog-island pre),

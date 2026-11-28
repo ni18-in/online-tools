@@ -1,15 +1,16 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import type { Props as SeoProps } from '../../components/Seo.astro';
-import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
-import { indexedPosts, blogUrl } from '../../data/blogs';
+import { SITE_URL, SITE_NAME, AUTHOR_NAME, AUTHOR_PERSON_SCHEMA, AUTHOR_URL, DEFAULT_OG_IMAGE } from '../../data/site';
+import { indexedPosts, blogUrl, blogBadgeKey, readingTimeMinutes } from '../../data/blogs';
 
 const posts = indexedPosts();
+const categories = [...new Set(posts.map((p) => p.category))];
 const seo: SeoProps = {
   title: 'Blog - Online Tools',
   description:
-    'Read the latest articles, tutorials, and updates from the Online Tools team. Discover tips for using our web utilities effectively.',
-  keywords: 'blog, online tools, tutorials, web utilities, guides, tech articles',
+    'Read the latest articles, tutorials, and privacy-first developer guides from Nitin Kanade at Online Tools.',
+  keywords: 'blog, online tools, tutorials, web utilities, guides, tech articles, Nitin Kanade',
   canonical: `${SITE_URL}/blogs/`,
   hreflang: [
     { hreflang: 'en', href: `${SITE_URL}/blogs/` },
@@ -17,8 +18,8 @@ const seo: SeoProps = {
     { hreflang: 'fr', href: `${SITE_URL}/fr/blogs/` },
     { hreflang: 'x-default', href: `${SITE_URL}/blogs/` },
   ],
-  og: { type: 'website', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and updates from the Online Tools team.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'en_US' },
-  twitter: { card: 'summary_large_image', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and updates from the Online Tools team.', image: DEFAULT_OG_IMAGE },
+  og: { type: 'website', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and guides from Online Tools.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'en_US' },
+  twitter: { card: 'summary_large_image', url: `${SITE_URL}/blogs/`, title: 'Blog - Online Tools', description: 'Latest articles, tutorials, and guides from Online Tools.', image: DEFAULT_OG_IMAGE },
   jsonLd: [
     {
       '@context': 'https://schema.org',
@@ -30,11 +31,15 @@ const seo: SeoProps = {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: 'Online Tools Blog',
-      description: 'Articles, tutorials, and guides from the Online Tools team.',
+      inLanguage: 'en',
+      description: 'Articles, tutorials, and guides from Online Tools.',
       url: `${SITE_URL}/blogs/`,
       publisher: {
         '@type': 'Organization',
         name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        founder: AUTHOR_PERSON_SCHEMA,
+        sameAs: [AUTHOR_URL],
         logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/icons/android-chrome-192x192.png` },
       },
       mainEntity: {
@@ -50,7 +55,7 @@ const seo: SeoProps = {
             dateModified: p.dateModified,
             image: p.image,
             url: blogUrl(p.slug),
-            author: { '@type': 'Person', name: p.author },
+            author: AUTHOR_PERSON_SCHEMA,
           },
         })),
       },
@@ -63,22 +68,34 @@ const fmt = (iso: string) => iso.slice(0, 10);
 <PageLayout seo={seo} lang="en" current="blogs" width="narrow" adsEnabled={true}>
   <header class="blog-head">
     <h1>Blog</h1>
-    <p>Guides, tutorials, and updates from the Online Tools team.</p>
+    <p>Practical guides on privacy-first web utilities, API debugging, media conversion, and web performance.</p>
   </header>
-  
-  <ul class="post-grid post-list">
+
+  <section class="blog-toolbar" aria-label="Filter articles">
+    <search class="blog-search-box">
+      <label for="blog-search-input" class="sr-only">Search blog articles</label>
+      <input
+        type="search"
+        id="blog-search-input"
+        placeholder="Search guides (e.g. JWT, PDF, HEIC, REM, cURL)..."
+        autocomplete="off"
+      />
+    </search>
+    <div class="blog-filter-pills" role="group" aria-label="Filter by category">
+      <button type="button" class="filter-pill active" data-cat="all" aria-pressed="true">All ({posts.length})</button>
+      {categories.map((cat) => (
+        <button type="button" class="filter-pill" data-cat={blogBadgeKey(cat)} aria-pressed="false">{cat}</button>
+      ))}
+    </div>
+    <p id="blog-result-count" class="blog-result-count" aria-live="polite">Showing {posts.length} articles</p>
+  </section>
+
+  <ul class="post-grid post-list" id="blog-post-grid">
     {posts.map((p, idx) => {
-      const getBadgeClass = (category: string) => {
-        const cat = category.toLowerCase();
-        if (cat.includes('utility')) return 'utility';
-        if (cat.includes('productivity')) return 'productivity';
-        if (cat.includes('development')) return 'development';
-        if (cat.includes('design')) return 'design';
-        if (cat.includes('developer')) return 'developer';
-        return '';
-      };
+      const badge = blogBadgeKey(p.category);
+      const mins = readingTimeMinutes(p.slug);
       return (
-        <li class="post-item">
+        <li class="post-item" data-cat={badge} data-hay={`${p.title} ${p.description} ${p.category} ${p.keywords}`.toLowerCase()}>
           <a href={`/blogs/${p.slug}.html`} class="post-card">
             <div class="post-banner-wrapper">
               <img
@@ -91,13 +108,15 @@ const fmt = (iso: string) => iso.slice(0, 10);
                 fetchpriority={idx === 0 ? 'high' : undefined}
                 decoding="async"
               />
-              <span class={`category-badge ${getBadgeClass(p.category)}`}>{p.category}</span>
+              <span class={`category-badge ${badge}`}>{p.category}</span>
             </div>
             <div class="post-content">
               <div class="post-meta">
                 <time datetime={p.datePublished}>{fmt(p.datePublished)}</time>
-                <span class="meta-dot">&bull;</span>
-                <span class="post-author">By {p.author}</span>
+                <span class="meta-dot" aria-hidden="true">&bull;</span>
+                <span>{mins} min read</span>
+                <span class="meta-dot" aria-hidden="true">&bull;</span>
+                <span class="post-author">{AUTHOR_NAME}</span>
               </div>
               <h2 class="post-title">{p.title}</h2>
               <p class="post-excerpt">{p.description}</p>
@@ -114,12 +133,122 @@ const fmt = (iso: string) => iso.slice(0, 10);
       );
     })}
   </ul>
+
+  <div id="blog-empty" class="blog-empty" hidden>
+    <p>No matching articles found. Try clearing your search or switching category.</p>
+    <button type="button" id="blog-reset-btn" class="reset-btn">Show all articles</button>
+  </div>
 </PageLayout>
 
+<script is:inline>
+  (() => {
+    const input = document.getElementById('blog-search-input');
+    const pills = Array.from(document.querySelectorAll('.blog-filter-pills .filter-pill'));
+    const items = Array.from(document.querySelectorAll('#blog-post-grid .post-item'));
+    const countEl = document.getElementById('blog-result-count');
+    const emptyEl = document.getElementById('blog-empty');
+    const resetBtn = document.getElementById('blog-reset-btn');
+    if (!input || !items.length) return;
+
+    let activeCat = 'all';
+    const apply = () => {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      for (const el of items) {
+        const okCat = activeCat === 'all' || el.dataset.cat === activeCat;
+        const okText = !q || (el.dataset.hay || '').includes(q);
+        const vis = okCat && okText;
+        el.hidden = !vis;
+        if (vis) shown++;
+      }
+      if (countEl) countEl.textContent = `Showing ${shown} article${shown === 1 ? '' : 's'}`;
+      if (emptyEl) emptyEl.hidden = shown > 0;
+    };
+
+    const params = new URLSearchParams(location.search);
+    if (params.get('q')) input.value = params.get('q');
+    input.addEventListener('input', apply);
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        activeCat = pill.dataset.cat || 'all';
+        pills.forEach((p) => {
+          const active = p === pill;
+          p.classList.toggle('active', active);
+          p.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        apply();
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        input.value = '';
+        activeCat = 'all';
+        pills.forEach((p) => {
+          const active = p.dataset.cat === 'all';
+          p.classList.toggle('active', active);
+          p.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        apply();
+        input.focus();
+      });
+    }
+    apply();
+  })();
+</script>
+
 <style>
-  .blog-head { text-align: center; margin-bottom: 40px; }
+  .blog-head { text-align: center; margin-bottom: 28px; }
   .blog-head h1 { font-size: 2.75rem; margin: 0 0 12px; font-weight: 800; color: var(--md-sys-color-on-surface); letter-spacing: -0.02em; }
-  .blog-head p { font-size: 1.1rem; margin: 0; color: var(--md-sys-color-on-surface-variant); }
+  .blog-head p { font-size: 1.05rem; margin: 0 auto; max-width: 640px; color: var(--md-sys-color-on-surface-variant); }
+
+  .blog-toolbar { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 32px; }
+  .blog-search-box { width: 100%; max-width: 560px; }
+  .blog-search-box input {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface-container-low);
+    color: var(--md-sys-color-on-surface);
+    font: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+  }
+  .blog-search-box input:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 2px; }
+  .blog-filter-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .filter-pill {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface-variant);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .filter-pill:hover { border-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-surface); }
+  .filter-pill.active {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-color: var(--md-sys-color-primary);
+  }
+  .blog-result-count { margin: 0; font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); }
+  .blog-empty { text-align: center; padding: 48px 16px; color: var(--md-sys-color-on-surface-variant); }
+  .reset-btn {
+    margin-top: 12px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
   
   .post-grid {
     display: grid;
@@ -130,6 +259,7 @@ const fmt = (iso: string) => iso.slice(0, 10);
     list-style: none;
   }
   .post-item { display: flex; }
+  .post-item[hidden] { display: none; }
   .post-item:nth-child(n + 4) {
     content-visibility: auto;
     contain-intrinsic-block-size: auto 380px;
@@ -188,7 +318,12 @@ const fmt = (iso: string) => iso.slice(0, 10);
   .category-badge.productivity { background: #f0fdf4; color: #15803d; }
   .category-badge.development { background: #faf5ff; color: #7e22ce; }
   .category-badge.design { background: #fff7ed; color: #c2410c; }
-  .category-badge.developer { background: #f0f9ff; color: #1d4ed8; }
+  .category-badge.developer { background: #eff6ff; color: #1d4ed8; }
+  .category-badge.security { background: #fef2f2; color: #b91c1c; }
+  .category-badge.media { background: #fdf2f8; color: #be185d; }
+  .category-badge.calculator { background: #ecfeff; color: #0e7490; }
+  .category-badge.fun { background: #fefce8; color: #a16207; }
+  .category-badge.performance { background: #f0fdfa; color: #0f766e; }
 
   .post-content {
     padding: 24px;

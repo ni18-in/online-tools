@@ -1,6 +1,6 @@
 // Blog catalog. Posts live at /blogs/<slug>.html (literal .html, per the URL contract).
 // 6 are indexed (in sitemap); ai-love-calculator + face-beauty-test are noindex (excluded).
-import { SITE_URL, SITE_NAME, AUTHOR_NAME, AUTHOR_URL, abs } from './site';
+import { SITE_URL, SITE_NAME, AUTHOR_NAME, AUTHOR_URL, DEFAULT_ROBOTS, abs } from './site';
 import type { HreflangLink, Props as SeoProps } from '../components/Seo.astro';
 import type { Locale } from './i18n';
 
@@ -98,7 +98,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/nodejs-22-fetch-typescript-5-8-curl-to-code-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'nodejs-22-fetch-typescript-5-8-convertir-curl-a-codigo',
@@ -182,7 +181,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/gemini-2-5-code-diff-august-2026-text-compare-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'gemini-2-5-diferencia-codigo-agosto-2026-comparar-texto',
@@ -350,7 +348,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/zero-trust-pdf-privacy-august-2026-merger-splitter-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'privacidad-pdf-zero-trust-agosto-2026-unir-dividir',
@@ -658,7 +655,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/microservice-api-drift-august-2026-json-compare-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'desfase-api-microservicios-agosto-2026-comparar-json',
@@ -1078,7 +1074,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/css-container-queries-rem-to-px-converter-2026-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'consultas-contenedor-css-convertidor-rem-a-px-2026',
@@ -1218,7 +1213,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/mumbai-auto-taxi-tariff-2026-meter-calculator-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'tarifa-taxi-auto-mumbai-2026-calculadora-tarifa',
@@ -1246,7 +1240,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-content-readability-text-analyzer-2026-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'analisis-lecturabilidad-texto-ia-2026',
@@ -1274,7 +1267,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/oauth-2-1-jwt-security-privacy-2026-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-jwt-oauth-2-1-privacidad-2026',
@@ -1302,7 +1294,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-logo-redesign-trend-2026-guess-the-logo-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'tendencia-rediseno-logos-ia-2026-adivina-el-logo',
@@ -1358,7 +1349,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-homework-mit-2026-grade-calculator-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'ia-tareas-mit-2026-calculadora-calificaciones',
@@ -1386,7 +1376,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/ai-subtitle-drift-august-2026-resync-tool-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'desfase-subtitulos-ia-agosto-2026-resincronizador',
@@ -1722,7 +1711,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/next-gen-gst-reforms-august-2026-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'reformas-gst-2-0-guia-agosto-2026',
@@ -1834,7 +1822,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/web-performance-core-web-vitals-image-optimization-2026-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'optimizacion-imagenes-core-web-vitals-rendimiento-web-2026',
@@ -2136,7 +2123,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/secure-basic-auth-header-banner.jpg`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'seguridad-encabezado-autenticacion-basica',
@@ -2165,7 +2151,6 @@ export const blogPosts: BlogPost[] = [
     // No bespoke banner for this post; reuse the on-topic iPhone/HEIC photo banner.
     image: `${SITE_URL}/assets/blog/iphone-photo-fixer-guide-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'guia-visor-heic-chrome-firefox',
@@ -2221,7 +2206,6 @@ export const blogPosts: BlogPost[] = [
     dateModified: '2026-08-09T12:00:00+05:30',
     image: `${SITE_URL}/assets/blog/unix-epoch-timestamp-debugging-guide-banner.webp`,
     author: 'ni18',
-    noindex: true,
     i18n: {
       es: {
         slug: 'guia-depuracion-marcas-tiempo-epoch-unix',
@@ -2356,7 +2340,7 @@ export function blogSeo(post: BlogPost, lang: Locale = 'en'): SeoProps {
     description: description || post.description,
     keywords: keywords || post.keywords,
     canonical: url,
-    robots: post.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+    robots: post.noindex ? 'noindex, follow' : DEFAULT_ROBOTS,
     hreflang: blogHreflang(post),
     og: {
       type: 'article',
@@ -2372,20 +2356,54 @@ export function blogSeo(post: BlogPost, lang: Locale = 'en'): SeoProps {
   };
 }
 
+const blogBodyFiles = import.meta.glob('../components/legacy/blogs/*/body.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+
+export function readingTimeMinutes(slug: string): number {
+  const key = Object.keys(blogBodyFiles).find((p) => p.endsWith(`/blogs/${slug}/body.html`));
+  if (!key) return 4;
+  const words = blogBodyFiles[key].replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(2, Math.round(words / 200));
+}
+
+export function blogBadgeKey(category: string): string {
+  const c = category.toLowerCase();
+  if (c.includes('privac') || c.includes('secur') || c.includes('seguridad') || c.includes('sécurité')) return 'security';
+  if (c.includes('perform') || c.includes('rendimiento') || c.includes('performance')) return 'performance';
+  if (c.includes('developer') || c.includes('programación') || c.includes('développ')) return 'developer';
+  if (c.includes('develop') || c.includes('desarrollo')) return 'development';
+  if (c.includes('productiv')) return 'productivity';
+  if (c.includes('design') || c.includes('diseño')) return 'design';
+  if (c.includes('media') || c.includes('média') || c.includes('medio')) return 'media';
+  if (c.includes('calcul')) return 'calculator';
+  if (c.includes('fun') || c.includes('ocio') || c.includes('divert') || c.includes('jeu')) return 'fun';
+  if (c.includes('utilit') || c.includes('utilidad') || c.includes('utilitaire')) return 'utility';
+  return 'utility';
+}
+
 const TOOL_BLOG_KEYWORDS: Record<string, string[]> = {
   'iphone-photo-fixer': ['iphone-photo-fixer'],
   'markdown-to-word': ['markdown-to-word'],
   'vtf-converter': ['vtf-converter'],
   'px-to-rem-converter': ['px-to-rem-converter'],
+  'rem-to-px-converter': ['rem-to-px-converter'],
   'json-visualizer-pro': ['json-visualizer-pro'],
   'free-online-image-utility-tool': ['edit-images-like-pro', 'image-optimization'],
   'screen-recorder-pro': ['screen-recorder'],
-  'jwt-debugger': ['jwt-debugger'],
+  'jwt-debugger': ['jwt-debugger', 'jwt-security'],
   'basic-authentication-header-generator': ['basic-auth'],
   'curl-to-code': ['curl-to-code'],
   'online-text-compare': ['text-compare'],
   'advance-epoch-converter': ['epoch-timestamp'],
   'heic-viewer': ['heic-viewer'],
+  'pdf-merger-splitter': ['merger-splitter'],
+  'json-comparison-tool': ['json-compare', 'json-diff', 'json-security'],
+  'grade-calculator': ['grade-calculator'],
+  'mh-meter-price-calculator': ['meter-calculator'],
+  'guess-the-logo': ['guess-the-logo'],
+  'subtitle-resync-tool': ['resync-tool'],
+  'all-in-one-text-analyzer': ['text-analyzer', 'code-analysis'],
+  'next-gen-gst-reforms': ['gst-reforms'],
+  'regex-tester': ['regex-testing'],
 };
 
 export function relatedBlogsForTool(toolSlug: string, lang: Locale = 'en'): { title: string; description: string; href: string }[] {
@@ -2406,6 +2424,36 @@ export function relatedBlogsForTool(toolSlug: string, lang: Locale = 'en'): { ti
         href: blogUrl(p.slug, lang).replace(SITE_URL, ''),
       };
     });
+}
+
+export function relatedPostsForBlog(
+  currentSlug: string,
+  lang: Locale = 'en',
+  limit = 3
+): { title: string; description: string; href: string; category: string; badge: string; minutes: number }[] {
+  const current = blogPosts.find((p) => p.slug === currentSlug);
+  const pool = indexedPosts().filter((p) => {
+    if (p.slug === currentSlug) return false;
+    if (lang === 'es' && !p.i18n?.es) return false;
+    if (lang === 'fr' && !p.i18n?.fr) return false;
+    return true;
+  });
+  const sorted = [
+    ...pool.filter((p) => current && p.category === current.category),
+    ...pool.filter((p) => !current || p.category !== current.category),
+  ];
+  return sorted.slice(0, limit).map((p) => {
+    const loc = lang === 'es' ? p.i18n?.es : lang === 'fr' ? p.i18n?.fr : undefined;
+    const category = loc?.category || p.category;
+    return {
+      title: loc?.title || p.title,
+      description: loc?.description || p.description,
+      href: blogUrl(p.slug, lang).replace(SITE_URL, ''),
+      category,
+      badge: blogBadgeKey(category),
+      minutes: readingTimeMinutes(p.slug),
+    };
+  });
 }
 
 export function relatedToolSlugForBlog(blogSlug: string): string | undefined {
