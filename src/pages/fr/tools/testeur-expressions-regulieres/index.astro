@@ -1,0 +1,666 @@
+---
+import ToolLayout from '../../../../layouts/ToolLayout.astro';
+import { getTool, toolSeo, makeFaqSchema, makeHowToSchema } from '../../../../data/tools';
+import { SITE_URL } from '../../../../data/site';
+
+const tool = getTool('regex-tester')!;
+
+const steps = [
+  {
+    title: 'Saisissez le motif d\'expression régulière et les drapeaux',
+    description: 'Tapez votre motif regex et activez les drapeaux comme la recherche globale (g), insensible à la casse (i), multiligne (m), dotAll (s) ou unicode (u).',
+  },
+  {
+    title: 'Entrez le texte de test et visualisez les correspondances',
+    description: 'Collez votre texte de test pour voir le surlignage en temps réel, le nombre de correspondances, les positions d\'index et les captures de groupes.',
+  },
+  {
+    title: 'Testez le remplacement de texte et les modèles prédéfinis',
+    description: 'Ajoutez un motif de remplacement (ex. $1 ou texte personnalisé) pour prévisualiser les chaînes transformées ou utilisez nos préréglages (Email, URL).',
+  },
+  {
+    title: 'Copiez les correspondances ou le texte transformé',
+    description: 'Utilisez les boutons d\'action pour copier facilement les correspondances extraites ou le résultat du remplacement.',
+  },
+];
+
+const faqSchema = makeFaqSchema([
+  {
+    question: 'Mes données de test regex sont-elles privées et sécurisées ?',
+    answer: 'Oui, 100%. Tout le traitement, le surlignage et le remplacement s\'exécutent localement dans la mémoire de votre navigateur via les API JavaScript nativas. Aucun texte n\'est envoyé vers des serveurs distants.',
+  },
+  {
+    question: 'Quel moteur d\'expressions régulières cet outil utilise-t-il ?',
+    answer: 'Cet outil utilise le moteur natif ECMAScript (JavaScript) RegExp de votre navigateur, prenant en charge les fonctionnalités modernes comme les groupes nommés et le lookbehind.',
+  },
+  {
+    question: 'Comment fonctionnent les variables de groupe comme $1 lors du remplacement ?',
+    answer: 'Dans le champ de remplacement, $1, $2, etc., font référence aux groupes de capture entre parenthèses dans votre motif. $& représente la correspondance complète.',
+  },
+  {
+    question: 'Que se passe-t-il si je saisis un motif regex invalide ?',
+    answer: 'Si l\'expression contient une erreur de syntaxe, une bannière d\'erreur s\'affiche immédiatement avec le message SyntaxError exact du moteur JavaScript.',
+  },
+]);
+
+const howToSchema = makeHowToSchema(
+  'Comment tester et déboguer des expressions régulières en ligne',
+  'Guide étape par étape pour tester, déboguer et visualiser des expressions régulières JavaScript avec surlignage en temps réel et extraction de groupes.',
+  steps
+);
+
+const localizedSeo = {
+  title: 'Testeur d\'Expressions Régulières – Analyseur Visuel',
+  description:
+    'Testez et visualisez des expressions régulières JavaScript en temps réel. Surlignez les correspondances avec une confidentialité 100% locale.',
+  keywords:
+    'testeur expressions regulieres, tester regex en ligne, analyseur regex, javascript regex, debogueur regex, ni18',
+  author: 'ni18',
+  ogTitle: 'Testeur d\'Expressions Régulières – Analyseur Visuel',
+  ogDescription:
+    'Testez et visualisez des expressions régulières JavaScript en temps réel. Surlignez les correspondances avec une confidentialité 100% locale.',
+  twitterDomain: 'online-tools.ni18.in',
+  appSchema: {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Testeur d\'Expressions Régulières',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'All',
+    url: `${SITE_URL}/fr/tools/testeur-expressions-regulieres/`,
+    description:
+      'Testez et visualisez des expressions régulières JavaScript en temps réel avec surlignage interactif, extraction de groupes et aperçu de remplacement.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  extraJsonLd: [howToSchema, faqSchema],
+};
+
+const seo = toolSeo(tool, localizedSeo);
+seo.canonical = `${SITE_URL}/fr/tools/testeur-expressions-regulieres/`;
+seo.og.url = seo.canonical;
+if (seo.twitter) seo.twitter.url = seo.canonical;
+
+const altLinks = {
+  en: `${SITE_URL}/tools/regex-tester/`,
+  es: `${SITE_URL}/es/tools/probador-expresiones-regulares/`,
+  fr: `${SITE_URL}/fr/tools/testeur-expressions-regulieres/`,
+};
+---
+
+<ToolLayout seo={seo} lang="fr" altLinks={altLinks}>
+  <div class="tool-island" id="tool-regex-tester">
+    <header class="tool-header">
+      <h1>Testeur d'Expressions Régulières</h1>
+      <p class="subtitle">Testez, déboguez et visualisez des expressions régulières JavaScript en temps réel avec une confidentialité 100% côté client</p>
+    </header>
+
+    <!-- Quick Action Bar -->
+    <div class="quick-actions">
+      <button type="button" class="action-btn" id="btn-sample">
+        <span>Charger un exemple</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-clear">
+        <span>Effacer</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-preset-email">
+        <span>Exemple Email</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-preset-url">
+        <span>Exemple URL</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-preset-phone">
+        <span>Exemple Téléphone</span>
+      </button>
+      <button type="button" class="action-btn action-btn--secondary" id="btn-preset-date">
+        <span>Exemple Date ISO</span>
+      </button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="workspace-grid">
+      <!-- Input Controls -->
+      <section class="pane input-pane" aria-labelledby="pattern-heading">
+        <div class="pane-header">
+          <h2 id="pattern-heading">Motif et Configuration</h2>
+        </div>
+
+        <div class="control-group">
+          <label for="regex-pattern">Motif d'Expression Régulière</label>
+          <div class="regex-input-wrap">
+            <span class="regex-slash">/</span>
+            <input type="text" id="regex-pattern" class="form-input code-font" value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" spellcheck="false" placeholder="motif regex..." />
+            <span class="regex-slash">/</span>
+            <input type="text" id="regex-flags" class="form-input code-font flags-input" value="gi" spellcheck="false" placeholder="flags" maxlength="6" />
+          </div>
+        </div>
+
+        <div class="flags-toggle-bar">
+          <label class="flag-checkbox"><input type="checkbox" id="flag-g" checked /> <span>g (global)</span></label>
+          <label class="flag-checkbox"><input type="checkbox" id="flag-i" checked /> <span>i (casse)</span></label>
+          <label class="flag-checkbox"><input type="checkbox" id="flag-m" /> <span>m (multiligne)</span></label>
+          <label class="flag-checkbox"><input type="checkbox" id="flag-s" /> <span>s (dotAll)</span></label>
+          <label class="flag-checkbox"><input type="checkbox" id="flag-u" /> <span>u (unicode)</span></label>
+        </div>
+
+        <div class="control-group margin-top-md">
+          <label for="test-string">Texte de Test</label>
+          <textarea id="test-string" class="form-textarea code-font" spellcheck="false" rows="6" placeholder="Saisissez ou collez du texte de test..."></textarea>
+        </div>
+
+        <div class="control-group margin-top-sm">
+          <label for="replace-string">Motif de Remplacement / Substitution (Optionnel)</label>
+          <input type="text" id="replace-string" class="form-input code-font" value="[EMAIL: $&]" spellcheck="false" placeholder="Texte de remplacement (ex. $1 ou [MASQUÉ])" />
+        </div>
+
+        <div id="status-error" class="error-banner" style="display:none;" role="alert">
+          <span id="error-message">Syntaxe d'expression régulière invalide.</span>
+        </div>
+      </section>
+
+      <!-- Output Analysis -->
+      <section class="pane output-pane" aria-labelledby="results-heading">
+        <div class="pane-header">
+          <h2 id="results-heading">Analyse des Correspondances</h2>
+          <div class="action-btn-group">
+            <button type="button" class="copy-btn" id="btn-copy-matches"><span>Copier Correspondances</span></button>
+            <button type="button" class="copy-btn" id="btn-copy-replaced"><span>Copier Résultat</span></button>
+          </div>
+        </div>
+
+        <div class="results-stats">
+          <span class="stat-badge" id="stat-count">Correspondances: 0</span>
+          <span class="stat-badge stat-badge--info" id="stat-time">Temps: 0ms</span>
+        </div>
+
+        <div class="output-block">
+          <span class="output-label">Texte Surligné Interactif:</span>
+          <div id="highlighted-output" class="highlighted-display code-font"></div>
+        </div>
+
+        <div class="output-block margin-top-sm">
+          <span class="output-label">Résultat du Remplacement:</span>
+          <div id="replacement-output" class="replacement-display code-font"></div>
+        </div>
+
+        <div class="pane-header sub-header">
+          <h2>Groupes de Capture et Détails</h2>
+        </div>
+        <div class="groups-table-wrap">
+          <table class="groups-table" id="groups-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Correspondance</th>
+                <th>Index</th>
+                <th>Groupes</th>
+              </tr>
+            </thead>
+            <tbody id="groups-table-body">
+              <tr><td colspan="4" class="empty-cell">Aucune correspondance trouvée.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Educational Guide & FAQs (SEO Content) -->
+    <article class="guide-section">
+      <h2>Comment utiliser le Testeur d'Expressions Régulières</h2>
+      <p>Les expressions régulières (RegEx) sont essentielles en développement logiciel pour la validation de données, le filtrage et la manipulation de texte. Cet outil interactif vous permet de tester des motifs en temps réel, d'inspecter les groupes de capture et d'évaluer les remplacements directement dans votre navigateur.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>⚡ Confidentialité 100% Locale</h3>
+          <p>Aucune donnée ou motif n'est envoyé vers des serveurs externes. Tout s'exécute localement avec l'API JavaScript native.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🎯 Surlignage Visuel Instantané</h3>
+          <p>Surligne précisément les correspondances, les positions d'index et extrait les sous-groupes dans un tableau clair.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔄 Aperçu de Remplacement</h3>
+          <p>Testez les substitutions de texte avec insertion de variables ($1, $2) avec un retour réactif immédiat.</p>
+        </div>
+      </div>
+
+      <h2>Instructions Étape par Étape</h2>
+      <ol class="steps-list">
+        <li><strong>Étape 1: Saisissez le Motif:</strong> Tapez votre expression régulière et sélectionnez les drapeaux (g, i, m, s, u), ou choisissez un préréglage.</li>
+        <li><strong>Étape 2: Ajoutez le Texte de Test:</strong> Collez le texte à analyser pour voir le surlignage automatique.</li>
+        <li><strong>Étape 3: Inspectez les Groupes de Capture:</strong> Consultez le tableau de détails pour vérifier les limites d'index et les valeurs capturées.</li>
+        <li><strong>Étape 4: Copiez les Résultats:</strong> Copiez les correspondances extraites ou le texte transformé en un seul clic.</li>
+      </ol>
+
+      <h2>Analyse Technique: Drapeaux ECMAScript</h2>
+      <p>Les expressions régulières en JavaScript utilisent des drapeaux standards pour contrôler le comportement de recherche :</p>
+
+      <div class="table-wrap">
+        <table class="cron-table">
+          <thead>
+            <tr>
+              <th>Drapeau</th>
+              <th>Nom</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>g</code></td>
+              <td>Global</td>
+              <td>Recherche toutes les correspondances au lieu de s'arrêter à la première.</td>
+            </tr>
+            <tr>
+              <td><code>i</code></td>
+              <td>Insensible à la casse</td>
+              <td>Ignore les différences entre majuscules et minuscules.</td>
+            </tr>
+            <tr>
+              <td><code>m</code></td>
+              <td>Multiligne</td>
+              <td>Traite <code>^</code> et <code>$</code> comme le début et la fin de chaque ligne.</td>
+            </tr>
+            <tr>
+              <td><code>s</code></td>
+              <td>dotAll</td>
+              <td>Permet au point <code>.</code> de correspondre aussi aux sauts de ligne.</td>
+            </tr>
+            <tr>
+              <td><code>u</code></td>
+              <td>Unicode</td>
+              <td>Active la prise en charge complète des propriétés Unicode.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Foire Aux Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Mes données sont-elles privées ?</summary>
+          <p>Oui, 100%. Tout le traitement s'effectue localement dans votre navigateur. Rien n'est envoyé sur un serveur.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quel moteur regex est utilisé ?</summary>
+          <p>Il utilise le moteur ECMAScript natif de votre navigateur, compatible avec les expressions régulières JavaScript modernes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment fonctionnent les variables de remplacement comme $1 ?</summary>
+          <p>Dans le champ de remplacement, $1 et $2 sont remplacés par les groupes capturés entre parenthèses.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Que se passe-t-il si le motif est invalide ?</summary>
+          <p>Une alerte d'erreur s'affiche indiquant l'erreur de syntaxe retournée par le moteur JavaScript.</p>
+        </details>
+      </div>
+    </article>
+  </div>
+</ToolLayout>
+
+<style>
+  #tool-regex-tester { max-width: 1080px; margin: 0 auto; }
+  .tool-header { text-align: center; margin-bottom: 24px; }
+  .tool-header h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; margin: 0 0 8px; color: var(--md-sys-color-on-surface); }
+  .subtitle { font-size: 1rem; color: var(--md-sys-color-on-surface-variant); margin: 0; }
+
+  .quick-actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+  .action-btn, .copy-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+    border-radius: var(--md-sys-shape-corner-small, 8px); font-size: 0.875rem; font-weight: 500;
+    cursor: pointer; border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .action-btn:hover, .copy-btn:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); }
+  .action-btn--secondary { background: var(--md-sys-color-surface-container-low); }
+
+  .action-btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .workspace-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 36px; }
+  .pane { background: var(--md-sys-color-surface-container-lowest); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
+  .pane-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .pane-header h2 { font-size: 1.1rem; font-weight: 600; margin: 0; color: var(--md-sys-color-on-surface); }
+  .sub-header { border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 16px; margin-top: 20px; }
+
+  .control-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .control-group label { font-size: 0.85rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant); }
+  .margin-top-md { margin-top: 12px; }
+  .margin-top-sm { margin-top: 8px; }
+
+  .regex-input-wrap { display: flex; align-items: center; gap: 4px; }
+  .regex-slash { font-size: 1.2rem; font-weight: 700; color: var(--md-sys-color-primary); }
+  .flags-input { width: 70px; text-align: center; }
+
+  .flags-toggle-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .flag-checkbox { font-size: 0.8rem; display: flex; align-items: center; gap: 4px; color: var(--md-sys-color-on-surface-variant); cursor: pointer; user-select: none; }
+
+  .form-select, .form-input, .form-textarea {
+    width: 100%; padding: 10px 12px; border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface);
+    font-size: 0.9rem; box-sizing: border-box;
+  }
+  .form-textarea { resize: vertical; line-height: 1.5; }
+  .code-font { font-family: monospace; font-size: 0.95rem; }
+
+  .results-stats { display: flex; gap: 10px; margin-bottom: 12px; }
+  .stat-badge { padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+  .stat-badge--info { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface-variant); }
+
+  .output-block { display: flex; flex-direction: column; gap: 4px; }
+  .output-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--md-sys-color-primary); }
+
+  .highlighted-display, .replacement-display {
+    min-height: 80px; max-height: 200px; overflow-y: auto; padding: 12px;
+    background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 8px; color: var(--md-sys-color-on-surface); white-space: pre-wrap; word-break: break-all; line-height: 1.5;
+  }
+
+  .groups-table-wrap { overflow-x: auto; margin-top: 8px; }
+  .groups-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
+  .groups-table th, .groups-table td { padding: 8px 10px; border: 1px solid var(--md-sys-color-outline-variant); }
+  .groups-table th { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); font-weight: 600; }
+  .groups-table td { background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface-variant); word-break: break-all; }
+  .empty-cell { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 16px; }
+
+  .error-banner { margin-top: 12px; padding: 10px 14px; border-radius: 8px; background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); font-size: 0.85rem; }
+
+  .guide-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--md-sys-color-outline-variant); }
+  .guide-section h2 { font-size: 1.5rem; font-weight: 700; margin: 28px 0 12px; color: var(--md-sys-color-on-surface); }
+  .guide-section p { font-size: 0.95rem; line-height: 1.6; color: var(--md-sys-color-on-surface-variant); margin-bottom: 16px; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+  .feature-card { padding: 16px; background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; margin: 0 0 8px; color: var(--md-sys-color-primary); }
+  .feature-card p { font-size: 0.875rem; margin: 0; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
+
+  .steps-list { margin: 16px 0 24px; padding-left: 20px; line-height: 1.8; color: var(--md-sys-color-on-surface-variant); }
+
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  .cron-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; }
+  .cron-table th, .cron-table td { padding: 10px 14px; border: 1px solid var(--md-sys-color-outline-variant); }
+  .cron-table th { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); font-weight: 600; }
+  .cron-table td { background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface-variant); }
+
+  .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  .faq-item { background: var(--md-sys-color-surface-container-low); border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; padding: 12px 16px; }
+  .faq-item summary { font-weight: 600; cursor: pointer; color: var(--md-sys-color-on-surface); }
+  .faq-item p { margin: 8px 0 0; font-size: 0.9rem; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
+</style>
+
+<script is:inline>
+  (function () {
+    const patternInput = document.getElementById('regex-pattern');
+    const flagsInput = document.getElementById('regex-flags');
+    const testStringInput = document.getElementById('test-string');
+    const replaceStringInput = document.getElementById('replace-string');
+
+    const flagG = document.getElementById('flag-g');
+    const flagI = document.getElementById('flag-i');
+    const flagM = document.getElementById('flag-m');
+    const flagS = document.getElementById('flag-s');
+    const flagU = document.getElementById('flag-u');
+
+    const btnSample = document.getElementById('btn-sample');
+    const btnClear = document.getElementById('btn-clear');
+    const btnPresetEmail = document.getElementById('btn-preset-email');
+    const btnPresetUrl = document.getElementById('btn-preset-url');
+    const btnPresetPhone = document.getElementById('btn-preset-phone');
+    const btnPresetDate = document.getElementById('btn-preset-date');
+    const btnCopyMatches = document.getElementById('btn-copy-matches');
+    const btnCopyReplaced = document.getElementById('btn-copy-replaced');
+
+    const highlightedOutput = document.getElementById('highlighted-output');
+    const replacementOutput = document.getElementById('replacement-output');
+    const groupsTableBody = document.getElementById('groups-table-body');
+    const statCount = document.getElementById('stat-count');
+    const statTime = document.getElementById('stat-time');
+    const statusError = document.getElementById('status-error');
+    const errorMessage = document.getElementById('error-message');
+
+    const STORAGE_KEY = 'onlineTools_regexTesterInput';
+
+    let matchedStrings = [];
+
+    function syncFlagsFromCheckboxes() {
+      let f = '';
+      if (flagG.checked) f += 'g';
+      if (flagI.checked) f += 'i';
+      if (flagM.checked) f += 'm';
+      if (flagS.checked) f += 's';
+      if (flagU.checked) f += 'u';
+      flagsInput.value = f;
+      updateAll();
+    }
+
+    function syncCheckboxesFromFlagsInput() {
+      const f = flagsInput.value;
+      flagG.checked = f.includes('g');
+      flagI.checked = f.includes('i');
+      flagM.checked = f.includes('m');
+      flagS.checked = f.includes('s');
+      flagU.checked = f.includes('u');
+      updateAll();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function updateAll() {
+      try {
+        statusError.style.display = 'none';
+        matchedStrings = [];
+
+        const pat = patternInput.value;
+        const flg = flagsInput.value;
+        const text = testStringInput.value;
+        const replaceVal = replaceStringInput.value;
+
+        if (!pat) {
+          highlightedOutput.innerHTML = escapeHtml(text);
+          replacementOutput.textContent = text;
+          groupsTableBody.innerHTML = '<tr><td colspan="4" class="empty-cell">Entrez un motif regex pour voir les correspondances.</td></tr>';
+          statCount.textContent = 'Correspondances: 0';
+          statTime.textContent = 'Temps: 0ms';
+          return;
+        }
+
+        const t0 = performance.now();
+        let regex;
+        try {
+          regex = new RegExp(pat, flg);
+        } catch (err) {
+          statusError.style.display = 'block';
+          errorMessage.textContent = 'Regex SyntaxError: ' + err.message;
+          highlightedOutput.innerHTML = escapeHtml(text);
+          replacementOutput.textContent = text;
+          groupsTableBody.innerHTML = '<tr><td colspan="4" class="empty-cell">Motif regex invalide.</td></tr>';
+          statCount.textContent = 'Correspondances: Erreur';
+          statTime.textContent = 'Temps: --';
+          return;
+        }
+
+        const matches = [];
+        if (flg.includes('g')) {
+          let match;
+          let guard = 0;
+          while ((match = regex.exec(text)) !== null && guard < 5000) {
+            guard++;
+            matches.push(match);
+            if (match.index === regex.lastIndex) {
+              regex.lastIndex++;
+            }
+          }
+        } else {
+          const match = regex.exec(text);
+          if (match) matches.push(match);
+        }
+
+        const evalTime = (performance.now() - t0).toFixed(1);
+        statCount.textContent = `Correspondances: ${matches.length}`;
+        statTime.textContent = `Temps: ${evalTime}ms`;
+
+        // 1. Highlight matches
+        if (matches.length === 0) {
+          highlightedOutput.innerHTML = escapeHtml(text) || '<span style="color:var(--md-sys-color-on-surface-variant);">(texte vide)</span>';
+        } else {
+          let html = '';
+          let lastIndex = 0;
+          matches.forEach((m) => {
+            const start = m.index;
+            const end = start + m[0].length;
+            html += escapeHtml(text.slice(lastIndex, start));
+            html += `<mark style="background:var(--md-sys-color-tertiary-container);color:var(--md-sys-color-on-tertiary-container);padding:2px 4px;border-radius:4px;font-weight:600;">${escapeHtml(m[0])}</mark>`;
+            lastIndex = end;
+            matchedStrings.push(m[0]);
+          });
+          html += escapeHtml(text.slice(lastIndex));
+          highlightedOutput.innerHTML = html;
+        }
+
+        // 2. Replacement Output
+        if (replaceVal !== undefined) {
+          try {
+            replacementOutput.textContent = text.replace(regex, replaceVal);
+          } catch (e) {
+            replacementOutput.textContent = 'Erreur de remplacement';
+          }
+        }
+
+        // 3. Groups Table
+        if (matches.length === 0) {
+          groupsTableBody.innerHTML = '<tr><td colspan="4" class="empty-cell">Aucune correspondance trouvée.</td></tr>';
+        } else {
+          groupsTableBody.innerHTML = matches
+            .map((m, idx) => {
+              const groupCaptures = m.slice(1).map((g, gi) => `<b>$${gi + 1}:</b> ${g !== undefined ? escapeHtml(g) : '<i>indéfini</i>'}`).join('<br>');
+              return `<tr>
+                <td><b>${idx + 1}</b></td>
+                <td><code>${escapeHtml(m[0])}</code></td>
+                <td>[${m.index}, ${m.index + m[0].length}]</td>
+                <td>${groupCaptures || '<span style="color:var(--md-sys-color-outline);">Sans groupes</span>'}</td>
+              </tr>`;
+            })
+            .join('');
+        }
+
+        saveState();
+      } catch (err) {
+        statusError.style.display = 'block';
+        errorMessage.textContent = 'Erreur inattendue: ' + err.message;
+      }
+    }
+
+    function saveState() {
+      try {
+        const payload = {
+          p: patternInput.value,
+          f: flagsInput.value,
+          t: testStringInput.value,
+          r: replaceStringInput.value,
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (e) {}
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const payload = JSON.parse(raw);
+          if (payload.p !== undefined) patternInput.value = payload.p;
+          if (payload.f !== undefined) flagsInput.value = payload.f;
+          if (payload.t !== undefined) testStringInput.value = payload.t;
+          if (payload.r !== undefined) replaceStringInput.value = payload.r;
+          syncCheckboxesFromFlagsInput();
+        } else {
+          btnSample.click();
+        }
+      } catch (e) {
+        btnSample.click();
+      }
+    }
+
+    patternInput.addEventListener('input', updateAll);
+    flagsInput.addEventListener('input', syncCheckboxesFromFlagsInput);
+    testStringInput.addEventListener('input', updateAll);
+    replaceStringInput.addEventListener('input', updateAll);
+
+    flagG.addEventListener('change', syncFlagsFromCheckboxes);
+    flagI.addEventListener('change', syncFlagsFromCheckboxes);
+    flagM.addEventListener('change', syncFlagsFromCheckboxes);
+    flagS.addEventListener('change', syncFlagsFromCheckboxes);
+    flagU.addEventListener('change', syncFlagsFromCheckboxes);
+
+    btnSample.addEventListener('click', () => {
+      patternInput.value = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}';
+      flagsInput.value = 'gi';
+      syncCheckboxesFromFlagsInput();
+      testStringInput.value = 'Support technique sur dev@ni18.in ou contact@example.org pour toute question.\nEcrivez à admin.alerts@sub.domain.co.uk!';
+      replaceStringInput.value = '[EMAIL: $&]';
+      updateAll();
+    });
+
+    btnClear.addEventListener('click', () => {
+      patternInput.value = '';
+      testStringInput.value = '';
+      replaceStringInput.value = '';
+      updateAll();
+    });
+
+    btnPresetEmail.addEventListener('click', () => {
+      patternInput.value = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}';
+      flagsInput.value = 'gi';
+      syncCheckboxesFromFlagsInput();
+      updateAll();
+    });
+
+    btnPresetUrl.addEventListener('click', () => {
+      patternInput.value = 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)';
+      flagsInput.value = 'gi';
+      syncCheckboxesFromFlagsInput();
+      testStringInput.value = 'Consultez nos outils sur https://online-tools.ni18.in/ ou visitez http://example.org/path?query=1';
+      replaceStringInput.value = '[URL: $&]';
+      updateAll();
+    });
+
+    btnPresetPhone.addEventListener('click', () => {
+      patternInput.value = '\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}';
+      flagsInput.value = 'g';
+      syncCheckboxesFromFlagsInput();
+      testStringInput.value = 'Appelez le +1-800-555-0199 ou le (555) 012-3456 demain.';
+      replaceStringInput.value = '[TÉLÉPHONE]';
+      updateAll();
+    });
+
+    btnPresetDate.addEventListener('click', () => {
+      patternInput.value = '(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])';
+      flagsInput.value = 'g';
+      syncCheckboxesFromFlagsInput();
+      testStringInput.value = 'Projet lancé le 2026-08-15 et mis à jour le 2026-12-31.';
+      replaceStringInput.value = '$3/$2/$1';
+      updateAll();
+    });
+
+    btnCopyMatches.addEventListener('click', () => {
+      if (matchedStrings.length === 0) return;
+      navigator.clipboard.writeText(matchedStrings.join('\n')).then(() => {
+        if (window.showToast) window.showToast('Correspondances copiées !');
+      });
+    });
+
+    btnCopyReplaced.addEventListener('click', () => {
+      const text = replacementOutput.textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        if (window.showToast) window.showToast('Texte transformé copié !');
+      });
+    });
+
+    loadState();
+  })();
+</script>

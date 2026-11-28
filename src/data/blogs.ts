@@ -35,6 +35,60 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'commonmark-spec-2026-markdown-to-word',
+    title: 'CommonMark Spec 2026: Convert Technical Markdown to Word Free',
+    description: 'With CommonMark 2026 standards expanding in tech docs, convert tables, math, and syntax to Word .docx 100% client-side with zero cloud uploads or leaks.',
+    keywords: 'commonmark spec 2026, markdown to word, convert markdown to docx, technical documentation converter, client side markdown converter, zero trust docx, ni18',
+    category: 'Productivity',
+    datePublished: '2026-11-09T12:00:00+05:30',
+    dateModified: '2026-11-09T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/commonmark-spec-2026-markdown-to-word-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'especificacion-commonmark-2026-markdown-a-word',
+        title: 'CommonMark 2026: Convierte Documentación Markdown a Word',
+        description: 'Con el estándar CommonMark 2026 para documentación técnica, convierte tablas y sintaxis a Word (.docx) 100% en local sin subir archivos a la nube.',
+        keywords: 'especificacion commonmark 2026, markdown a word, convertir markdown a docx, convertidor documentacion tecnica, markdown cliente local, ni18',
+        category: 'Productividad'
+      },
+      fr: {
+        slug: 'specification-commonmark-2026-markdown-en-word',
+        title: 'CommonMark 2026 : Convertir Markdown Technique en Word Privé',
+        description: 'Avec le standard CommonMark 2026 pour la documentation technique, convertissez tableaux et syntaxe en Word .docx 100% en local sans aucun téléversement.',
+        keywords: 'specification commonmark 2026, markdown en word, convertir markdown en docx, convertisseur documentation technique, markdown prive cote client, ni18',
+        category: 'Productivité'
+      }
+    }
+  },
+  {
+    slug: 'ecmascript-v-flag-regex-testing-2026',
+    title: 'ECMAScript v-Flag Regex 2026: Test & Visualizer Free',
+    description: 'With ECMAScript 2026 v-flag set notation and unicode string properties, test and debug modern regex patterns 100% client-side with zero data leaks.',
+    keywords: 'ECMAScript v-flag regex 2026, regex tester and visualizer, javascript regex set notation, redos prevention, client side regex tool, test regex online free, ni18',
+    category: 'Developer',
+    datePublished: '2026-11-02T12:00:00+05:30',
+    dateModified: '2026-11-02T12:00:00+05:30',
+    image: `${SITE_URL}/assets/blog/ecmascript-v-flag-regex-testing-2026-banner.webp`,
+    author: 'ni18',
+    i18n: {
+      es: {
+        slug: 'ecmascript-v-flag-expresiones-regulares-2026',
+        title: 'Regex v-Flag ECMAScript 2026: Prueba y Visualiza Gratis',
+        description: 'Ante la notación de conjuntos v-flag de ECMAScript 2026, prueba y depura expresiones regulares 100% local en tu navegador sin subir datos. Herramienta gratis.',
+        keywords: 'regex v-flag ecmascript 2026, probador expresiones regulares, notacion conjuntos regex, prevencion redos, herramienta regex cliente, probar regex online, ni18',
+        category: 'Programación'
+      },
+      fr: {
+        slug: 'ecmascript-v-flag-expressions-regulieres-2026',
+        title: 'Regex v-Flag ECMAScript 2026 : Testeur et Visualiseur',
+        description: 'Avec la notation d\'ensembles v-flag d\'ECMAScript 2026, testez et déboguez vos regex 100% en local dans votre navigateur sans téléversement. Outil gratuit.',
+        keywords: 'regex v-flag ecmascript 2026, testeur expressions regulieres, notation ensembles regex, prevention redos, outil regex cote client, tester regex en ligne, ni18',
+        category: 'Développement'
+      }
+    }
+  },
+  {
     slug: 'nodejs-22-fetch-typescript-5-8-curl-to-code',
     title: 'Node.js 22 & TS 5.8 API Migration: Convert cURL to Code Free',
     description: 'With Node.js 22 LTS and TypeScript 5.8 enforcing native fetch APIs, convert cURL commands to JavaScript & Python 100% client-side with zero key leaks.',
