@@ -1,16 +1,23 @@
 ---
 // Pre-paint theme resolver. Runs synchronously in <head> BEFORE first paint so the MD3
-// shell never flashes the wrong color scheme (CLS/FOUC mitigation). Sets data-theme on
-// <html>; md3-tokens.css keys both schemes off it. Tool islands keep their own dark logic.
+// shell never flashes the wrong color scheme (CLS/FOUC mitigation). Syncs both
+// meta[name="color-scheme"] (light dark | light | dark) and data-theme on <html>.
 ---
 <script is:inline>
   (function () {
+    var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    var meta = document.querySelector('meta[name="color-scheme"]');
     try {
       var stored = localStorage.getItem('theme');
-      var theme = stored || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.dataset.theme = theme;
+      if (stored === 'light' || stored === 'dark') {
+        if (meta) meta.setAttribute('content', stored);
+        document.documentElement.dataset.theme = stored;
+      } else {
+        if (meta) meta.setAttribute('content', 'light dark');
+        document.documentElement.dataset.theme = mq && mq.matches ? 'dark' : 'light';
+      }
     } catch (e) {
-      document.documentElement.dataset.theme = 'light';
+      document.documentElement.dataset.theme = mq && mq.matches ? 'dark' : 'light';
     }
   })();
 </script>

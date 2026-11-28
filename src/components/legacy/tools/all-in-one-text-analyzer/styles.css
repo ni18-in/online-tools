@@ -4,19 +4,25 @@
         }
 
         /* Simple scrollbar styling for textarea */
-        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar {
-            width: 8px;
+        #tool-all-in-one-text-analyzer textarea {
+            scrollbar-width: thin;
+            scrollbar-color: #94a3b8 #e2e8f0;
         }
-        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-track {
-            background: #e2e8f0; /* bg-slate-200 */
-            border-radius: 10px;
-        }
-        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb {
-            background: #94a3b8; /* bg-slate-400 */
-            border-radius: 10px;
-        }
-        #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb:hover {
-            background: #64748b; /* bg-slate-500 */
+        @supports not (scrollbar-color: auto) {
+            #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar {
+                width: 8px;
+            }
+            #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-track {
+                background: #e2e8f0; /* bg-slate-200 */
+                border-radius: 10px;
+            }
+            #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb {
+                background: #94a3b8; /* bg-slate-400 */
+                border-radius: 10px;
+            }
+            #tool-all-in-one-text-analyzer textarea::-webkit-scrollbar-thumb:hover {
+                background: #64748b; /* bg-slate-500 */
+            }
         }
 
         /* Style for keyword list */

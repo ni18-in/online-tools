@@ -16,7 +16,30 @@ export const ADSENSE_SLOT = '2773802330';
 export const GSC_VERIFICATION = '';
 
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
-export const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1';
+export const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+export const AUTHOR_NAME = 'Nitin Kanade';
+export const AUTHOR_URL = 'https://www.linkedin.com/in/nitinkanade1/';
+
+export const AUTHOR_PERSON_SCHEMA = {
+  '@type': 'Person',
+  name: AUTHOR_NAME,
+  url: AUTHOR_URL,
+  sameAs: [AUTHOR_URL],
+};
+
+export const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/assets/icons/android-chrome-192x192.png`,
+  },
+  founder: AUTHOR_PERSON_SCHEMA,
+  sameAs: [AUTHOR_URL],
+};
 
 /** Join the site origin with a root-relative path → absolute URL. */
 export function abs(path: string): string {

@@ -30,13 +30,52 @@ const langTargets = LOCALES.map((loc) => ({
   href: loc === lang ? '' : (altLinks[loc] ?? LOCALE_BASE[loc]),
   current: loc === lang,
 }));
+
+const uiText = {
+  en: {
+    skip: 'Skip to main content',
+    homeAria: 'Online Tools — home',
+    mainNav: 'Main',
+    langLabel: 'Language',
+    langAria: 'Language selector',
+    themeDark: 'Switch to dark mode',
+    themeLight: 'Switch to light mode',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    drawerAria: 'Mobile navigation',
+  },
+  es: {
+    skip: 'Saltar al contenido principal',
+    homeAria: 'Online Tools — inicio',
+    mainNav: 'Principal',
+    langLabel: 'Idioma',
+    langAria: 'Selector de idioma',
+    themeDark: 'Cambiar a modo oscuro',
+    themeLight: 'Cambiar a modo claro',
+    menuOpen: 'Abrir menú',
+    menuClose: 'Cerrar menú',
+    drawerAria: 'Navegación móvil',
+  },
+  fr: {
+    skip: 'Aller au contenu principal',
+    homeAria: 'Online Tools — accueil',
+    mainNav: 'Principal',
+    langLabel: 'Langue',
+    langAria: 'Sélecteur de langue',
+    themeDark: 'Passer en mode sombre',
+    themeLight: 'Passer en mode clair',
+    menuOpen: 'Ouvrir le menu',
+    menuClose: 'Fermer le menu',
+    drawerAria: 'Navigation mobile',
+  },
+}[lang];
 ---
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip-link" href="#main-content">{uiText.skip}</a>
 <header class="site-header" role="banner">
   <div class="bar">
-    <a class="brand" href={base} aria-label="Online Tools — home">Online Tools</a>
+    <a class="brand" href={base} aria-label={uiText.homeAria}>Online Tools</a>
 
-    <nav class="nav-desktop" aria-label="Main Navigation">
+    <nav class="nav-desktop" aria-label={uiText.mainNav}>
       {nav.map((item) => (
         <a
           href={item.href}
@@ -48,13 +87,12 @@ const langTargets = LOCALES.map((loc) => ({
 
     <div class="actions">
       <label class="lang-wrap">
-        <span class="sr-only">Language</span>
+        <span class="sr-only">{uiText.langLabel}</span>
         <select
           id="site-lang-select"
           name="language"
           class="lang-select"
-          aria-label="Language selector"
-          onchange="if(this.value){window.location.href=this.value}"
+          aria-label={uiText.langAria}
         >
           {langTargets.map((t) => (
             <option value={t.href} selected={t.current} disabled={t.current}>{t.label}</option>
@@ -62,72 +100,145 @@ const langTargets = LOCALES.map((loc) => ({
         </select>
       </label>
 
-      <md-icon-button id="theme-toggle" aria-label="Toggle dark mode" class="theme-toggle">
+      <md-icon-button id="theme-toggle" aria-label={uiText.themeDark} class="theme-toggle">
         <svg class="i-sun" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zM2 13h2a1 1 0 100-2H2a1 1 0 100 2zm18 0h2a1 1 0 100-2h-2a1 1 0 100 2zM11 2v2a1 1 0 102 0V2a1 1 0 10-2 0zm0 18v2a1 1 0 102 0v-2a1 1 0 10-2 0zM5.99 4.58a1 1 0 10-1.41 1.41l1.06 1.06a1 1 0 101.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 10-1.41 1.41l1.06 1.06a1 1 0 101.41-1.41l-1.06-1.06zm1.06-10.96a1 1 0 10-1.41-1.41l-1.06 1.06a1 1 0 101.41 1.41l1.06-1.06zM7.05 18.36a1 1 0 10-1.41-1.41l-1.06 1.06a1 1 0 101.41 1.41l1.06-1.06z"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M12.74 2.06a1 1 0 00-1.1.21A9 9 0 1021.73 12.4a1 1 0 00-1.3-1.28 7 7 0 01-9.55-9.06z"/></svg>
       </md-icon-button>
 
-      <md-icon-button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <md-icon-button id="menu-toggle" class="menu-toggle" aria-label={uiText.menuOpen} aria-expanded="false" aria-controls="mobile-drawer">
         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </md-icon-button>
     </div>
   </div>
-
-  <nav id="mobile-drawer" class="nav-mobile" aria-label="Mobile Navigation" hidden>
-    {nav.map((item) => (
-      <a href={item.href} class:list={['nav-link', { active: current === item.key }]}>{item.label}</a>
-    ))}
-  </nav>
 </header>
 
-<script is:inline>
+<dialog id="mobile-drawer" class="nav-mobile-dialog" closedby="any" aria-label={uiText.drawerAria}>
+  <div class="nav-mobile-head">
+    <span class="brand">{uiText.drawerAria}</span>
+    <button type="button" id="mobile-drawer-close" class="nav-mobile-close" aria-label={uiText.menuClose}>&times;</button>
+  </div>
+  <nav class="nav-mobile" aria-label={uiText.drawerAria}>
+    {nav.map((item) => (
+      <a
+        href={item.href}
+        class:list={['nav-link', { active: current === item.key }]}
+        aria-current={current === item.key ? 'page' : undefined}
+      >{item.label}</a>
+    ))}
+  </nav>
+</dialog>
+
+<script is:inline define:vars={{ uiText }}>
   (function () {
+    var langSelect = document.getElementById('site-lang-select');
+    if (langSelect) {
+      langSelect.addEventListener('change', function () {
+        if (this.value) window.location.href = this.value;
+      });
+    }
+
     var menuBtn = document.getElementById('menu-toggle');
     var drawer = document.getElementById('mobile-drawer');
+    var drawerClose = document.getElementById('mobile-drawer-close');
     if (menuBtn && drawer) {
+      var syncMenuState = function (open) {
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? uiText.menuClose : uiText.menuOpen);
+      };
       var openDrawer = function () {
-        drawer.removeAttribute('hidden');
-        menuBtn.setAttribute('aria-expanded', 'true');
-        menuBtn.setAttribute('aria-label', 'Close menu');
-        var firstLink = drawer.querySelector('a');
-        if (firstLink) firstLink.focus();
+        if (typeof drawer.showModal === 'function') {
+          if (!drawer.open) drawer.showModal();
+        } else {
+          drawer.setAttribute('open', '');
+        }
+        syncMenuState(true);
       };
-      var closeDrawer = function (restoreFocus) {
-        if (drawer.hasAttribute('hidden')) return;
-        drawer.setAttribute('hidden', '');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'Open menu');
-        if (restoreFocus) menuBtn.focus();
+      var closeDrawer = function () {
+        if (typeof drawer.close === 'function') {
+          if (drawer.open) drawer.close();
+        } else {
+          drawer.removeAttribute('open');
+        }
+        syncMenuState(false);
       };
+
       menuBtn.addEventListener('click', function () {
-        if (drawer.hasAttribute('hidden')) openDrawer(); else closeDrawer(true);
+        if (drawer.open) closeDrawer(); else openDrawer();
       });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeDrawer(true);
-      });
-      document.addEventListener('click', function (e) {
-        if (drawer.hasAttribute('hidden')) return;
-        if (drawer.contains(e.target) || menuBtn.contains(e.target)) return;
-        closeDrawer(false);
+      if (drawerClose) {
+        drawerClose.addEventListener('click', closeDrawer);
+      }
+      drawer.addEventListener('close', function () {
+        syncMenuState(false);
       });
       drawer.addEventListener('click', function (e) {
-        if (e.target && e.target.tagName === 'A') closeDrawer(false);
+        if (e.target && e.target.tagName === 'A') closeDrawer();
       });
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        var pressedOutside = false;
+        var isOutside = function (e) {
+          var r = drawer.getBoundingClientRect();
+          return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+        };
+        drawer.addEventListener('pointerdown', function (e) { pressedOutside = isOutside(e); });
+        drawer.addEventListener('pointerup', function (e) { if (pressedOutside && isOutside(e)) closeDrawer(); });
+      }
+      if (window.matchMedia) {
+        var desktopMq = window.matchMedia('(min-width: 769px)');
+        var onResize = function (e) { if (e.matches && drawer.open) closeDrawer(); };
+        if (desktopMq.addEventListener) desktopMq.addEventListener('change', onResize);
+      }
     }
+
     var themeBtn = document.getElementById('theme-toggle');
+    var mqDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    var schemeMeta = document.querySelector('meta[name="color-scheme"]');
+    var getSystemTheme = function () { return mqDark && mqDark.matches ? 'dark' : 'light'; };
+    var applyThemeState = function (mode) {
+      var resolved = (mode === 'light' || mode === 'dark') ? mode : getSystemTheme();
+      document.documentElement.dataset.theme = resolved;
+      if (schemeMeta) schemeMeta.setAttribute('content', (mode === 'light' || mode === 'dark') ? mode : 'light dark');
+      if (themeBtn) {
+        themeBtn.setAttribute('aria-label', resolved === 'dark' ? uiText.themeLight : uiText.themeDark);
+      }
+    };
+
+    try {
+      applyThemeState(localStorage.getItem('theme'));
+    } catch (e) {
+      applyThemeState(null);
+    }
+
     if (themeBtn) {
-      var updateThemeAria = function () {
-        var isDark = document.documentElement.dataset.theme === 'dark';
-        themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-      };
-      updateThemeAria();
       themeBtn.addEventListener('click', function () {
-        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        try { localStorage.setItem('theme', next); } catch (e) {}
-        updateThemeAria();
+        var current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        var sys = getSystemTheme();
+        try {
+          if (next === sys) {
+            localStorage.removeItem('theme');
+            applyThemeState(null);
+          } else {
+            localStorage.setItem('theme', next);
+            applyThemeState(next);
+          }
+        } catch (e) {
+          applyThemeState(next);
+        }
       });
     }
+
+    if (mqDark && mqDark.addEventListener) {
+      mqDark.addEventListener('change', function () {
+        try {
+          if (!localStorage.getItem('theme')) applyThemeState(null);
+        } catch (e) {}
+      });
+    }
+
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'theme') applyThemeState(e.newValue);
+    });
   })();
 </script>
 
@@ -196,18 +307,64 @@ const langTargets = LOCALES.map((loc) => ({
   :global(:root[data-theme='dark']) .theme-toggle .i-sun { display: none; }
   :global(:root[data-theme='dark']) .theme-toggle .i-moon { display: block; }
   .menu-toggle { display: none; }
-  .nav-mobile {
+  .nav-mobile-dialog {
     display: none;
-    flex-direction: column;
-    padding: 8px 16px 16px;
-    gap: 4px;
+    border: 0;
+    padding: 0;
+    margin: 0 0 0 auto;
+    inset: 0 0 0 auto;
+    width: min(20rem, 85vw);
+    max-width: none;
+    height: 100svh;
+    max-height: none;
     background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: var(--md-sys-elevation-3);
+  }
+  .nav-mobile-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-mobile-dialog:modal {
+    overscroll-behavior: contain;
+  }
+  .nav-mobile-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+  .nav-mobile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  }
+  .nav-mobile-head .brand { font-size: 1.05rem; }
+  .nav-mobile-close {
+    background: none;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    color: var(--md-sys-color-on-surface);
+    border-radius: 999px;
+    min-inline-size: 36px;
+    min-block-size: 36px;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px 24px;
+    gap: 6px;
   }
   .nav-mobile .nav-link { padding: 12px 16px; border-radius: 12px; }
 
   @media (max-width: 768px) {
     .nav-desktop { display: none; }
     .menu-toggle { display: inline-flex; }
-    .nav-mobile:not([hidden]) { display: flex; }
   }
 </style>

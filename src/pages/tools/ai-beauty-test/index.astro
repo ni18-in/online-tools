@@ -803,7 +803,7 @@ const headRaw = `
         };
         reader.readAsDataURL(file);
       } else if (file) {
-        alert('Please upload a valid image file (JPG, PNG, GIF).');
+        if (window.showToast) window.showToast('Please upload a valid image file (JPG, PNG, GIF).');
       }
     }
 

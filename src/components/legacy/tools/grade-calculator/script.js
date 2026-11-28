@@ -63,7 +63,7 @@
 
             const modalFooter = document.getElementById('modal-content').querySelector('.mt-4');
             // Clear existing buttons and add the new confirmation buttons
-            modalFooter.innerHTML = '';
+            modalFooter.replaceChildren();
             modalFooter.appendChild(document.querySelector('#app-modal button')); // Cancel button
             modalFooter.appendChild(confirmBtn); // Confirm button
         }
@@ -115,7 +115,7 @@
             // Ensure standard close button is present for simple messages
             const modalFooter = document.getElementById('modal-content').querySelector('.mt-4');
             if (modalFooter.children.length > 1 || type === 'success') {
-                 modalFooter.innerHTML = '';
+                 modalFooter.replaceChildren();
                  const closeBtn = document.createElement('button');
                  closeBtn.textContent = 'Close';
                  closeBtn.className = 'px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-150';
@@ -215,7 +215,7 @@
          * @param {Array} breakdown - Array of category summary objects.
          */
         function renderSummaryBreakdown(breakdown, totalWeightedScore) {
-            summaryBreakdownEl.innerHTML = '';
+            summaryBreakdownEl.replaceChildren();
 
             if (breakdown.length === 0) {
                  summaryBreakdownEl.innerHTML = '<p class="text-gray-500 italic">No categories defined.</p>';
@@ -254,7 +254,7 @@
          * Renders all categories and assignments to the DOM.
          */
         function renderCategories() {
-            categoriesContainer.innerHTML = '';
+            categoriesContainer.replaceChildren();
 
             if (categories.length === 0) {
                 placeholderTextEl.classList.remove('hidden');

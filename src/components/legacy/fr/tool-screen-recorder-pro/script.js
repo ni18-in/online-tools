@@ -91,27 +91,31 @@
 
         // --- Theme Toggle ---
         function applyTheme(theme) {
+            const metaScheme = document.querySelector('meta[name="color-scheme"]');
+            if (metaScheme) metaScheme.content = theme === 'dark' ? 'dark' : 'light';
             if (theme === 'dark') {
                 document.body.classList.add('dark-mode');
                 themeIcon.textContent = 'light_mode'; 
-                localStorage.setItem('theme', 'dark');
             } else {
                 document.body.classList.remove('dark-mode');
                 themeIcon.textContent = 'brightness_4'; 
-                localStorage.setItem('theme', 'light');
             }
         }
 
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            applyTheme(nextTheme);
+            try {
+                if (nextTheme === (prefersDarkScheme.matches ? 'dark' : 'light')) localStorage.removeItem('screenRecorderTheme');
+                else localStorage.setItem('screenRecorderTheme', nextTheme);
+            } catch (e) {}
         });
         
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const savedTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+        const savedTheme = localStorage.getItem('screenRecorderTheme') || (prefersDarkScheme.matches ? 'dark' : 'light');
         applyTheme(savedTheme);
-        prefersDarkScheme.addEventListener('change', e => { // Listen for OS theme changes
-            if (!localStorage.getItem('theme')) { // Only if user hasn't explicitly set a theme
+        prefersDarkScheme.addEventListener('change', e => {
+            if (!localStorage.getItem('screenRecorderTheme')) {
                  applyTheme(e.matches ? 'dark' : 'light');
             }
         });

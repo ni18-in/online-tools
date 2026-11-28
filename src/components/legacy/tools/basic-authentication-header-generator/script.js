@@ -46,18 +46,14 @@
          * Copies the generated header to the clipboard.
          * Uses a temporary textarea to ensure compatibility, especially in iFrames.
          */
-        function copyToClipboard() {
-            const textToCopy = resultOutput.textContent;
-            if (!textToCopy) return;
-
-            // Create a temporary textarea element
+        function fallbackCopyBasicAuth(textToCopy) {
+            const prev = document.activeElement;
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = textToCopy;
-            tempTextArea.style.position = 'absolute';
-            tempTextArea.style.left = '-9999px'; // Move it off-screen
+            tempTextArea.setAttribute('readonly', '');
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.left = '-9999px';
             document.body.appendChild(tempTextArea);
-            
-            // Select and copy
             tempTextArea.select();
             try {
                 document.execCommand('copy');
@@ -66,8 +62,20 @@
                 console.error('Failed to copy text: ', err);
                 displayCopyFeedback('Failed to copy!');
             } finally {
-                // Clean up the temporary element
                 document.body.removeChild(tempTextArea);
+                if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+            }
+        }
+
+        function copyToClipboard() {
+            const textToCopy = resultOutput.textContent;
+            if (!textToCopy) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => displayCopyFeedback('Copied to clipboard!'))
+                    .catch(() => fallbackCopyBasicAuth(textToCopy));
+            } else {
+                fallbackCopyBasicAuth(textToCopy);
             }
         }
 
@@ -94,12 +102,14 @@
         
         // Allow pressing Enter in input fields to generate
         usernameInput.addEventListener('keydown', (e) => {
+            if (e.isComposing || e.keyCode === 229) return;
             if (e.key === 'Enter') {
                 e.preventDefault();
                 generateHeader();
             }
         });
         passwordInput.addEventListener('keydown', (e) => {
+            if (e.isComposing || e.keyCode === 229) return;
             if (e.key === 'Enter') {
                 e.preventDefault();
                 generateHeader();

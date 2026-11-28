@@ -85,7 +85,7 @@
      * @param {Array<Object>} tools - The array of tool objects to render.
      */
     function renderTools(tools) {
-      toolsContainer.innerHTML = ''; // Clear existing cards
+      toolsContainer.replaceChildren(); // Clear existing cards
 
       if (tools.length === 0) {
         noResultsMessage.classList.remove('hidden');

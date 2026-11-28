@@ -27,10 +27,37 @@ console.log("Hello World");
         }
 
         // --- Markdown to HTML (Preview) ---
+        function sanitizeHtmlToFragment(rawHtml) {
+            const doc = new DOMParser().parseFromString(rawHtml, 'text/html');
+            const blocked = new Set(['script', 'style', 'iframe', 'object', 'embed', 'form', 'input', 'textarea', 'select', 'button', 'base', 'link', 'meta']);
+            doc.body.querySelectorAll('*').forEach((el) => {
+                if (blocked.has(el.localName)) {
+                    el.remove();
+                    return;
+                }
+                for (const attr of Array.from(el.attributes)) {
+                    const name = attr.name.toLowerCase();
+                    const val = attr.value.trim();
+                    if (name.startsWith('on') || name === 'srcdoc') {
+                        el.removeAttribute(attr.name);
+                    } else if ((name === 'href' || name === 'src' || name === 'xlink:href') && /^(?:javascript|vbscript|data\s*:\s*text\/html):/i.test(val.replace(/[\x00-\x20]/g, ''))) {
+                        el.removeAttribute(attr.name);
+                    }
+                }
+            });
+            const frag = document.createDocumentFragment();
+            frag.append(...Array.from(doc.body.childNodes));
+            return frag;
+        }
+
         function updatePreview() {
             const markdownText = editor.value;
             const htmlContent = marked.parse(markdownText);
-            preview.innerHTML = htmlContent;
+            if (typeof preview.setHTML === 'function') {
+                preview.setHTML(htmlContent);
+            } else {
+                preview.replaceChildren(sanitizeHtmlToFragment(htmlContent));
+            }
         }
 
         editor.addEventListener('input', updatePreview);
@@ -51,20 +78,36 @@ console.log("Hello World");
 
         // --- Copy Rich Text ---
         async function copyRichText() {
-            const range = document.createRange();
-            range.selectNode(preview);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-
+            const notify = (msg) => (window.showToast ? window.showToast(msg) : alert(msg));
             try {
-                document.execCommand('copy');
-                alert('Texte enrichi copie dans le presse-papiers !');
+                if (navigator.clipboard && typeof navigator.clipboard.write === 'function' && typeof ClipboardItem !== 'undefined') {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            'text/html': new Blob([preview.innerHTML], { type: 'text/html' }),
+                            'text/plain': new Blob([preview.innerText || preview.textContent || ''], { type: 'text/plain' }),
+                        }),
+                    ]);
+                    notify('Texte enrichi copie dans le presse-papiers !');
+                    return;
+                }
             } catch (err) {
-                console.error('Failed to copy', err);
-                alert('Echec de la copie du texte.');
+                console.warn('Async rich clipboard failed, trying selection fallback', err);
             }
 
-            window.getSelection().removeAllRanges();
+            const range = document.createRange();
+            range.selectNode(preview);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            try {
+                document.execCommand('copy');
+                notify('Texte enrichi copie dans le presse-papiers !');
+            } catch (err) {
+                console.error('Failed to copy', err);
+                notify('Echec de la copie du texte.');
+            } finally {
+                sel.removeAllRanges();
+            }
         }
 
         // --- Markdown to DOCX Generation ---

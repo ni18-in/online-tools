@@ -61,7 +61,15 @@
   --md-sys-elevation-2: 0 1px 2px rgba(0, 0, 0, .3), 0 2px 6px 2px rgba(0, 0, 0, .15);
   --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, .15), 0 1px 3px rgba(0, 0, 0, .3);
 
+  color-scheme: light dark;
+}
+
+:root:has(> head > meta[name='color-scheme'][content='light']) {
   color-scheme: light;
+}
+
+:root:has(> head > meta[name='color-scheme'][content='dark']) {
+  color-scheme: dark;
 }
 
 :root[data-theme='dark'] {
@@ -94,8 +102,40 @@
   color-scheme: dark;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --md-sys-color-primary: #c0c1ff;
+    --md-sys-color-on-primary: #1c1d92;
+    --md-sys-color-primary-container: #3736aa;
+    --md-sys-color-on-primary-container: #e1e0ff;
+    --md-sys-color-secondary: #c3c4dd;
+    --md-sys-color-on-secondary: #2c2e42;
+    --md-sys-color-secondary-container: #424459;
+    --md-sys-color-on-secondary-container: #dfe0f9;
+    --md-sys-color-surface: #131318;
+    --md-sys-color-surface-dim: #131318;
+    --md-sys-color-surface-bright: #39383f;
+    --md-sys-color-surface-container-lowest: #0e0e13;
+    --md-sys-color-surface-container-low: #1b1b21;
+    --md-sys-color-surface-container: #1f1f25;
+    --md-sys-color-surface-container-high: #2a2930;
+    --md-sys-color-surface-container-highest: #35343b;
+    --md-sys-color-on-surface: #e5e1e9;
+    --md-sys-color-on-surface-variant: #d6d4dd;
+    --md-sys-color-outline: #a09ea8;
+    --md-sys-color-outline-variant: #46464f;
+    --md-sys-color-background: #131318;
+    --md-sys-color-on-background: #e5e1e9;
+    --md-sys-color-inverse-surface: #e5e1e9;
+    --md-sys-color-inverse-on-surface: #303036;
+  }
+}
+
 /* ----- minimal, safe global base ----- */
-html { overflow-x: clip; }
+html {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: var(--md-ref-typeface-plain);
@@ -121,16 +161,20 @@ ins.adsbygoogle,
   box-sizing: border-box;
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}
 
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.sr-only:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 :focus-visible {
@@ -138,16 +182,42 @@ a { color: inherit; }
   outline-offset: 2px;
 }
 
+/* Typographic polish on shell & content sections */
+.page :is(h1, h2, h3, th),
+.tool-main :is(h1, h2, h3, th),
+.blog-shell :is(h1, h2, h3, th),
+.notfound :is(h1, h2) {
+  text-wrap: balance;
+}
+
+.page p,
+.tool-content-guide p,
+.blog-shell p {
+  text-wrap: pretty;
+}
+
 /* Page wrapper keeps footer at the bottom on short pages. */
 .site-shell {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100svh;
 }
-.site-shell > main { flex: 1 0 auto; }
+
+.site-shell>main {
+  flex: 1 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
@@ -155,11 +225,32 @@ a { color: inherit; }
   }
 }
 
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .tool-card,
+  .related-card,
+  .pill-btn,
+  .cat-badge,
+  .ad-slot {
+    border: 1px solid CanvasText;
+  }
+
+  .pill-btn.active,
+  .pill-btn[aria-pressed='true'],
+  .nav-link.active {
+    outline: 2px solid Highlight;
+  }
+}
+
 /* Visually-hidden skip link that becomes visible on keyboard focus. */
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: 8px;
-  top: -40px;
+  top: -64px;
   z-index: 100;
   padding: 8px 16px;
   background: var(--md-sys-color-primary);
@@ -168,4 +259,7 @@ a { color: inherit; }
   font-weight: 500;
   text-decoration: none;
 }
-.skip-link:focus { top: 8px; }
+
+.skip-link:focus-visible {
+  top: 8px;
+}

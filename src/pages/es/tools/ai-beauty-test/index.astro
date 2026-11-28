@@ -773,7 +773,7 @@ const headRaw = `
         };
         reader.readAsDataURL(file);
       } else if (file) {
-        alert('Por favor, sube un archivo de imagen válido (JPG, PNG, GIF).');
+        if (window.showToast) window.showToast('Por favor, sube un archivo de imagen válido (JPG, PNG, GIF).');
       }
     }
 

@@ -511,7 +511,7 @@
                 }, 1000);
             } else {
                 optionsContainer.style.display = 'grid';
-                optionsContainer.innerHTML = '';
+                optionsContainer.replaceChildren();
                 const displayOptions = shuffleArray([...question.options]);
                 displayOptions.forEach((option, index) => {
                     const button = document.createElement('button');
@@ -806,7 +806,7 @@
             if (gameMode === 'streaming' && gameOverScreen.classList.contains('active')) return;
             try {
                 const highScores = JSON.parse(localStorage.getItem('guessLogoHighScores') || '[]');
-                highscoreList.innerHTML = '';
+                highscoreList.replaceChildren();
                 if (highScores.length === 0) {
                     highscoreList.innerHTML = '<li>Aucun meilleur score pour le moment !</li>';
                     return;
@@ -846,46 +846,57 @@
             const translatedMode = gameMode === 'single' ? 'Solo' : gameMode === 'party' ? 'Mode Fête' : gameMode === 'challenge' ? 'Mode Défi' : 'Mode Streaming';
             const translatedDiff = difficulty === 'easy' ? 'Facile' : difficulty === 'medium' ? 'Moyen' : difficulty === 'hard' ? 'Difficile' : 'Tous';
             const textToCopy = `J'ai obtenu un score de ${score} à Devine le Logo ! (Mode : ${translatedMode}, Difficulté : ${translatedDiff}, Manches/Questions : ${gameMode === 'challenge' ? currentQuestionIndex : totalRounds}). Essayez-le !`;
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-9999px';
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showMessage('Score copié dans le presse-papiers !', 'success', 2000);
-            } catch (err) {
-                showMessage('Échec de la copie du score.', 'error', 2000);
+            const fallback = () => {
+                const prev = document.activeElement;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showMessage('Score copié dans le presse-papiers !', 'success', 2000);
+                } catch (err) {
+                    showMessage('Échec de la copie du score.', 'error', 2000);
+                } finally {
+                    document.body.removeChild(textArea);
+                    if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+                }
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => showMessage('Score copié dans le presse-papiers !', 'success', 2000))
+                    .catch(fallback);
+            } else {
+                fallback();
             }
-            document.body.removeChild(textArea);
         });
 
         // --- DARK MODE ---
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('guessLogoDarkMode', isDarkMode);
-            darkModeToggle.textContent = isDarkMode ? '☀️' : '�';
-
-            // CSS variables should handle the theme changes via :root and .dark-mode
-            // Explicitly setting body styles here might be redundant but kept for safety
+        function applyGuessLogoTheme(isDarkMode) {
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            const metaScheme = document.querySelector('meta[name="color-scheme"]');
+            if (metaScheme) metaScheme.content = isDarkMode ? 'dark' : 'light';
+            darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
             document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
             document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            const isDarkMode = !document.body.classList.contains('dark-mode');
+            applyGuessLogoTheme(isDarkMode);
+            const osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (isDarkMode === osDark) localStorage.removeItem('guessLogoDarkMode');
+            else localStorage.setItem('guessLogoDarkMode', String(isDarkMode));
             playSound('click');
         });
 
         function loadDarkModePreference() {
-            const isDarkMode = localStorage.getItem('guessLogoDarkMode') === 'true';
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-                darkModeToggle.textContent = '☀️';
-            } else {
-                document.body.classList.remove('dark-mode');
-                darkModeToggle.textContent = '🌙';
-            }
-            document.body.style.setProperty('--bg-color', isDarkMode ? 'var(--dark-bg)' : 'var(--light-bg)');
-            document.body.style.setProperty('--text-color', isDarkMode ? 'var(--dark-text)' : 'var(--light-text)');
+            const stored = localStorage.getItem('guessLogoDarkMode');
+            const isDarkMode = stored === null ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) : stored === 'true';
+            applyGuessLogoTheme(isDarkMode);
         }
 
         // --- KEYBOARD INPUT ---

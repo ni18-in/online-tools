@@ -130,9 +130,9 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
   seo={seo}
   lang="en"
   headRaw={`
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" referrerpolicy="no-referrer"></script>
   `}
 >
   <div class="tool-island" id="tool-jee-mains-mock-test-free-online">
@@ -563,20 +563,20 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     </div>
 
     <!-- ==================== MODAL: SUBMISSION CONFIRMATION ==================== -->
-    <div id="jee-modal-submit" class="jee-modal jee-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-submit-title">
-      <div class="jee-modal__backdrop" id="modal-submit-backdrop"></div>
+    <dialog id="jee-modal-submit" class="jee-modal" closedby="any" aria-labelledby="modal-submit-title">
       <div class="jee-modal__dialog">
         <h3 id="modal-submit-title" class="jee-modal-title">Submit Exam Confirmation</h3>
         <p class="jee-modal-desc">Are you sure you want to end and submit your mock test?</p>
 
         <table class="jee-summary-table">
+          <caption class="sr-only">Exam Question Summary</caption>
           <thead>
             <tr>
-              <th>Subject</th>
-              <th>Total</th>
-              <th>Answered</th>
-              <th>Not Answered</th>
-              <th>Review</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Total</th>
+              <th scope="col">Answered</th>
+              <th scope="col">Not Answered</th>
+              <th scope="col">Review</th>
             </tr>
           </thead>
           <tbody id="submit-summary-tbody">
@@ -585,7 +585,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
         </table>
 
         <div class="jee-modal-actions">
-          <button type="button" class="jee-btn jee-btn--outline" id="btn-cancel-submit">
+          <button type="button" class="jee-btn jee-btn--outline" id="btn-cancel-submit" autofocus>
             <span>Resume Test</span>
           </button>
           <button type="button" class="jee-btn jee-btn--primary" id="btn-confirm-submit">
@@ -593,11 +593,10 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
 
     <!-- ==================== MODAL: ALL PAPERS / ANDROID PROMO ==================== -->
-    <div id="jee-modal-papers" class="jee-modal jee-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-papers-title">
-      <div class="jee-modal__backdrop" id="modal-papers-backdrop"></div>
+    <dialog id="jee-modal-papers" class="jee-modal" closedby="any" aria-labelledby="modal-papers-title">
       <div class="jee-modal__dialog jee-modal__dialog--lg">
         <div class="jee-modal-head-row">
           <div>
@@ -1892,20 +1891,32 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
 
   /* Modals */
   .jee-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .jee-modal[open] {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
   }
 
-  .jee-modal__backdrop {
-    position: absolute;
-    inset: 0;
+  .jee-modal:modal {
+    overscroll-behavior: contain;
+  }
+
+  .jee-modal::backdrop {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
+    overflow: hidden;
+    overscroll-behavior: contain;
   }
 
   .jee-modal__dialog {
@@ -2049,7 +2060,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     if (paper && paper.sections) {
       // Sort sections so Physics is first, then Chemistry, then Mathematics
       const sectionOrder = ['physics', 'chem', 'math'];
-      const sortedSections = [...paper.sections].sort(
+      const sortedSections = paper.sections.toSorted(
         (a, b) => sectionOrder.indexOf(a.id) - sectionOrder.indexOf(b.id)
       );
       sortedSections.forEach((s) => {
@@ -2221,7 +2232,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
       if (q.type === 'single_correct') {
         currentQNumerical.classList.add('jee-hidden');
         currentQOptions.classList.remove('jee-hidden');
-        currentQOptions.innerHTML = '';
+        currentQOptions.replaceChildren();
 
         const letters = ['A', 'B', 'C', 'D'];
         (q.options || []).forEach((opt, idx) => {
@@ -2295,7 +2306,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
 
     function renderPalette() {
       if (!paletteGrid) return;
-      paletteGrid.innerHTML = '';
+      paletteGrid.replaceChildren();
 
       const currentSubjectList = questionsBySubject[activeSubject] || [];
       const subName = activeSubject === 'physics' ? 'Physics' : activeSubject === 'chem' ? 'Chemistry' : 'Mathematics';
@@ -2417,7 +2428,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
       if (!modalSubmit) return;
       const tbody = document.getElementById('submit-summary-tbody');
       if (tbody) {
-        tbody.innerHTML = '';
+        tbody.replaceChildren();
         const subjects = [
           { id: 'physics', name: 'Physics' },
           { id: 'chem', name: 'Chemistry' },
@@ -2446,11 +2457,20 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
           tbody.appendChild(row);
         });
       }
-      modalSubmit.classList.remove('jee-hidden');
+      if (typeof modalSubmit.showModal === 'function') {
+        if (!modalSubmit.open) modalSubmit.showModal();
+      } else {
+        modalSubmit.setAttribute('open', '');
+      }
     }
 
     function closeSubmitModal() {
-      if (modalSubmit) modalSubmit.classList.add('jee-hidden');
+      if (!modalSubmit) return;
+      if (typeof modalSubmit.close === 'function') {
+        if (modalSubmit.open) modalSubmit.close();
+      } else {
+        modalSubmit.removeAttribute('open');
+      }
     }
 
     // Submit Exam & Calculate Scores
@@ -2579,7 +2599,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     function renderSolutions(filter) {
       const listContainer = document.getElementById('jee-solutions-list');
       if (!listContainer) return;
-      listContainer.innerHTML = '';
+      listContainer.replaceChildren();
 
       allQuestions.forEach((item, idx) => {
         const q = item.question;
@@ -2671,7 +2691,7 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
     function populatePapersModal() {
       const container = document.getElementById('jee-manifest-papers-list');
       if (!container || !manifest || !manifest.papers) return;
-      container.innerHTML = '';
+      container.replaceChildren();
 
       manifest.papers.forEach((p, idx) => {
         const item = document.createElement('div');
@@ -2773,9 +2793,6 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
       const btnCancelSubmit = document.getElementById('btn-cancel-submit');
       if (btnCancelSubmit) btnCancelSubmit.addEventListener('click', closeSubmitModal);
 
-      const backdropSubmit = document.getElementById('modal-submit-backdrop');
-      if (backdropSubmit) backdropSubmit.addEventListener('click', closeSubmitModal);
-
       const btnConfirmSubmit = document.getElementById('btn-confirm-submit');
       if (btnConfirmSubmit) btnConfirmSubmit.addEventListener('click', submitExam);
 
@@ -2841,21 +2858,42 @@ const APP_PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=in.ni1
       // Papers Modal
       const btnBrowsePapers = document.getElementById('btn-browse-papers');
       const btnClosePapers = document.getElementById('btn-close-papers-modal');
-      const backdropPapers = document.getElementById('modal-papers-backdrop');
 
       if (btnBrowsePapers && modalPapers) {
         btnBrowsePapers.addEventListener('click', () => {
           populatePapersModal();
-          modalPapers.classList.remove('jee-hidden');
+          if (typeof modalPapers.showModal === 'function') {
+            if (!modalPapers.open) modalPapers.showModal();
+          } else {
+            modalPapers.setAttribute('open', '');
+          }
         });
       }
 
       if (btnClosePapers && modalPapers) {
-        btnClosePapers.addEventListener('click', () => modalPapers.classList.add('jee-hidden'));
+        btnClosePapers.addEventListener('click', () => {
+          if (typeof modalPapers.close === 'function') {
+            if (modalPapers.open) modalPapers.close();
+          } else {
+            modalPapers.removeAttribute('open');
+          }
+        });
       }
 
-      if (backdropPapers && modalPapers) {
-        backdropPapers.addEventListener('click', () => modalPapers.classList.add('jee-hidden'));
+      // Light-dismiss fallback for browsers without native <dialog closedby="any">
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        [modalSubmit, modalPapers].forEach((dlg) => {
+          if (!dlg) return;
+          const card = dlg.querySelector('.jee-modal__dialog');
+          let pressedOutside = false;
+          dlg.addEventListener('pointerdown', (e) => {
+            pressedOutside = card ? !card.contains(e.target) : e.target === dlg;
+          });
+          dlg.addEventListener('pointerup', (e) => {
+            const releasedOutside = card ? !card.contains(e.target) : e.target === dlg;
+            if (pressedOutside && releasedOutside && typeof dlg.close === 'function') dlg.close();
+          });
+        });
       }
     }
 

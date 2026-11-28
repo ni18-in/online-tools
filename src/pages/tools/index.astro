@@ -76,23 +76,24 @@ let cardIndex = 0;
   </header>
 
   <section aria-label="Search" class="search">
-    <label for="tool-search-input" class="sr-only">Search for tools</label>
-    <div class="search-input-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input type="search" id="tool-search-input" placeholder="Search tools by name or description... (Press /)" autocomplete="off" />
-      <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display:none">&times;</button>
-      <div class="shortcut-hint" aria-hidden="true"><kbd>/</kbd></div>
-    </div>
+    <search>
+      <label for="tool-search-input" class="sr-only">Search for tools</label>
+      <div class="search-input-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" id="tool-search-input" placeholder="Search tools by name or description... (Press /)" autocomplete="off" />
+        <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display:none">&times;</button>
+        <div class="shortcut-hint" aria-hidden="true"><kbd>/</kbd></div>
+      </div>
+    </search>
   </section>
 
-  <div class="category-pills" role="tablist" aria-label="Filter tools by category">
+  <div class="category-pills" role="group" aria-label="Filter tools by category">
     {filterCategories.map((cat, idx) => (
       <button
         type="button"
         class:list={['pill-btn', { active: idx === 0 }]}
         data-category-filter={cat.id}
-        role="tab"
-        aria-selected={idx === 0 ? 'true' : 'false'}
+        aria-pressed={idx === 0 ? 'true' : 'false'}
       >
         {cat.label}
       </button>
@@ -101,7 +102,7 @@ let cardIndex = 0;
 
   <div id="no-results-message" class="no-results-card" style="display:none" aria-live="polite">
     <div class="no-results-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </div>
     <h3>No tools found</h3>
     <p>No tools matching your search criteria were found.</p>
@@ -178,13 +179,20 @@ let cardIndex = 0;
         activeCat = 'all';
         pills.forEach(function (p, idx) {
           p.classList.toggle('active', idx === 0);
-          p.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+          p.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
         });
         filterTools();
         if (input) input.focus();
       }
 
-      if (input) input.addEventListener('input', filterTools);
+      if (input) {
+        var initialQ = new URLSearchParams(window.location.search).get('q');
+        if (initialQ) {
+          input.value = initialQ;
+          filterTools();
+        }
+        input.addEventListener('input', filterTools);
+      }
       if (clearBtn) clearBtn.addEventListener('click', resetSearch);
       if (resetBtn) resetBtn.addEventListener('click', resetSearch);
 
@@ -206,10 +214,10 @@ let cardIndex = 0;
         btn.addEventListener('click', function () {
           pills.forEach(function (p) {
             p.classList.remove('active');
-            p.setAttribute('aria-selected', 'false');
+            p.setAttribute('aria-pressed', 'false');
           });
           btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
+          btn.setAttribute('aria-pressed', 'true');
           activeCat = btn.getAttribute('data-category-filter') || 'all';
           filterTools();
         });
@@ -249,7 +257,7 @@ let cardIndex = 0;
   #tool-search-input:focus {
     outline: none;
     border-color: var(--md-sys-color-primary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--md-sys-color-primary) 20%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--md-sys-color-primary) 20%, transparent);
   }
   .clear-search-btn {
     position: absolute;
@@ -361,6 +369,10 @@ let cardIndex = 0;
     border-bottom: 2px solid var(--md-sys-color-primary-container);
   }
   .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .tool-grid > :nth-child(n + 7) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 220px;
+  }
   @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

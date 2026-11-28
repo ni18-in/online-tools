@@ -5,38 +5,47 @@
  * (script.js reads `.tool-card h3 a` text + `p` text) keeps working unchanged.
  * `external` cards link off-site (e.g. tools.ni18.in) and open in a new tab.
  */
+import type { Locale } from '../data/i18n';
+
 export interface Props {
   href: string;
   name: string;
   description: string;
   headingId: string;
   category?: string;
+  lang?: Locale;
   external?: boolean;
   cta?: string;
 }
-const { href, name, description, headingId, category, external = false, cta = 'Use Tool' } = Astro.props;
-const rel = external ? 'noopener' : undefined;
+const { href, name, description, headingId, category, lang = 'en', external = false, cta = 'Use Tool' } = Astro.props;
+const rel = external ? 'noopener noreferrer' : undefined;
 const target = external ? '_blank' : undefined;
+
+const CATEGORY_LABELS_I18N: Record<Locale, Record<string, string>> = {
+  en: { developer: 'Developer', text: 'Text', media: 'Media', calculator: 'Calculator', fun: 'Fun & Games' },
+  es: { developer: 'Desarrollo', text: 'Texto', media: 'Medios', calculator: 'Calculadora', fun: 'Juegos' },
+  fr: { developer: 'Développement', text: 'Texte', media: 'Médias', calculator: 'Calculatrice', fun: 'Jeux' },
+};
 
 const CATEGORY_META: Record<string, { label: string; icon: string }> = {
   developer: {
-    label: 'Developer',
+    label: CATEGORY_LABELS_I18N[lang].developer,
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />',
   },
   text: {
-    label: 'Text',
+    label: CATEGORY_LABELS_I18N[lang].text,
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />',
   },
   media: {
-    label: 'Media',
+    label: CATEGORY_LABELS_I18N[lang].media,
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />',
   },
   calculator: {
-    label: 'Calculator',
+    label: CATEGORY_LABELS_I18N[lang].calculator,
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
   },
   fun: {
-    label: 'Fun & Games',
+    label: CATEGORY_LABELS_I18N[lang].fun,
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
   },
 };
@@ -98,29 +107,29 @@ const catMeta = category ? CATEGORY_META[category] : undefined;
     border: 1px solid transparent;
   }
   .cat-developer {
-    background: rgba(79, 70, 229, 0.08);
-    color: #4f46e5;
-    border-color: rgba(79, 70, 229, 0.2);
+    background: rgba(67, 56, 202, 0.08);
+    color: #4338ca;
+    border-color: rgba(67, 56, 202, 0.22);
   }
   .cat-text {
-    background: rgba(13, 148, 136, 0.08);
-    color: #0d9488;
-    border-color: rgba(13, 148, 136, 0.2);
+    background: rgba(15, 118, 110, 0.08);
+    color: #0f766e;
+    border-color: rgba(15, 118, 110, 0.22);
   }
   .cat-media {
-    background: rgba(147, 51, 234, 0.08);
-    color: #9333ea;
-    border-color: rgba(147, 51, 234, 0.2);
+    background: rgba(126, 34, 206, 0.08);
+    color: #7e22ce;
+    border-color: rgba(126, 34, 206, 0.22);
   }
   .cat-calculator {
-    background: rgba(217, 119, 6, 0.08);
-    color: #d97706;
-    border-color: rgba(217, 119, 6, 0.2);
+    background: rgba(180, 83, 9, 0.08);
+    color: #92400e;
+    border-color: rgba(180, 83, 9, 0.22);
   }
   .cat-fun {
-    background: rgba(225, 29, 72, 0.08);
-    color: #e11d48;
-    border-color: rgba(225, 29, 72, 0.2);
+    background: rgba(190, 18, 60, 0.08);
+    color: #be123c;
+    border-color: rgba(190, 18, 60, 0.22);
   }
 
   :global(:root[data-theme='dark']) .cat-developer {

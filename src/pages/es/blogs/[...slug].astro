@@ -31,7 +31,7 @@ const seo = blogSeo(post, 'es');
 const body = pick(bodies, post.slug, 'body.html', true);
 const css = pick(styles, post.slug, 'styles.css');
 ---
-<BlogLayout seo={seo} lang="es">
+<BlogLayout seo={seo} lang="es" postSlug={post.slug}>
   <article class="blog-island legacy-tw" id={`blog-${post.slug}`} set:html={body} />
 </BlogLayout>
 

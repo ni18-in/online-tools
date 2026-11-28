@@ -103,20 +103,32 @@
             const score = scoreText.textContent;
             const status = compatibilityStatus.textContent;
             const textToCopy = `¡Mi puntuación de amor es ${score}! La IA dice que es «${status}». ¡Descubre la tuya!`;
-            
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                shareFeedback.textContent = '¡Resultado copiado al portapapeles!';
-            } catch (err) {
-                shareFeedback.textContent = 'No se pudo copiar el resultado.';
-                console.error('Fallback: Oops, unable to copy', err);
+            const finish = (ok) => {
+                shareFeedback.textContent = ok ? '¡Resultado copiado al portapapeles!' : 'No se pudo copiar el resultado.';
+                setTimeout(() => { shareFeedback.textContent = ''; }, 3000);
+            };
+            const fallback = () => {
+                const prev = document.activeElement;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.setAttribute('readonly', '');
+                textArea.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    finish(true);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    finish(false);
+                } finally {
+                    document.body.removeChild(textArea);
+                    if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+                }
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => finish(true)).catch(fallback);
+            } else {
+                fallback();
             }
-            
-            document.body.removeChild(textArea);
-            setTimeout(() => { shareFeedback.textContent = ''; }, 3000);
         });

@@ -173,7 +173,7 @@
             readingEaseEl.textContent = readingEase;
 
             // Update Keyword List
-            keywordListEl.innerHTML = ''; // Clear previous list
+            keywordListEl.replaceChildren(); // Clear previous list
             if (keywords.length > 0) {
                 keywords.forEach(([word, count]) => {
                     const li = document.createElement('li');

@@ -246,13 +246,14 @@ const altLinks = {
       <h2>Analyse Technique : Syntaxe UNIX Cron</h2>
       <p>Les expressions cron standard UNIX se composent de 5 champs séparés par des espaces : <code>Minute Heure Jour-du-Mois Mois Jour-de-la-Semaine</code>.</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Tableau de référence de la syntaxe UNIX Cron">
         <table class="cron-table">
+          <caption class="sr-only">Référence de la syntaxe UNIX Cron à 5 champs</caption>
           <thead>
             <tr>
-              <th>Champ</th>
-              <th>Valeurs Autorisées</th>
-              <th>Caractères Spéciaux</th>
+              <th scope="col">Champ</th>
+              <th scope="col">Valeurs Autorisées</th>
+              <th scope="col">Caractères Spéciaux</th>
             </tr>
           </thead>
           <tbody>

@@ -1,4 +1,5 @@
-const CACHE_NAME = 'online-tools-v1';
+const CACHE_NAME = 'online-tools-v2';
+const MAX_CACHE_ENTRIES = 80;
 
 const PRECACHE_URLS = [
   '/',
@@ -7,14 +8,23 @@ const PRECACHE_URLS = [
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/favicon-16x16.png',
   '/assets/icons/apple-touch-icon.png',
-  '/assets/icons/site.webmanifest',
-  '/vendor/fontawesome/css/all.min.css',
-  '/vendor/fontawesome/webfonts/fa-solid-900.woff2',
-  '/vendor/fontawesome/webfonts/fa-regular-400.woff2',
-  '/vendor/lucide/lucide.min.js',
-  '/vendor/jsdiff/diff.min.js',
-  '/vendor/jsondiffpatch/jsondiffpatch.umd.min.js'
+  '/assets/icons/site.webmanifest'
 ];
+
+async function trimCache(cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length > maxEntries) {
+    const excess = keys.length - maxEntries;
+    await Promise.all(keys.slice(0, excess).map((k) => cache.delete(k)));
+  }
+}
+
+async function putBounded(request, response) {
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(request, response);
+  await trimCache(CACHE_NAME, MAX_CACHE_ENTRIES);
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -64,7 +74,7 @@ self.addEventListener('fetch', (event) => {
         .then((response) => {
           if (response.status === 200) {
             const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+            putBounded(request, clone);
           }
           return response;
         })
@@ -92,7 +102,7 @@ self.addEventListener('fetch', (event) => {
           fetch(request)
             .then((networkResponse) => {
               if (networkResponse && networkResponse.status === 200) {
-                caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+                putBounded(request, networkResponse);
               }
             })
             .catch(() => {/* ignore background fetch failure */});
@@ -102,7 +112,7 @@ self.addEventListener('fetch', (event) => {
         return fetch(request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const clone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+            putBounded(request, clone);
           }
           return networkResponse;
         });
@@ -119,7 +129,7 @@ self.addEventListener('fetch', (event) => {
           .then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
               const clone = networkResponse.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+              putBounded(request, clone);
             }
             return networkResponse;
           })

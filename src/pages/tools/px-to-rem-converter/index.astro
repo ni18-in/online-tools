@@ -91,7 +91,7 @@ const altLinks = { es: `${SITE_URL}/es/tools/px-a-rem-convertidor/` };
         <form id="converter-form" aria-label="Pixel to REM conversion form">
           <div class="form-group">
             <label for="px-input">Pixel (px) Value</label>
-            <input type="number" id="px-input" placeholder="e.g., 24" required aria-required="true" aria-describedby="px-input-description" value="16" />
+            <input type="number" id="px-input" placeholder="e.g., 24" required aria-describedby="px-input-description" value="16" />
             <p id="px-input-description" class="sr-only">Enter the pixel value you want to convert.</p>
           </div>
           <div class="form-group">
@@ -133,8 +133,9 @@ const altLinks = { es: `${SITE_URL}/es/tools/px-a-rem-convertidor/` };
 
     <section id="conversion-table" aria-labelledby="table-heading">
       <h2 id="table-heading">PX to REM Conversion Table (Base 16px)</h2>
-      <div class="card table-container">
+      <div class="card table-container" tabindex="0" role="region" aria-labelledby="table-heading">
         <table>
+          <caption class="sr-only">Pixel to REM conversion chart</caption>
           <thead>
             <tr><th scope="col">Pixel (px)</th><th scope="col">REM</th></tr>
           </thead>

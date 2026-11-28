@@ -1,6 +1,7 @@
 ---
 /** SiteFooter.astro — consistent MD3 footer across every page (tool pages had none before). */
 import { type Locale, LOCALE_BASE, NAV_LABELS } from '../data/i18n';
+import { AUTHOR_NAME, AUTHOR_URL } from '../data/site';
 
 export interface Props {
   lang?: Locale;
@@ -18,6 +19,11 @@ const rights: Record<Locale, string> = {
   es: 'Todos los derechos reservados.',
   fr: 'Tous droits réservés.',
 };
+const footerAria: Record<Locale, string> = {
+  en: 'Footer',
+  es: 'Pie de página',
+  fr: 'Pied de page',
+};
 ---
 <footer class="site-footer" role="contentinfo">
   <div class="inner">
@@ -25,14 +31,14 @@ const rights: Record<Locale, string> = {
       <a class="brand" href={base}>Online Tools</a>
       <p class="tagline">{tagline[lang]}</p>
     </div>
-    <nav class="col" aria-label="Footer">
+    <nav class="col" aria-label={footerAria[lang]}>
       <a href={`${base}tools/`}>{labels.tools}</a>
       <a href={`${base}blogs/`}>{labels.blogs}</a>
       <a href={`${base}about/`}>{labels.about}</a>
     </nav>
   </div>
   <div class="copyright">
-    <p>&copy; {new Date().getFullYear()} ni18 / Online Tools. {rights[lang]}</p>
+    <p>&copy; {new Date().getFullYear()} Online Tools · Created by <a href={AUTHOR_URL} target="_blank" rel="noopener noreferrer">{AUTHOR_NAME}</a>. {rights[lang]}</p>
   </div>
 </footer>
 
@@ -70,7 +76,8 @@ const rights: Record<Locale, string> = {
     text-align: center;
     padding: 16px;
     font-size: 0.875rem;
-    opacity: 0.75;
+    opacity: 0.85;
   }
   .copyright p { margin: 0; }
+  .copyright a { color: inherit; text-decoration: underline; }
 </style>

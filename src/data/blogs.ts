@@ -1,6 +1,6 @@
 // Blog catalog. Posts live at /blogs/<slug>.html (literal .html, per the URL contract).
 // 6 are indexed (in sitemap); ai-love-calculator + face-beauty-test are noindex (excluded).
-import { SITE_URL, SITE_NAME, abs } from './site';
+import { SITE_URL, SITE_NAME, AUTHOR_NAME, AUTHOR_URL, abs } from './site';
 import type { HreflangLink, Props as SeoProps } from '../components/Seo.astro';
 import type { Locale } from './i18n';
 
@@ -2247,11 +2247,17 @@ function blogPostingSchema(post: BlogPost, lang: Locale = 'en') {
     '@type': 'BlogPosting',
     headline: title || post.title,
     description: description || post.description,
+    inLanguage: lang,
     datePublished: post.datePublished,
     dateModified: post.dateModified,
     image: abs(post.image),
     url: blogUrl(post.slug, lang),
-    author: { '@type': 'Person', name: post.author },
+    author: {
+      '@type': 'Person',
+      name: post.author && post.author.toLowerCase() !== 'ni18' ? post.author : AUTHOR_NAME,
+      url: AUTHOR_URL,
+      sameAs: [AUTHOR_URL],
+    },
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
@@ -2310,4 +2316,47 @@ export function blogSeo(post: BlogPost, lang: Locale = 'en'): SeoProps {
     twitter: { card: 'summary_large_image', url, title: title || post.title, description: description || post.description, image: abs(post.image) },
     jsonLd: [blogPostingSchema(post, lang), blogBreadcrumb(post, lang)],
   };
+}
+
+const TOOL_BLOG_KEYWORDS: Record<string, string[]> = {
+  'iphone-photo-fixer': ['iphone-photo-fixer'],
+  'markdown-to-word': ['markdown-to-word'],
+  'vtf-converter': ['vtf-converter'],
+  'px-to-rem-converter': ['px-to-rem-converter'],
+  'json-visualizer-pro': ['json-visualizer-pro'],
+  'free-online-image-utility-tool': ['edit-images-like-pro', 'image-optimization'],
+  'screen-recorder-pro': ['screen-recorder'],
+  'jwt-debugger': ['jwt-debugger'],
+  'basic-authentication-header-generator': ['basic-auth'],
+  'curl-to-code': ['curl-to-code'],
+  'online-text-compare': ['text-compare'],
+  'advance-epoch-converter': ['epoch-timestamp'],
+  'heic-viewer': ['heic-viewer'],
+};
+
+export function relatedBlogsForTool(toolSlug: string, lang: Locale = 'en'): { title: string; description: string; href: string }[] {
+  const keys = TOOL_BLOG_KEYWORDS[toolSlug];
+  if (!keys) return [];
+  return indexedPosts()
+    .filter((p) => {
+      if (lang === 'es' && !p.i18n?.es) return false;
+      if (lang === 'fr' && !p.i18n?.fr) return false;
+      return keys.some((k) => p.slug.includes(k));
+    })
+    .slice(0, 2)
+    .map((p) => {
+      const loc = lang === 'es' ? p.i18n?.es : lang === 'fr' ? p.i18n?.fr : undefined;
+      return {
+        title: loc?.title || p.title,
+        description: loc?.description || p.description,
+        href: blogUrl(p.slug, lang).replace(SITE_URL, ''),
+      };
+    });
+}
+
+export function relatedToolSlugForBlog(blogSlug: string): string | undefined {
+  for (const [toolSlug, keys] of Object.entries(TOOL_BLOG_KEYWORDS)) {
+    if (keys.some((k) => blogSlug.includes(k))) return toolSlug;
+  }
+  return undefined;
 }

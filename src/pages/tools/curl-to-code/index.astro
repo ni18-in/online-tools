@@ -132,7 +132,7 @@ const altLinks = {
           ></textarea>
         </div>
         <div id="parse-error" class="error-banner" style="display:none;" role="alert">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
           <span id="error-message">Invalid cURL command syntax.</span>
         </div>
       </section>
@@ -847,6 +847,23 @@ const altLinks = {
       curlInput.focus();
     });
 
+    function fallbackCopyText(text, okMsg) {
+      const prev = document.activeElement;
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+      document.body.appendChild(ta);
+      try {
+        ta.select();
+        document.execCommand('copy');
+        if (window.showToast) window.showToast(okMsg);
+      } finally {
+        document.body.removeChild(ta);
+        if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+      }
+    }
+
     btnCopy.addEventListener('click', () => {
       const code = codeOutput.textContent;
       if (!code || code.startsWith('// Paste a cURL')) return;
@@ -854,15 +871,9 @@ const altLinks = {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(code).then(() => {
           if (window.showToast) window.showToast('Copied code to clipboard!');
-        });
+        }).catch(() => fallbackCopyText(code, 'Copied code to clipboard!'));
       } else {
-        const ta = document.createElement('textarea');
-        ta.value = code;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        if (window.showToast) window.showToast('Copied code to clipboard!');
+        fallbackCopyText(code, 'Copied code to clipboard!');
       }
     });
 

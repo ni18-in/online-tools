@@ -101,7 +101,13 @@
         function toggleTheme() {
             const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
             document.documentElement.dataset.theme = next;
-            try { localStorage.setItem('theme', next); } catch (e) {}
+            const m = document.querySelector('meta[name="color-scheme"]');
+            if (m) m.content = next;
+            const osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            try {
+                if ((osDark && next === 'dark') || (!osDark && next === 'light')) localStorage.removeItem('theme');
+                else localStorage.setItem('theme', next);
+            } catch (e) {}
             updateThemeIcons();
         }
         function loadThemePreference() {
@@ -160,7 +166,7 @@
             }
         }
         function clearMessages() {
-            DOMElements.messageArea.innerHTML = '';
+            DOMElements.messageArea.replaceChildren();
         }
 
         // --- Line Number Logic ---
@@ -206,7 +212,7 @@
             currentDiffDelta = null;
             DOMElements.downloadButton.classList.add('hidden');
             DOMElements.copyResultsButton.classList.add('hidden');
-            DOMElements.diffOutputWrapper.innerHTML = '';
+            DOMElements.diffOutputWrapper.replaceChildren();
 
             if (!initializeJsonDiffPatcher()) {
                  return;
@@ -313,7 +319,7 @@
              clearMessages();
 
              if (!DOMElements.jsonInputLeft.value && !DOMElements.jsonInputRight.value) {
-                 DOMElements.diffOutputWrapper.innerHTML = '';
+                 DOMElements.diffOutputWrapper.replaceChildren();
                  DOMElements.diffOutputSection.classList.add('hidden');
                  DOMElements.downloadButton.classList.add('hidden');
                  DOMElements.copyResultsButton.classList.add('hidden');
@@ -531,6 +537,7 @@
             DOMElements.jsonInputLeft.addEventListener('input', () => updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft));
             DOMElements.jsonInputLeft.addEventListener('scroll', () => syncScroll(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft));
             DOMElements.jsonInputLeft.addEventListener('keydown', (e) => {
+                if (e.isComposing || e.keyCode === 229) return;
                 if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') {
                     updateLineNumbers(DOMElements.jsonInputLeft, DOMElements.lineNumbersLeft);
                 }
@@ -551,6 +558,7 @@
             DOMElements.jsonInputRight.addEventListener('input', () => updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight));
             DOMElements.jsonInputRight.addEventListener('scroll', () => syncScroll(DOMElements.jsonInputRight, DOMElements.lineNumbersRight));
             DOMElements.jsonInputRight.addEventListener('keydown', (e) => {
+                 if (e.isComposing || e.keyCode === 229) return;
                  if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') {
                     updateLineNumbers(DOMElements.jsonInputRight, DOMElements.lineNumbersRight);
                  }

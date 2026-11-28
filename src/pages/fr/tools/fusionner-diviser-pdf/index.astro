@@ -92,11 +92,11 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
     <!-- Mode Selector & Quick Actions -->
     <div class="mode-bar">
       <div class="mode-tabs" role="tablist" aria-label="Mode d'opération">
-        <button type="button" class="mode-tab active" id="tab-merge" role="tab" aria-selected="true">
+        <button type="button" class="mode-tab active" id="tab-merge" role="tab" aria-selected="true" aria-controls="view-merge" tabindex="0">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="2" width="13" height="15" rx="2"/><path d="M4 6H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
           <span>Fusionner PDFs</span>
         </button>
-        <button type="button" class="mode-tab" id="tab-split" role="tab" aria-selected="false">
+        <button type="button" class="mode-tab" id="tab-split" role="tab" aria-selected="false" aria-controls="view-split" tabindex="-1">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
           <span>Diviser PDF</span>
         </button>
@@ -210,7 +210,7 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
     </div>
 
     <!-- Status Toast -->
-    <div id="status-toast" class="status-toast" style="display:none;" role="status">
+    <div id="status-toast" class="status-toast" popover="manual" role="status" aria-live="polite">
       <span id="status-message">Traitement...</span>
     </div>
 
@@ -487,8 +487,9 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
     background: var(--md-sys-color-surface, #FFFFFF);
     border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0);
     border-radius: 6px;
-    width: 32px;
-    height: 32px;
+    min-inline-size: 32px;
+    min-block-size: 32px;
+    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -633,8 +634,11 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
 
   .status-toast {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    inset: auto;
+    inset-block-end: 2rem;
+    inset-inline-end: 2rem;
+    margin: 0;
+    border: 0;
     background: var(--md-sys-color-inverse-surface, #313033);
     color: var(--md-sys-color-inverse-on-surface, #F4EFF4);
     padding: 0.75rem 1.25rem;
@@ -643,6 +647,11 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
     font-size: 0.9rem;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
     z-index: 1000;
+    display: none;
+  }
+
+  .status-toast:is(:popover-open, .status-toast--active) {
+    display: block;
   }
 
   .guide-section {
@@ -702,13 +711,27 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
     const btnSplitAction = document.getElementById('btn-split-action');
     const btnSplitLabel = document.getElementById('btn-split-label');
 
+    let toastTimer = null;
+    function hideToast() {
+      if (statusToast.matches && statusToast.matches(':popover-open')) {
+        try { statusToast.hidePopover(); } catch {}
+      }
+      statusToast.classList.remove('status-toast--active');
+    }
+
     function showToast(msg, duration = 3000) {
       statusMessage.textContent = msg;
-      statusToast.style.display = 'block';
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+      if (typeof statusToast.showPopover === 'function') {
+        try { statusToast.showPopover(); } catch { statusToast.classList.add('status-toast--active'); }
+      } else {
+        statusToast.classList.add('status-toast--active');
+      }
       if (duration > 0) {
-        setTimeout(() => {
-          statusToast.style.display = 'none';
-        }, duration);
+        toastTimer = setTimeout(hideToast, duration);
       }
     }
 
@@ -718,22 +741,29 @@ const headRaw = '<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>';
       return (bytes / 1048576).toFixed(1) + ' Mo';
     }
 
-    tabMerge.addEventListener('click', () => {
-      tabMerge.classList.add('active');
-      tabMerge.setAttribute('aria-selected', 'true');
-      tabSplit.classList.remove('active');
-      tabSplit.setAttribute('aria-selected', 'false');
-      viewMerge.style.display = 'block';
-      viewSplit.style.display = 'none';
-    });
+    function activateTab(activeTab, inactiveTab, activeView, inactiveView) {
+      activeTab.classList.add('active');
+      activeTab.setAttribute('aria-selected', 'true');
+      activeTab.setAttribute('tabindex', '0');
+      inactiveTab.classList.remove('active');
+      inactiveTab.setAttribute('aria-selected', 'false');
+      inactiveTab.setAttribute('tabindex', '-1');
+      activeView.style.display = 'block';
+      inactiveView.style.display = 'none';
+    }
 
-    tabSplit.addEventListener('click', () => {
-      tabSplit.classList.add('active');
-      tabSplit.setAttribute('aria-selected', 'true');
-      tabMerge.classList.remove('active');
-      tabMerge.setAttribute('aria-selected', 'false');
-      viewSplit.style.display = 'block';
-      viewMerge.style.display = 'none';
+    tabMerge.addEventListener('click', () => activateTab(tabMerge, tabSplit, viewMerge, viewSplit));
+    tabSplit.addEventListener('click', () => activateTab(tabSplit, tabMerge, viewSplit, viewMerge));
+
+    [tabMerge, tabSplit].forEach((tab, idx, tabs) => {
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'Home' || e.key === 'End') {
+          e.preventDefault();
+          const next = e.key === 'Home' ? tabs[0] : e.key === 'End' ? tabs[1] : tabs[(idx + 1) % tabs.length];
+          next.click();
+          next.focus();
+        }
+      });
     });
 
     btnClearAll.addEventListener('click', () => {

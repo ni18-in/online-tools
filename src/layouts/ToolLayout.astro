@@ -12,7 +12,8 @@ import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
 import { type Locale, LOCALE_BASE, NAV_LABELS } from '../data/i18n';
-import { tools } from '../data/tools';
+import { tools, TOOL_TRANSLATIONS } from '../data/tools';
+import { relatedBlogsForTool } from '../data/blogs';
 import '../styles/tw-preflight-scoped.css';
 
 export interface Props {
@@ -59,7 +60,13 @@ const currentTool = tools.find((t) => {
   return false;
 });
 
-const toolName = currentTool ? currentTool.name : (h1 || seo.title.split('–')[0].split('|')[0].trim());
+const toolName = currentTool
+  ? (lang === 'es' ? TOOL_TRANSLATIONS[currentTool.slug]?.es?.name : lang === 'fr' ? TOOL_TRANSLATIONS[currentTool.slug]?.fr?.name : undefined) || currentTool.name
+  : (h1 || seo.title.split('–')[0].split('|')[0].trim());
+
+const breadcrumbLabel = lang === 'es' ? 'Migas de pan' : lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb';
+const relatedAriaLabel = lang === 'es' ? 'Herramientas relacionadas' : lang === 'fr' ? 'Outils connexes' : 'Related tools';
+const guidesTitle = lang === 'es' ? 'Guías y Tutoriales Relacionados' : lang === 'fr' ? 'Guides et Tutoriels Connexes' : 'Related Guides & Tutorials';
 
 const relatedTools = currentTool
   ? tools
@@ -71,12 +78,14 @@ const relatedTools = currentTool
       })
       .slice(0, 3)
   : [];
+
+const relatedGuides = currentTool ? relatedBlogsForTool(currentTool.slug, lang) : [];
 ---
 <BaseLayout seo={seo} lang={lang} current="tools" altLinks={altLinks} headRaw={finalHeadRaw} adsEnabled={ad}>
   <main id="main-content" class="tool-main">
     {h1 && <h1 class="sr-only">{h1}</h1>}
 
-    <nav class="tool-breadcrumbs" aria-label="Breadcrumb">
+    <nav class="tool-breadcrumbs" aria-label={breadcrumbLabel}>
       <ol>
         <li><a href={base}>{navLabels.home}</a></li>
         <li class="crumb-sep" aria-hidden="true">/</li>
@@ -89,7 +98,7 @@ const relatedTools = currentTool
     <slot />
 
     {relatedTools.length > 0 && (
-      <aside class="related-tools" aria-label="Related tools">
+      <aside class="related-tools" aria-label={relatedAriaLabel}>
         <h2 class="related-title">
           {lang === 'es' ? 'Herramientas Relacionadas' : lang === 'fr' ? 'Outils Connexes' : 'Related Tools'}
         </h2>
@@ -97,13 +106,28 @@ const relatedTools = currentTool
           {relatedTools.map((rt) => {
             const locSlug = lang === 'es' && rt.i18n?.es ? rt.i18n.es : (lang === 'fr' && rt.i18n?.fr ? rt.i18n.fr : rt.slug);
             const href = `${base}tools/${locSlug}/`;
+            const locTrans = lang === 'es' ? TOOL_TRANSLATIONS[rt.slug]?.es : lang === 'fr' ? TOOL_TRANSLATIONS[rt.slug]?.fr : undefined;
             return (
               <a href={href} class="related-card">
-                <span class="related-name">{rt.name}</span>
-                <span class="related-desc">{rt.description}</span>
+                <span class="related-name">{locTrans?.name || rt.name}</span>
+                <span class="related-desc">{locTrans?.description || rt.description}</span>
               </a>
             );
           })}
+        </div>
+      </aside>
+    )}
+
+    {relatedGuides.length > 0 && (
+      <aside class="related-tools" aria-label={guidesTitle}>
+        <h2 class="related-title">{guidesTitle}</h2>
+        <div class="related-grid">
+          {relatedGuides.map((g) => (
+            <a href={g.href} class="related-card">
+              <span class="related-name">{g.title}</span>
+              <span class="related-desc">{g.description}</span>
+            </a>
+          ))}
         </div>
       </aside>
     )}

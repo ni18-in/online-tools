@@ -7,7 +7,9 @@
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
-import { type Locale } from '../data/i18n';
+import { type Locale, LOCALE_BASE, NAV_LABELS } from '../data/i18n';
+import { getTool, TOOL_TRANSLATIONS } from '../data/tools';
+import { relatedToolSlugForBlog } from '../data/blogs';
 import '../styles/tw-preflight-scoped.css';
 
 export interface Props {
@@ -16,18 +18,88 @@ export interface Props {
   altLinks?: Partial<Record<Locale, string>>;
   headRaw?: string;
   ad?: boolean;
+  postSlug?: string;
 }
-const { seo, lang = 'en', altLinks = {}, headRaw, ad = true } = Astro.props;
+const { seo, lang = 'en', altLinks = {}, headRaw, ad = true, postSlug } = Astro.props;
+const base = LOCALE_BASE[lang];
+const labels = NAV_LABELS[lang];
+const breadcrumbLabel = lang === 'es' ? 'Migas de pan' : lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb';
+const articleTitle = seo.title.split('–')[0].split('|')[0].trim();
+
+const matchedToolSlug = postSlug ? relatedToolSlugForBlog(postSlug) : undefined;
+const matchedTool = matchedToolSlug ? getTool(matchedToolSlug) : undefined;
+const toolLocSlug = matchedTool
+  ? (lang === 'es' && matchedTool.i18n?.es ? matchedTool.i18n.es : lang === 'fr' && matchedTool.i18n?.fr ? matchedTool.i18n.fr : matchedTool.slug)
+  : undefined;
+const toolHref = toolLocSlug ? `${base}tools/${toolLocSlug}/` : undefined;
+const toolTrans = matchedTool ? (lang === 'es' ? TOOL_TRANSLATIONS[matchedTool.slug]?.es : lang === 'fr' ? TOOL_TRANSLATIONS[matchedTool.slug]?.fr : undefined) : undefined;
+const toolName = toolTrans?.name || matchedTool?.name;
+const toolDesc = toolTrans?.description || matchedTool?.description;
+const ctaLabel = lang === 'es' ? 'Abrir Herramienta Gratis' : lang === 'fr' ? "Ouvrir l'Outil Gratuit" : 'Try the Free Tool Now';
 ---
 <BaseLayout seo={seo} lang={lang} current="blogs" altLinks={altLinks} headRaw={headRaw} adsEnabled={ad}>
   <div class="blog-shell">
+    <nav class="blog-breadcrumbs" aria-label={breadcrumbLabel}>
+      <ol>
+        <li><a href={base}>{labels.home}</a></li>
+        <li class="crumb-sep" aria-hidden="true">/</li>
+        <li><a href={`${base}blogs/`}>{labels.blogs}</a></li>
+        <li class="crumb-sep" aria-hidden="true">/</li>
+        <li class="crumb-current" aria-current="page">{articleTitle}</li>
+      </ol>
+    </nav>
     <slot />
+    {matchedTool && toolHref && (
+      <aside class="blog-tool-cta" aria-label={ctaLabel}>
+        <div class="blog-tool-cta__body">
+          <span class="blog-tool-cta__eyebrow">{ctaLabel}</span>
+          <h2 class="blog-tool-cta__title">{toolName}</h2>
+          <p class="blog-tool-cta__desc">{toolDesc}</p>
+        </div>
+        <a href={toolHref} class="blog-tool-cta__btn">{ctaLabel} &rarr;</a>
+      </aside>
+    )}
     {ad && <AdSlot placement="below-content" minHeight={250} class="blog-ad" />}
   </div>
 </BaseLayout>
 
 <style>
-  .blog-shell { max-width: 920px; margin: 0 auto; padding: 8px 16px 0; box-sizing: border-box; }
+  .blog-shell { max-width: 920px; margin: 0 auto; padding: 16px 16px 0; box-sizing: border-box; }
+  .blog-breadcrumbs { margin: 0 0 16px; font-size: 0.875rem; color: var(--md-sys-color-on-surface-variant); }
+  .blog-breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; margin: 0; list-style: none; }
+  .blog-breadcrumbs a { color: var(--md-sys-color-primary); text-decoration: none; }
+  .blog-breadcrumbs a:hover { text-decoration: underline; }
+  .crumb-sep { opacity: 0.5; }
+  .crumb-current { font-weight: 500; color: var(--md-sys-color-on-surface); max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .blog-tool-cta {
+    margin: 28px 0 0;
+    padding: 20px 24px;
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-radius: var(--md-sys-shape-corner-large);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .blog-tool-cta__body { flex: 1 1 280px; }
+  .blog-tool-cta__eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; margin-bottom: 4px; }
+  .blog-tool-cta__title { margin: 0 0 4px; font-size: 1.15rem; font-weight: 700; }
+  .blog-tool-cta__desc { margin: 0; font-size: 0.9rem; opacity: 0.9; line-height: 1.45; }
+  .blog-tool-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .blog-tool-cta__btn:hover { opacity: 0.92; }
   .blog-ad { margin: 32px auto; max-width: min(728px, 100%); }
   /* Blog articles adapt to the theme surface */
   :global(.blog-island.legacy-tw) {

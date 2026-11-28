@@ -260,10 +260,13 @@ const altLinks = {
             <span class="label-principal" id="label-principal-pct">Capital Aportado: 32.4%</span>
             <span class="label-interest" id="label-interest-pct">Intereses Generados: 67.6%</span>
           </div>
-          <div class="ratio-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
-            <div class="bar-segment bar-segment--principal" id="bar-principal" style="width: 32.4%;"></div>
-            <div class="bar-segment bar-segment--interest" id="bar-interest" style="width: 67.6%;"></div>
-          </div>
+          <progress
+            id="ratio-progress"
+            class="ratio-progress"
+            max="100"
+            value="32.4"
+            aria-label="Proporción entre capital aportado e intereses"
+          ></progress>
         </div>
 
         <!-- Interactive SVG Growth Chart -->
@@ -309,18 +312,19 @@ const altLinks = {
         </div>
         <div class="table-actions">
           <button type="button" class="btn-secondary" id="btn-export-csv">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>Exportar CSV</span>
           </button>
           <button type="button" class="btn-secondary" id="btn-copy-table">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             <span>Copiar Tabla</span>
           </button>
         </div>
       </div>
 
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="heading-schedule">
         <table class="schedule-table" id="schedule-table">
+          <caption class="sr-only">Tabla de Crecimiento Anual</caption>
           <thead>
             <tr>
               <th scope="col">Año</th>
@@ -665,22 +669,28 @@ const altLinks = {
     color: var(--md-sys-color-primary, #6750A4);
   }
 
-  .ratio-bar {
+  .ratio-progress {
+    display: block;
+    width: 100%;
     height: 12px;
+    appearance: none;
+    border: 0 solid;
     border-radius: 6px;
-    background: var(--md-sys-color-surface-container-highest, #E6E0E9);
-    display: flex;
-    overflow: hidden;
-  }
-
-  .bar-segment--principal {
-    background: var(--md-sys-color-outline, #79747E);
-    transition: width 0.3s ease;
-  }
-
-  .bar-segment--interest {
+    overflow: clip;
     background: var(--md-sys-color-primary, #6750A4);
-    transition: width 0.3s ease;
+  }
+
+  .ratio-progress::-webkit-progress-bar {
+    background: var(--md-sys-color-primary, #6750A4);
+  }
+
+  .ratio-progress::-webkit-progress-value {
+    background: var(--md-sys-color-outline, #79747E);
+    transition: inline-size 0.3s ease;
+  }
+
+  .ratio-progress::-moz-progress-bar {
+    background: var(--md-sys-color-outline, #79747E);
   }
 
   .chart-container {
@@ -920,8 +930,7 @@ const altLinks = {
     const resTotalInterest = document.getElementById('res-total-interest');
     const labelPrincipalPct = document.getElementById('label-principal-pct');
     const labelInterestPct = document.getElementById('label-interest-pct');
-    const barPrincipal = document.getElementById('bar-principal');
-    const barInterest = document.getElementById('bar-interest');
+    const ratioProgress = document.getElementById('ratio-progress');
     const tableBody = document.getElementById('table-body');
 
     const chartLineBalance = document.getElementById('chart-line-balance');
@@ -1084,8 +1093,7 @@ const altLinks = {
 
       labelPrincipalPct.textContent = `Capital Aportado: ${investedPct}%`;
       labelInterestPct.textContent = `Intereses Generados: ${interestPct}%`;
-      barPrincipal.style.width = `${investedPct}%`;
-      barInterest.style.width = `${interestPct}%`;
+      if (ratioProgress) ratioProgress.value = parseFloat(investedPct);
 
       renderTable(schedule);
       renderChart(schedule, principal);

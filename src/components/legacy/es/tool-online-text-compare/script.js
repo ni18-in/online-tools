@@ -268,8 +268,8 @@
             
             const diff = Diff.diffLines(text1Value, text2Value, { newlineIsToken: true, ignoreWhitespace: false });
             
-            diffOutput1.innerHTML = '';
-            diffOutput2.innerHTML = '';
+            diffOutput1.replaceChildren();
+            diffOutput2.replaceChildren();
 
             if (text1Value === "" && text2Value === "") {
                  diffOutput1.classList.add('placeholder-active');
@@ -396,11 +396,22 @@
             }
         }
 
+        function applyCompareDarkMode(isDarkMode) {
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            const metaScheme = document.querySelector('meta[name="color-scheme"]');
+            if (metaScheme) metaScheme.content = isDarkMode ? 'dark' : 'light';
+            if (darkModeToggle) {
+                const icon = darkModeToggle.querySelector('.material-icons');
+                if (icon) icon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+            }
+        }
+
         function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('textCompare_darkMode', isDarkMode);
-            darkModeToggle.querySelector('.material-icons').textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+            const isDarkMode = !document.body.classList.contains('dark-mode');
+            applyCompareDarkMode(isDarkMode);
+            const osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (isDarkMode === osDark) localStorage.removeItem('textCompare_darkMode');
+            else localStorage.setItem('textCompare_darkMode', String(isDarkMode));
         }
 
         function showTemporaryMessage(buttonElement, messageKey, iconName = 'check') {
@@ -432,6 +443,34 @@
             performComparison(); 
         });
 
+        function copyTextWithFallback(text, onSuccess, onError) {
+            const fallback = () => {
+                const prev = document.activeElement;
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = text;
+                tempTextArea.setAttribute('readonly', '');
+                tempTextArea.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                tempTextArea.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    onSuccess();
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    onError();
+                } finally {
+                    document.body.removeChild(tempTextArea);
+                    if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+                }
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+            } else {
+                fallback();
+            }
+        }
+
         copyResultButton.addEventListener('click', () => {
             let resultText = `Differences (Text 1 vs Text 2):\n\n`;
             resultText += `--- Text 1 View ---\n`;
@@ -450,43 +489,27 @@
                  showTemporaryMessage(copyResultButton, 'nothingToCopy', 'warning');
                 return;
             }
-
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = resultText;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            tempTextArea.setSelectionRange(0, 99999); // For mobile devices
-            try {
-                document.execCommand('copy');
-                showTemporaryMessage(copyResultButton, 'resultCopied');
-            } catch (err) {
-                console.error('Failed to copy result: ', err);
-                 showTemporaryMessage(copyResultButton, 'Error copying', 'error');
-            }
-            document.body.removeChild(tempTextArea);
+            copyTextWithFallback(
+                resultText,
+                () => showTemporaryMessage(copyResultButton, 'resultCopied'),
+                () => showTemporaryMessage(copyResultButton, 'Error copying', 'error')
+            );
         });
 
 
         document.querySelectorAll('.copy-button').forEach(button => {
             button.addEventListener('click', (e) => {
-                const targetId = e.currentTarget.dataset.textTarget;
+                const targetBtn = e.currentTarget;
+                const targetId = targetBtn.dataset.textTarget;
                 const textToCopy = document.getElementById(targetId).value;
                 if (textToCopy) {
-                    const tempTextArea = document.createElement('textarea');
-                    tempTextArea.value = textToCopy;
-                    document.body.appendChild(tempTextArea);
-                    tempTextArea.select();
-                    tempTextArea.setSelectionRange(0, 99999); // For mobile devices
-                    try {
-                        document.execCommand('copy');
-                        showTemporaryMessage(e.currentTarget, 'copiedToClipboard');
-                    } catch (err) {
-                        console.error('Failed to copy text: ', err);
-                        showTemporaryMessage(e.currentTarget, 'Error copying', 'error');
-                    }
-                    document.body.removeChild(tempTextArea);
+                    copyTextWithFallback(
+                        textToCopy,
+                        () => showTemporaryMessage(targetBtn, 'copiedToClipboard'),
+                        () => showTemporaryMessage(targetBtn, 'Error copying', 'error')
+                    );
                 } else {
-                    showTemporaryMessage(e.currentTarget, 'nothingToCopy', 'warning');
+                    showTemporaryMessage(targetBtn, 'nothingToCopy', 'warning');
                 }
             });
         });
@@ -568,11 +591,9 @@
                 languageSelector.value = savedLanguage;
             }
 
-            const savedDarkMode = localStorage.getItem('textCompare_darkMode') === 'true';
-            if (savedDarkMode) {
-                document.body.classList.add('dark-mode');
-                if(darkModeToggle) darkModeToggle.querySelector('.material-icons').textContent = 'light_mode';
-            }
+            const storedDarkMode = localStorage.getItem('textCompare_darkMode');
+            const osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyCompareDarkMode(storedDarkMode === null ? osDark : storedDarkMode === 'true');
             
             const rootStyle = getComputedStyle(document.documentElement);
             const primaryColorVal = rootStyle.getPropertyValue('--primary-color').trim();

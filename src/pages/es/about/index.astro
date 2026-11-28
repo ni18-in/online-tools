@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import type { Props as SeoProps } from '../../../components/Seo.astro';
-import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../../data/site';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, AUTHOR_PERSON_SCHEMA, AUTHOR_URL } from '../../../data/site';
 import body from '../../../components/legacy/es/about/body.html?raw';
 import css from '../../../components/legacy/es/about/styles.css?raw';
 import '../../../styles/tw-preflight-scoped.css';
@@ -9,7 +9,7 @@ import '../../../styles/tw-preflight-scoped.css';
 const seo: SeoProps = {
   title: 'Acerca de Nosotros – NI18 Herramientas Online',
   description: 'Conoce la misión de NI18 Herramientas Online: proporcionar utilidades web gratuitas, simples y útiles directamente en tu navegador.',
-  keywords: 'acerca de, herramientas online, utilidades web gratis, misión, ni18',
+  keywords: 'acerca de, herramientas online, utilidades web gratis, misión, Nitin Kanade, ni18',
   canonical: `${SITE_URL}/es/about/`,
   hreflang: [
     { hreflang: 'en', href: `${SITE_URL}/about/` },
@@ -19,6 +19,18 @@ const seo: SeoProps = {
   ],
   og: { type: 'website', url: `${SITE_URL}/es/about/`, title: 'Acerca de – NI18', description: 'La misión de NI18 Herramientas Online.', image: DEFAULT_OG_IMAGE, siteName: SITE_NAME, locale: 'es_ES' },
   twitter: { card: 'summary_large_image', url: `${SITE_URL}/es/about/`, title: 'Acerca de – NI18', description: 'La misión de NI18 Herramientas Online.', image: DEFAULT_OG_IMAGE },
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'Acerca de Nosotros – NI18 Herramientas Online',
+      description: 'Conoce la misión de NI18 Herramientas Online.',
+      url: `${SITE_URL}/es/about/`,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/es/about/` },
+      mainEntity: AUTHOR_PERSON_SCHEMA,
+      publisher: { '@type': 'Organization', name: SITE_NAME, url: `${SITE_URL}/`, founder: AUTHOR_PERSON_SCHEMA, sameAs: [AUTHOR_URL] },
+    },
+  ],
 };
 ---
 <BaseLayout seo={seo} lang="es" current="about" altLinks={{ en: `${SITE_URL}/about/`, fr: `${SITE_URL}/fr/about/` }}>

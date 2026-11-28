@@ -2,7 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import ToolCard from '../components/ToolCard.astro';
 import type { Props as SeoProps } from '../components/Seo.astro';
-import { SITE_URL, DEFAULT_OG_IMAGE } from '../data/site';
+import { SITE_URL, DEFAULT_OG_IMAGE, ORGANIZATION_SCHEMA } from '../data/site';
 import { homepageGrid, homepageItemListOrder, getTool, toolUrl, homepageItemListItem } from '../data/tools';
 
 const collectionItems = homepageItemListOrder.map((slug, i) => ({
@@ -41,12 +41,19 @@ const seo: SeoProps = {
     image: DEFAULT_OG_IMAGE,
   },
   jsonLd: [
+    ORGANIZATION_SCHEMA,
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Online Tools',
       alternateName: 'Online Web Tools and Utilities',
       url: `${SITE_URL}/`,
+      inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${SITE_URL}/tools/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -86,25 +93,26 @@ const filterCategories = [
 
   <section aria-labelledby="search-heading" class="search">
     <h2 id="search-heading" class="sr-only">Search Tools</h2>
-    <form role="search" id="tool-search-form" onsubmit="return false;">
-      <label for="tool-search-input" class="sr-only">Search for tools</label>
-      <div class="search-input-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description... (Press /)" autocomplete="off" />
-        <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display:none">&times;</button>
-        <div class="shortcut-hint" aria-hidden="true"><kbd>/</kbd></div>
-      </div>
-    </form>
+    <search>
+      <form id="tool-search-form" action="/tools/" method="get">
+        <label for="tool-search-input" class="sr-only">Search for tools</label>
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="search" id="tool-search-input" name="q" placeholder="Search tools by name or description... (Press /)" autocomplete="off" />
+          <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search" style="display:none">&times;</button>
+          <div class="shortcut-hint" aria-hidden="true"><kbd>/</kbd></div>
+        </div>
+      </form>
+    </search>
   </section>
 
-  <div class="category-pills" role="tablist" aria-label="Filter tools by category">
+  <div class="category-pills" role="group" aria-label="Filter tools by category">
     {filterCategories.map((cat, idx) => (
       <button
         type="button"
         class:list={['pill-btn', { active: idx === 0 }]}
         data-category-filter={cat.id}
-        role="tab"
-        aria-selected={idx === 0 ? 'true' : 'false'}
+        aria-pressed={idx === 0 ? 'true' : 'false'}
       >
         {cat.label}
       </button>
@@ -137,6 +145,7 @@ const filterCategories = [
 
   <script is:inline>
     (function () {
+      var form = document.getElementById('tool-search-form');
       var input = document.getElementById('tool-search-input');
       var pills = Array.prototype.slice.call(document.querySelectorAll('[data-category-filter]'));
       var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
@@ -144,6 +153,10 @@ const filterCategories = [
       var clearBtn = document.getElementById('clear-search-btn');
       var resetBtn = document.getElementById('reset-search-btn');
       if (!cards.length) return;
+
+      if (form) {
+        form.addEventListener('submit', function (e) { e.preventDefault(); });
+      }
 
       var activeCat = 'all';
 
@@ -175,13 +188,20 @@ const filterCategories = [
         activeCat = 'all';
         pills.forEach(function (p, idx) {
           p.classList.toggle('active', idx === 0);
-          p.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+          p.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
         });
         filterTools();
         if (input) input.focus();
       }
 
-      if (input) input.addEventListener('input', filterTools);
+      if (input) {
+        var initialQ = new URLSearchParams(window.location.search).get('q');
+        if (initialQ) {
+          input.value = initialQ;
+          filterTools();
+        }
+        input.addEventListener('input', filterTools);
+      }
       if (clearBtn) clearBtn.addEventListener('click', resetSearch);
       if (resetBtn) resetBtn.addEventListener('click', resetSearch);
 
@@ -203,10 +223,10 @@ const filterCategories = [
         btn.addEventListener('click', function () {
           pills.forEach(function (p) {
             p.classList.remove('active');
-            p.setAttribute('aria-selected', 'false');
+            p.setAttribute('aria-pressed', 'false');
           });
           btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
+          btn.setAttribute('aria-pressed', 'true');
           activeCat = btn.getAttribute('data-category-filter') || 'all';
           filterTools();
         });
@@ -246,7 +266,7 @@ const filterCategories = [
   #tool-search-input:focus {
     outline: none;
     border-color: var(--md-sys-color-primary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--md-sys-color-primary) 20%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--md-sys-color-primary) 20%, transparent);
   }
   .clear-search-btn {
     position: absolute;
@@ -353,6 +373,10 @@ const filterCategories = [
   }
   .reset-search-btn:hover { opacity: 0.9; }
   .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .tool-grid > :nth-child(n + 7) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 220px;
+  }
   @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

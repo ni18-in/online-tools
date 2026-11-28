@@ -2,7 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import type { Props as SeoProps } from '../../components/Seo.astro';
-import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../../data/site';
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, ORGANIZATION_SCHEMA } from '../../data/site';
 import { homepageGrid, homepageItemListOrder, getTool, homepageItemListItem, TOOL_TRANSLATIONS } from '../../data/tools';
 
 const collectionItems = homepageItemListOrder.map((slug, i) => {
@@ -51,12 +51,18 @@ const seo: SeoProps = {
     image: DEFAULT_OG_IMAGE,
   },
   jsonLd: [
+    ORGANIZATION_SCHEMA,
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'NI18 Herramientas Online',
       url: `${SITE_URL}/es/`,
       inLanguage: 'es',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${SITE_URL}/es/tools/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -79,6 +85,7 @@ const cards = homepageGrid.map((entry) => {
       href: `/es/tools/${esSlug}/`,
       name: trans?.name || t.name,
       description: trans?.description || t.description,
+      category: t.category,
       external: false,
     };
   }
@@ -86,6 +93,7 @@ const cards = homepageGrid.map((entry) => {
     href: entry.external,
     name: entry.name,
     description: entry.description,
+    category: 'fun',
     external: true,
   };
 });
@@ -98,10 +106,12 @@ const cards = homepageGrid.map((entry) => {
 
   <section aria-labelledby="search-heading" class="search">
     <h2 id="search-heading" class="sr-only">Buscar Herramientas</h2>
-    <form role="search" id="tool-search-form" onsubmit="return false;">
-      <label for="tool-search-input" class="sr-only">Buscar herramientas</label>
-      <input type="search" id="tool-search-input" name="q" placeholder="Buscar herramientas por nombre o descripción..." autocomplete="off" />
-    </form>
+    <search>
+      <form id="tool-search-form" action="/es/tools/" method="get">
+        <label for="tool-search-input" class="sr-only">Buscar herramientas</label>
+        <input type="search" id="tool-search-input" name="q" placeholder="Buscar herramientas por nombre o descripción..." autocomplete="off" />
+      </form>
+    </search>
   </section>
 
   <section aria-labelledby="tool-list-heading">
@@ -115,6 +125,8 @@ const cards = homepageGrid.map((entry) => {
           href={c.href}
           name={c.name}
           description={c.description}
+          category={c.category}
+          lang="es"
           headingId={`tool-heading-${i + 1}`}
           external={c.external}
           cta="Iniciar"
@@ -125,11 +137,13 @@ const cards = homepageGrid.map((entry) => {
 
   <script is:inline>
     (function () {
+      var form = document.getElementById('tool-search-form');
       var input = document.getElementById('tool-search-input');
       var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
       var noResults = document.getElementById('no-results-message');
       if (!input || !cards.length) return;
-      input.addEventListener('input', function () {
+      if (form) form.addEventListener('submit', function (e) { e.preventDefault(); });
+      function runFilter() {
         var q = input.value.toLowerCase().trim();
         var found = 0;
         cards.forEach(function (card) {
@@ -142,7 +156,13 @@ const cards = homepageGrid.map((entry) => {
           if (visible) found++;
         });
         if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
-      });
+      }
+      var initialQ = new URLSearchParams(window.location.search).get('q');
+      if (initialQ) {
+        input.value = initialQ;
+        runFilter();
+      }
+      input.addEventListener('input', runFilter);
     })();
   </script>
 </PageLayout>
@@ -165,6 +185,10 @@ const cards = homepageGrid.map((entry) => {
   .section-title { text-align: center; font-size: 1.75rem; margin: 16px 0 24px; color: var(--md-sys-color-on-surface); }
   .no-results { text-align: center; color: var(--md-sys-color-on-surface-variant); padding: 40px 0; }
   .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .tool-grid > :nth-child(n + 7) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 220px;
+  }
   @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

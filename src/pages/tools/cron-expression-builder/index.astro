@@ -240,13 +240,14 @@ const altLinks = {
       <h2>Technical Deep-Dive: Understanding UNIX Cron Syntax</h2>
       <p>Standard UNIX cron expressions consist of 5 space-delimited fields arranged in chronological hierarchy: <code>Minute Hour Day-of-Month Month Day-of-Week</code>.</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="UNIX Cron syntax reference table">
         <table class="cron-table">
+          <caption class="sr-only">UNIX Cron 5-field syntax reference</caption>
           <thead>
             <tr>
-              <th>Field</th>
-              <th>Allowed Values</th>
-              <th>Special Characters</th>
+              <th scope="col">Field</th>
+              <th scope="col">Allowed Values</th>
+              <th scope="col">Special Characters</th>
             </tr>
           </thead>
           <tbody>

@@ -109,18 +109,25 @@
         }
 
         /* Custom Scrollbar for Highscores */
-        #tool-guess-the-logo ::-webkit-scrollbar {
-            width: 8px;
+        #tool-guess-the-logo * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--text-secondary) transparent;
         }
 
-        #tool-guess-the-logo ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        @supports not (scrollbar-color: auto) {
+            #tool-guess-the-logo ::-webkit-scrollbar {
+                width: 8px;
+            }
 
-        #tool-guess-the-logo ::-webkit-scrollbar-thumb {
-            background: var(--text-secondary);
-            border-radius: 4px;
-            opacity: 0.5;
+            #tool-guess-the-logo ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            #tool-guess-the-logo ::-webkit-scrollbar-thumb {
+                background: var(--text-secondary);
+                border-radius: 4px;
+                opacity: 0.5;
+            }
         }
 
         /* Game Screens Transition */

@@ -72,7 +72,7 @@ const fmt = (iso: string) => iso.slice(0, 10);
   </header>
   
   <ul class="post-grid post-list">
-    {posts.map((p) => {
+    {posts.map((p, idx) => {
       const title = p.i18n?.es?.title || p.title;
       const description = p.i18n?.es?.description || p.description;
       const category = p.i18n?.es?.category || p.category;
@@ -91,7 +91,16 @@ const fmt = (iso: string) => iso.slice(0, 10);
         <li class="post-item">
           <a href={`/es/blogs/${esSlug}.html`} class="post-card">
             <div class="post-banner-wrapper">
-              <img src={p.image} alt={title} class="post-banner" loading="lazy" decoding="async" />
+              <img
+                src={p.image}
+                alt={title}
+                class="post-banner"
+                width="1200"
+                height="630"
+                loading={idx < 2 ? 'eager' : 'lazy'}
+                fetchpriority={idx === 0 ? 'high' : undefined}
+                decoding="async"
+              />
               <span class={`category-badge ${getBadgeClass(category)}`}>{category}</span>
             </div>
             <div class="post-content">
@@ -104,7 +113,7 @@ const fmt = (iso: string) => iso.slice(0, 10);
               <p class="post-excerpt">{description}</p>
               <span class="read-more">
                 Leer Artículo
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -131,6 +140,10 @@ const fmt = (iso: string) => iso.slice(0, 10);
     list-style: none;
   }
   .post-item { display: flex; }
+  .post-item:nth-child(n + 4) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 380px;
+  }
   
   .post-card {
     text-decoration: none;

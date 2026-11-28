@@ -106,7 +106,7 @@ const altLinks = {
           ></textarea>
         </div>
         <div id="parse-error" class="error-banner" style="display:none;" role="alert">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
           <span id="error-message">Syntaxe de commande cURL invalide.</span>
         </div>
       </section>
@@ -373,9 +373,30 @@ const altLinks = {
     btnCopy.addEventListener('click', () => {
       const code = codeOutput.textContent;
       if (!code || code.startsWith('// Collez')) return;
-      navigator.clipboard.writeText(code).then(() => {
-        if (window.showToast) window.showToast('Code copié dans le presse-papiers !');
-      });
+      const msg = 'Code copié dans le presse-papiers !';
+      const fallback = () => {
+        const prev = document.activeElement;
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+        document.body.appendChild(ta);
+        try {
+          ta.select();
+          document.execCommand('copy');
+          if (window.showToast) window.showToast(msg);
+        } finally {
+          document.body.removeChild(ta);
+          if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+        }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          if (window.showToast) window.showToast(msg);
+        }).catch(fallback);
+      } else {
+        fallback();
+      }
     });
 
     curlInput.value = SAMPLE_JSON;

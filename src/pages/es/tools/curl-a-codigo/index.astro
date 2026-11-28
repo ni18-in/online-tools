@@ -74,15 +74,15 @@ const altLinks = {
 
     <div class="quick-actions">
       <button type="button" class="action-btn" id="btn-sample-json">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         <span>Ejemplo POST (JSON)</span>
       </button>
       <button type="button" class="action-btn" id="btn-sample-auth">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         <span>Ejemplo GET (Token)</span>
       </button>
       <button type="button" class="action-btn action-btn--secondary" id="btn-clear">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
         <span>Limpiar</span>
       </button>
     </div>
@@ -106,7 +106,7 @@ const altLinks = {
           ></textarea>
         </div>
         <div id="parse-error" class="error-banner" style="display:none;" role="alert">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
           <span id="error-message">Error de sintaxis en el comando cURL.</span>
         </div>
       </section>
@@ -124,7 +124,7 @@ const altLinks = {
             <button type="button" class="lang-tab" data-lang="php" role="tab" aria-selected="false">PHP</button>
           </div>
           <button type="button" class="copy-btn" id="btn-copy-code" aria-label="Copiar código">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             <span>Copiar</span>
           </button>
         </div>
@@ -373,9 +373,30 @@ const altLinks = {
     btnCopy.addEventListener('click', () => {
       const code = codeOutput.textContent;
       if (!code || code.startsWith('// Pega')) return;
-      navigator.clipboard.writeText(code).then(() => {
-        if (window.showToast) window.showToast('¡Código copiado al portapapeles!');
-      });
+      const msg = '¡Código copiado al portapapeles!';
+      const fallback = () => {
+        const prev = document.activeElement;
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+        document.body.appendChild(ta);
+        try {
+          ta.select();
+          document.execCommand('copy');
+          if (window.showToast) window.showToast(msg);
+        } finally {
+          document.body.removeChild(ta);
+          if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+        }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          if (window.showToast) window.showToast(msg);
+        }).catch(fallback);
+      } else {
+        fallback();
+      }
     });
 
     curlInput.value = SAMPLE_JSON;

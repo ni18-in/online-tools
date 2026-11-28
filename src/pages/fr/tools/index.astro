@@ -64,7 +64,7 @@ const seo: SeoProps = {
           const frSlug = t.i18n?.fr || t.slug;
           const trans = TOOL_TRANSLATIONS[t.slug]?.fr;
           return {
-            '@type': t.schemaType,
+            '@type': 'ListItem',
             position: i + 1,
             name: trans?.name || t.name,
             url: `${SITE_URL}/fr/tools/${frSlug}/`,
@@ -83,8 +83,10 @@ let cardIndex = 0;
   </header>
 
   <section aria-label="Rechercher" class="search">
-    <label for="tool-search-input" class="sr-only">Rechercher des outils</label>
-    <input type="search" id="tool-search-input" placeholder="Rechercher des outils par nom ou description..." autocomplete="off" />
+    <search>
+      <label for="tool-search-input" class="sr-only">Rechercher des outils</label>
+      <input type="search" id="tool-search-input" placeholder="Rechercher des outils par nom ou description..." autocomplete="off" />
+    </search>
   </section>
   <p id="no-results-message" class="no-results" style="display:none" aria-live="polite">
     Aucun outil trouvé correspondant à votre recherche.
@@ -103,6 +105,8 @@ let cardIndex = 0;
               href={`/fr/tools/${frSlug}/`}
               name={trans?.name || t.name}
               description={trans?.description || t.description}
+              category={t.category}
+              lang="fr"
               headingId={`tool-heading-${cardIndex}`}
               cta="Lancer"
             />
@@ -118,7 +122,7 @@ let cardIndex = 0;
       var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
       var noResults = document.getElementById('no-results-message');
       if (!input || !cards.length) return;
-      input.addEventListener('input', function () {
+      function runFilter() {
         var q = input.value.toLowerCase().trim();
         var found = 0;
         cards.forEach(function (card) {
@@ -135,7 +139,13 @@ let cardIndex = 0;
           sec.style.display = any ? '' : 'none';
         });
         if (noResults) noResults.style.display = found === 0 && q ? 'block' : 'none';
-      });
+      }
+      var initialQ = new URLSearchParams(window.location.search).get('q');
+      if (initialQ) {
+        input.value = initialQ;
+        runFilter();
+      }
+      input.addEventListener('input', runFilter);
     })();
   </script>
 </PageLayout>
@@ -159,6 +169,10 @@ let cardIndex = 0;
     border-bottom: 2px solid var(--md-sys-color-primary-container);
   }
   .tool-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .tool-grid > :nth-child(n + 7) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 220px;
+  }
   @media (min-width: 640px) { .tool-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .tool-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

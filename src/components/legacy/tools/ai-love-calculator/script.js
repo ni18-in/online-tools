@@ -144,26 +144,32 @@
             const score = scoreText.textContent;
             const status = compatibilityStatus.textContent;
             const textToCopy = `My love score is ${score}! The AI says it's a "${status}". Find out yours!`;
-            
-            // Create a temporary textarea to copy text
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                // Use execCommand as a fallback for iframe environments
-                document.execCommand('copy');
-                shareFeedback.textContent = 'Results copied to clipboard!';
-            } catch (err) {
-                shareFeedback.textContent = 'Could not copy results.';
-                console.error('Fallback: Oops, unable to copy', err);
+            const finish = (ok) => {
+                shareFeedback.textContent = ok ? 'Results copied to clipboard!' : 'Could not copy results.';
+                setTimeout(() => { shareFeedback.textContent = ''; }, 3000);
+            };
+            const fallback = () => {
+                const prev = document.activeElement;
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.setAttribute('readonly', '');
+                textArea.style.cssText = 'position:fixed;inset-inline-start:-9999px;opacity:0;';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    finish(true);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    finish(false);
+                } finally {
+                    document.body.removeChild(textArea);
+                    if (prev && typeof prev.focus === 'function') prev.focus({ preventScroll: true });
+                }
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => finish(true)).catch(fallback);
+            } else {
+                fallback();
             }
-            
-            document.body.removeChild(textArea);
-
-            // Hide the feedback message after a few seconds
-            setTimeout(() => {
-                shareFeedback.textContent = '';
-            }, 3000);
         });

@@ -88,6 +88,8 @@ if (seo.canonical) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content="#4f46e5" />
     {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 
@@ -148,56 +150,82 @@ if (seo.canonical) {
       <SiteFooter lang={lang} />
     </div>
 
-    <div id="global-snackbar" class="md3-snackbar" role="status" aria-live="polite">
+    <div id="global-snackbar" class="md3-snackbar" popover="manual" role="status" aria-live="polite" aria-atomic="true">
       <span id="global-snackbar-text" class="md3-snackbar__text"></span>
-      <button id="global-snackbar-action" class="md3-snackbar__action" style="display: none;"></button>
+      <button id="global-snackbar-action" type="button" class="md3-snackbar__action" hidden></button>
     </div>
 
     <script is:inline>
-      window.showToast = function(message, duration = 4000, actionText = '', actionCallback = null) {
-        const snackbar = document.getElementById('global-snackbar');
-        const textEl = document.getElementById('global-snackbar-text');
-        const actionBtn = document.getElementById('global-snackbar-action');
-        
-        if (!snackbar || !textEl) return;
-        
-        textEl.textContent = message;
-        
-        if (actionText && actionCallback) {
-          actionBtn.textContent = actionText;
-          actionBtn.style.display = 'inline-block';
-          actionBtn.onclick = () => {
-            actionCallback();
-            snackbar.classList.remove('md3-snackbar--active');
-          };
-        } else {
-          actionBtn.style.display = 'none';
-          actionBtn.onclick = null;
-        }
-        
-        snackbar.classList.add('md3-snackbar--active');
-        
-        if (window.snackbarTimer) {
-          clearTimeout(window.snackbarTimer);
-        }
-        
-        window.snackbarTimer = setTimeout(() => {
-          snackbar.classList.remove('md3-snackbar--active');
-        }, duration);
-      };
+      (function () {
+        var snackbar = document.getElementById('global-snackbar');
+        var textEl = document.getElementById('global-snackbar-text');
+        var actionBtn = document.getElementById('global-snackbar-action');
+        var pendingDuration = 4000;
 
-      // Intercept legacy window.alert calls
-      window.alert = function(message) {
-        window.showToast(message);
-        console.log("Alert intercepted:", message);
-      };
+        function hideToast() {
+          if (!snackbar) return;
+          if (typeof snackbar.hidePopover === 'function') {
+            try { snackbar.hidePopover(); } catch (e) {}
+          }
+          snackbar.classList.remove('md3-snackbar--active');
+        }
+
+        function scheduleHide(duration) {
+          if (window.snackbarTimer) clearTimeout(window.snackbarTimer);
+          window.snackbarTimer = setTimeout(function () {
+            if (snackbar && snackbar.matches(':focus-within')) return;
+            hideToast();
+          }, duration);
+        }
+
+        if (snackbar) {
+          snackbar.addEventListener('focusout', function () {
+            if (!snackbar.matches(':focus-within') && (snackbar.classList.contains('md3-snackbar--active') || (snackbar.matches && snackbar.matches(':popover-open')))) {
+              scheduleHide(pendingDuration);
+            }
+          });
+        }
+
+        window.showToast = function (message, duration, actionText, actionCallback) {
+          if (duration === void 0) duration = 4000;
+          if (!snackbar || !textEl) return;
+          pendingDuration = duration;
+          textEl.textContent = message;
+
+          if (actionBtn) {
+            if (actionText && actionCallback) {
+              actionBtn.textContent = actionText;
+              actionBtn.hidden = false;
+              actionBtn.onclick = function () {
+                actionCallback();
+                hideToast();
+              };
+            } else {
+              actionBtn.hidden = true;
+              actionBtn.onclick = null;
+            }
+          }
+
+          if (typeof snackbar.showPopover === 'function') {
+            try { snackbar.showPopover(); } catch (e) {}
+          }
+          snackbar.classList.add('md3-snackbar--active');
+          scheduleHide(duration);
+        };
+
+        // Intercept legacy window.alert calls
+        window.alert = function (message) {
+          window.showToast(String(message));
+        };
+      })();
     </script>
 
     <style is:global>
       .md3-snackbar {
         position: fixed;
-        bottom: 24px;
-        left: 50%;
+        inset: auto auto 24px 50%;
+        margin: 0;
+        border: 0;
         transform: translateX(-50%) translateY(100px);
         background-color: var(--md-sys-color-inverse-surface, #313033);
         color: var(--md-sys-color-inverse-on-surface, #f4f0f4);
@@ -208,14 +236,14 @@ if (seo.canonical) {
         align-items: center;
         gap: 8px;
         min-width: 288px;
-        max-width: 568px;
+        max-width: min(568px, calc(100vw - 32px));
         z-index: 9999;
         transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1), opacity 0.25s ease;
         opacity: 0;
         pointer-events: none;
       }
 
-      .md3-snackbar--active {
+      .md3-snackbar:is(:popover-open, .md3-snackbar--active) {
         transform: translateX(-50%) translateY(0);
         opacity: 1;
         pointer-events: auto;
@@ -235,10 +263,29 @@ if (seo.canonical) {
         font-weight: 500;
         font-size: 0.875rem;
         cursor: pointer;
-        padding: 0 8px;
+        padding: 4px 8px;
         text-transform: uppercase;
       }
+      .md3-snackbar__action[hidden] { display: none; }
     </style>
+
+    <!-- Speculative prefetch for instant same-origin MPA navigations (progressive enhancement). -->
+    <script type="speculationrules" is:inline>
+      {
+        "prefetch": [
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                { "not": { "href_matches": "/404.html" } },
+                { "not": { "selector_matches": "[rel~=nofollow]" } }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
 
     <!-- Material Web Components: deferred module, never blocks first paint. -->
     <script>

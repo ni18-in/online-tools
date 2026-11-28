@@ -1,17 +1,24 @@
 /* Custom scrollbar styling for aesthetics */
-    #tool-tools .tools-container::-webkit-scrollbar {
-      width: 8px;
+    #tool-tools .tools-container {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 #f1f5f9;
     }
 
-    #tool-tools .tools-container::-webkit-scrollbar-thumb {
-      background-color: #cbd5e1;
-      /* slate-300 */
-      border-radius: 4px;
-    }
+    @supports not (scrollbar-color: auto) {
+      #tool-tools .tools-container::-webkit-scrollbar {
+        width: 8px;
+      }
 
-    #tool-tools .tools-container::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      /* slate-100 */
+      #tool-tools .tools-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e1;
+        /* slate-300 */
+        border-radius: 4px;
+      }
+
+      #tool-tools .tools-container::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        /* slate-100 */
+      }
     }
 
     /* A11y Improvement: Screen reader only class for the label */
